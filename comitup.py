@@ -4,6 +4,8 @@ import NetworkManager as nm
 import argparse
 import dbus
 import sys
+import uuid
+import random
 
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -52,6 +54,13 @@ def get_connection_by_ssid(name):
     return None
 
 
+def del_connection_by_ssid(name):
+    for connection in get_all_connections():
+        ssid = get_ssid_from_connection(connection)
+        if name == ssid:
+            connection.Delete()
+
+
 def activate_connection_by_ssid(ssid, device=None):
     if not device:
         device = get_wifi_device()
@@ -65,8 +74,35 @@ def get_access_points(device=None):
     if not device:
         device = get_wifi_device()
 
-    return [x for x in device.SpecificDevice().GetAllAccessPoints()]
+    return device.SpecificDevice().GetAllAccessPoints()
 
+def make_hotspot(basename='comitup'):
+    name = "%s-%d" % (basename, random.randint(1000, 9999))
+
+    settings = {
+        'connection':
+        {
+            'type': '802-11-wireless',
+            'uuid': str(uuid.uuid4()),
+            'id': name,
+            'autoconnect': False,
+        },
+        '802-11-wireless':
+        {
+            'mode': 'ap',
+            'ssid': name,
+        },
+        'ipv4':
+        {
+            'method': 'shared',
+        },
+        'ipv6':
+        {
+            'method': 'ignore',
+        },
+    }
+
+    nm.Settings.AddConnection(settings)
 
 #
 # CLI Interface
@@ -104,6 +140,18 @@ def do_detailconnection(ssid):
 
     pp.pprint(connection.GetSettings())
     pp.pprint(connection.GetSecrets())
+
+
+def do_delconnection(ssid):
+    """Delete a connection id'd by ssid"""
+
+    del_connection_by_ssid(ssid)
+
+
+def do_makehotspot(dummy):
+    """Create a hotspot connection for future use"""
+
+    make_hotspot()
 
 
 def get_command(cmd):
