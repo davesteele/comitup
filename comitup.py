@@ -19,6 +19,18 @@ def initialize():
     nm.Settings.ReloadConnections()
 
 
+def none_on_exception(fp):
+    @wraps(fp)
+    def wrapper(*args, **kwargs):
+        try:
+            return(fp(*args, **kwargs))
+        except KeyError:
+            return None
+
+    return wrapper
+
+
+@none_on_exception
 def get_wifi_device():
     return [x for x in nm.NetworkManager.GetDevices() if x.DeviceType == 2][0]
 
@@ -29,17 +41,6 @@ def get_device_settings(device):
 
     connection = device.ActiveConnection
     return connection.Connection.GetSettings()
-
-
-def none_on_exception(fp):
-    @wraps(fp)
-    def wrapper(*args, **kwargs):
-        try:
-            return(fp(*args, **kwargs))
-        except KeyError:
-            return None
-
-    return wrapper
 
 
 @none_on_exception
@@ -59,15 +60,11 @@ def get_all_connections():
     return [x for x in nm.Settings.ListConnections()]
 
 
+@none_on_exception
 def get_ssid_from_connection(connection):
     settings = connection.GetSettings()
 
-    try:
-        ssid = settings['802-11-wireless']['ssid']
-    except KeyError:
-        ssid = None
-
-    return ssid
+    return settings['802-11-wireless']['ssid']
 
 
 def get_connection_by_ssid(name):
