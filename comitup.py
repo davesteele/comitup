@@ -6,6 +6,8 @@ import dbus
 import sys
 import uuid
 import random
+import getpass
+import tabulate
 from functools import wraps
 
 
@@ -100,6 +102,11 @@ def get_access_points(device=None):
     return device.SpecificDevice().GetAllAccessPoints()
 
 
+@none_on_exception
+def get_access_point_by_ssid(ssid, device=None):
+    return [x for x in get_access_points(device) if x.Ssid == ssid][0]
+
+
 def make_hotspot(basename='comitup'):
     name = "%s-%d" % (basename, random.randint(1000, 9999))
 
@@ -128,6 +135,46 @@ def make_hotspot(basename='comitup'):
 
     nm.Settings.AddConnection(settings)
 
+
+def make_connection_for(point, password=None):
+
+    settings = {
+        'connection':
+        {
+            'id': point.Ssid,
+            'type': '802-11-wireless',
+            'uuid': str(uuid.uuid4()),
+        },
+        '802-11-wireless':
+        {
+            'ssid': point.Ssid,
+        },
+        'ipv4':
+        {
+            # assume DHCP
+            'method': 'auto',
+        },
+        'ipv6':
+        {
+            # assume ipv4-only
+            'method': 'ignore',
+        },
+    }
+
+    secflags = point.WpaFlags | point.RsnFlags
+
+    # assume privacy = WPA(2) psk
+    if point.Flags & 1:
+        settings['802-11-wireless']['security'] = '802-11-wireless-security'
+        settings['802-11-wireless-security'] = {
+            'auth-alg': 'open',
+            'key-mgmt': 'wpa-psk',
+            'psk': password,
+        }
+
+    nm.Settings.AddConnection(settings)
+
+
 #
 # CLI Interface
 #
@@ -135,9 +182,18 @@ def make_hotspot(basename='comitup'):
 
 def do_listaccess(arg):
     """List all accessible access points"""
+    rows = []
     for point in get_access_points():
-        print "%s %s %d" % (point.Ssid, point.HwAddress, ord(point.Strength))
-        print point.WpaFlags
+        row = (point.Ssid, point.HwAddress, \
+                            point.Flags, point.WpaFlags, \
+                            point.RsnFlags, ord(point.Strength),
+                            point.Frequency)
+        rows.append(row)
+
+    bypwr = sorted(rows, key=lambda x: -x[5])
+
+    hdrs = ('SSID', 'MAC', 'Private', 'WPA', 'RSN', 'Power', 'Frequency')
+    print(tabulate.tabulate(bypwr, headers=hdrs))
 
 
 def do_listconnections(arg):
@@ -183,6 +239,17 @@ def do_makehotspot(dummy):
     """Create a hotspot connection for future use"""
 
     make_hotspot()
+
+
+def do_makeconnection(ssid):
+    """Create a connection for a visible access point, for future use"""
+    point = get_access_point_by_ssid(ssid)
+
+    password = ''
+    if point.Flags & 1:
+        password = getpass.getpass('password: ')
+
+    make_connection_for(point, password)
 
 
 def get_command(cmd):
