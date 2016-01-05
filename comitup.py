@@ -6,6 +6,8 @@ import dbus
 import sys
 import uuid
 import random
+from functools import wraps
+
 
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -19,15 +21,36 @@ def get_wifi_device():
     return [x for x in nm.NetworkManager.GetDevices() if x.DeviceType == 2][0]
 
 
-def get_active_ssid(device=None):
+def get_device_settings(device):
     if not device:
         device = get_wifi_device()
 
     connection = device.ActiveConnection
-    settings = connection.Connection.GetSettings()
-    ssid = settings['802-11-wireless']['ssid']
+    return connection.Connection.GetSettings()
 
-    return ssid
+
+def none_on_exception(fp):
+    @wraps(fp)
+    def wrapper(*args, **kwargs):
+        try:
+            return(fp(*args, **kwargs))
+        except KeyError:
+            return None
+
+    return wrapper
+
+
+@none_on_exception
+def get_active_ssid(device=None):
+    return get_device_settings(device)['802-11-wireless']['ssid']
+
+
+@none_on_exception
+def get_active_ip(device=None):
+    if not device:
+        device = get_wifi_device()
+
+    return device.Ip4Config.Addresses[0][0]
 
 
 def get_all_connections():
@@ -76,6 +99,7 @@ def get_access_points(device=None):
 
     return device.SpecificDevice().GetAllAccessPoints()
 
+
 def make_hotspot(basename='comitup'):
     name = "%s-%d" % (basename, random.randint(1000, 9999))
 
@@ -108,10 +132,12 @@ def make_hotspot(basename='comitup'):
 # CLI Interface
 #
 
+
 def do_listaccess(arg):
     """List all accessible access points"""
     for point in get_access_points():
         print "%s %s %d" % (point.Ssid, point.HwAddress, ord(point.Strength))
+        print point.WpaFlags
 
 
 def do_listconnections(arg):
@@ -131,6 +157,11 @@ def do_setconnection(ssid):
 def do_getconnection(dummy):
     """Print the active connection ssid"""
     print get_active_ssid()
+
+
+def do_getip(dummy):
+    """Print the current IP address"""
+    print(get_active_ip())
 
 
 def do_detailconnection(ssid):
