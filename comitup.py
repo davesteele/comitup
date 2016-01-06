@@ -24,7 +24,7 @@ def none_on_exception(fp):
     def wrapper(*args, **kwargs):
         try:
             return(fp(*args, **kwargs))
-        except KeyError:
+        except (AttributeError, IndexError, TypeError):
             return None
 
     return wrapper
@@ -92,6 +92,7 @@ def activate_connection_by_ssid(ssid, device=None):
     nm.NetworkManager.ActivateConnection(connection, device, '/')
 
 
+@none_on_exception
 def get_access_points(device=None):
     if not device:
         device = get_wifi_device()
@@ -158,8 +159,6 @@ def make_connection_for(point, password=None):
         },
     }
 
-    secflags = point.WpaFlags | point.RsnFlags
-
     # assume privacy = WPA(2) psk
     if point.Flags & 1:
         settings['802-11-wireless']['security'] = '802-11-wireless-security'
@@ -181,10 +180,12 @@ def do_listaccess(arg):
     """List all accessible access points"""
     rows = []
     for point in get_access_points():
-        row = (point.Ssid, point.HwAddress, \
-                            point.Flags, point.WpaFlags, \
-                            point.RsnFlags, ord(point.Strength),
-                            point.Frequency)
+        row = (
+            point.Ssid, point.HwAddress,
+            point.Flags, point.WpaFlags,
+            point.RsnFlags, ord(point.Strength),
+            point.Frequency
+        )
         rows.append(row)
 
     bypwr = sorted(rows, key=lambda x: -x[5])
@@ -199,7 +200,7 @@ def do_listconnections(arg):
         ssid = get_ssid_from_connection(connection)
 
         if ssid:
-            print ssid
+            print(ssid)
 
 
 def do_setconnection(ssid):
@@ -209,7 +210,7 @@ def do_setconnection(ssid):
 
 def do_getconnection(dummy):
     """Print the active connection ssid"""
-    print get_active_ssid()
+    print(get_active_ssid())
 
 
 def do_getip(dummy):
@@ -294,7 +295,7 @@ def main():
     try:
         initialize()
     except dbus.exceptions.DBusException:
-        print "Must run as root"
+        print("Must run as root")
         sys.exit(1)
 
     args = parse_args()
