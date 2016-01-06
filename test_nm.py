@@ -120,6 +120,7 @@ def test_activate_connection_by_id(monkeypatch, connections_fxt):
 
 def test_get_access_point_by_ssid(device_fxt):
     assert comitup.get_access_point_by_ssid("myssid")
+    assert not comitup.get_access_point_by_ssid("bogusssid")
 
 
 def test_make_hotspot(monkeypatch):
