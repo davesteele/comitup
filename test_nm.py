@@ -38,8 +38,6 @@ def device_fxt(monkeypatch):
     getAllAccessPoints.GetAllAccessPoints.return_value = [point]
     device.SpecificDevice.return_value = getAllAccessPoints
 
-    device.SpecificDevice.GetAllAccessPoints.return_value = [point]
-
     monkeypatch.setattr("comitup.nm.NetworkManager.GetDevices",
                         Mock(return_value=[device]))
 
