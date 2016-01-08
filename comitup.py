@@ -24,7 +24,7 @@ def none_on_exception(fp):
     def wrapper(*args, **kwargs):
         try:
             return(fp(*args, **kwargs))
-        except (AttributeError, IndexError, TypeError):
+        except (KeyError, AttributeError, IndexError, TypeError):
             return None
 
     return wrapper
