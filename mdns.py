@@ -18,8 +18,10 @@ def update_entry(name, addr, file='/etc/avahi/hosts'):
 def parse_args():
     prog = 'mdns'
     parser = argparse.ArgumentParser(
-        description="",
-        epilog="",
+        prog=prog,
+        description="Add an mdns (Zeroconf) entry for a .local address",
+        epilog="After entry, the host can be accessed by e.g. "
+               "'ping <host>.local'",
     )
 
     parser.add_argument(

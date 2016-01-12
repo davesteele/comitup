@@ -10,7 +10,9 @@ This makes heavy use of the Python [NetworkManager] module. The NetworkManager
 [NetworkManager]: http://pythonhosted.org/python-networkmanager/
 [specification]: https://developer.gnome.org/NetworkManager/unstable/spec.html
 
-## Usage
+## Development tools
+
+### Usage - nm
 
 	# python nm.py -h
 	usage: comitup [-h] command [arg]
@@ -35,4 +37,19 @@ This makes heavy use of the Python [NetworkManager] module. The NetworkManager
 	  makehotspot - Create a hotspot connection for future use
 	  setconnection - Connect to a connection
 
+### Usage - mdns
+
+	# python mdns.py -h
+	usage: mdns [-h] host address
+	
+	Add an mdns (Zeroconf) entry for a .local address
+	
+	positional arguments:
+	  host        host name (e.g. "comitup.local")
+	  address     IP address
+	
+	optional arguments:
+	  -h, --help  show this help message and exit
+	
+	After entry, the host can be accessed by e.g. 'ping <host>.local'
 
