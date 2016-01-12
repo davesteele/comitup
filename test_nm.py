@@ -1,12 +1,12 @@
 import pytest
 from mock import Mock
 
-import comitup
+import nm
 
 
 @pytest.fixture()
 def no_device_fxt(monkeypatch):
-    monkeypatch.setattr("comitup.nm.NetworkManager.GetDevices",
+    monkeypatch.setattr("nm.nm.NetworkManager.GetDevices",
                         Mock(return_value=[]))
     return None
 
@@ -15,7 +15,7 @@ def no_device_fxt(monkeypatch):
 def device_no_conn_fxt(monkeypatch):
     device = Mock()
     device.ActiveConnection = None
-    monkeypatch.setattr("comitup.nm.NetworkManager.GetDevices",
+    monkeypatch.setattr("nm.nm.NetworkManager.GetDevices",
                         Mock(return_value=[device]))
     return None
 
@@ -38,7 +38,7 @@ def device_fxt(monkeypatch):
     getAllAccessPoints.GetAllAccessPoints.return_value = [point]
     device.SpecificDevice.return_value = getAllAccessPoints
 
-    monkeypatch.setattr("comitup.nm.NetworkManager.GetDevices",
+    monkeypatch.setattr("nm.nm.NetworkManager.GetDevices",
                         Mock(return_value=[device]))
 
     return None
@@ -46,7 +46,7 @@ def device_fxt(monkeypatch):
 
 @pytest.fixture()
 def no_connections_fxt(monkeypatch):
-    monkeypatch.setattr("comitup.nm.Settings.ListConnections",
+    monkeypatch.setattr("nm.nm.Settings.ListConnections",
                         Mock(return_value=[]))
     return None
 
@@ -60,17 +60,17 @@ def connections_fxt(monkeypatch):
         }
     }
 
-    monkeypatch.setattr("comitup.nm.Settings.ListConnections",
+    monkeypatch.setattr("nm.nm.Settings.ListConnections",
                         Mock(return_value=[connection]))
 
     return connection
 
 
 @pytest.mark.parametrize("func", (
-        comitup.get_wifi_device,
-        comitup.get_active_ssid,
-        comitup.get_active_ip,
-        comitup.get_access_points,
+        nm.get_wifi_device,
+        nm.get_active_ssid,
+        nm.get_active_ip,
+        nm.get_access_points,
     )
 )
 def test_none_dev(no_device_fxt, func):
@@ -78,54 +78,54 @@ def test_none_dev(no_device_fxt, func):
 
 
 def test_none_dev_get_access(no_device_fxt):
-    assert comitup.get_access_point_by_ssid('ssid') == None
+    assert nm.get_access_point_by_ssid('ssid') == None
 
 
 def test_no_active_ssid(device_no_conn_fxt):
-    assert comitup.get_active_ssid() == None
+    assert nm.get_active_ssid() == None
 
 
 def test_get_active_ssid(device_fxt):
-    assert comitup.get_active_ssid() == "myssid"
+    assert nm.get_active_ssid() == "myssid"
 
 
 def test_get_active_ip(device_fxt):
-    assert comitup.get_active_ip() == '1.2.3.4'
+    assert nm.get_active_ip() == '1.2.3.4'
 
 
 def test_no_conn(no_connections_fxt):
-    assert comitup.get_connection_by_ssid('ssid') == None
+    assert nm.get_connection_by_ssid('ssid') == None
 
 
 def test_get_connection_by_ssid(connections_fxt):
-    assert comitup.get_connection_by_ssid("myssid")
-    assert not comitup.get_connection_by_ssid("bogusssid")
+    assert nm.get_connection_by_ssid("myssid")
+    assert not nm.get_connection_by_ssid("bogusssid")
 
 
 def test_del_connection_by_ssid(connections_fxt):
-    comitup.del_connection_by_ssid("myssid")
+    nm.del_connection_by_ssid("myssid")
     assert connections_fxt.Delete.called
 
 
 def test_activate_connection_by_id(monkeypatch, connections_fxt):
     activate = Mock()
-    monkeypatch.setattr("comitup.nm.NetworkManager.ActivateConnection",
+    monkeypatch.setattr("nm.nm.NetworkManager.ActivateConnection",
                         activate)
 
-    comitup.activate_connection_by_ssid("myssid")
+    nm.activate_connection_by_ssid("myssid")
     assert activate.called
 
 
 def test_get_access_point_by_ssid(device_fxt):
-    assert comitup.get_access_point_by_ssid("myssid")
-    assert not comitup.get_access_point_by_ssid("bogusssid")
+    assert nm.get_access_point_by_ssid("myssid")
+    assert not nm.get_access_point_by_ssid("bogusssid")
 
 
 def test_make_hotspot(monkeypatch):
     addconnection = Mock()
-    monkeypatch.setattr("comitup.nm.Settings.AddConnection", addconnection)
+    monkeypatch.setattr("nm.nm.Settings.AddConnection", addconnection)
 
-    comitup.make_hotspot()
+    nm.make_hotspot()
 
     assert addconnection.called
 
@@ -135,12 +135,12 @@ def test_make_connection_for(monkeypatch):
     point.Flags = 1
 
     addconnection = Mock()
-    monkeypatch.setattr("comitup.nm.Settings.AddConnection", addconnection)
+    monkeypatch.setattr("nm.nm.Settings.AddConnection", addconnection)
 
-    comitup.make_connection_for(point, "password")
+    nm.make_connection_for(point, "password")
 
     assert addconnection.called
 
 
 def test_do_listaccess(device_fxt):
-    comitup.do_listaccess(None)
+    nm.do_listaccess(None)

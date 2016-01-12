@@ -12,22 +12,27 @@ This makes heavy use of the Python [NetworkManager] module. The NetworkManager
 
 ## Usage
 
-    # ./comitup.py -h
-    usage: comitup [-h] command [arg]
-    
-    Manage NetworkManager Wifi connections
-    
-    positional arguments:
-      command     command
-      arg         command argument
-    
-    optional arguments:
-      -h, --help  show this help message and exit
-    
-    Commands:
-      detailconnection - Print details about a connection
-      getconnection - Print the active connection ssid
-      listaccess - List all accessible access points
-      listconnections - List all defined connections
-      setconnection - Connect to a connection
+	# python nm.py -h
+	usage: comitup [-h] command [arg]
+	
+	Manage NetworkManager Wifi connections
+	
+	positional arguments:
+	  command     command
+	  arg         command argument
+	
+	optional arguments:
+	  -h, --help  show this help message and exit
+	
+	Commands:
+	  delconnection - Delete a connection id'd by ssid
+	  detailconnection - Print details about a connection
+	  getconnection - Print the active connection ssid
+	  getip - Print the current IP address
+	  listaccess - List all accessible access points
+	  listconnections - List all defined connections
+	  makeconnection - Create a connection for a visible access point, for future use
+	  makehotspot - Create a hotspot connection for future use
+	  setconnection - Connect to a connection
+
 
