@@ -19,18 +19,21 @@ def initialize():
     nm.Settings.ReloadConnections()
 
 
-def none_on_exception(fp):
-    @wraps(fp)
-    def wrapper(*args, **kwargs):
-        try:
-            return(fp(*args, **kwargs))
-        except (KeyError, AttributeError, IndexError, TypeError):
-            return None
+def none_on_exception(*exceptions):
+    def _none_on_exception(fp):
+        @wraps(fp)
+        def wrapper(*args, **kwargs):
+            try:
+                return(fp(*args, **kwargs))
+            except exceptions:
+                return None
 
-    return wrapper
+        return wrapper
+
+    return _none_on_exception
 
 
-@none_on_exception
+@none_on_exception(IndexError)
 def get_wifi_device():
     return [x for x in nm.NetworkManager.GetDevices() if x.DeviceType == 2][0]
 
@@ -43,12 +46,12 @@ def get_device_settings(device):
     return connection.Connection.GetSettings()
 
 
-@none_on_exception
+@none_on_exception(AttributeError)
 def get_active_ssid(device=None):
     return get_device_settings(device)['802-11-wireless']['ssid']
 
 
-@none_on_exception
+@none_on_exception(AttributeError)
 def get_active_ip(device=None):
     if not device:
         device = get_wifi_device()
@@ -60,7 +63,7 @@ def get_all_connections():
     return [x for x in nm.Settings.ListConnections()]
 
 
-@none_on_exception
+#@none_on_exception(AttributeError)
 def get_ssid_from_connection(connection):
     settings = connection.GetSettings()
 
@@ -92,7 +95,7 @@ def activate_connection_by_ssid(ssid, device=None):
     nm.NetworkManager.ActivateConnection(connection, device, '/')
 
 
-@none_on_exception
+@none_on_exception(AttributeError)
 def get_access_points(device=None):
     if not device:
         device = get_wifi_device()
@@ -100,7 +103,7 @@ def get_access_points(device=None):
     return device.SpecificDevice().GetAllAccessPoints()
 
 
-@none_on_exception
+@none_on_exception(IndexError, TypeError)
 def get_access_point_by_ssid(ssid, device=None):
     return [x for x in get_access_points(device) if x.Ssid == ssid][0]
 
