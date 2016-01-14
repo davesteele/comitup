@@ -51,7 +51,7 @@ def get_active_ssid(device=None):
     return get_device_settings(device)['802-11-wireless']['ssid']
 
 
-@none_on_exception(AttributeError)
+@none_on_exception(AttributeError, IndexError)
 def get_active_ip(device=None):
     if not device:
         device = get_wifi_device()
