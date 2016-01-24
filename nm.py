@@ -19,6 +19,10 @@ def initialize():
     nm.Settings.ReloadConnections()
 
 
+def nm_state():
+    return nm.NetworkManager.State
+
+
 def none_on_exception(*exceptions):
     def _none_on_exception(fp):
         @wraps(fp)
@@ -36,6 +40,13 @@ def none_on_exception(*exceptions):
 @none_on_exception(IndexError)
 def get_wifi_device():
     return [x for x in nm.NetworkManager.GetDevices() if x.DeviceType == 2][0]
+
+
+def get_device_path(device=None):
+    if not device:
+        device = get_wifi_device()
+
+    return device.SpecificDevice().object_path
 
 
 def get_device_settings(device):
@@ -63,7 +74,7 @@ def get_all_connections():
     return [x for x in nm.Settings.ListConnections()]
 
 
-#@none_on_exception(AttributeError)
+@none_on_exception(AttributeError, KeyError)
 def get_ssid_from_connection(connection):
     settings = connection.GetSettings()
 
@@ -106,6 +117,19 @@ def get_access_points(device=None):
 @none_on_exception(IndexError, TypeError)
 def get_access_point_by_ssid(ssid, device=None):
     return [x for x in get_access_points(device) if x.Ssid == ssid][0]
+
+
+def get_candidate_connections(device=None):
+    if not device:
+        device = get_wifi_device()
+
+    conns = [get_ssid_from_connection(x) for x in get_all_connections()]
+    #conns = [x for x in conns if x]
+    points = [x.Ssid for x in get_access_points(device)]
+
+    candidates = list(set(conns) & set(points))
+
+    return candidates
 
 
 def make_hotspot(basename='comitup'):
@@ -240,6 +264,13 @@ def do_makehotspot(dummy):
     """Create a hotspot connection for future use"""
 
     make_hotspot()
+
+
+def do_listcandidates(dummy):
+    """List available connections for current access points"""
+
+    for candidate in get_candidate_connections():
+        print(candidate)
 
 
 def do_makeconnection(ssid):
