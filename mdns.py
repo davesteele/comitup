@@ -3,16 +3,21 @@
 import argparse
 
 
-def update_entry(name, addr, file='/etc/avahi/hosts'):
+def update_entry(name, addr=None, file='/etc/avahi/hosts'):
 
     with open(file, 'r+') as fp:
         lines = [x for x in fp.readlines() if not name + '\n' in x]
 
-        lines.append("{0} {1}\n".format(addr, name))
+        if addr:
+            lines.append("{0} {1}\n".format(addr, name))
 
         fp.seek(0)
         for line in lines:
             fp.write(line)
+
+
+def rm_entry(name, file='/etc/avahi/hosts'):
+    update_entry(name, None, file)
 
 
 def parse_args():

@@ -42,3 +42,15 @@ def test_update_entry(avahi_conf):
     assert "1.2.3.4" in new
     assert "5.6.7.8" in new
     assert "9.8.7.6 comitup.local\n" not in new
+
+
+def test_rm_entry(avahi_conf):
+    mdns.rm_entry('comitup.local', avahi_conf.strpath)
+
+    with open(avahi_conf.strpath, 'r') as fp:
+        new = fp.read()
+
+    assert "header" in new
+    assert "1.2.3.4" in new
+    assert "5.6.7.8" in new
+    assert "comitup.local" not in new
