@@ -28,7 +28,7 @@ def none_on_exception(*exceptions):
         @wraps(fp)
         def wrapper(*args, **kwargs):
             try:
-                return(fp(*args, **kwargs))
+                return fp(*args, **kwargs)
             except exceptions:
                 return None
 
