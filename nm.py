@@ -124,12 +124,8 @@ def get_candidate_connections(device=None):
         device = get_wifi_device()
 
     conns = [get_ssid_from_connection(x) for x in get_all_connections()]
-    #conns = [x for x in conns if x]
-    points = [x.Ssid for x in get_access_points(device)]
 
-    candidates = list(set(conns) & set(points))
-
-    return candidates
+    return conns
 
 
 def make_hotspot(basename='comitup'):
