@@ -97,13 +97,6 @@ def nm_state_change(state):
         check_device_listener()
 
 
-bus.add_signal_receiver(
-    nm_state_change,
-    signal_name="StateChanged",
-    dbus_interface="org.freedesktop.NetworkManager"
-)
-
-nm_state_change(nm.nm_state())
 
 
 def set_nm_listeners():
@@ -121,6 +114,13 @@ def set_nm_listeners():
 
     check_device_listener()
 
+    bus.add_signal_receiver(
+        nm_state_change,
+        signal_name="StateChanged",
+        dbus_interface="org.freedesktop.NetworkManager"
+    )
+
+    nm_state_change(nm.nm_state())
 
 def init_nmmon():
     set_nm_listeners()
