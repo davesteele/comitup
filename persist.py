@@ -1,6 +1,7 @@
 
 import os
 import json
+from functools import wraps
 
 
 class persist(dict):
@@ -18,10 +19,6 @@ class persist(dict):
 
         self.save()
 
-    def __setitem__(self, key, value):
-        super(persist, self).__setitem__(key, value)
-        self.save()
-
     def save(self):
         with open(self.path, 'w') as fp:
             json.dump(self, fp, indent=2)
@@ -32,11 +29,24 @@ class persist(dict):
 
         self.update(dict)
 
-    def update(self, *args, **kwargs):
-        super(persist, self).update(*args, **kwargs)
-        self.save()
+    def justaddsave(fn):
+        @wraps(fn)
+        def wrapper(inst, *args, **kwargs):
+            super_method = getattr(dict, fn.__name__)
+            retval = super_method(inst, *args, **kwargs)
+            fn(inst, *args, **kwargs)
+            inst.save()
+            return retval
+        return wrapper
 
+    @justaddsave
+    def __setitem__(self, key, value):
+        pass
+
+    @justaddsave
+    def update(self, *args, **kwargs):
+        pass
+
+    @justaddsave
     def setdefault(self, *args, **kwargs):
-        retvalue = super(persist, self).setdefault(*args, **kwargs)
-        self.save()
-        return retvalue
+        pass
