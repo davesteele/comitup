@@ -5,3 +5,4 @@ dist
 .coverage
 *egg-info
 *swp
+build
