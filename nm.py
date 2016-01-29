@@ -124,6 +124,7 @@ def get_candidate_connections(device=None):
         device = get_wifi_device()
 
     conns = [get_ssid_from_connection(x) for x in get_all_connections()]
+    conns = [x for x in conns if x]
 
     return conns
 

@@ -92,10 +92,9 @@ def nm_state_change(state):
     # https://developer.gnome.org/NetworkManager/stable/spec.html
     # #type-NM_STATE
     if state >= 50:
-        log.debug("We're connected with state %s" % state)
+#        log.debug("We're connected with state %s" % state)
 
         check_device_listener()
-
 
 
 
@@ -121,6 +120,7 @@ def set_nm_listeners():
     )
 
     nm_state_change(nm.nm_state())
+
 
 def init_nmmon():
     set_nm_listeners()
