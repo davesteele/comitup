@@ -1,6 +1,6 @@
 
 
-from persist import persist
+from comitup.persist import persist
 
 import pytest
 import os

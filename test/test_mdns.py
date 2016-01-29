@@ -1,6 +1,6 @@
 import pytest
 
-import mdns
+from comitup import mdns
 import textwrap
 
 

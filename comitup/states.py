@@ -1,18 +1,18 @@
 #!/usr/bin/python
 
+import logging
+from functools import wraps
+
+from collections import namedtuple
+
 import gobject
 from dbus.mainloop.glib import DBusGMainLoop
 DBusGMainLoop(set_as_default=True)
 
+import nmmon    # noqa
+import nm       # noqa
+import mdns     # noqa
 
-from collections import namedtuple
-
-import nmmon
-import nm
-import mdns
-
-import logging
-from functools import wraps
 
 log = logging.getLogger('comitup')
 
@@ -26,7 +26,6 @@ com_state = None
 conn_list = []
 connection = ''
 state_id = 0
-#timer = None
 
 
 def timeout(fn):
@@ -45,6 +44,7 @@ def timeout(fn):
 # Hotspot state
 #
 
+
 def hotspot_start():
     global conn_list
     log.info("Activating hotspot")
@@ -53,14 +53,17 @@ def hotspot_start():
     conn_list = []
     activate_connection(hotspot_name)
 
+
 def hotspot_pass():
     log.debug("Activating mdns")
 
     ip = nm.get_active_ip()
     mdns.update_entry(dns_name, ip)
 
+
 def hotspot_fail():
     pass
+
 
 @timeout
 def hotspot_timeout():
@@ -68,9 +71,11 @@ def hotspot_timeout():
 
     set_state('CONNECTING', candidate_connections())
 
+
 #
 # Connecting state
 #
+
 
 def connecting_start():
     global conn_list
@@ -81,8 +86,10 @@ def connecting_start():
     log.info('Attempting connection to %s' % conn)
     activate_connection(conn)
 
+
 def connecting_pass():
     set_state('CONNECTED')
+
 
 def connecting_fail():
     if conn_list:
@@ -90,10 +97,12 @@ def connecting_fail():
     else:
         set_state('HOTSPOT')
 
+
 @timeout
 def connecting_timeout():
     pass
     # go to HOTSPOT
+
 
 #
 # Connect state
@@ -112,6 +121,7 @@ def connect_start():
 def connect_pass():
     pass
 
+
 def connect_fail():
     set_state('HOTSPOT')
 
@@ -120,7 +130,6 @@ def connect_fail():
 def connect_timeout():
     pass
     # check for valid connection, else go to hotspot
-
 
 
 #
@@ -150,6 +159,7 @@ state_matrix = {
                     ),
 }
 
+
 def set_state(state, connections=None):
     global com_state, conn_list, state_id
 
@@ -172,6 +182,7 @@ def set_state(state, connections=None):
     gobject.timeout_add(60*1000, state_info.timeout_fn, state_id)
 
 #    #timer = threading.Timer(60.0, timeout_fn)
+
 
 def activate_connection(name):
     global connection
@@ -210,4 +221,3 @@ if __name__ == '__main__':
 
     loop = gobject.MainLoop()
     loop.run()
-

@@ -3,7 +3,6 @@
 import dbus
 import gobject
 
-from collections import defaultdict
 from dbus.mainloop.glib import DBusGMainLoop
 
 import logging
@@ -12,7 +11,6 @@ if __name__ == '__main__':
     DBusGMainLoop(set_as_default=True)
 
 import nm   # noqa
-
 
 
 #
@@ -37,6 +35,7 @@ nm_dev_fail = null_fn
 # functions
 #
 
+
 def set_device_callbacks(up, down):
     global nm_dev_connect
     global nm_dev_fail
@@ -45,9 +44,7 @@ def set_device_callbacks(up, down):
     nm_dev_fail = down
 
 
-
 def nm_device_change(state, *args):
-    #print "device at state %s connecting to %s" % (state, "something")
 
     # see for device states:
     # https://developer.gnome.org/NetworkManager/stable/spec.html
@@ -87,15 +84,10 @@ def check_device_listener(force=False):
 def nm_state_change(state):
     global device_path
 
-    #print("state: ", state)
-
     # https://developer.gnome.org/NetworkManager/stable/spec.html
     # #type-NM_STATE
     if state >= 50:
-#        log.debug("We're connected with state %s" % state)
-
         check_device_listener()
-
 
 
 def set_nm_listeners():
@@ -140,7 +132,6 @@ def main():
 
     def down():
         print("wifi down")
-
 
     set_device_callbacks(up, down)
 
