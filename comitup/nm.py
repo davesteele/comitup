@@ -123,10 +123,19 @@ def get_candidate_connections(device=None):
     if not device:
         device = get_wifi_device()
 
-    conns = [get_ssid_from_connection(x) for x in get_all_connections()]
-    conns = [x for x in conns if x]
+    candidates = []
 
-    return conns
+    for conn in get_all_connections():
+        settings = conn.GetSettings()
+        ssid = get_ssid_from_connection(conn)
+
+        if ssid \
+           and settings['connection']['type'] == '802-11-wireless' \
+           and settings['802-11-wireless']['mode'] == 'infrastructure':
+
+            candidates.append(ssid)
+
+    return candidates
 
 
 def make_hotspot(basename='comitup'):
