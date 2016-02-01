@@ -29,24 +29,26 @@ class persist(dict):
 
         self.update(dict)
 
-    def justaddsave(fn):
+    def addsave(fn):
         @wraps(fn)
         def wrapper(inst, *args, **kwargs):
-            super_method = getattr(dict, fn.__name__)
-            retval = super_method(inst, *args, **kwargs)
+            # give wrapped function a chance to validate arguments
             fn(inst, *args, **kwargs)
+
+            super_method = getattr(inst.__class__.__bases__[0], fn.__name__)
+            retval = super_method(inst, *args, **kwargs)
             inst.save()
             return retval
         return wrapper
 
-    @justaddsave
-    def __setitem__(self, key, value):
+    @addsave
+    def __setitem__(self, key, value, super_ret=None):
         pass
 
-    @justaddsave
+    @addsave
     def update(self, *args, **kwargs):
         pass
 
-    @justaddsave
+    @addsave
     def setdefault(self, *args, **kwargs):
         pass
