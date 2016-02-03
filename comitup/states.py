@@ -2,12 +2,12 @@
 
 import logging
 from functools import wraps
-
 from collections import namedtuple
 
 import gobject
-from dbus.mainloop.glib import DBusGMainLoop
-DBusGMainLoop(set_as_default=True)
+if __name__ == '__main__':
+    from dbus.mainloop.glib import DBusGMainLoop
+    DBusGMainLoop(set_as_default=True)
 
 import nmmon    # noqa
 import nm       # noqa
@@ -32,7 +32,6 @@ def timeout(fn):
     @wraps(fn)
     def wrapper(id):
         if id == state_id:
-            print state_id
             fn()
             return True
         else:
@@ -49,7 +48,7 @@ def hotspot_start():
     global conn_list
     log.info("Activating hotspot")
 
-    mdns.rm_entry(dns_name)
+    mdns.clear_entries()
     conn_list = []
     activate_connection(hotspot_name)
 
@@ -58,7 +57,7 @@ def hotspot_pass():
     log.debug("Activating mdns")
 
     ip = nm.get_active_ip()
-    mdns.update_entry(dns_name, ip)
+    mdns.add_hosts([dns_name], ip)
 
 
 def hotspot_fail():
@@ -80,7 +79,7 @@ def hotspot_timeout():
 def connecting_start():
     global conn_list
 
-    mdns.rm_entry(dns_name)
+    mdns.clear_entries()
 
     conn = conn_list.pop(0)
     log.info('Attempting connection to %s' % conn)
@@ -88,10 +87,12 @@ def connecting_start():
 
 
 def connecting_pass():
+    log.debug("Connection successful")
     set_state('CONNECTED')
 
 
 def connecting_fail():
+    log.debug("Connection failed")
     if conn_list:
         set_state('CONNECTING')
     else:
@@ -113,7 +114,7 @@ def connect_start():
     global conn_list
 
     ip = nm.get_active_ip()
-    mdns.update_entry(dns_name, ip)
+    mdns.add_hosts([dns_name], ip)
 
     conn_list = []
 
@@ -123,13 +124,14 @@ def connect_pass():
 
 
 def connect_fail():
+    log.warn('Connection lost')
     set_state('HOTSPOT')
 
 
 @timeout
 def connect_timeout():
     pass
-    # check for valid connection, else go to hotspot
+    # todo - check for valid connection, else go to hotspot
 
 
 #
@@ -165,9 +167,6 @@ def set_state(state, connections=None):
 
     log.info('Setting state to %s' % state)
 
-#    if timer:
-#        timer.cancel()
-
     state_info = state_matrix[state]
 
     nmmon.set_device_callbacks(state_info.pass_fn, state_info.fail_fn)
@@ -181,8 +180,6 @@ def set_state(state, connections=None):
 
     gobject.timeout_add(60*1000, state_info.timeout_fn, state_id)
 
-#    #timer = threading.Timer(60.0, timeout_fn)
-
 
 def activate_connection(name):
     global connection
@@ -193,29 +190,23 @@ def activate_connection(name):
 
 
 def timeout_fn():
-
-    state_info = state_matrix[state]
+    state_info = state_matrix[com_state]
     state_info.timeout_fn()
 
 
 def candidate_connections():
-    all = nm.get_candidate_connections()
-
-    valid = set(all) - set(['hotspot'])
-
-    return list(valid)
+    return nm.get_candidate_connections()
 
 
 if __name__ == '__main__':
     handler = logging.StreamHandler(stream=None)
-#    handler.setLevel(logging.DEBUG)
     log.addHandler(handler)
     log.setLevel(logging.DEBUG)
 
     log.info("Starting")
 
-    print candidate_connections()
-    set_state('CONNECTING', candidate_connections())
+    set_state('HOTSPOT')
+    # set_state('CONNECTING', candidate_connections())
 
     nmmon.init_nmmon()
 
