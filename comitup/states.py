@@ -130,8 +130,9 @@ def connect_fail():
 
 @timeout
 def connect_timeout():
-    pass
-    # todo - check for valid connection, else go to hotspot
+    if connection != nm.get_active_ssid():
+        log.warn("Connection lost on timeout")
+        set_state('HOTSPOT')
 
 
 #
