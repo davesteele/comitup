@@ -18,4 +18,4 @@ matrix:
             - python-networkmanager
 
 script:
-  python setup.py build test
+  - python setup.py build test
