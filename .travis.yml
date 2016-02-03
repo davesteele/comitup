@@ -1,0 +1,21 @@
+language: python
+
+sudo: required
+dist: trusty
+
+virtualenv:
+  system_site_packages: true
+
+matrix:
+  include:
+    - python: "2.7"
+      addons:
+        apt:
+          packages:
+            - avahi-daemon
+            - python-dbus
+            - python-gobject-2
+            - python-networkmanager
+
+script:
+  python setup.py build test
