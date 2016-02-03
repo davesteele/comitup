@@ -1,128 +1,57 @@
 import pytest
 
 from comitup import mdns
-import textwrap
-
-from xml.etree import ElementTree as ET
-
-import os
+from mock import Mock, patch
 
 
 @pytest.fixture()
-def avahi_conf(tmpdir):
-    path = tmpdir.join(u'hosts')
+def avahi_fxt(monkeypatch):
+    monkeypatch.setattr("comitup.mdns.dbus.Interface", Mock())
+    monkeypatch.setattr('comitup.mdns.dbus.SystemBus', Mock())
+    monkeypatch.setattr('comitup.mdns.log', Mock())
 
-    with open(path.strpath, 'w') as fp:
-        fp.write(textwrap.dedent(
-                """
-                # header
-                1.2.3.4 host1.local
-                9.8.7.6 comitup.local
-                5.6.7.8 host2.local
-                """
-            )
-        )
-
-    return path
+    return None
 
 
-@pytest.fixture()
-def service_path(tmpdir):
-    return tmpdir.join(u'comitup.service')
+def test_avahi_null(avahi_fxt):
+    pass
 
 
-@pytest.fixture()
-def service_data(service_path):
-    data = {
-        'service_name': "comitup on %h",
-        'hosts': ['host1', 'host2'],
-        'services': [
-            {
-                'type': '_http._tcp',
-                'port': 80,
-            },
-        ],
-    }
+def test_avahi_establish_group(avahi_fxt):
+    assert not mdns.server
+    assert not mdns.group
 
-    return data
+    mdns.establish_group()
+
+    assert mdns.server
+    assert mdns.group
 
 
-def test_avahi_fxt(avahi_conf):
-    with open(avahi_conf.strpath, 'r') as fp:
-        old = fp.read()
-
-    assert "9.8.7.6 comitup.local\n" in old
-    assert "header" in old
+def test_avahi_make_a_record(avahi_fxt):
+    mdns.make_a_record('host', '1.2.3.4')
+    assert mdns.group.AddRecord.called
 
 
-def test_update_entry(avahi_conf):
-    mdns.update_entry('comitup.local', '10.11.12.13', avahi_conf.strpath)
-
-    with open(avahi_conf.strpath, 'r') as fp:
-        new = fp.read()
-
-    assert "10.11.12.13 comitup.local\n" in new
-
-    assert "header" in new
-    assert "1.2.3.4" in new
-    assert "5.6.7.8" in new
-    assert "9.8.7.6 comitup.local\n" not in new
+def test_avahi_add_service(avahi_fxt):
+    mdns.add_service('host')
+    assert mdns.group.AddService.called
 
 
-@pytest.mark.parametrize("hosts", (
-        ('comitup.local', 'comitup-8675.local'),
-        ('comitup-8675.local', 'comitup.local'),
-    )
-)
-def test_update_entries(avahi_conf, hosts):
-    mdns.update_entry(
-        hosts,
-        '10.11.12.13',
-        avahi_conf.strpath
-    )
+@patch('comitup.mdns.establish_group', Mock())
+def test_avahi_clear_entries(avahi_fxt):
+    isempty = Mock(return_value=False)
+    mdns.group = Mock()
+    mdns.group.IsEmpty = isempty
 
-    with open(avahi_conf.strpath, 'r') as fp:
-        new = fp.read()
+    mdns.clear_entries()
 
-    assert "10.11.12.13 comitup.local\n" in new
-    assert "10.11.12.13 comitup-8675.local\n" in new
-
-    assert "header" in new
-    assert "1.2.3.4" in new
-    assert "5.6.7.8" in new
-    assert "9.8.7.6 comitup.local\n" not in new
+    assert isempty.called
+    assert mdns.group.Reset.called
+    assert mdns.establish_group.called
+    assert not mdns.log.called
 
 
-def test_rm_entry(avahi_conf):
-    mdns.rm_entry('comitup.local', avahi_conf.strpath)
+def test_avahi_add_hosts(avahi_fxt):
+    mdns.add_hosts(['host1', 'host2'], '1.2.3.4')
 
-    with open(avahi_conf.strpath, 'r') as fp:
-        new = fp.read()
-
-    assert "header" in new
-    assert "1.2.3.4" in new
-    assert "5.6.7.8" in new
-    assert "comitup.local" not in new
-
-
-def test_avahi_service_exist(service_path, service_data):
-    mdns.mk_service_file(service_data, service_path.strpath)
-    assert os.path.exists(service_path.strpath)
-
-
-def test_avahi_service_parses(service_path, service_data):
-    mdns.mk_service_file(service_data, service_path.strpath)
-    ET.parse(service_path.strpath)
-
-
-def test_avahi_service_content(service_path, service_data):
-    mdns.mk_service_file(service_data, service_path.strpath)
-    tree = ET.parse(service_path.strpath)
-    root = tree.getroot()
-
-    assert(root.tag == 'service-group')
-    assert(root[0].tag == 'name')
-    assert('comitup' in root[0].text)
-    assert(root[1].tag == 'service')
-    assert(root[1][0].text == 'host1')
-    assert(root[2][0].text == 'host2')
+    assert mdns.group.Commit.called

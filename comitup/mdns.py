@@ -14,8 +14,6 @@ CLASS_IN = 0x01
 TYPE_A = 0x01
 TTL = 5
 
-bus = dbus.SystemBus()
-
 server = None
 group = None
 
@@ -24,6 +22,8 @@ group = None
 
 def establish_group():
     global server, group
+
+    bus = dbus.SystemBus()
 
     server = dbus.Interface(
             bus.get_object(avahi.DBUS_NAME, avahi.DBUS_PATH_SERVER),
