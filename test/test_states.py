@@ -71,10 +71,10 @@ def test_state_transition_cleanup(state_fxt):
     states.set_state('CONNECTING', ['c1'])
     states.connecting_fail()
 
-    states.com_state == 'HOTSPOT'
+    assert states.com_state == 'HOTSPOT'
 
 
-@pytest.mark.parametrize("match", (True, False))
+@pytest.mark.parametrize("match", (False, True))
 def test_state_timeout_wrapper(match):
 
     @states.timeout
@@ -82,6 +82,6 @@ def test_state_timeout_wrapper(match):
         pass
 
     if match:
-        assert timeout_fn(states.state_id) == True
+        assert timeout_fn(states.state_id) == match
     else:
-        assert timeout_fn(states.state_id + 1) == False
+        assert timeout_fn(states.state_id + 1) == match
