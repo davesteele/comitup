@@ -17,8 +17,7 @@ import mdns     # noqa
 log = logging.getLogger('comitup')
 
 # definitions
-dns_name = 'comitup.local'
-hotspot_name = 'hotspot'
+dns_names = []
 
 
 # Global state information
@@ -50,14 +49,14 @@ def hotspot_start():
 
     mdns.clear_entries()
     conn_list = []
-    activate_connection(hotspot_name)
+    activate_connection(dns_names[0])
 
 
 def hotspot_pass():
     log.debug("Activating mdns")
 
     ip = nm.get_active_ip()
-    mdns.add_hosts([dns_name], ip)
+    mdns.add_hosts(dns_names, ip)
 
 
 def hotspot_fail():
@@ -101,8 +100,7 @@ def connecting_fail():
 
 @timeout
 def connecting_timeout():
-    pass
-    # go to HOTSPOT
+    connecting_fail()
 
 
 #
@@ -110,26 +108,26 @@ def connecting_timeout():
 #
 
 
-def connect_start():
+def connected_start():
     global conn_list
 
     ip = nm.get_active_ip()
-    mdns.add_hosts([dns_name], ip)
+    mdns.add_hosts(dns_names, ip)
 
     conn_list = []
 
 
-def connect_pass():
+def connected_pass():
     pass
 
 
-def connect_fail():
+def connected_fail():
     log.warn('Connection lost')
     set_state('HOTSPOT')
 
 
 @timeout
-def connect_timeout():
+def connected_timeout():
     if connection != nm.get_active_ssid():
         log.warn("Connection lost on timeout")
         set_state('HOTSPOT')
@@ -155,10 +153,10 @@ state_matrix = {
                         connecting_timeout,
                     ),
     'CONNECTED':    StateInfo(
-                        connect_start,
-                        connect_pass,
-                        connect_fail,
-                        connect_timeout,
+                        connected_start,
+                        connected_pass,
+                        connected_fail,
+                        connected_timeout,
                     ),
 }
 
@@ -190,13 +188,13 @@ def activate_connection(name):
     nm.activate_connection_by_ssid(connection)
 
 
-def timeout_fn():
-    state_info = state_matrix[com_state]
-    state_info.timeout_fn()
-
-
 def candidate_connections():
     return nm.get_candidate_connections()
+
+
+def sethosts(*args):
+    global dns_names
+    dns_names = args
 
 
 if __name__ == '__main__':
@@ -205,6 +203,8 @@ if __name__ == '__main__':
     log.setLevel(logging.DEBUG)
 
     log.info("Starting")
+
+    set_hosts('comitup', 'comitup-1111')
 
     set_state('HOTSPOT')
     # set_state('CONNECTING', candidate_connections())
