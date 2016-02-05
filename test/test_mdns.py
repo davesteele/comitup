@@ -5,10 +5,18 @@ from mock import Mock, patch
 
 
 @pytest.fixture()
-def avahi_fxt(monkeypatch):
+def avahi_fxt(monkeypatch, request):
     monkeypatch.setattr("comitup.mdns.dbus.Interface", Mock())
     monkeypatch.setattr('comitup.mdns.dbus.SystemBus', Mock())
     monkeypatch.setattr('comitup.mdns.log', Mock())
+
+    save_group = mdns.group
+    mdns.group = Mock()
+
+    def fin():
+        mdns.group = save_group
+
+    request.addfinalizer(fin)
 
     return None
 
@@ -18,13 +26,9 @@ def test_avahi_null(avahi_fxt):
 
 
 def test_avahi_establish_group(avahi_fxt):
-    assert not mdns.server
-    assert not mdns.group
-
+    old_group = mdns.group
     mdns.establish_group()
-
-    assert mdns.server
-    assert mdns.group
+    assert mdns.group != old_group
 
 
 def test_avahi_make_a_record(avahi_fxt):

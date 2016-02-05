@@ -14,14 +14,13 @@ CLASS_IN = 0x01
 TYPE_A = 0x01
 TTL = 5
 
-server = None
 group = None
 
 
 # functions
 
 def establish_group():
-    global server, group
+    global group
 
     bus = dbus.SystemBus()
 
