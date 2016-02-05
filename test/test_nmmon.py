@@ -15,6 +15,12 @@ def nmmon_con_fxt(request):
     request.addfinalizer(fin)
 
 
+def test_nmmon_null_init():
+    nmmon.nm_dev_connect()
+    nmmon.nm_dev_fail()
+    nmmon.null_fn()
+
+
 def test_nmmon_set_callbacks(nmmon_con_fxt):
     nmmon.set_device_callbacks(1, 2)
 

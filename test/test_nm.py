@@ -1,5 +1,5 @@
 import pytest
-from mock import Mock
+from mock import Mock, patch
 
 from comitup import nm
 

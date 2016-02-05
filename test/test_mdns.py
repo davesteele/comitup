@@ -55,3 +55,20 @@ def test_avahi_add_hosts(avahi_fxt):
     mdns.add_hosts(['host1', 'host2'], '1.2.3.4')
 
     assert mdns.group.Commit.called
+
+
+@pytest.mark.parametrize("dns_in, dns_out",(
+    ("a.b.c", "a.b.c"),
+    ("A.B.C", "A.B.C"),
+    ("a..b", "a.b"),
+    ("a.b.", "a.b"),
+))
+def test_avahi_encode_dns(dns_in, dns_out):
+    assert dns_out == mdns.encode_dns(dns_in)
+
+
+@patch('comitup.mdns.log.warn')
+def test_avahi_clear_fail(warn, avahi_fxt):
+    mdns.group = None
+    mdns.clear_entries()
+    assert warn.called
