@@ -1,7 +1,7 @@
 
 from comitup import states
 import pytest
-from mock import Mock
+from mock import Mock, patch
 
 
 @pytest.fixture()
@@ -74,14 +74,34 @@ def test_state_transition_cleanup(state_fxt):
     assert states.com_state == 'HOTSPOT'
 
 
-@pytest.mark.parametrize("match", (False, True))
-def test_state_timeout_wrapper(match):
+@pytest.mark.parametrize("offset, match", ((-1, False), (0, True), (1, False)))
+def test_state_timeout_wrapper(offset, match):
+
+    themock = Mock()
 
     @states.timeout
     def timeout_fn():
-        pass
+        themock()
 
-    if match:
-        assert timeout_fn(states.state_id) == match
-    else:
-        assert timeout_fn(states.state_id + 1) == match
+    assert timeout_fn(states.state_id + offset) == match
+    assert themock.called == match
+
+    lambda: True
+
+
+@pytest.mark.parametrize("times, called", (((1, 1000), True), ((2, 3), False)))
+@patch('comitup.states.time.time')
+def test_state_timeout_activity(tmmock, times, called):
+    themock = Mock()
+
+    @states.timeout
+    def timeout_fn():
+        themock()
+
+    tmmock.side_effect = times
+
+    states.set_activity()
+    timeout_fn(states.state_id)
+
+    assert states.last_activity == times[0]
+    assert themock.called == called

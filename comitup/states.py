@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import logging
+import time
 from functools import wraps
 from collections import namedtuple
 
@@ -25,13 +26,15 @@ com_state = None
 conn_list = []
 connection = ''
 state_id = 0
+last_activity = 0
 
 
 def timeout(fn):
     @wraps(fn)
     def wrapper(id):
         if id == state_id:
-            fn()
+            if time.time() - last_activity > 60:
+                fn()
             return True
         else:
             return False
@@ -180,6 +183,12 @@ def set_state(state, connections=None):
     gobject.timeout_add(60*1000, state_info.timeout_fn, state_id)
 
 
+def set_activity():
+    global last_activity
+
+    last_activity = time.time()
+
+
 def activate_connection(name):
     global connection
     connection = name
@@ -197,6 +206,10 @@ def sethosts(*args):
     dns_names = args
 
 
+def init_states():
+    nmmon.init_nmmon()
+
+
 if __name__ == '__main__':
     handler = logging.StreamHandler(stream=None)
     log.addHandler(handler)
@@ -209,7 +222,7 @@ if __name__ == '__main__':
     set_state('HOTSPOT')
     # set_state('CONNECTING', candidate_connections())
 
-    nmmon.init_nmmon()
+    init_states()
 
     loop = gobject.MainLoop()
     loop.run()
