@@ -34,7 +34,7 @@ commands = {
     'r':   CmdState(do_reload,  '(r)eload',            True,  True, True),
     'd':   CmdState(do_delete,  '(d)elete connection', False, True, True),
     'q':   CmdState(do_quit,    '(q)uit',              True,  True, True),
-    '<n>': CmdState(do_connect, 'connecto to <n>',     True, False, False),
+    '<n>': CmdState(do_connect, 'connect to <n>',     True, False, False),
 }
 
 def int_value(s):
