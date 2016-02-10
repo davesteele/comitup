@@ -92,9 +92,12 @@ def connecting_start():
 
     mdns.clear_entries()
 
-    conn = conn_list.pop(0)
-    log.info('Attempting connection to %s' % conn)
-    activate_connection(conn)
+    if conn_list:
+        conn = conn_list.pop(0)
+        log.info('Attempting connection to %s' % conn)
+        activate_connection(conn)
+    else:
+        set_state('HOTSPOT')
 
 
 def connecting_pass():

@@ -74,6 +74,15 @@ def test_state_transition_cleanup(state_fxt):
     assert states.com_state == 'HOTSPOT'
 
 
+def test_state_transition_no_connections(state_fxt):
+    states.connection = 'hs'
+
+    states.set_state('CONNECTING', [])
+#    states.connecting_fail()
+
+    assert states.com_state == 'HOTSPOT'
+
+
 @pytest.mark.parametrize("offset, match", ((-1, False), (0, True), (1, False)))
 def test_state_timeout_wrapper(offset, match):
 
