@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import dbus
 import dbus.service
 
 import logging
@@ -9,12 +10,15 @@ from dbus.mainloop.glib import DBusGMainLoop
 DBusGMainLoop(set_as_default=True)
 
 import states   # noqa
+import nm       # noqa
 
 comitup_path = "/com/github/davesteele/comitup"
 
 comitup_int = "com.github.davesteele.comitup"
 
 log = logging.getLogger('comitup')
+
+
 
 
 class Comitup(dbus.service.Object):
@@ -26,9 +30,41 @@ class Comitup(dbus.service.Object):
     def activity(self):
         states.set_activity()
 
+    @dbus.service.method(comitup_int, in_signature="", out_signature="as")
+    def candidate_connections(self):
+        return nm.get_candidate_connections()
 
-def init_state_mgr():
-    states.init_states()
+    @dbus.service.method(comitup_int, in_signature="", out_signature="aa{ss}")
+    def access_points(self):
+        points = [x for x in nm.get_access_points() if x.Ssid]
+        ptary = []
+        for point in points:
+            if point.Flags & 1:
+                encstr = "encrypted"
+            else:
+                encstr = "unencrypted"
+
+            ptdict = {
+                'ssid':     point.Ssid,
+                'strength': str(ord(point.Strength)),
+                'security': encstr,
+            }
+
+            ptary.append(ptdict)
+
+        return sorted(ptary, key=lambda x: -float(x['strength']))
+
+    @dbus.service.method(comitup_int, in_signature="", out_signature="ss")
+    def state(self):
+        return [states.com_state, states.connection]
+
+    @dbus.service.method(comitup_int, in_signature="s", out_signature="")
+    def connect(self, ssid):
+        pass
+
+
+def init_state_mgr(*hosts):
+    states.init_states(*hosts)
     Comitup()
 
 
@@ -39,7 +75,8 @@ def main():
 
     log.info('starting')
 
-    init_state_mgr()
+    init_state_mgr('comitup.local', 'comitup-1111.local')
+    states.set_state('HOTSPOT')
 
     loop = gobject.MainLoop()
     loop.run()

@@ -22,7 +22,7 @@ def state_fxt(monkeypatch):
 
     monkeypatch.setattr('comitup.states.gobject.timeout_add', Mock())
 
-    states.sethosts('hs', 'hs-1111')
+    states.set_hosts('hs', 'hs-1111')
 
 
 @pytest.mark.parametrize(
@@ -105,3 +105,14 @@ def test_state_timeout_activity(tmmock, times, called):
 
     assert states.last_activity == times[0]
     assert themock.called == called
+
+
+def test_state_set_hosts():
+    states.set_hosts('a', 'b')
+    assert states.dns_names == ('a', 'b')
+
+
+@patch('comitup.states.nmmon.init_nmmon')
+def test_state_init_states(init_nmmon):
+    states.init_states('c', 'd')
+    assert states.dns_names == ('c', 'd')

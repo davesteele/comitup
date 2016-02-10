@@ -41,6 +41,14 @@ def timeout(fn):
 
     return wrapper
 
+
+def dns_to_conn(host):
+    if '.local' in host:
+        return host[:-len('.local')]
+    else:
+        return host
+
+
 #
 # Hotspot state
 #
@@ -52,13 +60,14 @@ def hotspot_start():
 
     mdns.clear_entries()
     conn_list = []
-    activate_connection(dns_names[0])
+    activate_connection(dns_to_conn(dns_names[0]))
 
 
 def hotspot_pass():
     log.debug("Activating mdns")
 
     ip = nm.get_active_ip()
+    print dns_names, ip
     mdns.add_hosts(dns_names, ip)
 
 
@@ -194,6 +203,7 @@ def activate_connection(name):
     connection = name
     log.debug('Connecting to %s' % connection)
 
+    print connection
     nm.activate_connection_by_ssid(connection)
 
 
@@ -201,13 +211,15 @@ def candidate_connections():
     return nm.get_candidate_connections()
 
 
-def sethosts(*args):
+def set_hosts(*args):
     global dns_names
     dns_names = args
 
 
-def init_states():
+def init_states(*hosts):
     nmmon.init_nmmon()
+    print "setting states hosts to ", hosts
+    set_hosts(*hosts)
 
 
 if __name__ == '__main__':
@@ -217,12 +229,11 @@ if __name__ == '__main__':
 
     log.info("Starting")
 
-    set_hosts('comitup', 'comitup-1111')
+    init_states('comitup.local', 'comitup-1111.local')
 
     set_state('HOTSPOT')
     # set_state('CONNECTING', candidate_connections())
 
-    init_states()
 
     loop = gobject.MainLoop()
     loop.run()
