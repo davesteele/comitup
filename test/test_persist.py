@@ -12,7 +12,7 @@ def jsonpath(tmpdir):
 
 
 def test_persist_is_dict(jsonpath):
-    dict = persist(jsonpath, {})
+    dict = persist(jsonpath)
     dict['a'] = 'b'
     assert dict['a'] == 'b'
 

@@ -95,8 +95,6 @@ def test_state_timeout_wrapper(offset, match):
     assert timeout_fn(states.state_id + offset) == match
     assert themock.called == match
 
-    lambda: True
-
 
 @pytest.mark.parametrize("times, called", (((1, 1000), True), ((2, 3), False)))
 @patch('comitup.states.time.time')
@@ -125,3 +123,8 @@ def test_state_set_hosts():
 def test_state_init_states(init_nmmon):
     states.init_states('c', 'd')
     assert states.dns_names == ('c', 'd')
+
+
+@pytest.mark.parametrize("hostin, hostout", (('host', 'host'), ('host.local', 'host')))
+def test_state_dns_to_conn(hostin, hostout):
+    assert states.dns_to_conn(hostin) == hostout
