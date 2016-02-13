@@ -23,7 +23,7 @@ log = logging.getLogger('comitup')
 
 class Comitup(dbus.service.Object):
     def __init__(self):
-        bus_name = dbus.service.BusName(comitup_int, bus=dbus.SessionBus())
+        bus_name = dbus.service.BusName(comitup_int, bus=dbus.SystemBus())
         dbus.service.Object.__init__(self, bus_name, comitup_path)
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="")
