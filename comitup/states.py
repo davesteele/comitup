@@ -67,7 +67,6 @@ def hotspot_pass():
     log.debug("Activating mdns")
 
     ip = nm.get_active_ip()
-    print dns_names, ip
     mdns.add_hosts(dns_names, ip)
 
 
@@ -206,7 +205,6 @@ def activate_connection(name):
     connection = name
     log.debug('Connecting to %s' % connection)
 
-    print connection
     nm.activate_connection_by_ssid(connection)
 
 
@@ -221,7 +219,6 @@ def set_hosts(*args):
 
 def init_states(*hosts):
     nmmon.init_nmmon()
-    print "setting states hosts to ", hosts
     set_hosts(*hosts)
 
 
