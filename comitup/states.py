@@ -28,6 +28,8 @@ connection = ''
 state_id = 0
 last_activity = 0
 
+points = []
+
 
 def timeout(fn):
     @wraps(fn)
@@ -176,9 +178,12 @@ state_matrix = {
 
 
 def set_state(state, connections=None):
-    global com_state, conn_list, state_id
+    global com_state, conn_list, state_id, points
 
     log.info('Setting state to %s' % state)
+
+    if com_state != 'HOTSPOT':
+        points = nm.get_points_ext()
 
     state_info = state_matrix[state]
 

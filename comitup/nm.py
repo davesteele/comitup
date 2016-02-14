@@ -114,6 +114,27 @@ def get_access_points(device=None):
     return device.SpecificDevice().GetAllAccessPoints()
 
 
+def get_points_ext(device=None):
+    inlist = get_access_points(device)
+
+    outlist = []
+    for point in inlist:
+
+        if point.Flags & 1:
+            encstr = "encrypted"
+        else:
+            encstr = "unencrypted"
+
+        outpoint = {
+            'ssid': point.Ssid,
+            'strength': str(ord(point.Strength)),
+            'security': encstr,
+        }
+
+        outlist.append(outpoint)
+
+    return outlist
+
 @none_on_exception(IndexError, TypeError)
 def get_access_point_by_ssid(ssid, device=None):
     return [x for x in get_access_points(device) if x.Ssid == ssid][0]

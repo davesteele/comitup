@@ -19,7 +19,7 @@ comitup_int = "com.github.davesteele.comitup"
 log = logging.getLogger('comitup')
 
 
-
+com_obj = None
 
 class Comitup(dbus.service.Object):
     def __init__(self):
@@ -36,23 +36,9 @@ class Comitup(dbus.service.Object):
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="aa{ss}")
     def access_points(self):
-        points = [x for x in nm.get_access_points() if x.Ssid]
-        ptary = []
-        for point in points:
-            if point.Flags & 1:
-                encstr = "encrypted"
-            else:
-                encstr = "unencrypted"
+        points = [x for x in states.points if x['ssid']]
 
-            ptdict = {
-                'ssid':     point.Ssid,
-                'strength': str(ord(point.Strength)),
-                'security': encstr,
-            }
-
-            ptary.append(ptdict)
-
-        return sorted(ptary, key=lambda x: -float(x['strength']))
+        return sorted(points, key=lambda x: -float(x['strength']))
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="ss")
     def state(self):
@@ -64,8 +50,10 @@ class Comitup(dbus.service.Object):
 
 
 def init_state_mgr(*hosts):
+    global com_obj
+
     states.init_states(*hosts)
-    Comitup()
+    com_obj = Comitup()
 
 
 def main():
@@ -77,6 +65,8 @@ def main():
 
     init_state_mgr('comitup.local', 'comitup-1111.local')
     states.set_state('HOTSPOT')
+
+    print com_obj.access_points()
 
     loop = gobject.MainLoop()
     loop.run()
