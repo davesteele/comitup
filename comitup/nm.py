@@ -106,6 +106,15 @@ def activate_connection_by_ssid(ssid, device=None):
     nm.NetworkManager.ActivateConnection(connection, device, '/')
 
 
+def deactivate_connection(device=None):
+    if not device:
+        device = get_wifi_device()
+
+    connection = device.ActiveConnection
+    if connection:
+        nm.NetworkManager.DeactivateConnection(connection)
+
+
 @none_on_exception(AttributeError)
 def get_access_points(device=None):
     if not device:

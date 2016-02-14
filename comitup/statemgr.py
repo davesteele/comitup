@@ -48,6 +48,11 @@ class Comitup(dbus.service.Object):
     def connect(self, ssid):
         pass
 
+    @dbus.service.method(comitup_int, in_signature="", out_signature="")
+    def delete_connection(self):
+        nm.del_connection_by_ssid(nm.get_active_ssid())
+        states.set_state('HOTSPOT')
+
 
 def init_state_mgr(*hosts):
     global com_obj
@@ -65,8 +70,6 @@ def main():
 
     init_state_mgr('comitup.local', 'comitup-1111.local')
     states.set_state('HOTSPOT')
-
-    print com_obj.access_points()
 
     loop = gobject.MainLoop()
     loop.run()

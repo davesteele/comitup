@@ -98,6 +98,9 @@ def connecting_start():
         log.info('Attempting connection to %s' % conn)
         activate_connection(conn)
     else:
+        # Give NetworkManager a chance to update the access point list
+        nm.deactivate_connection()  # todo - clean this up
+        time.sleep(5)
         set_state('HOTSPOT')
 
 

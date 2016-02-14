@@ -13,10 +13,14 @@ ciu_service = bus.get_object(
                '/com/github/davesteele/comitup'
               )
 
-ciu_state = ciu_service.get_dbus_method('state', 'com.github.davesteele.comitup')
-ciu_activity = ciu_service.get_dbus_method('activity', 'com.github.davesteele.comitup')
-ciu_points = ciu_service.get_dbus_method('access_points', 'com.github.davesteele.comitup')
-ciu_delete = ciu_service.get_dbus_method('delete_connection', 'com.github.davesteele.comitup')
+ciu_state =    ciu_service.get_dbus_method('state',
+                    'com.github.davesteele.comitup')
+ciu_activity = ciu_service.get_dbus_method('activity',
+                    'com.github.davesteele.comitup')
+ciu_points =   ciu_service.get_dbus_method('access_points',
+                    'com.github.davesteele.comitup')
+ciu_delete =   ciu_service.get_dbus_method('delete_connection',
+                    'com.github.davesteele.comitup')
 
 
 def get_points():

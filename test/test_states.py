@@ -22,6 +22,14 @@ def state_fxt(monkeypatch):
 
     monkeypatch.setattr('comitup.states.gobject.timeout_add', Mock())
 
+    monkeypatch.setattr('comitup.states.nm.get_points_ext',
+                        Mock(return_value=[]))
+
+    monkeypatch.setattr('comitup.states.nm.deactivate_connection',
+                        Mock())
+
+    monkeypatch.setattr('comitup.states.time.sleep', Mock())
+
     states.set_hosts('hs', 'hs-1111')
 
 
