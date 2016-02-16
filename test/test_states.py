@@ -6,29 +6,30 @@ from mock import Mock, patch
 
 @pytest.fixture()
 def state_fxt(monkeypatch):
-    monkeypatch.setattr('comitup.states.mdns.clear_entries', Mock())
-    monkeypatch.setattr('comitup.states.mdns.add_hosts', Mock())
+    monkeypatches = (
+        ('comitup.states.mdns.clear_entries',             None),
+        ('comitup.states.mdns.add_hosts',                 None),
 
-    monkeypatch.setattr('comitup.states.nm.activate_connection_by_ssid',
-                        Mock())
-    monkeypatch.setattr('comitup.states.nm.get_candidate_connections',
-                        Mock(return_value=['c1', 'c2']))
-    monkeypatch.setattr('comitup.states.nm.get_active_ip',
-                        Mock(return_value='1.2.3.4'))
-    monkeypatch.setattr('comitup.states.nm.get_active_ssid', Mock())
+        ('comitup.states.nm.activate_connection_by_ssid', None),
+        ('comitup.states.nm.get_candidate_connections',   ['c1', 'c2']),
+        ('comitup.states.nm.get_active_ip',               '1.2.3.4'),
+        ('comitup.states.nm.get_active_ssid',             None),
+        ('comitup.states.nm.get_points_ext',              []),
+        ('comitup.states.nm.deactivate_connection',       None),
 
-    monkeypatch.setattr('comitup.states.nmmon.init_nmmon', Mock())
-    monkeypatch.setattr('comitup.states.nmmon.set_device_callbacks', Mock())
+        ('comitup.states.nmmon.init_nmmon',               None),
+        ('comitup.states.nmmon.set_device_callbacks',     None),
 
-    monkeypatch.setattr('comitup.states.gobject.timeout_add', Mock())
+        ('comitup.states.gobject.timeout_add',            None),
 
-    monkeypatch.setattr('comitup.states.nm.get_points_ext',
-                        Mock(return_value=[]))
+        ('comitup.states.time.sleep',                     None),
+    )
 
-    monkeypatch.setattr('comitup.states.nm.deactivate_connection',
-                        Mock())
-
-    monkeypatch.setattr('comitup.states.time.sleep', Mock())
+    for path, return_val in monkeypatches:
+        if return_val:
+            monkeypatch.setattr(path, Mock(return_value=return_val))
+        else:
+            monkeypatch.setattr(path, Mock())
 
     states.set_hosts('hs', 'hs-1111')
 
