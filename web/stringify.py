@@ -24,19 +24,8 @@ def decrypt(ctext):
 
 
 def encode(obj):
-    jobj = pickle.dumps(obj)
-    cobj = zlib.compress(jobj)
-    xobj = encrypt(cobj)
-    hobj = binascii.hexlify(xobj)
-
-    return hobj
+    return binascii.hexlify(encrypt(zlib.compress(pickle.dumps(obj))))
 
 
 def decode(hexstr):
-    cobj = binascii.unhexlify(hexstr)
-    xobj = decrypt(cobj)
-    jobj = zlib.decompress(xobj)
-    obj = pickle.loads(jobj)
-
-    return obj
-
+    return pickle.loads(zlib.decompress(decrypt(binascii.unhexlify(hexstr))))
