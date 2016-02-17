@@ -61,7 +61,7 @@ def test_avahi_add_hosts(avahi_fxt):
     assert mdns.group.Commit.called
 
 
-@pytest.mark.parametrize("dns_in, dns_out",(
+@pytest.mark.parametrize("dns_in, dns_out", (
     ("a.b.c", "a.b.c"),
     ("A.B.C", "A.B.C"),
     ("a..b", "a.b"),

@@ -4,10 +4,8 @@ import pytest
 from mock import Mock, patch
 import importlib
 
-
-#import comitup.statemgr as sm
-
 import dbus.service
+
 
 def nullwrapper(*args, **kwargs):
     def _nullwrapper(fn):

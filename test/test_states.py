@@ -134,6 +134,9 @@ def test_state_init_states(init_nmmon):
     assert states.dns_names == ('c', 'd')
 
 
-@pytest.mark.parametrize("hostin, hostout", (('host', 'host'), ('host.local', 'host')))
+@pytest.mark.parametrize(
+                "hostin, hostout",
+                (('host', 'host'), ('host.local', 'host'))
+             )
 def test_state_dns_to_conn(hostin, hostout):
     assert states.dns_to_conn(hostin) == hostout

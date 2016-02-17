@@ -21,6 +21,7 @@ log = logging.getLogger('comitup')
 
 com_obj = None
 
+
 class Comitup(dbus.service.Object):
     def __init__(self):
         bus_name = dbus.service.BusName(comitup_int, bus=dbus.SystemBus())

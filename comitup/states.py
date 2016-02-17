@@ -242,6 +242,5 @@ if __name__ == '__main__':
     set_state('HOTSPOT')
     # set_state('CONNECTING', candidate_connections())
 
-
     loop = gobject.MainLoop()
     loop.run()

@@ -2,6 +2,7 @@
 import ConfigParser
 import StringIO
 
+
 class Config(object):
     def __init__(self, filename):
         self.config = ConfigParser.SafeConfigParser()
@@ -16,4 +17,3 @@ class Config(object):
             pass
 
         return super(Config, self).__getattr__(tag)
-

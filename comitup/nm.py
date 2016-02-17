@@ -144,6 +144,7 @@ def get_points_ext(device=None):
 
     return outlist
 
+
 @none_on_exception(IndexError, TypeError)
 def get_access_point_by_ssid(ssid, device=None):
     return [x for x in get_access_points(device) if x.Ssid == ssid][0]
