@@ -32,14 +32,9 @@ def test_conf_null(conf_fxt):
     conf_fxt.tag1
 
 
-@pytest.mark.parametrize("tag, val", (
-        ('tag1', 'val1'),
-        ('tag2', 'val2'),
-        ('tag3', 'val3'),
-    )
-)
-def test_conf_vals(tag, val, conf_fxt):
-    assert eval('conf_fxt.' + tag) == val
+@pytest.mark.parametrize("idx", ('1', '2', '3'))
+def test_conf_vals(idx conf_fxt):
+    assert eval('conf_fxt.tag' + idx) == "val" + idx
 
 
 def test_conf_miss(conf_fxt):
