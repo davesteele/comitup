@@ -4,16 +4,16 @@ import StringIO
 
 
 class Config(object):
-    def __init__(self, filename):
-        self.config = ConfigParser.SafeConfigParser()
-        conf_str = '[DEFAULT]\n' + open(filename, 'r').read()
+    def __init__(self, filename, section='DEFAULT'):
+        self._section = section
+
+        self._config = ConfigParser.SafeConfigParser()
+        conf_str = '[%s]\n' % self._section + open(filename, 'r').read()
         conf_fp = StringIO.StringIO(conf_str)
-        self.config.readfp(conf_fp)
+        self._config.readfp(conf_fp)
 
     def __getattr__(self, tag):
         try:
-            return self.config.get('DEFAULT', tag)
-        except:
-            pass
-
-        return super(Config, self).__getattr__(tag)
+            return self._config.get(self._section, tag)
+        except ConfigParser.NoOptionError:
+            raise AttributeError
