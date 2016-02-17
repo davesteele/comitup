@@ -12,7 +12,7 @@ class persist(dict):
 
         super(persist, self).__init__(*args, **kwargs)
 
-        self.path = path
+        self.__dict__['path'] = path
 
         if os.path.exists(self.path):
             self.load()
@@ -52,3 +52,15 @@ class persist(dict):
     @addsave
     def setdefault(self, *args, **kwargs):
         pass
+
+    def __setattr__(self, name, value):
+        if name in self.__dict__:
+            self.__dict__[name] = value
+        else:
+            self.__setitem__(name, value)
+
+    def __getattr__(self, name):
+        if name in self.__dict__:
+            return self.__dict__[name]
+        else:
+            return self.__getitem__(name)

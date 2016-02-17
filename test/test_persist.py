@@ -4,6 +4,7 @@ from comitup.persist import persist
 
 import pytest
 import os
+import textwrap
 
 
 @pytest.fixture()
@@ -53,3 +54,37 @@ def test_persist_setdefault(jsonpath):
     mydict.setdefault('a', 'b')
     new = persist(jsonpath, {'a': 'c'})
     assert new['a'] == 'b'
+
+
+def test_persist_setattr(jsonpath):
+    mydict = persist(jsonpath)
+    mydict.a = 'b'
+    assert mydict['a'] == 'b'
+
+
+def test_persist_getattr(jsonpath):
+    mydict = persist(jsonpath)
+    mydict['a'] = 'b'
+    assert mydict.a == 'b'
+
+
+def test_persist_persist_setattr(jsonpath):
+    mydict = persist(jsonpath)
+    mydict.a = 'b'
+    new = persist(jsonpath)
+    assert new['a'] == 'b'
+
+
+def test_persist_persist_getattr(jsonpath):
+    mydict = persist(jsonpath)
+    mydict['a'] = 'b'
+    new = persist(jsonpath)
+    assert new.a == 'b'
+
+
+def test_persist_file_format(jsonpath):
+    mydict = persist(jsonpath)
+    mydict['a'] = 'b'
+
+    expected = '{\n  "a": "b"\n}'
+    assert open(jsonpath, 'r').read() == expected
