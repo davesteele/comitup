@@ -2,8 +2,6 @@
 
 import sys
 
-
-
 from collections import namedtuple, OrderedDict
 import dbus
 
@@ -13,18 +11,22 @@ ciu_service = bus.get_object(
                '/com/github/davesteele/comitup'
               )
 
-ciu_state =    ciu_service.get_dbus_method('state',
-                    'com.github.davesteele.comitup')
-ciu_activity = ciu_service.get_dbus_method('activity',
-                    'com.github.davesteele.comitup')
-ciu_points =   ciu_service.get_dbus_method('access_points',
-                    'com.github.davesteele.comitup')
-ciu_delete =   ciu_service.get_dbus_method('delete_connection',
-                    'com.github.davesteele.comitup')
-
-
-def get_points():
-    return []
+ciu_state = ciu_service.get_dbus_method(
+                'state',
+                'com.github.davesteele.comitup'
+            )
+ciu_activity = ciu_service.get_dbus_method(
+                'activity',
+                'com.github.davesteele.comitup'
+               )
+ciu_points = ciu_service.get_dbus_method(
+                'access_points',
+                'com.github.davesteele.comitup'
+             )
+ciu_delete = ciu_service.get_dbus_method(
+                'delete_connection',
+                'com.github.davesteele.comitup'
+             )
 
 
 def do_reload(connection):
@@ -34,12 +36,14 @@ def do_reload(connection):
 def do_quit(connection):
     sys.exit(0)
 
+
 def do_delete(connection):
     ciu_delete(connection)
 
 
 def do_connect(connection):
     pass
+
 
 CmdState = namedtuple('CmdState', "fn, desc, HOTSPOT, CONNECTING, CONNECTED")
 
@@ -50,15 +54,18 @@ commands = OrderedDict([
     ('<n>', CmdState(do_connect, 'connect to <n>',     True, False, False)),
 ])
 
+
 def int_value(s):
     try:
         return int(s)
     except (ValueError, TypeError):
         return None
 
+
 def get_state():
     state, connection = ciu_state()
     return state, connection
+
 
 def get_valid_cmds(state):
     cmds = [x for x in commands.keys() if commands[x].__getattribute__(state)]
@@ -79,6 +86,7 @@ def print_cmd_prompts(state, connection, points):
 
     for cmd in get_valid_cmds(state):
         print "    %s" % commands[cmd].desc
+
 
 def interpreter():
     while True:
@@ -102,7 +110,5 @@ def interpreter():
                 print "\nInvalid command\n"
 
 
-
 if __name__ == '__main__':
     interpreter()
-
