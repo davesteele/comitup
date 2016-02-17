@@ -57,7 +57,9 @@ def bus_fxt(request):
     return nmmon.bus.add_signal_receiver
 
 
-def test_nmmon_set_listener(bus_fxt):
+@patch('comitup.nmmon.nm.nm_state', return_value=0)
+@patch('comitup.nmmon.check_device_listener')
+def test_nmmon_set_listener(check_listener, nm_state, bus_fxt):
     nmmon.set_device_listener('apath')
 
     assert bus_fxt.called
