@@ -47,7 +47,13 @@ class Comitup(dbus.service.Object):
 
     @dbus.service.method(comitup_int, in_signature="s", out_signature="")
     def connect(self, ssid):
-        pass
+        if nm.get_connection_by_ssid(ssid):
+            nm.del_connection(ssid)
+
+        point = nm.get_access_point_by_ssid(ssid)
+        nm.make_connection_for(point, password)
+
+        states.set_state('CONNECTING', ssid)
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="")
     def delete_connection(self):
