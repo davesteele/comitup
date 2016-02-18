@@ -33,7 +33,7 @@ def test_conf_null(conf_fxt):
 
 
 @pytest.mark.parametrize("idx", ('1', '2', '3'))
-def test_conf_vals(idx conf_fxt):
+def test_conf_vals(idx, conf_fxt):
     assert eval('conf_fxt.tag' + idx) == "val" + idx
 
 
