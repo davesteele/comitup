@@ -13,31 +13,31 @@ from web import stringify as sfy
 def test_web_stringify_encrypt(test_str):
     assert test_str == sfy.decrypt(sfy.encrypt(test_str))
 
-    
+
 @pytest.mark.parametrize('tst', ('len', 'pass', 'fail'))
-def test_web_stringify_chk():
+def test_web_stringify_chk(tst):
     orig = 'a'
     chked = sfy.add_chk(orig)
-    
+
     if tst == 'len':
         assert len(chked) > len(orig)
     elif tst == 'pass':
         assert sfy.chk_chk(chked) == orig
     elif tst == 'fail':
-        with raises sfy.SfyException:
+        with pytest.raises(sfy.SfyException):
             sfy.chk_chk(chked + 'a')
     else:
         assert False
-        
-        
+
+
 @pytest.mark.parametrize("var", (1, "string", {'a': 1, 'b': 2}))
-@pytest.mark.parametrize("test", ("encode", "decode", "iv"))
-def test_web_stringify(test, var):
+@pytest.mark.parametrize("tst", ("encode", "decode", "iv"))
+def test_web_stringify(tst, var):
     encoded = sfy.encode(var)
 
-    if test == "encode":
+    if tst == "encode":
         assert all(x in string.hexdigits for x in encoded)
-    elif test == "decode":
+    elif tst == "decode":
         assert sfy.decode(encoded) == var
-    elif test == "iv":
+    elif tst == "iv":
         assert encoded != sfy.encode(var)

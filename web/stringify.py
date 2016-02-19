@@ -29,7 +29,7 @@ def decrypt(ctext):
     return crypt_alg.decrypt(ctext)[16:]
 
 
-def calc_chk(text, key)
+def calc_chk(text, key):
     h = SHA256.new()
     h.update(text)
     h.update(key)
@@ -42,12 +42,12 @@ def add_chk(text):
 
 def chk_chk(text):
     (data, chk) = (text[:-64], text[-64:])
-    
+
     if chk != calc_chk(data, key):
         raise SfyException("Checksum error")
-        
+
     return data
-    
+
 
 def encode(obj):
     return add_chk(hexlify(encrypt(compress(dumps(obj)))))
