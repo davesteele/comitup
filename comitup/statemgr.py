@@ -67,6 +67,8 @@ def init_state_mgr(*hosts):
     states.init_states(*hosts)
     com_obj = Comitup()
 
+    states.set_state('HOTSPOT')
+
 
 def main():
     handler = logging.StreamHandler(stream=None)
