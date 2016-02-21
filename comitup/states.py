@@ -225,9 +225,16 @@ def set_hosts(*args):
     dns_names = args
 
 
+def assure_hotspot(ssid):
+    if not nm.get_connection_by_ssid(ssid):
+        nm.make_hotspot(ssid)
+
+
 def init_states(*hosts):
     nmmon.init_nmmon()
     set_hosts(*hosts)
+
+    assure_hotspot(dns_to_conn(hosts[0]))
 
 
 if __name__ == '__main__':

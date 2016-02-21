@@ -4,7 +4,6 @@ from comitup.persist import persist
 
 import pytest
 import os
-import textwrap
 
 
 @pytest.fixture()

@@ -169,9 +169,7 @@ def get_candidate_connections(device=None):
     return candidates
 
 
-def make_hotspot(basename='comitup'):
-    name = "%s-%d" % (basename, random.randint(1000, 9999))
-
+def make_hotspot(name='comitup'):
     settings = {
         'connection':
         {

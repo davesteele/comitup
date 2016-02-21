@@ -128,10 +128,14 @@ def test_state_set_hosts():
     assert states.dns_names == ('a', 'b')
 
 
+@patch('comitup.states.assure_hotspot')
 @patch('comitup.states.nmmon.init_nmmon')
-def test_state_init_states(init_nmmon):
+def test_state_init_states(init_nmmon, assure_hs):
     states.init_states('c', 'd')
     assert states.dns_names == ('c', 'd')
+
+    assert assure_hs.called
+    assert assure_hs.call_args[0][0] == 'c'
 
 
 @pytest.mark.parametrize(
