@@ -7,10 +7,15 @@ from getpass import getpass
 import dbus
 
 bus = dbus.SystemBus()
-ciu_service = bus.get_object(
-               'com.github.davesteele.comitup',
-               '/com/github/davesteele/comitup'
-              )
+
+try:
+    ciu_service = bus.get_object(
+                   'com.github.davesteele.comitup',
+                   '/com/github/davesteele/comitup'
+                  )
+except dbus.exceptions.DBusException:
+    print "Error connecting to the comitup D-Bus service"
+    sys.exit(1)
 
 ciu_state = ciu_service.get_dbus_method(
                 'state',
