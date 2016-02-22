@@ -22,6 +22,7 @@ def conf_fxt(tmpdir, monkeypatch):
 
     return path
 
+
 @pytest.fixture()
 def persist_fxt(tmpdir, monkeypatch):
     path = os.path.join(tmpdir.__str__(), 'persistfile')

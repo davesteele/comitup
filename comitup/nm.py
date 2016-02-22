@@ -5,7 +5,6 @@ import argparse
 import dbus
 import sys
 import uuid
-import random
 import getpass
 import tabulate
 from functools import wraps
@@ -208,6 +207,7 @@ def make_connection_for(point, password=None):
         '802-11-wireless':
         {
             'ssid': point.Ssid,
+            'mode': 'infrastructure',
         },
         'ipv4':
         {

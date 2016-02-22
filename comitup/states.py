@@ -4,6 +4,8 @@ import logging
 import time
 from functools import wraps
 from collections import namedtuple
+from dbus.exceptions import DBusException
+
 
 import gobject
 if __name__ == '__main__':
@@ -99,7 +101,10 @@ def connecting_start():
         activate_connection(conn)
     else:
         # Give NetworkManager a chance to update the access point list
-        nm.deactivate_connection()  # todo - clean this up
+        try:
+            nm.deactivate_connection()  # todo - clean this up
+        except DBusException:
+            pass
         time.sleep(5)
         set_state('HOTSPOT')
 

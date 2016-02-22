@@ -11,7 +11,7 @@ import gobject
 from dbus.mainloop.glib import DBusGMainLoop
 DBusGMainLoop(set_as_default=True)
 
-import statemgr
+import statemgr     # noqa
 
 PERSIST_PATH = "/var/lib/comitup/comitup.json"
 CONF_PATH = "/etc/comitup.conf"
@@ -40,7 +40,7 @@ def deflog():
 def load_data():
     conf = config.Config(
                 CONF_PATH,
-                defaults = {
+                defaults={
                     'base_name': 'comitup',
                     'web_port': '8080',
                 },

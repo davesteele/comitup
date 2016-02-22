@@ -3,6 +3,7 @@
 import sys
 
 from collections import namedtuple, OrderedDict
+from getpass import getpass
 import dbus
 
 bus = dbus.SystemBus()
@@ -27,6 +28,10 @@ ciu_delete = ciu_service.get_dbus_method(
                 'delete_connection',
                 'com.github.davesteele.comitup'
              )
+ciu_connect = ciu_service.get_dbus_method(
+                'connect',
+                'com.github.davesteele.comitup'
+             )
 
 
 def do_reload(connection):
@@ -41,8 +46,8 @@ def do_delete(connection):
     ciu_delete(connection)
 
 
-def do_connect(connection):
-    pass
+def do_connect(connection, password):
+    ciu_connect(connection, password)
 
 
 CmdState = namedtuple('CmdState', "fn, desc, HOTSPOT, CONNECTING, CONNECTED")
@@ -101,7 +106,10 @@ def interpreter():
         index = int_value(cmd)
 
         if index:
-            do_connect()
+            password = ""
+            if points[index-1]['security'] == 'encrypted':
+                password = getpass('password: ')
+            do_connect(points[index-1]['ssid'], password)
         else:
             ciu_activity()
             try:

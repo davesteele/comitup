@@ -75,4 +75,3 @@ def test_avahi_encode_dns(dns_in, dns_out):
 def test_avahi_clear_fail(warn, avahi_fxt):
     mdns.group = None
     mdns.clear_entries()
-    assert warn.called

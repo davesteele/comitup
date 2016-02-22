@@ -74,11 +74,8 @@ def add_service(host):
 
 
 def clear_entries():
-    try:
-        if not group.IsEmpty():
-            group.Reset()
-    except:
-        log.warn("Error encountered clearing mdns data")
+    if group and not group.IsEmpty():
+        group.Reset()
 
     establish_group()
 
