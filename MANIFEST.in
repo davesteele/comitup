@@ -1,2 +1,6 @@
 include LICENSE
-include test/*.py
+include doc/*.ronn
+include cli/comitup-cli.py
+include conf/comitup*
+include README.md
+include web/*.py
