@@ -1,0 +1,10 @@
+comitup-conf(5)     comitup-conf.5.ronn
+comitup(8)          comitup.8.ronn
+comitup-web(8)      comitup-web.8.ronn
+comitup-cli(1)      comitup-cli.1.ronn
+
+networkmanager(8)   http://linux.die.net/man/8/networkmanager
+avahi-daemon(8)     http://man.cx/avahi-daemon(8)
+
+Zeroconf            https://en.wikipedia.org/wiki/Zero-configuration_networking
+

@@ -1,0 +1,85 @@
+comitup(8) -- Manage wifi connections on headless, unconnected systems
+=============================================
+
+## SYNOPSIS
+
+`comitup`
+
+## DESCRIPTION
+
+
+
+**Comitup** works with networkmanager(8) to manage wifi connections, and with
+avahi-daemon(8) to publish mdns host names.
+
+### D-BUS Interface
+
+**Comitup** supports a D-BUS object which claims the name
+_com.github.davesteele.comitup_ on the path
+_/com/github/davesteele/comitup_, supporting the single
+interface _com.github.davesteele.comitup_. The interface includes the
+following methods.
+
+  * _activity()_
+
+    Input: None
+
+    Output: None
+
+    Calling this method will disable **comitup** timeout processing for the
+    current period. In the **HOTSPOT** mode, this defers the periodic access
+    point connection attempt until the next timeout period (nominally 1
+    minute).
+
+  * _access_points()_
+
+    Input: None
+
+    Output: Array of DICT_ENTRY
+
+    Return a list of visible access points. This is represented as an array
+    of D-BUS DICT_ENTRY. Each DICT_ENTRY contains the following keys:
+
+    * access point keys:
+        * _ssid_ - The 802.11 Service Set Identifier for the access point
+
+        * _strength_ - The recieved signal strength, as a number between 0
+          and 100
+
+        * _security_ - Either _encrypted_ or _unencrypted_.
+
+  * _state()_
+
+    Input: None
+
+    Ouput: state, connection
+
+    This returns the current **comitup** state, either **HOTSPOT**,
+    **CONNECTING**, or **CONNECTED**, and the _ssid_ name for the current
+    connection on the wifi device.
+
+  * _connect()_
+
+    Input: ssid, password
+
+    Output: None
+
+    Delete any existing connection for _ssid_, create a new connection, and
+    attempt to connect to it. The password may be a zero length string if
+    not needed.
+
+  * _delete_connection()_
+
+    Input: ssid
+
+    Output: None
+
+    Delete the connection for _ssid_.
+
+## COPYRIGHT
+
+Comitup is Copyright (C) 2016 David Steele <https://davesteele.github.io/>
+
+## SEE ALSO
+
+comitup-conf(5), comitup-cli(1), comitup-web(8)

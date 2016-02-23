@@ -1,0 +1,20 @@
+comitup-web(1) -- Wifi configuration web server for the Comitup service
+=============================================
+
+## SYNOPSIS
+
+`comitup-web`
+
+## DESCRIPTION
+
+
+## OPTIONS
+
+
+## COPYRIGHT
+
+Comitup is Copyright (C) 2016 David Steele https://davesteele.github.io/
+
+## SEE ALSO
+
+comitup(8), comitup-conf(5), comitup-cli(1)
