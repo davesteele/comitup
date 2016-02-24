@@ -64,10 +64,10 @@ class Comitup(dbus.service.Object):
         states.set_state('HOTSPOT')
 
 
-def init_state_mgr(*hosts):
+def init_state_mgr(hosts, callbacks):
     global com_obj
 
-    states.init_states(*hosts)
+    states.init_states(hosts, callbacks)
     com_obj = Comitup()
 
     states.set_state('CONNECTING', states.candidate_connections())

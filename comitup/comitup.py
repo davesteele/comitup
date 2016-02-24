@@ -7,6 +7,8 @@ import persist
 import config
 import random
 
+import webmgr
+
 import gobject
 from dbus.mainloop.glib import DBusGMainLoop
 DBusGMainLoop(set_as_default=True)
@@ -43,6 +45,7 @@ def load_data():
                 defaults={
                     'base_name': 'comitup',
                     'web_port': '8080',
+                    'web_service': '',
                 },
              )
 
@@ -64,9 +67,11 @@ def main():
 
     (conf, data) = load_data()
 
+    webmgr.init_webmgr(conf.web_service, conf.web_port)
+
     statemgr.init_state_mgr(
-                inst_name(conf, data) + '.local',
-                conf.base_name + '.local'
+                (inst_name(conf, data) + '.local', conf.base_name + '.local'),
+                [webmgr.state_callback],
              )
 
     loop = gobject.MainLoop()

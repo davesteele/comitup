@@ -1,11 +1,21 @@
 
 from comitup import states
 import pytest
-from mock import Mock, patch
+from mock import Mock, patch, call
 
 
 @pytest.fixture()
-def state_fxt(monkeypatch):
+def state_globals(request):
+    callbacks = states.state_callbacks
+
+    def fin():
+        states.state_callbacks = callbacks
+
+    request.addfinalizer(fin)
+
+
+@pytest.fixture()
+def state_fxt(monkeypatch, state_globals):
     monkeypatches = (
         ('comitup.states.mdns.clear_entries',             None),
         ('comitup.states.mdns.add_hosts',                 None),
@@ -131,7 +141,7 @@ def test_state_set_hosts():
 @patch('comitup.states.assure_hotspot')
 @patch('comitup.states.nmmon.init_nmmon')
 def test_state_init_states(init_nmmon, assure_hs):
-    states.init_states('c', 'd')
+    states.init_states(('c', 'd'), [])
     assert states.dns_names == ('c', 'd')
 
     assert assure_hs.called
@@ -144,3 +154,17 @@ def test_state_init_states(init_nmmon, assure_hs):
              )
 def test_state_dns_to_conn(hostin, hostout):
     assert states.dns_to_conn(hostin) == hostout
+
+
+def test_state_callback_decorator(state_globals):
+    callback = Mock()
+
+    @states.state_callback
+    def foo_bar():
+        pass
+
+    states.add_state_callback(callback)
+
+    foo_bar()
+
+    assert callback.call_args == call('FOO', 'bar')

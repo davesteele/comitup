@@ -32,6 +32,24 @@ last_activity = 0
 
 points = []
 
+state_callbacks = []
+
+
+def state_callback(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        returnvalue = fn(*args, **kwargs)
+
+        state, action = fn.__name__.split('_')
+
+        state = state.upper()
+
+        for callback in state_callbacks:
+            callback(state, action)
+
+        return returnvalue
+    return wrapper
+
 
 def timeout(fn):
     @wraps(fn)
@@ -58,6 +76,7 @@ def dns_to_conn(host):
 #
 
 
+@state_callback
 def hotspot_start():
     global conn_list
     log.info("Activating hotspot")
@@ -67,6 +86,7 @@ def hotspot_start():
     activate_connection(dns_to_conn(dns_names[0]))
 
 
+@state_callback
 def hotspot_pass():
     log.debug("Activating mdns")
 
@@ -74,6 +94,7 @@ def hotspot_pass():
     mdns.add_hosts(dns_names, ip)
 
 
+@state_callback
 def hotspot_fail():
     pass
 
@@ -90,6 +111,7 @@ def hotspot_timeout():
 #
 
 
+@state_callback
 def connecting_start():
     global conn_list
 
@@ -109,11 +131,13 @@ def connecting_start():
         set_state('HOTSPOT')
 
 
+@state_callback
 def connecting_pass():
     log.debug("Connection successful")
     set_state('CONNECTED')
 
 
+@state_callback
 def connecting_fail():
     log.debug("Connection failed")
     if conn_list:
@@ -132,6 +156,7 @@ def connecting_timeout():
 #
 
 
+@state_callback
 def connected_start():
     global conn_list
 
@@ -141,10 +166,12 @@ def connected_start():
     conn_list = []
 
 
+@state_callback
 def connected_pass():
     pass
 
 
+@state_callback
 def connected_fail():
     log.warn('Connection lost')
     set_state('HOTSPOT')
@@ -235,11 +262,20 @@ def assure_hotspot(ssid):
         nm.make_hotspot(ssid)
 
 
-def init_states(*hosts):
+def init_states(hosts, callbacks):
     nmmon.init_nmmon()
     set_hosts(*hosts)
 
+    for callback in callbacks:
+        add_state_callback(callback)
+
     assure_hotspot(dns_to_conn(hosts[0]))
+
+
+def add_state_callback(callback):
+    global state_callbacks
+
+    state_callbacks.append(callback)
 
 
 if __name__ == '__main__':
