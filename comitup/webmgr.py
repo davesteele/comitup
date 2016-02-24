@@ -1,5 +1,9 @@
 
 
+import logging
+
+log = logging.getLogger('comitup')
+
 
 COMITUP_SERVICE = 'comitup-web'
 
