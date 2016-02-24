@@ -7,14 +7,27 @@ comitup(8) -- Manage wifi connections on headless, unconnected systems
 
 ## DESCRIPTION
 
+The **comitup** service provides a means to establish a connection between a
+computer and a wifi access point, in the case where wifi is the only means
+available to access the computer.
 
+On startup, the service will attempt to connect to wifi using established
+networkmanager(8) connections. If this is not successful, **comitup** will
+establish a wifi hotspot with the name _comitup-<nnnn>_, where <nnnn> is
+a persistent 4-digit number.
 
-**Comitup** works with networkmanager(8) to manage wifi connections, and with
-avahi-daemon(8) to publish mdns host names.
+While the hotspot is active, a comitup-web(8) service is available to manage
+connecting to an access point.
+
+In all states, avahi-daemon(8) is used to publish the mdns host names
+_comitup.local_ and _comitup-<nnnn>.local_, making the web service accessible
+as e.g. _http://comitup.local_, for systems supporting Zeroconf. For other
+systems, a _comitup_ Web Service is published which is visible to Zeroconf
+browsing applications, allowing the IP address to be manually determined.
 
 ### D-BUS Interface
 
-**Comitup** supports a D-BUS object which claims the name
+**Comitup** provides a D-BUS object which claims the name
 _com.github.davesteele.comitup_ on the path
 _/com/github/davesteele/comitup_, supporting the
 interface _com.github.davesteele.comitup_. The interface includes the
@@ -38,9 +51,9 @@ following methods.
     Output: Array of _DICT_ENTRY_
 
     Return a list of visible access points. This is represented as an array
-    of D-BUS _DICT_ENTRY_. Each _DICT_ENTRY_ contains the following keys,
-    _ssid_, _strength_ (0 to 100) and _security_ (_encrypted_ or
-    _unencrypted_).
+    of D-BUS _DICT_ENTRY_. Each _DICT_ENTRY_ contains strings associated with
+    the following keys, _ssid_, _strength_ (0 to 100) and _security_
+    (_encrypted_ or _unencrypted_).
 
   * _state()_
 
@@ -48,9 +61,9 @@ following methods.
 
     Ouput: _state_, _connection_
 
-    This returns the current **comitup** state, either **HOTSPOT**,
-    **CONNECTING**, or **CONNECTED**, and the _ssid_ name for the current
-    connection on the wifi device.
+    This returns strings for the current **comitup** state (either
+    **HOTSPOT**, **CONNECTING**, or **CONNECTED**) and the _ssid_ name for
+    the current connection on the wifi device.
 
   * _connect()_
 
@@ -68,11 +81,12 @@ following methods.
 
     Output: None
 
-    Delete the connection for _ssid_.
+    Delete the connection for _ssid_. The system will not be able to reconnect
+    using this connection.
 
 ## COPYRIGHT
 
-Comitup is Copyright (C) 2016 David Steele <https://davesteele.github.io/>
+Comitup is Copyright (C) 2016 David Steele <https://davesteele.github.io/>.
 
 ## SEE ALSO
 
