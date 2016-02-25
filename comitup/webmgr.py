@@ -15,6 +15,7 @@ def start_service(service):
     log.debug("starting %s web service", service)
     pass
 
+
 def stop_service(service):
     log.debug("stopping %s web service", service)
     pass

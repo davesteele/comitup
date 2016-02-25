@@ -3,7 +3,6 @@
 import logging
 import time
 from functools import wraps
-from collections import namedtuple
 from dbus.exceptions import DBusException
 
 
@@ -188,28 +187,20 @@ def connected_timeout():
 # State Management
 #
 
-StateInfo = namedtuple('StateInfo', "start_fn, pass_fn, fail_fn, timeout_fn")
 
-state_matrix = {
-    'HOTSPOT':      StateInfo(
-                        hotspot_start,
-                        hotspot_pass,
-                        hotspot_fail,
-                        hotspot_timeout,
-                    ),
-    'CONNECTING':   StateInfo(
-                        connecting_start,
-                        connecting_pass,
-                        connecting_fail,
-                        connecting_timeout,
-                    ),
-    'CONNECTED':    StateInfo(
-                        connected_start,
-                        connected_pass,
-                        connected_fail,
-                        connected_timeout,
-                    ),
-}
+class state_matrix(object):
+    """Map e.g. state_matrix('HOTSPOT').pass_fn to the function hotspot_pass"""
+
+    def __init__(self, state):
+        self.state = state.lower()
+
+    def __getattr__(self, attr):
+        try:
+            fname = self.state + '_' + attr[:-3]
+            return globals()[fname]
+        except KeyError:
+            print attr
+            raise AttributeError
 
 
 def set_state(state, connections=None):
@@ -220,7 +211,7 @@ def set_state(state, connections=None):
     if com_state != 'HOTSPOT':
         points = nm.get_points_ext()
 
-    state_info = state_matrix[state]
+    state_info = state_matrix(state)
 
     nmmon.set_device_callbacks(state_info.pass_fn, state_info.fail_fn)
 

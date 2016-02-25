@@ -88,6 +88,7 @@ def test_persist_file_format(jsonpath):
     expected = '{\n  "a": "b"\n}'
     assert open(jsonpath, 'r').read() == expected
 
+
 def test_persist_get_attr_dict(jsonpath):
     mydict = persist(jsonpath)
 

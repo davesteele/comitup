@@ -168,3 +168,19 @@ def test_state_callback_decorator(state_globals):
     foo_bar()
 
     assert callback.call_args == call('FOO', 'bar')
+
+
+def test_state_matrix():
+    assert states.state_matrix('HOTSPOT').pass_fn == states.hotspot_pass
+
+
+@pytest.mark.parametrize("path, good", (
+    ("states.state_matrix('HOTSPOT').bogus_fn", False),
+    ("states.state_matrix('HOTSPOT').bogus",    False),
+    ("states.state_matrix('HOTSPOT').pass_fn",  True),))
+def test_state_matrix_miss(path, good):
+    if good:
+        eval(path)
+    else:
+        with pytest.raises(AttributeError):
+            eval(path)
