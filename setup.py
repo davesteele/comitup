@@ -55,7 +55,7 @@ class MyClean(clean):
 
 setup(
     name='comitup',
-    packages=['comitup'],
+    packages=['comitup', 'web', 'cli'],
     version='0.1',
     description="Copy a remote file using multiple SSH streams",
     classifiers=[
@@ -70,15 +70,22 @@ setup(
         'Topic :: System :: Networking',
     ],
     entry_points={
-        'console_scripts': ['comitup=comitup:main'],
+        'console_scripts': [
+            'comitup=comitup:main',
+            'comitup-cli=cli:interpreter',
+        ],
     },
+    data_files=[
+        ('/etc', ['conf/comitup.conf']),
+        ('/var/lib/comitup', ['conf/comitup.json']),
+        ('/etc/dbus-1/system.d', ['conf/comitup-dbus.conf']),
+    ],
     install_requires=[],
     tests_require=['pytest', 'mock'],
     cmdclass={
         'clean': MyClean,
         'test': PyTest,
     },
-    data_files=[],
     author="David Steele",
     author_email="dsteele@gmail.com",
     url='https://davesteele.github.io/comitup/',
