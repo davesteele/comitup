@@ -47,3 +47,24 @@ def test_webmgr_callback(stop_svc, start_svc, svc, state, action,
 
     if svc:
         assert fn_fact().called
+
+
+
+others = [(x, y) for x in ('HOTSPOT', 'CONNECTING', 'CONNECTED')
+                 for y in ('fail', 'timeout')]
+
+
+@pytest.mark.parametrize("state, action",
+    [
+        ('CONNECTING', 'pass'),
+        ('CONNECTED', 'pass'),
+    ] + others
+)
+@patch('comitup.webmgr.start_service')
+@patch('comitup.webmgr.stop_service')
+def test_webmgr_no_callback(stop_svc, start_svc, state, action, websvc_fxt):
+    webmgr.web_service = 'foo'
+    webmgr.state_callback(state, action)
+
+    assert not stop_svc.called
+    assert not start_svc.called

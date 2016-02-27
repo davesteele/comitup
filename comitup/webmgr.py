@@ -30,7 +30,10 @@ callmatrix = {
 
 
 def state_callback(state, action):
-    (fn_fact, svc_fact) = callmatrix[(state, action)]
+    try:
+        (fn_fact, svc_fact) = callmatrix[(state, action)]
+    except KeyError:
+        return
 
     if svc_fact():
         fn_fact()(svc_fact())
