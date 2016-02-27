@@ -21,17 +21,19 @@ def stop_service(service):
     pass
 
 
+callmatrix = {
+    ('HOTSPOT',    'start'): (lambda: stop_service, lambda: web_service),
+    ('HOTSPOT',     'pass'): (lambda: start_service, lambda: COMITUP_SERVICE),
+    ('CONNECTING', 'start'): (lambda: stop_service, lambda: COMITUP_SERVICE),
+    ('CONNECTED',  'start'): (lambda: start_service, lambda: web_service),
+}
+
+
 def state_callback(state, action):
-    if (state, action) == ('HOTSPOT', 'start'):
-        if web_service:
-            stop_service(web_service)
-    elif (state, action) == ('HOTSPOT', 'pass'):
-        start_service(COMITUP_SERVICE)
-    elif (state, action) == ('CONNECTING', 'start'):
-        stop_service(COMITUP_SERVICE)
-    elif (state, action) == ('CONNECTED', 'start'):
-        if web_service:
-            start_service(web_service)
+    (fn_fact, svc_fact) = callmatrix[(state, action)]
+
+    if svc_fact():
+        fn_fact()(svc_fact())
 
 
 def callback_target():

@@ -11,23 +11,6 @@ def test_webmgr_callback_target():
     assert webmgr.callback_target() == webmgr.state_callback
 
 
-@pytest.mark.parametrize("state, action, start_arg, stop_arg", (
-    ('HOTSPOT',    'pass',  "comitup-web",      None),
-    ('CONNECTING', 'start', None,               "comitup-web"),
-))
-@patch('comitup.webmgr.start_service')
-@patch('comitup.webmgr.stop_service')
-def test_webmgr_callback(stop_svc, start_svc, state, action, start_arg,
-                         stop_arg):
-    webmgr.state_callback(state, action)
-
-    if start_arg is not None:
-        assert start_svc.call_args == call(start_arg)
-
-    if stop_arg is not None:
-        assert stop_svc.call_args == call(stop_arg)
-
-
 @pytest.fixture()
 def websvc_fxt(request):
     web_svc = webmgr.web_service
@@ -38,27 +21,29 @@ def websvc_fxt(request):
     request.addfinalizer(fin)
 
 
-@pytest.mark.parametrize("state, action, start_arg, stop_arg", (
-    ('HOTSPOT',    'start', None,               'foo'),
-    ('CONNECTED',  'start', webmgr.web_service, None),
+@pytest.mark.parametrize("state, action, fn_fact, arg_fact", (
+    ('HOTSPOT',    'start', lambda: webmgr.stop_service,
+                            lambda: webmgr.web_service),        # noqa
+    ('HOTSPOT',     'pass', lambda: webmgr.start_service,
+                            lambda: webmgr.COMITUP_SERVICE),
+    ('CONNECTING', 'start', lambda: webmgr.stop_service,
+                            lambda: webmgr.COMITUP_SERVICE),
+    ('CONNECTED',  'start', lambda: webmgr.start_service,
+                            lambda: webmgr.web_service),
 ))
 @pytest.mark.parametrize("svc", ("", "foo"))
 @patch('comitup.webmgr.start_service')
 @patch('comitup.webmgr.stop_service')
-def test_webmgr_callback2(stop_svc, start_svc, state, action, start_arg,
-                          stop_arg, websvc_fxt, svc):
-
+def test_webmgr_callback(stop_svc, start_svc, svc, state, action,
+                         fn_fact, arg_fact, websvc_fxt):
     webmgr.web_service = svc
     webmgr.state_callback(state, action)
 
-    if start_arg and svc:
-        assert start_svc.call_args == call(start_arg)
+    if arg_fact():
+        assert fn_fact().called
+        assert fn_fact().called_with(call(arg_fact()))
+    else:
+        assert not fn_fact().called
 
-    if start_arg and not svc:
-        assert start_svc.call_args is None
-
-    if stop_arg and svc:
-        assert stop_svc.call_args == call(stop_arg)
-
-    if stop_arg and not svc:
-        assert stop_svc.call_args is None
+    if svc:
+        assert fn_fact().called
