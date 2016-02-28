@@ -28,13 +28,9 @@ def conf_fxt(tmpdir):
     return config.Config(path)
 
 
-def test_conf_null(conf_fxt):
-    conf_fxt.tag1
-
-
 @pytest.mark.parametrize("idx", ('1', '2', '3'))
 def test_conf_vals(idx, conf_fxt):
-    assert eval('conf_fxt.tag' + idx) == "val" + idx
+    assert eval('conf_fxt.tag{0} == "val{0}"'.format(idx))
 
 
 def test_conf_miss(conf_fxt):

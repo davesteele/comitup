@@ -49,13 +49,11 @@ def test_webmgr_callback(stop_svc, start_svc, svc, state, action,
         assert fn_fact().called
 
 
-
 others = [(x, y) for x in ('HOTSPOT', 'CONNECTING', 'CONNECTED')
-                 for y in ('fail', 'timeout')]
+                 for y in ('fail', 'timeout')]                      # noqa
 
 
-@pytest.mark.parametrize("state, action",
-    [
+@pytest.mark.parametrize("state, action", [
         ('CONNECTING', 'pass'),
         ('CONNECTED', 'pass'),
     ] + others

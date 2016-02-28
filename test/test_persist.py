@@ -4,11 +4,32 @@ from comitup.persist import persist
 
 import pytest
 import os
+import tempfile
+import shutil
+
+
+@pytest.fixture(scope='module')
+def dir_fxt(request):
+    dir = tempfile.mkdtemp()
+
+    def fin():
+        shutil.rmtree(dir)
+
+    request.addfinalizer(fin)
+
+    return dir
 
 
 @pytest.fixture()
-def jsonpath(tmpdir):
-    return os.path.join(tmpdir.__str__(), "persist.json")
+def jsonpath(request, dir_fxt):
+    path = os.path.join(dir_fxt, 'persist.json')
+
+    def fin():
+        os.unlink(path)
+
+    request.addfinalizer(fin)
+
+    return path
 
 
 def test_persist_is_dict(jsonpath):

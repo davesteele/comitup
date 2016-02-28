@@ -65,10 +65,12 @@ def test_nmmon_set_listener(check_listener, nm_state, bus_fxt):
     assert bus_fxt.called
 
 
-def test_nmmon_check_listener(bus_fxt, devpath_fxt):
+@patch('comitup.nmmon.nm.get_device_path', return_value='somepath')
+@patch('comitup.nmmon.set_device_listener')
+def test_nmmon_check_listener(listener, dev_path, bus_fxt, devpath_fxt):
     nmmon.check_device_listener()
 
-    assert bus_fxt.called
+    assert listener.called
 
 
 @pytest.fixture()
@@ -82,19 +84,23 @@ def devpath_fxt(request):
 
 
 @pytest.mark.parametrize('state, called', ((0, False,), (100, True)))
-def test_nmmon_state_change(bus_fxt, devpath_fxt, state, called):
+@patch('comitup.nmmon.check_device_listener')
+def test_nmmon_state_change(chk_listen, bus_fxt, devpath_fxt, state, called):
     nmmon.nm_state_change(state)
 
-    assert bus_fxt.called == called
+    assert chk_listen.called == called
 
 
-def test_nmmon_set_nm_listeners(bus_fxt):
+@patch('comitup.nmmon.check_device_listener')
+def test_nmmon_set_nm_listeners(check_listener, bus_fxt):
     nmmon.set_nm_listeners()
 
     assert bus_fxt.called
+    assert check_listener.called
 
 
-def test_nmmon_init(bus_fxt):
+@patch('comitup.nmmon.check_device_listener')
+def test_nmmon_init(check_listener, bus_fxt):
     nmmon.init_nmmon()
 
     assert bus_fxt.called

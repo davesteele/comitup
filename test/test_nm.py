@@ -1,5 +1,5 @@
 import pytest
-from mock import Mock
+from mock import Mock, patch
 
 from comitup import nm
 
@@ -107,7 +107,8 @@ def test_del_connection_by_ssid(connections_fxt):
     assert connections_fxt.Delete.called
 
 
-def test_activate_connection_by_id(monkeypatch, connections_fxt):
+@patch('comitup.nm.get_wifi_device')
+def test_activate_connection_by_id(get_dev, monkeypatch, connections_fxt):
     activate = Mock()
     monkeypatch.setattr("comitup.nm.nm.NetworkManager.ActivateConnection",
                         activate)
