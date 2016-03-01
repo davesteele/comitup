@@ -41,3 +41,5 @@ def test_web_stringify(tst, var):
         assert sfy.decode(encoded) == var
     elif tst == "iv":
         assert encoded != sfy.encode(var)
+    else:
+        assert False
