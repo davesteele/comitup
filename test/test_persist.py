@@ -20,14 +20,14 @@ def dir_fxt(request):
     return dir
 
 
+count = 0
+
 @pytest.fixture()
 def jsonpath(request, dir_fxt):
-    path = os.path.join(dir_fxt, 'persist.json')
+    global count
 
-    def fin():
-        os.unlink(path)
-
-    request.addfinalizer(fin)
+    path = os.path.join(dir_fxt, 'persist%d.json' % count)
+    count += 1
 
     return path
 
