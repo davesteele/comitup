@@ -80,7 +80,7 @@ setup(
         ('/var/lib/comitup', ['conf/comitup.json']),
         ('/etc/dbus-1/system.d', ['conf/comitup-dbus.conf']),
     ],
-    install_requires=[],
+    install_requires=['networkmanager', 'tabulate', 'crypto', 'avahi'],
     tests_require=['pytest', 'mock'],
     cmdclass={
         'clean': MyClean,
