@@ -165,7 +165,9 @@ def get_candidate_connections(device=None):
 
             candidates.append(ssid)
 
-    return candidates
+    points = [x.Ssid for x in get_access_points()]
+
+    return list(set(candidates) & set(points))
 
 
 def make_hotspot(name='comitup'):
