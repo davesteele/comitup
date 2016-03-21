@@ -10,7 +10,7 @@ It is located in the _/etc/_ directory.
 
   * _base_name_:
     By default, comitup will create a hotspot named **comitup-<nnnn>**, and publish
-    avahi-daemon(8) host entries for **comitup-<nnnn>** and **comitup**. Settting this
+    avahi-daemon(8) host entries for **comitup-<nnnn>** and **comitup**. Setting this
     entry will change the **comitup** string with one of the users choosing.
 
   * _web_port_:
