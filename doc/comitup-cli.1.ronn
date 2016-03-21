@@ -5,7 +5,7 @@ comitup-cli(1) -- command-line interface for comitup network management
 
     $ `comitup-cli`
     
-    Mode: HOTSPOT
+    State: HOTSPOT
     Connection: hotspot-1234
     Points:
         1: MyAccessPoint
