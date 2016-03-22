@@ -2,41 +2,12 @@
 
 import sys
 
+sys.path.append('.')
+sys.path.append('..')
+
 from collections import namedtuple, OrderedDict
 from getpass import getpass
-import dbus
-
-bus = dbus.SystemBus()
-
-try:
-    ciu_service = bus.get_object(
-                   'com.github.davesteele.comitup',
-                   '/com/github/davesteele/comitup'
-                  )
-except dbus.exceptions.DBusException:
-    print "Error connecting to the comitup D-Bus service"
-    sys.exit(1)
-
-ciu_state = ciu_service.get_dbus_method(
-                'state',
-                'com.github.davesteele.comitup'
-            )
-ciu_activity = ciu_service.get_dbus_method(
-                'activity',
-                'com.github.davesteele.comitup'
-               )
-ciu_points = ciu_service.get_dbus_method(
-                'access_points',
-                'com.github.davesteele.comitup'
-             )
-ciu_delete = ciu_service.get_dbus_method(
-                'delete_connection',
-                'com.github.davesteele.comitup'
-             )
-ciu_connect = ciu_service.get_dbus_method(
-                'connect',
-                'com.github.davesteele.comitup'
-             )
+from comitup import client as ciu
 
 
 def do_reload(connection):
@@ -48,11 +19,11 @@ def do_quit(connection):
 
 
 def do_delete(connection):
-    ciu_delete(connection)
+    ciu.ciu_delete(connection)
 
 
 def do_connect(connection, password):
-    ciu_connect(connection, password)
+    ciu.ciu_connect(connection, password)
 
 
 CmdState = namedtuple('CmdState', "fn, desc, HOTSPOT, CONNECTING, CONNECTED")
@@ -73,7 +44,7 @@ def int_value(s):
 
 
 def get_state():
-    state, connection = ciu_state()
+    state, connection = ciu.ciu_state()
     return state, connection
 
 
@@ -102,7 +73,7 @@ def interpreter():
     while True:
         state, connection = get_state()
 
-        points = ciu_points()
+        points = ciu.ciu_points()
 
         print_cmd_prompts(state, connection, points)
 
@@ -116,7 +87,7 @@ def interpreter():
                 password = getpass('password: ')
             do_connect(points[index-1]['ssid'], password)
         else:
-            ciu_activity()
+            ciu.ciu_activity()
             try:
                 commands[cmd].fn(connection)
             except KeyError:
