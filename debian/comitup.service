@@ -1,0 +1,18 @@
+[Unit]
+Description=Comitup Wifi Management
+After=NetworkManager.service Avahi.service
+
+[Service]
+Type=dbus
+BusName=com.github.davesteele.comitup
+ExecStart=/usr/sbin/comitup
+PrivateTmp=true
+PrivateDevices=yes
+PrivateNetwork=yes
+ProtectSystem=full
+ProtectHome=yes
+MountFlags=slave
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

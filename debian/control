@@ -1,0 +1,34 @@
+Source: comitup
+Section: net
+Priority: optional
+Maintainer: David Steele <dsteele@gmail.com>
+Build-Depends:
+    debhelper (>=9),
+    dh-python,
+    dh-systemd,
+    python-all (>= 2.6.6-3~),
+    python-setuptools,
+    ruby-ronn,
+Standards-Version: 3.9.7
+Homepage: https://github.com/davesteele/comitup
+X-Python-Version: >= 2.7
+Vcs-Git: https://github.com/davesteele/comitup.git -b debian
+Vcs-Browser: https://github.com/davesteele/comitup
+
+Package: comitup
+Architecture: all
+Depends: 
+    ${python:Depends},
+    ${misc:Depends},
+    python-all (>= 2.6.6-3~),
+    python2.7-crypto,
+    python-networkmanager,
+    python-tabulate,
+    python2.7-avahi,
+    python-gobject-2,
+    python-cherrypy,
+    python-jinja2,
+Description: bootstrap Wifi using Wifi
+ Comitup will attempt to connect to wifi using an established connection. If
+ that fails, is creates a hotspot and web service to aid in configuring a
+ connection.

@@ -1,0 +1,3 @@
+/usr/share/comitup/comitup-cmd /usr/sbin/comitup
+/usr/share/comitup/comitup-cli /usr/sbin/comitup-cli
+/usr/share/comitup/comitup-web /usr/sbin/comitup-web

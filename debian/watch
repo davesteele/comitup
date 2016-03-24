@@ -1,0 +1,9 @@
+version=4
+
+
+opts=filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/comitup-$1\.tar\.gz/,\
+pgpsigurlmangle=s/github.com/raw.githubusercontent.com/;\
+s/archive\/master/signatures/;\
+s/([^\/]+)\.tar\.gz/comitup-$1\.tar\.gz/;\
+s/$/.asc/ \
+https://github.com/davesteele/comitup/tags .*master/v?(\d\S*)\.tar\.gz

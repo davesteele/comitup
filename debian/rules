@@ -1,0 +1,32 @@
+#!/usr/bin/make -f
+
+#export DH_VERBOSE = 1
+
+PKD = $(word 1,$(abspath $(dir $(MAKEFILE_LIST))))
+PKG = $(shell dpkg-parsechangelog -l$(PKD)/changelog --show-field=Source)
+VER = $(shell (dpkg-parsechangelog -l$(PKD)/changelog | grep Version | sed 's/Version..//' | sed 's/-.\+//'))
+
+export PYBUILD_NAME=comitup
+export PYBUILD_DISABLE_python3=install
+export PYBUILD_DISABLE=test
+export PYBUILD_INSTALL_ARGS=--install-lib=/usr/share/comitup\
+ --install-scripts=/usr/share/comitup
+
+%:
+	dh $@  --with python2,systemd --buildsystem=pybuild
+
+override_dh_auto_build:
+	dh_auto_build
+	ronn doc/*.ronn
+
+override_dh_systemd_enable:
+	dh_systemd_enable
+	dh_systemd_enable --name=comitup-web
+
+override_dh_installinit:
+	# to silence lintian complaints about phantom init.d files
+
+.PHONY get-orig-source:
+get-orig-source:  $(info I: $(PKG)_$(VER))
+	@echo "# Downloading..."
+	uscan --noconf --verbose --rename --destdir=$(CURDIR) --check-dirname-level=0 --force-download --download-version $(VER) $(PKD)
