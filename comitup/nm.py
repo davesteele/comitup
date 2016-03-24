@@ -199,38 +199,38 @@ def make_hotspot(name='comitup'):
 
 def make_connection_for(point, password=None):
 
-    settings = {
-        'connection':
+    settings = dbus.Dictionary({
+        'connection': dbus.Dictionary(
         {
             'id': point.Ssid,
             'type': '802-11-wireless',
             'uuid': str(uuid.uuid4()),
-        },
-        '802-11-wireless':
+        }),
+        '802-11-wireless': dbus.Dictionary(
         {
-            'ssid': point.Ssid,
+            'ssid': dbus.ByteArray(point.Ssid),
             'mode': 'infrastructure',
-        },
-        'ipv4':
+        }),
+        'ipv4': dbus.Dictionary(
         {
             # assume DHCP
             'method': 'auto',
-        },
-        'ipv6':
+        }),
+        'ipv6': dbus.Dictionary(
         {
             # assume ipv4-only
             'method': 'ignore',
-        },
-    }
+        }),
+    })
 
     # assume privacy = WPA(2) psk
     if point.Flags & 1:
         settings['802-11-wireless']['security'] = '802-11-wireless-security'
-        settings['802-11-wireless-security'] = {
+        settings['802-11-wireless-security'] = dbus.Dictionary({
             'auth-alg': 'open',
             'key-mgmt': 'wpa-psk',
             'psk': password,
-        }
+        })
 
     nm.Settings.AddConnection(settings)
 
