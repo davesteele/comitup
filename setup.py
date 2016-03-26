@@ -29,7 +29,8 @@ class MyClean(clean):
 
         for root, dirs, files in os.walk('.'):
             [shutil.rmtree(os.path.join(root, x)) for x in dirs if x in
-                (".pyc", ".coverage", ".cache", "__pycache__")]
+                (".pyc", ".coverage", ".cache", "__pycache__",
+                 "comitup.egg-info")]
 
             for file in files:
                 for match in (".pyc", ".cache", ".coverage"):
