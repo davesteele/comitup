@@ -1,55 +1,29 @@
-# Comitup 
- Pronounced (COMM-it-up)
 
-This module is intended to support managing NetworkManager Wifi connections.
-It will evenutually support the ability to bootstrap Wifi support over Wifi.
 
-This makes heavy use of the Python [NetworkManager] module. The NetworkManager
- DBus [specification] includes detail on how to call the DBus functions.
 
-[NetworkManager]: http://pythonhosted.org/python-networkmanager/
-[specification]: https://developer.gnome.org/NetworkManager/unstable/spec.html
 
-## Development tools
+Comitup
+======
 
-### Usage - nm
+Bootstrap Wifi using Wifi
+-------------------------
 
-	# python nm.py -h
-	usage: comitup [-h] command [arg]
-	
-	Manage NetworkManager Wifi connections
-	
-	positional arguments:
-	  command     command
-	  arg         command argument
-	
-	optional arguments:
-	  -h, --help  show this help message and exit
-	
-	Commands:
-	  delconnection - Delete a connection id'd by ssid
-	  detailconnection - Print details about a connection
-	  getconnection - Print the active connection ssid
-	  getip - Print the current IP address
-	  listaccess - List all accessible access points
-	  listconnections - List all defined connections
-	  makeconnection - Create a connection for a visible access point, for future use
-	  makehotspot - Create a hotspot connection for future use
-	  setconnection - Connect to a connection
+The __comitup__ service establishes wifi connectivity for a headless Linux system, using wifi as the only access mechanism to the system.
 
-### Usage - mdns
+If the computer cannot automatically connect to a local wifi access point, __comitup__ will create a custom hotspot, and establish a __comitup-web__ web service on that network. The web service can be used to remotely select and authenticate a visible wifi connection. 
 
-	# python mdns.py -h
-	usage: mdns [-h] host address
-	
-	Add an mdns (Zeroconf) entry for a .local address
-	
-	positional arguments:
-	  host        host name (e.g. "comitup.local")
-	  address     IP address
-	
-	optional arguments:
-	  -h, --help  show this help message and exit
-	
-	After entry, the host can be accessed by e.g. 'ping <host>.local'
+The hotspot is named _comitup-&lt;nnnn&gt;_, where _&lt;nnnn&gt;_ is a persistent 4-digit number. The website is accessible on that hotspot as _ht&#8203;tp://comitup.local_ or _ht&#8203;tp://comitup-&lt;nnnn&gt;.local_ from any device which supports [Bonjour/ZeroConf/Avahi] [zeroconf]. For other devices, use a Zeroconf browser ([Android][], [Windows][]) to determine the IP address of the web service, and browse to _ht&#8203;tp://&lt;ipaddress&gt;_.
 
+[zeroconf]: https://en.wikipedia.org/wiki/Zero-configuration_networking
+[Android]: https://play.google.com/store/apps/details?id=com.melloware.zeroconf&hl=en
+[Windows]: http://hobbyistsoftware.com/bonjourbrowser
+
+The __comitup-cli__ utility is available to interact with _comitup_ from a local terminal session.
+
+Man pages
+---------
+
+* [comitup.8](https://github.com/davesteele/comitup/blob/master/doc/comitup.8.ronn)
+* [comitup-conf.5](https://github.com/davesteele/comitup/blob/master/doc/comitup-conf.5.ronn)
+* [comitup-web.8](https://github.com/davesteele/comitup/blob/master/doc/comitup-web.8.ronn)
+* [comitup-cli.1](https://github.com/davesteele/comitup/blob/master/doc/comitup-cli.1.ronn)
