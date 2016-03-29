@@ -9,8 +9,8 @@ It is located in the _/etc/_ directory.
 ## PARAMETERS
 
   * _base_name_:
-    By default, comitup will create a hotspot named **comitup-<nnnn>**, and publish
-    avahi-daemon(8) host entries for **comitup-<nnnn>** and **comitup**. Setting this
+    By default, comitup will create a hotspot named **comitup-&lt;nnnn&gt;**, and publish
+    avahi-daemon(8) host entries for **comitup-&lt;nnnn&gt;** and **comitup**. Setting this
     entry will change the **comitup** string with one of the users choosing.
 
   * _web_port_:
@@ -26,7 +26,7 @@ It is located in the _/etc/_ directory.
 
 ## COPYRIGHT
 
-Comitup is Copyright (C) 2016 David Steele <https://davesteele.github.io/>
+Comitup is Copyright (C) 2016 David Steele &lt;https://davesteele.github.iO/&gt;
 
 ## SEE ALSO
 

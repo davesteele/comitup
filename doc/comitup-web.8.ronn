@@ -13,7 +13,7 @@ comitup-web(1) -- Wifi configuration web server for the Comitup service
 
 ## COPYRIGHT
 
-Comitup is Copyright (C) 2016 David Steele https://davesteele.github.io/
+Comitup is Copyright (C) 2016 David Steele &lt;https://davesteele.github.io/&gt;
 
 ## SEE ALSO
 

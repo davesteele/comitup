@@ -31,7 +31,7 @@ Display:
     The **comitup** states are **HOTSPOT**, **CONNECTING**, and **CONNECTED**. 
 
     In the **HOTSPOT** mode, **comitup** creates a wifi hotspot with the
-    name **comitup-<nnnn>**, where <nnnn> is a persistent 4-digit number.
+    name **comitup-&lt;nnnn&gt;**, where &lt;nnnn&gt; is a persistent 4-digit number.
 
     Once in **HOTSPOT** mode, the system will occasionally (~1/min) cycle
     through through available defined connections, by transitioning to the
@@ -71,14 +71,14 @@ Commands:
 
     This command is not available in the **HOTSPOT** mode.
 
-  * __<n>__ - **Connect to access point <n>**
+  * __&lt;n&gt;__ - **Connect to access point &lt;n&gt;**
 
     Define a connection for the selected access point, and then attempt to
     connect.
 
 ## COPYRIGHT
 
-Comitup is Copyright (C) 2016 David Steele <https://davesteele.github.io/>
+Comitup is Copyright (C) 2016 David Steele &lt;https://davesteele.github.io&gt;/
 
 ## SEE ALSO
 
