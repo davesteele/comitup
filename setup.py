@@ -76,6 +76,11 @@ setup(
             'comitup-cli=cli:interpreter',
         ],
     },
+    options={
+        'build_scripts': {
+            'executable': '/usr/bin/python2.7',
+        },
+    },
     data_files=[
         ('/etc', ['conf/comitup.conf']),
         ('/var/lib/comitup', ['conf/comitup.json']),
