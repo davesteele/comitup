@@ -7,9 +7,12 @@ comitup-web(1) -- Wifi configuration web server for the Comitup service
 
 ## DESCRIPTION
 
+__comitup-web__ is a web service that provides access to the comitup(8) Wifi
+bootstrap service.
 
 ## OPTIONS
 
+See comitup-conf(5).
 
 ## COPYRIGHT
 

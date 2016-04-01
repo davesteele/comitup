@@ -72,8 +72,8 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'comitup=comitup:main',
-            'comitup-cli=cli:interpreter',
+            'comitup=comitup.comitup:main',
+            'comitup-cli=cli.comitupcli:interpreter',
         ],
     },
     options={
@@ -86,7 +86,7 @@ setup(
         ('/var/lib/comitup', ['conf/comitup.json']),
         ('/etc/dbus-1/system.d', ['conf/comitup-dbus.conf']),
     ],
-    install_requires=['networkmanager', 'tabulate', 'crypto', 'avahi'],
+    install_requires=[],
     tests_require=['pytest', 'mock'],
     cmdclass={
         'clean': MyClean,
