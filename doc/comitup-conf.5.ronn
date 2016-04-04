@@ -26,7 +26,7 @@ It is located in the _/etc/_ directory.
 
 ## COPYRIGHT
 
-Comitup is Copyright (C) 2016 David Steele &lt;https://davesteele.github.iO/&gt;
+Comitup is Copyright (C) 2016 David Steele &lt;https://davesteele.github.io/&gt;
 
 ## SEE ALSO
 
