@@ -13,10 +13,6 @@ It is located in the _/etc/_ directory.
     avahi-daemon(8) host entries for **comitup-&lt;nnnn&gt;** and **comitup**. Setting this
     entry will change the **comitup** string with one of the users choosing.
 
-  * _web_port_:
-    This defines the port for the configuration web server that is present when
-    comitup(8) is in the **HOTSPOT** state.
-
   * _web_service_:
     This defines a user web service to be controlled by **comitup**. This service will be
     disabled in the **HOTSPOT** state in preference of the comitup web service, and will be

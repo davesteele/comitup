@@ -1,24 +1,40 @@
 
 
 import logging
+import dbus
+
+bus = dbus.SystemBus()
+systemd_service = bus.get_object(
+    'org.freedesktop.systemd1',
+    '/org/freedesktop/systemd1',
+)
+
+sd_start_unit = systemd_service.get_dbus_method(
+    'StartUnit',
+    'org.freedesktop.systemd1.Manager',
+)
+
+sd_stop_unit = systemd_service.get_dbus_method(
+    'StopUnit',
+    'org.freedesktop.systemd1.Manager',
+)
 
 log = logging.getLogger('comitup')
 
 
-COMITUP_SERVICE = 'comitup-web'
+COMITUP_SERVICE = 'comitup-web.service'
 
 web_service = ""
-port = "80"
 
 
 def start_service(service):
     log.debug("starting %s web service", service)
-    pass
+    sd_start_unit(service, 'fail')
 
 
 def stop_service(service):
     log.debug("stopping %s web service", service)
-    pass
+    sd_stop_unit(service, 'fail')
 
 
 callmatrix = {
@@ -43,5 +59,7 @@ def callback_target():
     return state_callback
 
 
-def init_webmgr(web_service, port):
-    pass
+def init_webmgr(web_svc):
+    global web_service
+
+    web_service = web_svc

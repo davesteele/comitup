@@ -38,22 +38,6 @@ class MyClean(clean):
                         os.unlink(os.path.join(root, file))
 
 
-#            [os.unlink(os.path.join(root, x)) for x in files if x in
-                
-
-#        for base in ('.', 'test', 'comitup'):
-#            for entry in os.listdir(base):
-#                path = os.path.join(base, entry)
-#
-#                for str in (".pyc", ".coverage", ".cache", "__pycache__"):
-#                    if str in entry:
-#                        if os.isdir(path):
-#                            shutil.rmtree(path)
-#                        else:
-#                            os.unlink(path)
-
-
-
 setup(
     name='comitup',
     packages=['comitup', 'web', 'cli'],
@@ -74,6 +58,7 @@ setup(
         'console_scripts': [
             'comitup=comitup.comitup:main',
             'comitup-cli=cli.comitupcli:interpreter',
+            'comitup-web=web.comitupweb:main',
         ],
     },
     options={
@@ -85,6 +70,14 @@ setup(
         ('/etc', ['conf/comitup.conf']),
         ('/var/lib/comitup', ['conf/comitup.json']),
         ('/etc/dbus-1/system.d', ['conf/comitup-dbus.conf']),
+        ('/usr/share/comitup/web', ['web/comitupweb.conf']),
+        ('/usr/share/comitup/web/templates',
+            [
+                'web/templates/index.html',
+                'web/templates/connect.html',
+                'web/templates/confirm.html',
+            ]
+        ),
     ],
     install_requires=[],
     tests_require=['pytest', 'mock'],

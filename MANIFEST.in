@@ -1,6 +1,6 @@
 include LICENSE
 include doc/*.ronn
-include cli/comitup-cli.py
+include cli/comitupcli.py
 include conf/comitup*
 include README.md
 include web/*.py
