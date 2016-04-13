@@ -102,7 +102,12 @@ def hotspot_fail():
 def hotspot_timeout():
     log.debug('Periodic connection attempt')
 
-    set_state('CONNECTING', candidate_connections())
+    conn_list = candidate_connections()
+    if conn_list:
+        # bug - try the first connection twice
+        set_state('CONNECTING', [conn_list[0], conn_list[0]] + conn_list)
+    else:
+        set_state('CONNECTING')
 
 
 #
@@ -117,6 +122,8 @@ def connecting_start():
     mdns.clear_entries()
 
     if conn_list:
+        nm.disconnect()
+
         conn = conn_list.pop(0)
         log.info('Attempting connection to %s' % conn)
         activate_connection(conn)
@@ -236,7 +243,12 @@ def activate_connection(name):
     connection = name
     log.debug('Connecting to %s' % connection)
 
-    nm.activate_connection_by_ssid(connection)
+    try:
+        path = [x['nmpath'] for x in points if x['ssid'] == name][0]
+    except IndexError:
+        path = '/'
+
+    nm.activate_connection_by_ssid(connection, path=path)
 
 
 def candidate_connections():

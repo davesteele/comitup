@@ -48,6 +48,16 @@ def get_device_path(device=None):
     return device.SpecificDevice().object_path
 
 
+def disconnect(device=None):
+    if not device:
+        device = get_wifi_device()
+
+    try:
+        device.Disconnect()
+    except:
+        pass
+
+
 def get_device_settings(device):
     if not device:
         device = get_wifi_device()
@@ -96,13 +106,13 @@ def del_connection_by_ssid(name):
             connection.Delete()
 
 
-def activate_connection_by_ssid(ssid, device=None):
+def activate_connection_by_ssid(ssid, device=None, path='/'):
     if not device:
         device = get_wifi_device()
 
     connection = get_connection_by_ssid(ssid)
 
-    nm.NetworkManager.ActivateConnection(connection, device, '/')
+    nm.NetworkManager.ActivateConnection(connection, device, path)
 
 
 def deactivate_connection(device=None):
@@ -123,7 +133,7 @@ def get_access_points(device=None):
 
 
 def get_points_ext(device=None):
-    inlist = get_access_points(device)
+    inlist = sorted(get_access_points(device), key=lambda x: -ord(x.Strength))
 
     outlist = []
     for point in inlist:
@@ -137,6 +147,7 @@ def get_points_ext(device=None):
             'ssid': point.Ssid,
             'strength': str(ord(point.Strength)),
             'security': encstr,
+            'nmpath': point.object_path,
         }
 
         outlist.append(outpoint)

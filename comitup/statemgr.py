@@ -56,7 +56,7 @@ class Comitup(dbus.service.Object):
         pt = Point(ssid, 1 if point['security'] == 'encrypted' else 0)
         nm.make_connection_for(pt, password)
 
-        states.set_state('CONNECTING', [ssid])
+        states.set_state('CONNECTING', [ssid, ssid])
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="")
     def delete_connection(self):

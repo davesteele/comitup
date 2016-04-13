@@ -24,7 +24,6 @@ def state_fxt(monkeypatch, state_globals):
         ('comitup.states.nm.get_candidate_connections',   ['c1', 'c2']),
         ('comitup.states.nm.get_active_ip',               '1.2.3.4'),
         ('comitup.states.nm.get_active_ssid',             None),
-        ('comitup.states.nm.get_points_ext',              []),
         ('comitup.states.nm.deactivate_connection',       None),
 
         ('comitup.states.nmmon.init_nmmon',               None),
@@ -44,12 +43,26 @@ def state_fxt(monkeypatch, state_globals):
     states.set_hosts('hs', 'hs-1111')
 
 
+@pytest.fixture()
+def points_fxt(monkeypatch):
+    pt = {
+        'nmpath': '/',
+        'ssid': 'ssid',
+    }
+
+    monkeypatch.setattr(
+        'comitup.states.nm.get_points_ext',
+        Mock(return_value=[pt])
+    )
+
+    return None
+
 @pytest.mark.parametrize(
     "state, action, end_state, conn, conn_list",
     (
         ('hotspot',       'pass',    'HOTSPOT', 'hs', []),
         ('hotspot',       'fail',    'HOTSPOT', 'hs', []),
-        ('hotspot',    'timeout', 'CONNECTING', 'c1', ['c2']),
+        ('hotspot',    'timeout', 'CONNECTING', 'c1', ['c1', 'c1', 'c2']),
         ('connecting',    'pass',  'CONNECTED', 'c1', []),
         ('connecting',    'fail', 'CONNECTING', 'c2', []),
         ('connecting', 'timeout', 'CONNECTING', 'c2', []),
@@ -61,7 +74,7 @@ def state_fxt(monkeypatch, state_globals):
 )
 @pytest.mark.parametrize("thetest", ('end_state', 'conn', 'conn_list'))
 def test_state_transition(thetest, state, action, end_state,
-                          conn, conn_list, state_fxt):
+                          conn, conn_list, state_fxt, points_fxt):
     action_fn = states.__getattribute__(state + "_" + action)
 
     states.connection = ''
