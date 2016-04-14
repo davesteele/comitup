@@ -1,5 +1,12 @@
 #!/usr/bin/python
 
+#
+# Copyright 2016 David Steele <dsteele@gmail.com>
+# This file is part of comitup
+# Available under the terms of the GNU General Public License version 2
+# or later
+#
+
 from binascii import hexlify, unhexlify
 from zlib import compress, decompress
 from pickle import dumps, loads

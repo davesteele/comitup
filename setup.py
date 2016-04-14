@@ -1,4 +1,11 @@
 
+#
+# Copyright 2016 David Steele <dsteele@gmail.com>
+# This file is part of comitup
+# Available under the terms of the GNU General Public License version 2
+# or later
+#
+
 from setuptools import setup
 from distutils.command.clean import clean
 from setuptools.command.test import test
