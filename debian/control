@@ -10,6 +10,7 @@ Build-Depends:
     python-setuptools,
     ruby-ronn,
 Standards-Version: 3.9.7
+Testsuite: autopkgtest
 Homepage: https://github.com/davesteele/comitup
 X-Python-Version: >= 2.7
 Vcs-Git: https://github.com/davesteele/comitup.git -b debian

@@ -1,0 +1,2 @@
+Test-Command: py.test
+Depends: @, python-pytest, python-mock, python-setuptools
