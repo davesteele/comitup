@@ -140,7 +140,11 @@ def get_access_points(device=None):
 
 
 def get_points_ext(device=None):
-    inlist = sorted(get_access_points(device), key=lambda x: -ord(x.Strength))
+    try:
+        inlist = sorted(get_access_points(device),
+                        key=lambda x: -ord(x.Strength))
+    except TypeError:
+        inlist = []
 
     outlist = []
     for point in inlist:
