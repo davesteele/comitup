@@ -24,8 +24,6 @@ class HelloWorld(object):
 
         points = ciu.ciu_points()
 
-        print points
-
         return tmpl.render(points=points)
     index.exposed = True
 

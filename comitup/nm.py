@@ -13,7 +13,6 @@ import dbus
 import sys
 import uuid
 import getpass
-import tabulate
 from functools import wraps
 
 
@@ -277,6 +276,8 @@ def do_listaccess(arg):
     bypwr = sorted(rows, key=lambda x: -x[5])
 
     hdrs = ('SSID', 'MAC', 'Private', 'WPA', 'RSN', 'Power', 'Frequency')
+
+    import tabulate
     print(tabulate.tabulate(bypwr, headers=hdrs))
 
 
