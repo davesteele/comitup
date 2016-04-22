@@ -1,0 +1,23 @@
+From: David Steele <dsteele@gmail.com>
+Date: Thu, 21 Apr 2016 20:37:54 -0400
+Subject: Rename the comitup script
+
+This supports the Debian convention of storing the app module
+and script in the same directory.
+---
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 350a222..f7748d0 100644
+--- a/setup.py
++++ b/setup.py
+@@ -63,7 +63,7 @@ setup(
+     ],
+     entry_points={
+         'console_scripts': [
+-            'comitup=comitup.comitup:main',
++            'comitup-cmd=comitup.comitup:main',
+             'comitup-cli=cli.comitupcli:interpreter',
+             'comitup-web=web.comitupweb:main',
+         ],
