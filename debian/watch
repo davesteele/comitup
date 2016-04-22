@@ -1,4 +1,4 @@
-version=4
+version=3
 
 
 opts=filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/comitup-$1\.tar\.gz/,\
