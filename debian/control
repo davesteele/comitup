@@ -24,11 +24,11 @@ Depends:
     python-all (>= 2.6.6-3~),
     python2.7-crypto,
     python-networkmanager,
-    python-tabulate,
     python2.7-avahi,
     python-gobject-2,
     python-cherrypy,
     python-jinja2,
+Suggests: python-tabulate
 Description: bootstrap Wifi using Wifi
  Comitup will attempt to connect to wifi using an established connection. If
  that fails, is creates a hotspot and web service to aid in configuring a
