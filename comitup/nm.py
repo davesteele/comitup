@@ -7,6 +7,7 @@
 # or later
 #
 
+import logging
 import NetworkManager as nm
 import argparse
 import dbus
@@ -18,6 +19,8 @@ from functools import wraps
 
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
+
+log = logging.getLogger('comitup')
 
 
 def initialize():
@@ -35,6 +38,7 @@ def none_on_exception(*exceptions):
             try:
                 return fp(*args, **kwargs)
             except exceptions:
+                log.debug("Got an exception, returning None", fp.__name)
                 return None
 
         return wrapper
@@ -61,7 +65,7 @@ def disconnect(device=None):
     try:
         device.Disconnect()
     except:
-        pass
+        log.debug("Error received in disconnect")
 
 
 def get_device_settings(device):
