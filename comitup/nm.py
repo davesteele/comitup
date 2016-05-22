@@ -146,25 +146,29 @@ def get_points_ext(device=None):
     try:
         inlist = sorted(get_access_points(device),
                         key=lambda x: -ord(x.Strength))
-    except TypeError:
+    except (TypeError, dbus.exceptions.DBusException):
+        log.debug("Error getting access points")
         inlist = []
 
     outlist = []
     for point in inlist:
 
-        if point.Flags & 1:
-            encstr = "encrypted"
-        else:
-            encstr = "unencrypted"
+        try:
+            if point.Flags & 1:
+                encstr = "encrypted"
+            else:
+                encstr = "unencrypted"
 
-        outpoint = {
-            'ssid': point.Ssid,
-            'strength': str(ord(point.Strength)),
-            'security': encstr,
-            'nmpath': point.object_path,
-        }
+            outpoint = {
+                'ssid': point.Ssid,
+                'strength': str(ord(point.Strength)),
+                'security': encstr,
+                'nmpath': point.object_path,
+            }
 
-        outlist.append(outpoint)
+            outlist.append(outpoint)
+        except dbus.exceptions.DBusException:
+            log.debug("Error getting point info")
 
     return outlist
 
