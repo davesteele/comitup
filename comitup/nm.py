@@ -281,8 +281,12 @@ def do_listaccess(arg):
 
     hdrs = ('SSID', 'MAC', 'Private', 'WPA', 'RSN', 'Power', 'Frequency')
 
-    import tabulate
-    print(tabulate.tabulate(bypwr, headers=hdrs))
+    try:
+        import tabulate
+        print(tabulate.tabulate(bypwr, headers=hdrs))
+    except:
+        for entry in bypwr:
+            print entry
 
 
 def do_listconnections(arg):
