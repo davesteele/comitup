@@ -7,6 +7,7 @@
 # or later
 #
 
+import logging
 import NetworkManager as nm
 import argparse
 import dbus
@@ -18,6 +19,8 @@ from functools import wraps
 
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
+
+log = logging.getLogger('comitup')
 
 
 def initialize():
@@ -35,6 +38,7 @@ def none_on_exception(*exceptions):
             try:
                 return fp(*args, **kwargs)
             except exceptions:
+                log.debug("Got an exception, returning None", fp.__name)
                 return None
 
         return wrapper
@@ -61,7 +65,7 @@ def disconnect(device=None):
     try:
         device.Disconnect()
     except:
-        pass
+        log.debug("Error received in disconnect")
 
 
 def get_device_settings(device):
@@ -142,25 +146,29 @@ def get_points_ext(device=None):
     try:
         inlist = sorted(get_access_points(device),
                         key=lambda x: -ord(x.Strength))
-    except TypeError:
+    except (TypeError, dbus.exceptions.DBusException):
+        log.debug("Error getting access points")
         inlist = []
 
     outlist = []
     for point in inlist:
 
-        if point.Flags & 1:
-            encstr = "encrypted"
-        else:
-            encstr = "unencrypted"
+        try:
+            if point.Flags & 1:
+                encstr = "encrypted"
+            else:
+                encstr = "unencrypted"
 
-        outpoint = {
-            'ssid': point.Ssid,
-            'strength': str(ord(point.Strength)),
-            'security': encstr,
-            'nmpath': point.object_path,
-        }
+            outpoint = {
+                'ssid': point.Ssid,
+                'strength': str(ord(point.Strength)),
+                'security': encstr,
+                'nmpath': point.object_path,
+            }
 
-        outlist.append(outpoint)
+            outlist.append(outpoint)
+        except dbus.exceptions.DBusException:
+            log.debug("Error getting point info")
 
     return outlist
 
@@ -277,8 +285,12 @@ def do_listaccess(arg):
 
     hdrs = ('SSID', 'MAC', 'Private', 'WPA', 'RSN', 'Power', 'Frequency')
 
-    import tabulate
-    print(tabulate.tabulate(bypwr, headers=hdrs))
+    try:
+        import tabulate
+        print(tabulate.tabulate(bypwr, headers=hdrs))
+    except:
+        for entry in bypwr:
+            print entry
 
 
 def do_listconnections(arg):
