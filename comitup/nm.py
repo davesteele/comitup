@@ -226,18 +226,18 @@ def make_hotspot(name='comitup'):
     nm.Settings.AddConnection(settings)
 
 
-def make_connection_for(point, password=None):
+def make_connection_for(ssid, password=None):
 
     settings = dbus.Dictionary({
         'connection': dbus.Dictionary(
         {
-            'id': point.Ssid,
+            'id': ssid,
             'type': '802-11-wireless',
             'uuid': str(uuid.uuid4()),
         }),
         '802-11-wireless': dbus.Dictionary(
         {
-            'ssid': dbus.ByteArray(point.Ssid),
+            'ssid': dbus.ByteArray(ssid),
             'mode': 'infrastructure',
         }),
         'ipv4': dbus.Dictionary(
@@ -253,7 +253,7 @@ def make_connection_for(point, password=None):
     })
 
     # assume privacy = WPA(2) psk
-    if point.Flags & 1:
+    if password:
         settings['802-11-wireless']['security'] = '802-11-wireless-security'
         settings['802-11-wireless-security'] = dbus.Dictionary({
             'auth-alg': 'open',
@@ -346,14 +346,11 @@ def do_listcandidates(dummy):
 
 
 def do_makeconnection(ssid):
-    """Create a connection for a visible access point, for future use"""
-    point = get_access_point_by_ssid(ssid)
+    """Create a connection for an access point, for future use"""
 
-    password = ''
-    if point.Flags & 1:
-        password = getpass.getpass('password: ')
+    password = getpass.getpass('password: ')
 
-    make_connection_for(point, password)
+    make_connection_for(ssid, password)
 
 
 def get_command(cmd):

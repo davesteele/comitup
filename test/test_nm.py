@@ -132,13 +132,11 @@ def test_make_hotspot(monkeypatch):
 
 
 def test_make_connection_for(monkeypatch):
-    point = Mock()
-    point.Flags = 1
 
     addconnection = Mock()
     monkeypatch.setattr("comitup.nm.nm.Settings.AddConnection", addconnection)
 
-    nm.make_connection_for(point, "password")
+    nm.make_connection_for("anssid", "password")
 
     assert addconnection.called
 
