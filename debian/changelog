@@ -1,4 +1,11 @@
-comitup (0.1-1) unstable; urgency=low
+comitup (0.2-1) unstable; urgency=medium
+
+  * Add a manual Access Point selection capability.
+  * Minor bug fixes.
+
+ -- David Steele <steele@debian.org>  Thu, 07 Jul 2016 11:56:33 -0400
+
+comitup (0.1-1) UNRELEASED; urgency=low
 
   * Initial release (Closes: #821145)
 
