@@ -1,0 +1,65 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+Suite: stable
+Codename: comitup-jessie
+Date: Thu, 07 Jul 2016 20:04:42 UTC
+Architectures: amd64 i386 armhf armel
+Components: main
+Description: Apt repository for comitup on Jessie
+MD5Sum:
+ 736e190a3fa7eb219adeb6d4f87c179d 865 main/binary-amd64/Packages
+ ed2bfa7d427058937e2244401d21a21a 567 main/binary-amd64/Packages.gz
+ c6769702302d74ed5882984e94cfce5b 102 main/binary-amd64/Release
+ 736e190a3fa7eb219adeb6d4f87c179d 865 main/binary-i386/Packages
+ ed2bfa7d427058937e2244401d21a21a 567 main/binary-i386/Packages.gz
+ a298bf6155b31ef2349dbc0d9192e085 101 main/binary-i386/Release
+ 736e190a3fa7eb219adeb6d4f87c179d 865 main/binary-armhf/Packages
+ ed2bfa7d427058937e2244401d21a21a 567 main/binary-armhf/Packages.gz
+ c69162a720c4f06e5ba47fef2df53ec3 102 main/binary-armhf/Release
+ 736e190a3fa7eb219adeb6d4f87c179d 865 main/binary-armel/Packages
+ ed2bfa7d427058937e2244401d21a21a 567 main/binary-armel/Packages.gz
+ e386ab57b2853b759f1bd053a0a6fff8 102 main/binary-armel/Release
+SHA1:
+ 1c5fc043ecd9032f4a287fe36081d9924a41c29d 865 main/binary-amd64/Packages
+ c90b287006b9c5cf1b3083ac2af1df0c1b7fd3a2 567 main/binary-amd64/Packages.gz
+ 20731db1de05e360072f236d6a46c6fc850c2ec7 102 main/binary-amd64/Release
+ 1c5fc043ecd9032f4a287fe36081d9924a41c29d 865 main/binary-i386/Packages
+ c90b287006b9c5cf1b3083ac2af1df0c1b7fd3a2 567 main/binary-i386/Packages.gz
+ e99b6dd826e7b46e531dcd70fdc9392185ab2eec 101 main/binary-i386/Release
+ 1c5fc043ecd9032f4a287fe36081d9924a41c29d 865 main/binary-armhf/Packages
+ c90b287006b9c5cf1b3083ac2af1df0c1b7fd3a2 567 main/binary-armhf/Packages.gz
+ 6ddbbd4b4ecb466aeb399548aca1f6579e2d20d4 102 main/binary-armhf/Release
+ 1c5fc043ecd9032f4a287fe36081d9924a41c29d 865 main/binary-armel/Packages
+ c90b287006b9c5cf1b3083ac2af1df0c1b7fd3a2 567 main/binary-armel/Packages.gz
+ 76238278554d09626bb4c5f877c35e380d776c57 102 main/binary-armel/Release
+SHA256:
+ 04982aec1f20cbf90777d87094242a5293bf00320b6d2c1bb64b8de6ec7d4563 865 main/binary-amd64/Packages
+ f670f229c8f826d542dd771f2cbba771d65e857278a904fbbf937142d413be3f 567 main/binary-amd64/Packages.gz
+ 3b2886e4c95d617936e90098ea6311bf48387fdef82348ec433f8d43b1bf8168 102 main/binary-amd64/Release
+ 04982aec1f20cbf90777d87094242a5293bf00320b6d2c1bb64b8de6ec7d4563 865 main/binary-i386/Packages
+ f670f229c8f826d542dd771f2cbba771d65e857278a904fbbf937142d413be3f 567 main/binary-i386/Packages.gz
+ f01b4c909180d1179b6c63c8e2ed969dd58bf076f6e2546d6731becbeab7033b 101 main/binary-i386/Release
+ 04982aec1f20cbf90777d87094242a5293bf00320b6d2c1bb64b8de6ec7d4563 865 main/binary-armhf/Packages
+ f670f229c8f826d542dd771f2cbba771d65e857278a904fbbf937142d413be3f 567 main/binary-armhf/Packages.gz
+ f095947890f784e4aff75e5b1de330906d5696a0fafd291bbb1805ee56a7ea8f 102 main/binary-armhf/Release
+ 04982aec1f20cbf90777d87094242a5293bf00320b6d2c1bb64b8de6ec7d4563 865 main/binary-armel/Packages
+ f670f229c8f826d542dd771f2cbba771d65e857278a904fbbf937142d413be3f 567 main/binary-armel/Packages.gz
+ cec0bf59fe71cdad4d970511bfd7351bedeaa895b1d9478019a0f448381dce2e 102 main/binary-armel/Release
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iQIcBAEBCAAGBQJXfrXdAAoJEGJ+uykKgXqCAcUP+gJtKfweAZ+TzxRvY0PyRmvj
+sw9cvW7ewoDhv2zxgwNGH8/0nDstiwj4QsgDR9SZvwl8tbw3rZUiM929ZxIFJmst
+0raD8hEhDR45H9aJccwO+EGkjKZ9UCd7q3UUovTlmKkbwl9EE+pBYKGWpV40OQct
+UOWQQw1WZk7FQm+Ao4dfYBslrlAjEK6WtBzmQLybWbeQlPn+D2V7ph7ZVZQ03jpM
+di1Muxa6Jr6bEpcTTL8GNC5hocKpxNF4fU0/TaH1hcbOqdiNwnjnJWbnWNzCD4Tp
+ZPMj9RFFKBlTwCDO2ifSt5MzAByduc9iy9d4Rl/AyH/3FquWG7TbhKCc1Xk/oACD
+jz8kI6RS3U7nTX9Lj9blyjWCL/UGKgCrpo8t+RjZPPNjGbubr3cVLbAQ9zUO1qOw
+/CuKUg+cnFqYLbiEzmTfgzLntstKwG0c18TaDUyQqjitrl1VasSOELqH30OZnx6Q
+pmDDxF95KzL/1xiE4Eqbdb3BVs6oKTDAbIYPmyz+CAF5E/NZzyF5y18FuIGFuOLU
+NKbN84YFsWYclTQS/HFr/SbxTekqEnF+29ubwuxRwa5nuA5Mkj7x4U792pxvsRyE
+0a2cjXe+BUvANkcIbl0UR4DMQoccrk02n/BcB6uY10Dm97KJwtbGSA3Q9qQIplsD
+e2uTQMdVL1ja93OF0Pmd
+=04xO
+-----END PGP SIGNATURE-----

@@ -1,0 +1,251 @@
+<!-- Creator     : groff version 1.22.3 -->
+<!-- CreationDate: Thu Jul  7 20:04:40 2016 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>COMITUP</title>
+
+</head>
+<body>
+
+<h1 align="center">COMITUP</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>comitup</b>
+&minus; Manage wifi connections on headless, unconnected
+systems</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>comitup</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">The
+<b>comitup</b> service provides a means to establish a
+connection between a computer and a wifi access point, in
+the case where wifi is the only means available to access
+the computer.</p>
+
+<p style="margin-left:11%; margin-top: 1em">On startup, the
+service will attempt to connect to wifi using established
+networkmanager(8) connections. If this is not successful,
+<b>comitup</b> will establish a wifi hotspot with the name
+<i>comitup&minus;&lt;nnnn&gt;</i>, where &lt;nnnn&gt; is a
+persistent 4&minus;digit number.</p>
+
+<p style="margin-left:11%; margin-top: 1em">While the
+hotspot is active, a comitup&minus;web(8) service is
+available to manage connecting to an access point.</p>
+
+<p style="margin-left:11%; margin-top: 1em">In all states,
+avahi&minus;daemon(8) is used to publish the mdns host names
+<i>comitup.local</i> and
+<i>comitup&minus;&lt;nnnn&gt;.local</i>, making the web
+service accessible as e.g. <i>http://comitup.local</i>, for
+systems supporting Zeroconf. For other systems, a
+<i>comitup</i> Web Service is published which is visible to
+Zeroconf browsing applications, allowing the IP address to
+be manually determined.</p>
+
+<p style="margin-left:11%; margin-top: 1em"><b>comitup</b>
+logs to <i>/var/log/comitup.log</i>.</p>
+
+<p style="margin-left:11%; margin-top: 1em"><b>D&minus;BUS
+Interface <br>
+Comitup</b> provides a D&minus;BUS object which claims the
+name <i>com.github.davesteele.comitup</i> on the path
+<i>/com/github/davesteele/comitup</i>, supporting the
+interface <i>com.github.davesteele.comitup</i>. The
+interface includes the following methods.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="5%"></td>
+<td width="15%">
+
+
+<p><i>activity()</i></p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:17%; margin-top: 1em">Input: None</p>
+
+<p style="margin-left:17%; margin-top: 1em">Output:
+None</p>
+
+<p style="margin-left:17%; margin-top: 1em">Calling this
+method will disable <b>comitup</b> timeout processing for
+the current period. In the <b>HOTSPOT</b> mode, this defers
+the periodic access point connection attempt until the next
+timeout period (nominally 1 minute).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="5%"></td>
+<td width="23%">
+
+
+<p style="margin-top: 1em"><i>access_points()</i></p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:17%; margin-top: 1em">Input: None</p>
+
+<p style="margin-left:17%; margin-top: 1em">Output: Array
+of <i>DICT_ENTRY</i></p>
+
+<p style="margin-left:17%; margin-top: 1em">Return a list
+of visible access points. This is represented as an array of
+D&minus;BUS <i>DICT_ENTRY</i>. Each <i>DICT_ENTRY</i>
+contains strings associated with the following keys,
+<i>ssid</i>, <i>strength</i> (0 to 100) and <i>security</i>
+(<i>encrypted</i> or <i>unencrypted</i>).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="5%"></td>
+<td width="11%">
+
+
+<p style="margin-top: 1em"><i>state()</i></p></td>
+<td width="72%">
+</td></tr>
+</table>
+
+<p style="margin-left:17%; margin-top: 1em">Input: None</p>
+
+<p style="margin-left:17%; margin-top: 1em">Ouput:
+<i>state</i>, <i>connection</i></p>
+
+<p style="margin-left:17%; margin-top: 1em">This returns
+strings for the current <b>comitup</b> state (either
+<b>HOTSPOT</b>, <b>CONNECTING</b>, or <b>CONNECTED</b>) and
+the <i>ssid</i> name for the current connection on the wifi
+device.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="5%"></td>
+<td width="14%">
+
+
+<p style="margin-top: 1em"><i>connect()</i></p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<p style="margin-left:17%; margin-top: 1em">Input:
+<i>ssid</i>, <i>password</i></p>
+
+<p style="margin-left:17%; margin-top: 1em">Output:
+None</p>
+
+<p style="margin-left:17%; margin-top: 1em">Delete any
+existing connection for <i>ssid</i>, create a new
+connection, and attempt to connect to it. The password may
+be a zero length string if not needed.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="5%"></td>
+<td width="29%">
+
+
+<p style="margin-top: 1em"><i>delete_connection()</i></p></td>
+<td width="54%">
+</td></tr>
+</table>
+
+<p style="margin-left:17%; margin-top: 1em">Input:
+<i>ssid</i></p>
+
+<p style="margin-left:17%; margin-top: 1em">Output:
+None</p>
+
+<p style="margin-left:17%; margin-top: 1em">Delete the
+connection for <i>ssid</i>. The system will not be able to
+reconnect using this connection.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">Comitup is
+Copyright (C) 2016 David Steele
+&lt;https://davesteele.github.io/&gt;.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:11%; margin-top: 1em">comitup&minus;conf(5),
+comitup&minus;cli(1), comitup&minus;web(8)</p>
+<hr>
+</body>
+</html>
