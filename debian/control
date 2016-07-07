@@ -9,7 +9,7 @@ Build-Depends:
     python-all (>= 2.6.6-3~),
     python-setuptools,
     ruby-ronn,
-Standards-Version: 3.9.7
+Standards-Version: 3.9.8
 Testsuite: autopkgtest
 Homepage: https://github.com/davesteele/comitup
 X-Python-Version: >= 2.7
