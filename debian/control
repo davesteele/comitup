@@ -1,7 +1,7 @@
 Source: comitup
 Section: net
 Priority: optional
-Maintainer: David Steele <dsteele@gmail.com>
+Maintainer: David Steele <steele@debian.org>
 Build-Depends:
     debhelper (>=9),
     dh-python,
