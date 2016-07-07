@@ -1,0 +1,37 @@
+#!/usr/bin/python
+
+import os
+import json
+import re
+
+from distutils.version import LooseVersion
+
+
+def pkgkeyfunc(a):
+    (name, ver) = a.split('_')[0:2]
+    return((LooseVersion(ver), name))
+
+def pkglatestver(pkglist):
+    vers = [x.split('_')[1] for x in pkglist]
+    return max(vers, key=lambda x:LooseVersion(x))
+
+def pkglatestdebver(pkglist):
+    vers = [x.split('_')[1] for x in pkglist if re.search('deb.u.', x)]
+    return max(vers, key=lambda x:LooseVersion(x))
+
+debs = [x for x in os.listdir('deb') if 'deb' in x]
+debs.sort(key=pkgkeyfunc, reverse=True)
+
+ver = pkglatestver(debs)
+#stablever = pkglatestdebver(debs)
+
+latestdebs = [x for x in debs if ver in x]
+#latestdebdebs = [x for x in debs if stablever in x]
+
+outputjson = { 'all_pkgs': debs,
+               'latest_pkgs': latestdebs, }
+#               'latest_stable': latestdebdebs, }
+
+
+with open('pkgs.json', 'w') as outfile:
+    json.dump(outputjson, outfile, sort_keys=True, indent=4)

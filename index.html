@@ -1,0 +1,129 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/Product">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Comitup</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="javascripts/jquery-1.7.1.min.js"></script>
+    <script src="javascripts/jquery.mustache.js"></script>
+    <script src="javascripts/mustache.js"></script>
+
+    <meta itemprop="name" content="Comitup Wifi Bootstrap Service">
+    <meta itemprop="description" content="Bootstrap Wifi using Wifi">
+
+    <script type="text/javascript">
+
+//    function dotemplate(data, textstatus, jqXHR ) {
+//        $.Mustache.addFromDom('debtmpl');
+//        $('#deblist').mustache('debtmpl', data);
+//        $.Mustache.addFromDom('debstabletmpl');
+//        $('#debstablelist').mustache('debstabletmpl', data);
+//    }
+//
+//    $(document).ready(function() {
+//        $.getJSON('pkgs.json', dotemplate);
+//    })
+
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Comitup</h1>
+        <p>Bootstrap Wifi networking using the Wifi connection</p>
+
+        <p class="view"><a href="https://github.com/davesteele/comitup">View the Project on GitHub <small>davesteele/comitup</small></a></p>
+
+<div class="g-page" data-width="275" data-href="//plus.google.com/114224856151152598318" data-layout="landscape" data-rel="publisher"></div>
+
+<!--
+        <ul>
+          <li><a href="https://github.com/davesteele/cloudprint-service/zipball/release">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/davesteele/cloudprint-service/tarball/release">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/davesteele/cloudprint-service">View On <strong>GitHub</strong></a></li>
+        </ul>
+-->
+      </header>
+      <section>
+        <h3>Wifi Network Bootstrap for the Raspberry Pi 3</h3>
+
+<p>Comitup is a software package that provides a service to establish Wifi
+networking on a headless computer (that is, one with no video, keyboard, or mouse).</p>
+
+<p>The Comitup ROM is a microSD disk image for the Raspberry Pi 3, providing
+an operating system with the comitup service included. The Comitup ROM is an
+extension of standard Raspbian OS with the following capabilities:</p>
+
+<ul>
+<li>The comitup-resize service, which automatically expands the Comitup ROM
+image to fill the microSD card on the first boot of the Raspberry Pi.
+<li>The comitup service, which automatically connects to an established 
+Wifi Access Point, if possible. Otherwise, it will create a stand-alone 
+Access Point with the name (SSID) 'comitup-&lt;nnnn&gt;', 
+where '&lt;nnnn&gt;' is a unique, persistent four-digit number.</li>
+<li>Defined ZeroConf mdns address names for 'comitup.local' and 
+'comitup-&lt;nnnn&gt;.local', advertising the IP address of the Raspbery
+Pi on Wifi.</li>
+<li>A comitup-web service, which provides a web interface for selecting and 
+authenticating against an existing Access Point.</li>
+<li>A comitup-cli command-line utility for interacting with comitup.</li>
+</ul>
+
+
+<h3>Download</h3>
+
+<ul>
+<li>Comitup ROM<br>
+<p>The latest version of the Comitup ROM is available by BitTorrent 
+<a href="">here</a>. Seeders are appreciated.</p>
+</li>
+<li>Comitup<br>
+<p>The packages are available in the <a href="archive.html">Package
+Archive</a>, or set up a <a href="ppa.html">comitup PPA repository</a> link.</p>
+</li>
+</ul>
+
+<h3>Documentation</h3>
+<ul>
+<li>The <a href="https://github.com/davesteele/comitup/wiki">Comitup
+Wiki</a>.</li>
+<li>Man pages
+<ul>
+<li><a href="man/comitup.html">comitup (8)</a> (<a href="man/comitup.pdf">pdf</a>)</li>
+<li><a href="man/comitup-conf.html">comitup-conf (5)</a> (<a href="man/comitup-conf.pdf">pdf</a>)</li>
+<li><a href="man/comitup-web.html">comitup-web (8)</a> (<a href="man/comitup-web.pdf">pdf</a>)</li>
+<li><a href="man/comitup-cli.html">comitup-cli (8)</a> (<a href="man/comitup-cli.pdf">pdf</a>)</li>
+</ul>
+
+</li>
+</ul>
+
+<h3>Support/Feedback</h3>
+<ul>
+<li><a href="https://github.com/davesteele/comitup/issues" >Issues</a></p></li>
+<div class="g-plus" data-action="share"></div>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://plus.google.com/100462058146704694561?rel=author">David Steele</a> (<a href="https://github.com/davesteele">davesteele</a>)</p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+  </body>
+</html>

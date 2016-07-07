@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Comitup PPA Repository</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Comitup</h1>
+        <p>Bootstrap Wifi networking using the Wifi connection</p>
+
+        <p class="view"><a href="https://github.com/davesteele/comitup">View the Project on GitHub <small>davesteele/comitup</small></a></p>
+
+<!--
+        <ul>
+          <li><a href="https://github.com/davesteele/cloudprint-service/zipball/release">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/davesteele/cloudprint-service/tarball/release">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/davesteele/cloudprint-service">View On <strong>GitHub</strong></a></li>
+        </ul>
+-->
+      </header>
+      <section>
+      <a href="index.html">back</a>
+        <h3>Using the comitup repository.</h3>
+Here is how to add comitup to apt repository resources for your system, letting you install and
+automatically upgrade with standard tools.
+<br><br>
+First, add one of this reference to the comitup <a href="http://en.wikipedia.org/wiki/Personal_Package_Archive">PPA</a> to your /etc/apt/sources.list file (as root):<br><br>
+<pre>
+deb http://davesteele.github.io/comitup/repo comitup-jessie main</pre>
+Add the repository key to your apt key ring:<br><br>
+<pre>
+$ wget https://davesteele.github.io/key-366150CE.pub.txt
+$ sudo apt-key add key-366150CE.pub.txt
+</pre>
+Install the packages with :<br><br>
+<pre>
+$ sudo apt-get update
+$ sudo apt-get install comitup
+</pre>
+The packages will be updated with every 'apt-get upgrade'.
+
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/davesteele">davesteele</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>

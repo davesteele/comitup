@@ -1,0 +1,22 @@
+# Origin: comitup
+# Label: comitup
+Codename: comitup-jessie
+Suite: stable
+Architectures: amd64 i386 armhf armel
+Components: main
+Description: Apt repository for comitup on Jessie
+#DebOverride: override.squeeze
+#DscOverride: override.squeeze
+SignWith: default
+
+# # Origin: gnome-gmail
+# # Label: gnome-gmail
+# Codename: cloudprint-stretch
+# Suite: testing
+# Architectures: amd64 i386 armhf armel
+# Components: main
+# Description: Apt repository for cloudprint on Stretch
+# #DebOverride: override.squeeze
+# #DscOverride: override.squeeze
+# SignWith: default
+
