@@ -1,3 +1,4 @@
+<html>
 <head>
 <title>Comitup Access Point Selection</title>
 </head>
@@ -16,6 +17,12 @@ Select an access point.<br/><br/>
 <a href="confirm?ssid={{ point.ssid }}&encrypted={{ point.security }}">{{ point.ssid }}</a>
 {% endfor %}
 </ul>
+<form action="confirm">
+<input type="hidden" name="encrypted" value="encrypted">
+Hidden or missing SSID: 
+<input type="text" name="ssid">
+<input type="submit" value="submit">
+</form>
 </body>
 </html>
 

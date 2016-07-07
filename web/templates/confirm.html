@@ -1,3 +1,4 @@
+<html>
 <head>
 <title>Comitup Confirm Selection</title>
 </head>
@@ -12,7 +13,7 @@ If the connection fails, this hotspot will be re-created.<br><br>
 <form action="connect" method="post">
 <input type="hidden" name="ssid" value="{{ ssid }}">
 {% if encrypted == "encrypted" %}
-Password: <input type='text' name='password'><br><br>
+Password (if required): <input type='text' name='password'><br><br>
 {% endif %}
 
 <input type="submit" value="Connect">

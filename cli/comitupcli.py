@@ -29,8 +29,8 @@ def do_delete(connection):
     ciu.ciu_delete(connection)
 
 
-def do_connect(connection, password):
-    ciu.ciu_connect(connection, password)
+def do_connect(ssid, password):
+    ciu.ciu_connect(ssid, password)
 
 
 CmdState = namedtuple('CmdState', "fn, desc, HOTSPOT, CONNECTING, CONNECTED")
@@ -39,7 +39,8 @@ commands = OrderedDict([
     ('r',   CmdState(do_reload,  '(r)eload',            True,  True, True)),
     ('d',   CmdState(do_delete,  '(d)elete connection', False, True, True)),
     ('q',   CmdState(do_quit,    '(q)uit',              True,  True, True)),
-    ('<n>', CmdState(do_connect, 'connect to <n>',     True, False, False)),
+    ('<n>', CmdState(do_connect, 'connect to <n>',      True,  False, False)),
+    ('m',   CmdState(do_connect,  '(m)anual connection', True,  False, False)),
 ])
 
 
@@ -93,6 +94,10 @@ def interpreter():
             if points[index-1]['security'] == 'encrypted':
                 password = getpass('password: ')
             do_connect(points[index-1]['ssid'], password)
+        elif cmd == 'm':
+            ssid = raw_input("ssid?: ")
+            password = getpass('password (if required)?: ')
+            do_connect(ssid, password)
         else:
             ciu.ciu_activity()
             try:

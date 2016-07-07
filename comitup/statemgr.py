@@ -57,11 +57,7 @@ class Comitup(dbus.service.Object):
         if nm.get_connection_by_ssid(ssid):
             nm.del_connection_by_ssid(ssid)
 
-        # todo - this could use some cleaning up
-        point = [x for x in states.points if x['ssid'] == ssid][0]
-        Point = namedtuple('Point', "Ssid, Flags")
-        pt = Point(ssid, 1 if point['security'] == 'encrypted' else 0)
-        nm.make_connection_for(pt, password)
+        nm.make_connection_for(ssid, password)
 
         states.set_state('CONNECTING', [ssid, ssid])
 
