@@ -39,7 +39,7 @@ def dbm2pct(dbm):
 
 def devaps(dev):
     """Get a list of Access Points (as dicts) for a device"""
-    out = docmd('iw %s scan' % dev)
+    out = docmd('iw dev %s scan' % dev)
 
     aps = []
     for blk in out[4:].split('BSS '):
@@ -75,5 +75,16 @@ def candidates():
     return clist
 
 
+def ap_conn_count():
+    count = 0
+    for dev in devlist():
+        out = docmd('iw dev %s station dump' % dev)
+        count += len([x for x in out.split('\n') if "Station" in x])
+
+    return count
+
+
 if __name__ == '__main__':
     print candidates()
+
+    print ap_conn_count()
