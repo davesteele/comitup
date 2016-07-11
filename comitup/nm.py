@@ -15,6 +15,7 @@ import sys
 import uuid
 import getpass
 from functools import wraps
+import iwscan
 
 
 import pprint
@@ -195,8 +196,9 @@ def get_candidate_connections(device=None):
             candidates.append(ssid)
 
     points = [x.Ssid for x in get_access_points()]
+    iwpoints = [x['ssid'] for x in iwscan.candidates()]
 
-    return list(set(candidates) & set(points))
+    return list(set(candidates) & (set(points) | set(iwpoints)))
 
 
 def make_hotspot(name='comitup'):
