@@ -11,6 +11,7 @@ import dbus
 import dbus.service
 from collections import namedtuple
 import logging
+import iwscan
 
 import gobject
 from dbus.mainloop.glib import DBusGMainLoop
@@ -44,9 +45,7 @@ class Comitup(dbus.service.Object):
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="aa{ss}")
     def access_points(self):
-        points = [x for x in states.points if x['ssid']]
-
-        return sorted(points, key=lambda x: -float(x['strength']))
+        return iwscan.candidates()
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="ss")
     def state(self):
