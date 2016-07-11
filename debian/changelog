@@ -1,4 +1,10 @@
-comitup (0.2-1) unstable; urgency=medium
+comitup (0.3-1) unstable; urgency=medium
+
+  * Use the 'iw' command for a better list of available Access Points.
+
+ -- David Steele <steele@debian.org>  Mon, 11 Jul 2016 15:50:35 -0400
+
+comitup (0.2-1) UNRELEASED; urgency=medium
 
   * Add a manual Access Point selection capability.
   * Minor bug fixes.
