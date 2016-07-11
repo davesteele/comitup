@@ -11,6 +11,7 @@ import logging
 import time
 from functools import wraps
 from dbus.exceptions import DBusException
+import iwscan
 
 
 import gobject
@@ -107,14 +108,18 @@ def hotspot_fail():
 
 @timeout
 def hotspot_timeout():
-    log.debug('Periodic connection attempt')
 
-    conn_list = candidate_connections()
-    if conn_list:
-        # bug - try the first connection twice
-        set_state('CONNECTING', [conn_list[0], conn_list[0]] + conn_list)
+    if iwscan.ap_conn_count() == 0:
+        log.debug('Periodic connection attempt')
+
+        conn_list = candidate_connections()
+        if conn_list:
+            # bug - try the first connection twice
+            set_state('CONNECTING', [conn_list[0], conn_list[0]] + conn_list)
+        else:
+            set_state('CONNECTING')
     else:
-        set_state('CONNECTING')
+        log.info('AP active - skipping CONNECTING scan')
 
 
 #
