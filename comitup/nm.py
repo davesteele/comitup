@@ -232,26 +232,26 @@ def make_connection_for(ssid, password=None):
 
     settings = dbus.Dictionary({
         'connection': dbus.Dictionary(
-        {
-            'id': ssid,
-            'type': '802-11-wireless',
-            'uuid': str(uuid.uuid4()),
-        }),
+            {
+                'id': ssid,
+                'type': '802-11-wireless',
+                'uuid': str(uuid.uuid4()),
+            }),
         '802-11-wireless': dbus.Dictionary(
-        {
-            'ssid': dbus.ByteArray(ssid),
-            'mode': 'infrastructure',
-        }),
+            {
+                'ssid': dbus.ByteArray(ssid),
+                'mode': 'infrastructure',
+            }),
         'ipv4': dbus.Dictionary(
-        {
-            # assume DHCP
-            'method': 'auto',
-        }),
+            {
+                # assume DHCP
+                'method': 'auto',
+            }),
         'ipv6': dbus.Dictionary(
-        {
-            # assume ipv4-only
-            'method': 'ignore',
-        }),
+            {
+                # assume ipv4-only
+                'method': 'ignore',
+            }),
     })
 
     # assume privacy = WPA(2) psk
@@ -292,7 +292,7 @@ def do_listaccess(arg):
         print(tabulate.tabulate(bypwr, headers=hdrs))
     except:
         for entry in bypwr:
-            print entry
+            print(entry)
 
 
 def do_listconnections(arg):

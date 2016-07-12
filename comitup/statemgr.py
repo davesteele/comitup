@@ -9,7 +9,6 @@
 
 import dbus
 import dbus.service
-from collections import namedtuple
 import logging
 import iwscan
 

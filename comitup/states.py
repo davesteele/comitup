@@ -218,7 +218,7 @@ class state_matrix(object):
             fname = self.state + '_' + attr[:-3]
             return globals()[fname]
         except KeyError:
-            print attr
+            print(attr)
             raise AttributeError
 
 

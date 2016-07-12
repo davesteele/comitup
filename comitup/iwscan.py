@@ -37,6 +37,7 @@ def dbm2pct(dbm):
     pct = min(100, pct)
     return str(pct)
 
+
 def devaps(dev):
     """Get a list of Access Points (as dicts) for a device"""
     out = docmd('iw dev %s scan' % dev)
@@ -67,7 +68,7 @@ def candidates():
                 pt['security'] = 'encrypted'
             else:
                 pt['security'] = 'unencrypted'
-            
+
             clist.append(pt)
 
     clist = sorted(clist, key=lambda x: -float(x['strength']))
@@ -85,6 +86,6 @@ def ap_conn_count():
 
 
 if __name__ == '__main__':
-    print candidates()
+    print(candidates())
 
-    print ap_conn_count()
+    print(ap_conn_count())

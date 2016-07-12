@@ -11,12 +11,13 @@ import sys
 sys.path.append('.')
 sys.path.append('..')
 
-import cherrypy
-import os
-from jinja2 import Environment, FileSystemLoader
-from comitup import client as ciu
+import cherrypy                                   # noqa
+import os                                         # noqa
+from jinja2 import Environment, FileSystemLoader  # noqa
+from comitup import client as ciu                 # noqa
 
 env = None
+
 
 class HelloWorld(object):
     def index(self):
@@ -54,7 +55,7 @@ def main():
     env = Environment(loader=FileSystemLoader(env_path))
 
     cherrypy.config.update(file=conf_path)
- 
+
     cherrypy.server.start()
 
 

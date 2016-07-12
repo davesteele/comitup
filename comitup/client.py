@@ -18,7 +18,7 @@ try:
                    '/com/github/davesteele/comitup'
                   )
 except dbus.exceptions.DBusException:
-    print "Error connecting to the comitup D-Bus service"
+    print("Error connecting to the comitup D-Bus service")
     sys.exit(1)
 
 ciu_state = ciu_service.get_dbus_method(
