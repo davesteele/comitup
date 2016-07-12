@@ -26,7 +26,7 @@ _ht&#8203;tp://comitup.local_ or _ht&#8203;tp://comitup-&lt;nnnn&gt;.local_
 from any device which supports [Bonjour/ZeroConf/Avahi] [zeroconf]. For
 other devices, use a Zeroconf browser ([Android][], [Windows][]) to
 determine the IP address of the "Comitup Service", and browse to
-_http&#58;//&lt;ipaddress&gt;_.
+_http&#58;//&lt;ipaddress&gt;_. In most cases, this address will be _http&#58;//10.42.0.1/_
 
 [zeroconf]: https://en.wikipedia.org/wiki/Zero-configuration_networking
 [Android]: https://play.google.com/store/apps/details?id=com.melloware.zeroconf&hl=en
