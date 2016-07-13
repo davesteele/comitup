@@ -1,6 +1,7 @@
 [Unit]
 Description=Comitup Wifi Management
 After=NetworkManager.service Avahi.service
+Documentation=man:comitup(8)
 
 [Service]
 Type=dbus

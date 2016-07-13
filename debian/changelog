@@ -21,4 +21,4 @@ comitup (0.1-1) UNRELEASED; urgency=low
 
   * Initial release (Closes: #821145)
 
- -- David Steele <dsteele@gmail.com>  Wed, 23 Mar 2016 23:07:38 -0400
+ -- David Steele <steele@debian.org>  Wed, 23 Mar 2016 23:07:38 -0400
