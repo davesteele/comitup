@@ -1,4 +1,10 @@
-comitup (0.3-1) unstable; urgency=medium
+comitup (0.4-4) unstable; urgency=medium
+
+  * RFS feedback
+
+ -- David Steele <steele@debian.org>  Wed, 13 Jul 2016 15:05:21 -0400
+
+comitup (0.3-1) UNRELEASED; urgency=medium
 
   * Use the 'iw' command for a better list of available Access Points.
 
