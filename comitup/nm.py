@@ -189,11 +189,14 @@ def get_candidate_connections(device=None):
         settings = conn.GetSettings()
         ssid = get_ssid_from_connection(conn)
 
-        if ssid \
-           and settings['connection']['type'] == '802-11-wireless' \
-           and settings['802-11-wireless']['mode'] == 'infrastructure':
+        try:
+            if ssid \
+               and settings['connection']['type'] == '802-11-wireless' \
+               and settings['802-11-wireless']['mode'] == 'infrastructure':
 
-            candidates.append(ssid)
+                candidates.append(ssid)
+        except KeyError:
+            log.debug("Unexpected connection format for %s" % ssid)
 
     points = [x.Ssid for x in get_access_points()]
     iwpoints = [x['ssid'] for x in iwscan.candidates()]

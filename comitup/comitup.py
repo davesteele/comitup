@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 
+import os
 import logging
 from logging.handlers import TimedRotatingFileHandler
 import persist
@@ -61,6 +62,9 @@ def inst_name(conf, data):
 
 
 def main():
+    if os.geteuid() != 0:
+        exit("Comitup requires root privileges")
+
     log = deflog()
     log.info("Starting comitup")
 

@@ -86,7 +86,14 @@ setup(
             ]
         ),
     ],
-    install_requires=[],
+    install_requires=[
+        'crypto',
+        'networkmanager',
+        'avahi',
+        'gobject-2',
+        'cherry-pi',
+        'jinja2',
+    ],
     tests_require=['pytest', 'mock'],
     cmdclass={
         'clean': MyClean,
