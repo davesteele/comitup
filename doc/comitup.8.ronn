@@ -44,7 +44,8 @@ following methods.
     Calling this method will disable **comitup** timeout processing for the
     current period. In the **HOTSPOT** mode, this defers the periodic access
     point connection attempt until the next timeout period (nominally 1
-    minute).
+    minute). **HOTSPOT** timeout processing is also disabled if any other
+    device is connected to the hotspot.
 
   * _access_points()_
 
