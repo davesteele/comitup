@@ -76,9 +76,15 @@ Commands:
     Define a connection for the selected access point, and then attempt to
     connect.
 
+    This command is only available in teh **HOTSPOT** mode.
+
+  * __m__ - **Manual connection**
+
+    Enter an SSID manually.
+
 ## COPYRIGHT
 
-Comitup is Copyright (C) 2016 David Steele &lt;https://davesteele.github.io&gt;/
+Comitup is Copyright (C) 2016 David Steele &lt;https://davesteele.github.io&gt;/&gt;
 
 ## SEE ALSO
 
