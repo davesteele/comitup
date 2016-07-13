@@ -1,6 +1,6 @@
 
 #
-# Copyright 2016 David Steele <dsteele@gmail.com>
+# Copyright 2016 David Steele <steele@debian.org>
 # This file is part of comitup
 # Available under the terms of the GNU General Public License version 2
 # or later
@@ -100,6 +100,6 @@ setup(
         'test': PyTest,
     },
     author="David Steele",
-    author_email="dsteele@gmail.com",
+    author_email="steele@debian.org",
     url='https://davesteele.github.io/comitup/',
     )

@@ -34,7 +34,7 @@ Display:
     name **comitup-&lt;nnnn&gt;**, where &lt;nnnn&gt; is a persistent 4-digit number.
 
     Once in **HOTSPOT** mode, the system will occasionally (~1/min) cycle
-    through through available defined connections, by transitioning to the
+    through available defined connections, by transitioning to the
     **CONNECTING** mode. The Access Point list is updated by this process.
     Any command issued by **comitup-cli** will cause the next
     timeout instance to be skipped.
@@ -84,7 +84,7 @@ Commands:
 
 ## COPYRIGHT
 
-Comitup is Copyright (C) 2016 David Steele &lt;https://davesteele.github.io&gt;/&gt;
+Comitup is Copyright (C) 2016 David Steele &lt;steele@debian.org&gt;
 
 ## SEE ALSO
 

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 #
-# Copyright 2016 David Steele <dsteele@gmail.com>
+# Copyright 2016 David Steele <steele@debian.org>
 # This file is part of comitup
 # Available under the terms of the GNU General Public License version 2
 # or later
@@ -62,7 +62,7 @@ def get_valid_cmds(state):
 
 
 def print_cmd_prompts(state, connection, points):
-    print
+    print()
     print("State:", state)
     print("Connection:", connection)
 
