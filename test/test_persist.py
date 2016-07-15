@@ -22,6 +22,7 @@ def dir_fxt(request):
 
 count = 0
 
+
 @pytest.fixture()
 def jsonpath(request, dir_fxt):
     global count

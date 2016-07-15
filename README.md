@@ -5,6 +5,10 @@
 Comitup
 ======
 
+[Home Page](https://davesteele.github.io/comitup/)
+
+[Wiki](https://github.com/davesteele/comitup/wiki)
+
 Bootstrap Wifi using Wifi
 -------------------------
 
@@ -21,8 +25,8 @@ persistent 4-digit number. The website is accessible on that hotspot as
 _ht&#8203;tp://comitup.local_ or _ht&#8203;tp://comitup-&lt;nnnn&gt;.local_
 from any device which supports [Bonjour/ZeroConf/Avahi] [zeroconf]. For
 other devices, use a Zeroconf browser ([Android][], [Windows][]) to
-determine the IP address of the web service, and browse to
-_http&#58;//&lt;ipaddress&gt;_.
+determine the IP address of the "Comitup Service", and browse to
+_http&#58;//&lt;ipaddress&gt;_. In most cases, this address will be _http&#58;//10.42.0.1/_
 
 [zeroconf]: https://en.wikipedia.org/wiki/Zero-configuration_networking
 [Android]: https://play.google.com/store/apps/details?id=com.melloware.zeroconf&hl=en
@@ -36,7 +40,7 @@ __comitup__ requires NetworkManager and systemd.
 Man pages
 ---------
 
-* [comitup.8](https://github.com/davesteele/comitup/blob/master/doc/comitup.8.ronn)
-* [comitup-conf.5](https://github.com/davesteele/comitup/blob/master/doc/comitup-conf.5.ronn)
-* [comitup-web.8](https://github.com/davesteele/comitup/blob/master/doc/comitup-web.8.ronn)
-* [comitup-cli.1](https://github.com/davesteele/comitup/blob/master/doc/comitup-cli.1.ronn)
+* [comitup.8](https://davesteele.github.io/comitup/man/comitup.html)
+* [comitup-conf.5](https://davesteele.github.io/comitup/man/comitup-conf.html)
+* [comitup-web.8](https://davesteele.github.io/comitup/man/comitup-web.html)
+* [comitup-cli.1](https://davesteele.github.io/comitup/man/comitup-cli.html)

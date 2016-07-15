@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 #
-# Copyright 2016 David Steele <dsteele@gmail.com>
+# Copyright 2016 David Steele <steele@debian.org>
 # This file is part of comitup
 # Available under the terms of the GNU General Public License version 2
 # or later
@@ -189,11 +189,14 @@ def get_candidate_connections(device=None):
         settings = conn.GetSettings()
         ssid = get_ssid_from_connection(conn)
 
-        if ssid \
-           and settings['connection']['type'] == '802-11-wireless' \
-           and settings['802-11-wireless']['mode'] == 'infrastructure':
+        try:
+            if ssid \
+               and settings['connection']['type'] == '802-11-wireless' \
+               and settings['802-11-wireless']['mode'] == 'infrastructure':
 
-            candidates.append(ssid)
+                candidates.append(ssid)
+        except KeyError:
+            log.debug("Unexpected connection format for %s" % ssid)
 
     points = [x.Ssid for x in get_access_points()]
     iwpoints = [x['ssid'] for x in iwscan.candidates()]
@@ -232,26 +235,26 @@ def make_connection_for(ssid, password=None):
 
     settings = dbus.Dictionary({
         'connection': dbus.Dictionary(
-        {
-            'id': ssid,
-            'type': '802-11-wireless',
-            'uuid': str(uuid.uuid4()),
-        }),
+            {
+                'id': ssid,
+                'type': '802-11-wireless',
+                'uuid': str(uuid.uuid4()),
+            }),
         '802-11-wireless': dbus.Dictionary(
-        {
-            'ssid': dbus.ByteArray(ssid),
-            'mode': 'infrastructure',
-        }),
+            {
+                'ssid': dbus.ByteArray(ssid),
+                'mode': 'infrastructure',
+            }),
         'ipv4': dbus.Dictionary(
-        {
-            # assume DHCP
-            'method': 'auto',
-        }),
+            {
+                # assume DHCP
+                'method': 'auto',
+            }),
         'ipv6': dbus.Dictionary(
-        {
-            # assume ipv4-only
-            'method': 'ignore',
-        }),
+            {
+                # assume ipv4-only
+                'method': 'ignore',
+            }),
     })
 
     # assume privacy = WPA(2) psk
@@ -292,7 +295,7 @@ def do_listaccess(arg):
         print(tabulate.tabulate(bypwr, headers=hdrs))
     except:
         for entry in bypwr:
-            print entry
+            print(entry)
 
 
 def do_listconnections(arg):

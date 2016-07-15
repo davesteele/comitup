@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 #
-# Copyright 2016 David Steele <dsteele@gmail.com>
+# Copyright 2016 David Steele <steele@debian.org>
 # This file is part of comitup
 # Available under the terms of the GNU General Public License version 2
 # or later
@@ -18,7 +18,7 @@ try:
                    '/com/github/davesteele/comitup'
                   )
 except dbus.exceptions.DBusException:
-    print "Error connecting to the comitup D-Bus service"
+    print("Error connecting to the comitup D-Bus service")
     sys.exit(1)
 
 ciu_state = ciu_service.get_dbus_method(

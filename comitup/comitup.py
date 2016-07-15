@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 
+import os
 import logging
 from logging.handlers import TimedRotatingFileHandler
 import persist
@@ -13,7 +14,7 @@ from dbus.mainloop.glib import DBusGMainLoop
 DBusGMainLoop(set_as_default=True)
 
 import statemgr     # noqa
-import webmgr
+import webmgr       # noqa
 
 PERSIST_PATH = "/var/lib/comitup/comitup.json"
 CONF_PATH = "/etc/comitup.conf"
@@ -61,6 +62,9 @@ def inst_name(conf, data):
 
 
 def main():
+    if os.geteuid() != 0:
+        exit("Comitup requires root privileges")
+
     log = deflog()
     log.info("Starting comitup")
 

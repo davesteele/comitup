@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 #
-# Copyright 2016 David Steele <dsteele@gmail.com>
+# Copyright 2016 David Steele <steele@debian.org>
 # This file is part of comitup
 # Available under the terms of the GNU General Public License version 2
 # or later
@@ -12,9 +12,9 @@ import sys
 sys.path.append('.')
 sys.path.append('..')
 
-from collections import namedtuple, OrderedDict
-from getpass import getpass
-from comitup import client as ciu
+from collections import namedtuple, OrderedDict  # noqa
+from getpass import getpass                      # noqa
+from comitup import client as ciu                # noqa
 
 
 def do_reload(connection):
@@ -62,19 +62,19 @@ def get_valid_cmds(state):
 
 
 def print_cmd_prompts(state, connection, points):
-    print
-    print "State:", state
-    print "Connection:", connection
+    print()
+    print("State:", state)
+    print("Connection:", connection)
 
     if state == 'HOTSPOT':
-        print "Points:"
+        print("Points:")
         for point in enumerate(points, start=1):
-            print "    %d: %s" % (point[0], point[1]['ssid'])
+            print("    %d: %s" % (point[0], point[1]['ssid']))
 
-    print "Available commands:"
+    print("Available commands:")
 
     for cmd in get_valid_cmds(state):
-        print "    %s" % commands[cmd].desc
+        print("    %s" % commands[cmd].desc)
 
 
 def interpreter():
@@ -103,7 +103,7 @@ def interpreter():
             try:
                 commands[cmd].fn(connection)
             except KeyError:
-                print "\nInvalid command\n"
+                print("\nInvalid command\n")
 
 
 if __name__ == '__main__':

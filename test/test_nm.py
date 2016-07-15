@@ -74,15 +74,15 @@ def connections_fxt(monkeypatch):
     )
 )
 def test_none_dev(no_device_fxt, func):
-    assert func() == None
+    assert func() is None
 
 
 def test_none_dev_get_access(no_device_fxt):
-    assert nm.get_access_point_by_ssid('ssid') == None
+    assert nm.get_access_point_by_ssid('ssid') is None
 
 
 def test_no_active_ssid(device_no_conn_fxt):
-    assert nm.get_active_ssid() == None
+    assert nm.get_active_ssid() is None
 
 
 def test_get_active_ssid(device_fxt):
@@ -94,7 +94,7 @@ def test_get_active_ip(device_fxt):
 
 
 def test_no_conn(no_connections_fxt):
-    assert nm.get_connection_by_ssid('ssid') == None
+    assert nm.get_connection_by_ssid('ssid') is None
 
 
 def test_get_connection_by_ssid(connections_fxt):

@@ -60,6 +60,7 @@ def points_fxt(monkeypatch):
 
     return None
 
+
 @pytest.mark.parametrize(
     "state, action, end_state, conn, conn_list",
     (
