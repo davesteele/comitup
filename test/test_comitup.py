@@ -81,6 +81,7 @@ def loop_fxt(monkeypatch):
 
 
 @patch('comitup.comitup.statemgr.init_state_mgr')
+@patch('comitup.comitup.os.geteuid', Mock(return_value=0))
 def test_ciu_main(initsm, loop_fxt, conf_fxt, persist_fxt, log_fxt):
     ciu.main()
 
