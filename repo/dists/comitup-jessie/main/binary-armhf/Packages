@@ -1,18 +1,18 @@
 Package: comitup
-Version: 0.3-1
+Version: 0.4-1
 Architecture: all
 Maintainer: David Steele <steele@debian.org>
-Installed-Size: 106
-Depends: python2.7:any, python:any (>= 2.7.5-5~), init-system-helpers (>= 1.18~), python-all (>= 2.6.6-3~), python2.7-crypto, python-networkmanager, python2.7-avahi, python-gobject-2, python-cherrypy, python-jinja2
+Installed-Size: 108
+Depends: python-jinja2, python2.7:any, python:any (>= 2.7.5-5~), init-system-helpers (>= 1.18~), python-crypto, python-networkmanager, python-avahi, python-gobject-2, python-cherrypy
 Suggests: python-tabulate
 Homepage: https://github.com/davesteele/comitup
 Priority: optional
 Section: net
-Filename: pool/main/c/comitup/comitup_0.3-1_all.deb
-Size: 19018
-SHA256: 0cd8bc355b54e4f2f0edb07d78f76406ecb04378489181e2897b4140f0b53810
-SHA1: 7f2449c304421c317e211b6a0e132dfc5b912b8e
-MD5sum: b88882ef65d46dea87087dc034266f46
+Filename: pool/main/c/comitup/comitup_0.4-1_all.deb
+Size: 19306
+SHA256: 375a23475f5dd33dff42fdfec65fd3bccec6daf73d6d5cdba862b3fe7f6bcda8
+SHA1: ca5bf2f2bb8bc1d9e7de96f0027da201b17fbe7d
+MD5sum: f4d0d5cf731e689898eed94da735a663
 Description: bootstrap Wifi using Wifi
  Comitup will attempt to connect to wifi using an established connection. If
  that fails, is creates a hotspot and web service to aid in configuring a

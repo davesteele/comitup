@@ -1,5 +1,5 @@
 <!-- Creator     : groff version 1.22.3 -->
-<!-- CreationDate: Thu Jul  7 20:04:40 2016 -->
+<!-- CreationDate: Fri Jul 15 16:56:20 2016 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -35,7 +35,7 @@
 
 
 <p style="margin-left:11%; margin-top: 1em"><b>comitup</b>
-&minus; Manage wifi connections on headless, unconnected
+- Manage wifi connections on headless, unconnected
 systems</p>
 
 <h2>SYNOPSIS
@@ -61,30 +61,31 @@ the computer.</p>
 service will attempt to connect to wifi using established
 networkmanager(8) connections. If this is not successful,
 <b>comitup</b> will establish a wifi hotspot with the name
-<i>comitup&minus;&lt;nnnn&gt;</i>, where &lt;nnnn&gt; is a
-persistent 4&minus;digit number.</p>
+<i>comitup-&lt;nnnn&gt;</i>, where &lt;nnnn&gt; is a
+persistent 4-digit number.</p>
 
 <p style="margin-left:11%; margin-top: 1em">While the
-hotspot is active, a comitup&minus;web(8) service is
-available to manage connecting to an access point.</p>
+hotspot is active, a comitup-web(8) service is available to
+manage connecting to an access point.</p>
 
 <p style="margin-left:11%; margin-top: 1em">In all states,
-avahi&minus;daemon(8) is used to publish the mdns host names
-<i>comitup.local</i> and
-<i>comitup&minus;&lt;nnnn&gt;.local</i>, making the web
-service accessible as e.g. <i>http://comitup.local</i>, for
-systems supporting Zeroconf. For other systems, a
-<i>comitup</i> Web Service is published which is visible to
-Zeroconf browsing applications, allowing the IP address to
-be manually determined.</p>
+avahi-daemon(8) is used to publish the mdns host names
+<i>comitup.local</i> and <i>comitup-&lt;nnnn&gt;.local</i>,
+making the web service accessible as e.g.
+<i>http://comitup.local</i>, for systems supporting
+Zeroconf. For other systems, a <i>comitup</i> Web Service is
+published which is visible to Zeroconf browsing
+applications, allowing the IP address to be manually
+determined. The web service address is likely
+<i>http://10.42.0.1</i>.</p>
 
 <p style="margin-left:11%; margin-top: 1em"><b>comitup</b>
 logs to <i>/var/log/comitup.log</i>.</p>
 
-<p style="margin-left:11%; margin-top: 1em"><b>D&minus;BUS
+<p style="margin-left:11%; margin-top: 1em"><b>D-Bus
 Interface <br>
-Comitup</b> provides a D&minus;BUS object which claims the
-name <i>com.github.davesteele.comitup</i> on the path
+Comitup</b> provides a D-Bus object which claims the name
+<i>com.github.davesteele.comitup</i> on the path
 <i>/com/github/davesteele/comitup</i>, supporting the
 interface <i>com.github.davesteele.comitup</i>. The
 interface includes the following methods.</p>
@@ -115,7 +116,9 @@ None</p>
 method will disable <b>comitup</b> timeout processing for
 the current period. In the <b>HOTSPOT</b> mode, this defers
 the periodic access point connection attempt until the next
-timeout period (nominally 1 minute).</p>
+timeout period (nominally 1 minute). <b>HOTSPOT</b> timeout
+processing is also disabled if any other device is connected
+to the hotspot.</p>
 
 <table width="100%" border="0" rules="none" frame="void"
        cellspacing="0" cellpadding="0">
@@ -141,9 +144,9 @@ of <i>DICT_ENTRY</i></p>
 
 <p style="margin-left:17%; margin-top: 1em">Return a list
 of visible access points. This is represented as an array of
-D&minus;BUS <i>DICT_ENTRY</i>. Each <i>DICT_ENTRY</i>
-contains strings associated with the following keys,
-<i>ssid</i>, <i>strength</i> (0 to 100) and <i>security</i>
+D-Bus <i>DICT_ENTRY</i>. Each <i>DICT_ENTRY</i> contains
+strings associated with the following keys, <i>ssid</i>,
+<i>strength</i> (0 to 100) and <i>security</i>
 (<i>encrypted</i> or <i>unencrypted</i>).</p>
 
 <table width="100%" border="0" rules="none" frame="void"
@@ -165,7 +168,7 @@ contains strings associated with the following keys,
 
 <p style="margin-left:17%; margin-top: 1em">Input: None</p>
 
-<p style="margin-left:17%; margin-top: 1em">Ouput:
+<p style="margin-left:17%; margin-top: 1em">Output:
 <i>state</i>, <i>connection</i></p>
 
 <p style="margin-left:17%; margin-top: 1em">This returns
@@ -236,7 +239,7 @@ reconnect using this connection.</p>
 
 <p style="margin-left:11%; margin-top: 1em">Comitup is
 Copyright (C) 2016 David Steele
-&lt;https://davesteele.github.io/&gt;.</p>
+&lt;steele@debian.org&gt;.</p>
 
 <h2>SEE ALSO
 <a name="SEE ALSO"></a>
@@ -244,8 +247,8 @@ Copyright (C) 2016 David Steele
 
 
 
-<p style="margin-left:11%; margin-top: 1em">comitup&minus;conf(5),
-comitup&minus;cli(1), comitup&minus;web(8)</p>
+<p style="margin-left:11%; margin-top: 1em">comitup-conf(5),
+comitup-cli(1), comitup-web(8)</p>
 <hr>
 </body>
 </html>

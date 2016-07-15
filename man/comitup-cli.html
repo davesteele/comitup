@@ -1,5 +1,5 @@
 <!-- Creator     : groff version 1.22.3 -->
-<!-- CreationDate: Thu Jul  7 20:04:41 2016 -->
+<!-- CreationDate: Fri Jul 15 16:56:21 2016 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,12 +13,12 @@
        table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
        h1      { text-align: center }
 </style>
-<title>COMITUP&minus;CLI</title>
+<title>COMITUP-CLI</title>
 
 </head>
 <body>
 
-<h1 align="center">COMITUP&minus;CLI</h1>
+<h1 align="center">COMITUP-CLI</h1>
 
 <a href="#NAME">NAME</a><br>
 <a href="#SYNOPSIS">SYNOPSIS</a><br>
@@ -35,9 +35,8 @@
 
 
 
-<p style="margin-left:11%; margin-top: 1em"><b>comitup&minus;cli</b>
-&minus; command&minus;line interface for comitup network
-management</p>
+<p style="margin-left:11%; margin-top: 1em"><b>comitup-cli</b>
+- command-line interface for comitup network management</p>
 
 <h2>SYNOPSIS
 <a name="SYNOPSIS"></a>
@@ -45,11 +44,11 @@ management</p>
 
 
 <p style="margin-left:11%; margin-top: 1em">$
-&rsquo;comitup&minus;cli&rsquo;</p>
+&rsquo;comitup-cli&rsquo;</p>
 
 <p style="margin-left:11%; margin-top: 1em">State: HOTSPOT
 <br>
-Connection: hotspot&minus;1234 <br>
+Connection: hotspot-1234 <br>
 Points: <br>
 1: MyAccessPoint <br>
 2: HisAccessPoint <br>
@@ -65,14 +64,14 @@ command?:</p>
 
 
 <p style="margin-left:11%; margin-top: 1em">The
-<b>comitup&minus;cli</b> utility provides access to the
-comitup(8) D&minus;Bus interface. It is intended to serve as
-a debug tool, and a source code example for connecting to
-the interface.</p>
+<b>comitup-cli</b> utility provides access to the comitup(8)
+D-Bus interface. It is intended to serve as a debug tool,
+and a source code example for connecting to the
+interface.</p>
 
 <p style="margin-left:11%; margin-top: 1em">If the
-comitup(8) service is not running, <b>comitup&minus;cli</b>
-will immediately exit.</p>
+comitup(8) service is not running, <b>comitup-cli</b> will
+immediately exit.</p>
 
 <p style="margin-left:11%; margin-top: 1em">Display:</p>
 
@@ -99,16 +98,16 @@ and <b>CONNECTED</b>.</p>
 
 <p style="margin-left:17%; margin-top: 1em">In the
 <b>HOTSPOT</b> mode, <b>comitup</b> creates a wifi hotspot
-with the name <b>comitup&minus;&lt;nnnn&gt;</b>, where
-&lt;nnnn&gt; is a persistent 4&minus;digit number.</p>
+with the name <b>comitup-&lt;nnnn&gt;</b>, where
+&lt;nnnn&gt; is a persistent 4-digit number.</p>
 
 <p style="margin-left:17%; margin-top: 1em">Once in
 <b>HOTSPOT</b> mode, the system will occasionally (~1/min)
-cycle through through available defined connections, by
+cycle through available defined connections, by
 transitioning to the <b>CONNECTING</b> mode. The Access
 Point list is updated by this process. Any command issued by
-<b>comitup&minus;cli</b> will cause the next timeout
-instance to be skipped.</p>
+<b>comitup-cli</b> will cause the next timeout instance to
+be skipped.</p>
 
 <p style="margin-left:17%; margin-top: 1em">Once a
 connection is established, the system will be in the
@@ -154,10 +153,10 @@ of the current active connection.</p>
 </table>
 
 <p style="margin-left:17%; margin-top: 1em">While in the
-<b>HOTSPOT</b> mode, <b>comitup&minus;cli</b> will list the
-currently&minus;visible access points, by <b>ssid</b>.
-Access points with the strongest signal are sorted to the
-top of the list. The entries are numbered, for use with the
+<b>HOTSPOT</b> mode, <b>comitup-cli</b> will list the
+currently-visible access points, by <b>ssid</b>. Access
+points with the strongest signal are sorted to the top of
+the list. The entries are numbered, for use with the
 <b>connect</b> command.</p>
 
 <p style="margin-left:11%; margin-top: 1em">Commands:</p>
@@ -174,7 +173,7 @@ top of the list. The entries are numbered, for use with the
 <td width="15%">
 
 
-<p><b>r</b> &minus; <b>Reload</b></p></td>
+<p><b>r</b> - <b>Reload</b></p></td>
 <td width="68%">
 </td></tr>
 </table>
@@ -194,7 +193,7 @@ displayed state, mode, and list of access points.</p>
 <td width="12%">
 
 
-<p style="margin-top: 1em"><b>q</b> &minus; <b>Quit</b></p></td>
+<p style="margin-top: 1em"><b>q</b> - <b>Quit</b></p></td>
 <td width="71%">
 </td></tr>
 </table>
@@ -214,7 +213,7 @@ displayed state, mode, and list of access points.</p>
 <td width="32%">
 
 
-<p style="margin-top: 1em"><b>d</b> &minus; <b>Delete
+<p style="margin-top: 1em"><b>d</b> - <b>Delete
 connection</b></p> </td>
 <td width="51%">
 </td></tr>
@@ -240,8 +239,8 @@ not available in the <b>HOTSPOT</b> mode.</p>
 <td width="51%">
 
 
-<p style="margin-top: 1em"><b>&lt;n&gt;</b> &minus;
-<b>Connect to access point &lt;n&gt;</b></p></td>
+<p style="margin-top: 1em"><b>&lt;n&gt;</b> - <b>Connect to
+access point &lt;n&gt;</b></p></td>
 <td width="32%">
 </td></tr>
 </table>
@@ -250,6 +249,30 @@ not available in the <b>HOTSPOT</b> mode.</p>
 connection for the selected access point, and then attempt
 to connect.</p>
 
+<p style="margin-left:17%; margin-top: 1em">This command is
+only available in teh <b>HOTSPOT</b> mode.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="5%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em"><b>m</b> - <b>Manual
+connection</b></p> </td>
+<td width="51%">
+</td></tr>
+</table>
+
+<p style="margin-left:17%; margin-top: 1em">Enter an SSID
+manually.</p>
+
 <h2>COPYRIGHT
 <a name="COPYRIGHT"></a>
 </h2>
@@ -257,7 +280,7 @@ to connect.</p>
 
 <p style="margin-left:11%; margin-top: 1em">Comitup is
 Copyright (C) 2016 David Steele
-&lt;https://davesteele.github.io&gt;/</p>
+&lt;steele@debian.org&gt;</p>
 
 <h2>SEE ALSO
 <a name="SEE ALSO"></a>
@@ -265,7 +288,7 @@ Copyright (C) 2016 David Steele
 
 
 <p style="margin-left:11%; margin-top: 1em">comitup(8),
-comitup&minus;conf(5), comitup&minus;web(8)</p>
+comitup-conf(5), comitup-web(8)</p>
 <hr>
 </body>
 </html>
