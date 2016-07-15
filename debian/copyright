@@ -2,7 +2,7 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: comitup
 Source: https://github.com/davesteele/comitup
 
-Files: LICENSE, COPYING
+Files: LICENSE COPYING
 Copyright: Free Software Foundation, Inc., <http:fsf.org/>
 License: GPL-2
  This package is free software; you can redistribute it and/or modify
