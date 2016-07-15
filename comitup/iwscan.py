@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import subprocess
+import re
 
 
 # NetworkManager is doing a poor job of maintaining the AP scan list when
@@ -43,7 +44,7 @@ def devaps(dev):
     out = docmd('iw dev %s scan' % dev)
 
     aps = []
-    for blk in out[4:].split('BSS '):
+    for blk in re.split('\nBSS ', out[4:]):
         try:
             ap = blk2dict(blk)
             ap['power'] = dbm2pct(float(ap['signal'].split()[0]))
