@@ -8,11 +8,9 @@ and script in the same directory.
  setup.py | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/setup.py b/setup.py
-index 350a222..f7748d0 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -63,7 +63,7 @@ setup(
+@@ -63,7 +63,7 @@
      ],
      entry_points={
          'console_scripts': [
