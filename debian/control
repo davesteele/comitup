@@ -21,6 +21,11 @@ Architecture: all
 Depends: 
     ${python:Depends},
     ${misc:Depends},
+    python-crypto,
+    python-networkmanager,
+    python-avahi,
+    python-gobject-2,
+    python-cherrypy,
 Suggests: python-tabulate
 Description: bootstrap Wifi using Wifi
  Comitup will attempt to connect to wifi using an established connection. If
