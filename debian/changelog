@@ -1,6 +1,7 @@
 comitup (0.4-1) unstable; urgency=medium
 
-  * RFS feedback
+  * Fix the WPA security detection logic for the 'iw' command.
+  * RFS feedback.
 
  -- David Steele <steele@debian.org>  Wed, 13 Jul 2016 15:05:21 -0400
 
