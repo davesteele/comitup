@@ -1,3 +1,12 @@
+comitup (0.5-1) UNRELEASED; urgency=medium
+
+  * Minor doc fixes.
+  * git-buildpackage build support.
+  * Fix comitup-cli print statements.
+  * Obscure the web password field. 
+
+ -- David Steele <steele@debian.org>  Wed, 24 Aug 2016 13:46:33 -0400
+
 comitup (0.4-1) unstable; urgency=medium
 
   * Fix the WPA security detection logic for the 'iw' command.
