@@ -15,9 +15,13 @@ export PYBUILD_INSTALL_ARGS=--install-lib=/usr/share/comitup\
 %:
 	dh $@  --with python2,systemd --buildsystem=pybuild
 
+
+CHDATE = $(shell grep "\-\-" debian/changelog | head -1 | sed 's/.\+, //' | sed 's/...\:.\+//' )
+DT = $(shell date -d "${CHDATE}" "+%Y-%m-%d")
+
 override_dh_auto_build:
 	dh_auto_build
-	ronn doc/*.ronn
+	ronn --date=${DT} doc/*.ronn
 
 override_dh_systemd_enable:
 	dh_systemd_enable
