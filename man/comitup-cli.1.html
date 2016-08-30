@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' value='text/html;charset=utf8'>
+  <meta name='generator' value='Ronn/v0.7.3 (http://github.com/rtomayko/ronn/tree/0.7.3)'>
+  <title>comitup-cli(1) - command-line interface for comitup network management</title>
+  <style type='text/css' media='all'>
+  /* style: man */
+  body#manpage {margin:0}
+  .mp {max-width:100ex;padding:0 9ex 1ex 4ex}
+  .mp p,.mp pre,.mp ul,.mp ol,.mp dl {margin:0 0 20px 0}
+  .mp h2 {margin:10px 0 0 0}
+  .mp > p,.mp > pre,.mp > ul,.mp > ol,.mp > dl {margin-left:8ex}
+  .mp h3 {margin:0 0 0 4ex}
+  .mp dt {margin:0;clear:left}
+  .mp dt.flush {float:left;width:8ex}
+  .mp dd {margin:0 0 0 9ex}
+  .mp h1,.mp h2,.mp h3,.mp h4 {clear:left}
+  .mp pre {margin-bottom:20px}
+  .mp pre+h2,.mp pre+h3 {margin-top:22px}
+  .mp h2+pre,.mp h3+pre {margin-top:5px}
+  .mp img {display:block;margin:auto}
+  .mp h1.man-title {display:none}
+  .mp,.mp code,.mp pre,.mp tt,.mp kbd,.mp samp,.mp h3,.mp h4 {font-family:monospace;font-size:14px;line-height:1.42857142857143}
+  .mp h2 {font-size:16px;line-height:1.25}
+  .mp h1 {font-size:20px;line-height:2}
+  .mp {text-align:justify;background:#fff}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#131211}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#030201}
+  .mp u {text-decoration:underline}
+  .mp code,.mp strong,.mp b {font-weight:bold;color:#131211}
+  .mp em,.mp var {font-style:italic;color:#232221;text-decoration:none}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#0000ff}
+  .mp b.man-ref {font-weight:normal;color:#434241}
+  .mp pre {padding:0 4ex}
+  .mp pre code {font-weight:normal;color:#434241}
+  .mp h2+pre,h3+pre {padding-left:0}
+  ol.man-decor,ol.man-decor li {margin:3px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;color:#999;letter-spacing:1px}
+  ol.man-decor {width:100%}
+  ol.man-decor li.tl {text-align:left}
+  ol.man-decor li.tc {text-align:center;letter-spacing:4px}
+  ol.man-decor li.tr {text-align:right;float:right}
+  </style>
+</head>
+<!--
+  The following styles are deprecated and will be removed at some point:
+  div#man, div#man ol.man, div#man ol.head, div#man ol.man.
+
+  The .man-page, .man-decor, .man-head, .man-foot, .man-title, and
+  .man-navigation should be used instead.
+-->
+<body id='manpage'>
+  <div class='mp' id='man'>
+
+  <div class='man-navigation' style='display:none'>
+    <a href="#NAME">NAME</a>
+    <a href="#SYNOPSIS">SYNOPSIS</a>
+    <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#COPYRIGHT">COPYRIGHT</a>
+    <a href="#SEE-ALSO">SEE ALSO</a>
+  </div>
+
+  <ol class='man-decor man-head man head'>
+    <li class='tl'>comitup-cli(1)</li>
+    <li class='tc'></li>
+    <li class='tr'>comitup-cli(1)</li>
+  </ol>
+
+  <h2 id="NAME">NAME</h2>
+<p class="man-name">
+  <code>comitup-cli</code> - <span class="man-whatis">command-line interface for comitup network management</span>
+</p>
+
+<h2 id="SYNOPSIS">SYNOPSIS</h2>
+
+<pre><code>$ `comitup-cli`
+
+State: HOTSPOT
+Connection: hotspot-1234
+Points:
+    1: MyAccessPoint
+    2: HisAccessPoint
+Available Commands:
+    (r)eload
+    (q)uit
+    connect to (&lt;n>)
+command?:
+</code></pre>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>The <strong>comitup-cli</strong> utility provides access to the <a class="man-ref" href="comitup.8.html">comitup<span class="s">(8)</span></a> D-Bus interface.
+It is intended to serve as a debug tool, and a source code example for
+connecting to the interface.</p>
+
+<p>If the <a class="man-ref" href="comitup.8.html">comitup<span class="s">(8)</span></a> service is not running, <strong>comitup-cli</strong> will immediately exit.</p>
+
+<p>Display:</p>
+
+<ul>
+<li><p><strong>State</strong></p>
+
+<p>The <strong>comitup</strong> states are <strong>HOTSPOT</strong>, <strong>CONNECTING</strong>, and <strong>CONNECTED</strong>.</p>
+
+<p>In the <strong>HOTSPOT</strong> mode, <strong>comitup</strong> creates a wifi hotspot with the
+name <strong>comitup-&lt;nnnn&gt;</strong>, where &lt;nnnn&gt; is a persistent 4-digit number.</p>
+
+<p>Once in <strong>HOTSPOT</strong> mode, the system will occasionally (~1/min) cycle
+through available defined connections, by transitioning to the
+<strong>CONNECTING</strong> mode. The Access Point list is updated by this process.
+Any command issued by <strong>comitup-cli</strong> will cause the next
+timeout instance to be skipped.</p>
+
+<p>Once a connection is established, the system will be in the <strong>CONNECTED</strong>
+mode. If the connection is lost, failed, or deleted, the system will
+transition back to the <strong>HOTSPOT</strong> state.</p></li>
+<li><p><strong>Connection</strong></p>
+
+<p>The <code>ssid</code> of the current active connection.</p></li>
+<li><p><strong>Points</strong></p>
+
+<p>While in the <strong>HOTSPOT</strong> mode, <strong>comitup-cli</strong> will list the
+currently-visible access points, by <code>ssid</code>. Access points with the
+strongest signal are sorted to the top of the list. The entries are
+numbered, for use with the <strong>connect</strong> command.</p></li>
+</ul>
+
+
+<p>Commands:</p>
+
+<ul>
+<li><p><strong>r</strong> - <strong>Reload</strong></p>
+
+<p>Refresh the displayed state, mode, and list of access points.</p></li>
+<li><p><strong>q</strong> - <strong>Quit</strong></p>
+
+<p>Exit <strong>comitup.cli</strong>.</p></li>
+<li><p><strong>d</strong> - <strong>Delete connection</strong></p>
+
+<p>Delete the configuration information for the current wifi connection.
+This will cause <strong>comitup</strong> to transition to the <strong>HOTSPOT</strong> mode.</p>
+
+<p>This command is not available in the <strong>HOTSPOT</strong> mode.</p></li>
+<li><p><strong>&lt;n&gt;</strong> - <strong>Connect to access point &lt;n&gt;</strong></p>
+
+<p>Define a connection for the selected access point, and then attempt to
+connect.</p>
+
+<p>This command is only available in the <strong>HOTSPOT</strong> mode.</p></li>
+<li><p><strong>m</strong> - <strong>Manual connection</strong></p>
+
+<p>Enter an SSID manually.</p></li>
+</ul>
+
+
+<h2 id="COPYRIGHT">COPYRIGHT</h2>
+
+<p>Comitup is Copyright (C) 2016 David Steele &lt;steele@debian.org&gt;</p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<p><a class="man-ref" href="comitup.8.html">comitup<span class="s">(8)</span></a>, <a class="man-ref" href="comitup-conf.5.html">comitup-conf<span class="s">(5)</span></a>, <a class="man-ref" href="comitup-web.8.html">comitup-web<span class="s">(8)</span></a></p>
+
+
+  <ol class='man-decor man-foot man foot'>
+    <li class='tl'></li>
+    <li class='tc'>2016-08-24</li>
+    <li class='tr'>comitup-cli(1)</li>
+  </ol>
+
+  </div>
+</body>
+</html>

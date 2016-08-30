@@ -2,5 +2,5 @@
 
 for manpg in comitup comitup-conf comitup-web comitup-cli ; do
     (man -t $manpg|ps2pdf - $manpg.pdf);
-    man -Thtml $manpg >$manpg.html;
+    cp /usr/share/doc/comitup/$manpg*.html . ;
 done
