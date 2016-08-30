@@ -76,7 +76,7 @@ Commands:
     Define a connection for the selected access point, and then attempt to
     connect.
 
-    This command is only available in teh **HOTSPOT** mode.
+    This command is only available in the **HOTSPOT** mode.
 
   * __m__ - **Manual connection**
 

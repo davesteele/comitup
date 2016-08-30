@@ -47,6 +47,9 @@ following methods.
     point connection attempt until the next timeout period (nominally 1
     minute). **HOTSPOT** timeout processing is also disabled if any other
     device is connected to the hotspot.
+    
+    This method is deprecated. **HOTSPOT** timeout processing is now disabled
+    if any other device is connected to the hotspot.
 
   * _access_points()_
 

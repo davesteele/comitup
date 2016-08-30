@@ -62,9 +62,9 @@ def get_valid_cmds(state):
 
 
 def print_cmd_prompts(state, connection, points):
-    print()
-    print("State:", state)
-    print("Connection:", connection)
+    print('')
+    print("State: %s" % state)
+    print("Connection: %s" % connection)
 
     if state == 'HOTSPOT':
         print("Points:")
