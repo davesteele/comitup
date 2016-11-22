@@ -99,7 +99,6 @@ def interpreter():
             password = getpass('password (if required)?: ')
             do_connect(ssid, password)
         else:
-            ciu.ciu_activity()
             try:
                 commands[cmd].fn(connection)
             except KeyError:
