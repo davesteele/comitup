@@ -36,21 +36,6 @@ _/com/github/davesteele/comitup_, supporting the
 interface _com.github.davesteele.comitup_. The interface includes the
 following methods.
 
-  * _activity()_
-
-    Input: None
-
-    Output: None
-
-    Calling this method will disable **comitup** timeout processing for the
-    current period. In the **HOTSPOT** mode, this defers the periodic access
-    point connection attempt until the next timeout period (nominally 1
-    minute). **HOTSPOT** timeout processing is also disabled if any other
-    device is connected to the hotspot.
-    
-    This method is deprecated. **HOTSPOT** timeout processing is now disabled
-    if any other device is connected to the hotspot.
-
   * _access_points()_
 
     Input: None

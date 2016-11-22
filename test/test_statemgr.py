@@ -44,13 +44,6 @@ def test_sm_none(statemgr_fxt):
     pass
 
 
-@patch('comitup.states.set_activity')
-def test_sm_activity(state_act, statemgr_fxt):
-    obj = sm.Comitup()
-    obj.activity()
-    assert state_act.called
-
-
 @patch('comitup.nm.get_candidate_connections')
 def test_sm_candidates(nm_candidates, statemgr_fxt):
     obj = sm.Comitup()
