@@ -36,6 +36,25 @@ _/com/github/davesteele/comitup_, supporting the
 interface _com.github.davesteele.comitup_. The interface includes the
 following methods.
 
+  * _get_info()_
+
+    Input: None
+
+    Output: _DICT_ENTRY_
+
+    Return information about the current **Comitup** service. The keys are
+    as follows:
+
+    * _version_ - The package version
+
+    * _basename_ - The currently configured basename (default **comitup**)
+
+
+    * _id_ - The unique random numeric id associated with the service instance
+
+    * _hostnames_ - A list of host names that are published for the service
+      IP address
+
   * _access_points()_
 
     Input: None

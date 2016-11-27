@@ -73,7 +73,7 @@ def main():
     webmgr.init_webmgr(conf.web_service)
 
     statemgr.init_state_mgr(
-                (inst_name(conf, data) + '.local', conf.base_name + '.local'),
+                conf, data,
                 [webmgr.state_callback],
              )
 

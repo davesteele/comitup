@@ -6,11 +6,14 @@
 # Available under the terms of the GNU General Public License version 2
 # or later
 #
+import sys
+sys.path.append("/usr/share/comitup")
 
 import dbus
 import dbus.service
 import logging
 import iwscan
+import pkg_resources
 
 import gobject
 from dbus.mainloop.glib import DBusGMainLoop
@@ -27,6 +30,8 @@ log = logging.getLogger('comitup')
 
 
 com_obj = None
+conf = None
+data = None
 
 
 class Comitup(dbus.service.Object):
@@ -61,10 +66,31 @@ class Comitup(dbus.service.Object):
         states.set_state('HOTSPOT')
 
 
-def init_state_mgr(hosts, callbacks):
-    global com_obj
+    @dbus.service.method(comitup_int, in_signature="", out_signature="{s}")
+    def get_info(self):
+        info = {
+            'version': pkg_resources.get_distribution("comitup").version,
+            'basename': conf.base_name,
+            'id': data.id,
+            'hostnames': get_hosts(conf, data),
+            }
 
-    states.init_states(hosts, callbacks)
+        return info
+
+
+def get_hosts(conf, data):
+    return [
+        "%s-%s.local" % (conf.base_name, data.id),
+        "%s.local" % conf.base_name
+    ]
+
+
+def init_state_mgr(gconf, gdata, callbacks):
+    global com_obj, conf, data
+
+    conf, data = (gconf, gdata)
+
+    states.init_states(get_hosts(conf, data), callbacks)
     com_obj = Comitup()
 
     states.set_state('CONNECTING', states.candidate_connections())
