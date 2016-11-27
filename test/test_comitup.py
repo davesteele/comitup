@@ -1,7 +1,7 @@
 
 
 import pytest
-from mock import Mock, patch, call
+from mock import Mock, patch
 import textwrap
 import os
 

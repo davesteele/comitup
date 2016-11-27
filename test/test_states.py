@@ -139,10 +139,9 @@ def test_state_timeout_activity():
     def timeout_fn():
         themock()
 
-
     timeout_fn(states.state_id)
 
-    assert themock.called == True
+    assert themock.called
 
 
 def test_state_set_hosts():

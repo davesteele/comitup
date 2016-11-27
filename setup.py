@@ -14,6 +14,7 @@ import os
 import shutil
 import sys
 
+
 class PyTest(test):
     user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
 
@@ -84,7 +85,7 @@ setup(
                 'web/templates/connect.html',
                 'web/templates/confirm.html',
             ]
-        ),
+        ), # noqa
     ],
     install_requires=[
         'jinja2',

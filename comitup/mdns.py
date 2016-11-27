@@ -97,6 +97,7 @@ def add_hosts(hosts, addr):
 
     group.Commit()
 
+
 if __name__ == '__main__':
     add_hosts(['comitup-1111.local', 'comitup.local'], '192.168.200.32')
 

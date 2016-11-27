@@ -35,6 +35,7 @@ device_listener = None
 def null_fn():
     pass
 
+
 nm_dev_connect = null_fn
 nm_dev_fail = null_fn
 

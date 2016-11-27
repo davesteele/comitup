@@ -85,7 +85,12 @@ def interpreter():
 
         print_cmd_prompts(state, connection, points)
 
-        cmd = raw_input("command?: ")
+        try:
+            input = raw_input
+        except NameError:
+            pass
+
+        cmd = input("command?: ")
 
         index = int_value(cmd)
 
@@ -95,7 +100,7 @@ def interpreter():
                 password = getpass('password: ')
             do_connect(points[index-1]['ssid'], password)
         elif cmd == 'm':
-            ssid = raw_input("ssid?: ")
+            ssid = input("ssid?: ")
             password = getpass('password (if required)?: ')
             do_connect(ssid, password)
         else:

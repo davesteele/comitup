@@ -6,17 +6,19 @@
 # Available under the terms of the GNU General Public License version 2
 # or later
 #
-import sys
-sys.path.append("/usr/share/comitup")
 
 import dbus
 import dbus.service
 import logging
 import iwscan
-import pkg_resources
 
-import gobject
-from dbus.mainloop.glib import DBusGMainLoop
+import sys
+sys.path.append("/usr/share/comitup")
+
+import pkg_resources # noqa
+
+import gobject                               # noqa
+from dbus.mainloop.glib import DBusGMainLoop # noqa
 DBusGMainLoop(set_as_default=True)
 
 import states   # noqa
@@ -64,7 +66,6 @@ class Comitup(dbus.service.Object):
     def delete_connection(self):
         nm.del_connection_by_ssid(nm.get_active_ssid())
         states.set_state('HOTSPOT')
-
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="{s}")
     def get_info(self):
