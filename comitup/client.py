@@ -37,3 +37,7 @@ ciu_connect = ciu_service.get_dbus_method(
                 'connect',
                 'com.github.davesteele.comitup'
              )
+ciu_info = ciu_service.get_dbus_method(
+                'get_info',
+                'com.github.davesteele.comitup'
+             )

@@ -67,13 +67,13 @@ class Comitup(dbus.service.Object):
         nm.del_connection_by_ssid(nm.get_active_ssid())
         states.set_state('HOTSPOT')
 
-    @dbus.service.method(comitup_int, in_signature="", out_signature="{s}")
+    @dbus.service.method(comitup_int, in_signature="", out_signature="a{ss}")
     def get_info(self):
         info = {
             'version': pkg_resources.get_distribution("comitup").version,
             'basename': conf.base_name,
             'id': data.id,
-            'hostnames': get_hosts(conf, data),
+            'hostnames': ';'.join(get_hosts(conf, data)),
             }
 
         return info

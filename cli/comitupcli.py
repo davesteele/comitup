@@ -33,14 +33,21 @@ def do_connect(ssid, password):
     ciu.ciu_connect(ssid, password)
 
 
+def do_info(connection):
+    info = ciu.ciu_info(connection)
+    print("")
+    print("Host %s on comitup version %s" % (info['hostnames'], info['version']))
+
+
 CmdState = namedtuple('CmdState', "fn, desc, HOTSPOT, CONNECTING, CONNECTED")
 
 commands = OrderedDict([
-    ('r',   CmdState(do_reload,  '(r)eload',            True,  True, True)),
-    ('d',   CmdState(do_delete,  '(d)elete connection', False, True, True)),
-    ('q',   CmdState(do_quit,    '(q)uit',              True,  True, True)),
-    ('<n>', CmdState(do_connect, 'connect to <n>',      True,  False, False)),
-    ('m',   CmdState(do_connect,  '(m)anual connection', True,  False, False)),
+    ('i',   CmdState(do_info,    '(i)nfo',               True,  True, True)),
+    ('r',   CmdState(do_reload,  '(r)eload',             True,  True, True)),
+    ('d',   CmdState(do_delete,  '(d)elete connection',  False, True, True)),
+    ('q',   CmdState(do_quit,    '(q)uit',               True,  True, True)),
+    ('<n>', CmdState(do_connect, 'connect to <n>',       True,  False, False)),
+    ('m',   CmdState(do_connect, '(m)anual connection',  True,  False, False)),
 ])
 
 
