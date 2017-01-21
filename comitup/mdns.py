@@ -65,12 +65,16 @@ def make_a_record(host, addr):
 
 
 def add_service(host):
+    name = host
+    if '.local' in name:
+        name = name[:-len('.local')]
+
     group.AddService(
         avahi.IF_UNSPEC,
         avahi.PROTO_UNSPEC,
         dbus.UInt32(0),
-        "Comitup Service",
-        "_http._tcp",
+        name,
+        "_workstation._tcp",
         "",
         host,
         dbus.UInt16(80),
