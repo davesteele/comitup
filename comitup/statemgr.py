@@ -82,7 +82,6 @@ class Comitup(dbus.service.Object):
 def get_hosts(conf, data):
     return [
         "%s-%s.local" % (conf.base_name, data.id),
-        "%s.local" % conf.base_name
     ]
 
 
