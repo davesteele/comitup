@@ -78,7 +78,7 @@ def add_service(host):
         "",
         host,
         dbus.UInt16(80),
-        avahi.string_array_to_txt_array("")
+        avahi.string_array_to_txt_array(["comitup-home=https://davesteele.github.io/comitup/"])
     )
 
 # public functions
