@@ -64,17 +64,25 @@ def make_a_record(host, addr):
     )
 
 
-def add_service(host):
+def add_service(host, addr):
+    name = host
+    if '.local' in name:
+        name = name[:-len('.local')]
+
     group.AddService(
         avahi.IF_UNSPEC,
         avahi.PROTO_UNSPEC,
         dbus.UInt32(0),
-        "Comitup Service",
-        "_http._tcp",
+        name,
+        "_workstation._tcp",
         "",
         host,
-        dbus.UInt16(80),
-        avahi.string_array_to_txt_array("")
+        dbus.UInt16(9),
+        avahi.string_array_to_txt_array([
+            "hostname=%s" % host,
+            "ipaddr=%s" % addr,
+            "comitup-home=https://davesteele.github.io/comitup/",
+        ])
     )
 
 # public functions
@@ -93,9 +101,10 @@ def add_hosts(hosts, addr):
     for host in hosts:
         make_a_record(host, addr)
 
-    add_service(hosts[0])
+    add_service(hosts[0], addr)
 
     group.Commit()
+
 
 if __name__ == '__main__':
     add_hosts(['comitup-1111.local', 'comitup.local'], '192.168.200.32')

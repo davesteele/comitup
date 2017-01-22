@@ -35,7 +35,6 @@ com_state = None
 conn_list = []
 connection = ''
 state_id = 0
-last_activity = 0
 
 points = []
 
@@ -62,8 +61,7 @@ def timeout(fn):
     @wraps(fn)
     def wrapper(id):
         if id == state_id:
-            if time.time() - last_activity > 60:
-                fn()
+            fn()
             return True
         else:
             return False
@@ -242,12 +240,6 @@ def set_state(state, connections=None):
     state_info.start_fn()
 
     gobject.timeout_add(60*1000, state_info.timeout_fn, state_id)
-
-
-def set_activity():
-    global last_activity
-
-    last_activity = time.time()
 
 
 def activate_connection(name):

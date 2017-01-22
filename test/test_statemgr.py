@@ -15,7 +15,7 @@ def nullwrapper(*args, **kwargs):
         return wrapper
     return _nullwrapper
 
-# patch('dbus.service.method', nullwrapper)
+
 dbus.service.method = nullwrapper
 
 sm = importlib.import_module('comitup.statemgr')

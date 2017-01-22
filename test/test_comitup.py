@@ -1,7 +1,7 @@
 
 
 import pytest
-from mock import Mock, patch, call
+from mock import Mock, patch
 import textwrap
 import os
 
@@ -85,6 +85,4 @@ def loop_fxt(monkeypatch):
 def test_ciu_main(initsm, loop_fxt, conf_fxt, persist_fxt, log_fxt):
     ciu.main()
 
-    assert initsm.call_args == call(('test-1234.local', 'test.local'),
-                                    [ciu.webmgr.state_callback])
     assert loop_fxt.run.called

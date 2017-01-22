@@ -132,22 +132,16 @@ def test_state_timeout_wrapper(offset, match):
     assert themock.called == match
 
 
-@pytest.mark.parametrize("times, called", (((1, 1000), True), ((2, 3), False)))
-@patch('comitup.states.time.time')
-def test_state_timeout_activity(tmmock, times, called):
+def test_state_timeout_activity():
     themock = Mock()
 
     @states.timeout
     def timeout_fn():
         themock()
 
-    tmmock.side_effect = times
-
-    states.set_activity()
     timeout_fn(states.state_id)
 
-    assert states.last_activity == times[0]
-    assert themock.called == called
+    assert themock.called
 
 
 def test_state_set_hosts():

@@ -12,8 +12,13 @@ import dbus.service
 import logging
 import iwscan
 
-import gobject
-from dbus.mainloop.glib import DBusGMainLoop
+import sys
+sys.path.append("/usr/share/comitup")
+
+import pkg_resources # noqa
+
+import gobject                               # noqa
+from dbus.mainloop.glib import DBusGMainLoop # noqa
 DBusGMainLoop(set_as_default=True)
 
 import states   # noqa
@@ -27,6 +32,8 @@ log = logging.getLogger('comitup')
 
 
 com_obj = None
+conf = None
+data = None
 
 
 class Comitup(dbus.service.Object):
@@ -60,11 +67,30 @@ class Comitup(dbus.service.Object):
         nm.del_connection_by_ssid(nm.get_active_ssid())
         states.set_state('HOTSPOT')
 
+    @dbus.service.method(comitup_int, in_signature="", out_signature="a{ss}")
+    def get_info(self):
+        info = {
+            'version': pkg_resources.get_distribution("comitup").version,
+            'basename': conf.base_name,
+            'id': data.id,
+            'hostnames': ';'.join(get_hosts(conf, data)),
+            }
 
-def init_state_mgr(hosts, callbacks):
-    global com_obj
+        return info
 
-    states.init_states(hosts, callbacks)
+
+def get_hosts(conf, data):
+    return [
+        "%s-%s.local" % (conf.base_name, data.id),
+    ]
+
+
+def init_state_mgr(gconf, gdata, callbacks):
+    global com_obj, conf, data
+
+    conf, data = (gconf, gdata)
+
+    states.init_states(get_hosts(conf, data), callbacks)
     com_obj = Comitup()
 
     states.set_state('CONNECTING', states.candidate_connections())
