@@ -1,3 +1,11 @@
+comitup (0.6-1) unstable; urgency=medium
+
+  * Replace 'activity' with 'get-info' in the D-Bus interface.
+  * Eliminate the 'comitup.local' mdns name.
+  * Publish as a mdns Workstation.
+
+ -- David Steele <steele@debian.org>  Sat, 21 Jan 2017 23:40:34 -0500
+
 comitup (0.5-1) unstable; urgency=medium
 
   * Minor doc fixes.
