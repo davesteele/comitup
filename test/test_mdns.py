@@ -37,7 +37,7 @@ def test_avahi_make_a_record(avahi_fxt):
 
 
 def test_avahi_add_service(avahi_fxt):
-    mdns.add_service('host')
+    mdns.add_service('host', '1.2.3.4')
     assert mdns.group.AddService.called
 
 
