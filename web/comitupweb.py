@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 #
-# Copyright 2016 David Steele <steele@debian.org>
+# Copyright 2016-2017 David Steele <steele@debian.org>
 # This file is part of comitup
 # Available under the terms of the GNU General Public License version 2
 # or later

@@ -19,10 +19,10 @@ a persistent 4-digit number.
 While the hotspot is active, a comitup-web(8) service is available to manage
 connecting to an access point.
 
-In all states, avahi-daemon(8) is used to publish the mdns host names
-_comitup.local_ and _comitup-&lt;nnnn&gt;.local_, making the web service accessible
-as e.g. _http://comitup.local_, for systems supporting Zeroconf. For other
-systems, a _comitup_ Web Service is published which is visible to Zeroconf
+In all states, avahi-daemon(8) is used to publish the mdns host name
+_comitup-&lt;nnnn&gt;.local_, making the web service accessible
+as e.g. _http://comitup-1234.local_, for systems supporting Zeroconf. For other
+systems, a _comitup_ Workstation entry is published which is visible to Zeroconf
 browsing applications, allowing the IP address to be manually determined.
 The web service address is likely _http://10.42.0.1_.
 
@@ -45,15 +45,15 @@ following methods.
     Return information about the current **Comitup** service. The keys are
     as follows:
 
-    * _version_ - The package version
+        * _version_ - The package version
 
-    * _basename_ - The currently configured basename (default **comitup**)
+        * _basename_ - The currently configured basename (default **comitup**)
 
 
-    * _id_ - The unique random numeric id associated with the service instance
+        * _id_ - The unique random numeric id associated with the service instance
 
-    * _hostnames_ - A list of host names that are published for the service
-      IP address.
+        * _hostnames_ - A list of host names that are published for the service
+          IP address.
 
   * _access_points()_
 
@@ -97,7 +97,7 @@ following methods.
 
 ## COPYRIGHT
 
-Comitup is Copyright (C) 2016 David Steele &lt;steele@debian.org&gt;.
+Comitup is Copyright (C) 2016-2017 David Steele &lt;steele@debian.org&gt;.
 
 ## SEE ALSO
 
