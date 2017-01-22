@@ -53,7 +53,7 @@ following methods.
     * _id_ - The unique random numeric id associated with the service instance
 
     * _hostnames_ - A list of host names that are published for the service
-      IP address
+      IP address.
 
   * _access_points()_
 
