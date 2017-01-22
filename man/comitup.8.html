@@ -107,20 +107,23 @@ interface <em>com.github.davesteele.comitup</em>. The interface includes the
 following methods.</p>
 
 <ul>
-<li><p><em>activity()</em></p>
+<li><p><em>get_info()</em></p>
 
 <p>Input: None</p>
 
-<p>Output: None</p>
+<p>Output: <em>DICT_ENTRY</em></p>
 
-<p>Calling this method will disable <strong>comitup</strong> timeout processing for the
-current period. In the <strong>HOTSPOT</strong> mode, this defers the periodic access
-point connection attempt until the next timeout period (nominally 1
-minute). <strong>HOTSPOT</strong> timeout processing is also disabled if any other
-device is connected to the hotspot.</p>
+<p>Return information about the current <strong>Comitup</strong> service. The keys are
+as follows:</p>
 
-<p>This method is deprecated. <strong>HOTSPOT</strong> timeout processing is now disabled
-if any other device is connected to the hotspot.</p></li>
+<ul>
+<li><p><em>version</em> - The package version</p></li>
+<li><p><em>basename</em> - The currently configured basename (default <strong>comitup</strong>)</p></li>
+<li><p><em>id</em> - The unique random numeric id associated with the service instance</p></li>
+<li><p><em>hostnames</em> - A list of host names that are published for the service
+IP address.</p></li>
+</ul>
+</li>
 <li><p><em>access_points()</em></p>
 
 <p>Input: None</p>
@@ -171,7 +174,7 @@ using this connection.</p></li>
 
   <ol class='man-decor man-foot man foot'>
     <li class='tl'></li>
-    <li class='tc'>2016-08-24</li>
+    <li class='tc'>January 2017</li>
     <li class='tr'>comitup(8)</li>
   </ol>
 
