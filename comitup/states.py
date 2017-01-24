@@ -88,15 +88,26 @@ def hotspot_start():
 
     mdns.clear_entries()
     conn_list = []
-    activate_connection(dns_to_conn(dns_names[0]))
+
+    # tolerate Raspberry Pi 2
+    try:
+        activate_connection(dns_to_conn(dns_names[0]))
+    except DBusException:
+        log.warn("Error connecting hotspot")
 
 
 @state_callback
 def hotspot_pass():
     log.debug("Activating mdns")
 
-    ip = nm.get_active_ip()
-    mdns.add_hosts(dns_names, ip)
+    # IP tolerance for PI 2
+    for _ in range(5):
+        ip = nm.get_active_ip()
+        if ip:
+            mdns.clear_entries()
+            mdns.add_hosts(dns_names, ip)
+            break
+        time.sleep(1)
 
 
 @state_callback
@@ -176,8 +187,14 @@ def connecting_timeout():
 def connected_start():
     global conn_list
 
-    ip = nm.get_active_ip()
-    mdns.add_hosts(dns_names, ip)
+    # IP tolerance for PI 2
+    for _ in range(5):
+        ip = nm.get_active_ip()
+        if ip:
+            mdns.clear_entries()
+            mdns.add_hosts(dns_names, ip)
+            break
+        time.sleep(1)
 
     conn_list = []
 
