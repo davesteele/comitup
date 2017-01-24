@@ -49,7 +49,7 @@ class MyClean(clean):
 setup(
     name='comitup',
     packages=['comitup', 'web', 'cli'],
-    version='0.5',
+    version='0.7',
     description="Copy a remote file using multiple SSH streams",
     classifiers=[
         'Development Status :: 1 - Planning',
