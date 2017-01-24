@@ -82,9 +82,13 @@ Commands:
 
     Enter an SSID manually.
 
+  * __i__ - **Get information**
+
+    Return the comitup version and host name for the current instance.
+
 ## COPYRIGHT
 
-Comitup is Copyright (C) 2016 David Steele &lt;steele@debian.org&gt;
+Comitup is Copyright (C) 2016-2017 David Steele &lt;steele@debian.org&gt;
 
 ## SEE ALSO
 

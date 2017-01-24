@@ -1,6 +1,6 @@
 
 #
-# Copyright 2016 David Steele <steele@debian.org>
+# Copyright 2016-2017 David Steele <steele@debian.org>
 # This file is part of comitup
 # Available under the terms of the GNU General Public License version 2
 # or later
@@ -49,7 +49,7 @@ class MyClean(clean):
 setup(
     name='comitup',
     packages=['comitup', 'web', 'cli'],
-    version='0.5',
+    version='0.7',
     description="Copy a remote file using multiple SSH streams",
     classifiers=[
         'Development Status :: 1 - Planning',

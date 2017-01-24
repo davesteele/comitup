@@ -8,6 +8,8 @@ import re
 # in AP mode. Use the 'iw' command to get the AP list.
 
 def docmd(cmd):
+    cmd = "timeout 5 " + cmd
+
     try:
         out = subprocess.check_output(cmd.split()).decode()
     except subprocess.CalledProcessError:
