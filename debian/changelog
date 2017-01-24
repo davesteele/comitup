@@ -1,3 +1,10 @@
+comitup (0.7-1) unstable; urgency=medium
+
+  * Make it more robust for non Raspberry Pi 3 use.
+    - Tested on a Pi 2 with a KOOTEK wifi adapter. 
+
+ -- David Steele <steele@debian.org>  Mon, 23 Jan 2017 21:46:58 -0500
+
 comitup (0.6-1) unstable; urgency=medium
 
   * Replace 'activity' with 'get-info' in the D-Bus interface.
