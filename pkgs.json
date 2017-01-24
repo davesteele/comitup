@@ -1,5 +1,6 @@
 {
     "all_pkgs": [
+        "comitup_0.7-1_all.deb", 
         "comitup_0.6-1_all.deb", 
         "comitup_0.5-1_all.deb", 
         "comitup_0.4-1_all.deb", 
@@ -8,6 +9,6 @@
         "comitup_0.1-1_all.deb"
     ], 
     "latest_pkgs": [
-        "comitup_0.6-1_all.deb"
+        "comitup_0.7-1_all.deb"
     ]
 }

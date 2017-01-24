@@ -89,10 +89,10 @@ a persistent 4-digit number.</p>
 <p>While the hotspot is active, a <a class="man-ref" href="comitup-web.8.html">comitup-web<span class="s">(8)</span></a> service is available to manage
 connecting to an access point.</p>
 
-<p>In all states, <a class="man-ref" href="http://man.cx/avahi-daemon(8)">avahi-daemon<span class="s">(8)</span></a> is used to publish the mdns host names
-<em>comitup.local</em> and <em>comitup-&lt;nnnn&gt;.local</em>, making the web service accessible
-as e.g. <em>http://comitup.local</em>, for systems supporting Zeroconf. For other
-systems, a <em>comitup</em> Web Service is published which is visible to Zeroconf
+<p>In all states, <a class="man-ref" href="http://man.cx/avahi-daemon(8)">avahi-daemon<span class="s">(8)</span></a> is used to publish the mdns host name
+<em>comitup-&lt;nnnn&gt;.local</em>, making the web service accessible
+as e.g. <em>http://comitup-1234.local</em>, for systems supporting Zeroconf. For other
+systems, a <em>comitup</em> Workstation entry is published which is visible to Zeroconf
 browsing applications, allowing the IP address to be manually determined.
 The web service address is likely <em>http://10.42.0.1</em>.</p>
 
@@ -116,14 +116,16 @@ following methods.</p>
 <p>Return information about the current <strong>Comitup</strong> service. The keys are
 as follows:</p>
 
-<ul>
-<li><p><em>version</em> - The package version</p></li>
-<li><p><em>basename</em> - The currently configured basename (default <strong>comitup</strong>)</p></li>
-<li><p><em>id</em> - The unique random numeric id associated with the service instance</p></li>
-<li><p><em>hostnames</em> - A list of host names that are published for the service
-IP address.</p></li>
-</ul>
-</li>
+<pre><code>* _version_ - The package version.
+
+* _basename_ - The currently configured basename (default **comitup**).
+
+
+* _id_ - The unique random numeric id associated with the service instance.
+
+* _hostnames_ - A list of host names that are published for the service
+  IP address.
+</code></pre></li>
 <li><p><em>access_points()</em></p>
 
 <p>Input: None</p>
@@ -165,7 +167,7 @@ using this connection.</p></li>
 
 <h2 id="COPYRIGHT">COPYRIGHT</h2>
 
-<p>Comitup is Copyright (C) 2016 David Steele &lt;steele@debian.org&gt;.</p>
+<p>Comitup is Copyright (C) 2016-2017 David Steele &lt;steele@debian.org&gt;.</p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
