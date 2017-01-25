@@ -1,1 +1,0 @@
-f56b5546c319ce0ce14798e1b6a83653553c5e55  2016-05-27-raspbian-jessie-07-15-comitup.img.zip

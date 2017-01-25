@@ -1,1 +1,0 @@
-ba696fc70285055916536b425bdf57a634ece4cf  2016-11-25-raspbian-jessie-lite-12-31-comitup.img.zip

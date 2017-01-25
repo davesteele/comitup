@@ -1,1 +1,0 @@
-62f7df1d52809bb94f94b0403abe96a87392ba65  2017-01-11-raspbian-jessie-comitup-0.6-01-22.img.zip

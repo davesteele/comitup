@@ -1,1 +1,0 @@
-1346725d0d1d92a94f4ed90e65d32ecb2e0775f3  2016-11-25-raspbian-jessie-12-31-comitup.img.zip
