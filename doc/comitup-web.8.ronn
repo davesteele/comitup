@@ -1,4 +1,4 @@
-comitup-web(1) -- Wifi configuration web server for the Comitup service
+comitup-web(8) -- Wifi configuration web server for the Comitup service
 =============================================
 
 ## SYNOPSIS
