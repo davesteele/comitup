@@ -155,7 +155,7 @@ def get_points_ext(device=None):
     for point in inlist:
 
         try:
-            if point.Flags & 1:
+            if point.Flags or point.WpaFlags or point.RsnFlags:
                 encstr = "encrypted"
             else:
                 encstr = "unencrypted"
