@@ -93,7 +93,7 @@ def init_state_mgr(gconf, gdata, callbacks):
     states.init_states(get_hosts(conf, data), callbacks)
     com_obj = Comitup()
 
-    states.set_state('HOTSPOT')
+    states.set_state('HOTSPOT', timeout=5)
 
 
 def main():
@@ -104,7 +104,7 @@ def main():
     log.info('starting')
 
     init_state_mgr('comitup.local', 'comitup-1111.local')
-    states.set_state('HOTSPOT')
+    states.set_state('HOTSPOT', timeout=5)
 
     loop = gobject.MainLoop()
     loop.run()

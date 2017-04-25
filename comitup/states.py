@@ -237,7 +237,7 @@ class state_matrix(object):
             raise AttributeError
 
 
-def set_state(state, connections=None):
+def set_state(state, connections=None, timeout=60):
     global com_state, conn_list, state_id, points
 
     log.info('Setting state to %s' % state)
@@ -256,7 +256,7 @@ def set_state(state, connections=None):
     com_state = state
     state_info.start_fn()
 
-    gobject.timeout_add(60*1000, state_info.timeout_fn, state_id)
+    gobject.timeout_add(timeout*1000, state_info.timeout_fn, state_id)
 
 
 def activate_connection(name):
