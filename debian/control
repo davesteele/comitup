@@ -11,7 +11,7 @@ Build-Depends:
     ruby-ronn,
 Standards-Version: 3.9.8
 Testsuite: autopkgtest
-Homepage: https://github.com/davesteele/comitup
+Homepage: https://davesteele.github.io/comitup/
 X-Python-Version: >= 2.7
 Vcs-Git: https://github.com/davesteele/comitup.git -b debian
 Vcs-Browser: https://github.com/davesteele/comitup
