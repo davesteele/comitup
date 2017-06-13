@@ -67,7 +67,7 @@ def candidates():
             pt = {}
             pt['ssid'] = ap['SSID']
             pt['strength'] = ap['power']
-            if 'WPA' in ap:
+            if 'WPA' in ap or 'RSN' in ap:
                 pt['security'] = 'encrypted'
             else:
                 pt['security'] = 'unencrypted'
