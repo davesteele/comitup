@@ -212,6 +212,7 @@ def make_hotspot(name='comitup'):
             'uuid': str(uuid.uuid4()),
             'id': name,
             'autoconnect': False,
+            'interface-name': 'wlan0',
         },
         '802-11-wireless':
         {
@@ -231,7 +232,7 @@ def make_hotspot(name='comitup'):
     nm.Settings.AddConnection(settings)
 
 
-def make_connection_for(ssid, password=None):
+def make_connection_for(ssid, password=None, interface=None):
 
     settings = dbus.Dictionary({
         'connection': dbus.Dictionary(
@@ -256,6 +257,9 @@ def make_connection_for(ssid, password=None):
                 'method': 'ignore',
             }),
     })
+
+    if interface:
+        settings['connection']['interface-name'] = interface
 
     # assume privacy = WPA(2) psk
     if password:
