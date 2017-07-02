@@ -47,9 +47,13 @@ def none_on_exception(*exceptions):
     return _none_on_exception
 
 
+def get_wifi_devices():
+    return [x for x in nm.NetworkManager.GetDevices() if x.DeviceType == 2]
+
+
 @none_on_exception(IndexError)
-def get_wifi_device():
-    return [x for x in nm.NetworkManager.GetDevices() if x.DeviceType == 2][0]
+def get_wifi_device(index=0):
+    return get_wifi_devices()[index]
 
 
 def get_device_path(device=None):
