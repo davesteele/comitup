@@ -63,10 +63,7 @@ def get_device_path(device=None):
     return device.SpecificDevice().object_path
 
 
-def disconnect(device=None):
-    if not device:
-        device = get_wifi_device()
-
+def disconnect(device):
     try:
         device.Disconnect()
     except:

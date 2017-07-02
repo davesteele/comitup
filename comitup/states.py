@@ -22,6 +22,7 @@ if __name__ == '__main__':
 import nmmon    # noqa
 import nm       # noqa
 import mdns     # noqa
+import modemgr  # noqa
 
 
 log = logging.getLogger('comitup')
@@ -143,7 +144,7 @@ def connecting_start():
     mdns.clear_entries()
 
     if conn_list:
-        nm.disconnect()
+        nm.disconnect(modemgr.get_state_device('CONNECTING'))
 
         conn = conn_list.pop(0)
         log.info('Attempting connection to %s' % conn)
