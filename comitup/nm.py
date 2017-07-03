@@ -126,10 +126,7 @@ def activate_connection_by_ssid(ssid, device, path='/'):
     nm.NetworkManager.ActivateConnection(connection, device, path)
 
 
-def deactivate_connection(device=None):
-    if not device:
-        device = get_wifi_device()
-
+def deactivate_connection(device):
     connection = device.ActiveConnection
     if connection:
         nm.NetworkManager.DeactivateConnection(connection)

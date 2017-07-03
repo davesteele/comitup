@@ -152,7 +152,8 @@ def connecting_start():
     else:
         # Give NetworkManager a chance to update the access point list
         try:
-            nm.deactivate_connection()  # todo - clean this up
+            # todo - clean this up
+            nm.deactivate_connection(modemgr.get_state_device('CONNECTING'))
         except DBusException:
             pass
         time.sleep(5)
