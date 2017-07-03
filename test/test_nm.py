@@ -116,7 +116,7 @@ def test_activate_connection_by_id(get_dev, monkeypatch, connections_fxt):
     monkeypatch.setattr("comitup.nm.nm.NetworkManager.ActivateConnection",
                         activate)
 
-    nm.activate_connection_by_ssid("myssid")
+    nm.activate_connection_by_ssid("myssid", nm.get_wifi_device())
     assert activate.called
 
 

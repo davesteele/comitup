@@ -92,7 +92,7 @@ def hotspot_start():
 
     # tolerate Raspberry Pi 2
     try:
-        activate_connection(dns_to_conn(dns_names[0]))
+        activate_connection(dns_to_conn(dns_names[0]), 'HOTSPOT')
     except DBusException:
         log.warn("Error connecting hotspot")
 
@@ -148,7 +148,7 @@ def connecting_start():
 
         conn = conn_list.pop(0)
         log.info('Attempting connection to %s' % conn)
-        activate_connection(conn)
+        activate_connection(conn, 'CONNECTING')
     else:
         # Give NetworkManager a chance to update the access point list
         try:
@@ -260,7 +260,7 @@ def set_state(state, connections=None, timeout=60):
     gobject.timeout_add(timeout*1000, state_info.timeout_fn, state_id)
 
 
-def activate_connection(name):
+def activate_connection(name, state):
     global connection
     connection = name
     log.debug('Connecting to %s' % connection)
@@ -270,7 +270,9 @@ def activate_connection(name):
     except IndexError:
         path = '/'
 
-    nm.activate_connection_by_ssid(connection, path=path)
+    nm.activate_connection_by_ssid(connection,
+                                   modemgr.get_state_device(state),
+                                   path=path)
 
 
 def candidate_connections():

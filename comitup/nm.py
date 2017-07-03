@@ -120,10 +120,7 @@ def del_connection_by_ssid(name):
             connection.Delete()
 
 
-def activate_connection_by_ssid(ssid, device=None, path='/'):
-    if not device:
-        device = get_wifi_device()
-
+def activate_connection_by_ssid(ssid, device, path='/'):
     connection = get_connection_by_ssid(ssid)
 
     nm.NetworkManager.ActivateConnection(connection, device, path)
@@ -316,7 +313,7 @@ def do_listconnections(arg):
 
 def do_setconnection(ssid):
     """Connect to a connection"""
-    activate_connection_by_ssid(ssid)
+    activate_connection_by_ssid(ssid, get_wifi_device())
 
 
 def do_getconnection(dummy):
