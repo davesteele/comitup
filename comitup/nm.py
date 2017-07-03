@@ -64,10 +64,7 @@ def get_wifi_device(index=0):
     return get_wifi_devices()[index]
 
 
-def get_device_path(device=None):
-    if not device:
-        device = get_wifi_device()
-
+def get_device_path(device):
     return device.SpecificDevice().object_path
 
 

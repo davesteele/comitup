@@ -249,7 +249,7 @@ def set_state(state, connections=None, timeout=60):
 
     state_info = state_matrix(state)
 
-    nmmon.set_device_callbacks(state_info.pass_fn, state_info.fail_fn)
+    nmmon.set_device_callbacks(state, state_info.pass_fn, state_info.fail_fn)
 
     if connections:
         conn_list = connections

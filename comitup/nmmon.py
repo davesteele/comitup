@@ -17,7 +17,8 @@ import logging
 if __name__ == '__main__':
     DBusGMainLoop(set_as_default=True)
 
-import nm   # noqa
+import nm       # noqa
+import modemgr  # noqa
 
 
 #
@@ -30,6 +31,7 @@ bus = dbus.SystemBus()
 
 device_path = None
 device_listener = None
+comstate = 'HOTSPOT'
 
 
 def null_fn():
@@ -44,9 +46,16 @@ nm_dev_fail = null_fn
 #
 
 
-def set_device_callbacks(up, down):
+def set_device_callbacks(state, up, down):
     global nm_dev_connect
     global nm_dev_fail
+    global comstate
+
+    nm_dev_connect = null_fn
+    nm_dev_fail = null_fn
+
+    comstate = state
+    check_device_listener()
 
     nm_dev_connect = up
     nm_dev_fail = down
@@ -82,7 +91,7 @@ def set_device_listener(path):
 def check_device_listener(force=False):
     global device_path
 
-    current_path = nm.get_device_path()
+    current_path = nm.get_device_path(modemgr.get_state_device(comstate))
 
     if force or (current_path and current_path != device_path):
         device_path = current_path
@@ -141,7 +150,7 @@ def main():
     def down():
         print("wifi down")
 
-    set_device_callbacks(up, down)
+    set_device_callbacks('HOTSPOT', up, down)
 
     loop = gobject.MainLoop()
     loop.run()
