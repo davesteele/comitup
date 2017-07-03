@@ -106,7 +106,7 @@ def hotspot_pass():
         ip = nm.get_active_ip()
         if ip:
             mdns.clear_entries()
-            mdns.add_hosts(dns_names, ip)
+            mdns.add_hosts(dns_names)
             break
         time.sleep(1)
 
@@ -193,7 +193,7 @@ def connected_start():
         ip = nm.get_active_ip()
         if ip:
             mdns.clear_entries()
-            mdns.add_hosts(dns_names, ip)
+            mdns.add_hosts(dns_names)
             break
         time.sleep(1)
 

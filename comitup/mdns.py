@@ -12,6 +12,7 @@ import dbus
 from encodings.idna import ToASCII
 import socket
 import logging
+import nm
 
 log = logging.getLogger('comitup')
 
@@ -51,10 +52,10 @@ def encode_dns(name):
     return '.'.join(out)
 
 
-def make_a_record(host, addr):
+def make_a_record(host, devindex, addr):
     group.AddRecord(
-        avahi.IF_UNSPEC,
-        avahi.PROTO_UNSPEC,
+        devindex,
+        avahi.PROTO_INET,
         dbus.UInt32(0),
         encode_dns(host),
         CLASS_IN,
@@ -64,14 +65,14 @@ def make_a_record(host, addr):
     )
 
 
-def add_service(host, addr):
+def add_service(host, devindex, addr):
     name = host
     if '.local' in name:
         name = name[:-len('.local')]
 
     group.AddService(
-        avahi.IF_UNSPEC,
-        avahi.PROTO_UNSPEC,
+        devindex,
+        avahi.PROTO_INET,
         dbus.UInt32(0),
         name,
         "_workstation._tcp",
@@ -95,19 +96,25 @@ def clear_entries():
     establish_group()
 
 
-def add_hosts(hosts, addr):
+def add_hosts(hosts):
     establish_group()
 
-    for host in hosts:
-        make_a_record(host, addr)
+    i = 0
+    for device in nm.get_devices():
+        i += 1
+        name = nm.device_name(device)
+        addr = nm.get_active_ip(device)
+        if ('wlan' in name or 'eth' in name) and addr:
+            for host in hosts:
+                make_a_record(host, i, addr)
 
-    add_service(hosts[0], addr)
+            add_service(hosts[0], i, addr)
 
     group.Commit()
 
 
 if __name__ == '__main__':
-    add_hosts(['comitup-1111.local', 'comitup.local'], '192.168.200.32')
+    add_hosts(['comitup-1111.local', 'comitup.local'])
 
     while True:
         pass

@@ -47,8 +47,16 @@ def none_on_exception(*exceptions):
     return _none_on_exception
 
 
+def get_devices():
+    return nm.NetworkManager.GetDevices()
+
+
+def device_name(device):
+    return device.Interface
+
+
 def get_wifi_devices():
-    return [x for x in nm.NetworkManager.GetDevices() if x.DeviceType == 2]
+    return [x for x in get_devices() if x.DeviceType == 2]
 
 
 @none_on_exception(IndexError)
