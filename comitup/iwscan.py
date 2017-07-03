@@ -58,11 +58,16 @@ def devaps(dev):
     return aps
 
 
-def candidates():
+def candidates(device=None):
     """Return a list of reachable Access Point SSIDs, sorted by power"""
 
+    if device:
+        dev_list = [device]
+    else:
+        dev_list = devlist()
+
     clist = []
-    for dev in devlist():
+    for dev in dev_list:
         for ap in devaps(dev):
             pt = {}
             pt['ssid'] = ap['SSID']

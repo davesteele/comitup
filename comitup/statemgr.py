@@ -49,7 +49,7 @@ class Comitup(dbus.service.Object):
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="aa{ss}")
     def access_points(self):
-        return iwscan.candidates()
+        return iwscan.candidates(nm.device_name(modemgr.get_link_device()))
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="ss")
     def state(self):
