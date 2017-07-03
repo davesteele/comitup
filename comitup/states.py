@@ -103,7 +103,7 @@ def hotspot_pass():
 
     # IP tolerance for PI 2
     for _ in range(5):
-        ip = nm.get_active_ip()
+        ip = nm.get_active_ip(modemgr.get_state_device('HOTSPOT'))
         if ip:
             mdns.clear_entries()
             mdns.add_hosts(dns_names)
@@ -190,7 +190,7 @@ def connected_start():
 
     # IP tolerance for PI 2
     for _ in range(5):
-        ip = nm.get_active_ip()
+        ip = nm.get_active_ip(modemgr.get_state_device('CONNECTED'))
         if ip:
             mdns.clear_entries()
             mdns.add_hosts(dns_names)

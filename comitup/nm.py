@@ -89,10 +89,7 @@ def get_active_ssid(device):
 
 
 @none_on_exception(AttributeError, IndexError)
-def get_active_ip(device=None):
-    if not device:
-        device = get_wifi_device()
-
+def get_active_ip(device):
     return device.Ip4Config.Addresses[0][0]
 
 
@@ -329,7 +326,7 @@ def do_getconnection(dummy):
 
 def do_getip(dummy):
     """Print the current IP address"""
-    print(get_active_ip())
+    print(get_active_ip(get_wifi_device()))
 
 
 def do_detailconnection(ssid):

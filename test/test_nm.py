@@ -93,7 +93,7 @@ def test_get_active_ssid(device_fxt):
 
 
 def test_get_active_ip(device_fxt):
-    assert nm.get_active_ip() == '1.2.3.4'
+    assert nm.get_active_ip(nm.get_wifi_device()) == '1.2.3.4'
 
 
 def test_no_conn(no_connections_fxt):
