@@ -80,10 +80,6 @@ def test_none_dev(no_device_fxt, func):
         assert func(nm.get_wifi_device()) is None
 
 
-def test_none_dev_get_access(no_device_fxt):
-    assert nm.get_access_point_by_ssid('ssid') is None
-
-
 def test_no_active_ssid(device_no_conn_fxt):
     assert nm.get_active_ssid(nm.get_wifi_device()) is None
 
@@ -118,11 +114,6 @@ def test_activate_connection_by_id(get_dev, monkeypatch, connections_fxt):
 
     nm.activate_connection_by_ssid("myssid", nm.get_wifi_device())
     assert activate.called
-
-
-def test_get_access_point_by_ssid(device_fxt):
-    assert nm.get_access_point_by_ssid("myssid")
-    assert not nm.get_access_point_by_ssid("bogusssid")
 
 
 def test_make_hotspot(monkeypatch):

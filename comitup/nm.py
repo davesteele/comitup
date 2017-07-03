@@ -133,14 +133,11 @@ def deactivate_connection(device):
 
 
 @none_on_exception(AttributeError)
-def get_access_points(device=None):
-    if not device:
-        device = get_wifi_device()
-
+def get_access_points(device):
     return device.SpecificDevice().GetAllAccessPoints()
 
 
-def get_points_ext(device=None):
+def get_points_ext(device):
     try:
         inlist = sorted(get_access_points(device),
                         key=lambda x: -ord(x.Strength))
@@ -171,11 +168,6 @@ def get_points_ext(device=None):
     return outlist
 
 
-@none_on_exception(IndexError, TypeError)
-def get_access_point_by_ssid(ssid, device=None):
-    return [x for x in get_access_points(device) if x.Ssid == ssid][0]
-
-
 def get_candidate_connections(device=None):
     if not device:
         device = get_wifi_device()
@@ -195,7 +187,7 @@ def get_candidate_connections(device=None):
         except KeyError:
             log.debug("Unexpected connection format for %s" % ssid)
 
-    points = [x.Ssid for x in get_access_points()]
+    points = [x.Ssid for x in get_access_points(device)]
     iwpoints = [x['ssid'] for x in iwscan.candidates()]
 
     return list(set(candidates) & (set(points) | set(iwpoints)))
@@ -278,7 +270,7 @@ def make_connection_for(ssid, password=None, interface=None):
 def do_listaccess(arg):
     """List all accessible access points"""
     rows = []
-    for point in get_access_points():
+    for point in get_access_points(get_wifi_device()):
         row = (
             point.Ssid, point.HwAddress,
             point.Flags, point.WpaFlags,

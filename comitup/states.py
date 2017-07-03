@@ -245,7 +245,7 @@ def set_state(state, connections=None, timeout=60):
     log.info('Setting state to %s' % state)
 
     if com_state != 'HOTSPOT':
-        points = nm.get_points_ext()
+        points = nm.get_points_ext(modemgr.get_state_device(com_state))
 
     state_info = state_matrix(state)
 
