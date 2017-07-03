@@ -23,6 +23,7 @@ DBusGMainLoop(set_as_default=True)
 
 import states   # noqa
 import nm       # noqa
+import modemgr  # noqa
 
 comitup_path = "/com/github/davesteele/comitup"
 
@@ -64,7 +65,8 @@ class Comitup(dbus.service.Object):
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="")
     def delete_connection(self):
-        nm.del_connection_by_ssid(nm.get_active_ssid())
+        ssid = nm.get_active_ssid(modemgr.get_link_device())
+        nm.del_connection_by_ssid(ssid)
         states.set_state('HOTSPOT')
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="a{ss}")

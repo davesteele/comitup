@@ -213,7 +213,7 @@ def connected_fail():
 
 @timeout
 def connected_timeout():
-    if connection != nm.get_active_ssid():
+    if connection != nm.get_active_ssid(modemgr.get_state_device('CONNECTED')):
         log.warn("Connection lost on timeout")
         set_state('HOTSPOT')
 

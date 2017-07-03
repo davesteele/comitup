@@ -71,15 +71,12 @@ def disconnect(device):
 
 
 def get_device_settings(device):
-    if not device:
-        device = get_wifi_device()
-
     connection = device.ActiveConnection
     return connection.Connection.GetSettings()
 
 
 @none_on_exception(AttributeError)
-def get_active_ssid(device=None):
+def get_active_ssid(device):
     return get_device_settings(device)['802-11-wireless']['ssid']
 
 
@@ -319,7 +316,7 @@ def do_setconnection(ssid):
 
 def do_getconnection(dummy):
     """Print the active connection ssid"""
-    print(get_active_ssid())
+    print(get_active_ssid(get_wifi_device()))
 
 
 def do_getip(dummy):
