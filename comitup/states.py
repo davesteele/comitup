@@ -122,7 +122,7 @@ def hotspot_timeout():
     if iwscan.ap_conn_count() == 0:
         log.debug('Periodic connection attempt')
 
-        conn_list = candidate_connections()
+        conn_list = candidate_connections(modemgr.get_state_device('CONNECTED'))
         if conn_list:
             # bug - try the first connection twice
             set_state('CONNECTING', [conn_list[0], conn_list[0]] + conn_list)
@@ -276,8 +276,8 @@ def activate_connection(name, state):
                                    path=path)
 
 
-def candidate_connections():
-    return nm.get_candidate_connections()
+def candidate_connections(device):
+    return nm.get_candidate_connections(device)
 
 
 def set_hosts(*args):

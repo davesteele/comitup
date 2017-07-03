@@ -44,7 +44,8 @@ class Comitup(dbus.service.Object):
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="as")
     def candidate_connections(self):
-        return nm.get_candidate_connections()
+        dev = modemgr.get_state_device('CONNECTED')
+        return nm.get_candidate_connections(dev)
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="aa{ss}")
     def access_points(self):

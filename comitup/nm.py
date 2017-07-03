@@ -168,10 +168,7 @@ def get_points_ext(device):
     return outlist
 
 
-def get_candidate_connections(device=None):
-    if not device:
-        device = get_wifi_device()
-
+def get_candidate_connections(device):
     candidates = []
 
     for conn in get_all_connections():
@@ -339,7 +336,7 @@ def do_makehotspot(dummy):
 def do_listcandidates(dummy):
     """List available connections for current access points"""
 
-    for candidate in get_candidate_connections():
+    for candidate in get_candidate_connections(get_wifi_device()):
         print(candidate)
 
 
