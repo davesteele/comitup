@@ -58,6 +58,12 @@ def devaps(dev):
     return aps
 
 
+def dedup_aplist(aplist):
+    apdict = {x['ssid']: x for x in aplist}
+
+    return [apdict[x] for x in apdict]
+
+
 def candidates(device=None):
     """Return a list of reachable Access Point SSIDs, sorted by power"""
 
@@ -78,6 +84,8 @@ def candidates(device=None):
                 pt['security'] = 'unencrypted'
 
             clist.append(pt)
+
+    clist = dedup_aplist(clist)
 
     clist = sorted(clist, key=lambda x: -float(x['strength']))
 
