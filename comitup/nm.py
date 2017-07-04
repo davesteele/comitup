@@ -182,7 +182,7 @@ def get_candidate_connections(device):
             log.debug("Unexpected connection format for %s" % ssid)
 
     points = [x.Ssid for x in get_access_points(device)]
-    iwpoints = [x['ssid'] for x in iwscan.candidates(device_name(device))]
+    iwpoints = [x['ssid'] for x in iwscan.candidates()]
 
     return list(set(candidates) & (set(points) | set(iwpoints)))
 
