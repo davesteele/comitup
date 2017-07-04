@@ -42,11 +42,6 @@ class Comitup(dbus.service.Object):
         bus_name = dbus.service.BusName(comitup_int, bus=dbus.SystemBus())
         dbus.service.Object.__init__(self, bus_name, comitup_path)
 
-    @dbus.service.method(comitup_int, in_signature="", out_signature="as")
-    def candidate_connections(self):
-        dev = modemgr.get_state_device('CONNECTED')
-        return nm.get_candidate_connections(dev)
-
     @dbus.service.method(comitup_int, in_signature="", out_signature="aa{ss}")
     def access_points(self):
         aps = iwscan.candidates()
