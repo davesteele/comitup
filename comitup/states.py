@@ -121,7 +121,7 @@ def hotspot_fail():
 @timeout
 def hotspot_timeout():
 
-    if iwscan.ap_conn_count() == 0:
+    if iwscan.ap_conn_count() == 0 or modemgr.get_mode() != 'single':
         log.debug('Periodic connection attempt')
 
         conn_list = candidate_connections(modemgr.get_state_device('CONNECTED'))
