@@ -41,6 +41,8 @@ points = []
 
 state_callbacks = []
 
+hotspot_name = None
+
 
 def state_callback(fn):
     @wraps(fn)
@@ -291,13 +293,17 @@ def assure_hotspot(ssid):
 
 
 def init_states(hosts, callbacks):
+    global hotspot_name
+
     nmmon.init_nmmon()
     set_hosts(*hosts)
 
     for callback in callbacks:
         add_state_callback(callback)
 
-    assure_hotspot(dns_to_conn(hosts[0]))
+    hotspot_name = dns_to_conn(hosts[0])
+
+    assure_hotspot(hotspot_name)
 
 
 def add_state_callback(callback):

@@ -49,7 +49,8 @@ class Comitup(dbus.service.Object):
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="aa{ss}")
     def access_points(self):
-        return iwscan.candidates()
+        aps = iwscan.candidates()
+        return [x for x in aps if x['ssid'] != states.hotspot_name]
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="ss")
     def state(self):
