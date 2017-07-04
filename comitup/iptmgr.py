@@ -22,11 +22,12 @@ start_cmds = [
 
 end_cmds = [
     # Clear HOTSPOT rules
-    "iptables -D OUTPUT -j COMITUP-OUT",
+    "iptables -D OUTPUT -j COMITUP-OUT >/dev/null 2>&1",
     "iptables -D COMITUP-OUT "
-        "-p icmp --icmp-type destination-unreachable -j DROP", #noqa
-    "iptables -D COMITUP-OUT -j RETURN",
-    "iptables -X COMITUP-OUT",
+        "-p icmp --icmp-type destination-unreachable "       # noqa
+        "-j DROP >/dev/null 2>&1",                           # noqa
+    "iptables -D COMITUP-OUT -j RETURN >/dev/null 2>&1",
+    "iptables -X COMITUP-OUT >/dev/null 2>&1",
 ]
 
 appliance_cmds = [
@@ -38,10 +39,10 @@ appliance_cmds = [
 ]
 
 appliance_clear = [
-    "iptables -t nat -D POSTROUTING -j COMITUP-FWD",
-    "iptables -t nat -D COMITUP-FWD -o wlan1 -j MASQUERADE",
-    "iptables -t nat -D COMITUP-FWD -j RETURN",
-    "iptables -t nat -X COMITUP-FWD",
+    "iptables -t nat -D POSTROUTING -j COMITUP-FWD >/dev/null 2>&1",
+    "iptables -t nat -D COMITUP-FWD -o wlan1 -j MASQUERADE >/dev/null 2>&1",
+    "iptables -t nat -D COMITUP-FWD -j RETURN >/dev/null 2>&1",
+    "iptables -t nat -X COMITUP-FWD >/dev/null 2>&1",
 ]
 
 
