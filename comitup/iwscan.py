@@ -2,6 +2,7 @@
 
 import subprocess
 import re
+from multiprocessing import Process, Queue
 
 
 # NetworkManager is doing a poor job of maintaining the AP scan list when
@@ -58,6 +59,21 @@ def devaps(dev):
     return aps
 
 
+def apgen(dev, q):
+    for ap in devaps(dev):
+        pt = {}
+        pt['ssid'] = ap['SSID']
+        pt['strength'] = ap['power']
+        if 'WPA' in ap or 'RSN' in ap:
+            pt['security'] = 'encrypted'
+        else:
+            pt['security'] = 'unencrypted'
+
+        q.put(pt)
+
+    q.put("DONE")
+
+
 def dedup_aplist(aplist):
     apdict = {x['ssid']: x for x in aplist}
 
@@ -72,18 +88,24 @@ def candidates(device=None):
     else:
         dev_list = devlist()
 
-    clist = []
+    jobs = []
+    q = Queue()
     for dev in dev_list:
-        for ap in devaps(dev):
-            pt = {}
-            pt['ssid'] = ap['SSID']
-            pt['strength'] = ap['power']
-            if 'WPA' in ap or 'RSN' in ap:
-                pt['security'] = 'encrypted'
-            else:
-                pt['security'] = 'unencrypted'
+        p = Process(target=apgen, args=(dev, q))
+        p.start()
+        jobs.append(p)
 
+    clist = []
+    donecount = 0
+    while donecount < len(jobs):
+        pt = q.get()
+        if pt == "DONE":
+            donecount += 1
+        else:
             clist.append(pt)
+
+    for p in jobs:
+        p.join()
 
     clist = dedup_aplist(clist)
 
