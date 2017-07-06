@@ -18,6 +18,7 @@ sys.path.append("/usr/share/comitup")
 import pkg_resources # noqa
 
 import gobject                               # noqa
+import time
 from dbus.mainloop.glib import DBusGMainLoop # noqa
 DBusGMainLoop(set_as_default=True)
 
@@ -36,16 +37,26 @@ com_obj = None
 conf = None
 data = None
 
+apcache = None
+cachetime = 0
 
 class Comitup(dbus.service.Object):
     def __init__(self):
         bus_name = dbus.service.BusName(comitup_int, bus=dbus.SystemBus())
         dbus.service.Object.__init__(self, bus_name, comitup_path)
 
+
     @dbus.service.method(comitup_int, in_signature="", out_signature="aa{ss}")
     def access_points(self):
-        aps = iwscan.candidates()
-        return [x for x in aps if x['ssid'] != states.hotspot_name]
+        global apcache, cachetime
+
+        if time.time() - cachetime > 10:
+            aps = iwscan.candidates()
+            aps = [x for x in aps if x['ssid'] != states.hotspot_name]
+            apcache = aps
+            cachetime = time.time()
+
+        return apcache
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="ss")
     def state(self):
