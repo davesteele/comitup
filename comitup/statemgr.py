@@ -51,10 +51,11 @@ class Comitup(dbus.service.Object):
         global apcache, cachetime
 
         if time.time() - cachetime > 10:
+            cachetime = time.time()   # keep anyone else from processing
             aps = iwscan.candidates()
             aps = [x for x in aps if x['ssid'] != states.hotspot_name]
             apcache = aps
-            cachetime = time.time()
+            cachetime = time.time()   # cache time actually starts now
 
         return apcache
 
