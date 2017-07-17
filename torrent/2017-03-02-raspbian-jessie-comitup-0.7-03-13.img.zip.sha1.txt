@@ -1,1 +1,0 @@
-c0a33a1e6326a8bde35b21d1b606bf0b0594aae9  2017-03-02-raspbian-jessie-comitup-0.7-03-13.img.zip
