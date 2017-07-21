@@ -15,7 +15,7 @@ start_cmds = [
     # HOTSPOT rules
     "iptables -N COMITUP-OUT",
     "iptables -A COMITUP-OUT "
-      "-p icmp --icmp-type destination-unreachable -j DROP", # noqa
+      "-p icmp --icmp-type destination-unreachable -j DROP",  # noqa
     "iptables -A COMITUP-OUT -j RETURN",
     "iptables -I OUTPUT -j COMITUP-OUT",
 ]
@@ -24,8 +24,8 @@ end_cmds = [
     # Clear HOTSPOT rules
     "iptables -D OUTPUT -j COMITUP-OUT >/dev/null 2>&1",
     "iptables -D COMITUP-OUT "
-        "-p icmp --icmp-type destination-unreachable "       # noqa
-        "-j DROP >/dev/null 2>&1",                           # noqa
+        "-p icmp --icmp-type destination-unreachable "        # noqa
+        "-j DROP >/dev/null 2>&1",                            # noqa
     "iptables -D COMITUP-OUT -j RETURN >/dev/null 2>&1",
     "iptables -X COMITUP-OUT >/dev/null 2>&1",
 ]

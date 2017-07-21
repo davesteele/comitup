@@ -1,7 +1,7 @@
 
 
 import pytest
-from mock import Mock, patch
+from mock import Mock
 import importlib
 
 import dbus.service

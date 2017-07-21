@@ -15,16 +15,16 @@ import iwscan
 import sys
 sys.path.append("/usr/share/comitup")
 
-import pkg_resources # noqa
+import pkg_resources                          # noqa
 
-import gobject                               # noqa
-import time
-from dbus.mainloop.glib import DBusGMainLoop # noqa
+import gobject                                # noqa
+import time                                   # noqa
+from dbus.mainloop.glib import DBusGMainLoop  # noqa
 DBusGMainLoop(set_as_default=True)
 
-import states   # noqa
-import nm       # noqa
-import modemgr  # noqa
+import states                                 # noqa
+import nm                                     # noqa
+import modemgr                                # noqa
 
 comitup_path = "/com/github/davesteele/comitup"
 
@@ -40,11 +40,11 @@ data = None
 apcache = None
 cachetime = 0
 
+
 class Comitup(dbus.service.Object):
     def __init__(self):
         bus_name = dbus.service.BusName(comitup_int, bus=dbus.SystemBus())
         dbus.service.Object.__init__(self, bus_name, comitup_path)
-
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="aa{ss}")
     def access_points(self):

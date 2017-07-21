@@ -39,5 +39,3 @@ def get_state_device(state):
         return get_ap_device()
     else:
         return get_link_device()
-
-

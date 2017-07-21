@@ -85,7 +85,7 @@ setup(
                 'web/templates/connect.html',
                 'web/templates/confirm.html',
             ]
-        ), # noqa
+        ),  # noqa
     ],
     install_requires=[
         'jinja2',
