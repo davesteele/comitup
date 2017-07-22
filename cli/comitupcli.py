@@ -36,7 +36,8 @@ def do_connect(ssid, password):
 def do_info(connection):
     info = ciu.ciu_info(connection)
     print("")
-    print("Host %s on comitup version %s" % (info['hostnames'], info['version']))
+    print("Host %s on comitup version %s"
+          % (info['hostnames'], info['version']))
 
 
 CmdState = namedtuple('CmdState', "fn, desc, HOTSPOT, CONNECTING, CONNECTED")

@@ -22,6 +22,7 @@ if __name__ == '__main__':
 import nmmon    # noqa
 import nm       # noqa
 import mdns     # noqa
+import modemgr  # noqa
 
 
 log = logging.getLogger('comitup')
@@ -39,6 +40,8 @@ state_id = 0
 points = []
 
 state_callbacks = []
+
+hotspot_name = None
 
 
 def state_callback(fn):
@@ -91,7 +94,7 @@ def hotspot_start():
 
     # tolerate Raspberry Pi 2
     try:
-        activate_connection(dns_to_conn(dns_names[0]))
+        activate_connection(dns_to_conn(dns_names[0]), 'HOTSPOT')
     except DBusException:
         log.warn("Error connecting hotspot")
 
@@ -102,10 +105,10 @@ def hotspot_pass():
 
     # IP tolerance for PI 2
     for _ in range(5):
-        ip = nm.get_active_ip()
+        ip = nm.get_active_ip(modemgr.get_state_device('HOTSPOT'))
         if ip:
             mdns.clear_entries()
-            mdns.add_hosts(dns_names, ip)
+            mdns.add_hosts(dns_names)
             break
         time.sleep(1)
 
@@ -118,10 +121,11 @@ def hotspot_fail():
 @timeout
 def hotspot_timeout():
 
-    if iwscan.ap_conn_count() == 0:
+    if iwscan.ap_conn_count() == 0 or modemgr.get_mode() != 'single':
         log.debug('Periodic connection attempt')
 
-        conn_list = candidate_connections()
+        dev = modemgr.get_state_device('CONNECTED')
+        conn_list = candidate_connections(dev)
         if conn_list:
             # bug - try the first connection twice
             set_state('CONNECTING', [conn_list[0], conn_list[0]] + conn_list)
@@ -143,15 +147,16 @@ def connecting_start():
     mdns.clear_entries()
 
     if conn_list:
-        nm.disconnect()
+        nm.disconnect(modemgr.get_state_device('CONNECTING'))
 
         conn = conn_list.pop(0)
         log.info('Attempting connection to %s' % conn)
-        activate_connection(conn)
+        activate_connection(conn, 'CONNECTING')
     else:
         # Give NetworkManager a chance to update the access point list
         try:
-            nm.deactivate_connection()  # todo - clean this up
+            # todo - clean this up
+            nm.deactivate_connection(modemgr.get_state_device('CONNECTING'))
         except DBusException:
             pass
         time.sleep(5)
@@ -189,10 +194,10 @@ def connected_start():
 
     # IP tolerance for PI 2
     for _ in range(5):
-        ip = nm.get_active_ip()
+        ip = nm.get_active_ip(modemgr.get_state_device('CONNECTED'))
         if ip:
             mdns.clear_entries()
-            mdns.add_hosts(dns_names, ip)
+            mdns.add_hosts(dns_names)
             break
         time.sleep(1)
 
@@ -212,7 +217,7 @@ def connected_fail():
 
 @timeout
 def connected_timeout():
-    if connection != nm.get_active_ssid():
+    if connection != nm.get_active_ssid(modemgr.get_state_device('CONNECTED')):
         log.warn("Connection lost on timeout")
         set_state('HOTSPOT')
 
@@ -237,17 +242,17 @@ class state_matrix(object):
             raise AttributeError
 
 
-def set_state(state, connections=None):
+def set_state(state, connections=None, timeout=60):
     global com_state, conn_list, state_id, points
 
     log.info('Setting state to %s' % state)
 
     if com_state != 'HOTSPOT':
-        points = nm.get_points_ext()
+        points = nm.get_points_ext(modemgr.get_state_device(com_state))
 
     state_info = state_matrix(state)
 
-    nmmon.set_device_callbacks(state_info.pass_fn, state_info.fail_fn)
+    nmmon.set_device_callbacks(state, state_info.pass_fn, state_info.fail_fn)
 
     if connections:
         conn_list = connections
@@ -256,10 +261,10 @@ def set_state(state, connections=None):
     com_state = state
     state_info.start_fn()
 
-    gobject.timeout_add(60*1000, state_info.timeout_fn, state_id)
+    gobject.timeout_add(timeout*1000, state_info.timeout_fn, state_id)
 
 
-def activate_connection(name):
+def activate_connection(name, state):
     global connection
     connection = name
     log.debug('Connecting to %s' % connection)
@@ -269,11 +274,13 @@ def activate_connection(name):
     except IndexError:
         path = '/'
 
-    nm.activate_connection_by_ssid(connection, path=path)
+    nm.activate_connection_by_ssid(connection,
+                                   modemgr.get_state_device(state),
+                                   path=path)
 
 
-def candidate_connections():
-    return nm.get_candidate_connections()
+def candidate_connections(device):
+    return nm.get_candidate_connections(device)
 
 
 def set_hosts(*args):
@@ -287,13 +294,17 @@ def assure_hotspot(ssid):
 
 
 def init_states(hosts, callbacks):
+    global hotspot_name
+
     nmmon.init_nmmon()
     set_hosts(*hosts)
 
     for callback in callbacks:
         add_state_callback(callback)
 
-    assure_hotspot(dns_to_conn(hosts[0]))
+    hotspot_name = dns_to_conn(hosts[0])
+
+    assure_hotspot(hotspot_name)
 
 
 def add_state_callback(callback):

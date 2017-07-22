@@ -21,8 +21,9 @@ def test_nmmon_null_init():
     nmmon.null_fn()
 
 
+@patch('comitup.nm.get_device_path', return_value='/')
 def test_nmmon_set_callbacks(nmmon_con_fxt):
-    nmmon.set_device_callbacks(1, 2)
+    nmmon.set_device_callbacks('HOTSPOT', 1, 2)
 
     assert nmmon.nm_dev_connect == 1
     assert nmmon.nm_dev_fail == 2

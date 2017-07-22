@@ -15,6 +15,7 @@ DBusGMainLoop(set_as_default=True)
 
 import statemgr     # noqa
 import webmgr       # noqa
+import iptmgr       # noqa
 
 PERSIST_PATH = "/var/lib/comitup/comitup.json"
 CONF_PATH = "/etc/comitup.conf"
@@ -71,10 +72,11 @@ def main():
     (conf, data) = load_data()
 
     webmgr.init_webmgr(conf.web_service)
+    iptmgr.init_iptmgr()
 
     statemgr.init_state_mgr(
                 conf, data,
-                [webmgr.state_callback],
+                [webmgr.state_callback, iptmgr.state_callback],
              )
 
     loop = gobject.MainLoop()

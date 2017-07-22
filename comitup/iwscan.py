@@ -2,6 +2,7 @@
 
 import subprocess
 import re
+from multiprocessing import Process, Queue
 
 
 # NetworkManager is doing a poor job of maintaining the AP scan list when
@@ -58,21 +59,55 @@ def devaps(dev):
     return aps
 
 
-def candidates():
+def apgen(dev, q):
+    for ap in devaps(dev):
+        pt = {}
+        pt['ssid'] = ap['SSID']
+        pt['strength'] = ap['power']
+        if 'WPA' in ap or 'RSN' in ap:
+            pt['security'] = 'encrypted'
+        else:
+            pt['security'] = 'unencrypted'
+
+        q.put(pt)
+
+    q.put("DONE")
+
+
+def dedup_aplist(aplist):
+    apdict = {x['ssid']: x for x in aplist}
+
+    return [apdict[x] for x in apdict]
+
+
+def candidates(device=None):
     """Return a list of reachable Access Point SSIDs, sorted by power"""
 
-    clist = []
-    for dev in devlist():
-        for ap in devaps(dev):
-            pt = {}
-            pt['ssid'] = ap['SSID']
-            pt['strength'] = ap['power']
-            if 'WPA' in ap:
-                pt['security'] = 'encrypted'
-            else:
-                pt['security'] = 'unencrypted'
+    if device:
+        dev_list = [device]
+    else:
+        dev_list = devlist()
 
+    jobs = []
+    q = Queue()
+    for dev in dev_list:
+        p = Process(target=apgen, args=(dev, q))
+        p.start()
+        jobs.append(p)
+
+    clist = []
+    donecount = 0
+    while donecount < len(jobs):
+        pt = q.get()
+        if pt == "DONE":
+            donecount += 1
+        else:
             clist.append(pt)
+
+    for p in jobs:
+        p.join()
+
+    clist = dedup_aplist(clist)
 
     clist = sorted(clist, key=lambda x: -float(x['strength']))
 

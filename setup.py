@@ -49,7 +49,7 @@ class MyClean(clean):
 setup(
     name='comitup',
     packages=['comitup', 'web', 'cli'],
-    version='0.7',
+    version='0.8',
     description="Copy a remote file using multiple SSH streams",
     classifiers=[
         'Development Status :: 1 - Planning',
@@ -85,7 +85,7 @@ setup(
                 'web/templates/connect.html',
                 'web/templates/confirm.html',
             ]
-        ), # noqa
+        ),  # noqa
     ],
     install_requires=[
         'jinja2',

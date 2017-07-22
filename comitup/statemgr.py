@@ -15,14 +15,16 @@ import iwscan
 import sys
 sys.path.append("/usr/share/comitup")
 
-import pkg_resources # noqa
+import pkg_resources                          # noqa
 
-import gobject                               # noqa
-from dbus.mainloop.glib import DBusGMainLoop # noqa
+import gobject                                # noqa
+import time                                   # noqa
+from dbus.mainloop.glib import DBusGMainLoop  # noqa
 DBusGMainLoop(set_as_default=True)
 
-import states   # noqa
-import nm       # noqa
+import states                                 # noqa
+import nm                                     # noqa
+import modemgr                                # noqa
 
 comitup_path = "/com/github/davesteele/comitup"
 
@@ -35,19 +37,27 @@ com_obj = None
 conf = None
 data = None
 
+apcache = None
+cachetime = 0
+
 
 class Comitup(dbus.service.Object):
     def __init__(self):
         bus_name = dbus.service.BusName(comitup_int, bus=dbus.SystemBus())
         dbus.service.Object.__init__(self, bus_name, comitup_path)
 
-    @dbus.service.method(comitup_int, in_signature="", out_signature="as")
-    def candidate_connections(self):
-        return nm.get_candidate_connections()
-
     @dbus.service.method(comitup_int, in_signature="", out_signature="aa{ss}")
     def access_points(self):
-        return iwscan.candidates()
+        global apcache, cachetime
+
+        if time.time() - cachetime > 10:
+            cachetime = time.time()   # keep anyone else from processing
+            aps = iwscan.candidates()
+            aps = [x for x in aps if x['ssid'] != states.hotspot_name]
+            apcache = aps
+            cachetime = time.time()   # cache time actually starts now
+
+        return apcache
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="ss")
     def state(self):
@@ -64,7 +74,8 @@ class Comitup(dbus.service.Object):
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="")
     def delete_connection(self):
-        nm.del_connection_by_ssid(nm.get_active_ssid())
+        ssid = nm.get_active_ssid(modemgr.get_link_device())
+        nm.del_connection_by_ssid(ssid)
         states.set_state('HOTSPOT')
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="a{ss}")
@@ -93,7 +104,7 @@ def init_state_mgr(gconf, gdata, callbacks):
     states.init_states(get_hosts(conf, data), callbacks)
     com_obj = Comitup()
 
-    states.set_state('CONNECTING', states.candidate_connections())
+    states.set_state('HOTSPOT', timeout=5)
 
 
 def main():
@@ -104,7 +115,7 @@ def main():
     log.info('starting')
 
     init_state_mgr('comitup.local', 'comitup-1111.local')
-    states.set_state('CONNECTING', states.candidate_connections())
+    states.set_state('HOTSPOT', timeout=5)
 
     loop = gobject.MainLoop()
     loop.run()

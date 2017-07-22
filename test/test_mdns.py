@@ -32,12 +32,12 @@ def test_avahi_establish_group(avahi_fxt):
 
 
 def test_avahi_make_a_record(avahi_fxt):
-    mdns.make_a_record('host', '1.2.3.4')
+    mdns.make_a_record('host', '1', '1.2.3.4')
     assert mdns.group.AddRecord.called
 
 
 def test_avahi_add_service(avahi_fxt):
-    mdns.add_service('host', '1.2.3.4')
+    mdns.add_service('host', '1', '1.2.3.4')
     assert mdns.group.AddService.called
 
 
@@ -56,7 +56,7 @@ def test_avahi_clear_entries(avahi_fxt):
 
 
 def test_avahi_add_hosts(avahi_fxt):
-    mdns.add_hosts(['host1', 'host2'], '1.2.3.4')
+    mdns.add_hosts(['host1', 'host2'])
 
     assert mdns.group.Commit.called
 

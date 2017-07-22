@@ -47,22 +47,28 @@ def none_on_exception(*exceptions):
     return _none_on_exception
 
 
+def get_devices():
+    return nm.NetworkManager.GetDevices()
+
+
+def device_name(device):
+    return device.Interface
+
+
+def get_wifi_devices():
+    return [x for x in get_devices() if x.DeviceType == 2]
+
+
 @none_on_exception(IndexError)
-def get_wifi_device():
-    return [x for x in nm.NetworkManager.GetDevices() if x.DeviceType == 2][0]
+def get_wifi_device(index=0):
+    return get_wifi_devices()[index]
 
 
-def get_device_path(device=None):
-    if not device:
-        device = get_wifi_device()
-
+def get_device_path(device):
     return device.SpecificDevice().object_path
 
 
-def disconnect(device=None):
-    if not device:
-        device = get_wifi_device()
-
+def disconnect(device):
     try:
         device.Disconnect()
     except:
@@ -70,23 +76,17 @@ def disconnect(device=None):
 
 
 def get_device_settings(device):
-    if not device:
-        device = get_wifi_device()
-
     connection = device.ActiveConnection
     return connection.Connection.GetSettings()
 
 
 @none_on_exception(AttributeError)
-def get_active_ssid(device=None):
+def get_active_ssid(device):
     return get_device_settings(device)['802-11-wireless']['ssid']
 
 
 @none_on_exception(AttributeError, IndexError)
-def get_active_ip(device=None):
-    if not device:
-        device = get_wifi_device()
-
+def get_active_ip(device):
     return device.Ip4Config.Addresses[0][0]
 
 
@@ -117,33 +117,24 @@ def del_connection_by_ssid(name):
             connection.Delete()
 
 
-def activate_connection_by_ssid(ssid, device=None, path='/'):
-    if not device:
-        device = get_wifi_device()
-
+def activate_connection_by_ssid(ssid, device, path='/'):
     connection = get_connection_by_ssid(ssid)
 
     nm.NetworkManager.ActivateConnection(connection, device, path)
 
 
-def deactivate_connection(device=None):
-    if not device:
-        device = get_wifi_device()
-
+def deactivate_connection(device):
     connection = device.ActiveConnection
     if connection:
         nm.NetworkManager.DeactivateConnection(connection)
 
 
 @none_on_exception(AttributeError)
-def get_access_points(device=None):
-    if not device:
-        device = get_wifi_device()
-
+def get_access_points(device):
     return device.SpecificDevice().GetAllAccessPoints()
 
 
-def get_points_ext(device=None):
+def get_points_ext(device):
     try:
         inlist = sorted(get_access_points(device),
                         key=lambda x: -ord(x.Strength))
@@ -155,7 +146,7 @@ def get_points_ext(device=None):
     for point in inlist:
 
         try:
-            if point.Flags & 1:
+            if point.Flags or point.WpaFlags or point.RsnFlags:
                 encstr = "encrypted"
             else:
                 encstr = "unencrypted"
@@ -174,15 +165,7 @@ def get_points_ext(device=None):
     return outlist
 
 
-@none_on_exception(IndexError, TypeError)
-def get_access_point_by_ssid(ssid, device=None):
-    return [x for x in get_access_points(device) if x.Ssid == ssid][0]
-
-
-def get_candidate_connections(device=None):
-    if not device:
-        device = get_wifi_device()
-
+def get_candidate_connections(device):
     candidates = []
 
     for conn in get_all_connections():
@@ -198,7 +181,7 @@ def get_candidate_connections(device=None):
         except KeyError:
             log.debug("Unexpected connection format for %s" % ssid)
 
-    points = [x.Ssid for x in get_access_points()]
+    points = [x.Ssid for x in get_access_points(device)]
     iwpoints = [x['ssid'] for x in iwscan.candidates()]
 
     return list(set(candidates) & (set(points) | set(iwpoints)))
@@ -212,6 +195,7 @@ def make_hotspot(name='comitup'):
             'uuid': str(uuid.uuid4()),
             'id': name,
             'autoconnect': False,
+            'interface-name': 'wlan0',
         },
         '802-11-wireless':
         {
@@ -231,7 +215,7 @@ def make_hotspot(name='comitup'):
     nm.Settings.AddConnection(settings)
 
 
-def make_connection_for(ssid, password=None):
+def make_connection_for(ssid, password=None, interface=None):
 
     settings = dbus.Dictionary({
         'connection': dbus.Dictionary(
@@ -257,6 +241,9 @@ def make_connection_for(ssid, password=None):
             }),
     })
 
+    if interface:
+        settings['connection']['interface-name'] = interface
+
     # assume privacy = WPA(2) psk
     if password:
         settings['802-11-wireless']['security'] = '802-11-wireless-security'
@@ -277,7 +264,7 @@ def make_connection_for(ssid, password=None):
 def do_listaccess(arg):
     """List all accessible access points"""
     rows = []
-    for point in get_access_points():
+    for point in get_access_points(get_wifi_device()):
         row = (
             point.Ssid, point.HwAddress,
             point.Flags, point.WpaFlags,
@@ -309,17 +296,17 @@ def do_listconnections(arg):
 
 def do_setconnection(ssid):
     """Connect to a connection"""
-    activate_connection_by_ssid(ssid)
+    activate_connection_by_ssid(ssid, get_wifi_device())
 
 
 def do_getconnection(dummy):
     """Print the active connection ssid"""
-    print(get_active_ssid())
+    print(get_active_ssid(get_wifi_device()))
 
 
 def do_getip(dummy):
     """Print the current IP address"""
-    print(get_active_ip())
+    print(get_active_ip(get_wifi_device()))
 
 
 def do_detailconnection(ssid):
@@ -346,7 +333,7 @@ def do_makehotspot(dummy):
 def do_listcandidates(dummy):
     """List available connections for current access points"""
 
-    for candidate in get_candidate_connections():
+    for candidate in get_candidate_connections(get_wifi_device()):
         print(candidate)
 
 

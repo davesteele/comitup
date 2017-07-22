@@ -7,56 +7,50 @@
 # or later
 #
 
+import os
+import time
+from multiprocessing import Process
+from flask import Flask, render_template, request
+app = Flask(__name__)
+
 import sys
 sys.path.append('.')
 sys.path.append('..')
 
-import cherrypy                                   # noqa
-import os                                         # noqa
-from jinja2 import Environment, FileSystemLoader  # noqa
 from comitup import client as ciu                 # noqa
 
-env = None
+
+def do_connect(ssid, password):
+    time.sleep(1)
+    ciu.ciu_connect(ssid, password)
 
 
-class HelloWorld(object):
-    def index(self):
-        tmpl = env.get_template('index.html')
-
-        points = ciu.ciu_points()
-
-        return tmpl.render(points=points)
-    index.exposed = True
-
-    def confirm(self, ssid="", encrypted="unencrypted"):
-        tmpl = env.get_template('confirm.html')
-
-        return tmpl.render({'ssid': ssid, 'encrypted': encrypted})
-    confirm.exposed = True
-
-    def connect(self, ssid="", password=""):
-        tmpl = env.get_template('confirm.html')
-
-        ciu.ciu_connect(ssid, password)
-        return tmpl.render({'ssid': ssid, 'password': password})
-    connect.exposed = True
+@app.route("/")
+def index():
+    points = ciu.ciu_points()
+    return render_template("index.html", points=points)
 
 
-cherrypy.root = HelloWorld()
+@app.route("/confirm")
+def confirm():
+    ssid = request.args.get("ssid", "")
+    encrypted = request.args.get("encrypted", "unencrypted")
+    return render_template("confirm.html", ssid=ssid, encrypted=encrypted)
+
+
+@app.route("/connect", methods=['POST'])
+def connect():
+    ssid = request.form["ssid"]
+    password = request.form["password"]
+
+    p = Process(target=do_connect, args=(ssid, password))
+    p.start()
+
+    return render_template("connect.html", ssid=ssid, password=password)
 
 
 def main():
-    global env
-
-    proj_path = os.path.dirname(os.path.abspath(__file__))
-    conf_path = os.path.join(proj_path, "comitupweb.conf")
-    env_path = os.path.join(proj_path, "templates")
-
-    env = Environment(loader=FileSystemLoader(env_path))
-
-    cherrypy.config.update(file=conf_path)
-
-    cherrypy.server.start()
+    app.run(host="0.0.0.0", port=80, debug=False, threaded=True)
 
 
 if __name__ == '__main__':

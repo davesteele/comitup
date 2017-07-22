@@ -1,7 +1,7 @@
 
 
 import pytest
-from mock import Mock, patch
+from mock import Mock
 import importlib
 
 import dbus.service
@@ -42,13 +42,6 @@ def statemgr_fxt(monkeypatch, request):
 
 def test_sm_none(statemgr_fxt):
     pass
-
-
-@patch('comitup.nm.get_candidate_connections')
-def test_sm_candidates(nm_candidates, statemgr_fxt):
-    obj = sm.Comitup()
-    obj.candidate_connections()
-    assert nm_candidates.called
 
 
 def test_sm_state(statemgr_fxt):
