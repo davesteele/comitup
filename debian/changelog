@@ -1,3 +1,13 @@
+comitup (0.8-1) UNRELEASED; urgency=medium
+
+  * New master version.
+    - Support for 2-wifi device mode.
+    - Mdns serves IP addresses appropirate for each interface.
+    - Better detection of encrypted Access points.
+    - Update comitup-web from cherrypy to flask.
+
+ -- David Steele <steele@debian.org>  Fri, 21 Jul 2017 23:38:35 -0400
+
 comitup (0.7-1) unstable; urgency=medium
 
   * Make it more robust for non Raspberry Pi 3 use.
