@@ -25,7 +25,7 @@ Depends:
     python-networkmanager,
     python-avahi,
     python-gobject-2,
-    python-cherrypy,
+    python-flask,
 Suggests: python-tabulate
 Description: bootstrap Wifi using Wifi
  Comitup will attempt to connect to wifi using an established connection. If
