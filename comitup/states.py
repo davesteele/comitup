@@ -83,20 +83,33 @@ def dns_to_conn(host):
 # Hotspot state
 #
 
+def fake_hs_pass():
+    hotspot_pass()
+    return False
+
 
 @state_callback
 def hotspot_start():
     global conn_list
     log.info("Activating hotspot")
 
-    mdns.clear_entries()
-    conn_list = []
+    hs_ssid = dns_to_conn(dns_names[0])
 
-    # tolerate Raspberry Pi 2
-    try:
-        activate_connection(dns_to_conn(dns_names[0]), 'HOTSPOT')
-    except DBusException:
-        log.warn("Error connecting hotspot")
+    # if we are in two-wifi device mode, skip the reconnect if possible,
+    # to avoid kicking some clients off
+    if hs_ssid != nm.get_active_ssid(modemgr.get_state_device('HOTSPOT')):
+        mdns.clear_entries()
+        conn_list = []
+
+        # tolerate Raspberry Pi 2
+        try:
+            activate_connection(hs_ssid, 'HOTSPOT')
+        except DBusException:
+            log.warn("Error connecting hotspot")
+    else:
+        log.debug("Didn't need to reactivate - already running")
+        # the connect callback won't happen - let's 'pass' manually
+        gobject.timeout_add(100, fake_hs_pass)
 
 
 @state_callback
