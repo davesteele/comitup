@@ -60,19 +60,25 @@ def run_cmds(cmds):
 
 def state_callback(state, action):
     if (state, action) == ('HOTSPOT', 'start'):
+        log.debug("Running iptables commands for HOTSPOT")
+
         run_cmds(end_cmds)
         run_cmds(start_cmds)
 
         if modemgr.get_mode() == 'router':
             run_cmds(appliance_clear)
 
-    elif (state, action) == ('CONNECTING', 'start'):
+        log.debug("Done with iptables commands for HOTSPOT")
+
+    elif (state, action) == ('CONNECTED', 'start'):
+        log.debug("Running iptables commands for CONNECTING")
         run_cmds(end_cmds)
 
         if modemgr.get_mode() == 'router':
             run_cmds(appliance_clear)
             run_cmds(appliance_cmds)
 
+        log.debug("Done with iptables commands for CONNECTING")
 
 def init_iptmgr():
     pass
