@@ -1,3 +1,10 @@
+comitup (0.9-1) UNRELEASED; urgency=medium
+
+  * Better dual-wlan support for mobile devices.
+    - Eliminate AP drops.
+
+ -- David Steele <steele@debian.org>  Wed, 26 Jul 2017 08:14:04 -0400
+
 comitup (0.8-1) unstable; urgency=medium
 
   * New master version.
