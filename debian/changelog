@@ -1,9 +1,12 @@
-comitup (0.9-1) UNRELEASED; urgency=medium
+comitup (0.9-1) unstable; urgency=medium
 
   * Better dual-wlan support for mobile devices.
     - Eliminate AP drops.
+    - Tolerate iptables collisions.
+    - Increase timeout to 3 minutes to allow Android time to ip-up.
+    - Don't update iptables and web server till CONNECTED.
 
- -- David Steele <steele@debian.org>  Wed, 26 Jul 2017 08:14:04 -0400
+ -- David Steele <steele@debian.org>  Thu, 27 Jul 2017 19:57:56 -0400
 
 comitup (0.8-1) unstable; urgency=medium
 
