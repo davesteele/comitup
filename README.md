@@ -28,6 +28,11 @@ other devices, use a Zeroconf browser ([Android][], [Windows][]) to
 determine the IP address of the "Comitup Service", and browse to
 _http&#58;//&lt;ipaddress&gt;_. In most cases, this address will be _http&#58;//10.42.0.1/_
 
+If two wifi interfaces are available, the first will persistently remain
+the hotspot, and the second will get the external connection. When both
+are connected, forwarding and masquerading are enabled so that
+hotspot-connected devices can access external networks.
+
 [zeroconf]: https://en.wikipedia.org/wiki/Zero-configuration_networking
 [Android]: https://play.google.com/store/apps/details?id=com.melloware.zeroconf&hl=en
 [Windows]: http://hobbyistsoftware.com/bonjourbrowser
