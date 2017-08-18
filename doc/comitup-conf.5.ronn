@@ -20,6 +20,11 @@ It is located in the _/etc/_ directory.
     such as _apache2.service_ or _nginx.service_. This defaults to a null string,
     meaning no service is controlled.
 
+  * _enable_appliance_mode_:
+    By default, comitup will use multiple wifi interfaces, if available, to connect to the
+    local hotspot and to the internet simultaneously. Setting this to something other than
+    "true" will limit comitup to the first wifi interface.
+
 ## COPYRIGHT
 
 Comitup is Copyright (C) 2016-2017 David Steele &lt;steele@debian.org&gt;

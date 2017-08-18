@@ -19,6 +19,10 @@ a persistent 4-digit number.
 While the hotspot is active, a comitup-web(8) service is available to manage
 connecting to an access point.
 
+If two wifi interfaces are available, the hotspot will remain active on the
+first interface, and the internet connection will be made on the second.
+Otherwise, the hotspot will be replaced with the internet connection.
+
 In all states, avahi-daemon(8) is used to publish the mdns host name
 _comitup-&lt;nnnn&gt;.local_, making the web service accessible
 as e.g. _http://comitup-1234.local_, for systems supporting Zeroconf. For other
