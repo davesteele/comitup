@@ -301,9 +301,9 @@ def set_hosts(*args):
     dns_names = args
 
 
-def assure_hotspot(ssid):
+def assure_hotspot(ssid, device):
     if not nm.get_connection_by_ssid(ssid):
-        nm.make_hotspot(ssid)
+        nm.make_hotspot(ssid, device)
 
 
 def init_states(hosts, callbacks):
@@ -317,7 +317,7 @@ def init_states(hosts, callbacks):
 
     hotspot_name = dns_to_conn(hosts[0])
 
-    assure_hotspot(hotspot_name)
+    assure_hotspot(hotspot_name, modemgr.get_ap_device())
 
 
 def add_state_callback(callback):

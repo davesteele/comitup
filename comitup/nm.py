@@ -187,7 +187,7 @@ def get_candidate_connections(device):
     return list(set(candidates) & (set(points) | set(iwpoints)))
 
 
-def make_hotspot(name='comitup'):
+def make_hotspot(name='comitup', device=None):
     settings = {
         'connection':
         {
@@ -195,7 +195,6 @@ def make_hotspot(name='comitup'):
             'uuid': str(uuid.uuid4()),
             'id': name,
             'autoconnect': False,
-            'interface-name': 'wlan0',
         },
         '802-11-wireless':
         {
@@ -211,6 +210,9 @@ def make_hotspot(name='comitup'):
             'method': 'ignore',
         },
     }
+
+    if device:
+        settings['connection']['interface-name'] = device_name(device)
 
     nm.Settings.AddConnection(settings)
 

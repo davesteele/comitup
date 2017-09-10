@@ -43,6 +43,8 @@ def state_fxt(monkeypatch, state_globals):
     monkeypatch.setattr('comitup.states.iwscan.ap_conn_count',
                         Mock(return_value=0))
 
+    monkeypatch.setattr('comitup.states.modemgr.CONF_PATH', '/dev/null')
+
     states.set_hosts('hs', 'hs-1111')
 
 
