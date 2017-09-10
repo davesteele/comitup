@@ -1,1 +1,0 @@
-35e03a509e568edf5412fff7be6b395e5efa3729  2017-08-16-raspbian-stretch-lite-comitup-0.9-08-18.img.zip
