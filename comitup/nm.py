@@ -59,6 +59,10 @@ def get_wifi_devices():
     return [x for x in get_devices() if x.DeviceType == 2]
 
 
+def get_phys_dev_names():
+    return [device_name(x) for x in get_devices() if x.DeviceType in (1, 2)]
+
+
 @none_on_exception(IndexError)
 def get_wifi_device(index=0):
     return get_wifi_devices()[index]
