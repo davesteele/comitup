@@ -104,7 +104,7 @@ def add_hosts(hosts):
         i += 1
         name = nm.device_name(device)
         addr = nm.get_active_ip(device)
-        if ('wlan' in name or 'eth' in name) and addr:
+        if (name in nm.get_phys_dev_names()) and addr:
             for host in hosts:
                 make_a_record(host, i, addr)
 

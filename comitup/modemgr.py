@@ -8,14 +8,21 @@
 #
 
 import nm
+import config
 
 
 SINGLE_MODE = "single"
 MULTI_MODE = "router"
 
+CONF_PATH = "/etc/comitup.conf"
+
+def dual_enabled():
+    conf = config.Config(CONF_PATH, defaults={'enable_appliance_mode': 'true'})
+    return conf.enable_appliance_mode == 'true'
+
 
 def get_mode():
-    if len(nm.get_wifi_devices()) > 1:
+    if len(nm.get_wifi_devices()) > 1 and dual_enabled():
         return MULTI_MODE
     else:
         return SINGLE_MODE
@@ -28,7 +35,7 @@ def get_ap_device():
 def get_link_device():
     second_device = nm.get_wifi_device(1)
 
-    if second_device:
+    if second_device and dual_enabled():
         return second_device
     else:
         return nm.get_wifi_device(0)

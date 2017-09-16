@@ -59,6 +59,10 @@ def get_wifi_devices():
     return [x for x in get_devices() if x.DeviceType == 2]
 
 
+def get_phys_dev_names():
+    return [device_name(x) for x in get_devices() if x.DeviceType in (1, 2)]
+
+
 @none_on_exception(IndexError)
 def get_wifi_device(index=0):
     return get_wifi_devices()[index]
@@ -187,7 +191,7 @@ def get_candidate_connections(device):
     return list(set(candidates) & (set(points) | set(iwpoints)))
 
 
-def make_hotspot(name='comitup'):
+def make_hotspot(name='comitup', device=None):
     settings = {
         'connection':
         {
@@ -195,7 +199,6 @@ def make_hotspot(name='comitup'):
             'uuid': str(uuid.uuid4()),
             'id': name,
             'autoconnect': False,
-            'interface-name': 'wlan0',
         },
         '802-11-wireless':
         {
@@ -211,6 +214,9 @@ def make_hotspot(name='comitup'):
             'method': 'ignore',
         },
     }
+
+    if device:
+        settings['connection']['interface-name'] = device_name(device)
 
     nm.Settings.AddConnection(settings)
 
