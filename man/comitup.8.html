@@ -89,6 +89,10 @@ a persistent 4-digit number.</p>
 <p>While the hotspot is active, a <a class="man-ref" href="comitup-web.8.html">comitup-web<span class="s">(8)</span></a> service is available to manage
 connecting to an access point.</p>
 
+<p>If two wifi interfaces are available, the hotspot will remain active on the
+first interface, and the internet connection will be made on the second.
+Otherwise, the hotspot will be replaced with the internet connection.</p>
+
 <p>In all states, <a class="man-ref" href="http://man.cx/avahi-daemon(8)">avahi-daemon<span class="s">(8)</span></a> is used to publish the mdns host name
 <em>comitup-&lt;nnnn&gt;.local</em>, making the web service accessible
 as e.g. <em>http://comitup-1234.local</em>, for systems supporting Zeroconf. For other
@@ -119,7 +123,6 @@ as follows:</p>
 <pre><code>* _version_ - The package version.
 
 * _basename_ - The currently configured basename (default **comitup**).
-
 
 * _id_ - The unique random numeric id associated with the service instance.
 
@@ -176,7 +179,7 @@ using this connection.</p></li>
 
   <ol class='man-decor man-foot man foot'>
     <li class='tl'></li>
-    <li class='tc'>January 2017</li>
+    <li class='tc'>September 2017</li>
     <li class='tr'>comitup(8)</li>
   </ol>
 

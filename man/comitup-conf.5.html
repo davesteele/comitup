@@ -87,6 +87,9 @@ disabled in the <strong>HOTSPOT</strong> state in preference of the comitup web 
 enabled in the <strong>CONNECTED</strong> state. This should be the name of the systemd web service,
 such as <em>apache2.service</em> or <em>nginx.service</em>. This defaults to a null string,
 meaning no service is controlled.</p></dd>
+<dt><em>enable_appliance_mode</em></dt><dd><p>By default, comitup will use multiple wifi interfaces, if available, to connect to the
+local hotspot and to the internet simultaneously. Setting this to something other than
+"true" will limit comitup to the first wifi interface.</p></dd>
 </dl>
 
 
@@ -101,7 +104,7 @@ meaning no service is controlled.</p></dd>
 
   <ol class='man-decor man-foot man foot'>
     <li class='tl'></li>
-    <li class='tc'>January 2017</li>
+    <li class='tc'>September 2017</li>
     <li class='tr'>comitup.conf(5)</li>
   </ol>
 
