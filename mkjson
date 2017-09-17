@@ -5,19 +5,20 @@ import json
 import re
 
 from distutils.version import LooseVersion
+from pkg_resources import parse_version
 
 
 def pkgkeyfunc(a):
     (name, ver) = a.split('_')[0:2]
-    return((LooseVersion(ver), name))
+    return((parse_version(ver), name))
 
 def pkglatestver(pkglist):
     vers = [x.split('_')[1] for x in pkglist]
-    return max(vers, key=lambda x:LooseVersion(x))
+    return max(vers, key=lambda x:parse_version(x))
 
 def pkglatestdebver(pkglist):
     vers = [x.split('_')[1] for x in pkglist if re.search('deb.u.', x)]
-    return max(vers, key=lambda x:LooseVersion(x))
+    return max(vers, key=lambda x:parse_version(x))
 
 debs = [x for x in os.listdir('deb') if 'deb' in x]
 debs.sort(key=pkgkeyfunc, reverse=True)
