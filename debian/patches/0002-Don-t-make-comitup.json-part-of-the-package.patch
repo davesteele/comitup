@@ -1,0 +1,21 @@
+From: David Steele <steele@debian.org>
+Date: Sun, 17 Sep 2017 20:24:28 -0400
+Subject: Don't make comitup.json part of the package
+
+We don't want it to be overwritten on upgrade.
+---
+ setup.py | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index c9e127c..aaf5a45 100644
+--- a/setup.py
++++ b/setup.py
+@@ -76,7 +76,6 @@ setup(
+     },
+     data_files=[
+         ('/etc', ['conf/comitup.conf']),
+-        ('/var/lib/comitup', ['conf/comitup.json']),
+         ('/etc/dbus-1/system.d', ['conf/comitup-dbus.conf']),
+         ('/usr/share/comitup/web', ['web/comitupweb.conf']),
+         ('/usr/share/comitup/web/templates',

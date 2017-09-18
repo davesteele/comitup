@@ -1,0 +1,19 @@
+#!/bin/sh
+
+case "$1" in 
+    remove)
+        rm -f /var/lib/comitup.json
+    ;;
+
+    upgrade|deconfigure|failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \'$1\'" >&2
+        exit 1
+    ;;
+
+esac
+
+#DEBHELPER#
+
