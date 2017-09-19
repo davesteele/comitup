@@ -22,7 +22,7 @@ Depends:
     python-crypto,
     python-networkmanager,
     python-avahi,
-    python-gobject,
+    python-gi,
     python-flask,
 Suggests: python-tabulate
 Description: bootstrap Wifi using Wifi
