@@ -9,7 +9,7 @@ import config
 import random
 
 
-import gobject
+from gi.repository.GLib import MainLoop
 from dbus.mainloop.glib import DBusGMainLoop
 DBusGMainLoop(set_as_default=True)
 
@@ -79,7 +79,7 @@ def main():
                 [webmgr.state_callback, iptmgr.state_callback],
              )
 
-    loop = gobject.MainLoop()
+    loop = MainLoop()
     loop.run()
 
 

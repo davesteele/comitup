@@ -17,7 +17,7 @@ sys.path.append("/usr/share/comitup")
 
 import pkg_resources                          # noqa
 
-import gobject                                # noqa
+from gi.repository.GLib import MainLoop        # noqa
 import time                                   # noqa
 from dbus.mainloop.glib import DBusGMainLoop  # noqa
 DBusGMainLoop(set_as_default=True)
@@ -117,7 +117,7 @@ def main():
     init_state_mgr('comitup.local', 'comitup-1111.local')
     states.set_state('HOTSPOT', timeout=5)
 
-    loop = gobject.MainLoop()
+    loop = MainLoop()
     loop.run()
 
 

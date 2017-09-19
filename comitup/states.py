@@ -14,7 +14,7 @@ from dbus.exceptions import DBusException
 import iwscan
 
 
-import gobject
+from gi.repository.GLib import MainLoop, timeout_add
 if __name__ == '__main__':
     from dbus.mainloop.glib import DBusGMainLoop
     DBusGMainLoop(set_as_default=True)
@@ -109,7 +109,7 @@ def hotspot_start():
     else:
         log.debug("Didn't need to reactivate - already running")
         # the connect callback won't happen - let's 'pass' manually
-        gobject.timeout_add(100, fake_hs_pass)
+        timeout_add(100, fake_hs_pass)
 
 
 @state_callback
@@ -274,7 +274,7 @@ def set_state(state, connections=None, timeout=180):
     com_state = state
     state_info.start_fn()
 
-    gobject.timeout_add(timeout*1000, state_info.timeout_fn, state_id)
+    timeout_add(timeout*1000, state_info.timeout_fn, state_id)
 
 
 def activate_connection(name, state):
@@ -338,5 +338,5 @@ if __name__ == '__main__':
     set_state('HOTSPOT')
     # set_state('CONNECTING', candidate_connections())
 
-    loop = gobject.MainLoop()
+    loop = MainLoop()
     loop.run()
