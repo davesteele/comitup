@@ -47,6 +47,7 @@ def load_data():
                 defaults={
                     'base_name': 'comitup',
                     'web_service': '',
+                    'external_callback': '/usr/local/bin/comitup-callback',
                 },
              )
 

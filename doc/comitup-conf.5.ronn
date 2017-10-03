@@ -25,6 +25,12 @@ It is located in the _/etc/_ directory.
     local hotspot and to the internet simultaneously. Setting this to something other than
     "true" will limit comitup to the first wifi interface.
 
+  * _external_callback_:
+
+    The path to an external script that is called on comitup state changes. It will include
+    a single argument, either 'HOTSPOT', 'CONNECTING', or 'CONNECTED'. The script must be
+    executable, and must be owned by root.
+
 ## COPYRIGHT
 
 Comitup is Copyright (C) 2016-2017 David Steele &lt;steele@debian.org&gt;
