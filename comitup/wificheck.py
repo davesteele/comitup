@@ -4,12 +4,17 @@
 from collections import namedtuple
 import textwrap
 import logging
+import subprocess
+import nm
 
 
 log = logging.getLogger('comitup')
 
 
 def device_present():
+    if subprocess.check_output("iw list".split()) == "":
+        # Fail without comment
+        return ""
     return None
 
 
@@ -18,6 +23,9 @@ def device_supports_ap():
 
 
 def device_nm_managed():
+    if nm.get_wifi_devices() == []:
+        # Fail without comment
+        return ""
     return None
 
 
