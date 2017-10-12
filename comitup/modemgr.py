@@ -16,6 +16,7 @@ MULTI_MODE = "router"
 
 CONF_PATH = "/etc/comitup.conf"
 
+
 def dual_enabled():
     conf = config.Config(CONF_PATH, defaults={'enable_appliance_mode': 'true'})
     return conf.enable_appliance_mode == 'true'

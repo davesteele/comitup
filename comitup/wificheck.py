@@ -72,7 +72,6 @@ def run_checks(logit=True, printit=True, verbose=True):
                 log.error(testspec.title)
                 if testresult:
                     log.error("    " + testresult)
-                
 
             if printit:
                 print testspec.title
