@@ -8,6 +8,7 @@ import persist
 import config
 import random
 import argparse
+import wificheck
 
 
 from gi.repository.GLib import MainLoop
