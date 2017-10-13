@@ -9,6 +9,7 @@ import config
 import random
 import argparse
 import wificheck
+import sys
 
 
 from gi.repository.GLib import MainLoop
