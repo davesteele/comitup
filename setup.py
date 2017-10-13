@@ -49,12 +49,13 @@ class MyClean(clean):
 setup(
     name='comitup',
     packages=['comitup', 'web', 'cli'],
-    version='0.9.1',
-    description="Copy a remote file using multiple SSH streams",
+    version='1.0',
+    description="Remotely manage wifi connections on a headless computer",
     classifiers=[
-        'Development Status :: 1 - Planning',
-        'Environment :: Console',
-        'Intended Audience :: Developers',
+        'Development Status :: 5 - Production/Stable',
+        'Environment :: Web Environment',
+        'Framework :: Flask',
+        'Intended Audience :: End Users/Desktop',
         'License :: OSI Approved ' +
         ':: GNU General Public License v2 or later (GPLv2+)',
         'Natural Language :: English',
