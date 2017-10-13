@@ -61,7 +61,6 @@ def run_cmds(cmds):
         subprocess.call(cmd.format(outdev), shell=True)
 
 
-
 def state_callback(state, action):
     if (state, action) == ('HOTSPOT', 'start'):
         log.debug("Running iptables commands for HOTSPOT")
@@ -83,6 +82,7 @@ def state_callback(state, action):
             run_cmds(appliance_cmds)
 
         log.debug("Done with iptables commands for CONNECTING")
+
 
 def init_iptmgr():
     pass

@@ -3,7 +3,7 @@ comitup(8) -- Manage wifi connections on headless, unconnected systems
 
 ## SYNOPSIS
 
-`comitup`
+`comitup [options]`
 
 ## DESCRIPTION
 
@@ -32,7 +32,11 @@ The web service address is likely _http://10.42.0.1_.
 
 **comitup** logs to _/var/log/comitup.log_.
 
-### D-Bus Interface
+## Options
+  * _-h_, _--help_ - Print help and exit
+  * _-c_, _--check_ - Check the wifi device configuration and exit
+
+## D-Bus Interface
 
 **Comitup** provides a D-Bus object which claims the name
 _com.github.davesteele.comitup_ on the path

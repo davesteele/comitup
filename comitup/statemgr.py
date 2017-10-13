@@ -11,13 +11,15 @@ import dbus
 import dbus.service
 import logging
 import iwscan
+import os
+import subprocess
 
 import sys
 sys.path.append("/usr/share/comitup")
 
 import pkg_resources                          # noqa
 
-import gobject                                # noqa
+from gi.repository.GLib import MainLoop        # noqa
 import time                                   # noqa
 from dbus.mainloop.glib import DBusGMainLoop  # noqa
 DBusGMainLoop(set_as_default=True)
@@ -96,12 +98,33 @@ def get_hosts(conf, data):
     ]
 
 
+def external_callback(state, action):
+    if action != 'start':
+        return
+
+    script = conf.external_callback
+
+    if not os.path.isfile(script):
+        return
+
+    if not os.access(script, os.X_OK):
+        log.error("Callback script %s is not executable" % script)
+        return
+
+    if os.stat(script).st_uid != 0:
+        log.error("Callback script %s is not owned by root" % script)
+        return
+
+    with open(os.devnull, 'w') as nul:
+        subprocess.call([script, state], stdout=nul, stderr=subprocess.STDOUT)
+
+
 def init_state_mgr(gconf, gdata, callbacks):
     global com_obj, conf, data
 
     conf, data = (gconf, gdata)
 
-    states.init_states(get_hosts(conf, data), callbacks)
+    states.init_states(get_hosts(conf, data), callbacks + [external_callback])
     com_obj = Comitup()
 
     states.set_state('HOTSPOT', timeout=5)
@@ -117,7 +140,7 @@ def main():
     init_state_mgr('comitup.local', 'comitup-1111.local')
     states.set_state('HOTSPOT', timeout=5)
 
-    loop = gobject.MainLoop()
+    loop = MainLoop()
     loop.run()
 
 

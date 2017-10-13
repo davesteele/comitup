@@ -29,7 +29,7 @@ def state_fxt(monkeypatch, state_globals):
         ('comitup.states.nmmon.init_nmmon',               None),
         ('comitup.states.nmmon.set_device_callbacks',     None),
 
-        ('comitup.states.gobject.timeout_add',            None),
+        ('comitup.states.timeout_add',                    None),
 
         ('comitup.states.time.sleep',                     None),
     )

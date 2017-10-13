@@ -8,7 +8,7 @@
 #
 
 import dbus
-import gobject
+from gi.repository.GLib import MainLoop
 
 from dbus.mainloop.glib import DBusGMainLoop
 
@@ -152,7 +152,7 @@ def main():
 
     set_device_callbacks('HOTSPOT', up, down)
 
-    loop = gobject.MainLoop()
+    loop = MainLoop()
     loop.run()
 
 

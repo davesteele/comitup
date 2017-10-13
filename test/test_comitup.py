@@ -73,7 +73,7 @@ def loop_fxt(monkeypatch):
     loop = Mock()
 
     monkeypatch.setattr(
-                    'comitup.comitup.gobject.MainLoop',
+                    'comitup.comitup.MainLoop',
                     Mock(return_value=loop)
                 )
 

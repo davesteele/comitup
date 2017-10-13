@@ -7,9 +7,10 @@ from logging.handlers import TimedRotatingFileHandler
 import persist
 import config
 import random
+import argparse
 
 
-import gobject
+from gi.repository.GLib import MainLoop
 from dbus.mainloop.glib import DBusGMainLoop
 DBusGMainLoop(set_as_default=True)
 
@@ -47,6 +48,7 @@ def load_data():
                 defaults={
                     'base_name': 'comitup',
                     'web_service': '',
+                    'external_callback': '/usr/local/bin/comitup-callback',
                 },
              )
 
@@ -62,14 +64,35 @@ def inst_name(conf, data):
     return conf.base_name + '-' + data.id
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="")
+
+    parser.add_argument('-c', '--check', action='store_true',
+            help="Check the wifi devices and exit")
+
+    args = parser.parse_args()
+
+    return args
+
+
 def main():
     if os.geteuid() != 0:
         exit("Comitup requires root privileges")
+
+    args = parse_args()
 
     log = deflog()
     log.info("Starting comitup")
 
     (conf, data) = load_data()
+
+    if args.check:
+        if wificheck.run_checks():
+            sys.exit(1)
+        else:
+            sys.exit(0)
+    else:
+        wificheck.run_checks(verbose=False)
 
     webmgr.init_webmgr(conf.web_service)
     iptmgr.init_iptmgr()
@@ -79,7 +102,7 @@ def main():
                 [webmgr.state_callback, iptmgr.state_callback],
              )
 
-    loop = gobject.MainLoop()
+    loop = MainLoop()
     loop.run()
 
 
