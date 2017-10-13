@@ -6,6 +6,7 @@ import textwrap
 import logging
 import subprocess
 import nm
+import re
 
 
 log = logging.getLogger('comitup')
@@ -19,6 +20,16 @@ def device_present():
 
 
 def device_supports_ap():
+    devicesinfo = subprocess.check_output("iw list".split())
+
+    phy = devicesinfo.split()[1]
+
+    cmd = "iw phy {} info".format(phy)
+    deviceinfo = subprocess.check_output(cmd.split())
+
+    if "* AP\n" not in deviceinfo:
+        return phy
+
     return None
 
 
