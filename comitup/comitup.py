@@ -8,7 +8,6 @@ import persist
 import config
 import random
 import argparse
-import wificheck
 import sys
 
 
@@ -19,6 +18,7 @@ DBusGMainLoop(set_as_default=True)
 import statemgr     # noqa
 import webmgr       # noqa
 import iptmgr       # noqa
+import wificheck    # noqa
 
 PERSIST_PATH = "/var/lib/comitup/comitup.json"
 CONF_PATH = "/etc/comitup.conf"
