@@ -21,9 +21,11 @@ Depends:
     ${misc:Depends},
     python-crypto,
     python-networkmanager,
+    python-pkg-resources,
     python-avahi,
     python-gi,
     python-flask,
+    iw,
 Suggests: python-tabulate
 Description: bootstrap Wifi using Wifi
  Comitup will attempt to connect to wifi using an established connection. If

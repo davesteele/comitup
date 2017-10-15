@@ -4,7 +4,7 @@ set -e
 
 case "$1" in
     configure)
-        comitup --check
+        python /usr/share/comitup/comitup/wificheck.py || true
     ;;
 esac
 
