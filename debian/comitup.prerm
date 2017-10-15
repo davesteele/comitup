@@ -4,7 +4,7 @@ set -e
 
 case "$1" in 
     remove)
-        rm -f /var/lib/comitup.json
+        rm -f /var/lib/comitup/comitup.json*
     ;;
 
     upgrade|deconfigure|failed-upgrade)

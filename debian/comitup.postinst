@@ -3,8 +3,12 @@
 set -e
 
 case "$1" in
-    configure)
-        python /usr/share/comitup/comitup/wificheck.py || true
+  configure)
+    if [ -e /var/lib/comitup/comitup.json.save ] ; then
+      mv -f /var/lib/comitup/comitup.json.save /var/lib/comitup/comitup.json
+    fi
+
+    python /usr/share/comitup/comitup/wificheck.py || true
     ;;
 esac
 
