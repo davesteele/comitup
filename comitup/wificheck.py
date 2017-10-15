@@ -5,7 +5,6 @@ from collections import namedtuple
 import textwrap
 import logging
 import subprocess
-import nm
 import re
 
 
@@ -34,9 +33,12 @@ def device_supports_ap():
 
 
 def device_nm_managed():
-    if nm.get_wifi_devices() == []:
+    devicesinfo = subprocess.check_output("nmcli device show".split(), re.MULTILINE)
+
+    if not re.search("GENERAL.TYPE\W+wifi", devicesinfo):
         # Fail without comment
         return ""
+
     return None
 
 
