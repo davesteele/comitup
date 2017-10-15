@@ -2,7 +2,8 @@ comitup (1.0-1) UNRELEASED; urgency=medium
 
   * Update some dependencies to modern replacements/versions.
   * Add a wifi configuration check on install.
-  * Support external script callback
+  * Support external script callback.
+  * Preserve the comitup number across upgrades.
 
  -- David Steele <steele@debian.org>  Sat, 14 Oct 2017 17:09:07 -0400
 
