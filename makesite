@@ -1,0 +1,14 @@
+#!/usr/bin/python3
+
+from jinja2 import Template
+import json
+
+pkgs = json.load(open('pkgs.json', 'r'))
+imgs = json.load(open('imgs.json', 'r'))
+
+for page in ['index', 'archive']:
+    template = Template(open("templates/{}.tmpl".format(page)).read())
+    output = template.render(imgs=imgs, pkgs=pkgs)
+
+    with open(page + ".html", 'w') as fp:
+        fp.write(output)

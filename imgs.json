@@ -1,0 +1,16 @@
+{
+    "full": {
+        "name": "",
+        "filename": "xxx",
+        "uncompressed": 0,
+        "compressed": 0,
+        "magnet": "xxx"
+    },
+    "lite": {
+        "name": "Lite",
+        "filename": "xxx",
+        "uncompressed": 0,
+        "compressed": 0,
+        "magnet": "xxx"
+    }
+}

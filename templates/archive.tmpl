@@ -27,27 +27,9 @@
       <a href="index.html">back</a>
         <h3>Archived packages.</h3>
 <ul>
-
-<li><a href="deb/comitup_0.9.1-1_all.deb">comitup_0.9.1-1_all.deb</a></li>
-
-<li><a href="deb/comitup_0.9-1_all.deb">comitup_0.9-1_all.deb</a></li>
-
-<li><a href="deb/comitup_0.8-1_all.deb">comitup_0.8-1_all.deb</a></li>
-
-<li><a href="deb/comitup_0.7-1_all.deb">comitup_0.7-1_all.deb</a></li>
-
-<li><a href="deb/comitup_0.6-1_all.deb">comitup_0.6-1_all.deb</a></li>
-
-<li><a href="deb/comitup_0.5-1_all.deb">comitup_0.5-1_all.deb</a></li>
-
-<li><a href="deb/comitup_0.4-1_all.deb">comitup_0.4-1_all.deb</a></li>
-
-<li><a href="deb/comitup_0.3-1_all.deb">comitup_0.3-1_all.deb</a></li>
-
-<li><a href="deb/comitup_0.2-1_all.deb">comitup_0.2-1_all.deb</a></li>
-
-<li><a href="deb/comitup_0.1-1_all.deb">comitup_0.1-1_all.deb</a></li>
-
+{% for pkg in pkgs.all_pkgs %}
+<li><a href="deb/{{ pkg }}">{{ pkg }}</a></li>
+{% endfor %}
 <li><a href="deb/checksums.txt">checksums.txt</a></li>
 </ul>
 
