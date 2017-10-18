@@ -78,10 +78,10 @@ password</li>
 <p>To <a href="https://github.com/davesteele/comitup/wiki/Tutorial#copy-the-image-to-a-microsd-card">burn</a> onto an SD card for the Raspberry Pi.</p>
 <ul>
 {% for img in ['full', 'lite'] %}
-<li>Comitup {{ imgs[img]['name'] }} Image ({{ imgs[img]['uncompressed'] }}B, {{ imgs[img]['compressed'] }}B compressed)<br>
+<li>Comitup {{ imgs[img]['name'] }} Image ({{ imgs[img]['uncompressedstr'] }}B, {{ imgs[img]['compressedstr'] }}B compressed)<br>
 <ul>
 <li><a href="https://steele.debian.net/comitup/{{ imgs[img]['filename'] }}">Download</a></li>
-<li><a href="torrent/{{ imgs[img]['filename'] }}">Torrent</a>
+<li><a href="torrent/{{ imgs[img]['filename'] }}.torrent">Torrent</a>
     (<a href="{{ imgs[img]['magnet'] }}">magnet</a>)</li>
 <li><a href="torrent/{{ imgs[img]['filename'] }}.sha1.txt">SHA1</a></li>
 <li><a href="torrent/{{ imgs[img]['filename'] }}.asc.txt">PGP</a></li>
