@@ -24,3 +24,5 @@ cd man
 cd ..
 
 ./updaterepo.py
+
+./makesite
