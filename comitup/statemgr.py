@@ -111,12 +111,22 @@ def external_callback(state, action):
         log.error("Callback script %s is not executable" % script)
         return
 
-    if os.stat(script).st_uid != 0:
-        log.error("Callback script %s is not owned by root" % script)
-        return
+    def demote(uid, gid):
+        def dodemote():
+            os.setuid(uid)
+            os.setgid(gid)
+
+        return dodemote
+
+    stats= os.stat(script)
 
     with open(os.devnull, 'w') as nul:
-        subprocess.call([script, state], stdout=nul, stderr=subprocess.STDOUT)
+        subprocess.call(
+            [script, state],
+            stdout=nul,
+            stderr=subprocess.STDOUT,
+            preexec_fn=demote(stats.st_uid, stats.st_gid),
+        )
 
 
 def init_state_mgr(gconf, gdata, callbacks):
