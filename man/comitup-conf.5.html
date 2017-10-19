@@ -90,6 +90,11 @@ meaning no service is controlled.</p></dd>
 <dt><em>enable_appliance_mode</em></dt><dd><p>By default, comitup will use multiple wifi interfaces, if available, to connect to the
 local hotspot and to the internet simultaneously. Setting this to something other than
 "true" will limit comitup to the first wifi interface.</p></dd>
+<dt><em>external_callback</em>:</dt><dd><p></p>
+
+<p>The path to an external script that is called on comitup state changes. It will include
+a single argument, either 'HOTSPOT', 'CONNECTING', or 'CONNECTED'. The script must be
+executable, and must be owned by root.</p></dd>
 </dl>
 
 
@@ -104,7 +109,7 @@ local hotspot and to the internet simultaneously. Setting this to something othe
 
   <ol class='man-decor man-foot man foot'>
     <li class='tl'></li>
-    <li class='tc'>September 2017</li>
+    <li class='tc'>October 2017</li>
     <li class='tr'>comitup.conf(5)</li>
   </ol>
 

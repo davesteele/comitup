@@ -56,6 +56,8 @@
     <a href="#NAME">NAME</a>
     <a href="#SYNOPSIS">SYNOPSIS</a>
     <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#Options">Options</a>
+    <a href="#D-Bus-Interface">D-Bus Interface</a>
     <a href="#COPYRIGHT">COPYRIGHT</a>
     <a href="#SEE-ALSO">SEE ALSO</a>
   </div>
@@ -73,7 +75,7 @@
 
 <h2 id="SYNOPSIS">SYNOPSIS</h2>
 
-<p><code>comitup</code></p>
+<p><code>comitup [options]</code></p>
 
 <h2 id="DESCRIPTION">DESCRIPTION</h2>
 
@@ -102,7 +104,15 @@ The web service address is likely <em>http://10.42.0.1</em>.</p>
 
 <p><strong>comitup</strong> logs to <em>/var/log/comitup.log</em>.</p>
 
-<h3 id="D-Bus-Interface">D-Bus Interface</h3>
+<h2 id="Options">Options</h2>
+
+<ul>
+<li><em>-h</em>, <em>--help</em> - Print help and exit</li>
+<li><em>-c</em>, <em>--check</em> - Check the wifi device configuration and exit</li>
+</ul>
+
+
+<h2 id="D-Bus-Interface">D-Bus Interface</h2>
 
 <p><strong>Comitup</strong> provides a D-Bus object which claims the name
 <em>com.github.davesteele.comitup</em> on the path
@@ -179,7 +189,7 @@ using this connection.</p></li>
 
   <ol class='man-decor man-foot man foot'>
     <li class='tl'></li>
-    <li class='tc'>September 2017</li>
+    <li class='tc'>October 2017</li>
     <li class='tr'>comitup(8)</li>
   </ol>
 
