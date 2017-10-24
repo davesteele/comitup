@@ -20,6 +20,40 @@ trackers = [
     'https://open.kickasstracker.com:443/announce',
 ]
 
+
+mag = [
+    (1000000000.0, 'G'),
+    (1000000.0, 'M'),
+    (1000.0, 'K'),
+]
+
+fmt = [
+    (1000, ".0f"),
+    (9.9, ".1f"),
+]
+
+
+def numsum(num, base2=True):
+
+    if base2:
+        num = num / 1024. * 1000
+
+    letter = ""
+    for lim, sym in mag:
+        if num >= lim:
+            num /= lim
+            letter = sym
+
+    formatstr = ""
+    for lim, fmtstr in fmt:
+        if num < lim:
+            formatstr = fmtstr
+
+    derived_format = "{{0:{1}}} {2}".format(num, formatstr, letter)
+    result = derived_format.format(num, formatstr, letter)
+
+    return result
+
 if os.path.exists(zip_path):
     os.unlink(zip_path)
 zipf = zipfile.ZipFile(zip_path, mode='x')
