@@ -14,7 +14,7 @@ Select an access point.<br/><br/>
 <path d="z"/>
 {% endif %}
 </svg>
-<a href="confirm?ssid={{ point.ssid }}&encrypted={{ point.security }}">{{ point.ssid }}</a>
+<a href="confirm?ssid={{ point.ssid_encoded }}&encrypted={{ point.security }}">{{ point.ssid }}</a>
 {% endfor %}
 </ul>
 <form action="confirm">

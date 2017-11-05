@@ -28,8 +28,8 @@ It is located in the _/etc/_ directory.
   * _external_callback_:
 
     The path to an external script that is called on comitup state changes. It will include
-    a single argument, either 'HOTSPOT', 'CONNECTING', or 'CONNECTED'. The script must be
-    executable, and must be owned by root.
+    a single argument, either 'HOTSPOT', 'CONNECTING', or 'CONNECTED'. The script will run
+    as the owning user and group.
 
 ## COPYRIGHT
 
