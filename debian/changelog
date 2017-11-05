@@ -1,10 +1,10 @@
-comitup (1.1-1) UNRELEASED; urgency=medium
+comitup (1.1-1) unstable; urgency=medium
 
   * Fix web failure for open APs.
   * Fix web failure for SSIDs with special characters.
   * Run the callback with the permissions of the script owner.
 
- -- David Steele <steele@debian.org>  Sat, 04 Nov 2017 20:58:31 -0400
+ -- David Steele <steele@debian.org>  Sat, 04 Nov 2017 22:00:22 -0400
 
 comitup (1.0-1) UNRELEASED; urgency=medium
 
