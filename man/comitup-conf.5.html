@@ -93,8 +93,8 @@ local hotspot and to the internet simultaneously. Setting this to something othe
 <dt><em>external_callback</em>:</dt><dd><p></p>
 
 <p>The path to an external script that is called on comitup state changes. It will include
-a single argument, either 'HOTSPOT', 'CONNECTING', or 'CONNECTED'. The script must be
-executable, and must be owned by root.</p></dd>
+a single argument, either 'HOTSPOT', 'CONNECTING', or 'CONNECTED'. The script will run
+as the owning user and group.</p></dd>
 </dl>
 
 
@@ -109,7 +109,7 @@ executable, and must be owned by root.</p></dd>
 
   <ol class='man-decor man-foot man foot'>
     <li class='tl'></li>
-    <li class='tc'>October 2017</li>
+    <li class='tc'>November 2017</li>
     <li class='tr'>comitup.conf(5)</li>
   </ol>
 
