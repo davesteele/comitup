@@ -1,3 +1,10 @@
+comitup (1.1-2) unstable; urgency=medium
+
+  * Tolerate missing comitup.json on preinst upgrade.
+    (Closes: 881673)
+
+ -- David Steele <steele@debian.org>  Mon, 13 Nov 2017 21:24:04 -0500
+
 comitup (1.1-1) unstable; urgency=medium
 
   * Fix web failure for open APs.
