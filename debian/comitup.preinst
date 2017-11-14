@@ -3,11 +3,11 @@
 set -e
 
 case "$1" in 
-    upgrade)
-        cp -f /var/lib/comitup/comitup.json /var/lib/comitup/comitup.json.save
-    ;;
-
+  upgrade)
+    if [ -e /var/lib/comitup/comitup.json ] ; then
+      cp -f /var/lib/comitup/comitup.json /var/lib/comitup/comitup.json.save
+    fi
+  ;;
 esac
 
 #DEBHELPER#
-
