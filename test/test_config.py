@@ -1,4 +1,8 @@
 
+# Copyright (c) 2017 David Steele <dsteele@gmail.com>
+#
+# SPDX-License-Identifier: GPL-2+
+# License-Filename: LICENSE
 import pytest
 import textwrap
 import os

@@ -1,4 +1,8 @@
 #!/usr/bin/python
+# Copyright (c) 2017 David Steele <dsteele@gmail.com>
+#
+# SPDX-License-Identifier: GPL-2+
+# License-Filename: LICENSE
 
 #
 # Copyright 2016-2017 David Steele <steele@debian.org>

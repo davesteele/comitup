@@ -1,4 +1,8 @@
 import pytest
+# Copyright (c) 2017 David Steele <dsteele@gmail.com>
+#
+# SPDX-License-Identifier: GPL-2+
+# License-Filename: LICENSE
 from mock import Mock, patch
 
 from comitup import nm
