@@ -1,4 +1,8 @@
 
+# Copyright (c) 2017 David Steele <dsteele@gmail.com>
+#
+# SPDX-License-Identifier: GPL-2+
+# License-Filename: LICENSE
 from comitup import states
 import pytest
 from mock import Mock, patch, call
