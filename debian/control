@@ -22,7 +22,6 @@ Depends:
     python-crypto,
     python-networkmanager,
     python-pkg-resources,
-    python-avahi,
     python-gi,
     python-flask,
     iw,
