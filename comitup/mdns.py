@@ -11,7 +11,6 @@
 # or later
 #
 
-import avahi
 import dbus
 from encodings.idna import ToASCII
 import socket
@@ -26,10 +25,16 @@ CLASS_IN = 0x01
 TYPE_A = 0x01
 TTL = 5
 
+DBUS_NAME = 'org.freedesktop.Avahi'
+DBUS_PATH_SERVER = '/'
+DBUS_INTERFACE_SERVER = 'org.freedesktop.Avahi.Server'
+DBUS_INTERFACE_ENTRY_GROUP = 'org.freedesktop.Avahi.EntryGroup'
+PROTO_INET = 0
+
 group = None
 
-
 # functions
+
 
 def establish_group():
     global group
@@ -37,13 +42,13 @@ def establish_group():
     bus = dbus.SystemBus()
 
     server = dbus.Interface(
-            bus.get_object(avahi.DBUS_NAME, avahi.DBUS_PATH_SERVER),
-            avahi.DBUS_INTERFACE_SERVER
+            bus.get_object(DBUS_NAME, DBUS_PATH_SERVER),
+            DBUS_INTERFACE_SERVER
     )
 
     group = dbus.Interface(
-            bus.get_object(avahi.DBUS_NAME, server.EntryGroupNew()),
-            avahi.DBUS_INTERFACE_ENTRY_GROUP
+            bus.get_object(DBUS_NAME, server.EntryGroupNew()),
+            DBUS_INTERFACE_ENTRY_GROUP
     )
 
 
@@ -59,7 +64,7 @@ def encode_dns(name):
 def make_a_record(host, devindex, addr):
     group.AddRecord(
         devindex,
-        avahi.PROTO_INET,
+        PROTO_INET,
         dbus.UInt32(0),
         encode_dns(host),
         CLASS_IN,
@@ -69,6 +74,17 @@ def make_a_record(host, devindex, addr):
     )
 
 
+def string_to_txt_array(strng):
+    if strng:
+        return [dbus.Byte(x) for x in strng]
+    else:
+        return strng
+
+
+def string_array_to_txt_array(txt_array):
+    return [string_to_txt_array(x) for x in txt_array]
+
+
 def add_service(host, devindex, addr):
     name = host
     if '.local' in name:
@@ -76,14 +92,14 @@ def add_service(host, devindex, addr):
 
     group.AddService(
         devindex,
-        avahi.PROTO_INET,
+        PROTO_INET,
         dbus.UInt32(0),
         name,
         "_workstation._tcp",
         "",
         host,
         dbus.UInt16(9),
-        avahi.string_array_to_txt_array([
+        string_array_to_txt_array([
             "hostname=%s" % host,
             "ipaddr=%s" % addr,
             "comitup-home=https://davesteele.github.io/comitup/",
