@@ -19,7 +19,7 @@ import sys
 import uuid
 import getpass
 from functools import wraps
-import iwscan
+from comitup import iwscan
 
 
 import pprint
