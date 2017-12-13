@@ -12,7 +12,6 @@
 #
 
 import dbus
-from encodings.idna import ToASCII
 import socket
 import logging
 import nm
@@ -54,12 +53,9 @@ def establish_group():
 
 
 def encode_dns(name):
-    out = []
-    for part in name.split('.'):
-        if len(part) == 0:
-            continue
-        out.append(ToASCII(part))
-    return '.'.join(out)
+    components = [x for x in name.split('.') if len(x) > 0]
+    fixed_name = '.'.join(components)
+    return fixed_name.encode('ascii')
 
 
 def make_a_record(host, devindex, addr):
@@ -77,7 +73,7 @@ def make_a_record(host, devindex, addr):
 
 def string_to_txt_array(strng):
     if strng:
-        return [dbus.Byte(x) for x in strng]
+        return [dbus.Byte(x) for x in strng.encode()]
     else:
         return strng
 
