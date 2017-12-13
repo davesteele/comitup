@@ -235,7 +235,7 @@ def make_connection_for(ssid, password=None, interface=None):
             }),
         '802-11-wireless': dbus.Dictionary(
             {
-                'ssid': dbus.ByteArray(ssid),
+                'ssid': dbus.ByteArray(ssid.encode()),
                 'mode': 'infrastructure',
             }),
         'ipv4': dbus.Dictionary(
