@@ -10,21 +10,21 @@
 # or later
 #
 
-import ConfigParser
-import StringIO
+import configparser
+import io
 
 
 class Config(object):
     def __init__(self, filename, section='DEFAULT', defaults={}):
         self._section = section
 
-        self._config = ConfigParser.SafeConfigParser(defaults=defaults)
+        self._config = configparser.SafeConfigParser(defaults=defaults)
         conf_str = '[%s]\n' % self._section + open(filename, 'r').read()
-        conf_fp = StringIO.StringIO(conf_str)
+        conf_fp = io.StringIO(conf_str)
         self._config.readfp(conf_fp)
 
     def __getattr__(self, tag):
         try:
             return self._config.get(self._section, tag)
-        except ConfigParser.NoOptionError:
+        except configparser.NoOptionError:
             raise AttributeError
