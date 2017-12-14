@@ -16,18 +16,18 @@ log = logging.getLogger('comitup')
 
 
 def device_present():
-    if subprocess.check_output("iw list".split()) == "":
+    if subprocess.check_output("iw list".split()).decode() == "":
         # Fail without comment
         return ""
     return None
 
 
 def device_supports_ap():
-    devicesinfo = subprocess.check_output("iw list".split())
+    devicesinfo = subprocess.check_output("iw list".split()).decode()
 
     phy = devicesinfo.split()[1]
 
-    cmd = "iw phy {} info".format(phy.decode())
+    cmd = "iw phy {} info".format(phy)
     deviceinfo = subprocess.check_output(cmd.split()).decode()
 
     if "* AP\n" not in deviceinfo:
