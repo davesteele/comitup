@@ -21,8 +21,8 @@ import logging
 if __name__ == '__main__':
     DBusGMainLoop(set_as_default=True)
 
-from comitup import nm       # noqa
-from comitup import modemgr  # noqa
+import nm       # noqa
+import modemgr  # noqa
 
 
 #
