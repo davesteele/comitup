@@ -15,7 +15,7 @@ import logging
 import time
 from functools import wraps
 from dbus.exceptions import DBusException
-from comitup import iwscan
+import iwscan
 
 
 from gi.repository.GLib import MainLoop, timeout_add
@@ -23,10 +23,10 @@ if __name__ == '__main__':
     from dbus.mainloop.glib import DBusGMainLoop
     DBusGMainLoop(set_as_default=True)
 
-from comitup import nmmon    # noqa
-from comitup import nm       # noqa
-from comitup import mdns     # noqa
-from comitup import modemgr  # noqa
+import nmmon    # noqa
+import nm       # noqa
+import mdns     # noqa
+import modemgr  # noqa
 
 
 log = logging.getLogger('comitup')
