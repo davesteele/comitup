@@ -14,10 +14,11 @@ img_dir = os.path.dirname(img_path)
 zip_name = img_name + ".zip"
 zip_path = img_path + ".zip"
 
+# Update tracker list from https://newtrackon.com
 trackers = [
-    'udp://bt.xxx-tracker.com:2710/announce',
-    'http://t.nyaatracker.com:80/announce',
-    'https://open.kickasstracker.com:443/announce',
+    'http://tracker.tfile.me:80/announce',
+    'http://retracker.bashtel.ru:80/announce',
+    'http://tracker.city9x.com:2710/announce',
 ]
 
 
