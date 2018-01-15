@@ -57,7 +57,7 @@ def numsum(num, base2=True):
 
 if os.path.exists(zip_path):
     os.unlink(zip_path)
-zipf = zipfile.ZipFile(zip_path, mode='x')
+zipf = zipfile.ZipFile(zip_path, compression=zipfile.ZIP_DEFLATED, mode='x')
 zipf.write(img_path)
 zipf.close()
 
@@ -69,8 +69,8 @@ with open(zip_path, 'rb') as fp:
 with open("./torrent/{}.sha1".format(zip_name), 'w') as fp:
     fp.write("{0} {1}".format(sha.hexdigest(), zip_name))
 
-os.system("gpg -a --detach-sign {}".format(zip_path)
-os.rename(zip_path + ".asc", "./torrent")
+os.system("gpg -a --detach-sign {}".format(zip_path))
+os.rename(zip_path + ".asc", "./torrent/" + zip_name + ".asc")
 
 cmd = "transmission-create -o ./torrent/{0}.torrent".format(zip_name)
 for tracker in trackers:
@@ -78,7 +78,7 @@ for tracker in trackers:
 cmd += " " + zip_path
 os.system(cmd)
 
-os.system('transmission-show -m {0}.torrent >./torrent/{0}.magnet'.format(zip_name)
+os.system('transmission-show -m ./torrent/{0}.torrent >./torrent/{0}.magnet'.format(zip_name))
 
 imginfo = {}
 if 'lite' in img_name:
@@ -93,13 +93,14 @@ imginfo['uncompressed'] = os.stat(img_path).st_size
 imginfo['compressed'] = os.stat(zip_path).st_size
 imginfo['uncompressedstr'] = numsum(imginfo['uncompressed'])
 imginfo['compressedstr'] = numsum(imginfo['compressed'])
-imginfo['magnet'] = open('./torrent/{}.magnet', 'r').read()
+imginfo['magnet'] = open('./torrent/{}.magnet'.format(zip_name), 'r').read()
 
-imgsinfo = json.load('imgs.json')
+with open('imgs.json', 'r') as fp:
+    imgsinfo = json.load(fp)
 
 imgsinfo[imgname] = imginfo
 
 with open('imgs.json', 'w') as fp:
-	json.dump(fp, imgsinfo, indent=4, sort_keys=True)
+	json.dump(imgsinfo, fp, indent=4, sort_keys=True)
 
 
