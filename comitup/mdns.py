@@ -16,6 +16,7 @@ from encodings.idna import ToASCII
 import socket
 import logging
 import nm
+import subprocess
 
 log = logging.getLogger('comitup')
 
@@ -116,19 +117,35 @@ def clear_entries():
     establish_group()
 
 
+def get_interface_mapping():
+    mapping = {}
+
+    for line in subprocess.check_output("ip addr".split()).decode().split('\n'):
+        try:
+            asc_index, name = line.split(": ")[0:2]
+            mapping[name] = int(asc_index)
+        except ValueError:
+            pass
+
+    return mapping
+
+
 def add_hosts(hosts):
     establish_group()
+    int_mapping = get_interface_mapping()
 
-    i = 0
     for device in nm.get_devices():
-        i += 1
         name = nm.device_name(device)
         addr = nm.get_active_ip(device)
-        if (name in nm.get_phys_dev_names()) and addr:
-            for host in hosts:
-                make_a_record(host, i, addr)
+        if (name in nm.get_phys_dev_names() \
+            and name in int_mapping \
+            and addr):
 
-            add_service(hosts[0], i, addr)
+            index = int_mapping[name]
+            for host in hosts:
+                make_a_record(host, index, addr)
+
+            add_service(hosts[0], index, addr)
 
     group.Commit()
 
