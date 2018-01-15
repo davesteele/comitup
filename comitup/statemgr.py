@@ -56,7 +56,7 @@ class Comitup(dbus.service.Object):
     def access_points(self):
         global apcache, cachetime
 
-        if time.time() - cachetime > 10:
+        if time.time() - cachetime > 5:
             cachetime = time.time()   # keep anyone else from processing
             aps = iwscan.candidates()
             aps = [x for x in aps if x['ssid'] != states.hotspot_name]
