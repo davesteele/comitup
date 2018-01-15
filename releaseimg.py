@@ -66,11 +66,11 @@ with open(zip_path, 'rb') as fp:
     for chunk in iter(lambda: fp.read(1048576), b''):
         sha.update(chunk)
 
-with open("./torrent/{}.sha1".format(zip_name), 'w') as fp:
+with open("./torrent/{}.sha1.txt".format(zip_name), 'w') as fp:
     fp.write("{0} {1}".format(sha.hexdigest(), zip_name))
 
 os.system("gpg -a --detach-sign {}".format(zip_path))
-os.rename(zip_path + ".asc", "./torrent/" + zip_name + ".asc")
+os.rename(zip_path + ".asc", "./torrent/" + zip_name + ".asc.txt")
 
 cmd = "transmission-create -o ./torrent/{0}.torrent".format(zip_name)
 for tracker in trackers:
