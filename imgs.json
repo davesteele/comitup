@@ -1,20 +1,20 @@
 {
     "full": {
+        "compressed": 1795723895,
+        "compressedstr": "1.8 G",
+        "filename": "2017-11-29-raspbian-stretch-comitup-1.1-01-14.img.zip",
+        "magnet": "magnet:?xt=urn:btih:be82ea0adeff6846484a85c1138900afce509a2e&dn=2017-11-29-raspbian-stretch-comitup-1.1-01-14.img.zip&tr=http%3A%2F%2Ftracker.tfile.me%3A80%2Fannounce&tr=http%3A%2F%2Fretracker.bashtel.ru%3A80%2Fannounce&tr=http%3A%2F%2Ftracker.city9x.com%3A2710%2Fannounce\n",
         "name": "",
-        "filename": "2017-09-07-raspbian-stretch-comitup-0.9-09-10.img.zip",
-        "uncompressed": 0,
-        "compressed": 0,
-        "uncompressedstr": "6.1 G",
-        "compressedstr": "1.6 G",
-        "magnet": "magnet:?xt=urn:btih:515ccfb79b4edad3d6a6e8b290c3341ca14342bb&dn=2017-09-07-raspbian-stretch-comitup-0.9-09-10.img.zip&tr=http%3A%2F%2Ft.nyaatracker.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce"
+        "uncompressed": 6601834496,
+        "uncompressedstr": "6.4 G"
     },
     "lite": {
+        "compressed": 402706521,
+        "compressedstr": "393 M",
+        "filename": "2017-11-29-raspbian-stretch-lite-comitup-1.1-01-14.img.zip",
+        "magnet": "magnet:?xt=urn:btih:9a0730c1929340479d99f9f9c05dd54f264ac9dd&dn=2017-11-29-raspbian-stretch-lite-comitup-1.1-01-14.img.zip&tr=http%3A%2F%2Ftracker.tfile.me%3A80%2Fannounce&tr=http%3A%2F%2Fretracker.bashtel.ru%3A80%2Fannounce&tr=http%3A%2F%2Ftracker.city9x.com%3A2710%2Fannounce\n",
         "name": "Lite",
-        "filename": "2017-09-07-raspbian-stretch-lite-comitup-0.9-09-10.img.zip",
-        "uncompressed": 0,
-        "compressed": 0,
-        "uncompressedstr": "1.4 G",
-        "compressedstr": "326 M",
-        "magnet": "magnet:?xt=urn:btih:b656a56f6391927c8ff5e545f783a6d0cb9cc280&dn=2017-09-07-raspbian-stretch-lite-comitup-0.9-09-10.img.zip&tr=http%3A%2F%2Ft.nyaatracker.com%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce"
+        "uncompressed": 1584234496,
+        "uncompressedstr": "1.5 G"
     }
 }
