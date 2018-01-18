@@ -101,7 +101,7 @@ def add_service(host, devindex, addr):
         host,
         dbus.UInt16(9),
         string_array_to_txt_array([
-            "hostname=%s" % host,
+            "hostname=%s" % host.encode(),
             "ipaddr=%s" % addr,
             "comitup-home=https://davesteele.github.io/comitup/",
         ])
