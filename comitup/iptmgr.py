@@ -12,8 +12,8 @@
 
 import logging
 import subprocess
-import modemgr
-import nm
+from comitup import modemgr
+from comitup import nm
 
 
 start_cmds = [
