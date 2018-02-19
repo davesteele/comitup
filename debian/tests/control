@@ -1,2 +1,2 @@
-Test-Command: py.test
-Depends: @, python-pytest, python-mock, python-setuptools
+Test-Command: py.test-3
+Depends: @, python3-pytest, python3-mock, python3-setuptools
