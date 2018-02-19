@@ -5,25 +5,26 @@ Maintainer: David Steele <steele@debian.org>
 Build-Depends:
     debhelper (>=9.20160709),
     dh-python,
-    python-all (>= 2.6.6-3~),
-    python-setuptools,
+    python3-all,
+    python3-setuptools,
     ruby-ronn,
 Standards-Version: 4.1.1
 Homepage: https://davesteele.github.io/comitup/
-X-Python-Version: >= 2.7
+X-Python3-Version: >= 3.5
 Vcs-Git: https://github.com/davesteele/comitup.git -b debian
 Vcs-Browser: https://github.com/davesteele/comitup
 
 Package: comitup
 Architecture: all
 Depends: 
-    ${python:Depends},
+    ${python3:Depends},
     ${misc:Depends},
-    python-crypto,
-    python-networkmanager,
-    python-pkg-resources,
-    python-gi,
-    python-flask,
+    python3-crypto,
+    python3-networkmanager,
+    python3-pkg-resources,
+    python3-gi,
+    python3-flask,
+    python-configparser,
     iw,
 Suggests: python-tabulate
 Description: bootstrap Wifi using Wifi

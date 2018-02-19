@@ -7,13 +7,13 @@ PKG = $(shell dpkg-parsechangelog -l$(PKD)/changelog --show-field=Source)
 VER ?= $(shell (dpkg-parsechangelog -l$(PKD)/changelog | grep Version | sed 's/Version..//' | sed 's/-.\+//'))
 
 export PYBUILD_NAME=comitup
-export PYBUILD_DISABLE_python3=install
+# export PYBUILD_DISABLE_python3=install
 export PYBUILD_DISABLE=test
 export PYBUILD_INSTALL_ARGS=--install-lib=/usr/share/comitup\
  --install-scripts=/usr/share/comitup
 
 %:
-	dh $@  --with python2,systemd --buildsystem=pybuild
+	dh $@  --with python3,systemd --buildsystem=pybuild
 
 
 CHDATE = $(shell grep "\-\-" debian/changelog | head -1 | sed 's/.\+, //' | sed 's/...\:.\+//' )
