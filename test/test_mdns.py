@@ -59,6 +59,7 @@ def test_avahi_clear_entries(avahi_fxt):
     assert not mdns.log.called
 
 
+@patch('comitup.nm.get_devices', Mock(return_value=[]))
 def test_avahi_add_hosts(avahi_fxt):
     mdns.add_hosts(['host1', 'host2'])
 
@@ -66,10 +67,10 @@ def test_avahi_add_hosts(avahi_fxt):
 
 
 @pytest.mark.parametrize("dns_in, dns_out", (
-    ("a.b.c", "a.b.c"),
-    ("A.B.C", "A.B.C"),
-    ("a..b", "a.b"),
-    ("a.b.", "a.b"),
+    ("a.b.c", "a.b.c".encode()),
+    ("A.B.C", "A.B.C".encode()),
+    ("a..b", "a.b".encode()),
+    ("a.b.", "a.b".encode()),
 ))
 def test_avahi_encode_dns(dns_in, dns_out):
     assert dns_out == mdns.encode_dns(dns_in)

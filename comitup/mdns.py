@@ -12,10 +12,10 @@
 #
 
 import dbus
-from encodings.idna import ToASCII
 import socket
 import logging
-import nm
+from comitup import nm
+import subprocess
 
 log = logging.getLogger('comitup')
 
@@ -53,12 +53,9 @@ def establish_group():
 
 
 def encode_dns(name):
-    out = []
-    for part in name.split('.'):
-        if len(part) == 0:
-            continue
-        out.append(ToASCII(part))
-    return '.'.join(out)
+    components = [x for x in name.split('.') if len(x) > 0]
+    fixed_name = '.'.join(components)
+    return fixed_name.encode('ascii')
 
 
 def make_a_record(host, devindex, addr):
@@ -76,7 +73,7 @@ def make_a_record(host, devindex, addr):
 
 def string_to_txt_array(strng):
     if strng:
-        return [dbus.Byte(x) for x in strng]
+        return [dbus.Byte(x) for x in strng.encode()]
     else:
         return strng
 
@@ -100,7 +97,7 @@ def add_service(host, devindex, addr):
         host,
         dbus.UInt16(9),
         string_array_to_txt_array([
-            "hostname=%s" % host,
+            "hostname=%s" % host.encode(),
             "ipaddr=%s" % addr,
             "comitup-home=https://davesteele.github.io/comitup/",
         ])
@@ -116,19 +113,35 @@ def clear_entries():
     establish_group()
 
 
+def get_interface_mapping():
+    mapping = {}
+
+    for line in subprocess.check_output("ip addr".split()).decode().split('\n'):
+        try:
+            asc_index, name = line.split(": ")[0:2]
+            mapping[name] = int(asc_index)
+        except ValueError:
+            pass
+
+    return mapping
+
+
 def add_hosts(hosts):
     establish_group()
+    int_mapping = get_interface_mapping()
 
-    i = 0
     for device in nm.get_devices():
-        i += 1
         name = nm.device_name(device)
         addr = nm.get_active_ip(device)
-        if (name in nm.get_phys_dev_names()) and addr:
-            for host in hosts:
-                make_a_record(host, i, addr)
+        if (name in nm.get_phys_dev_names() \
+            and name in int_mapping \
+            and addr):
 
-            add_service(hosts[0], i, addr)
+            index = int_mapping[name]
+            for host in hosts:
+                make_a_record(host, index, addr)
+
+            add_service(hosts[0], index, addr)
 
     group.Commit()
 

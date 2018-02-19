@@ -14,7 +14,7 @@
 import dbus
 import dbus.service
 import logging
-import iwscan
+from comitup import iwscan
 import os
 import subprocess
 
@@ -28,9 +28,9 @@ import time                                   # noqa
 from dbus.mainloop.glib import DBusGMainLoop  # noqa
 DBusGMainLoop(set_as_default=True)
 
-import states                                 # noqa
-import nm                                     # noqa
-import modemgr                                # noqa
+from comitup import states                                 # noqa
+from comitup import nm                                     # noqa
+from comitup import modemgr                                # noqa
 
 comitup_path = "/com/github/davesteele/comitup"
 
@@ -56,12 +56,17 @@ class Comitup(dbus.service.Object):
     def access_points(self):
         global apcache, cachetime
 
-        if time.time() - cachetime > 10:
+        if time.time() - cachetime > 5:
             cachetime = time.time()   # keep anyone else from processing
             aps = iwscan.candidates()
             aps = [x for x in aps if x['ssid'] != states.hotspot_name]
             apcache = aps
-            cachetime = time.time()   # cache time actually starts now
+
+            # set a timeout, if we got something
+            if len(apcache):
+                cachetime = time.time()   # cache time actually starts now
+            else:
+                cachetime = 0
 
         return apcache
 

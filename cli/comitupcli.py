@@ -97,11 +97,6 @@ def interpreter():
 
         print_cmd_prompts(state, connection, points)
 
-        try:
-            input = raw_input
-        except NameError:
-            pass
-
         cmd = input("command?: ")
 
         index = int_value(cmd)

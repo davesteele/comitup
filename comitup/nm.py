@@ -19,7 +19,7 @@ import sys
 import uuid
 import getpass
 from functools import wraps
-import iwscan
+from comitup import iwscan
 
 
 import pprint
@@ -144,8 +144,7 @@ def get_access_points(device):
 
 def get_points_ext(device):
     try:
-        inlist = sorted(get_access_points(device),
-                        key=lambda x: -ord(x.Strength))
+        inlist = sorted(get_access_points(device), key=lambda x: -x.Strength)
     except (TypeError, dbus.exceptions.DBusException):
         log.debug("Error getting access points")
         inlist = []
@@ -161,7 +160,7 @@ def get_points_ext(device):
 
             outpoint = {
                 'ssid': point.Ssid,
-                'strength': str(ord(point.Strength)),
+                'strength': str(point.Strength),
                 'security': encstr,
                 'nmpath': point.object_path,
             }
@@ -236,7 +235,7 @@ def make_connection_for(ssid, password=None, interface=None):
             }),
         '802-11-wireless': dbus.Dictionary(
             {
-                'ssid': dbus.ByteArray(ssid),
+                'ssid': dbus.ByteArray(ssid.encode()),
                 'mode': 'infrastructure',
             }),
         'ipv4': dbus.Dictionary(
@@ -278,7 +277,7 @@ def do_listaccess(arg):
         row = (
             point.Ssid, point.HwAddress,
             point.Flags, point.WpaFlags,
-            point.RsnFlags, ord(point.Strength),
+            point.RsnFlags, point.Strength,
             point.Frequency
         )
         rows.append(row)

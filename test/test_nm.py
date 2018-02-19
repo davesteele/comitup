@@ -37,7 +37,7 @@ def device_fxt(monkeypatch):
 
     point = Mock()
     point.Ssid = "myssid"
-    point.Strength = 'a'
+    point.Strength = 100
     getAllAccessPoints = Mock()
     getAllAccessPoints.GetAllAccessPoints.return_value = [point]
     device.SpecificDevice.return_value = getAllAccessPoints
