@@ -6,33 +6,33 @@ import re
 
 from distutils.version import LooseVersion
 from pkg_resources import parse_version
+from collections import defaultdict
 
 
 def pkgkeyfunc(a):
     (name, ver) = a.split('_')[0:2]
-    return((parse_version(ver), name))
+    return(name, (parse_version(ver)))
 
 def pkglatestver(pkglist):
     vers = [x.split('_')[1] for x in pkglist]
     return max(vers, key=lambda x:parse_version(x))
 
-def pkglatestdebver(pkglist):
-    vers = [x.split('_')[1] for x in pkglist if re.search('deb.u.', x)]
-    return max(vers, key=lambda x:parse_version(x))
+pkgs = defaultdict(lambda: [])
+for deb in os.listdir('deb'):
+    if 'deb' in deb:
+        pkgs[pkgkeyfunc(deb)[0]].append(deb)
 
-debs = [x for x in os.listdir('deb') if 'deb' in x]
-debs.sort(key=pkgkeyfunc, reverse=True)
+latestver={}
+latestdebs = []
+for pkg in pkgs:
+    pkgs[pkg] = sorted(pkgs[pkg], key=pkgkeyfunc)
+    latestver = pkglatestver(pkgs[pkg])
+    latestdebs.append([x for x in pkgs[pkg] if latestver in x][0])
 
-ver = pkglatestver(debs)
-#stablever = pkglatestdebver(debs)
-
-latestdebs = [x for x in debs if ver in x]
-#latestdebdebs = [x for x in debs if stablever in x]
+debs = reduce(lambda x,y: x + y, [pkgs[x] for x in pkgs])
 
 outputjson = { 'all_pkgs': debs,
                'latest_pkgs': latestdebs, }
-#               'latest_stable': latestdebdebs, }
-
 
 with open('pkgs.json', 'w') as outfile:
     json.dump(outputjson, outfile, sort_keys=True, indent=4)
