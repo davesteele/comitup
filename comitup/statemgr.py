@@ -14,7 +14,7 @@
 import dbus
 import dbus.service
 import logging
-import iwscan
+from comitup import iwscan
 import os
 import subprocess
 
@@ -28,9 +28,9 @@ import time                                   # noqa
 from dbus.mainloop.glib import DBusGMainLoop  # noqa
 DBusGMainLoop(set_as_default=True)
 
-import states                                 # noqa
-import nm                                     # noqa
-import modemgr                                # noqa
+from comitup import states                                 # noqa
+from comitup import nm                                     # noqa
+from comitup import modemgr                                # noqa
 
 comitup_path = "/com/github/davesteele/comitup"
 

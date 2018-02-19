@@ -11,8 +11,8 @@
 # or later
 #
 
-import nm
-import config
+from comitup import nm
+from comitup import config
 
 
 SINGLE_MODE = "single"
