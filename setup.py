@@ -76,7 +76,7 @@ setup(
     },
     options={
         'build_scripts': {
-            'executable': '/usr/bin/python2.7',
+            'executable': '/usr/bin/python3',
         },
     },
     data_files=[
