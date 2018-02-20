@@ -44,19 +44,19 @@ def test_webapp_index(app, ssid, monkeypatch):
     index_text = response.get_data().decode()
 
     assert ssid + "</a>" in index_text
-    assert "ssid=" + urllib.parse.quote_plus(ssid) in index_text
+    assert "ssid=" + urllib.parse.quote(ssid) in index_text
 
 
 @pytest.mark.parametrize('ssid', ssid_list)
 def test_webapp_confirm(app, ssid, monkeypatch):
-    quoted_ssid = urllib.parse.quote_plus(ssid)
+    quoted_ssid = urllib.parse.quote(ssid)
     url = "confirm?ssid={}&encrypted=encrypted".format(quoted_ssid)
 
     response = app.test_client().get(url)
     index_text = response.get_data().decode()
 
     assert "to " + ssid in index_text
-    assert "value=\"" + urllib.parse.quote_plus(ssid) in index_text
+    assert "value=\"" + urllib.parse.quote(ssid) in index_text
 
 
 
@@ -65,8 +65,8 @@ def test_webapp_confirm(app, ssid, monkeypatch):
     monkeypatch.setattr('web.comitupweb.Process', Mock())
 
     data = {
-        'ssid': ssid,
-        'password': 'password',
+        'ssid': urllib.parse.quote(ssid),
+        'password': urllib.parse.quote('password'),
     }
     response = app.test_client().post('connect', data=data)
     index_text = response.get_data().decode()
