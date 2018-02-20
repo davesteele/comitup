@@ -61,7 +61,7 @@ def connect():
     p.start()
 
     return render_template("connect.html",
-                            ssid=ssid,
+                            ssid=ssid.encode(),
                             password=password,
                         )
 
