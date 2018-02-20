@@ -20,7 +20,7 @@ Depends:
     ${python3:Depends},
     ${misc:Depends},
     python3-crypto,
-    python3-networkmanager,
+    python3-networkmanager (>= 2.0),
     python3-pkg-resources,
     python3-gi,
     python3-flask,
@@ -29,5 +29,5 @@ Depends:
 Suggests: python-tabulate
 Description: bootstrap Wifi using Wifi
  Comitup will attempt to connect to wifi using an established connection. If
- that fails, is creates a hotspot and web service to aid in configuring a
+ that fails, it creates a hotspot and web service to aid in configuring a
  connection.
