@@ -35,14 +35,14 @@ def do_connect(ssid, password):
 def index():
     points = ciu.ciu_points()
     for point in points:
-        point['ssid_encoded'] = urllib.quote_plus(point['ssid'])
+        point['ssid_encoded'] = urllib.parse.quote_plus(point['ssid'])
     return render_template("index.html", points=points)
 
 
 @app.route("/confirm")
 def confirm():
     ssid = request.args.get("ssid", "")
-    ssid_encoded = urllib.quote_plus(base64.b32encode(ssid))
+    ssid_encoded = urllib.parse.quote_plus(base64.b32encode(ssid.encode()))
     encrypted = request.args.get("encrypted", "unencrypted")
     return render_template(
                             "confirm.html",
@@ -54,14 +54,14 @@ def confirm():
 
 @app.route("/connect", methods=['POST'])
 def connect():
-    ssid = base64.b32decode(urllib.unquote_plus(request.form["ssid"]))
+    ssid = base64.b32decode(urllib.parse.unquote_plus(request.form["ssid"]))
     password = request.form["password"].encode()
 
     p = Process(target=do_connect, args=(ssid, password))
     p.start()
 
     return render_template("connect.html",
-                            ssid=ssid,
+                            ssid=ssid.encode(),
                             password=password,
                         )
 
