@@ -13,35 +13,52 @@
 
 import dbus
 import sys
+from collections import defaultdict
 
-bus = dbus.SystemBus()
+func_map = defaultdict(lambda: None)
 
-try:
-    ciu_service = bus.get_object(
-                   'com.github.davesteele.comitup',
-                   '/com/github/davesteele/comitup'
-                  )
-except dbus.exceptions.DBusException:
-    print("Error connecting to the comitup D-Bus service")
-    sys.exit(1)
+def ciu_decorator(fn):
+    def wrapper(*args, **kwargs):
+        endpoint = fn()
 
-ciu_state = ciu_service.get_dbus_method(
-                'state',
-                'com.github.davesteele.comitup'
-            )
-ciu_points = ciu_service.get_dbus_method(
-                'access_points',
-                'com.github.davesteele.comitup'
-             )
-ciu_delete = ciu_service.get_dbus_method(
-                'delete_connection',
-                'com.github.davesteele.comitup'
-             )
-ciu_connect = ciu_service.get_dbus_method(
-                'connect',
-                'com.github.davesteele.comitup'
-             )
-ciu_info = ciu_service.get_dbus_method(
-                'get_info',
-                'com.github.davesteele.comitup'
-             )
+        if func_map[endpoint] is None:
+            try:
+                bus = dbus.SystemBus()
+
+                ciu_service = bus.get_object(
+                       'com.github.davesteele.comitup',
+                       '/com/github/davesteele/comitup'
+                    )
+
+                func_map[endpoint] = ciu_service.get_dbus_method(
+                       endpoint,
+                       'com.github.davesteele.comitup'
+                    )
+            except dbus.exceptions.DBusException:
+                print("Error connecting to the comitup D-Bus service")
+                sys.exit(1)
+
+        return func_map[endpoint](*args, **kwargs)
+
+    return wrapper
+
+
+@ciu_decorator
+def ciu_state():
+    return 'state'
+
+@ciu_decorator
+def ciu_points():
+    return 'access_points'
+
+@ciu_decorator
+def ciu_delete():
+    return 'delete_connection'
+
+@ciu_decorator
+def ciu_connect():
+    return 'connect'
+
+@ciu_decorator
+def ciu_ifo():
+    return 'get_info'
