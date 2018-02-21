@@ -1,8 +1,8 @@
-comitup (1.2-1) UNRELEASED; urgency=medium
+comitup (1.2-1) unstable; urgency=medium
 
   * Update to python3
 
- -- root <steele@debian.org>  Mon, 19 Feb 2018 20:49:03 +0000
+ -- David Steele <steele@debian.org>  Tue, 20 Feb 2018 22:08:28 -0500
 
 comitup (1.1-2) unstable; urgency=medium
 
