@@ -17,7 +17,6 @@ from multiprocessing import Process
 import urllib
 import base64
 from flask import Flask, render_template, request
-app = Flask(__name__)
 
 import sys
 sys.path.append('.')
@@ -31,42 +30,48 @@ def do_connect(ssid, password):
     ciu.ciu_connect(ssid, password)
 
 
-@app.route("/")
-def index():
-    points = ciu.ciu_points()
-    for point in points:
-        point['ssid_encoded'] = urllib.parse.quote_plus(point['ssid'])
-    return render_template("index.html", points=points)
+def create_app():
+    app = Flask(__name__)
+
+    @app.route("/")
+    def index():
+        points = ciu.ciu_points()
+        for point in points:
+            point['ssid_encoded'] = urllib.parse.quote(point['ssid'])
+        return render_template("index.html", points=points)
 
 
-@app.route("/confirm")
-def confirm():
-    ssid = request.args.get("ssid", "")
-    ssid_encoded = urllib.parse.quote_plus(base64.b32encode(ssid.encode()))
-    encrypted = request.args.get("encrypted", "unencrypted")
-    return render_template(
-                            "confirm.html",
-                            ssid=ssid,
-                            encrypted=encrypted,
-                            ssid_encoded=ssid_encoded,
+    @app.route("/confirm")
+    def confirm():
+        ssid = request.args.get("ssid", "")
+        ssid_encoded = urllib.parse.quote(ssid.encode())
+        encrypted = request.args.get("encrypted", "unencrypted")
+        return render_template(
+                                "confirm.html",
+                                ssid=ssid,
+                                encrypted=encrypted,
+                                ssid_encoded=ssid_encoded,
+                                )
+
+
+    @app.route("/connect", methods=['POST'])
+    def connect():
+        ssid = urllib.parse.unquote(request.form["ssid"])
+        password = request.form["password"].encode()
+
+        p = Process(target=do_connect, args=(ssid, password))
+        p.start()
+
+        return render_template("connect.html",
+                                ssid=ssid,
+                                password=password,
                             )
 
-
-@app.route("/connect", methods=['POST'])
-def connect():
-    ssid = base64.b32decode(urllib.parse.unquote_plus(request.form["ssid"]))
-    password = request.form["password"].encode()
-
-    p = Process(target=do_connect, args=(ssid, password))
-    p.start()
-
-    return render_template("connect.html",
-                            ssid=ssid.encode(),
-                            password=password,
-                        )
+    return app
 
 
 def main():
+    app = create_app()
     app.run(host="0.0.0.0", port=80, debug=True, threaded=True)
 
 
