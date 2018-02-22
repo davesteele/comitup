@@ -16,10 +16,13 @@ log = logging.getLogger('comitup')
 
 
 def device_present():
-    if subprocess.check_output("iw list".split()).decode() == "":
-        # Fail without comment
+    try:
+        if subprocess.check_output("iw list".split()).decode() == "":
+            # Fail without comment
+            return ""
+        return None
+    except CalledProcessError:
         return ""
-    return None
 
 
 def device_supports_ap():
