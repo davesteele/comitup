@@ -13,10 +13,11 @@
         "comitup_1.0-1_all.deb", 
         "comitup_1.1-1_all.deb", 
         "comitup_1.1-2_all.deb", 
+        "comitup_1.2-1_all.deb", 
         "python3-networkmanager_2.0.1-3_all.deb"
     ], 
     "latest_pkgs": [
-        "comitup_1.1-2_all.deb", 
+        "comitup_1.2-1_all.deb", 
         "python3-networkmanager_2.0.1-3_all.deb"
     ]
 }
