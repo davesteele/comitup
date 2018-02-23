@@ -12,5 +12,7 @@ ProtectSystem=full
 ProtectHome=yes
 MountFlags=slave
 NoNewPrivileges=yes
+Restart=always
+RestartSec=6
 
 [Install]
