@@ -57,9 +57,14 @@ def numsum(num, base2=True):
 
 if os.path.exists(zip_path):
     os.unlink(zip_path)
+
 zipf = zipfile.ZipFile(zip_path, compression=zipfile.ZIP_DEFLATED, mode='x')
-zipf.write(img_path)
+
+curdir = os.getcwd()
+os.chdir(img_dir)
+zipf.write(img_name)
 zipf.close()
+os.chdir(curdir)
 
 sha = hashlib.sha1()
 with open(zip_path, 'rb') as fp:
