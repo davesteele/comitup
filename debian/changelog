@@ -1,3 +1,11 @@
+comitup (1.2.1-1) UNRELEASED; urgency=medium
+
+  * Add restart delay to systemd conf files.
+  * Interpret 'iw list' failure correctly.
+  * Catch NetworkManager loss, and kill comitup.
+
+ -- David Steele <steele@debian.org>  Fri, 23 Feb 2018 20:43:18 -0500
+
 comitup (1.2-1) unstable; urgency=medium
 
   * Update to python3
