@@ -1,5 +1,5 @@
 Package: comitup
-Version: 1.2-1
+Version: 1.2.1-1
 Architecture: all
 Maintainer: David Steele <steele@debian.org>
 Installed-Size: 153
@@ -8,11 +8,11 @@ Suggests: python-tabulate
 Homepage: https://davesteele.github.io/comitup/
 Priority: optional
 Section: net
-Filename: pool/main/c/comitup/comitup_1.2-1_all.deb
-Size: 28148
-SHA256: e52cafbb63b2269d417eeb58a102030fc002b56903c1d30d379cddc62bf3ba4e
-SHA1: ebf6563adeceaa4b7fe60955255792e5261a0d54
-MD5sum: c6b04d611d6764c1afe4a407f477c07a
+Filename: pool/main/c/comitup/comitup_1.2.1-1_all.deb
+Size: 28336
+SHA256: a6c01511078a4e2c6be04899c2cc9bc06c9e6fd4e7b53e25e0766c2c364d21df
+SHA1: 2d53c78524b8233eb333f486e4a0b851d8268a49
+MD5sum: 688d4e61af99db08bc5978f547fe5c6e
 Description: bootstrap Wifi using Wifi
  Comitup will attempt to connect to wifi using an established connection. If
  that fails, it creates a hotspot and web service to aid in configuring a
@@ -20,19 +20,19 @@ Description: bootstrap Wifi using Wifi
 
 Package: python3-networkmanager
 Source: python-networkmanager
-Version: 2.0.1-3
+Version: 2.0.1-4
 Architecture: all
 Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
-Installed-Size: 107
+Installed-Size: 106
 Depends: network-manager (>= 0.9.0~), python3-dbus, python3-six, python3:any (>= 3.3.2-2~)
 Homepage: https://pypi.python.org/pypi/python-networkmanager/
 Priority: optional
 Section: python
-Filename: pool/main/p/python-networkmanager/python3-networkmanager_2.0.1-3_all.deb
-Size: 25680
-SHA256: 93ae15df3b310d5e4cbe0531178e88a6b53242588ad46e16e1b4029d9adb7ea0
-SHA1: b4397e78fa09b6cb0488f7761000c58df296b49c
-MD5sum: d48172762a117f40c2ea1ece6da9c56a
+Filename: pool/main/p/python-networkmanager/python3-networkmanager_2.0.1-4_all.deb
+Size: 25664
+SHA256: 89c65fd8a986f9f69bbd3eb294b93319b3b7b14b928c3cecf037db48851d85c4
+SHA1: edb14e1bbb853ed3af98ea28bdd277dc1a8491c7
+MD5sum: 8f579803d8ef74b8fff03db65d58a440
 Description: Python 3 interface to the NetworkManager D-Bus interface
  python-networkmanager wraps NetworkManager's D-Bus interface so you can be
  less verbose when talking to NetworkManager from Python. All interfaces have
