@@ -101,6 +101,7 @@ def hotspot_start():
 
     # if we are in two-wifi device mode, skip the reconnect if possible,
     # to avoid kicking some clients off
+    log.debug("states: Calling nm.get_active_ssid()")
     if hs_ssid != nm.get_active_ssid(modemgr.get_state_device('HOTSPOT')):
         mdns.clear_entries()
         conn_list = []
@@ -122,6 +123,7 @@ def hotspot_pass():
 
     # IP tolerance for PI 2
     for _ in range(5):
+        log.debug("states: Calling nm.get_active_ip()")
         ip = nm.get_active_ip(modemgr.get_state_device('HOTSPOT'))
         if ip:
             mdns.clear_entries()
@@ -132,6 +134,7 @@ def hotspot_pass():
 
 @state_callback
 def hotspot_fail():
+    log.warn("Hotspot mode failure")
     pass
 
 
@@ -164,6 +167,7 @@ def connecting_start():
     mdns.clear_entries()
 
     if conn_list:
+        log.debug("states: Calling nm.disconnect()")
         nm.disconnect(modemgr.get_state_device('CONNECTING'))
 
         conn = conn_list.pop(0)
@@ -173,6 +177,7 @@ def connecting_start():
         # Give NetworkManager a chance to update the access point list
         try:
             # todo - clean this up
+            log.debug("states: Calling nm.deactivate_connection()")
             nm.deactivate_connection(modemgr.get_state_device('CONNECTING'))
         except DBusException:
             pass
@@ -211,6 +216,7 @@ def connected_start():
 
     # IP tolerance for PI 2
     for _ in range(5):
+        log.debug("states: Calling nm.get_active_ip()")
         ip = nm.get_active_ip(modemgr.get_state_device('CONNECTED'))
         if ip:
             mdns.clear_entries()
@@ -223,7 +229,17 @@ def connected_start():
 
 @state_callback
 def connected_pass():
-    pass
+    # NetworkManager is crashing on the first call to attach. In two
+    # interface mode, this leaves the hotspot interface with no IP
+    # configuration. Detect this and recover
+    if modemgr.get_mode() == modemgr.MULTI_MODE:
+        time.sleep(1)
+        log.debug("states: Calling nm.get_active_ip()")
+        ip = nm.get_active_ip(modemgr.get_state_device('HOTSPOT'))
+        if not ip:
+            log.warn("Hotspot lost IP configuration - resetting")
+            hs_ssid = dns_to_conn(dns_names[0])
+            activate_connection(hs_ssid, 'HOTSPOT')
 
 
 @state_callback
@@ -234,6 +250,7 @@ def connected_fail():
 
 @timeout
 def connected_timeout():
+    log.debug("states: Calling nm.get_active_ssid()")
     if connection != nm.get_active_ssid(modemgr.get_state_device('CONNECTED')):
         log.warn("Connection lost on timeout")
         set_state('HOTSPOT')
@@ -265,6 +282,7 @@ def set_state(state, connections=None, timeout=180):
     log.info('Setting state to %s' % state)
 
     if com_state != 'HOTSPOT':
+        log.debug("states: Calling nm.get_points_ext()")
         points = nm.get_points_ext(modemgr.get_state_device(com_state))
 
     state_info = state_matrix(state)
@@ -291,12 +309,14 @@ def activate_connection(name, state):
     except IndexError:
         path = '/'
 
+    log.debug("states: Calling nm.activate_connection_by_ssid()")
     nm.activate_connection_by_ssid(connection,
                                    modemgr.get_state_device(state),
                                    path=path)
 
 
 def candidate_connections(device):
+    log.debug("states: Calling nm.get_candidate_connections()")
     return nm.get_candidate_connections(device)
 
 
@@ -306,6 +326,7 @@ def set_hosts(*args):
 
 
 def assure_hotspot(ssid, device):
+    log.debug("states: Calling nm.get_connection_by_ssid()")
     if not nm.get_connection_by_ssid(ssid):
         nm.make_hotspot(ssid, device)
 
