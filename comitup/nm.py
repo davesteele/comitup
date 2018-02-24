@@ -52,7 +52,11 @@ def none_on_exception(*exceptions):
 
 
 def get_devices():
-    return nm.NetworkManager.GetDevices()
+    try:
+        return nm.NetworkManager.GetDevices()
+    except TypeError:
+        # NetworkManager is gone for some reason. Bail big time.
+        sys.exit(1)
 
 
 def device_name(device):

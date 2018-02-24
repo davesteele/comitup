@@ -16,16 +16,19 @@ log = logging.getLogger('comitup')
 
 
 def device_present():
-    if subprocess.check_output("iw list".split()).decode() == "":
-        # Fail without comment
+    try:
+        if subprocess.check_output("iw list".split()).decode() == "":
+            # Fail without comment
+            return ""
+        return None
+    except CalledProcessError:
         return ""
-    return None
 
 
 def device_supports_ap():
-    devicesinfo = subprocess.check_output("iw list".split()).decode()
-
-    phy = devicesinfo.split()[1]
+    phy_txt = subprocess.check_output("iw list".split()).decode()
+    phy_lst = [x.split()[1] for x in phy_txt.split('\n') if "Wiphy " in x]
+    phy = sorted(phy_lst)[0]
 
     cmd = "iw phy {} info".format(phy)
     deviceinfo = subprocess.check_output(cmd.split()).decode()
