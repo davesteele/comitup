@@ -223,7 +223,15 @@ def connected_start():
 
 @state_callback
 def connected_pass():
-    pass
+    # NetworkManager is crashing on the first call to attach. In two
+    # interface mode, this leaves the hotspot interface with no IP
+    # configuration. Detect this and recover
+    if modemgr.get_mode() == modemgr.MULTI_MODE:
+        time.sleep(1)
+        ip = nm.get_active_ip(modemgr.get_state_device('HOTSPOT'))
+        if not ip:
+            hs_ssid = dns_to_conn(dns_names[0])
+            activate_connection(hs_ssid, 'HOTSPOT')
 
 
 @state_callback
