@@ -134,6 +134,7 @@ def hotspot_pass():
 
 @state_callback
 def hotspot_fail():
+    log.warn("Hotspot mode failure")
     pass
 
 
@@ -236,6 +237,7 @@ def connected_pass():
         log.debug("states: Calling nm.get_active_ip()")
         ip = nm.get_active_ip(modemgr.get_state_device('HOTSPOT'))
         if not ip:
+            log.warn("Hotspot lost IP configuration - resetting")
             hs_ssid = dns_to_conn(dns_names[0])
             activate_connection(hs_ssid, 'HOTSPOT')
 
