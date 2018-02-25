@@ -1,8 +1,8 @@
-comitup (1.2.3-1) UNRELEASED; urgency=medium
+comitup (1.2.3-1) unstable; urgency=medium
 
   * Add a states monitor task. Use it to monitor hotspot.
 
- -- David Steele <steele@debian.org>  Sat, 24 Feb 2018 23:27:30 -0500
+ -- David Steele <steele@debian.org>  Sun, 25 Feb 2018 09:57:32 -0500
 
 comitup (1.2.2-1) UNRELEASED; urgency=medium
 
