@@ -229,17 +229,7 @@ def connected_start():
 
 @state_callback
 def connected_pass():
-    # NetworkManager is crashing on the first call to attach. In two
-    # interface mode, this leaves the hotspot interface with no IP
-    # configuration. Detect this and recover
-    if modemgr.get_mode() == modemgr.MULTI_MODE:
-        time.sleep(1)
-        log.debug("states: Calling nm.get_active_ip()")
-        ip = nm.get_active_ip(modemgr.get_state_device('HOTSPOT'))
-        if not ip:
-            log.warn("Hotspot lost IP configuration - resetting")
-            hs_ssid = dns_to_conn(dns_names[0])
-            activate_connection(hs_ssid, 'HOTSPOT')
+    pass
 
 
 @state_callback
@@ -331,6 +321,23 @@ def assure_hotspot(ssid, device):
         nm.make_hotspot(ssid, device)
 
 
+def state_monitor():
+    # NetworkManager is crashing on the first call to attach. In two
+    # interface mode, this leaves the hotspot interface with no IP
+    # configuration. Detect this and recover
+    if com_state != 'HOTSPOT'):
+        if modemgr.get_mode() == modemgr.MULTI_MODE:
+            log.debug("state_monitor: Calling nm.get_active_ip()")
+            ip = nm.get_active_ip(modemgr.get_state_device('HOTSPOT'))
+            if not ip:
+                log.warn("Hotspot lost IP configuration - resetting")
+                hs_ssid = dns_to_conn(dns_names[0])
+                activate_connection(hs_ssid, 'HOTSPOT')
+
+    # Keep this periodic task running
+    return True
+
+
 def init_states(hosts, callbacks):
     global hotspot_name
 
@@ -343,6 +350,8 @@ def init_states(hosts, callbacks):
     hotspot_name = dns_to_conn(hosts[0])
 
     assure_hotspot(hotspot_name, modemgr.get_ap_device())
+
+    timeout_add(10*1000, state_monitor)
 
 
 def add_state_callback(callback):
