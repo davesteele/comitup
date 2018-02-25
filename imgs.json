@@ -1,18 +1,18 @@
 {
     "full": {
-        "compressed": 1795826613,
+        "compressed": 1795813842,
         "compressedstr": "1.8 G",
-        "filename": "2017-11-29-raspbian-stretch-comitup-1.2-02-23.img.zip",
-        "magnet": "magnet:?xt=urn:btih:2348a879511dec8dcc3933819a237fe680aa237a&dn=2017-11-29-raspbian-stretch-comitup-1.2-02-23.img.zip&tr=udp%3A%2F%2Ftracker1.wasabii.com.tw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.sktorrent.net%3A6969%2Fannounce\n",
+        "filename": "2017-11-29-raspbian-stretch-comitup-1.2.3-02-24.img.zip",
+        "magnet": "magnet:?xt=urn:btih:21d1ab2e0beecc05304695aae924445af7137d52&dn=2017-11-29-raspbian-stretch-comitup-1.2.3-02-24.img.zip&tr=udp%3A%2F%2Ftracker1.wasabii.com.tw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.sktorrent.net%3A6969%2Fannounce\n",
         "name": "",
         "uncompressed": 6601834496,
         "uncompressedstr": "6.4 G"
     },
     "lite": {
-        "compressed": 402589152,
+        "compressed": 402589486,
         "compressedstr": "393 M",
-        "filename": "2017-11-29-raspbian-stretch-lite-comitup-1.2-02-23.img.zip",
-        "magnet": "magnet:?xt=urn:btih:3e80eaf00c01eed452aee16a2fbf36f580291cf5&dn=2017-11-29-raspbian-stretch-lite-comitup-1.2-02-23.img.zip&tr=udp%3A%2F%2Ftracker1.wasabii.com.tw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.sktorrent.net%3A6969%2Fannounce\n",
+        "filename": "2017-11-29-raspbian-stretch-lite-comitup-1.2.3-02-24.img.zip",
+        "magnet": "magnet:?xt=urn:btih:0695973d5e63744e6cece20353e13e8b49997175&dn=2017-11-29-raspbian-stretch-lite-comitup-1.2.3-02-24.img.zip&tr=udp%3A%2F%2Ftracker1.wasabii.com.tw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.sktorrent.net%3A6969%2Fannounce\n",
         "name": "Lite",
         "uncompressed": 1584234496,
         "uncompressedstr": "1.5 G"
