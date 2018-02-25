@@ -325,7 +325,7 @@ def state_monitor():
     # NetworkManager is crashing on the first call to attach. In two
     # interface mode, this leaves the hotspot interface with no IP
     # configuration. Detect this and recover
-    if com_state != 'HOTSPOT'):
+    if com_state != 'HOTSPOT':
         if modemgr.get_mode() == modemgr.MULTI_MODE:
             log.debug("state_monitor: Calling nm.get_active_ip()")
             ip = nm.get_active_ip(modemgr.get_state_device('HOTSPOT'))
