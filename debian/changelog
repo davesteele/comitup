@@ -1,3 +1,10 @@
+comitup (1.2.2-1) unstable; urgency=medium
+
+  * Workaround for NetworkManager crash, which mangles the hotspot.
+  * More logging.
+
+ -- David Steele <steele@debian.org>  Sat, 24 Feb 2018 19:59:49 -0500
+
 comitup (1.2.1-1) unstable; urgency=medium
 
   * Add restart delay to systemd conf files.
