@@ -10,25 +10,44 @@ import textwrap
 import logging
 import subprocess
 import re
+import os
 
 
 log = logging.getLogger('comitup')
 
 
+class DevInfo(object):
+    def __init__(self):
+        self.dev_list = []
+        for dev in os.listdir("/sys/class/net"):
+            try:
+                path = "/sys/class/net/{}/phy80211/name".format(dev)
+                with open(path, 'r') as fp:
+                    phy = fp.read().strip()
+                self.dev_list.append( (dev, phy) )
+            except FileNotFoundError:
+                pass
+
+    def get_devs(self):
+        return sorted([x[0] for x in self.dev_list])
+
+    def get_phy(self, dev):
+        return [x[1] for x in self.dev_list if x[0] == dev][0]
+
+
+dev_info = DevInfo()
+
 def device_present():
-    try:
-        if subprocess.check_output("iw list".split()).decode() == "":
-            # Fail without comment
-            return ""
+    if dev_info.get_devs():
         return None
-    except CalledProcessError:
+    else:
+        # Fail without comment
         return ""
 
 
 def device_supports_ap():
-    phy_txt = subprocess.check_output("iw list".split()).decode()
-    phy_lst = [x.split()[1] for x in phy_txt.split('\n') if "Wiphy " in x]
-    phy = sorted(phy_lst)[0]
+    dev = dev_info.get_devs()[0]
+    phy = dev_info.get_phy(dev)
 
     cmd = "iw phy {} info".format(phy)
     deviceinfo = subprocess.check_output(cmd.split()).decode()
@@ -42,9 +61,10 @@ def device_supports_ap():
 def device_nm_managed():
     devicesinfo = subprocess.check_output("nmcli device show".split(), re.MULTILINE).decode()
 
-    if not re.search("GENERAL.TYPE\W+wifi", devicesinfo):
-        # Fail without comment
-        return ""
+    for dev in dev_info.get_devs():
+        if dev not in devicesinfo:
+            # Fail without comment
+            return ""
 
     return None
 
