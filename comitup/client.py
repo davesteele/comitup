@@ -60,5 +60,5 @@ def ciu_connect():
     return 'connect'
 
 @ciu_decorator
-def ciu_ifo():
+def ciu_info():
     return 'get_info'
