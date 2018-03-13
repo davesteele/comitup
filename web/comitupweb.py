@@ -24,10 +24,12 @@ sys.path.append('..')
 
 from comitup import client as ciu                 # noqa
 
+ciu_client = None
+
 
 def do_connect(ssid, password):
     time.sleep(1)
-    ciu.ciu_connect(ssid, password)
+    ciu_client.ciu_connect(ssid, password)
 
 
 def create_app():
@@ -35,7 +37,7 @@ def create_app():
 
     @app.route("/")
     def index():
-        points = ciu.ciu_points()
+        points = ciu_client.ciu_points()
         for point in points:
             point['ssid_encoded'] = urllib.parse.quote(point['ssid'])
         return render_template("index.html", points=points)
@@ -71,6 +73,9 @@ def create_app():
 
 
 def main():
+    global ciu_client
+    ciu_client = ciu.CiuClient()
+
     app = create_app()
     app.run(host="0.0.0.0", port=80, debug=True, threaded=True)
 
