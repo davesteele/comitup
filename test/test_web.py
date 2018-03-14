@@ -37,8 +37,9 @@ def test_webapp_index(app, ssid, monkeypatch):
     point = {
         'ssid': ssid,
     }
-    points_mock = Mock(return_value = [point])
-    monkeypatch.setattr('web.comitupweb.ciu.ciu_points', points_mock)
+    client_mock = Mock()
+    client_mock.ciu_points.return_value = [point]
+    comitupweb.ciu_client = client_mock
 
     response = app.test_client().get('/')
     index_text = response.get_data().decode()

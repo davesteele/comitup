@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# Copyright (c) 2017 David Steele <dsteele@gmail.com>
+# Copyright (c) 2017-2018 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2+
 # License-Filename: LICENSE
@@ -13,52 +13,38 @@
 
 import dbus
 import sys
-from collections import defaultdict
 
-func_map = defaultdict(lambda: None)
+class CiuClient(object):
 
-def ciu_decorator(fn):
-    def wrapper(*args, **kwargs):
-        endpoint = fn()
+    # Make the dbus functions late binding, to facilitate testing.
 
-        if func_map[endpoint] is None:
-            try:
+    # These are the methods supported, with the corresponding dbus
+    # endpoint name.
+    methods = {
+        'ciu_info': 'get_info',
+        'ciu_state': 'state',
+        'ciu_points': 'access_points',
+        'ciu_connect': 'connect',
+        'ciu_delete': 'delete_connection',
+    }
+
+    def __init__(self):
+        self.service = None
+
+    def __getattr__(self, name):
+        if name not in self.methods:
+            raise AttributeError("Attribute {} not found".format(name))
+
+        try:
+            if not self.service:
                 bus = dbus.SystemBus()
+                self.service = bus.get_object('com.github.davesteele.comitup',
+                                              '/com/github/davesteele/comitup')
+            func = self.service.get_dbus_method(self.methods[name],
+                                                'com.github.davesteele.comitup')
+        except dbus.exceptions.DBusException:
+            sys.exit(1)
 
-                ciu_service = bus.get_object(
-                       'com.github.davesteele.comitup',
-                       '/com/github/davesteele/comitup'
-                    )
-
-                func_map[endpoint] = ciu_service.get_dbus_method(
-                       endpoint,
-                       'com.github.davesteele.comitup'
-                    )
-            except dbus.exceptions.DBusException:
-                print("Error connecting to the comitup D-Bus service")
-                sys.exit(1)
-
-        return func_map[endpoint](*args, **kwargs)
-
-    return wrapper
-
-
-@ciu_decorator
-def ciu_state():
-    return 'state'
-
-@ciu_decorator
-def ciu_points():
-    return 'access_points'
-
-@ciu_decorator
-def ciu_delete():
-    return 'delete_connection'
-
-@ciu_decorator
-def ciu_connect():
-    return 'connect'
-
-@ciu_decorator
-def ciu_ifo():
-    return 'get_info'
+        # connect as an unbound function
+        self.__setattr__(name, func)
+        return func

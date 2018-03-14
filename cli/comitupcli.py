@@ -21,24 +21,24 @@ from getpass import getpass                      # noqa
 from comitup import client as ciu                # noqa
 
 
-def do_reload(connection):
+def do_reload(ciu_client, connection):
     pass
 
 
-def do_quit(connection):
+def do_quit(ciu_client, connection):
     sys.exit(0)
 
 
-def do_delete(connection):
-    ciu.ciu_delete(connection)
+def do_delete(ciu_client, connection):
+    ciu_client.ciu_delete(connection)
 
 
-def do_connect(ssid, password):
-    ciu.ciu_connect(ssid, password)
+def do_connect(ciu_client, ssid, password):
+    ciu_client.ciu_connect(ssid, password)
 
 
-def do_info(connection):
-    info = ciu.ciu_info(connection)
+def do_info(ciu_client, connection):
+    info = ciu_client.ciu_info(connection)
     print("")
     print("Host %s on comitup version %s"
           % (info['hostnames'], info['version']))
@@ -63,8 +63,8 @@ def int_value(s):
         return None
 
 
-def get_state():
-    state, connection = ciu.ciu_state()
+def get_state(ciu_client):
+    state, connection = ciu_client.ciu_state()
     return state, connection
 
 
@@ -90,10 +90,13 @@ def print_cmd_prompts(state, connection, points):
 
 
 def interpreter():
-    while True:
-        state, connection = get_state()
 
-        points = ciu.ciu_points()
+    ciu_client = ciu.CiuClient()
+
+    while True:
+        state, connection = get_state(ciu_client)
+
+        points = ciu_client.ciu_points()
 
         print_cmd_prompts(state, connection, points)
 
@@ -105,14 +108,14 @@ def interpreter():
             password = ""
             if points[index-1]['security'] == 'encrypted':
                 password = getpass('password: ')
-            do_connect(points[index-1]['ssid'], password)
+            do_connect(ciu_client, points[index-1]['ssid'], password)
         elif cmd == 'm':
             ssid = input("ssid?: ")
             password = getpass('password (if required)?: ')
-            do_connect(ssid, password)
+            do_connect(ciu_client, ssid, password)
         else:
             try:
-                commands[cmd].fn(connection)
+                commands[cmd].fn(ciu_client, connection)
             except KeyError:
                 print("\nInvalid command\n")
 
