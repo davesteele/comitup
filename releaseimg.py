@@ -16,9 +16,9 @@ zip_path = img_path + ".zip"
 
 # Update tracker list from https://newtrackon.com
 trackers = [
-    'udp://tracker1.wasabii.com.tw:6969/announce',
     'udp://tracker.vanitycore.co:6969/announce',
-    'http://tracker.sktorrent.net:6969/announce',
+    'https://open.acgnxtracker.com:443/announce',
+    'http://share.camoe.cn:8080/announce',
 ]
 
 
