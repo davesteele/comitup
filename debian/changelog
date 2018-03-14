@@ -1,3 +1,10 @@
+comitup (1.2.4-1) unstable; urgency=medium
+
+  * Fix a bug in the startup wifi tests.
+  * Fix the comitup-cli 'info' command.
+
+ -- David Steele <steele@debian.org>  Tue, 13 Mar 2018 20:44:12 -0400
+
 comitup (1.2.3-1) unstable; urgency=medium
 
   * Add a states monitor task. Use it to monitor hotspot.
