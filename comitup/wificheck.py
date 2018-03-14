@@ -49,8 +49,11 @@ def device_supports_ap():
     dev = dev_info.get_devs()[0]
     phy = dev_info.get_phy(dev)
 
-    cmd = "iw phy {} info".format(phy)
-    deviceinfo = subprocess.check_output(cmd.split()).decode()
+    try:
+        cmd = "iw phy {} info".format(phy)
+        deviceinfo = subprocess.check_output(cmd.split()).decode()
+    except subprocess.CalledProcessError:
+        return ""
 
     if "* AP\n" not in deviceinfo:
         return phy
