@@ -8,7 +8,7 @@ case "$1" in
       mv -f /var/lib/comitup/comitup.json.save /var/lib/comitup/comitup.json
     fi
 
-    python /usr/share/comitup/comitup/wificheck.py || true
+    python3 /usr/share/comitup/comitup/wificheck.py || true
     ;;
 esac
 
