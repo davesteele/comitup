@@ -18,7 +18,7 @@ zip_path = img_path + ".zip"
 trackers = [
     'udp://tracker.vanitycore.co:6969/announce',
     'https://open.acgnxtracker.com:443/announce',
-    'http://share.camoe.cn:8080/announce',
+    'http://torrentsmd.com:8080/announce',
 ]
 
 
