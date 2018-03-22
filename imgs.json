@@ -1,20 +1,20 @@
 {
     "full": {
-        "compressed": 1795782980,
-        "compressedstr": "1.8 G",
-        "filename": "2017-11-29-raspbian-stretch-comitup-1.2.4-03-13.img.zip",
-        "magnet": "magnet:?xt=urn:btih:d06fa749fb2ef153c6feb73e4e7ac0aaca0610af&dn=2017-11-29-raspbian-stretch-comitup-1.2.4-03-13.img.zip&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=https%3A%2F%2Fopen.acgnxtracker.com%3A443%2Fannounce&tr=http%3A%2F%2Fshare.camoe.cn%3A8080%2Fannounce\n",
+        "compressed": 1461538559,
+        "compressedstr": "1.4 G",
+        "filename": "2018-03-22-Comitup-4GB.img.zip",
+        "magnet": "magnet:?xt=urn:btih:4677376222941b34721def16c0d4c9e96ac9a844&dn=2018-03-22-Comitup-4GB.img.zip&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=https%3A%2F%2Fopen.acgnxtracker.com%3A443%2Fannounce&tr=http%3A%2F%2Ftorrentsmd.com%3A8080%2Fannounce\n",
         "name": "",
-        "uncompressed": 6601834496,
-        "uncompressedstr": "6.4 G"
+        "uncompressed": 4232052736,
+        "uncompressedstr": "4.1 G"
     },
     "lite": {
-        "compressed": 402582359,
-        "compressedstr": "393 M",
-        "filename": "2017-11-29-raspbian-stretch-lite-comitup-1.2.4-03-13.img.zip",
-        "magnet": "magnet:?xt=urn:btih:9becf9e25ceffba2c7efbda365436b4733f21120&dn=2017-11-29-raspbian-stretch-lite-comitup-1.2.4-03-13.img.zip&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=https%3A%2F%2Fopen.acgnxtracker.com%3A443%2Fannounce&tr=http%3A%2F%2Fshare.camoe.cn%3A8080%2Fannounce\n",
+        "compressed": 389621295,
+        "compressedstr": "380 M",
+        "filename": "2018-03-22-Comitup-lite.img.zip",
+        "magnet": "magnet:?xt=urn:btih:73af2b0bc49f244a0c503f71588a4ee0cac17b6a&dn=2018-03-22-Comitup-lite.img.zip&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=https%3A%2F%2Fopen.acgnxtracker.com%3A443%2Fannounce&tr=http%3A%2F%2Ftorrentsmd.com%3A8080%2Fannounce\n",
         "name": "Lite",
-        "uncompressed": 1584234496,
-        "uncompressedstr": "1.5 G"
+        "uncompressed": 1862270976,
+        "uncompressedstr": "1.8 G"
     }
 }
