@@ -1,0 +1,4 @@
+Archive: stable
+Component: main
+Architecture: amd64
+Description: Apt repository for comitup on Jessie

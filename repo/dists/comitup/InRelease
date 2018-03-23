@@ -1,6 +1,9 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
 Suite: stable
-Codename: comitup-jessie
-Date: Fri, 23 Mar 2018 21:27:00 UTC
+Codename: comitup
+Date: Fri, 23 Mar 2018 21:27:07 UTC
 Architectures: amd64 i386 armhf armel
 Components: main
 Description: Apt repository for comitup on Jessie
@@ -43,3 +46,19 @@ SHA256:
  4b884ae8355bc8aadb2a22924d0bfa6710d1ac0b7fb8c503050cb0498074bc13 2004 main/binary-armel/Packages
  b060890ddda340a996396f8e5f3b5a0a27ad85173fc4e4ae60e22a50e3ad5f9b 1018 main/binary-armel/Packages.gz
  cec0bf59fe71cdad4d970511bfd7351bedeaa895b1d9478019a0f448381dce2e 102 main/binary-armel/Release
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE1wfmOgeeFqqbnJ0CYn67KQqBeoIFAlq1cSsACgkQYn67KQqB
+eoIUQg/8Dc0ZtdJMWeTdUTkyV4ZarFG0X8HRgrjXFdopGhnhVNb+i0PqkCsryK3J
+BpeVHwkn18LWSyghFLE8BMic8Qg6Owz4098GXT1BxSCWJZm4kGMkXWhdaZ+hjmoe
+tEaMr7MPivB3tEwhGALBhC2kkO/5Mx4zaIccpP79DqDi/mSifYed/iJTIzLemyo9
+/aYUS00UmbZ3fiU/HGSpbZbPhKijKlc13G1WFbbUp35GEq1iEhvk4yQywT69x67Y
+LMaMTyp22R6LuBXywVuLwbSdlJv2uAaDFO1Kg2YJYWC4EWV/10i+GuirPRJpS0Et
+/ybS0ThXYFC4qNRvPM/D105bW7DDkVpnCZjeD9fC49jVF5N6etX7pDryNJIGbPyd
+OVHBgvHvXgcXVqkz6CQBpbfIk0tcLySxEvlbnPc96/SuntLN5Ugo0fpggZxDHy44
+QFuL0087d0yWEbqcdLq5pF1DzaziZtwDkx5oczKvvUiQFC5k12MGqXIal4ckWL5Q
+YjOxwfqxbvH1pusiDJ4xiarU3hQPNEgHljqtiYdgLPExPF1/FmJsR5yldrU3rcDr
+e0/SXm11C7JEt/q4XPSaCcJUinuPdXFaDyixLr+yyuMz7+chTXfg+zw1lu8++WIS
+BycsNBlVwMQSCxJpgb/7ZdkvuhApeDZLldZ7maUy02r1jMqQofU=
+=zpGz
+-----END PGP SIGNATURE-----

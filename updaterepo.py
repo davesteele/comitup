@@ -21,4 +21,5 @@ with open('pkgs.json') as fp:
     debs = json.load(fp)
 
 addrepo('comitup-jessie', debs['latest_pkgs'])
+addrepo('comitup', debs['latest_pkgs'])
 

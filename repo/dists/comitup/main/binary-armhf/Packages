@@ -1,0 +1,46 @@
+Package: comitup
+Version: 1.2.4-1
+Architecture: all
+Maintainer: David Steele <steele@debian.org>
+Installed-Size: 157
+Depends: python3-jinja2, python3:any (>= 3.5~), python3-crypto, python3-networkmanager (>= 2.0), python3-pkg-resources, python3-gi, python3-flask, python-configparser, iw
+Suggests: python-tabulate
+Homepage: https://davesteele.github.io/comitup/
+Priority: optional
+Section: net
+Filename: pool/main/c/comitup/comitup_1.2.4-1_all.deb
+Size: 28924
+SHA256: 72517db6b05e41b2cff8f6914d147870b16f49d38897d68d1b9c179b6b044529
+SHA1: 2fe99405a1178fa464c70047858b98bbacd98566
+MD5sum: bd8622f154eafd2ea699975cd4c24497
+Description: bootstrap Wifi using Wifi
+ Comitup will attempt to connect to wifi using an established connection. If
+ that fails, it creates a hotspot and web service to aid in configuring a
+ connection.
+
+Package: python3-networkmanager
+Source: python-networkmanager
+Version: 2.0.1-4
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 106
+Depends: network-manager (>= 0.9.0~), python3-dbus, python3-six, python3:any (>= 3.3.2-2~)
+Homepage: https://pypi.python.org/pypi/python-networkmanager/
+Priority: optional
+Section: python
+Filename: pool/main/p/python-networkmanager/python3-networkmanager_2.0.1-4_all.deb
+Size: 25664
+SHA256: 89c65fd8a986f9f69bbd3eb294b93319b3b7b14b928c3cecf037db48851d85c4
+SHA1: edb14e1bbb853ed3af98ea28bdd277dc1a8491c7
+MD5sum: 8f579803d8ef74b8fff03db65d58a440
+Description: Python 3 interface to the NetworkManager D-Bus interface
+ python-networkmanager wraps NetworkManager's D-Bus interface so you can be
+ less verbose when talking to NetworkManager from Python. All interfaces have
+ been wrapped in classes, properties are exposed as Python properties and
+ function calls are forwarded to the correct interface.
+ .
+ See docs/index.rst for the documentation. An HTML version can be found on
+ http://packages.python.org/python-networkmanager/
+ .
+ This package provides the Python 3.x module.
+

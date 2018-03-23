@@ -1,6 +1,6 @@
 Suite: stable
-Codename: comitup-jessie
-Date: Fri, 23 Mar 2018 21:27:00 UTC
+Codename: comitup
+Date: Fri, 23 Mar 2018 21:27:07 UTC
 Architectures: amd64 i386 armhf armel
 Components: main
 Description: Apt repository for comitup on Jessie
