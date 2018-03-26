@@ -26,7 +26,6 @@ Depends:
     python3-flask,
     python-configparser,
     iw,
-    dnsmasq,
 Suggests: python-tabulate
 Description: bootstrap Wifi using Wifi
  Comitup will attempt to connect to wifi using an established connection. If
