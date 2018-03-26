@@ -19,6 +19,13 @@ import sys
 import uuid
 import getpass
 from functools import wraps
+
+if __name__ == '__main__':
+    import os
+    fullpath = os.path.abspath(__file__)
+    parentdir = '/'.join(fullpath.split('/')[:-2])
+    sys.path.insert(0, parentdir)
+
 from comitup import iwscan
 
 
