@@ -6,13 +6,21 @@ import os
 import hashlib
 import gnupg
 import json
+import subprocess
+import shutil
 
 
-img_path = sys.argv[1]
-img_name = os.path.split(img_path)[-1]
-img_dir = os.path.dirname(img_path)
-zip_name = img_name + ".zip"
-zip_path = img_path + ".zip"
+zip_path = sys.argv[1]
+zip_name = os.path.split(zip_path)[-1]
+zip_dir = os.path.dirname(zip_path)
+
+info_name = zip_name[6:-4] + ".info"
+info_path = os.path.join(zip_dir, info_name)
+print(info_name, info_path)
+
+if ".zip" not in zip_name:
+    print("argument must be the zipped image")
+    sys.exit(1)
 
 # Update tracker list from https://newtrackon.com
 trackers = [
@@ -55,17 +63,6 @@ def numsum(num, base2=True):
 
     return result
 
-if os.path.exists(zip_path):
-    os.unlink(zip_path)
-
-zipf = zipfile.ZipFile(zip_path, compression=zipfile.ZIP_DEFLATED, mode='x')
-
-curdir = os.getcwd()
-os.chdir(img_dir)
-zipf.write(img_name)
-zipf.close()
-os.chdir(curdir)
-
 sha = hashlib.sha1()
 with open(zip_path, 'rb') as fp:
     for chunk in iter(lambda: fp.read(1048576), b''):
@@ -85,16 +82,21 @@ os.system(cmd)
 
 os.system('transmission-show -m ./torrent/{0}.torrent >./torrent/{0}.magnet'.format(zip_name))
 
+shutil.copyfile(info_path, os.path.join('torrent', info_name + ".txt"))
+
 imginfo = {}
-if 'lite' in img_name:
+if 'lite' in zip_name:
     imginfo['name'] = 'Lite'
     imgname = 'lite'
 else:
     imginfo['name'] = ''
     imgname = 'full'
 
+zip_text = subprocess.check_output('unzip -l {}'.format(zip_path).split())
+uncompressed_size = int(zip_text.decode().split('\n')[-2].split()[0])
+
 imginfo['filename'] = zip_name
-imginfo['uncompressed'] = os.stat(img_path).st_size
+imginfo['uncompressed'] = uncompressed_size
 imginfo['compressed'] = os.stat(zip_path).st_size
 imginfo['uncompressedstr'] = numsum(imginfo['uncompressed'])
 imginfo['compressedstr'] = numsum(imginfo['compressed'])
