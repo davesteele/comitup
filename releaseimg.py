@@ -6,8 +6,8 @@ import os
 import hashlib
 import gnupg
 import json
-import subprocess
 import shutil
+import zipfile
 
 
 zip_path = sys.argv[1]
@@ -92,15 +92,16 @@ else:
     imginfo['name'] = ''
     imgname = 'full'
 
-zip_text = subprocess.check_output('unzip -l {}'.format(zip_path).split())
-uncompressed_size = int(zip_text.decode().split('\n')[-2].split()[0])
 
 imginfo['filename'] = zip_name
-imginfo['uncompressed'] = uncompressed_size
+zf = zipfile.ZipFile(zip_path)
+imginfo['uncompressed'] = zf.infolist()[0].file_size
+zf.close()
 imginfo['compressed'] = os.stat(zip_path).st_size
 imginfo['uncompressedstr'] = numsum(imginfo['uncompressed'])
 imginfo['compressedstr'] = numsum(imginfo['compressed'])
 imginfo['magnet'] = open('./torrent/{}.magnet'.format(zip_name), 'r').read()
+
 
 with open('imgs.json', 'r') as fp:
     imgsinfo = json.load(fp)
