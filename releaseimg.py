@@ -16,7 +16,6 @@ zip_dir = os.path.dirname(zip_path)
 
 info_name = zip_name[6:-4] + ".info"
 info_path = os.path.join(zip_dir, info_name)
-print(info_name, info_path)
 
 if ".zip" not in zip_name:
     print("argument must be the zipped image")
@@ -82,8 +81,6 @@ os.system(cmd)
 
 os.system('transmission-show -m ./torrent/{0}.torrent >./torrent/{0}.magnet'.format(zip_name))
 
-shutil.copyfile(info_path, os.path.join('torrent', info_name + ".txt"))
-
 imginfo = {}
 if 'lite' in zip_name:
     imginfo['name'] = 'Lite'
@@ -101,6 +98,7 @@ imginfo['compressed'] = os.stat(zip_path).st_size
 imginfo['uncompressedstr'] = numsum(imginfo['uncompressed'])
 imginfo['compressedstr'] = numsum(imginfo['compressed'])
 imginfo['magnet'] = open('./torrent/{}.magnet'.format(zip_name), 'r').read()
+imginfo['infoname'] = info_name
 
 
 with open('imgs.json', 'r') as fp:
