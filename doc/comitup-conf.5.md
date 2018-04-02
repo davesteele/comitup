@@ -1,5 +1,10 @@
-comitup.conf(5) -- Comitup configuration file format
-=============================================
+% comitup-conf(5)
+%
+% April 2018
+
+# NAME
+
+comitup.conf -- Comitup configuration file format
 
 ## DESCRIPTION
 

@@ -1,5 +1,10 @@
-comitup-web(8) -- Wifi configuration web server for the Comitup service
-=============================================
+% comitup-web(8)
+%
+% April 2018
+
+# NAME
+
+comitup-web -- Wifi configuration web server for the Comitup service
 
 ## SYNOPSIS
 
