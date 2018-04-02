@@ -1,5 +1,10 @@
-comitup-cli(1) -- command-line interface for comitup network management
-=============================================
+% comitup-cli(1)
+%
+% April 2018
+
+# NAME
+
+comitup-cli -- command-line interface for comitup network management
 
 ## SYNOPSIS
 

@@ -1,5 +1,10 @@
-comitup(8) -- Manage wifi connections on headless, unconnected systems
-=============================================
+% comitup(8)
+%
+% April 2018
+
+# NAME
+
+comitup -- Manage wifi connections on headless, unconnected systems
 
 ## SYNOPSIS
 
@@ -53,14 +58,14 @@ following methods.
     Return information about the current **Comitup** service. The keys are
     as follows:
 
-        * _version_ - The package version.
+      * _version_ - The package version.
 
-        * _basename_ - The currently configured basename (default **comitup**).
+      * _basename_ - The currently configured basename (default **comitup**).
 
-        * _id_ - The unique random numeric id associated with the service instance.
+      * _id_ - The unique random numeric id associated with the service instance.
 
-        * _hostnames_ - A list of host names that are published for the service
-          IP address.
+      * _hostnames_ - A list of host names that are published for the service
+        IP address.
 
   * _access_points()_
 
