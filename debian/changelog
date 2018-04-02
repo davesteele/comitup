@@ -1,3 +1,10 @@
+comitup (1.2.5-1) UNRELEASED; urgency=medium
+
+  * Use pandoc to create the man pages.
+  * Detect 'iw' command failure.
+
+ -- David Steele <steele@debian.org>  Mon, 02 Apr 2018 17:34:33 -0400
+
 comitup (1.2.4-1) unstable; urgency=medium
 
   * Fix a bug in the startup wifi tests.
