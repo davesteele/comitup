@@ -42,6 +42,7 @@ def do_info(ciu_client, connection):
     print("")
     print("Host %s on comitup version %s"
           % (info['hostnames'], info['version']))
+    print("'%s' mode" % info['imode'])
 
 
 CmdState = namedtuple('CmdState', "fn, desc, HOTSPOT, CONNECTING, CONNECTED")
