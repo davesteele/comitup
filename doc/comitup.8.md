@@ -67,6 +67,12 @@ following methods.
       * _hostnames_ - A list of host names that are published for the service
         IP address.
 
+      * _imode_ - The current interface mode for comitup. This returns the string
+        'single' or 'router'. In 'single' mode, the hotspot is terminated when
+        **CONNECTED**. In 'router' mode, the hotspot is retained, the upstream
+        connection is made with the other wifi device, and traffic is routed
+        between them. The web service is terminated when **CONNECTED**.
+
   * _access_points()_
 
     Input: None

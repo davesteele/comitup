@@ -96,6 +96,7 @@ class Comitup(dbus.service.Object):
             'basename': conf.base_name,
             'id': data.id,
             'hostnames': ';'.join(get_hosts(conf, data)),
+            'imode': modemgr.get_mode(),
             }
 
         return info
