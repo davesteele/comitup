@@ -6,9 +6,15 @@
 <h1>Comitup Confirm Selection</h1>
 Press the Connect button to connect this device to {{ ssid }}. <br><br>
 
+{% if mode == 'single' %}
 This will terminate the current hotspot. Connect to {{ ssid }} for access.<br><br>
 
 If the connection fails, this hotspot will be re-created.<br><br>
+{% else %}
+The hotspot will remain, but this web service will be terminated.<br><br>
+
+If the connection fails, the web service will be restored.<br><br>
+{% endif %}
 
 <form action="connect" method="post">
 <input type="hidden" name="ssid" value="{{ ssid_encoded }}">

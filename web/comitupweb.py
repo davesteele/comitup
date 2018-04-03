@@ -48,11 +48,15 @@ def create_app():
         ssid = request.args.get("ssid", "")
         ssid_encoded = urllib.parse.quote(ssid.encode())
         encrypted = request.args.get("encrypted", "unencrypted")
+
+        mode = ciu_client.ciu_info()['imode']
+
         return render_template(
                                 "confirm.html",
                                 ssid=ssid,
                                 encrypted=encrypted,
                                 ssid_encoded=ssid_encoded,
+                                mode=mode,
                                 )
 
 
@@ -67,7 +71,7 @@ def create_app():
         return render_template("connect.html",
                                 ssid=ssid,
                                 password=password,
-                            )
+                              )
 
     return app
 
