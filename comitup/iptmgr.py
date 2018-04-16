@@ -42,7 +42,7 @@ end_cmds = [
 
 appliance_cmds = [
     "iptables -w -t nat -N COMITUP-FWD",
-    "iptables -w -t nat -A COMITUP-FWD -o {} -j MASQUERADE",
+    "iptables -w -t nat -A COMITUP-FWD -o {link} -j MASQUERADE",
     "iptables -w -t nat -A COMITUP-FWD -j RETURN",
     "iptables -w -t nat -A POSTROUTING -j COMITUP-FWD",
     "echo 1 > /proc/sys/net/ipv4/ip_forward",
@@ -50,7 +50,7 @@ appliance_cmds = [
 
 appliance_clear = [
     "iptables -w -t nat -D POSTROUTING -j COMITUP-FWD >/dev/null 2>&1",
-    "iptables -w -t nat -D COMITUP-FWD -o {} -j MASQUERADE >/dev/null 2>&1",
+    "iptables -w -t nat -D COMITUP-FWD -o {link} -j MASQUERADE >/dev/null 2>&1",
     "iptables -w -t nat -D COMITUP-FWD -j RETURN >/dev/null 2>&1",
     "iptables -w -t nat -X COMITUP-FWD >/dev/null 2>&1",
 ]
@@ -60,9 +60,9 @@ log = logging.getLogger('comitup')
 
 
 def run_cmds(cmds):
-    outdev = nm.device_name(modemgr.get_link_device())
+    linkdev = nm.device_name(modemgr.get_link_device())
     for cmd in cmds:
-        subprocess.call(cmd.format(outdev), shell=True)
+        subprocess.call(cmd.format(link=linkdev), shell=True)
 
 
 def state_callback(state, action):
