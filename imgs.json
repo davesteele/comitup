@@ -1,20 +1,20 @@
 {
     "full": {
-        "compressed": 1463410643,
+        "compressed": 1464017183,
         "compressedstr": "1.4 G",
-        "filename": "image_2018-04-01-Comitup.zip",
-        "infoname": "2018-04-01-Comitup.info",
-        "magnet": "magnet:?xt=urn:btih:defde62579aa04d9fec3d16942d50343e8459a4f&dn=image%5F2018-04-01-Comitup.zip&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=https%3A%2F%2Fopen.acgnxtracker.com%3A443%2Fannounce&tr=http%3A%2F%2Ftorrentsmd.com%3A8080%2Fannounce\n",
+        "filename": "image_2018-04-15-Comitup.zip",
+        "infoname": "2018-04-15-Comitup.info",
+        "magnet": "magnet:?xt=urn:btih:9389753a1bcfce4f16d9d607564a04ee722a37ce&dn=image%5F2018-04-15-Comitup.zip&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=https%3A%2F%2Fopen.acgnxtracker.com%3A443%2Fannounce&tr=http%3A%2F%2Ftracker.electro-torrent.pl%3A80%2Fannounce\n",
         "name": "",
         "uncompressed": 4232052736,
         "uncompressedstr": "4.1 G"
     },
     "lite": {
-        "compressed": 390537821,
+        "compressed": 390616842,
         "compressedstr": "381 M",
-        "filename": "image_2018-04-01-Comitup-lite.zip",
-        "infoname": "2018-04-01-Comitup-lite.info",
-        "magnet": "magnet:?xt=urn:btih:1eecd977f136dca31dba99b40359c6d78f6cf48c&dn=image%5F2018-04-01-Comitup-lite.zip&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=https%3A%2F%2Fopen.acgnxtracker.com%3A443%2Fannounce&tr=http%3A%2F%2Ftorrentsmd.com%3A8080%2Fannounce\n",
+        "filename": "image_2018-04-15-Comitup-lite.zip",
+        "infoname": "2018-04-15-Comitup-lite.info",
+        "magnet": "magnet:?xt=urn:btih:e94221ed3efea76b5f0b2c140f7aacdb13ae0ba2&dn=image%5F2018-04-15-Comitup-lite.zip&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=https%3A%2F%2Fopen.acgnxtracker.com%3A443%2Fannounce&tr=http%3A%2F%2Ftracker.electro-torrent.pl%3A80%2Fannounce\n",
         "name": "Lite",
         "uncompressed": 1866465280,
         "uncompressedstr": "1.8 G"
