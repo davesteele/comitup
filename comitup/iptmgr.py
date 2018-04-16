@@ -24,7 +24,7 @@ start_cmds = [
     "iptables -w -A COMITUP-OUT "
       "-p icmp --icmp-type port-unreachable -j DROP",  # noqa
     "iptables -w -A COMITUP-OUT -j RETURN",
-    "iptables -w -I OUTPUT -j COMITUP-OUT",
+    "iptables -w -I OUTPUT -o {ap} -j COMITUP-OUT",
 ]
 
 end_cmds = [
@@ -61,8 +61,9 @@ log = logging.getLogger('comitup')
 
 def run_cmds(cmds):
     linkdev = nm.device_name(modemgr.get_link_device())
+    apdev = nm.device_name(modemgr.get_ap_device())
     for cmd in cmds:
-        subprocess.call(cmd.format(link=linkdev), shell=True)
+        subprocess.call(cmd.format(link=linkdev, ap=apdev), shell=True)
 
 
 def state_callback(state, action):
