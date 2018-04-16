@@ -29,7 +29,7 @@ start_cmds = [
 
 end_cmds = [
     # Clear HOTSPOT rules
-    "iptables -w -D OUTPUT -j COMITUP-OUT >/dev/null 2>&1",
+    "iptables -w -D OUTPUT -o {ap} -j COMITUP-OUT >/dev/null 2>&1",
     "iptables -w -D COMITUP-OUT "
         "-p icmp --icmp-type destination-unreachable "        # noqa
         "-j DROP >/dev/null 2>&1",                            # noqa
