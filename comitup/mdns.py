@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Copyright (c) 2017 David Steele <dsteele@gmail.com>
+# Copyright (c) 2017-2018 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2+
 # License-Filename: LICENSE

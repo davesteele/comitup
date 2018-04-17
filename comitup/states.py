@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Copyright (c) 2017 David Steele <dsteele@gmail.com>
+# Copyright (c) 2017-2018 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2+
 # License-Filename: LICENSE
@@ -146,6 +146,11 @@ def hotspot_timeout():
 
         dev = modemgr.get_state_device('CONNECTED')
         conn_list = candidate_connections(dev)
+
+        # This is a hack. For some reason, making this call enables the
+        # first CONNECT on a Pi 3 Model B+.
+        candidate_connections(modemgr.get_state_device('HOTSPOT'))
+
         if conn_list:
             # bug - try the first connection twice
             set_state('CONNECTING', [conn_list[0], conn_list[0]] + conn_list)
