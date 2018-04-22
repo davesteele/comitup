@@ -146,11 +146,6 @@ def hotspot_timeout():
 
         dev = modemgr.get_state_device('CONNECTED')
         conn_list = candidate_connections(dev)
-
-        # This is a hack. For some reason, making this call enables the
-        # first CONNECT on a Pi 3 Model B+.
-        candidate_connections(modemgr.get_state_device('HOTSPOT'))
-
         if conn_list:
             # bug - try the first connection twice
             set_state('CONNECTING', [conn_list[0], conn_list[0]] + conn_list)
