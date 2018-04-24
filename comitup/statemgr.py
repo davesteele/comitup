@@ -23,7 +23,7 @@ sys.path.append("/usr/share/comitup")
 
 import pkg_resources                          # noqa
 
-from gi.repository.GLib import MainLoop       # noqa
+from gi.repository.GLib import MainLoop        # noqa
 import time                                   # noqa
 from dbus.mainloop.glib import DBusGMainLoop  # noqa
 DBusGMainLoop(set_as_default=True)
@@ -31,7 +31,6 @@ DBusGMainLoop(set_as_default=True)
 from comitup import states                                 # noqa
 from comitup import nm                                     # noqa
 from comitup import modemgr                                # noqa
-from comitup import kicknm                                 # noqa
 
 comitup_path = "/com/github/davesteele/comitup"
 
@@ -149,7 +148,6 @@ def init_state_mgr(gconf, gdata, callbacks):
     com_obj = Comitup()
 
     states.set_state('HOTSPOT', timeout=5)
-    kicknm.kickNMProc(delay=7)
 
 
 def main():
