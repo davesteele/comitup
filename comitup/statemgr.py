@@ -38,9 +38,11 @@ from gi.repository.GLib import MainLoop, timeout_add  # noqa
 
 DBusGMainLoop(set_as_default=True)
 
-from comitup import modemgr  # noqa
-from comitup import nm  # noqa
-from comitup import states  # noqa
+from comitup import states                                 # noqa
+from comitup import nm                                     # noqa
+from comitup import modemgr                                # noqa
+from comitup import kicknm                                 # noqa
+from comitup import countrycode                            # noqa
 
 comitup_path: str = "/com/github/davesteele/comitup"
 
@@ -122,6 +124,10 @@ class Comitup(dbus.service.Object):
 
         timeout_add(10, do_nuke)
 
+    @dbus.service.method(comitup_int, in_signature="s", out_signature="")
+    def set_country(code):
+        countrycode.set_country_code(code)
+
 
 def get_info(conf: "Config", data: "persist") -> Dict[str, str]:
     if not conf or not data:
@@ -132,6 +138,7 @@ def get_info(conf: "Config", data: "persist") -> Dict[str, str]:
         "apname": expand_ap(conf.ap_name, data.id),
         "hostnames": ";".join(get_hosts(conf, data)),
         "imode": modemgr.get_mode(),
+        "country": countrycode.get_country_code(),
     }
 
     return info

@@ -74,6 +74,9 @@ following methods.
         connection is made with the other wifi device, and traffic is routed
         between them. The web service is terminated when **CONNECTED**.
 
+      * _country_ - The 2-character ISO3166 country code used for Wifi regulatory
+        compliance. The string '00' indicates that the country has not been set.
+
   * _access_points()_
 
     Input: None
@@ -123,6 +126,14 @@ following methods.
     Perform a factory reset of Comitup information on the device, which
     consists of removing all WiFi connections, and restarting the service. Note
     that _enable\_nuke_ must be enabled in comitup.conf for this to succeed.
+
+  * _set_country(code)_
+
+    Input: A two-character ISO3166 country code.
+
+    Output: None
+
+    Set the country code for Wifi regulatory compliance.
 
 ## COPYRIGHT
 
