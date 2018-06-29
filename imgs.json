@@ -1,22 +1,22 @@
 {
     "full": {
-        "compressed": 1453212087,
+        "compressed": 1455457673,
         "compressedstr": "1.4 G",
-        "filename": "image_2018-05-24-Comitup.zip",
-        "infoname": "2018-05-24-Comitup.info",
-        "magnet": "magnet:?xt=urn:btih:d4bf90e6b0e17578df807697d70db8f07c6115b8&dn=image%5F2018-05-24-Comitup.zip&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=https%3A%2F%2Fopen.acgnxtracker.com%3A443%2Fannounce&tr=http%3A%2F%2Ftracker.electro-torrent.pl%3A80%2Fannounce\n",
+        "filename": "image_2018-06-29-Comitup.zip",
+        "infoname": "2018-06-29-Comitup.info",
+        "magnet": "magnet:?xt=urn:btih:a89f93db23ed2bfe411d466b60b4eddba3c3cf59&dn=image%5F2018-06-29-Comitup.zip&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=http%3A%2F%2Fshare.camoe.cn%3A8080%2Fannounce&tr=https%3A%2F%2F1.track.ga%3A443%2Fannounce\n",
         "name": "",
         "uncompressed": 4173332480,
         "uncompressedstr": "4.1 G"
     },
     "lite": {
-        "compressed": 391569650,
+        "compressed": 391183696,
         "compressedstr": "382 M",
-        "filename": "image_2018-05-24-Comitup-lite.zip",
-        "infoname": "2018-05-24-Comitup-lite.info",
-        "magnet": "magnet:?xt=urn:btih:ba121ef7533ccd9ae01e6a0417ba87c34a9762aa&dn=image%5F2018-05-24-Comitup-lite.zip&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=https%3A%2F%2Fopen.acgnxtracker.com%3A443%2Fannounce&tr=http%3A%2F%2Ftracker.electro-torrent.pl%3A80%2Fannounce\n",
+        "filename": "image_2018-06-29-Comitup-lite.zip",
+        "infoname": "2018-06-29-Comitup-lite.info",
+        "magnet": "magnet:?xt=urn:btih:6cca822e2b69e051c55f388255e8b65a4d4c5451&dn=image%5F2018-06-29-Comitup-lite.zip&tr=udp%3A%2F%2Ftracker.vanitycore.co%3A6969%2Fannounce&tr=http%3A%2F%2Fshare.camoe.cn%3A8080%2Fannounce&tr=https%3A%2F%2F1.track.ga%3A443%2Fannounce\n",
         "name": "Lite",
-        "uncompressed": 1870659584,
+        "uncompressed": 1866465280,
         "uncompressedstr": "1.8 G"
     }
 }
