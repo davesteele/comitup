@@ -116,6 +116,7 @@ def external_callback(state, action):
     script = conf.external_callback
 
     if not os.path.isfile(script):
+        log.error("Callback script %s does not exist in the specifed path" % script)
         return
 
     if not os.access(script, os.X_OK):
