@@ -42,6 +42,15 @@ def create_app():
             point['ssid_encoded'] = urllib.parse.quote(point['ssid'])
         return render_template("index.html", points=points)
 
+    @app.route('/js/<path:path>')
+    def send_js(path):
+        return send_from_directory('templates/js', path)
+
+
+    @app.route('/css/<path:path>')
+    def send_js(path):
+        return send_from_directory('templates/css', path)
+
 
     @app.route("/confirm")
     def confirm():
