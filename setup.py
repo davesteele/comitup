@@ -69,7 +69,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'comitup=comitup.comitup:main',
+            'comitup-cmd=comitup.comitup:main',
             'comitup-cli=cli.comitupcli:interpreter',
             'comitup-web=web.comitupweb:main',
         ],
@@ -81,7 +81,6 @@ setup(
     },
     data_files=[
         ('/etc', ['conf/comitup.conf']),
-        ('/var/lib/comitup', ['conf/comitup.json']),
         ('/etc/dbus-1/system.d', ['conf/comitup-dbus.conf']),
         ('/usr/share/comitup/web', ['web/comitupweb.conf']),
         ('/usr/share/comitup/web/templates',
