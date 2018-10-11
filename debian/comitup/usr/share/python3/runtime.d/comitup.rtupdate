@@ -1,0 +1,7 @@
+#! /bin/sh
+set -e
+
+if [ "$1" = rtupdate ]; then
+	py3clean -p comitup /usr/share/comitup
+	py3compile -p comitup -V 3.5- /usr/share/comitup
+fi

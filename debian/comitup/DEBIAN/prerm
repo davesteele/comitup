@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in 
+    remove)
+        rm -f /var/lib/comitup/comitup.json*
+    ;;
+
+    upgrade|deconfigure|failed-upgrade)
+    ;;
+
+    *)
+        echo "prerm called with unknown argument \'$1\'" >&2
+        exit 1
+    ;;
+
+esac
+
+# Automatically added by dh_systemd_start
+if [ -d /run/systemd/system ]; then
+	deb-systemd-invoke stop comitup-web.service comitup.service >/dev/null
+fi
+# End automatically added section
+
+# Automatically added by dh_python3:
+if which py3clean >/dev/null 2>&1; then
+	py3clean -p comitup 
+else
+	dpkg -L comitup | perl -ne 's,/([^/]*)\.py$,/__pycache__/\1.*, or next; unlink $_ or die $! foreach glob($_)'
+	find /usr/lib/python3/dist-packages/ -type d -name __pycache__ -empty -print0 | xargs --null --no-run-if-empty rmdir
+fi
+
+# End automatically added section
+
+

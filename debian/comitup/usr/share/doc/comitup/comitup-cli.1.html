@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="" />
+  <title>comitup-cli(1)</title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<div id="header">
+<h1 class="title">comitup-cli(1)</h1>
+<h2 class="author"></h2>
+<h3 class="date">April 2018</h3>
+</div>
+<h1 id="name">NAME</h1>
+<p>comitup-cli -- command-line interface for comitup network management</p>
+<h2 id="synopsis">SYNOPSIS</h2>
+<pre><code>$ `comitup-cli`
+
+State: HOTSPOT
+Connection: hotspot-1234
+Points:
+    1: MyAccessPoint
+    2: HisAccessPoint
+Available Commands:
+    (r)eload
+    (q)uit
+    connect to (&lt;n&gt;)
+command?:</code></pre>
+<h2 id="description">DESCRIPTION</h2>
+<p>The <strong>comitup-cli</strong> utility provides access to the comitup(8) D-Bus interface. It is intended to serve as a debug tool, and a source code example for connecting to the interface.</p>
+<p>If the comitup(8) service is not running, <strong>comitup-cli</strong> will immediately exit.</p>
+<p>Display:</p>
+<ul>
+<li><p><strong>State</strong></p>
+<p>The <strong>comitup</strong> states are <strong>HOTSPOT</strong>, <strong>CONNECTING</strong>, and <strong>CONNECTED</strong>.</p>
+<p>In the <strong>HOTSPOT</strong> mode, <strong>comitup</strong> creates a wifi hotspot with the name <strong>comitup-&lt;nnnn&gt;</strong>, where &lt;nnnn&gt; is a persistent 4-digit number.</p>
+<p>Once in <strong>HOTSPOT</strong> mode, the system will occasionally (~1/min) cycle through available defined connections, by transitioning to the <strong>CONNECTING</strong> mode. The Access Point list is updated by this process. Any command issued by <strong>comitup-cli</strong> will cause the next timeout instance to be skipped.</p>
+<p>Once a connection is established, the system will be in the <strong>CONNECTED</strong> mode. If the connection is lost, failed, or deleted, the system will transition back to the <strong>HOTSPOT</strong> state.</p></li>
+<li><p><strong>Connection</strong></p>
+<p>The <code>ssid</code> of the current active connection.</p></li>
+<li><p><strong>Points</strong></p>
+<p>While in the <strong>HOTSPOT</strong> mode, <strong>comitup-cli</strong> will list the currently-visible access points, by <code>ssid</code>. Access points with the strongest signal are sorted to the top of the list. The entries are numbered, for use with the <strong>connect</strong> command.</p></li>
+</ul>
+<p>Commands:</p>
+<ul>
+<li><p><strong>r</strong> - <strong>Reload</strong></p>
+<p>Refresh the displayed state, mode, and list of access points.</p></li>
+<li><p><strong>q</strong> - <strong>Quit</strong></p>
+<p>Exit <strong>comitup.cli</strong>.</p></li>
+<li><p><strong>d</strong> - <strong>Delete connection</strong></p>
+<p>Delete the configuration information for the current wifi connection. This will cause <strong>comitup</strong> to transition to the <strong>HOTSPOT</strong> mode.</p>
+<p>This command is not available in the <strong>HOTSPOT</strong> mode.</p></li>
+<li><p><strong>&lt;n&gt;</strong> - <strong>Connect to access point &lt;n&gt;</strong></p>
+<p>Define a connection for the selected access point, and then attempt to connect.</p>
+<p>This command is only available in the <strong>HOTSPOT</strong> mode.</p></li>
+<li><p><strong>m</strong> - <strong>Manual connection</strong></p>
+<p>Enter an SSID manually.</p></li>
+<li><p><strong>i</strong> - <strong>Get information</strong></p>
+<p>Return the comitup version and host name for the current instance.</p></li>
+</ul>
+<h2 id="copyright">COPYRIGHT</h2>
+<p>Comitup is Copyright (C) 2016-2017 David Steele &lt;steele@debian.org&gt;</p>
+<h2 id="see-also">SEE ALSO</h2>
+<p>comitup(8), comitup-conf(5), comitup-web(8)</p>
+</body>
+</html>

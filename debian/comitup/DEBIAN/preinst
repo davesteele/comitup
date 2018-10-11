@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in 
+  upgrade)
+    if [ -e /var/lib/comitup/comitup.json ] ; then
+      cp -f /var/lib/comitup/comitup.json /var/lib/comitup/comitup.json.save
+    fi
+  ;;
+esac
+
+

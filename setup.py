@@ -91,6 +91,40 @@ setup(
                 'web/templates/confirm.html',
             ]
         ),  # noqa
+	('/usr/share/comitup/web/static/js',
+            [
+                'web/static/js/jquery-3.3.1.slim.min.js',
+                'web/static/js/bootstrap.min.js.map',
+                'web/static/js/bootstrap.min.js',
+                'web/static/js/bootstrap.js.map',
+                'web/static/js/bootstrap.js',
+                'web/static/js/bootstrap.bundle.min.js.map',
+                'web/static/js/bootstrap.bundle.min.js',
+                'web/static/js/bootstrap.bundle.js.map',
+                'web/static/js/bootstrap.bundle.js',
+            ]
+        ),
+        ('/usr/share/comitup/web/static/images',
+            [
+                'web/static/images/GoofyFPV_noText_transparent.png',
+            ]
+        ),
+        ('/usr/share/comitup/web/static/css',
+            [
+                'web/static/css/bootstrap.min.css.map',
+                'web/static/css/bootstrap.min.css',
+                'web/static/css/bootstrap.css.map',
+                'web/static/css/bootstrap.css',
+                'web/static/css/bootstrap-reboot.min.css.map',
+                'web/static/css/bootstrap-reboot.min.css',
+                'web/static/css/bootstrap-reboot.css.map',
+                'web/static/css/bootstrap-reboot.css',
+                'web/static/css/bootstrap-grid.min.css.map',
+                'web/static/css/bootstrap-grid.min.css',
+                'web/static/css/bootstrap-grid.css.map',
+                'web/static/css/bootstrap-grid.css',
+            ]
+        ),
     ],
     install_requires=[
         'jinja2',

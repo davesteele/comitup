@@ -1,0 +1,18 @@
+[Unit]
+Description=Comitup Web Service
+After=networking.service
+Documentation=man:comitup-web(8)
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/comitup-web
+PrivateTmp=true
+PrivateDevices=yes
+ProtectSystem=full
+ProtectHome=yes
+MountFlags=slave
+NoNewPrivileges=yes
+Restart=always
+RestartSec=6
+
+[Install]

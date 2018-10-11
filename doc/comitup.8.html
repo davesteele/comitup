@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="" />
+  <title>comitup(8)</title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<div id="header">
+<h1 class="title">comitup(8)</h1>
+<h2 class="author"></h2>
+<h3 class="date">April 2018</h3>
+</div>
+<h1 id="name">NAME</h1>
+<p>comitup -- Manage wifi connections on headless, unconnected systems</p>
+<h2 id="synopsis">SYNOPSIS</h2>
+<p><code>comitup [options]</code></p>
+<h2 id="description">DESCRIPTION</h2>
+<p>The <strong>comitup</strong> service provides a means to establish a connection between a computer and a wifi access point, in the case where wifi is the only means available to access the computer.</p>
+<p>On startup, the service will attempt to connect to wifi using established networkmanager(8) connections. If this is not successful, <strong>comitup</strong> will establish a wifi hotspot with the name <em>comitup-&lt;nnnn&gt;</em>, where &lt;nnnn&gt; is a persistent 4-digit number.</p>
+<p>While the hotspot is active, a comitup-web(8) service is available to manage connecting to an access point.</p>
+<p>If two wifi interfaces are available, the hotspot will remain active on the first interface, and the internet connection will be made on the second. Otherwise, the hotspot will be replaced with the internet connection.</p>
+<p>In all states, avahi-daemon(8) is used to publish the mdns host name <em>comitup-&lt;nnnn&gt;.local</em>, making the web service accessible as e.g. <em>http://comitup-1234.local</em>, for systems supporting Zeroconf. For other systems, a <em>comitup</em> Workstation entry is published which is visible to Zeroconf browsing applications, allowing the IP address to be manually determined. The web service address is likely <em>http://10.42.0.1</em>.</p>
+<p><strong>comitup</strong> logs to <em>/var/log/comitup.log</em>.</p>
+<h2 id="options">Options</h2>
+<ul>
+<li><em>-h</em>, <em>--help</em> - Print help and exit</li>
+<li><em>-c</em>, <em>--check</em> - Check the wifi device configuration and exit</li>
+</ul>
+<h2 id="d-bus-interface">D-Bus Interface</h2>
+<p><strong>Comitup</strong> provides a D-Bus object which claims the name <em>com.github.davesteele.comitup</em> on the path <em>/com/github/davesteele/comitup</em>, supporting the interface <em>com.github.davesteele.comitup</em>. The interface includes the following methods.</p>
+<ul>
+<li><p><em>get_info()</em></p>
+<p>Input: None</p>
+<p>Output: <em>DICT_ENTRY</em></p>
+<p>Return information about the current <strong>Comitup</strong> service. The keys are as follows:</p>
+<ul>
+<li><p><em>version</em> - The package version.</p></li>
+<li><p><em>basename</em> - The currently configured basename (default <strong>comitup</strong>).</p></li>
+<li><p><em>id</em> - The unique random numeric id associated with the service instance.</p></li>
+<li><p><em>hostnames</em> - A list of host names that are published for the service IP address.</p></li>
+<li><p><em>imode</em> - The current interface mode for comitup. This returns the string 'single' or 'router'. In 'single' mode, the hotspot is terminated when <strong>CONNECTED</strong>. In 'router' mode, the hotspot is retained, the upstream connection is made with the other wifi device, and traffic is routed between them. The web service is terminated when <strong>CONNECTED</strong>.</p></li>
+</ul></li>
+<li><p><em>access_points()</em></p>
+<p>Input: None</p>
+<p>Output: Array of <em>DICT_ENTRY</em></p>
+<p>Return a list of visible access points. This is represented as an array of D-Bus <em>DICT_ENTRY</em>. Each <em>DICT_ENTRY</em> contains strings associated with the following keys, <em>ssid</em>, <em>strength</em> (0 to 100) and <em>security</em> (<em>encrypted</em> or <em>unencrypted</em>).</p></li>
+<li><p><em>state()</em></p>
+<p>Input: None</p>
+<p>Output: <em>state</em>, <em>connection</em></p>
+<p>This returns strings for the current <strong>comitup</strong> state (either <strong>HOTSPOT</strong>, <strong>CONNECTING</strong>, or <strong>CONNECTED</strong>) and the <em>ssid</em> name for the current connection on the wifi device.</p></li>
+<li><p><em>connect()</em></p>
+<p>Input: <em>ssid</em>, <em>password</em></p>
+<p>Output: None</p>
+<p>Delete any existing connection for <em>ssid</em>, create a new connection, and attempt to connect to it. The password may be a zero length string if not needed.</p></li>
+<li><p><em>delete_connection()</em></p>
+<p>Input: <em>ssid</em></p>
+<p>Output: None</p>
+<p>Delete the connection for <em>ssid</em>. The system will not be able to reconnect using this connection.</p></li>
+</ul>
+<h2 id="copyright">COPYRIGHT</h2>
+<p>Comitup is Copyright (C) 2016-2017 David Steele &lt;steele@debian.org&gt;.</p>
+<h2 id="see-also">SEE ALSO</h2>
+<p>comitup-conf(5), comitup-cli(1), comitup-web(8)</p>
+</body>
+</html>
