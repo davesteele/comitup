@@ -25,7 +25,8 @@ if ".zip" not in zip_name:
 trackers = [
     'udp://tracker.vanitycore.co:6969/announce',
     'udp://tracker.coppersurfer.tk:6969/announce',
-    'http://retracker.telecom.by:80/announce',
+    'http://torrent.nwps.ws:80/announce',
+#    'http://retracker.telecom.by:80/announce',
 #    'http://share.camoe.cn:8080/announce',
 #    'https://1.track.ga:443/announce',
 #    'https://open.acgnxtracker.com:443/announce',
