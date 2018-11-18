@@ -124,8 +124,8 @@ def external_callback(state, action):
 
     def demote(uid, gid):
         def dodemote():
-            os.setuid(uid)
             os.setgid(gid)
+            os.setuid(uid)
 
         return dodemote
 
