@@ -150,7 +150,7 @@ def init_state_mgr(gconf, gdata, callbacks):
     com_obj = Comitup()
 
     states.set_state('HOTSPOT', timeout=5)
-    kicknm.kickNMProc(delay=7)
+    #kicknm.kickNMProc(delay=7)
 
 
 def main():
