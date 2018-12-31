@@ -1,11 +1,34 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" class="uk-height-1-1">
 <head>
-<title>Comitup Connection Attempt</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comitup</title>
+    <link rel="icon" href="img/favicon.ico">
+    <!-- CSS FILES -->
+    <link rel="stylesheet" type="text/css" href="css/uikit.css">
 </head>
-<body>
-<h1>Comitup Connection Attempt</h1>
+<body class="uk-height-1-1">
+<div class="uk-flex uk-flex-center uk-flex-middle">
+    <div class="uk-position-bottom-center uk-position-small">
+        <span class="uk-text-small uk-text-muted">Comitup - <a href="https://github.com/davesteele">Created by Dave Steele</a> | Built with <a href="https://github.com/davesteele/comitup" title="Comitup" target="_blank" data-uk-tooltip>ComitUp</a></span>
+    </div>
+    <div class="uk-width-large uk-padding-small">
+        <div class="uk-width-1-1 uk-text-center">
+            <span class="" uk-icon="icon: world; ratio: 5"></span>
+            <p class="uk-text-large">Connecting to Wifi</p>
+        </div>
 
-Connection to {{ ssid }} is being attempted.
+        <div class="uk-margin">
+            <div class="uk-width-1-1 uk-text-center">
+                <p>
+                    Connection to {{ ssid }} is being attempted.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 
-</body>
-</html>
+<!-- JS FILES -->
+<script src="js/uikit.js"></script>
+<script src="js/uikit-icons.js"></script>

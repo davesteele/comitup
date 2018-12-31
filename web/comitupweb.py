@@ -16,7 +16,7 @@ import time
 from multiprocessing import Process
 import urllib
 import base64
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 
 import sys
 sys.path.append('.')
@@ -41,6 +41,15 @@ def create_app():
         for point in points:
             point['ssid_encoded'] = urllib.parse.quote(point['ssid'])
         return render_template("index.html", points=points)
+
+    @app.route('/js/<path:path>')
+    def send_js(path):
+        return send_from_directory('templates/js', path)
+
+
+    @app.route('/css/<path:path>')
+    def send_css(path):
+        return send_from_directory('templates/css', path)
 
 
     @app.route("/confirm")
