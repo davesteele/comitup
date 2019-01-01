@@ -110,7 +110,7 @@ def hotspot_start():
         try:
             activate_connection(hs_ssid, 'HOTSPOT')
         except DBusException:
-            log.warn("Error connecting hotspot")
+            log.warning("Error connecting hotspot")
     else:
         log.debug("Didn't need to reactivate - already running")
         # the connect callback won't happen - let's 'pass' manually
@@ -134,7 +134,7 @@ def hotspot_pass():
 
 @state_callback
 def hotspot_fail():
-    log.warn("Hotspot mode failure")
+    log.warning("Hotspot mode failure")
     pass
 
 
@@ -234,7 +234,7 @@ def connected_pass():
 
 @state_callback
 def connected_fail():
-    log.warn('Connection lost')
+    log.warning('Connection lost')
     set_state('HOTSPOT')
 
 
@@ -242,7 +242,7 @@ def connected_fail():
 def connected_timeout():
     log.debug("states: Calling nm.get_active_ssid()")
     if connection != nm.get_active_ssid(modemgr.get_state_device('CONNECTED')):
-        log.warn("Connection lost on timeout")
+        log.warning("Connection lost on timeout")
         set_state('HOTSPOT')
 
 
@@ -330,7 +330,7 @@ def state_monitor():
             log.debug("state_monitor: Calling nm.get_active_ip()")
             ip = nm.get_active_ip(modemgr.get_state_device('HOTSPOT'))
             if not ip:
-                log.warn("Hotspot lost IP configuration - resetting")
+                log.warning("Hotspot lost IP configuration - resetting")
                 hs_ssid = dns_to_conn(dns_names[0])
                 activate_connection(hs_ssid, 'HOTSPOT')
 

@@ -18,10 +18,10 @@ class Config(object):
     def __init__(self, filename, section='DEFAULT', defaults={}):
         self._section = section
 
-        self._config = configparser.SafeConfigParser(defaults=defaults)
+        self._config = configparser.ConfigParser(defaults=defaults)
         conf_str = '[%s]\n' % self._section + open(filename, 'r').read()
         conf_fp = io.StringIO(conf_str)
-        self._config.readfp(conf_fp)
+        self._config.read_file(conf_fp)
 
     def __getattr__(self, tag):
         try:
