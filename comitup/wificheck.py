@@ -62,12 +62,15 @@ def device_supports_ap():
 
 
 def device_nm_managed():
-    devicesinfo = subprocess.check_output("nmcli device show".split(), re.MULTILINE).decode()
+    try:
+        devicesinfo = subprocess.check_output("nmcli device show".split(), re.MULTILINE).decode()
 
-    for dev in dev_info.get_devs():
-        if dev not in devicesinfo:
-            # Fail without comment
-            return ""
+        for dev in dev_info.get_devs():
+            if dev not in devicesinfo:
+                # Fail without comment
+                return ""
+    except CalledProcessError:
+        pass
 
     return None
 
