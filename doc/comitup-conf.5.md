@@ -36,6 +36,10 @@ It is located in the _/etc/_ directory.
     a single argument, either 'HOTSPOT', 'CONNECTING', or 'CONNECTED'. The script will run
     as the owning user and group.
 
+  * _primary_wifi_device_;
+
+    Override the default choice for the primary WiFi device to use.
+
 ## COPYRIGHT
 
 Comitup is Copyright (C) 2016-2017 David Steele &lt;steele@debian.org&gt;
