@@ -89,6 +89,9 @@ def main():
     global ciu_client
     ciu_client = ciu.CiuClient()
 
+    ciu_client.ciu_state()
+    ciu_client.ciu_points()
+
     app = create_app()
     app.run(host="0.0.0.0", port=80, debug=True, threaded=True)
 
