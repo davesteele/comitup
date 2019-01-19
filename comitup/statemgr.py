@@ -16,6 +16,7 @@ import dbus.service
 import logging
 from comitup import iwscan
 import os
+import re
 import subprocess
 
 import sys
@@ -93,8 +94,7 @@ class Comitup(dbus.service.Object):
     def get_info(self):
         info = {
             'version': pkg_resources.get_distribution("comitup").version,
-            'basename': conf.base_name,
-            'id': data.id,
+            'basename': ap_name(conf.base_name, data.id),
             'hostnames': ';'.join(get_hosts(conf, data)),
             'imode': modemgr.get_mode(),
             }
@@ -102,9 +102,18 @@ class Comitup(dbus.service.Object):
         return info
 
 
+def ap_name(base_name, id):
+    returnval = base_name
+
+    for l in range(5):
+        returnval = re.sub("<{}>".format("n"*l), id[:l], returnval)
+
+    return returnval
+
+
 def get_hosts(conf, data):
     return [
-        "%s-%s.local" % (conf.base_name, data.id),
+        "{}.local".format(ap_name(conf.base_name, data.id)),
     ]
 
 

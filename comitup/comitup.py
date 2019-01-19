@@ -52,7 +52,7 @@ def load_data():
     conf = config.Config(
                 CONF_PATH,
                 defaults={
-                    'base_name': 'comitup',
+                    'base_name': 'comitup-<nnnn>',
                     'web_service': '',
                     'external_callback': '/usr/local/bin/comitup-callback',
                 },
@@ -64,10 +64,6 @@ def load_data():
            )
 
     return (conf, data)
-
-
-def inst_name(conf, data):
-    return conf.base_name + '-' + data.id
 
 
 def parse_args():

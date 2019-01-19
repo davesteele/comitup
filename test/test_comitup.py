@@ -67,11 +67,6 @@ def test_ciu_loadconf(conf_fxt, persist_fxt):
     assert os.path.isfile(persist_fxt)
 
 
-def test_ciu_inst_name(conf_fxt, persist_fxt):
-    (conf, data) = ciu.load_data()
-    assert ciu.inst_name(conf, data) == 'test-1234'
-
-
 @pytest.fixture()
 def loop_fxt(monkeypatch):
     loop = Mock()

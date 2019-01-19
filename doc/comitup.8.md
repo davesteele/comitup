@@ -60,9 +60,7 @@ following methods.
 
       * _version_ - The package version.
 
-      * _basename_ - The currently configured basename (default **comitup**).
-
-      * _id_ - The unique random numeric id associated with the service instance.
+      * _basename_ - The currently configured basename (the AP hotspot name).
 
       * _hostnames_ - A list of host names that are published for the service
         IP address.
