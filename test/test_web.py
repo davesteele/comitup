@@ -21,7 +21,7 @@ ssid_list = [
 
 @pytest.fixture
 def app():
-    app = comitupweb.create_app()
+    app = comitupweb.create_app(Mock())
     app.debug = True
     app.testing = True
     return app
@@ -44,7 +44,7 @@ def test_webapp_index(app, ssid, monkeypatch):
     response = app.test_client().get('/')
     index_text = response.get_data().decode()
 
-    assert ssid + "</a>" in index_text
+    assert ssid + "</button>" in index_text
     assert "ssid=" + urllib.parse.quote(ssid) in index_text
 
 
