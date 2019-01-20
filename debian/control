@@ -8,7 +8,7 @@ Build-Depends:
     python3-all,
     python3-setuptools,
     pandoc,
-Standards-Version: 4.1.1
+Standards-Version: 4.3.0
 Homepage: https://davesteele.github.io/comitup/
 X-Python3-Version: >= 3.5
 Vcs-Git: https://github.com/davesteele/comitup.git -b debian
