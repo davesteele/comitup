@@ -1,7 +1,7 @@
 
-# Copyright (c) 2017-2018 David Steele <dsteele@gmail.com>
+# Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
 #
-# SPDX-License-Identifier: GPL-2+
+# SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 #
 # Copyright 2016-2017 David Steele <steele@debian.org>
@@ -18,10 +18,11 @@ class Config(object):
     def __init__(self, filename, section='DEFAULT', defaults={}):
         self._section = section
 
-        self._config = configparser.SafeConfigParser(defaults=defaults)
-        conf_str = '[%s]\n' % self._section + open(filename, 'r').read()
+        self._config = configparser.ConfigParser(defaults=defaults)
+        with open(filename, 'r') as fp:
+            conf_str = '[%s]\n' % self._section + fp.read()
         conf_fp = io.StringIO(conf_str)
-        self._config.readfp(conf_fp)
+        self._config.read_file(conf_fp)
 
     def __getattr__(self, tag):
         try:

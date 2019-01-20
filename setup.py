@@ -1,7 +1,7 @@
 
-# Copyright (c) 2017-2018 David Steele <dsteele@gmail.com>
+# Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
 #
-# SPDX-License-Identifier: GPL-2+
+# SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 #
 # Copyright 2016-2017 David Steele <steele@debian.org>

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-# Copyright (c) 2017-2018 David Steele <dsteele@gmail.com>
+# Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
 #
-# SPDX-License-Identifier: GPL-2+
+# SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 
 #
@@ -13,10 +13,12 @@
 
 import os
 import time
+import logging
+from logging.handlers import TimedRotatingFileHandler
 from multiprocessing import Process
 import urllib
 import base64
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 
 import sys
 sys.path.append('.')
@@ -25,6 +27,26 @@ sys.path.append('..')
 from comitup import client as ciu                 # noqa
 
 ciu_client = None
+LOG_PATH="/var/log/comitup-web.log"
+
+
+def deflog():
+    log = logging.getLogger('comitup_web')
+    log.setLevel(logging.INFO)
+    handler = TimedRotatingFileHandler(
+                LOG_PATH,
+                encoding='utf=8',
+                when='D',
+                interval=7,
+                backupCount=8,
+              )
+    fmtr = logging.Formatter(
+            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+           )
+    handler.setFormatter(fmtr)
+    log.addHandler(handler)
+
+    return log
 
 
 def do_connect(ssid, password):
@@ -32,7 +54,7 @@ def do_connect(ssid, password):
     ciu_client.ciu_connect(ssid, password)
 
 
-def create_app():
+def create_app(log):
     app = Flask(__name__)
 
     @app.route("/")
@@ -40,7 +62,17 @@ def create_app():
         points = ciu_client.ciu_points()
         for point in points:
             point['ssid_encoded'] = urllib.parse.quote(point['ssid'])
+        log.info("index.html - {} points".format(len(points)))
         return render_template("index.html", points=points)
+
+    @app.route('/js/<path:path>')
+    def send_js(path):
+        return send_from_directory('templates/js', path)
+
+
+    @app.route('/css/<path:path>')
+    def send_css(path):
+        return send_from_directory('templates/css', path)
 
 
     @app.route("/confirm")
@@ -50,6 +82,8 @@ def create_app():
         encrypted = request.args.get("encrypted", "unencrypted")
 
         mode = ciu_client.ciu_info()['imode']
+
+        log.info("confirm.html - ssid {0}, mode {1}".format(ssid, mode))
 
         return render_template(
                                 "confirm.html",
@@ -68,6 +102,7 @@ def create_app():
         p = Process(target=do_connect, args=(ssid, password))
         p.start()
 
+        log.info("connect.html - ssid {0}".format(ssid))
         return render_template("connect.html",
                                 ssid=ssid,
                                 password=password,
@@ -77,10 +112,16 @@ def create_app():
 
 
 def main():
+    log = deflog()
+    log.info("Starting comitup-web")
+
     global ciu_client
     ciu_client = ciu.CiuClient()
 
-    app = create_app()
+    ciu_client.ciu_state()
+    ciu_client.ciu_points()
+
+    app = create_app(log)
     app.run(host="0.0.0.0", port=80, debug=True, threaded=True)
 
 

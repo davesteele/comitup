@@ -1,7 +1,7 @@
 
-# Copyright (c) 2017-2018 David Steele <dsteele@gmail.com>
+# Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
 #
-# SPDX-License-Identifier: GPL-2+
+# SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 
 import pytest
@@ -18,7 +18,7 @@ def conf_fxt(tmpdir, monkeypatch):
 
     open(path, 'w').write(textwrap.dedent(
         """
-        base_name: test
+        ap_name: test
         """
     ))
 
@@ -63,13 +63,8 @@ def test_ciu_deflog(log_fxt):
 
 def test_ciu_loadconf(conf_fxt, persist_fxt):
     (conf, data) = ciu.load_data()
-    assert conf.base_name == 'test'
+    assert conf.ap_name == 'test'
     assert os.path.isfile(persist_fxt)
-
-
-def test_ciu_inst_name(conf_fxt, persist_fxt):
-    (conf, data) = ciu.load_data()
-    assert ciu.inst_name(conf, data) == 'test-1234'
 
 
 @pytest.fixture()

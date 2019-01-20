@@ -1,7 +1,7 @@
 import pytest
-# Copyright (c) 2017-2018 David Steele <dsteele@gmail.com>
+# Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
 #
-# SPDX-License-Identifier: GPL-2+
+# SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 
 from comitup import mdns

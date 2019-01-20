@@ -1,28 +1,55 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" class="uk-height-1-1">
 <head>
-<title>Comitup Confirm Selection</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comitup</title>
+    <link rel="icon" href="img/favicon.ico">
+    <!-- CSS FILES -->
+    <link rel="stylesheet" type="text/css" href="css/uikit.css">
 </head>
-<body>
-<h1>Comitup Confirm Selection</h1>
-Press the Connect button to connect this device to {{ ssid }}. <br><br>
+<body class="uk-height-1-1">
+<div class="uk-flex uk-flex-center uk-flex-middle">
+    <div class="uk-position-bottom-center uk-position-small">
+        <span class="uk-text-small uk-text-muted">Comitup - <a href="https://github.com/davesteele">Created by Dave Steele</a> | Built with <a href="https://github.com/davesteele/comitup" title="Comitup" target="_blank" data-uk-tooltip>ComitUp</a></span>
+    </div>
+    <div class="uk-width-large uk-padding-small">
+        <div class="uk-width-1-1 uk-text-center">
+            <span class="" uk-icon="icon: world; ratio: 5"></span>
+            <p class="uk-text-large">Connect to Wifi</p>
+        </div>
 
-{% if mode == 'single' %}
-This will terminate the current hotspot. Connect to {{ ssid }} for access.<br><br>
+        <div class="uk-margin">
+            <div class="uk-width-1-1">
+                <p>
+                    Press the Connect button to connect this device to {{ ssid }}. <br><br>
 
-If the connection fails, this hotspot will be re-created.<br><br>
-{% else %}
-The hotspot will remain, but this web service will be terminated.<br><br>
+                    {% if mode == 'single' %}
+                    This will terminate the current hotspot. Connect to {{ ssid }} for access.<br><br>
 
-If the connection fails, the web service will be restored.<br><br>
-{% endif %}
+                    If the connection fails, this hotspot will be re-created.<br><br>
+                    {% else %}
+                    The hotspot will remain, but this web service will be terminated.<br><br>
 
-<form action="connect" method="post">
-<input type="hidden" name="ssid" value="{{ ssid_encoded }}">
-Password (if required): <input type='password' name='password'><br><br>
+                    If the connection fails, the web service will be restored.<br><br>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        <form action="/connect" method="POST">
+            <div class="uk-grid uk-grid-small">
+                <div class="uk-width-2-3">
+                    <input type="hidden" name="ssid" value="{{ ssid_encoded }}">
+                    <input class="uk-input" required placeholder="Password (if required)" type="password" name="password">
+                </div>
+                <div class="uk-width-1-3">
+                    <button type="submit" value="Connect" class="uk-button uk-button-primary uk-width-expand">Connect</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
-<input type="submit" value="Connect">
-
-
-</form>
-</body>
-</html>
+<!-- JS FILES -->
+<script src="js/uikit.js"></script>
+<script src="js/uikit-icons.js"></script>

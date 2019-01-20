@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-# Copyright (c) 2017-2018 David Steele <dsteele@gmail.com>
+# Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
 #
-# SPDX-License-Identifier: GPL-2+
+# SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 
 
@@ -52,7 +52,7 @@ def load_data():
     conf = config.Config(
                 CONF_PATH,
                 defaults={
-                    'base_name': 'comitup',
+                    'ap_name': 'comitup-<nnnn>',
                     'web_service': '',
                     'external_callback': '/usr/local/bin/comitup-callback',
                 },
@@ -64,10 +64,6 @@ def load_data():
            )
 
     return (conf, data)
-
-
-def inst_name(conf, data):
-    return conf.base_name + '-' + data.id
 
 
 def parse_args():
