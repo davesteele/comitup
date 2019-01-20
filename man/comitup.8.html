@@ -1,21 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="" />
   <title>comitup(8)</title>
-  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">comitup(8)</h1>
-<h2 class="author"></h2>
-<h3 class="date">April 2018</h3>
-</div>
+<p class="author"></p>
+<p class="date">April 2018</p>
+</header>
 <h1 id="name">NAME</h1>
-<p>comitup -- Manage wifi connections on headless, unconnected systems</p>
+<p>comitup – Manage wifi connections on headless, unconnected systems</p>
 <h2 id="synopsis">SYNOPSIS</h2>
 <p><code>comitup [options]</code></p>
 <h2 id="description">DESCRIPTION</h2>
@@ -27,8 +32,8 @@
 <p><strong>comitup</strong> logs to <em>/var/log/comitup.log</em>.</p>
 <h2 id="options">Options</h2>
 <ul>
-<li><em>-h</em>, <em>--help</em> - Print help and exit</li>
-<li><em>-c</em>, <em>--check</em> - Check the wifi device configuration and exit</li>
+<li><em>-h</em>, <em>–help</em> - Print help and exit</li>
+<li><em>-c</em>, <em>–check</em> - Check the wifi device configuration and exit</li>
 </ul>
 <h2 id="d-bus-interface">D-Bus Interface</h2>
 <p><strong>Comitup</strong> provides a D-Bus object which claims the name <em>com.github.davesteele.comitup</em> on the path <em>/com/github/davesteele/comitup</em>, supporting the interface <em>com.github.davesteele.comitup</em>. The interface includes the following methods.</p>
@@ -39,10 +44,9 @@
 <p>Return information about the current <strong>Comitup</strong> service. The keys are as follows:</p>
 <ul>
 <li><p><em>version</em> - The package version.</p></li>
-<li><p><em>basename</em> - The currently configured basename (default <strong>comitup</strong>).</p></li>
-<li><p><em>id</em> - The unique random numeric id associated with the service instance.</p></li>
+<li><p><em>apname</em> - The currently configured AP hotspot name.</p></li>
 <li><p><em>hostnames</em> - A list of host names that are published for the service IP address.</p></li>
-<li><p><em>imode</em> - The current interface mode for comitup. This returns the string 'single' or 'router'. In 'single' mode, the hotspot is terminated when <strong>CONNECTED</strong>. In 'router' mode, the hotspot is retained, the upstream connection is made with the other wifi device, and traffic is routed between them. The web service is terminated when <strong>CONNECTED</strong>.</p></li>
+<li><p><em>imode</em> - The current interface mode for comitup. This returns the string ‘single’ or ‘router’. In ‘single’ mode, the hotspot is terminated when <strong>CONNECTED</strong>. In ‘router’ mode, the hotspot is retained, the upstream connection is made with the other wifi device, and traffic is routed between them. The web service is terminated when <strong>CONNECTED</strong>.</p></li>
 </ul></li>
 <li><p><em>access_points()</em></p>
 <p>Input: None</p>
