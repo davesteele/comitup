@@ -19,10 +19,13 @@ class Config(object):
         self._section = section
 
         self._config = configparser.ConfigParser(defaults=defaults)
-        with open(filename, 'r') as fp:
-            conf_str = '[%s]\n' % self._section + fp.read()
-        conf_fp = io.StringIO(conf_str)
-        self._config.read_file(conf_fp)
+        try:
+            with open(filename, 'r') as fp:
+                conf_str = '[%s]\n' % self._section + fp.read()
+            conf_fp = io.StringIO(conf_str)
+            self._config.read_file(conf_fp)
+        except FileNotFoundError:
+            pass
 
     def __getattr__(self, tag):
         try:
