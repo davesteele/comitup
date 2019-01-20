@@ -24,7 +24,7 @@ sys.path.append("/usr/share/comitup")
 
 import pkg_resources                          # noqa
 
-from gi.repository.GLib import MainLoop        # noqa
+from gi.repository.GLib import MainLoop       # noqa
 import time                                   # noqa
 from dbus.mainloop.glib import DBusGMainLoop  # noqa
 DBusGMainLoop(set_as_default=True)
