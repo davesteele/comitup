@@ -1,0 +1,9 @@
+comitup (1.3-1) UNRELEASED; urgency=medium
+
+    The base_name configuration variable has been removed, and
+    replaced by ap_name. The new variable lets you define the
+    presence and length of the persistent random number in the AP
+    name. See the comitup-conf man page or the install comitup.conf
+    file for details.
+
+ -- David Steele <steele@debian.org>  Sun, 20 Jan 2019 12:51:16 -0500
