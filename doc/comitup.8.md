@@ -18,7 +18,7 @@ available to access the computer.
 
 On startup, the service will attempt to connect to wifi using established
 networkmanager(8) connections. If this is not successful, **comitup** will
-establish a wifi hotspot with the name _comitup-&lt;nnnn&gt;_, where &lt;nnnn&gt; is
+establish a wifi hotspot with the name _comitup-&lt;nn&gt;_, where &lt;nn&gt; is
 a persistent 4-digit number.
 
 While the hotspot is active, a comitup-web(8) service is available to manage
@@ -29,7 +29,7 @@ first interface, and the internet connection will be made on the second.
 Otherwise, the hotspot will be replaced with the internet connection.
 
 In all states, avahi-daemon(8) is used to publish the mdns host name
-_comitup-&lt;nnnn&gt;.local_, making the web service accessible
+_comitup-&lt;nn&gt;.local_, making the web service accessible
 as e.g. _http://comitup-1234.local_, for systems supporting Zeroconf. For other
 systems, a _comitup_ Workstation entry is published which is visible to Zeroconf
 browsing applications, allowing the IP address to be manually determined.

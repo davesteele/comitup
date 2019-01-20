@@ -20,9 +20,9 @@ __comitup__ will create a custom hotspot, and establish a __comitup-web__
 web service on that network. The web service can be used to remotely select
 and authenticate a visible wifi connection. 
 
-The hotspot is named _comitup-&lt;nnnn&gt;_, where _&lt;nnnn&gt;_ is a
+The hotspot is named _comitup-&lt;nn&gt;_, where _&lt;nn&gt;_ is a
 persistent 4-digit number. The website is accessible on that hotspot as
-_ht&#8203;tp://comitup.local_ or _ht&#8203;tp://comitup-&lt;nnnn&gt;.local_
+_ht&#8203;tp://comitup.local_ or _ht&#8203;tp://comitup-&lt;nn&gt;.local_
 from any device which supports [Bonjour/ZeroConf/Avahi] [zeroconf]. For
 other devices, use a Zeroconf browser ([Android][], [Windows][]) to
 determine the IP address of the "Comitup Service", and browse to
