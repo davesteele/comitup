@@ -36,7 +36,7 @@ Display:
     The **comitup** states are **HOTSPOT**, **CONNECTING**, and **CONNECTED**. 
 
     In the **HOTSPOT** mode, **comitup** creates a wifi hotspot with the
-    name **comitup-&lt;nnnn&gt;**, where &lt;nnnn&gt; is a persistent 4-digit number.
+    name **comitup-&lt;nn&gt;**, where &lt;nn&gt; is a persistent 4-digit number.
 
     Once in **HOTSPOT** mode, the system will occasionally (~1/min) cycle
     through available defined connections, by transitioning to the
