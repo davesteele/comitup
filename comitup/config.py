@@ -19,7 +19,8 @@ class Config(object):
         self._section = section
 
         self._config = configparser.ConfigParser(defaults=defaults)
-        conf_str = '[%s]\n' % self._section + open(filename, 'r').read()
+        with open(filename, 'r') as fp:
+            conf_str = '[%s]\n' % self._section + fp.read()
         conf_fp = io.StringIO(conf_str)
         self._config.read_file(conf_fp)
 
