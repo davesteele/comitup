@@ -1,7 +1,13 @@
 comitup (1.3-1) UNRELEASED; urgency=medium
 
+  * New web gui look (thanks Krebbi).
+  * Add "primary_wifi_device" configuration variable.
+  * Replace "base_name" config with "ap_name".
   * Improve robustness with Pi 3 Model B+.
   * Limit AP iptables rules to AP traffic.
+  * Other networking fixes.
+  * Address bug in callback privilege dropping.
+  * comitup-web logging.
 
  -- David Steele <steele@debian.org>  Tue, 17 Apr 2018 08:04:38 -0400
 
