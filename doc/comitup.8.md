@@ -60,7 +60,7 @@ following methods.
 
       * _version_ - The package version.
 
-      * _basename_ - The currently configured basename (the AP hotspot name).
+      * _apname_ - The currently configured AP hotspot name.
 
       * _hostnames_ - A list of host names that are published for the service
         IP address.

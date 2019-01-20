@@ -13,10 +13,12 @@ It is located in the _/etc/_ directory.
 
 ## PARAMETERS
 
-  * _base_name_:
+  * _ap_name_:
     By default, comitup will create a hotspot named **comitup-&lt;nnnn&gt;**, and publish
     avahi-daemon(8) host entries for **comitup-&lt;nnnn&gt;** and **comitup**. Setting this
-    entry will change the **comitup** string with one of the users choosing.
+    entry will change the **comitup** string with one of the users choosing. If the
+    configuration variable contains an &lt;nnnn&gt; string, with one to 4 "n's", it will be
+    replaced with a persistent, random number.
 
   * _web_service_:
     This defines a user web service to be controlled by **comitup**. This service will be

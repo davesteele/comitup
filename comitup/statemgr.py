@@ -94,7 +94,7 @@ class Comitup(dbus.service.Object):
     def get_info(self):
         info = {
             'version': pkg_resources.get_distribution("comitup").version,
-            'basename': ap_name(conf.base_name, data.id),
+            'apname': expand_ap(conf.ap_name, data.id),
             'hostnames': ';'.join(get_hosts(conf, data)),
             'imode': modemgr.get_mode(),
             }
@@ -102,8 +102,8 @@ class Comitup(dbus.service.Object):
         return info
 
 
-def ap_name(base_name, id):
-    returnval = base_name
+def expand_ap(ap_name, id):
+    returnval = ap_name
 
     for l in range(5):
         returnval = re.sub("<{}>".format("n"*l), id[:l], returnval)
@@ -113,7 +113,7 @@ def ap_name(base_name, id):
 
 def get_hosts(conf, data):
     return [
-        "{}.local".format(ap_name(conf.base_name, data.id)),
+        "{}.local".format(expand_ap(conf.ap_name, data.id)),
     ]
 
 
