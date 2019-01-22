@@ -25,14 +25,6 @@ def test_nmmon_null_init():
     nmmon.null_fn()
 
 
-@patch('comitup.nm.get_device_path', return_value='/')
-def test_nmmon_set_callbacks(nmmon_con_fxt):
-    nmmon.set_device_callbacks('HOTSPOT', 1, 2)
-
-    assert nmmon.nm_dev_connect == 1
-    assert nmmon.nm_dev_fail == 2
-
-
 @pytest.mark.parametrize("state, pass_called, fail_called", (
                              (90,  False, False),
                              (100, True,  False),
@@ -68,14 +60,6 @@ def test_nmmon_set_listener(check_listener, nm_state, bus_fxt):
     nmmon.set_device_listener('apath')
 
     assert bus_fxt.called
-
-
-@patch('comitup.nmmon.nm.get_device_path', return_value='somepath')
-@patch('comitup.nmmon.set_device_listener')
-def test_nmmon_check_listener(listener, dev_path, bus_fxt, devpath_fxt):
-    nmmon.check_device_listener()
-
-    assert listener.called
 
 
 @pytest.fixture()
