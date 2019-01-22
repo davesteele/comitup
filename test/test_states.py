@@ -67,64 +67,6 @@ def points_fxt(monkeypatch):
     return None
 
 
-@pytest.mark.parametrize(
-    "state, action, end_state, conn, conn_list",
-    (
-        ('hotspot',       'pass',    'HOTSPOT', 'hs', []),
-        ('hotspot',       'fail',    'HOTSPOT', 'hs', []),
-        ('hotspot',    'timeout', 'CONNECTING', 'c1', ['c1', 'c1', 'c2']),
-        ('connecting',    'pass',  'CONNECTED', 'c1', []),
-        ('connecting',    'fail', 'CONNECTING', 'c2', []),
-        ('connecting', 'timeout', 'CONNECTING', 'c2', []),
-        # note - the null connection is a test side-effect
-        ('connected',     'pass',  'CONNECTED', '',   []),
-        ('connected',     'fail',    'HOTSPOT', 'hs', []),
-        ('connected',  'timeout',    'HOTSPOT', 'hs', []),
-    )
-)
-@pytest.mark.parametrize("thetest", ('end_state', 'conn', 'conn_list'))
-def test_state_transition(thetest, state, action, end_state,
-                          conn, conn_list, state_fxt, points_fxt):
-    action_fn = states.__getattribute__(state + "_" + action)
-
-    states.connection = ''
-
-    if state == 'connecting':
-        states.set_state(state.upper(), ['c1', 'c2'])
-    else:
-        states.set_state(state.upper())
-
-    if action == 'timeout':
-        action_fn(states.state_id)
-    else:
-        action_fn()
-
-    if thetest == 'end_state':
-        assert states.com_state == end_state
-    elif thetest == 'conn':
-        assert states.connection == conn
-    elif thetest == 'conn_list':
-        assert states.conn_list == conn_list
-
-
-def test_state_transition_cleanup(state_fxt):
-    states.connection = 'c1'
-
-    states.set_state('CONNECTING', ['c1'])
-    states.connecting_fail()
-
-    assert states.com_state == 'HOTSPOT'
-
-
-def test_state_transition_no_connections(state_fxt):
-    states.connection = 'hs'
-
-    states.set_state('CONNECTING', [])
-#    states.connecting_fail()
-
-    assert states.com_state == 'HOTSPOT'
-
-
 @pytest.mark.parametrize("offset, match", ((-1, False), (0, True), (1, False)))
 def test_state_timeout_wrapper(offset, match):
 
@@ -153,16 +95,6 @@ def test_state_timeout_activity():
 def test_state_set_hosts():
     states.set_hosts('a', 'b')
     assert states.dns_names == ('a', 'b')
-
-
-@patch('comitup.states.assure_hotspot')
-@patch('comitup.states.nmmon.init_nmmon')
-def test_state_init_states(init_nmmon, assure_hs):
-    states.init_states(('c', 'd'), [])
-    assert states.dns_names == ('c', 'd')
-
-    assert assure_hs.called
-    assert assure_hs.call_args[0][0] == 'c'
 
 
 @pytest.mark.parametrize(
