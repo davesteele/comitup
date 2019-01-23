@@ -91,6 +91,22 @@ setup(
                 'web/templates/confirm.html',
             ]
         ),  # noqa
+        ('/usr/share/comitup/web/templates/css',
+            [
+                'web/templates/css/uikit.css',
+                'web/templates/css/uikit-rtl.css',
+                'web/templates/css/uikit.min.css',
+                'web/templates/css/uikit-rtl.min.css',
+            ]
+        ),  # noqa
+        ('/usr/share/comitup/web/templates/js',
+            [
+                'web/templates/js/uikit-icons.js',
+                'web/templates/js/uikit.js',
+                'web/templates/js/uikit-icons.min.js',
+                'web/templates/js/uikit.min.js',
+            ]
+        ),  # noqa
     ],
     install_requires=[
         'jinja2',
