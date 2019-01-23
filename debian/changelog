@@ -1,6 +1,7 @@
 comitup (1.3.1-1) UNRELEASED; urgency=medium
 
   * Change the default number of digits in the hotspot from 4 to 2.
+  * Fix CI testing.
 
  -- David Steele <steele@debian.org>  Sun, 20 Jan 2019 17:55:01 -0500
 
