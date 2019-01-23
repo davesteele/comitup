@@ -69,7 +69,7 @@ def device_nm_managed():
             if dev not in devicesinfo:
                 # Fail without comment
                 return ""
-    except CalledProcessError:
+    except subprocess.CalledProcessError:
         pass
 
     return None
