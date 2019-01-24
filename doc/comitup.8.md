@@ -1,6 +1,6 @@
 % comitup(8)
 %
-% April 2018
+% January 2019
 
 # NAME
 

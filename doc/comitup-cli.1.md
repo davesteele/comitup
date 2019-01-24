@@ -1,6 +1,6 @@
 % comitup-cli(1)
 %
-% April 2018
+% Jan 2019
 
 # NAME
 
