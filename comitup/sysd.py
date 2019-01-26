@@ -10,7 +10,6 @@
 # or later
 #
 
-import logging
 import dbus
 
 bus = dbus.SystemBus()
@@ -28,4 +27,3 @@ sd_stop_unit = systemd_service.get_dbus_method(
     'StopUnit',
     'org.freedesktop.systemd1.Manager',
 )
-

@@ -11,23 +11,22 @@
 # or later
 #
 
-import os
-import time
+from flask import Flask, render_template, request, send_from_directory,\
+                  redirect
 import logging
 from logging.handlers import TimedRotatingFileHandler
 from multiprocessing import Process
-import urllib
-import base64
-from flask import Flask, render_template, request, send_from_directory, redirect
-
 import sys
+import time
+import urllib
+
 sys.path.append('.')
 sys.path.append('..')
 
 from comitup import client as ciu                 # noqa
 
 ciu_client = None
-LOG_PATH="/var/log/comitup-web.log"
+LOG_PATH = "/var/log/comitup-web.log"
 
 
 def deflog():
@@ -69,11 +68,9 @@ def create_app(log):
     def send_js(path):
         return send_from_directory('templates/js', path)
 
-
     @app.route('/css/<path:path>')
     def send_css(path):
         return send_from_directory('templates/css', path)
-
 
     @app.route("/confirm")
     def confirm():
@@ -93,7 +90,6 @@ def create_app(log):
                                 mode=mode,
                                 )
 
-
     @app.route("/connect", methods=['POST'])
     def connect():
         ssid = urllib.parse.unquote(request.form["ssid"])
@@ -103,16 +99,15 @@ def create_app(log):
         p.start()
 
         log.info("connect.html - ssid {0}".format(ssid))
-        return render_template("connect.html",
-                                ssid=ssid,
-                                password=password,
-                              )
-
+        return render_template(
+                "connect.html",
+                ssid=ssid,
+                password=password,
+                )
 
     @app.route("/<path:path>")
     def catch_all(path):
         return redirect("http://10.42.0.1/", code=302)
-
 
     return app
 

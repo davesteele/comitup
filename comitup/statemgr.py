@@ -138,7 +138,7 @@ def external_callback(state, action):
 
         return dodemote
 
-    stats= os.stat(script)
+    stats = os.stat(script)
 
     with open(os.devnull, 'w') as nul:
         subprocess.call(

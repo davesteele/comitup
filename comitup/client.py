@@ -14,6 +14,7 @@
 import dbus
 import sys
 
+
 class CiuClient(object):
 
     # Make the dbus functions late binding, to facilitate testing.
@@ -40,8 +41,10 @@ class CiuClient(object):
                 bus = dbus.SystemBus()
                 self.service = bus.get_object('com.github.davesteele.comitup',
                                               '/com/github/davesteele/comitup')
-            func = self.service.get_dbus_method(self.methods[name],
-                                                'com.github.davesteele.comitup')
+            func = self.service.get_dbus_method(
+                    self.methods[name],
+                    'com.github.davesteele.comitup'
+                    )
         except dbus.exceptions.DBusException:
             sys.exit(1)
 

@@ -5,7 +5,7 @@
 # License-Filename: LICENSE
 
 import pytest
-from mock import Mock, patch
+from mock import Mock
 import textwrap
 import os
 

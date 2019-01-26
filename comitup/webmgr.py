@@ -11,7 +11,6 @@
 #
 
 import logging
-import dbus
 
 from .sysd import sd_start_unit, sd_stop_unit
 

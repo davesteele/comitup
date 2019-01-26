@@ -6,11 +6,11 @@
 
 
 from collections import namedtuple
-import textwrap
 import logging
-import subprocess
-import re
 import os
+import re
+import subprocess
+import textwrap
 
 
 log = logging.getLogger('comitup')
@@ -24,7 +24,7 @@ class DevInfo(object):
                 path = "/sys/class/net/{}/phy80211/name".format(dev)
                 with open(path, 'r') as fp:
                     phy = fp.read().strip()
-                self.dev_list.append( (dev, phy) )
+                self.dev_list.append((dev, phy))
             except FileNotFoundError:
                 pass
 
@@ -36,6 +36,7 @@ class DevInfo(object):
 
 
 dev_info = DevInfo()
+
 
 def device_present():
     if dev_info.get_devs():
@@ -63,10 +64,11 @@ def device_supports_ap():
 
 def device_nm_managed():
     try:
-        devicesinfo = subprocess.check_output("nmcli device show".split(), re.MULTILINE).decode()
+        cmd = "nmcli device show"
+        devsinfo = subprocess.check_output(cmd.split(), re.MULTILINE).decode()
 
         for dev in dev_info.get_devs():
-            if dev not in devicesinfo:
+            if dev not in devsinfo:
                 # Fail without comment
                 return ""
     except subprocess.CalledProcessError:

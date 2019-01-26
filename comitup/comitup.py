@@ -69,8 +69,12 @@ def load_data():
 def parse_args():
     parser = argparse.ArgumentParser(description="")
 
-    parser.add_argument('-c', '--check', action='store_true',
-            help="Check the wifi devices and exit")
+    parser.add_argument(
+        '-c',
+        '--check',
+        action='store_true',
+        help="Check the wifi devices and exit",
+    )
 
     args = parser.parse_args()
 

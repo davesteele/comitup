@@ -7,7 +7,7 @@
 import pytest
 import urllib
 
-from mock import patch, call, Mock
+from mock import Mock
 
 from web import comitupweb
 
@@ -49,20 +49,7 @@ def test_webapp_index(app, ssid, monkeypatch):
 
 
 @pytest.mark.parametrize('ssid', ssid_list)
-def test_webapp_confirm(app, ssid, monkeypatch):
-    quoted_ssid = urllib.parse.quote(ssid)
-    url = "confirm?ssid={}&encrypted=encrypted".format(quoted_ssid)
-
-    response = app.test_client().get(url)
-    index_text = response.get_data().decode()
-
-    assert "to " + ssid in index_text
-    assert "value=\"" + urllib.parse.quote(ssid) in index_text
-
-
-
-@pytest.mark.parametrize('ssid', ssid_list)
-def test_webapp_confirm(app, ssid, monkeypatch):
+def test_webapp_connect(app, ssid, monkeypatch):
     monkeypatch.setattr('web.comitupweb.Process', Mock())
 
     data = {
