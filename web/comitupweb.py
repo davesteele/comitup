@@ -18,7 +18,7 @@ from logging.handlers import TimedRotatingFileHandler
 from multiprocessing import Process
 import urllib
 import base64
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, redirect
 
 import sys
 sys.path.append('.')
@@ -107,6 +107,12 @@ def create_app(log):
                                 ssid=ssid,
                                 password=password,
                               )
+
+
+    @app.route("/<path:path>")
+    def catch_all(path):
+        return redirect("http://10.42.0.1/", code=302)
+
 
     return app
 
