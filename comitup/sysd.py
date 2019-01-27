@@ -27,3 +27,11 @@ sd_stop_unit = systemd_service.get_dbus_method(
     'StopUnit',
     'org.freedesktop.systemd1.Manager',
 )
+
+sd_unit_state = systemd_service.get_dbus_method(
+    'GetUnitFileState',
+    'org.freedesktop.systemd1.Manager',
+)
+
+if __name__ == "__main__":
+    print(sd_unit_state("NetworkManager.service"))
