@@ -19,7 +19,7 @@ available to access the computer.
 On startup, the service will attempt to connect to wifi using established
 networkmanager(8) connections. If this is not successful, **comitup** will
 establish a wifi hotspot with the name _comitup-&lt;nn&gt;_, where &lt;nn&gt; is
-a persistent 4-digit number.
+a persistent 2-digit number.
 
 While the hotspot is active, a comitup-web(8) service is available to manage
 connecting to an access point.
