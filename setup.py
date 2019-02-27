@@ -83,7 +83,6 @@ setup(
         ('/etc', ['conf/comitup.conf']),
         ('/var/lib/comitup', ['conf/comitup.json']),
         ('/etc/dbus-1/system.d', ['conf/comitup-dbus.conf']),
-        ('/usr/share/comitup/web', ['web/comitupweb.conf']),
         ('/usr/share/comitup/web/templates',
             [
                 'web/templates/index.html',
