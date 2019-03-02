@@ -199,10 +199,9 @@ def get_candidate_connections(device):
         except KeyError:
             log.debug("Unexpected connection format for %s" % ssid)
 
-    points = [x.Ssid for x in get_access_points(device)]
-    iwpoints = [x['ssid'] for x in iwscan.candidates()]
+    log.debug("candidates: %s" % candidates)
 
-    return list(set(candidates) & (set(points) | set(iwpoints)))
+    return candidates
 
 
 def make_hotspot(name='comitup', device=None):
