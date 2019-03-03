@@ -1,6 +1,6 @@
 % comitup-cli(1)
 %
-% April 2018
+% February 2019
 
 # NAME
 
@@ -36,7 +36,7 @@ Display:
     The **comitup** states are **HOTSPOT**, **CONNECTING**, and **CONNECTED**. 
 
     In the **HOTSPOT** mode, **comitup** creates a wifi hotspot with the
-    name **comitup-&lt;nn&gt;**, where &lt;nn&gt; is a persistent 4-digit number.
+    name **comitup-&lt;nn&gt;**, where &lt;nn&gt; is a persistent 2-digit number.
 
     Once in **HOTSPOT** mode, the system will occasionally (~1/min) cycle
     through available defined connections, by transitioning to the
@@ -93,7 +93,7 @@ Commands:
 
 ## COPYRIGHT
 
-Comitup is Copyright (C) 2016-2017 David Steele &lt;steele@debian.org&gt;
+Comitup is Copyright (C) 2016-2019 David Steele &lt;steele@debian.org&gt;
 
 ## SEE ALSO
 

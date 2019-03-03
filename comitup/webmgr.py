@@ -11,26 +11,10 @@
 #
 
 import logging
-import dbus
 
-bus = dbus.SystemBus()
-systemd_service = bus.get_object(
-    'org.freedesktop.systemd1',
-    '/org/freedesktop/systemd1',
-)
-
-sd_start_unit = systemd_service.get_dbus_method(
-    'StartUnit',
-    'org.freedesktop.systemd1.Manager',
-)
-
-sd_stop_unit = systemd_service.get_dbus_method(
-    'StopUnit',
-    'org.freedesktop.systemd1.Manager',
-)
+from .sysd import sd_start_unit, sd_stop_unit
 
 log = logging.getLogger('comitup')
-
 
 COMITUP_SERVICE = 'comitup-web.service'
 

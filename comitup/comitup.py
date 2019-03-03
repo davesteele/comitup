@@ -53,6 +53,7 @@ def load_data():
                 CONF_PATH,
                 defaults={
                     'ap_name': 'comitup-<nn>',
+                    'ap_password': '',
                     'web_service': '',
                     'external_callback': '/usr/local/bin/comitup-callback',
                 },
@@ -69,8 +70,12 @@ def load_data():
 def parse_args():
     parser = argparse.ArgumentParser(description="")
 
-    parser.add_argument('-c', '--check', action='store_true',
-            help="Check the wifi devices and exit")
+    parser.add_argument(
+        '-c',
+        '--check',
+        action='store_true',
+        help="Check the wifi devices and exit",
+    )
 
     args = parser.parse_args()
 

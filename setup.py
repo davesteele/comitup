@@ -53,7 +53,7 @@ class MyClean(clean):
 setup(
     name='comitup',
     packages=['comitup', 'web', 'cli'],
-    version='1.3',
+    version='1.4',
     description="Remotely manage wifi connections on a headless computer",
     classifiers=[
         'Development Status :: 5 - Production/Stable',
@@ -83,7 +83,6 @@ setup(
         ('/etc', ['conf/comitup.conf']),
         ('/var/lib/comitup', ['conf/comitup.json']),
         ('/etc/dbus-1/system.d', ['conf/comitup-dbus.conf']),
-        ('/usr/share/comitup/web', ['web/comitupweb.conf']),
         ('/usr/share/comitup/web/templates',
             [
                 'web/templates/index.html',

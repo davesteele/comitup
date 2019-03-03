@@ -1,6 +1,6 @@
 % comitup-conf(5)
 %
-% April 2018
+% February 2019
 
 # NAME
 
@@ -19,6 +19,10 @@ It is located in the _/etc/_ directory.
     entry will change the **comitup** string with one of the users choosing. If the
     configuration variable contains an &lt;nn&gt; string, with one to 4 "n's", it will be
     replaced with a persistent, random number.
+
+  * _ap_password_:
+    If this parameter is defined in the configuration file, then the comitup hotspot will
+    require that any connection to the hotspot be authenticated, using this password.
 
   * _web_service_:
     This defines a user web service to be controlled by **comitup**. This service will be
@@ -44,7 +48,7 @@ It is located in the _/etc/_ directory.
 
 ## COPYRIGHT
 
-Comitup is Copyright (C) 2016-2017 David Steele &lt;steele@debian.org&gt;
+Comitup is Copyright (C) 2016-2019 David Steele &lt;steele@debian.org&gt;
 
 ## SEE ALSO
 

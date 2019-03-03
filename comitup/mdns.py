@@ -116,7 +116,7 @@ def clear_entries():
 def get_interface_mapping():
     mapping = {}
 
-    for line in subprocess.check_output("ip addr".split()).decode().split('\n'):
+    for line in subprocess.check_output(["ip", "addr"]).decode().split('\n'):
         try:
             asc_index, name = line.split(": ")[0:2]
             mapping[name] = int(asc_index)
@@ -133,9 +133,9 @@ def add_hosts(hosts):
     for device in nm.get_devices():
         name = nm.device_name(device)
         addr = nm.get_active_ip(device)
-        if (name in nm.get_phys_dev_names() \
-            and name in int_mapping \
-            and addr):
+        if (name in nm.get_phys_dev_names()
+                and name in int_mapping
+                and addr):
 
             index = int_mapping[name]
             for host in hosts:

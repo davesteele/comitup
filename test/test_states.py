@@ -1,11 +1,12 @@
-
 # Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
-from comitup import states
+
 import pytest
-from mock import Mock, patch, call
+from mock import Mock, call
+
+from comitup import states
 
 
 @pytest.fixture()

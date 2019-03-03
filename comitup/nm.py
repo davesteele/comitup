@@ -11,14 +11,15 @@
 # or later
 #
 
-import logging
-import NetworkManager as nm
 import argparse
 import dbus
+from functools import wraps
+import getpass
+import logging
+import NetworkManager as nm
+import pprint
 import sys
 import uuid
-import getpass
-from functools import wraps
 
 if __name__ == '__main__':
     import os
@@ -26,10 +27,9 @@ if __name__ == '__main__':
     parentdir = '/'.join(fullpath.split('/')[:-2])
     sys.path.insert(0, parentdir)
 
-from comitup import iwscan
+from comitup import iwscan  # noqa
 
 
-import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 log = logging.getLogger('comitup')
@@ -90,7 +90,7 @@ def get_device_path(device):
 def disconnect(device):
     try:
         device.Disconnect()
-    except:
+    except:   # noqa
         log.debug("Error received in disconnect")
 
 
@@ -199,13 +199,12 @@ def get_candidate_connections(device):
         except KeyError:
             log.debug("Unexpected connection format for %s" % ssid)
 
-    points = [x.Ssid for x in get_access_points(device)]
-    iwpoints = [x['ssid'] for x in iwscan.candidates()]
+    log.debug("candidates: %s" % candidates)
 
-    return list(set(candidates) & (set(points) | set(iwpoints)))
+    return candidates
 
 
-def make_hotspot(name='comitup', device=None):
+def make_hotspot(name='comitup', device=None, password=""):
     settings = {
         'connection':
         {
@@ -231,6 +230,11 @@ def make_hotspot(name='comitup', device=None):
 
     if device:
         settings['connection']['interface-name'] = device_name(device)
+
+    if password and len(password) >= 8:
+        settings['802-11-wireless-security'] = {}
+        settings['802-11-wireless-security']['key-mgmt'] = "wpa-psk"
+        settings['802-11-wireless-security']['psk'] = password
 
     nm.Settings.AddConnection(settings)
 
@@ -300,7 +304,7 @@ def do_listaccess(arg):
     try:
         import tabulate
         print(tabulate.tabulate(bypwr, headers=hdrs))
-    except:
+    except:    # noqa
         for entry in bypwr:
             print(entry)
 

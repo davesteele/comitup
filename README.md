@@ -21,9 +21,9 @@ web service on that network. The web service can be used to remotely select
 and authenticate a visible wifi connection. 
 
 The hotspot is named _comitup-&lt;nn&gt;_, where _&lt;nn&gt;_ is a
-persistent 4-digit number. The website is accessible on that hotspot as
+persistent 2-digit number. The website is accessible on that hotspot as
 _ht&#8203;tp://comitup.local_ or _ht&#8203;tp://comitup-&lt;nn&gt;.local_
-from any device which supports [Bonjour/ZeroConf/Avahi] [zeroconf]. For
+from any device which supports [Bonjour/ZeroConf/Avahi][zeroconf]. For
 other devices, use a Zeroconf browser ([Android][], [Windows][]) to
 determine the IP address of the "Comitup Service", and browse to
 _http&#58;//&lt;ipaddress&gt;_. In most cases, this address will be _http&#58;//10.42.0.1/_

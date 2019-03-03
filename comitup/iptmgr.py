@@ -50,7 +50,8 @@ appliance_cmds = [
 
 appliance_clear = [
     "iptables -w -t nat -D POSTROUTING -j COMITUP-FWD >/dev/null 2>&1",
-    "iptables -w -t nat -D COMITUP-FWD -o {link} -j MASQUERADE >/dev/null 2>&1",
+    "iptables -w -t nat -D COMITUP-FWD -o {link} "
+        "-j MASQUERADE >/dev/null 2>&1",  # noqa
     "iptables -w -t nat -D COMITUP-FWD -j RETURN >/dev/null 2>&1",
     "iptables -w -t nat -X COMITUP-FWD >/dev/null 2>&1",
 ]
