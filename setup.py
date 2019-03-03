@@ -106,6 +106,11 @@ setup(
                 'web/templates/js/uikit.min.js',
             ]
         ),  # noqa
+        ('/etc/NetworkManager/conf.d',
+            [
+                'conf/disablednsmasq.conf',
+            ]
+        ),
     ],
     install_requires=[
         'jinja2',
