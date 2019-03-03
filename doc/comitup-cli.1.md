@@ -1,6 +1,6 @@
 % comitup-cli(1)
 %
-% Jan 2019
+% February 2019
 
 # NAME
 
@@ -93,7 +93,7 @@ Commands:
 
 ## COPYRIGHT
 
-Comitup is Copyright (C) 2016-2017 David Steele &lt;steele@debian.org&gt;
+Comitup is Copyright (C) 2016-2019 David Steele &lt;steele@debian.org&gt;
 
 ## SEE ALSO
 

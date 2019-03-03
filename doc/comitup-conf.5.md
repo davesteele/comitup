@@ -1,6 +1,6 @@
 % comitup-conf(5)
 %
-% January 2019
+% February 2019
 
 # NAME
 
@@ -48,7 +48,7 @@ It is located in the _/etc/_ directory.
 
 ## COPYRIGHT
 
-Comitup is Copyright (C) 2016-2017 David Steele &lt;steele@debian.org&gt;
+Comitup is Copyright (C) 2016-2019 David Steele &lt;steele@debian.org&gt;
 
 ## SEE ALSO
 
