@@ -204,7 +204,7 @@ def get_candidate_connections(device):
     return candidates
 
 
-def make_hotspot(name='comitup', device=None):
+def make_hotspot(name='comitup', device=None, password=""):
     settings = {
         'connection':
         {
@@ -230,6 +230,11 @@ def make_hotspot(name='comitup', device=None):
 
     if device:
         settings['connection']['interface-name'] = device_name(device)
+
+    if password and len(password) >= 8:
+        settings['802-11-wireless-security'] = {}
+        settings['802-11-wireless-security']['key-mgmt'] = "wpa-psk"
+        settings['802-11-wireless-security']['psk'] = password
 
     nm.Settings.AddConnection(settings)
 

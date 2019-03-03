@@ -154,7 +154,11 @@ def init_state_mgr(gconf, gdata, callbacks):
 
     conf, data = (gconf, gdata)
 
-    states.init_states(get_hosts(conf, data), callbacks + [external_callback])
+    states.init_states(
+        get_hosts(conf, data),
+        callbacks + [external_callback],
+        conf.ap_password
+    )
     com_obj = Comitup()
 
     states.set_state('HOTSPOT', timeout=5)

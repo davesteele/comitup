@@ -20,6 +20,10 @@ It is located in the _/etc/_ directory.
     configuration variable contains an &lt;nn&gt; string, with one to 4 "n's", it will be
     replaced with a persistent, random number.
 
+  * _ap_password_:
+    If this parameter is defined in the configuration file, then the comitup hotspot will
+    require that any connection to the hotspot be authenticated, using this password.
+
   * _web_service_:
     This defines a user web service to be controlled by **comitup**. This service will be
     disabled in the **HOTSPOT** state in preference of the comitup web service, and will be

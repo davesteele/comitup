@@ -315,10 +315,13 @@ def set_hosts(*args):
     dns_names = args
 
 
-def assure_hotspot(ssid, device):
-    log.debug("states: Calling nm.get_connection_by_ssid()")
-    if not nm.get_connection_by_ssid(ssid):
-        nm.make_hotspot(ssid, device)
+def assure_hotspot(ssid, password, device):
+    nm.disconnect(modemgr.get_state_device('HOTSPOT'))
+
+    if nm.get_connection_by_ssid(ssid):
+        nm.del_connection_by_ssid(ssid)
+
+    nm.make_hotspot(ssid, device, password)
 
 
 def state_monitor():
@@ -338,7 +341,7 @@ def state_monitor():
     return True
 
 
-def init_states(hosts, callbacks):
+def init_states(hosts, callbacks, hotspot_pw):
     global hotspot_name
 
     nmmon.init_nmmon()
@@ -349,7 +352,7 @@ def init_states(hosts, callbacks):
 
     hotspot_name = dns_to_conn(hosts[0])
 
-    assure_hotspot(hotspot_name, modemgr.get_ap_device())
+    assure_hotspot(hotspot_name, hotspot_pw, modemgr.get_ap_device())
 
     timeout_add(10*1000, state_monitor)
 
@@ -367,7 +370,7 @@ if __name__ == '__main__':
 
     log.info("Starting")
 
-    init_states('comitup.local', 'comitup-1111.local')
+    init_states('comitup.local', 'comitup-1111.local', "")
 
     set_state('HOTSPOT')
     # set_state('CONNECTING', candidate_connections())
