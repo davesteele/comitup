@@ -5,6 +5,7 @@ set -e
 case "$1" in 
     remove)
         rm -f /var/lib/comitup/comitup.json*
+        rm -f /var/lib/comitup/dhcpleaseinfo
     ;;
 
     upgrade|deconfigure|failed-upgrade)
