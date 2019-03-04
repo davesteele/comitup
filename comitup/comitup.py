@@ -19,9 +19,10 @@ from gi.repository.GLib import MainLoop
 from dbus.mainloop.glib import DBusGMainLoop
 DBusGMainLoop(set_as_default=True)
 
+from comitup import cdns         # noqa
+from comitup import iptmgr       # noqa
 from comitup import statemgr     # noqa
 from comitup import webmgr       # noqa
-from comitup import iptmgr       # noqa
 from comitup import wificheck    # noqa
 
 PERSIST_PATH = "/var/lib/comitup/comitup.json"
@@ -106,7 +107,11 @@ def main():
 
     statemgr.init_state_mgr(
                 conf, data,
-                [webmgr.state_callback, iptmgr.state_callback],
+                [
+                    webmgr.state_callback,
+                    iptmgr.state_callback,
+                    cdns.state_callback,
+                ],
              )
 
     loop = MainLoop()
