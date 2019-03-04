@@ -119,7 +119,7 @@ setup(
         ),  # noqa
         ('/etc/NetworkManager/dnsmasq-shared.d',
             [
-                'conf/nm=dns-sabotage.conf',
+                'conf/nm-dns-sabotage.conf',
             ]
         ),  # noqa
     ],
