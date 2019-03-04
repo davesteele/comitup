@@ -106,6 +106,22 @@ setup(
                 'web/templates/js/uikit.min.js',
             ]
         ),  # noqa
+        ('/etc/NetworkManager/conf.d',
+            [
+                'conf/disablednsmasq.conf',
+            ]
+        ),  # noqa
+        ('/usr/share/comitup/dns',
+            [
+                'conf/dns-hotspot.conf',
+                'conf/dns-connected.conf',
+            ]
+        ),  # noqa
+        ('/etc/NetworkManager/dnsmasq-shared.d',
+            [
+                'conf/nm=dns-sabotage.conf',
+            ]
+        ),  # noqa
     ],
     install_requires=[
         'jinja2',

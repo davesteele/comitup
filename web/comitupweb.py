@@ -12,7 +12,7 @@
 #
 
 from flask import Flask, render_template, request, send_from_directory,\
-                  redirect
+                  redirect, abort
 import logging
 from logging.handlers import TimedRotatingFileHandler
 from multiprocessing import Process
@@ -104,6 +104,11 @@ def create_app(log):
                 ssid=ssid,
                 password=password,
                 )
+
+    @app.route("/img/favicon.ico")
+    def favicon(path):
+        log.info("Returning 404 for favicon request")
+        abort(404)
 
     @app.route("/<path:path>")
     def catch_all(path):
