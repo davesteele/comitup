@@ -100,10 +100,8 @@ setup(
         ),  # noqa
         ('/usr/share/comitup/web/templates/js',
             [
-                'web/templates/js/uikit-icons.js',
                 'web/templates/js/uikit.js',
                 'web/templates/js/uikit-icons.min.js',
-                'web/templates/js/uikit.min.js',
             ]
         ),  # noqa
         ('/etc/NetworkManager/conf.d',
