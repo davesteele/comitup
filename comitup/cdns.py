@@ -12,6 +12,8 @@ import signal
 import subprocess
 import time
 
+from comitup import modemgr
+
 log = logging.getLogger('comitup')
 
 hotspot_config = "/usr/share/comitup/dns/dns-hotspot.conf"
@@ -40,7 +42,9 @@ def run_dns(confpath):
 
     kill_dns(pidpath, signal.SIGTERM)
 
-    cmd = "dnsmasq --conf-file={}".format(confpath)
+    dev = modemgr.get_ap_device().Interface
+
+    cmd = "dnsmasq --conf-file={0} --interface={1}".format(confpath, dev)
 
     for _ in range(5):
         cp = subprocess.run(cmd.split())
