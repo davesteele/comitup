@@ -218,6 +218,7 @@ def make_hotspot(name='comitup', device=None, password="", hash="0000"):
         {
             'mode': 'ap',
             'ssid': name,
+            'band': "bg",
         },
         'ipv4':
         {
