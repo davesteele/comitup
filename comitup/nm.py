@@ -205,12 +205,13 @@ def get_candidate_connections(device):
 
 
 def make_hotspot(name='comitup', device=None, password=""):
+    comitup_uuid = str(uuid.uuid4())
     settings = {
         'connection':
         {
             'type': '802-11-wireless',
-            'uuid': str(uuid.uuid4()),
-            'id': name,
+            'uuid': comitup_uuid,
+            'id': "{0}-{1}".format(name, comitup_uuid[-4:]),
             'autoconnect': False,
         },
         '802-11-wireless':
