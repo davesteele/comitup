@@ -199,6 +199,10 @@ def get_candidate_connections(device):
         except KeyError:
             log.debug("Unexpected connection format for %s" % ssid)
 
+    # kicknm
+    get_access_points(device)
+    iwscan.candidates()
+
     log.debug("candidates: %s" % candidates)
 
     return candidates

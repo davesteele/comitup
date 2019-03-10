@@ -19,7 +19,6 @@ import time
 
 from comitup import iwscan
 
-
 from gi.repository.GLib import MainLoop, timeout_add
 if __name__ == '__main__':
     from dbus.mainloop.glib import DBusGMainLoop
@@ -142,6 +141,12 @@ def hotspot_fail():
 
 @timeout
 def hotspot_timeout():
+
+    # Ok, so there's a bug where the first upstream connection never happens.
+    # That is, it never happens until it is kicked off by someone starting
+    # comitup-cli. These two calls emulate that process.
+    iwscan.candidates()
+    nm.get_wifi_devices()
 
     if iwscan.ap_conn_count() == 0 or modemgr.get_mode() != 'single':
         log.debug('Periodic connection attempt')
