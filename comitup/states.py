@@ -343,7 +343,7 @@ def is_hotspot_current(connection):
 def assure_hotspot(ssid, password, device):
     hotspot_connection = nm.get_connection_by_ssid(ssid)
     if not hotspot_connection:
-        nm.make_hotspot(ssid, device)
+        nm.make_hotspot(ssid, device, password, hash_conf())
     elif not is_hotspot_current(hotspot_connection):
         nm.disconnect(modemgr.get_state_device('HOTSPOT'))
 
