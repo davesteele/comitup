@@ -11,12 +11,13 @@
 # or later
 #
 
+from dbus.exceptions import DBusException
+from functools import wraps
+import hashlib
 import logging
 import time
-from functools import wraps
-from dbus.exceptions import DBusException
-from comitup import iwscan
 
+from comitup import iwscan
 
 from gi.repository.GLib import MainLoop, timeout_add
 if __name__ == '__main__':
@@ -140,6 +141,12 @@ def hotspot_fail():
 
 @timeout
 def hotspot_timeout():
+
+    # Ok, so there's a bug where the first upstream connection never happens.
+    # That is, it never happens until it is kicked off by someone starting
+    # comitup-cli. These two calls emulate that process.
+    iwscan.candidates()
+    nm.get_wifi_devices()
 
     if iwscan.ap_conn_count() == 0 or modemgr.get_mode() != 'single':
         log.debug('Periodic connection attempt')
@@ -315,13 +322,34 @@ def set_hosts(*args):
     dns_names = args
 
 
-def assure_hotspot(ssid, password, device):
-    nm.disconnect(modemgr.get_state_device('HOTSPOT'))
+def hash_conf():
+    m = hashlib.sha256()
+    with open("/etc/comitup.conf", 'rb') as fp:
+        m.update(fp.read())
 
-    if nm.get_connection_by_ssid(ssid):
+    return m.hexdigest()[-4:]
+
+
+def is_hotspot_current(connection):
+    hs_filename = connection.GetSettings()['connection']['id']
+
+    hs_hash = hs_filename[-4:]
+
+    cf_hash = hash_conf()
+
+    return hs_hash == cf_hash
+
+
+def assure_hotspot(ssid, password, device):
+    hotspot_connection = nm.get_connection_by_ssid(ssid)
+    if not hotspot_connection:
+        nm.make_hotspot(ssid, device)
+    elif not is_hotspot_current(hotspot_connection):
+        nm.disconnect(modemgr.get_state_device('HOTSPOT'))
+
         nm.del_connection_by_ssid(ssid)
 
-    nm.make_hotspot(ssid, device, password)
+        nm.make_hotspot(ssid, device, password, hash_conf())
 
 
 def state_monitor():

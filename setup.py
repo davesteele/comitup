@@ -104,11 +104,6 @@ setup(
                 'web/templates/js/uikit-icons.min.js',
             ]
         ),  # noqa
-        ('/etc/NetworkManager/conf.d',
-            [
-                'conf/disablednsmasq.conf',
-            ]
-        ),  # noqa
         ('/usr/share/comitup/dns',
             [
                 'conf/dns-hotspot.conf',
