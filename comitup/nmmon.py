@@ -41,6 +41,9 @@ second_device = None
 nm_dev_connect = None
 nm_dev_fail = None
 
+PASS_STATES = [nm.NM_DEVICE_STATE_IP_CHECK, nm.NM_DEVICE_STATE_ACTIVATED]
+FAIL_STATES = [nm.NM_DEVICE_STATE_FAILED]
+
 
 def disable():
     global monitored_dev, nm_dev_connect, nm_dev_fail
@@ -64,20 +67,17 @@ def enable(dev, connect_fn, fail_fn):
 
 def ap_changed_state(state, *args):
     if monitored_dev == ap_device:
-        # see for device states:
-        # https://developer.gnome.org/NetworkManager/stable/spec.html
-        # #type-NM_DEVICE_STATE
-        if state == 100:
+        if state in PASS_STATES:
             nm_dev_connect()
-        elif state == 120:
+        elif state in FAIL_STATES:
             nm_dev_fail()
 
 
 def second_changed_state(state, *args):
     if monitored_dev == second_device:
-        if state == 100:
+        if state in PASS_STATES:
             nm_dev_connect()
-        elif state == 120:
+        elif state in FAIL_STATES:
             nm_dev_fail()
 
 
