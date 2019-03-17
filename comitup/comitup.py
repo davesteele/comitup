@@ -95,7 +95,7 @@ def main():
 
     (conf, data) = load_data()
 
-    time.sleep(5)
+    time.sleep(10)
 
     if args.check:
         if wificheck.run_checks():
