@@ -101,7 +101,11 @@ def disconnect(device):
 
 
 def get_device_settings(device):
-    connection = device.ActiveConnection
+    try:
+        connection = device.ActiveConnection
+    except NetworkManager.ObjectVanished:
+        sys.exit(1)
+
     return connection.Connection.GetSettings()
 
 
