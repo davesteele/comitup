@@ -21,122 +21,92 @@ import logging
 if __name__ == '__main__':
     DBusGMainLoop(set_as_default=True)
 
+if __name__ == '__main__':
+    import os, sys
+    fullpath = os.path.abspath(__file__)
+    parentdir = '/'.join(fullpath.split('/')[:-2])
+    sys.path.insert(0, parentdir)
+
 from comitup import nm       # noqa
 from comitup import modemgr  # noqa
-
-
-#
-# globals
-#
 
 log = logging.getLogger('comitup')
 
 bus = dbus.SystemBus()
 
-device_path = None
-device_listener = None
-comstate = 'HOTSPOT'
+monitored_dev = None
+ap_device = None
+second_device = None
+
+nm_dev_connect = None
+nm_dev_fail = None
 
 
-def null_fn():
-    pass
+def disable():
+    global monitored_dev, nm_dev_connect, nm_dev_fail
+
+    monitored_dev = None
+
+    nm_dev_connect = None
+    nm_dev_fail = None
 
 
-nm_dev_connect = null_fn
-nm_dev_fail = null_fn
+def enable(dev, connect_fn, fail_fn):
+    global monitored_dev, nm_dev_connect, nm_dev_fail
 
-#
-# functions
-#
+    monitored_dev = None
 
+    nm_dev_connect = connect_fn
+    nm_dev_fail = fail_fn
 
-def set_device_callbacks(state, up, down):
-    global nm_dev_connect
-    global nm_dev_fail
-    global comstate
-
-    nm_dev_connect = null_fn
-    nm_dev_fail = null_fn
-
-    comstate = state
-    check_device_listener()
-
-    nm_dev_connect = up
-    nm_dev_fail = down
+    monitored_dev = dev
 
 
-def nm_device_change(state, *args):
+def ap_changed_state(state, *args):
+    if monitored_dev == ap_device:
+        # see for device states:
+        # https://developer.gnome.org/NetworkManager/stable/spec.html
+        # #type-NM_DEVICE_STATE
+        if state == 100:
+            nm_dev_connect()
+        elif state == 120:
+            nm_dev_fail()
 
-    # see for device states:
-    # https://developer.gnome.org/NetworkManager/stable/spec.html
-    # #type-NM_DEVICE_STATE
-    if state == 100:
-        nm_dev_connect()
-    elif state == 120:
-        nm_dev_fail()
+
+def second_changed_state(state, *args):
+    if monitored_dev == second_device:
+        if state == 100:
+            nm_dev_connect()
+        elif state == 120:
+            nm_dev_fail()
 
 
-def set_device_listener(path):
-    global device_listener
+def set_device_listeners(ap_dev, second_dev):
+    global ap_device, second_device
 
-    if device_listener:
-        device_listener.remove()
-
-    log.debug("adding listener for path %s" % path)
-
+    ap_device = ap_dev
     device_listener = bus.add_signal_receiver(
-        nm_device_change,
+        ap_changed_state,
         signal_name="StateChanged",
         dbus_interface="org.freedesktop.NetworkManager.Device",
-        path=path
+        path=nm.get_device_path(ap_dev)
     )
 
-
-def check_device_listener(force=False):
-    global device_path
-
-    current_path = nm.get_device_path(modemgr.get_state_device(comstate))
-
-    if force or (current_path and current_path != device_path):
-        device_path = current_path
-        set_device_listener(device_path)
-
-
-def nm_state_change(state):
-    global device_path
-
-    # https://developer.gnome.org/NetworkManager/stable/spec.html
-    # #type-NM_STATE
-    if state >= 50:
-        check_device_listener()
-
-
-def set_nm_listeners():
-    bus.add_signal_receiver(
-        check_device_listener,
-        signal_name="DeviceAdded",
-        dbus_interface="org.freedesktop.NetworkManager"
+    if second_dev != ap_dev:
+        second_device = second_dev
+        device_listener = bus.add_signal_receiver(
+            second_changed_state,
+            signal_name="StateChanged",
+            dbus_interface="org.freedesktop.NetworkManager.Device",
+            path=nm.get_device_path(second_dev)
     )
-
-    bus.add_signal_receiver(
-        check_device_listener,
-        signal_name="DeviceRemoved",
-        dbus_interface="org.freedesktop.NetworkManager"
-    )
-
-    check_device_listener()
-
-    bus.add_signal_receiver(
-        nm_state_change,
-        signal_name="StateChanged",
-        dbus_interface="org.freedesktop.NetworkManager"
-    )
-
-    nm_state_change(nm.nm_state())
 
 
 def init_nmmon():
-    set_nm_listeners()
+    set_device_listeners(
+        modemgr.get_ap_device(),
+        modemgr.get_link_device()
+    )
 
 
 def main():
@@ -154,7 +124,7 @@ def main():
     def down():
         print("wifi down")
 
-    set_device_callbacks('HOTSPOT', up, down)
+    enable(modemgr.get_ap_device(), up, down)
 
     loop = MainLoop()
     loop.run()

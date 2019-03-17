@@ -100,18 +100,12 @@ def hotspot_start():
 
     hs_ssid = dns_to_conn(dns_names[0])
 
-    # if we are in two-wifi device mode, skip the reconnect if possible,
-    # to avoid kicking some clients off
     log.debug("states: Calling nm.get_active_ssid()")
     if hs_ssid != nm.get_active_ssid(modemgr.get_state_device('HOTSPOT')):
         mdns.clear_entries()
         conn_list = []
 
-        # tolerate Raspberry Pi 2
-        try:
-            activate_connection(hs_ssid, 'HOTSPOT')
-        except DBusException:
-            log.warning("Error connecting hotspot")
+        activate_connection(hs_ssid, 'HOTSPOT')
     else:
         log.debug("Didn't need to reactivate - already running")
         # the connect callback won't happen - let's 'pass' manually
@@ -141,21 +135,13 @@ def hotspot_fail():
 
 @timeout
 def hotspot_timeout():
-
-    # Ok, so there's a bug where the first upstream connection never happens.
-    # That is, it never happens until it is kicked off by someone starting
-    # comitup-cli. These two calls emulate that process.
-    iwscan.candidates()
-    nm.get_wifi_devices()
-
     if iwscan.ap_conn_count() == 0 or modemgr.get_mode() != 'single':
         log.debug('Periodic connection attempt')
 
         dev = modemgr.get_state_device('CONNECTED')
         conn_list = candidate_connections(dev)
         if conn_list:
-            # bug - try the first connection twice
-            set_state('CONNECTING', [conn_list[0], conn_list[0]] + conn_list)
+            set_state('CONNECTING', conn_list)
         else:
             set_state('CONNECTING')
     else:
@@ -181,14 +167,6 @@ def connecting_start():
         log.info('Attempting connection to %s' % conn)
         activate_connection(conn, 'CONNECTING')
     else:
-        # Give NetworkManager a chance to update the access point list
-        try:
-            # todo - clean this up
-            log.debug("states: Calling nm.deactivate_connection()")
-            nm.deactivate_connection(modemgr.get_state_device('CONNECTING'))
-        except DBusException:
-            pass
-        time.sleep(5)
         set_state('HOTSPOT')
 
 
@@ -284,7 +262,11 @@ def set_state(state, connections=None, timeout=180):
 
     state_info = state_matrix(state)
 
-    nmmon.set_device_callbacks(state, state_info.pass_fn, state_info.fail_fn)
+    nmmon.enable(
+        modemgr.get_state_device(state),
+        state_info.pass_fn,
+        state_info.fail_fn
+    )
 
     if connections:
         conn_list = connections
@@ -340,35 +322,6 @@ def is_hotspot_current(connection):
     return hs_hash == cf_hash
 
 
-def assure_hotspot(ssid, password, device):
-    hotspot_connection = nm.get_connection_by_ssid(ssid)
-    if not hotspot_connection:
-        nm.make_hotspot(ssid, device)
-    elif not is_hotspot_current(hotspot_connection):
-        nm.disconnect(modemgr.get_state_device('HOTSPOT'))
-
-        nm.del_connection_by_ssid(ssid)
-
-        nm.make_hotspot(ssid, device, password, hash_conf())
-
-
-def state_monitor():
-    # NetworkManager is crashing on the first call to attach. In two
-    # interface mode, this leaves the hotspot interface with no IP
-    # configuration. Detect this and recover
-    if com_state != 'HOTSPOT':
-        if modemgr.get_mode() == modemgr.MULTI_MODE:
-            log.debug("state_monitor: Calling nm.get_active_ip()")
-            ip = nm.get_active_ip(modemgr.get_state_device('HOTSPOT'))
-            if not ip:
-                log.warning("Hotspot lost IP configuration - resetting")
-                hs_ssid = dns_to_conn(dns_names[0])
-                activate_connection(hs_ssid, 'HOTSPOT')
-
-    # Keep this periodic task running
-    return True
-
-
 def init_states(hosts, callbacks, hotspot_pw):
     global hotspot_name
 
@@ -380,9 +333,7 @@ def init_states(hosts, callbacks, hotspot_pw):
 
     hotspot_name = dns_to_conn(hosts[0])
 
-    assure_hotspot(hotspot_name, hotspot_pw, modemgr.get_ap_device())
-
-    timeout_add(10*1000, state_monitor)
+    set_state('HOTSPOT', timeout=5)
 
 
 def add_state_callback(callback):

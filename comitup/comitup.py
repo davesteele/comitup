@@ -13,6 +13,7 @@ from comitup import config
 import random
 import argparse
 import sys
+import time
 
 
 from gi.repository.GLib import MainLoop
@@ -93,6 +94,8 @@ def main():
     log.info("Starting comitup")
 
     (conf, data) = load_data()
+
+    time.sleep(10)
 
     if args.check:
         if wificheck.run_checks():
