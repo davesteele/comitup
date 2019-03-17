@@ -1,5 +1,6 @@
 comitup (1.4-1) UNRELEASED; urgency=medium
 
+  * Fix network instabilities.
   * Implement captive portal for establishing upstream wifi configuration.
   * Attempt to connect to all defined connections, not just the
     visible ones.
