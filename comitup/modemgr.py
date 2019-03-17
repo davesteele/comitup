@@ -22,6 +22,9 @@ CONF_PATH = "/etc/comitup.conf"
 
 conf = None
 
+ap_device = None
+link_device = None
+
 
 def get_conf():
     global conf
@@ -50,27 +53,37 @@ def get_mode():
 
 
 def get_ap_device():
-    devs = nm.get_wifi_devices()
-    spec = get_conf().primary_wifi_device
+    global ap_device
 
-    if spec:
-        for dev in devs:
-            if dev.Interface == spec:
-                return dev
+    if not ap_device:
+        devs = nm.get_wifi_devices()
+        spec = get_conf().primary_wifi_device
 
-    return devs[0]
+        if spec:
+            for dev in devs:
+                if dev.Interface == spec:
+                    ap_device = dev
+
+    if not ap_device:
+        ap_device = devs[0]
+
+    return ap_device
 
 
 def get_link_device():
-    devs = nm.get_wifi_devices()
-    ap = get_ap_device()
+    global link_device
 
-    if dual_enabled:
-        for dev in devs:
-            if dev.Interface != ap.Interface:
-                return dev
+    if not link_device:
+        devs = nm.get_wifi_devices()
+        link_device = get_ap_device()
 
-    return ap
+        if dual_enabled:
+            for dev in devs:
+                if dev.Interface != link_device.Interface:
+                    link_device = dev
+                    return link_device
+
+    return link_device
 
 
 def get_state_device(state):

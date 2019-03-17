@@ -58,12 +58,18 @@ def none_on_exception(*exceptions):
     return _none_on_exception
 
 
+device_list = None
 def get_devices():
-    try:
-        return nm.NetworkManager.GetDevices()
-    except TypeError:
-        # NetworkManager is gone for some reason. Bail big time.
-        sys.exit(1)
+    global device_list
+
+    if not device_list:
+        try:
+            device_list = nm.NetworkManager.GetDevices()
+        except TypeError:
+            # NetworkManager is gone for some reason. Bail big time.
+            sys.exit(1)
+
+    return device_list
 
 
 def device_name(device):
@@ -199,9 +205,9 @@ def get_candidate_connections(device):
         except KeyError:
             log.debug("Unexpected connection format for %s" % ssid)
 
-    # kicknm
-    get_access_points(device)
-    iwscan.candidates()
+#     # kicknm
+#     get_access_points(device)
+#     iwscan.candidates()
 
     log.debug("candidates: %s" % candidates)
 
