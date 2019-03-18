@@ -304,6 +304,12 @@ def set_hosts(*args):
     dns_names = args
 
 
+def assure_hotspot(ssid, device):
+   log.debug("states: Calling nm.get_connection_by_ssid()")
+   if not nm.get_connection_by_ssid(ssid):
+       nm.make_hotspot(ssid, device)
+
+
 def hash_conf():
     m = hashlib.sha256()
     with open("/etc/comitup.conf", 'rb') as fp:
@@ -332,6 +338,7 @@ def init_states(hosts, callbacks, hotspot_pw):
         add_state_callback(callback)
 
     hotspot_name = dns_to_conn(hosts[0])
+    assure_hotspot(hotspot_name, modemgr.get_ap_device())
 
     set_state('HOTSPOT', timeout=5)
 
