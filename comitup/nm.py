@@ -45,6 +45,8 @@ def initialize():
 
 
 def nm_state():
+
+    log.debug("Calling nm.NetworkManager.State()")
     return nm.NetworkManager.State
 
 
@@ -69,6 +71,7 @@ def get_devices():
 
     if not device_list:
         try:
+            log.debug("Calling nm.GetDevices()")
             device_list = nm.NetworkManager.GetDevices()
         except TypeError:
             # NetworkManager is gone for some reason. Bail big time.
@@ -95,11 +98,13 @@ def get_wifi_device(index=0):
 
 
 def get_device_path(device):
+    log.debug("Getting specific device for path")
     return device.SpecificDevice().object_path
 
 
 def disconnect(device):
     try:
+        log.debug("Calling disconnect")
         device.Disconnect()
     except:   # noqa
         log.debug("Error received in disconnect")
@@ -111,6 +116,7 @@ def get_device_settings(device):
     except NetworkManager.ObjectVanished:
         sys.exit(1)
 
+    log.debug("Getting Connection settings")
     return connection.Connection.GetSettings()
 
 
@@ -125,11 +131,13 @@ def get_active_ip(device):
 
 
 def get_all_connections():
+    log.debug("Calling nm.ListConnections()")
     return [x for x in nm.Settings.ListConnections()]
 
 
 @none_on_exception(AttributeError, KeyError)
 def get_ssid_from_connection(connection):
+    log.debug("Calling GetSettings")
     settings = connection.GetSettings()
 
     return settings['802-11-wireless']['ssid']
@@ -154,17 +162,20 @@ def del_connection_by_ssid(name):
 def activate_connection_by_ssid(ssid, device, path='/'):
     connection = get_connection_by_ssid(ssid)
 
+    log.debug("Calling nm.ActivateConnection()")
     nm.NetworkManager.ActivateConnection(connection, device, path)
 
 
 def deactivate_connection(device):
     connection = device.ActiveConnection
     if connection:
+        log.debug("Calling nm.DeactivateConnection()")
         nm.NetworkManager.DeactivateConnection(connection)
 
 
 @none_on_exception(AttributeError)
 def get_access_points(device):
+    log.debug("Calling GetAllAccessPoints()")
     return device.SpecificDevice().GetAllAccessPoints()
 
 
@@ -257,6 +268,7 @@ def make_hotspot(name='comitup', device=None, password="", hash="0000"):
         settings['802-11-wireless-security']['key-mgmt'] = "wpa-psk"
         settings['802-11-wireless-security']['psk'] = password
 
+    log.debug("Calling nm.AddConnection()")
     nm.Settings.AddConnection(settings)
 
 
@@ -298,6 +310,7 @@ def make_connection_for(ssid, password=None, interface=None):
             'psk': password,
         })
 
+    log.debug("Calling nm.AddConnection()")
     nm.Settings.AddConnection(settings)
 
 
