@@ -18,6 +18,7 @@ import logging
 import time
 
 from comitup import iwscan
+from comitup import wpa
 
 from gi.repository.GLib import MainLoop, timeout_add
 if __name__ == '__main__':
@@ -147,6 +148,8 @@ def hotspot_timeout():
     else:
         log.info('AP active - skipping CONNECTING scan')
 
+    wpa.check_wpa(modemgr.get_ap_device().Interface)
+
 
 #
 # Connecting state
@@ -229,6 +232,9 @@ def connected_timeout():
     if connection != nm.get_active_ssid(modemgr.get_state_device('CONNECTED')):
         log.warning("Connection lost on timeout")
         set_state('HOTSPOT')
+
+    if modemgr.get_mode() == modemgr.MULTI_MODE:
+        wpa.check_wpa(modemgr.get_ap_device().Interface)
 
 
 #
