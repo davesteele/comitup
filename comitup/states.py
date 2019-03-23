@@ -273,9 +273,9 @@ def set_state(state, connections=None, timeout=180):
 
     state_id += 1
     com_state = state
+    timeout_add(timeout*1000, state_info.timeout_fn, state_id)
     state_info.start_fn()
 
-    timeout_add(timeout*1000, state_info.timeout_fn, state_id)
 
 
 def activate_connection(name, state):
