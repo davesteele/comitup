@@ -143,7 +143,7 @@ def hotspot_timeout():
         if conn_list:
             set_state('CONNECTING', conn_list)
         else:
-            set_state('CONNECTING')
+            log.info('No candidates - skipping CONNECTING scan')
     else:
         log.info('AP active - skipping CONNECTING scan')
 
