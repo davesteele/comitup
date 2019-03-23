@@ -110,6 +110,17 @@ def disconnect(device):
         log.debug("Error received in disconnect")
 
 
+settings_cache = {}
+def get_connection_settings(connection):
+    global settings_cache
+
+    if connection.uuid not in settings_cache:
+        log.debug("Not in cache")
+        settings_cache[connection.uuid] = connection.GetSettings()
+
+    return settings_cache[connection.uuid]
+
+
 def get_device_settings(device):
     try:
         connection = device.ActiveConnection
@@ -117,7 +128,7 @@ def get_device_settings(device):
         sys.exit(1)
 
     log.debug("Getting Connection settings")
-    return connection.Connection.GetSettings()
+    return get_connection_settings(connection.Connection)
 
 
 @none_on_exception(AttributeError)
@@ -138,7 +149,7 @@ def get_all_connections():
 @none_on_exception(AttributeError, KeyError)
 def get_ssid_from_connection(connection):
     log.debug("Calling GetSettings")
-    settings = connection.GetSettings()
+    settings = get_connection_settings(connection)
 
     return settings['802-11-wireless']['ssid']
 
@@ -213,7 +224,8 @@ def get_candidate_connections(device):
     candidates = []
 
     for conn in get_all_connections():
-        settings = conn.GetSettings()
+        log.debug("Getting settings 2")
+        settings = get_connection_settings(conn)
         ssid = get_ssid_from_connection(conn)
 
         try:

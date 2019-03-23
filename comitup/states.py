@@ -319,7 +319,7 @@ def hash_conf():
 
 
 def is_hotspot_current(connection):
-    hs_filename = connection.GetSettings()['connection']['id']
+    hs_filename = nm.get_connection_settings(connection)['connection']['id']
 
     hs_hash = hs_filename[-4:]
 
