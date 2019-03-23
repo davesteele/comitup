@@ -340,7 +340,9 @@ def init_states(hosts, callbacks, hotspot_pw):
     hotspot_name = dns_to_conn(hosts[0])
     assure_hotspot(hotspot_name, modemgr.get_ap_device())
 
-    set_state('HOTSPOT', timeout=5)
+    # Set an early kick to set CONNECTING mode
+    set_state('HOTSPOT')
+    timeout_add(5*1000, hotspot_timeout, state_id)
 
 
 def add_state_callback(callback):
