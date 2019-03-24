@@ -4,10 +4,13 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 
+import logging
 import subprocess
 import re
 from multiprocessing import Process, Queue
 
+
+log = logging.getLogger("comitup")
 
 # NetworkManager is doing a poor job of maintaining the AP scan list when
 # in AP mode. Use the 'iw' command to get the AP list.
@@ -25,6 +28,7 @@ def docmd(cmd):
 
 def devlist():
     """Get a list of supported devices from 'iw'"""
+    log.debug("Getting device list from 'iw'")
     out = docmd("iw dev")
     devs = [x.split()[1] for x in out.split('\n') if "Interface" in x]
     return devs
@@ -48,6 +52,7 @@ def dbm2pct(dbm):
 
 def devaps(dev):
     """Get a list of Access Points (as dicts) for a device"""
+    log.debug("Getting AP list from 'iw' dev %s" % dev)
     out = docmd('iw dev %s scan' % dev)
 
     aps = []
@@ -121,6 +126,7 @@ def candidates(device=None):
 def ap_conn_count():
     count = 0
     for dev in devlist():
+        log.debug("Getting iw station dump")
         out = docmd('iw dev %s station dump' % dev)
         count += len([x for x in out.split('\n') if "Station" in x])
 

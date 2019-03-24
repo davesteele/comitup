@@ -17,6 +17,7 @@ import logging
 from comitup import iwscan
 import os
 import re
+import socket
 import subprocess
 
 import sys
@@ -107,6 +108,8 @@ def expand_ap(ap_name, id):
 
     for l in range(5):
         returnval = re.sub("<{}>".format("n"*l), id[:l], returnval)
+
+    returnval = re.sub("<hostname>", socket.gethostname(), returnval)
 
     return returnval
 

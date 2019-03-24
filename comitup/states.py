@@ -18,6 +18,7 @@ import logging
 import time
 
 from comitup import iwscan
+from comitup import wpa
 
 from gi.repository.GLib import MainLoop, timeout_add
 if __name__ == '__main__':
@@ -143,9 +144,11 @@ def hotspot_timeout():
         if conn_list:
             set_state('CONNECTING', conn_list)
         else:
-            set_state('CONNECTING')
+            log.info('No candidates - skipping CONNECTING scan')
     else:
         log.info('AP active - skipping CONNECTING scan')
+
+    wpa.check_wpa(modemgr.get_ap_device().Interface)
 
 
 #
@@ -230,6 +233,9 @@ def connected_timeout():
         log.warning("Connection lost on timeout")
         set_state('HOTSPOT')
 
+    if modemgr.get_mode() == modemgr.MULTI_MODE:
+        wpa.check_wpa(modemgr.get_ap_device().Interface)
+
 
 #
 # State Management
@@ -273,9 +279,9 @@ def set_state(state, connections=None, timeout=180):
 
     state_id += 1
     com_state = state
+    timeout_add(timeout*1000, state_info.timeout_fn, state_id)
     state_info.start_fn()
 
-    timeout_add(timeout*1000, state_info.timeout_fn, state_id)
 
 
 def activate_connection(name, state):
@@ -304,6 +310,12 @@ def set_hosts(*args):
     dns_names = args
 
 
+def assure_hotspot(ssid, device):
+   log.debug("states: Calling nm.get_connection_by_ssid()")
+   if not nm.get_connection_by_ssid(ssid):
+       nm.make_hotspot(ssid, device)
+
+
 def hash_conf():
     m = hashlib.sha256()
     with open("/etc/comitup.conf", 'rb') as fp:
@@ -313,7 +325,7 @@ def hash_conf():
 
 
 def is_hotspot_current(connection):
-    hs_filename = connection.GetSettings()['connection']['id']
+    hs_filename = nm.get_connection_settings(connection)['connection']['id']
 
     hs_hash = hs_filename[-4:]
 
@@ -332,8 +344,11 @@ def init_states(hosts, callbacks, hotspot_pw):
         add_state_callback(callback)
 
     hotspot_name = dns_to_conn(hosts[0])
+    assure_hotspot(hotspot_name, modemgr.get_ap_device())
 
-    set_state('HOTSPOT', timeout=5)
+    # Set an early kick to set CONNECTING mode
+    set_state('HOTSPOT')
+    timeout_add(5*1000, hotspot_timeout, state_id)
 
 
 def add_state_callback(callback):

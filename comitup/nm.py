@@ -34,12 +34,19 @@ pp = pprint.PrettyPrinter(indent=4)
 
 log = logging.getLogger('comitup')
 
+this_module = sys.modules[__name__]
+for key in nm.__dict__:
+    if key.startswith("NM_"):
+        setattr(this_module, key, nm.__dict__[key])
+
 
 def initialize():
     nm.Settings.ReloadConnections()
 
 
 def nm_state():
+
+    log.debug("Calling nm.NetworkManager.State()")
     return nm.NetworkManager.State
 
 
@@ -64,6 +71,7 @@ def get_devices():
 
     if not device_list:
         try:
+            log.debug("Calling nm.GetDevices()")
             device_list = nm.NetworkManager.GetDevices()
         except TypeError:
             # NetworkManager is gone for some reason. Bail big time.
@@ -90,14 +98,27 @@ def get_wifi_device(index=0):
 
 
 def get_device_path(device):
+    log.debug("Getting specific device for path")
     return device.SpecificDevice().object_path
 
 
 def disconnect(device):
     try:
+        log.debug("Calling disconnect")
         device.Disconnect()
     except:   # noqa
         log.debug("Error received in disconnect")
+
+
+settings_cache = {}
+def get_connection_settings(connection):
+    global settings_cache
+
+    if connection.uuid not in settings_cache:
+        log.debug("Not in cache")
+        settings_cache[connection.uuid] = connection.GetSettings()
+
+    return settings_cache[connection.uuid]
 
 
 def get_device_settings(device):
@@ -106,7 +127,8 @@ def get_device_settings(device):
     except NetworkManager.ObjectVanished:
         sys.exit(1)
 
-    return connection.Connection.GetSettings()
+    log.debug("Getting Connection settings")
+    return get_connection_settings(connection.Connection)
 
 
 @none_on_exception(AttributeError)
@@ -120,12 +142,14 @@ def get_active_ip(device):
 
 
 def get_all_connections():
+    log.debug("Calling nm.ListConnections()")
     return [x for x in nm.Settings.ListConnections()]
 
 
 @none_on_exception(AttributeError, KeyError)
 def get_ssid_from_connection(connection):
-    settings = connection.GetSettings()
+    log.debug("Calling GetSettings")
+    settings = get_connection_settings(connection)
 
     return settings['802-11-wireless']['ssid']
 
@@ -149,17 +173,20 @@ def del_connection_by_ssid(name):
 def activate_connection_by_ssid(ssid, device, path='/'):
     connection = get_connection_by_ssid(ssid)
 
+    log.debug("Calling nm.ActivateConnection()")
     nm.NetworkManager.ActivateConnection(connection, device, path)
 
 
 def deactivate_connection(device):
     connection = device.ActiveConnection
     if connection:
+        log.debug("Calling nm.DeactivateConnection()")
         nm.NetworkManager.DeactivateConnection(connection)
 
 
 @none_on_exception(AttributeError)
 def get_access_points(device):
+    log.debug("Calling GetAllAccessPoints()")
     return device.SpecificDevice().GetAllAccessPoints()
 
 
@@ -197,7 +224,8 @@ def get_candidate_connections(device):
     candidates = []
 
     for conn in get_all_connections():
-        settings = conn.GetSettings()
+        log.debug("Getting settings 2")
+        settings = get_connection_settings(conn)
         ssid = get_ssid_from_connection(conn)
 
         try:
@@ -252,6 +280,7 @@ def make_hotspot(name='comitup', device=None, password="", hash="0000"):
         settings['802-11-wireless-security']['key-mgmt'] = "wpa-psk"
         settings['802-11-wireless-security']['psk'] = password
 
+    log.debug("Calling nm.AddConnection()")
     nm.Settings.AddConnection(settings)
 
 
@@ -293,6 +322,7 @@ def make_connection_for(ssid, password=None, interface=None):
             'psk': password,
         })
 
+    log.debug("Calling nm.AddConnection()")
     nm.Settings.AddConnection(settings)
 
 
