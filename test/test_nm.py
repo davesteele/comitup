@@ -70,24 +70,6 @@ def connections_fxt(monkeypatch):
     return connection
 
 
-@pytest.mark.parametrize("func", (
-        nm.get_wifi_device,
-        nm.get_active_ssid,
-        nm.get_active_ip,
-        nm.get_access_points,
-    )
-)
-def test_none_dev(no_device_fxt, func):
-    if func is nm.get_wifi_device:
-        assert func(0) is None
-    else:
-        assert func(nm.get_wifi_device()) is None
-
-
-def test_no_active_ssid(device_no_conn_fxt):
-    assert nm.get_active_ssid(nm.get_wifi_device()) is None
-
-
 def test_get_active_ssid(device_fxt):
     assert nm.get_active_ssid(nm.get_wifi_device()) == "myssid"
 
