@@ -77,7 +77,7 @@ def get_link_device():
         devs = nm.get_wifi_devices()
         link_device = get_ap_device()
 
-        if dual_enabled:
+        if dual_enabled():
             for dev in devs:
                 if dev.Interface != link_device.Interface:
                     link_device = dev
