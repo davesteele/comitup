@@ -34,7 +34,7 @@ def stop_service(service):
 callmatrix = {
     ('HOTSPOT',    'start'): (lambda: stop_service, lambda: web_service),
     ('HOTSPOT',     'pass'): (lambda: start_service, lambda: COMITUP_SERVICE),
-    ('CONNECTING',  'pass'): (lambda: stop_service, lambda: COMITUP_SERVICE),
+    ('CONNECTING', 'start'): (lambda: stop_service, lambda: COMITUP_SERVICE),
     ('CONNECTED',  'start'): (lambda: start_service, lambda: web_service),
 }
 
@@ -57,3 +57,5 @@ def init_webmgr(web_svc):
     global web_service
 
     web_service = web_svc
+
+    log.debug("web service is %s" % web_service)
