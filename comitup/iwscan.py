@@ -50,13 +50,14 @@ def dbm2pct(dbm):
     return str(pct)
 
 
-def devaps(dev):
+def devaps(dev, dump=""):
     """Get a list of Access Points (as dicts) for a device"""
-    log.debug("Getting AP list from 'iw' dev %s" % dev)
-    out = docmd('iw dev %s scan' % dev)
+    if not dump:
+        log.debug("Getting AP list from 'iw' dev %s" % dev)
+        dump = docmd('iw dev %s scan' % dev)
 
     aps = []
-    for blk in re.split('\nBSS ', out[4:]):
+    for blk in re.split('\nBSS ', dump[4:]):
         try:
             ap = blk2dict(blk)
             ap['power'] = dbm2pct(float(ap['signal'].split()[0]))
@@ -68,8 +69,8 @@ def devaps(dev):
     return aps
 
 
-def apgen(dev, q):
-    for ap in devaps(dev):
+def apgen(dev, q, dump=""):
+    for ap in devaps(dev, dump):
         pt = {}
         pt['ssid'] = ap['SSID']
         pt['strength'] = ap['power']
@@ -137,3 +138,9 @@ if __name__ == '__main__':
     print(candidates())
 
     print(ap_conn_count())
+
+    import sys
+    #print(devaps(sys.argv[1], sys.stdin.read()))
+
+    for ap in devaps(sys.argv[1], sys.stdin.read()):
+        print(ap["SSID"], ap["RSN"], ap["power"], "RSN" in ap)
