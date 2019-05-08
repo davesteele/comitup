@@ -30,7 +30,7 @@ def websvc_fxt(request):
                             lambda: webmgr.web_service),        # noqa
     ('HOTSPOT',     'pass', lambda: webmgr.start_service,
                             lambda: webmgr.COMITUP_SERVICE),
-    ('CONNECTING',  'pass', lambda: webmgr.stop_service,
+    ('CONNECTING', 'start', lambda: webmgr.stop_service,
                             lambda: webmgr.COMITUP_SERVICE),
     ('CONNECTED',  'start', lambda: webmgr.start_service,
                             lambda: webmgr.web_service),
@@ -58,7 +58,7 @@ others = [(x, y) for x in ('HOTSPOT', 'CONNECTING', 'CONNECTED')
 
 
 @pytest.mark.parametrize("state, action", [
-        ('CONNECTING', 'start'),
+        ('CONNECTING', 'pass'),
         ('CONNECTED', 'pass'),
     ] + others
 )
