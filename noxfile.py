@@ -5,8 +5,6 @@ import sys
 
 pkgs = [
     "libcairo2-dev",
-    "libjpeg-dev",
-    "libgif-dev",
     "gobject-introspection",
     "libgirepository1.0-dev",
 ]
@@ -17,8 +15,6 @@ deps = [
     "dbus-python",
     "python-networkmanager",
     "flask",
-    # apt-get install libcairo2-dev libjpeg-dev libgif-dev
-    # apt-get install gobject-introspection libgirepository1.0-dev
     "pygobject",
 ]
 
