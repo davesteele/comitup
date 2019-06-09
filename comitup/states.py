@@ -262,7 +262,7 @@ def set_state(state, connections=None, timeout=180):
 
     log.info('Setting state to %s' % state)
 
-    if com_state != 'HOTSPOT':
+    if com_state != 'HOTSPOT' and modemgr.get_mode() != modemgr.MULTI_MODE:
         log.debug("states: Calling nm.get_points_ext()")
         points = nm.get_points_ext(modemgr.get_state_device(com_state))
 
