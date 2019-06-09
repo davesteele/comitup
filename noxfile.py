@@ -22,7 +22,7 @@ def missing_pkg(pkg):
     cmd = "dpkg -l {} > /dev/null".format(pkg)
     return subprocess.run(cmd, shell=True).returncode != 0
 
-@nox.session(python="3.7")
+@nox.session()
 def test(session):
     missings = [x for x in pkgs if missing_pkg(x)]
     if missings:
