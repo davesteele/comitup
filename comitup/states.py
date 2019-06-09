@@ -262,7 +262,7 @@ def set_state(state, connections=None, timeout=180):
 
     log.info('Setting state to %s' % state)
 
-    if com_state != 'HOTSPOT':
+    if com_state != 'HOTSPOT' and modemgr.get_mode() != modemgr.MULTI_MODE:
         log.debug("states: Calling nm.get_points_ext()")
         points = nm.get_points_ext(modemgr.get_state_device(com_state))
 
@@ -310,10 +310,10 @@ def set_hosts(*args):
     dns_names = args
 
 
-def assure_hotspot(ssid, device):
+def assure_hotspot(ssid, device, password):
    log.debug("states: Calling nm.get_connection_by_ssid()")
    if not nm.get_connection_by_ssid(ssid):
-       nm.make_hotspot(ssid, device)
+       nm.make_hotspot(ssid, device, password)
 
 
 def hash_conf():
@@ -344,7 +344,7 @@ def init_states(hosts, callbacks, hotspot_pw):
         add_state_callback(callback)
 
     hotspot_name = dns_to_conn(hosts[0])
-    assure_hotspot(hotspot_name, modemgr.get_ap_device())
+    assure_hotspot(hotspot_name, modemgr.get_ap_device(), hotspot_pw)
 
     # Set an early kick to set CONNECTING mode
     set_state('HOTSPOT')

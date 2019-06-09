@@ -68,22 +68,31 @@ def enable(dev, connect_fn, fail_fn):
 def ap_changed_state(state, *args):
     if monitored_dev == ap_device:
         if state in PASS_STATES:
+            log.debug("nmm - primary pass")
             nm_dev_connect()
         elif state in FAIL_STATES:
+            log.debug("nmm - primary fail")
             nm_dev_fail()
+        else:
+            log.debug("nmm - primary state {}".format(state))
 
 
 def second_changed_state(state, *args):
     if monitored_dev == second_device:
         if state in PASS_STATES:
+            log.debug("nmm - secondary pass")
             nm_dev_connect()
         elif state in FAIL_STATES:
+            log.debug("nmm - secondary fail")
             nm_dev_fail()
+        else:
+            log.debug("nmm - secondary state {}".format(state))
 
 
 def set_device_listeners(ap_dev, second_dev):
     global ap_device, second_device
 
+    log.debug("nmm - Setting primary listener for {}".format(ap_dev))
     ap_device = ap_dev
     device_listener = bus.add_signal_receiver(
         ap_changed_state,
@@ -93,6 +102,7 @@ def set_device_listeners(ap_dev, second_dev):
     )
 
     if second_dev != ap_dev:
+        log.debug("nmm - Setting 2nd listener for {}".format(second_dev))
         second_device = second_dev
         device_listener = bus.add_signal_receiver(
             second_changed_state,
