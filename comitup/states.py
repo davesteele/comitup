@@ -268,6 +268,7 @@ def set_state(state, connections=None, timeout=180):
 
     state_info = state_matrix(state)
 
+    nmmon.init_nmmon()
     nmmon.enable(
         modemgr.get_state_device(state),
         state_info.pass_fn,
@@ -312,6 +313,7 @@ def set_hosts(*args):
 
 def assure_hotspot(ssid, device, password):
    log.debug("states: Calling nm.get_connection_by_ssid()")
+   nm.del_connection_by_ssid(ssid)
    if not nm.get_connection_by_ssid(ssid):
        nm.make_hotspot(ssid, device, password)
 

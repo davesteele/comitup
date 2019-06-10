@@ -92,16 +92,17 @@ def second_changed_state(state, *args):
 def set_device_listeners(ap_dev, second_dev):
     global ap_device, second_device
 
-    log.debug("nmm - Setting primary listener for {}".format(ap_dev))
-    ap_device = ap_dev
-    device_listener = bus.add_signal_receiver(
-        ap_changed_state,
-        signal_name="StateChanged",
-        dbus_interface="org.freedesktop.NetworkManager.Device",
-        path=nm.get_device_path(ap_dev)
-    )
+    if ap_device != ap_dev:
+        log.debug("nmm - Setting primary listener for {}".format(ap_dev))
+        ap_device = ap_dev
+        device_listener = bus.add_signal_receiver(
+            ap_changed_state,
+            signal_name="StateChanged",
+            dbus_interface="org.freedesktop.NetworkManager.Device",
+            path=nm.get_device_path(ap_dev)
+        )
 
-    if second_dev != ap_dev:
+    if second_dev != ap_dev and second_device != second_dev:
         log.debug("nmm - Setting 2nd listener for {}".format(second_dev))
         second_device = second_dev
         device_listener = bus.add_signal_receiver(

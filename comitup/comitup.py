@@ -95,8 +95,6 @@ def main():
 
     (conf, data) = load_data()
 
-    time.sleep(10)
-
     if args.check:
         if wificheck.run_checks():
             sys.exit(1)
