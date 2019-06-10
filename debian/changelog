@@ -1,4 +1,4 @@
-comitup (1.5-1) UNRELEASED; urgency=medium
+comitup (1.5-1) unstable; urgency=medium
 
   * Fix a race condition in the "web_service" start.
   * Fix a web page problem making unsecured APs unusable.
@@ -7,7 +7,7 @@ comitup (1.5-1) UNRELEASED; urgency=medium
   * Fix problem causing a hang in the "CONNECTING" state.
     - Improves startup time.
 
- -- David Steele <steele@debian.org>  Sun, 09 Jun 2019 21:16:24 -0400
+ -- David Steele <steele@debian.org>  Mon, 10 Jun 2019 12:22:10 -0400
 
 comitup (1.4-1) unstable; urgency=medium
 
