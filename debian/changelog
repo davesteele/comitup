@@ -1,3 +1,13 @@
+comitup (1.5-1) UNRELEASED; urgency=medium
+
+  * Fix a race condition in the "web_service" start.
+  * Fix a web page problem making unsecured APs unusable.
+  * Restore the ability to secure the comitup hotspot.
+  * Fix a DBUS crash when deleting connections in MULTI mode.
+  * Fix problem causing a hang in the "CONNECTING" state.
+
+ -- David Steele <steele@debian.org>  Sun, 09 Jun 2019 21:16:24 -0400
+
 comitup (1.4-1) unstable; urgency=medium
 
   * Fix network instabilities.
