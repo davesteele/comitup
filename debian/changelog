@@ -5,6 +5,7 @@ comitup (1.5-1) UNRELEASED; urgency=medium
   * Restore the ability to secure the comitup hotspot.
   * Fix a DBUS crash when deleting connections in MULTI mode.
   * Fix problem causing a hang in the "CONNECTING" state.
+    - Improves startup time.
 
  -- David Steele <steele@debian.org>  Sun, 09 Jun 2019 21:16:24 -0400
 
