@@ -25,7 +25,7 @@ sys.path.append("/usr/share/comitup")
 
 import pkg_resources                          # noqa
 
-from gi.repository.GLib import MainLoop       # noqa
+from gi.repository.GLib import MainLoop, timeout_add       # noqa
 import time                                   # noqa
 from dbus.mainloop.glib import DBusGMainLoop  # noqa
 DBusGMainLoop(set_as_default=True)
@@ -78,18 +78,26 @@ class Comitup(dbus.service.Object):
 
     @dbus.service.method(comitup_int, in_signature="ss", out_signature="")
     def connect(self, ssid, password):
-        if nm.get_connection_by_ssid(ssid):
-            nm.del_connection_by_ssid(ssid)
+        def to_fn(ssid, password):
+            if nm.get_connection_by_ssid(ssid):
+                nm.del_connection_by_ssid(ssid)
 
-        nm.make_connection_for(ssid, password)
+            nm.make_connection_for(ssid, password)
 
-        states.set_state('CONNECTING', [ssid, ssid])
+            states.set_state('CONNECTING', [ssid, ssid])
+            return False
+
+        timeout_add(1, to_fn, ssid, password)
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="")
     def delete_connection(self):
-        ssid = nm.get_active_ssid(modemgr.get_link_device())
-        nm.del_connection_by_ssid(ssid)
-        states.set_state('HOTSPOT')
+        def to_fn():
+            ssid = nm.get_active_ssid(modemgr.get_link_device())
+            nm.del_connection_by_ssid(ssid)
+            states.set_state('HOTSPOT')
+            return False
+
+        timeout_add(1, to_fn)
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="a{ss}")
     def get_info(self):

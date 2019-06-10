@@ -262,10 +262,6 @@ def set_state(state, connections=None, timeout=180):
 
     log.info('Setting state to %s' % state)
 
-    if com_state != 'HOTSPOT' and modemgr.get_mode() != modemgr.MULTI_MODE:
-        log.debug("states: Calling nm.get_points_ext()")
-        points = nm.get_points_ext(modemgr.get_state_device(com_state))
-
     state_info = state_matrix(state)
 
     nmmon.init_nmmon()
@@ -282,7 +278,6 @@ def set_state(state, connections=None, timeout=180):
     com_state = state
     timeout_add(timeout*1000, state_info.timeout_fn, state_id)
     state_info.start_fn()
-
 
 
 def activate_connection(name, state):

@@ -12,7 +12,7 @@
 #
 
 import dbus
-from gi.repository.GLib import MainLoop
+from gi.repository.GLib import MainLoop, timeout_add
 
 from dbus.mainloop.glib import DBusGMainLoop
 
@@ -36,7 +36,7 @@ bus = dbus.SystemBus()
 
 monitored_dev = None
 ap_device = None
-second_device = None
+second_device_name = None
 
 nm_dev_connect = None
 nm_dev_fail = None
@@ -64,35 +64,39 @@ def enable(dev, connect_fn, fail_fn):
 
     monitored_dev = dev
 
+def send_cb(cb):
+    def cb_to(cb):
+        cb()
+        return False
+
+    timeout_add(1, cb_to, cb)
 
 def ap_changed_state(state, *args):
-    if monitored_dev == ap_device:
-        if state in PASS_STATES:
-            log.debug("nmm - primary pass")
-            nm_dev_connect()
-        elif state in FAIL_STATES:
-            log.debug("nmm - primary fail")
-            nm_dev_fail()
-        else:
-            log.debug("nmm - primary state {}".format(state))
+    if state in PASS_STATES:
+        log.debug("nmm - primary pass")
+        send_cb(nm_dev_connect)
+    elif state in FAIL_STATES:
+        log.debug("nmm - primary fail")
+        send_cb(nm_dev_fail)
+    else:
+        log.debug("nmm - primary state {}".format(state))
 
 
 def second_changed_state(state, *args):
-    if monitored_dev == second_device:
-        if state in PASS_STATES:
-            log.debug("nmm - secondary pass")
-            nm_dev_connect()
-        elif state in FAIL_STATES:
-            log.debug("nmm - secondary fail")
-            nm_dev_fail()
-        else:
-            log.debug("nmm - secondary state {}".format(state))
+    if state in PASS_STATES:
+        log.debug("nmm - secondary pass")
+        send_cb(nm_dev_connect)
+    elif state in FAIL_STATES:
+        log.debug("nmm - secondary fail")
+        send_cb(nm_dev_fail)
+    else:
+        log.debug("nmm - secondary state {}".format(state))
 
 
 def set_device_listeners(ap_dev, second_dev):
-    global ap_device, second_device
+    global ap_device, second_device_name
 
-    if ap_device != ap_dev:
+    if ap_device is None:
         log.debug("nmm - Setting primary listener for {}".format(ap_dev))
         ap_device = ap_dev
         device_listener = bus.add_signal_receiver(
@@ -101,16 +105,18 @@ def set_device_listeners(ap_dev, second_dev):
             dbus_interface="org.freedesktop.NetworkManager.Device",
             path=nm.get_device_path(ap_dev)
         )
+        log.debug("Listener is {}".format(device_listener))
 
-    if second_dev != ap_dev and second_device != second_dev:
+    if second_device_name != second_dev.Interface:
         log.debug("nmm - Setting 2nd listener for {}".format(second_dev))
-        second_device = second_dev
+        second_device_name = second_dev.Interface
         device_listener = bus.add_signal_receiver(
             second_changed_state,
             signal_name="StateChanged",
             dbus_interface="org.freedesktop.NetworkManager.Device",
             path=nm.get_device_path(second_dev)
-    )
+        )
+        log.debug("Listener is {}".format(device_listener))
 
 
 def init_nmmon():
