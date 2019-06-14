@@ -1,22 +1,22 @@
 {
     "full": {
-        "compressed": 1519288234,
-        "compressedstr": "1.5 G",
-        "filename": "image_2019-03-30-Comitup.zip",
-        "infoname": "2019-03-30-Comitup.info",
-        "magnet": "magnet:?xt=urn:btih:d9251d0e33092b179f4d8beb742b29ba205d0de2&dn=image%5F2019-03-30-Comitup.zip&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=http%3A%2F%2Ftorrent.nwps.ws%3A80%2Fannounce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce\n",
+        "compressed": 1169526104,
+        "compressedstr": "1.1 G",
+        "filename": "image_2019-06-11-Comitup.zip",
+        "infoname": "2019-06-11-Comitup.info",
+        "magnet": "magnet:?xt=urn:btih:b541137f508076f59ba7e56a5f5ffbd358ea7873&dn=image%5F2019-06-11-Comitup.zip&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=http%3A%2F%2Ftorrent.nwps.ws%3A80%2Fannounce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce\n",
         "name": "",
-        "uncompressed": 4286578688,
-        "uncompressedstr": "4.2 G"
+        "uncompressed": 3539992576,
+        "uncompressedstr": "3.5 G"
     },
     "lite": {
-        "compressed": 392661915,
-        "compressedstr": "383 M",
-        "filename": "image_2019-03-30-Comitup-lite.zip",
-        "infoname": "2019-03-30-Comitup-lite.info",
-        "magnet": "magnet:?xt=urn:btih:7122e4ad75555fd493c236195bd58449c8304a34&dn=image%5F2019-03-30-Comitup-lite.zip&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=http%3A%2F%2Ftorrent.nwps.ws%3A80%2Fannounce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce\n",
+        "compressed": 396002979,
+        "compressedstr": "387 M",
+        "filename": "image_2019-06-11-Comitup-lite.zip",
+        "infoname": "2019-06-11-Comitup-lite.info",
+        "magnet": "magnet:?xt=urn:btih:ed7426239565d26dfa18079c16f776b8983841df&dn=image%5F2019-06-11-Comitup-lite.zip&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=http%3A%2F%2Ftorrent.nwps.ws%3A80%2Fannounce&tr=udp%3A%2F%2Fthetracker.org%3A80%2Fannounce\n",
         "name": "Lite",
-        "uncompressed": 1870659584,
+        "uncompressed": 1883242496,
         "uncompressedstr": "1.8 G"
     }
 }
