@@ -1,3 +1,9 @@
+comitup (1.6-1) UNRELEASED; urgency=medium
+
+  * Rework hotspot AP dhcp for Buster compatibility.
+
+ -- David Steele <steele@debian.org>  Tue, 25 Jun 2019 20:33:58 -0400
+
 comitup (1.5-1) unstable; urgency=medium
 
   * Fix a race condition in the "web_service" start.
