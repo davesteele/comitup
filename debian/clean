@@ -8,3 +8,4 @@ doc/comitup-cli.1
 doc/comitup-web.8
 .pytest_cache/
 .nox/
+.tox/
