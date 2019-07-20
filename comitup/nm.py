@@ -264,7 +264,13 @@ def make_hotspot(name='comitup', device=None, password="", hash="0000"):
         },
         'ipv4':
         {
-            'method': 'shared',
+            'method': 'manual',
+            'address-data': [
+                {
+                    'address': '10.42.0.1',
+                    'prefix': 24,
+                }
+            ]
         },
         'ipv6':
         {

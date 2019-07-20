@@ -110,11 +110,6 @@ setup(
                 'conf/dns-connected.conf',
             ]
         ),  # noqa
-        ('/etc/NetworkManager/dnsmasq-shared.d',
-            [
-                'conf/nm-dns-sabotage.conf',
-            ]
-        ),  # noqa
     ],
     install_requires=[
         'jinja2',
