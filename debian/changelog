@@ -1,10 +1,10 @@
-comitup (1.6-1) UNRELEASED; urgency=medium
+comitup (1.6-1) unstable; urgency=medium
 
   * Rework hotspot AP dhcp for Buster compatibility.
 
- -- David Steele <steele@debian.org>  Tue, 25 Jun 2019 20:33:58 -0400
+ -- David Steele <steele@debian.org>  Sat, 20 Jul 2019 11:50:46 -0400
 
-comitup (1.5-1) unstable; urgency=medium
+comitup (1.5-1) comitup; urgency=medium
 
   * Fix a race condition in the "web_service" start.
   * Fix a web page problem making unsecured APs unusable.
@@ -15,7 +15,7 @@ comitup (1.5-1) unstable; urgency=medium
 
  -- David Steele <steele@debian.org>  Mon, 10 Jun 2019 12:22:10 -0400
 
-comitup (1.4-1) unstable; urgency=medium
+comitup (1.4-1) comitup; urgency=medium
 
   * Fix network instabilities.
   * Implement captive portal for establishing upstream wifi configuration.
