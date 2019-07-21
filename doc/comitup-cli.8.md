@@ -1,4 +1,4 @@
-% comitup-cli(1)
+% comitup-cli(8)
 %
 % February 2019
 
