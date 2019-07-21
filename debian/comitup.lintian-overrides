@@ -1,2 +1,7 @@
 # The web service is managed exclusively by comitup
 comitup: systemd-service-file-missing-install-key
+
+# Comitup requires systemd's dbus interface. An alternate
+# init system cannot be used - init scripts would not be
+# useful.
+comitup: package-supports-alternative-init-but-no-init.d-script

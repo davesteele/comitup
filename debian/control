@@ -19,6 +19,7 @@ Architecture: all
 Depends: 
     ${python3:Depends},
     ${misc:Depends},
+    systemd,
     python3-crypto,
     python3-networkmanager (>= 2.0),
     python3-pkg-resources,
