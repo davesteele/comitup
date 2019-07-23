@@ -1,3 +1,10 @@
+comitup (1.6.1-1) unstable; urgency=medium
+
+  * Move comitup-cli man to section 8.
+  * Source-only upload.
+
+ -- David Steele <steele@debian.org>  Mon, 22 Jul 2019 22:03:51 -0400
+
 comitup (1.6-1) unstable; urgency=medium
 
   * Rework hotspot AP dhcp for Buster compatibility.
