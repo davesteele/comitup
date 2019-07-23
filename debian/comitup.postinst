@@ -8,6 +8,10 @@ case "$1" in
       mv -f /var/lib/comitup/comitup.json.save /var/lib/comitup/comitup.json
     fi
 
+    if [ -e /etc/NetworkManager/dnsmasq-shared.d/nm-dns-sabotage.conf ] ; then
+      rm -f /etc/NetworkManager/dnsmasq-shared.d/nm-dns-sabotage.conf
+    fi
+
     python3 /usr/share/comitup/comitup/wificheck.py || true
     ;;
 esac
