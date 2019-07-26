@@ -22,8 +22,14 @@ connected_config = "/usr/share/comitup/dns/dns-connected.conf"
 pidpath = Path("/var/run/comitup-dns")
 
 callmatrix = {
-    ('HOTSPOT',    'pass'): (lambda: run_dns, lambda: hotspot_config),
-    ('CONNECTING', 'start'): (lambda: run_dns, lambda: connected_config),
+    ('HOTSPOT',    'pass', "router"):
+        (lambda: run_dns, lambda: hotspot_config),
+    ('CONNECTING', 'start', "router"):
+        (lambda: run_dns, lambda: connected_config),
+    ('HOTSPOT',    'pass', "single"):
+        (lambda: run_dns, lambda: hotspot_config),
+    ('CONNECTING', 'start', "single"):
+        (lambda: run_dns, lambda: ""),
 }
 
 
@@ -42,25 +48,25 @@ def run_dns(confpath):
 
     kill_dns(pidpath, signal.SIGTERM)
 
-    dev = modemgr.get_ap_device().Interface
+    if os.path.exists(confpath):
+        dev = modemgr.get_ap_device().Interface
 
-    cmd = "dnsmasq --conf-file={0} --interface={1}".format(confpath, dev)
+        cmd = "dnsmasq --conf-file={0} --interface={1}".format(confpath, dev)
 
-    for _ in range(5):
-        cp = subprocess.run(cmd.split())
-        if cp.returncode == 0:
-            break
-        time.sleep(.1)
+        for _ in range(5):
+            cp = subprocess.run(cmd.split())
+            if cp.returncode == 0:
+                break
+            time.sleep(.1)
 
 
 def state_callback(state, action):
     try:
-        (fn_fact, svc_fact) = callmatrix[(state, action)]
+        (fn_fact, svc_fact) = callmatrix[(state, action, modemgr.get_mode())]
     except KeyError:
         return
 
-    if svc_fact():
-        fn_fact()(svc_fact())
+    fn_fact()(svc_fact())
 
 
 def callback_target():
