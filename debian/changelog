@@ -1,3 +1,9 @@
+comitup (1.7-1) UNRELEASED; urgency=medium
+
+  * Move the Hotspot network to 10.41.0.0/24.
+
+ -- David Steele <steele@debian.org>  Tue, 30 Jul 2019 17:23:48 -0400
+
 comitup (1.6.1-1) unstable; urgency=medium
 
   * Move comitup-cli man to section 8.
