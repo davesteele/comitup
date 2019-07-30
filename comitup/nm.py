@@ -268,7 +268,7 @@ def make_hotspot(name='comitup', device=None, password="", hash="0000"):
             'method': 'manual',
             'address-data': [
                 {
-                    'address': '10.42.0.1',
+                    'address': '10.41.0.1',
                     'prefix': 24,
                 }
             ]

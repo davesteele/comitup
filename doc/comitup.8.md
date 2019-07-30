@@ -33,7 +33,7 @@ _comitup-&lt;nn&gt;.local_, making the web service accessible
 as e.g. _http://comitup-1234.local_, for systems supporting Zeroconf. For other
 systems, a _comitup_ Workstation entry is published which is visible to Zeroconf
 browsing applications, allowing the IP address to be manually determined.
-The web service address is likely _http://10.42.0.1_.
+The web service address is _http://10.41.0.1_.
 
 **comitup** logs to _/var/log/comitup.log_.
 
