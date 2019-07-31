@@ -1,5 +1,7 @@
 comitup (1.7-1) UNRELEASED; urgency=medium
 
+  * The primary Wifi device was still serving hotspot dhcp addresses
+    when connected to an upstream AP.
   * Ensure the obsolete NetworkManager dnsmasq sabotage file is gone.
   * Require a compatible version of the Python NetworkManager interface.
   * Move the Hotspot network to 10.41.0.0/24.
