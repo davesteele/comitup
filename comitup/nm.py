@@ -57,7 +57,8 @@ def none_on_exception(*exceptions):
             try:
                 return fp(*args, **kwargs)
             except exceptions:
-                log.debug("Got an exception, returning None, %s" % fp.__name__)
+                log.debug("Got an exception, returning None, %s", fp.__name__,
+                          exc_info=True)
                 return None
 
         return wrapper
@@ -267,7 +268,7 @@ def make_hotspot(name='comitup', device=None, password="", hash="0000"):
             'method': 'manual',
             'address-data': [
                 {
-                    'address': '10.42.0.1',
+                    'address': '10.41.0.1',
                     'prefix': 24,
                 }
             ]
