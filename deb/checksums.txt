@@ -26,6 +26,7 @@ ff4dbc5d0efc7e363321a0ed3e9479d4  comitup_1.2.5-1_all.deb
 d716991b588863cf91af77d34becd701  comitup_1.4-1_all.deb
 c505577932eb26a667fd517f8832b463  comitup_1.5-1_all.deb
 42d42beca4221d9c0dc82a1604b01d29  comitup_1.6-1_all.deb
+b2b001071cb2e52c7b4c49324e2b5f49  comitup_1.7-1_all.deb
 110d9db131599f91a0c961d627609b1b  python3-dnslib_0.9.7+hg20170303-1_all.deb
 d48172762a117f40c2ea1ece6da9c56a  python3-networkmanager_2.0.1-3_all.deb
 8f579803d8ef74b8fff03db65d58a440  python3-networkmanager_2.0.1-4_all.deb
@@ -56,6 +57,7 @@ ce9a686f12984894f4032982f2c81c760d6db6b6  comitup_1.2.5-1_all.deb
 8e5fafdf9a2c92ed76a9a6cfeb9a0050360e7666  comitup_1.4-1_all.deb
 f5a7f0a09e72cf6d0699a6d26ca6c2f44c19059e  comitup_1.5-1_all.deb
 2501f130e7f1f54cc23c319581f8fd1d89e810c4  comitup_1.6-1_all.deb
+3e95c133b3331821eefd1096cd2acbe0191897e7  comitup_1.7-1_all.deb
 6f20fa6a22cc37e14ab4804cb4216ffe99aca74a  python3-dnslib_0.9.7+hg20170303-1_all.deb
 b4397e78fa09b6cb0488f7761000c58df296b49c  python3-networkmanager_2.0.1-3_all.deb
 edb14e1bbb853ed3af98ea28bdd277dc1a8491c7  python3-networkmanager_2.0.1-4_all.deb
@@ -86,6 +88,7 @@ e7b2a3711a8b82ed0b3a76dcf0e01566e1e61215d3782b734029ff2544849794  comitup_1.2.3-
 a97bd387e310e1a9070350f35eb9cf2622ba6a1a6f5d646cfd999767acd53303  comitup_1.4-1_all.deb
 c8d93df4289795f1386804a457252b277d442c3d30a1da40b755ec1a55da69b8  comitup_1.5-1_all.deb
 b854e64c734cfd805ac5d7ff24f19e021f9f47723052a87141bd1433760a9b01  comitup_1.6-1_all.deb
+c488d67a42ee602f122b30293518e59cfb8644f45e83c51c461905e7588083b3  comitup_1.7-1_all.deb
 d203fcde35a350d5925123cbc99388ba523a3ac7f7c271f74a6f7b52ce4c2aa0  python3-dnslib_0.9.7+hg20170303-1_all.deb
 93ae15df3b310d5e4cbe0531178e88a6b53242588ad46e16e1b4029d9adb7ea0  python3-networkmanager_2.0.1-3_all.deb
 89c65fd8a986f9f69bbd3eb294b93319b3b7b14b928c3cecf037db48851d85c4  python3-networkmanager_2.0.1-4_all.deb
@@ -93,17 +96,17 @@ ec324d2a46dd6accbe6787ba5b570a0acdf09d09e8d24107d815fa40081994ad  python3-networ
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEE1wfmOgeeFqqbnJ0CYn67KQqBeoIFAl07GpQACgkQYn67KQqB
-eoJUwhAAh9kTCHd0CRIrXfcgRKR+2O+qaqKR7bu6aXnhNaK9Rh+8Fv7F7MR1O4KM
-85QwjiCI6uX3CipGB3JtBCA6H4ND5OfDKcEpYJeGybNn5d/0x1cnwoxIeeT7IXPh
-tRRpxGPZy6yQie8YKozW8M5sTha442ixlH5XfFn4BKOxI4tTRV95s9rzx0sFOeJ1
-pAnpNaQV9p4MrfFxWLDBYdJLMZb28jMedk9kpoUdrljRwa/SU056rUhL+VKasZtw
-//EPU96eZUfEmA5avEavZDNIO8j4YJXt0sKjr3BBO+o5TbZmn5q/Rlx63lLu1dAX
-Q17fNGawT5tv9J6QBYFlPZXplg9BIPGSNSo7GBHkBiP5KdTXU4UjfCUUvzj/20g7
-x5aRqHYmu+zF3KkhgAAQIECsgxBAX/zVdXHZrKpGFpBF45bvo0g6B2g7X1n1J5tz
-efniiXbrnooji+dEzTp2Tv4EB8l3BFPt0X5pjGh4IWTcmKWI65jNphN5julV9Jfq
-g2YNmbhb6qp2//J1ZC9CGN6b8tcyET/Q1CBsFwIoah9CQcHEnZIC+ari1hKfkAzh
-r18E5+xhgI5yyayOpK/65yc8ixSJlUNvg1YA6CdEistTr3msMypo9nxKZG7GoiW7
-qtV0djeaHdCR9dN0FwPxEA3Rg22JzHTCF+/Jigcm+YuLM9xCPYc=
-=KJPy
+iQIzBAEBCgAdFiEE1wfmOgeeFqqbnJ0CYn67KQqBeoIFAl1M2PMACgkQYn67KQqB
+eoKXvRAAocma5PhYJcUVh5TDtgprGhbMwi1Rn0pN1O04ruQ7pEEnKroS69STpCVL
+7I/KSUpcSvHOdHdw1YvJmNcwz63qohOJbPoiA/mnou2OPS1ObLAFejr5hvpOLI60
+q1cUTbyM6qpQ50pz8hMZXZrIviiJIoEjEGeACawyEDbwXzh5h/1pcq0MIYAHsmoJ
+hDZsPcpSDVnR1+FKPAaZPR+DVnExr2/xdJGmj00tXU7//LdU7TheE7f1CtNI1ZR4
+yE5OI31QyytMBFomaeq9B1r/7C/Px4r55xjOoWDpNZBbd9rC+SSOuy61GJaecZW0
+mm6ezr6ytGj6RXAkVH0AsDzDUzCEKlE3eKIR+YSa9a6RT9xMLmABnZS0oMwYvCrn
+FMYj1hvSnbV/kdpCcAxS4iRm147kzc6DDX4wrWDzflUOq4juOSIcrPa8sb8FSRQK
+ov172zkZ2PO7U3LKzbjZ5ZSbcrJ165kWT02EcuGi567Qiusry++cO1OKUnytFgnA
+bz6jTeqM0I6JPlXUEoC3RHPK/EZhBu8MW3QTeUJ9gPc0smBDL4nhq+eZufNLKVnI
+c5FNf5x7JswL4QmwuyLcrYOHtovBdwuewIyfdxhyVwZ+tNn7E65ZNXzLJZK8JQpJ
+8JL6jF7mDeHP11Vr4Hhnq2nIQAR6QzsiBjkgvzJ76fWOHmb2hCI=
+=36Dl
 -----END PGP SIGNATURE-----
