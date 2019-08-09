@@ -53,7 +53,7 @@ class MyClean(clean):
 setup(
     name='comitup',
     packages=['comitup', 'web', 'cli'],
-    version='1.6',
+    version='1.7',
     description="Remotely manage wifi connections on a headless computer",
     classifiers=[
         'Development Status :: 5 - Production/Stable',
