@@ -1,4 +1,4 @@
-comitup (1.7-1) UNRELEASED; urgency=medium
+comitup (1.7-1) unstable; urgency=medium
 
     Note that the Comitup Hotspot assigned IP address has changed from
     10.42.0.1 to 10.41.0.1, to avoid contention with a NetworkManager-

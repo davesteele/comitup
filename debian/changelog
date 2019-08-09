@@ -1,4 +1,4 @@
-comitup (1.7-1) UNRELEASED; urgency=medium
+comitup (1.7-1) unstable; urgency=medium
 
   * The primary Wifi device was still serving hotspot dhcp addresses
     when connected to an upstream AP.
@@ -6,7 +6,7 @@ comitup (1.7-1) UNRELEASED; urgency=medium
   * Require a compatible version of the Python NetworkManager interface.
   * Move the Hotspot network to 10.41.0.0/24.
 
- -- David Steele <steele@debian.org>  Tue, 30 Jul 2019 17:23:48 -0400
+ -- David Steele <steele@debian.org>  Thu, 08 Aug 2019 22:02:35 -0400
 
 comitup (1.6.1-1) unstable; urgency=medium
 
