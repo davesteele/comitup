@@ -1,20 +1,20 @@
 {
     "full": {
-        "compressed": 1171196642,
+        "compressed": 1166745308,
         "compressedstr": "1.1 G",
-        "filename": "image_2019-07-20-Comitup.zip",
-        "infoname": "2019-07-20-Comitup.info",
-        "magnet": "magnet:?xt=urn:btih:778ab9ad0a573f1ca477c284eece14b79e96e6fb&dn=image%5F2019-07-20-Comitup.zip&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=http%3A%2F%2Ftorrent.nwps.ws%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce\n",
+        "filename": "image_2019-08-08-Comitup.zip",
+        "infoname": "2019-08-08-Comitup.info",
+        "magnet": "magnet:?xt=urn:btih:0970a2ca59b6d7425b9055218630541055eef8eb&dn=image%5F2019-08-08-Comitup.zip&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=http%3A%2F%2Ftorrent.nwps.ws%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce\n",
         "name": "",
-        "uncompressed": 3837788160,
+        "uncompressed": 3829399552,
         "uncompressedstr": "3.7 G"
     },
     "lite": {
-        "compressed": 449360965,
+        "compressed": 449292774,
         "compressedstr": "439 M",
-        "filename": "image_2019-07-20-Comitup-lite.zip",
-        "infoname": "2019-07-20-Comitup-lite.info",
-        "magnet": "magnet:?xt=urn:btih:209daeaaa3107617ca06ccd56f177747668367dd&dn=image%5F2019-07-20-Comitup-lite.zip&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=http%3A%2F%2Ftorrent.nwps.ws%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce\n",
+        "filename": "image_2019-08-08-Comitup-lite.zip",
+        "infoname": "2019-08-08-Comitup-lite.info",
+        "magnet": "magnet:?xt=urn:btih:335a7973cfbdc5bd42c47de56768baf0eb8d49e6&dn=image%5F2019-08-08-Comitup-lite.zip&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=http%3A%2F%2Ftorrent.nwps.ws%3A80%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce\n",
         "name": "Lite",
         "uncompressed": 2269118464,
         "uncompressedstr": "2.2 G"
