@@ -224,6 +224,7 @@ def connected_pass():
 def connected_fail():
     log.warning('Connection lost')
     set_state('HOTSPOT')
+    timeout_add(5*1000, hotspot_timeout, state_id)
 
 
 @timeout
