@@ -3,7 +3,7 @@ Hash: SHA512
 
 Suite: stable
 Codename: comitup-jessie
-Date: Fri, 09 Aug 2019 02:22:49 UTC
+Date: Thu, 22 Aug 2019 11:44:19 UTC
 Architectures: amd64 i386 armhf armel
 Components: main
 Description: Apt repository for comitup on Jessie
@@ -48,17 +48,17 @@ SHA256:
  cec0bf59fe71cdad4d970511bfd7351bedeaa895b1d9478019a0f448381dce2e 102 main/binary-armel/Release
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEE1wfmOgeeFqqbnJ0CYn67KQqBeoIFAl1M2PoACgkQYn67KQqB
-eoKVaw//Vw/4IGIAJUCTnIlc3tKpNtLZ87kqT+ib+Zi1LZWA+YTUO1nngEhFtvPA
-CpejHnb4asTG6ZU+gPM8sNA0gND5pCjgB+mLjMBmrcm18++NLAscvqxfWuPYHazZ
-13BDeX5IpJvqREDqOcbg6rmv5CPMxWFifbm9dpnhkprSqxdzilkL30+xGhcXkRnc
-GBF1qTwEhJzoUpw2nDkKc/4gww8YQEXaGMeTOIFDQ+HDtqMxKD72kvEHbEW6l/Q8
-Xf/YBzLZo6r/gGAZ9Yy96yhmi3zGiGUHTiqtEwAvA7puHM8bm+wBXKGiWsPk1Gmv
-owDlHi81ST2RkGxCgdWh74E4r0ftY0Ktu52ffiR9Xh/P+z6z+Hoq2yRHwYQrcOFo
-RrkaPT0sfudPPZZuEFcvsoiH02t71iLtqKb6Y373MXyQth3LRxzcdXZPhjJJr9oL
-6zG86ZI8aFm09q0d3rSeoSdwti6pKV0zrBLVmSzi3mcP16aGje7ZWuDP3lxpccvS
-WPMVQMKHVPol+V74MHV903EE0o/2MnMtbpOfFH+NbtawS7L+kokKd6mCvageCJe4
-3yZ4tjZRh1r+I3wJxuF/GQJxqOuWWc6VfX9EIu+toigPKw+7kRR+U2GQg6SS0+5c
-3WWWrMtNYuPoethLcExCS5vqg2FOOLTPOchrrHfwFNEKCSsB7bE=
-=rAuz
+iQIzBAEBCgAdFiEErg2/WpKlreSUgbpvijFx7zZhUM4FAl1egBgACgkQijFx7zZh
+UM43Xg//ahYbtNC40JuUOIYdz6KTsMPdle3I6gf+iwC9Co2JEc2dnKJPxXXJrkXk
+nNFbV8TkDRc51OsuN6viWwZERn8rhB9QPXVsOY4Ux2KAJnxSCtjDT8GmdpgQIoZq
+Dn/zbKqoSzyXRB5R7icEqi0MpWkBpoeIN/OLDPj5bqCNkaCuI9kcj5FOEQyTPCJa
+tluXJXXpdIaCyATJnyIvqs42zhVJ91V9fEcTdVo/KrEJeCvCnkhFkNMrfQVkHwN6
+3BWCesY7qN4vDoZ6sl2eN/YpssCZCCREzlr4/EV/gVzUvgvbm5KpfTn16dxKj83f
++R6/q22J9PKlF1AVA8r8XClV7ozmrVWWZQ31M28Vg6jzwEj0ct0rGsZDBKG3NWAF
+ngKsNbZhjguyTZoBfujdLL0Anu5DcnyjfsRE4nwvISdnZRdgSr/V1T9Weyq3wOw4
+RXWRVuGMV581BGW0uQcyn6khUaFS4CkXQa+VNuTTc4zwDeGima/S7AY870EL8kQ9
+zOjb1svWDSLgnCD8SyMAZGRk/jGMg+Xa6cON03FUhXqcgDrASF3zc2SQvLmfuSdv
+Jkoiq+ghv+jz2If94aDAqIJNTOU62BEZ3ce0GqXi1vz5WaXLbY+k0RnGGJLAp+a/
+5TI6CiWDPOGHfQrLAOLQsrwncGYvqn/iFHcJfMxZKtIsE3CmZEI=
+=j/wZ
 -----END PGP SIGNATURE-----
