@@ -15,6 +15,7 @@ log = logging.getLogger("comitup")
 # NetworkManager is doing a poor job of maintaining the AP scan list when
 # in AP mode. Use the 'iw' command to get the AP list.
 
+
 def docmd(cmd):
     cmd = "timeout 5 " + cmd
 
@@ -140,7 +141,6 @@ if __name__ == '__main__':
     print(ap_conn_count())
 
     import sys
-    #print(devaps(sys.argv[1], sys.stdin.read()))
 
     for ap in devaps(sys.argv[1], sys.stdin.read()):
         print(ap["SSID"], ap["RSN"], ap["power"], "RSN" in ap)

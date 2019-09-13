@@ -11,7 +11,7 @@
 # or later
 #
 
-from dbus.exceptions import DBusException
+
 from functools import wraps
 import hashlib
 import logging
@@ -308,10 +308,10 @@ def set_hosts(*args):
 
 
 def assure_hotspot(ssid, device, password):
-   log.debug("states: Calling nm.get_connection_by_ssid()")
-   nm.del_connection_by_ssid(ssid)
-   if not nm.get_connection_by_ssid(ssid):
-       nm.make_hotspot(ssid, device, password)
+    log.debug("states: Calling nm.get_connection_by_ssid()")
+    nm.del_connection_by_ssid(ssid)
+    if not nm.get_connection_by_ssid(ssid):
+        nm.make_hotspot(ssid, device, password)
 
 
 def hash_conf():

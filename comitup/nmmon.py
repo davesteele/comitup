@@ -22,7 +22,8 @@ if __name__ == '__main__':
     DBusGMainLoop(set_as_default=True)
 
 if __name__ == '__main__':
-    import os, sys
+    import os
+    import sys
     fullpath = os.path.abspath(__file__)
     parentdir = '/'.join(fullpath.split('/')[:-2])
     sys.path.insert(0, parentdir)
@@ -64,12 +65,14 @@ def enable(dev, connect_fn, fail_fn):
 
     monitored_dev = dev
 
+
 def send_cb(cb):
     def cb_to(cb):
         cb()
         return False
 
     timeout_add(1, cb_to, cb)
+
 
 def ap_changed_state(state, *args):
     if state in PASS_STATES:

@@ -38,7 +38,7 @@ def kill_dns(ppath, sig):
         pid = int(pidpath.read_text().strip())
         os.kill(pid, signal.SIGTERM)
         os.waitpid(pid, 0)
-    except (ValueError, ProcessLookupError, \
+    except (ValueError, ProcessLookupError,
             FileNotFoundError, ChildProcessError):
         pass
 
