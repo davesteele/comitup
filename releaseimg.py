@@ -24,8 +24,9 @@ if ".zip" not in zip_name:
 # Update tracker list from https://newtrackon.com
 trackers = [
     'udp://tracker.coppersurfer.tk:6969/announce',
-    'http://torrent.nwps.ws:80/announce',
     'udp://tracker.opentrackr.org:1337/announce',
+    'https://tracker.publictorrent.net:443/announce',
+#    'http://torrent.nwps.ws:80/announce',
 #    'udp://thetracker.org:80/announce',
 #    'udp://tracker.vanitycore.co:6969/announce',
 #    'http://retracker.telecom.by:80/announce',
