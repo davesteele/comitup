@@ -119,3 +119,5 @@ with open('imgs.json', 'w') as fp:
 
 os.system("cp {} ~/Downloads".format(zip_path))
 os.system("transmission-remote -a ./torrent/{}.torrent".format(zip_name))
+
+os.system("./makesite")
