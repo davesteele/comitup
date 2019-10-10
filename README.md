@@ -48,4 +48,4 @@ Man pages
 * [comitup.8](https://davesteele.github.io/comitup/man/comitup.8.html)
 * [comitup-conf.5](https://davesteele.github.io/comitup/man/comitup-conf.5.html)
 * [comitup-web.8](https://davesteele.github.io/comitup/man/comitup-web.8.html)
-* [comitup-cli.1](https://davesteele.github.io/comitup/man/comitup-cli.1.html)
+* [comitup-cli.8](https://davesteele.github.io/comitup/man/comitup-cli.8.html)
