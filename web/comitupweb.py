@@ -48,8 +48,10 @@ def deflog():
     return log
 
 
-def do_connect(ssid, password):
+def do_connect(ssid, password, log):
     time.sleep(1)
+    log.debug("Calling client connect")
+    ciu_client.service = None
     ciu_client.ciu_connect(ssid, password)
 
 
@@ -95,7 +97,7 @@ def create_app(log):
         ssid = urllib.parse.unquote(request.form["ssid"])
         password = request.form["password"].encode()
 
-        p = Process(target=do_connect, args=(ssid, password))
+        p = Process(target=do_connect, args=(ssid, password, log))
         p.start()
 
         log.info("connect.html - ssid {0}".format(ssid))
