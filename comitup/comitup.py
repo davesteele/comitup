@@ -13,7 +13,6 @@ from comitup import config
 import random
 import argparse
 import sys
-import time
 
 
 from gi.repository.GLib import MainLoop

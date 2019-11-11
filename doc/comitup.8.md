@@ -30,7 +30,7 @@ Otherwise, the hotspot will be replaced with the internet connection.
 
 In all states, avahi-daemon(8) is used to publish the mdns host name
 _comitup-&lt;nn&gt;.local_, making the web service accessible
-as e.g. _http://comitup-1234.local_, for systems supporting Zeroconf. For other
+as e.g. _http://comitup-12.local_, for systems supporting Zeroconf. For other
 systems, a _comitup_ Workstation entry is published which is visible to Zeroconf
 browsing applications, allowing the IP address to be manually determined.
 The web service address is _http://10.41.0.1_.

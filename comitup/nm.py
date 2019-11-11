@@ -29,6 +29,8 @@ if __name__ == '__main__':
 
 from comitup import iwscan  # noqa
 
+device_list = None
+settings_cache = {}
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -66,7 +68,6 @@ def none_on_exception(*exceptions):
     return _none_on_exception
 
 
-device_list = None
 def get_devices():
     global device_list
 
@@ -111,7 +112,6 @@ def disconnect(device):
         log.debug("Error received in disconnect")
 
 
-settings_cache = {}
 def get_connection_settings(connection):
     global settings_cache
 
@@ -125,7 +125,7 @@ def get_connection_settings(connection):
 def get_device_settings(device):
     try:
         connection = device.ActiveConnection
-    except NetworkManager.ObjectVanished:
+    except nm.ObjectVanished:
         sys.exit(1)
 
     log.debug("Getting Connection settings")

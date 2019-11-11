@@ -35,3 +35,8 @@ def test(session):
         session.install(pkg)
 
     session.run("pytest")
+
+@nox.session()
+def flake8(session):
+    session.install("flake8")
+    session.run("flake8", "setup.py", "cli", "comitup", "web")
