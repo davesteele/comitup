@@ -1,8 +1,10 @@
-comitup (1.7-2) UNRELEASED; urgency=medium
+comitup (1.8-1) unstable; urgency=medium
 
   * Correct tabulate Suggests to Python 3 (Closes: 935731).
+  * Set a short-term reconnect attampt on connect fail.
+  * Fix a connection error when used from IOS devices.
 
- -- David Steele <steele@debian.org>  Sun, 25 Aug 2019 14:58:58 -0400
+ -- David Steele <steele@debian.org>  Sun, 10 Nov 2019 19:58:43 -0500
 
 comitup (1.7-1) unstable; urgency=medium
 
