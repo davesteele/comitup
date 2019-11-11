@@ -14,7 +14,7 @@
   </style>
 </head>
 <body>
-<header>
+<header id="title-block-header">
 <h1 class="title">comitup(8)</h1>
 <p class="author"></p>
 <p class="date">February 2019</p>
@@ -28,7 +28,7 @@
 <p>On startup, the service will attempt to connect to wifi using established networkmanager(8) connections. If this is not successful, <strong>comitup</strong> will establish a wifi hotspot with the name <em>comitup-&lt;nn&gt;</em>, where &lt;nn&gt; is a persistent 2-digit number.</p>
 <p>While the hotspot is active, a comitup-web(8) service is available to manage connecting to an access point.</p>
 <p>If two wifi interfaces are available, the hotspot will remain active on the first interface, and the internet connection will be made on the second. Otherwise, the hotspot will be replaced with the internet connection.</p>
-<p>In all states, avahi-daemon(8) is used to publish the mdns host name <em>comitup-&lt;nn&gt;.local</em>, making the web service accessible as e.g. <em>http://comitup-1234.local</em>, for systems supporting Zeroconf. For other systems, a <em>comitup</em> Workstation entry is published which is visible to Zeroconf browsing applications, allowing the IP address to be manually determined. The web service address is <em>http://10.41.0.1</em>.</p>
+<p>In all states, avahi-daemon(8) is used to publish the mdns host name <em>comitup-&lt;nn&gt;.local</em>, making the web service accessible as e.g. <em>http://comitup-12.local</em>, for systems supporting Zeroconf. For other systems, a <em>comitup</em> Workstation entry is published which is visible to Zeroconf browsing applications, allowing the IP address to be manually determined. The web service address is <em>http://10.41.0.1</em>.</p>
 <p><strong>comitup</strong> logs to <em>/var/log/comitup.log</em>.</p>
 <h2 id="options">Options</h2>
 <ul>
