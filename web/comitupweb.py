@@ -58,6 +58,11 @@ def do_connect(ssid, password, log):
 def create_app(log):
     app = Flask(__name__)
 
+    @app.after_request
+    def add_header(response):
+        response.cache_control.max_age = 0
+        return response
+
     @app.route("/")
     def index():
         points = ciu_client.ciu_points()
