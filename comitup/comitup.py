@@ -34,15 +34,15 @@ def deflog():
     log = logging.getLogger('comitup')
     log.setLevel(logging.INFO)
     handler = TimedRotatingFileHandler(
-                LOG_PATH,
-                encoding='utf=8',
-                when='D',
-                interval=7,
-                backupCount=8,
-              )
+        LOG_PATH,
+        encoding='utf=8',
+        when='D',
+        interval=7,
+        backupCount=8,
+    )
     fmtr = logging.Formatter(
-            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-           )
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
     handler.setFormatter(fmtr)
     log.addHandler(handler)
 
@@ -51,19 +51,19 @@ def deflog():
 
 def load_data():
     conf = config.Config(
-                CONF_PATH,
-                defaults={
-                    'ap_name': 'comitup-<nn>',
-                    'ap_password': '',
-                    'web_service': '',
-                    'external_callback': '/usr/local/bin/comitup-callback',
-                },
-             )
+        CONF_PATH,
+        defaults={
+            'ap_name': 'comitup-<nn>',
+            'ap_password': '',
+            'web_service': '',
+            'external_callback': '/usr/local/bin/comitup-callback',
+        },
+    )
 
     data = persist.persist(
-                PERSIST_PATH,
-                {'id': str(random.randrange(1000, 9999))},
-           )
+        PERSIST_PATH,
+        {'id': str(random.randrange(1000, 9999))},
+    )
 
     return (conf, data)
 
@@ -106,13 +106,13 @@ def main():
     iptmgr.init_iptmgr()
 
     statemgr.init_state_mgr(
-                conf, data,
-                [
-                    webmgr.state_callback,
-                    iptmgr.state_callback,
-                    cdns.state_callback,
-                ],
-             )
+        conf, data,
+        [
+            webmgr.state_callback,
+            iptmgr.state_callback,
+            cdns.state_callback,
+        ],
+    )
 
     loop = MainLoop()
     loop.run()

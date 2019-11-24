@@ -8,7 +8,7 @@ import logging
 import subprocess
 import re
 from multiprocessing import Process, Queue
-
+from pprint import pprint
 
 log = logging.getLogger("comitup")
 
@@ -75,8 +75,13 @@ def apgen(dev, q, dump=""):
         pt = {}
         pt['ssid'] = ap['SSID']
         pt['strength'] = ap['power']
+
         if 'WPA' in ap or 'RSN' in ap:
             pt['security'] = 'encrypted'
+
+            AUTH_TYPE_KEY, WPA2_ENTERPRISE_AUTH_VAL = "* Authentication suites", "IEEE 802.1X"
+            pt['is_enterprise'] = str(
+                AUTH_TYPE_KEY in ap and ap[AUTH_TYPE_KEY] == WPA2_ENTERPRISE_AUTH_VAL)
         else:
             pt['security'] = 'unencrypted'
 

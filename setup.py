@@ -52,7 +52,7 @@ class MyClean(clean):
 
 setup(
     name='comitup',
-    packages=['comitup', 'web', 'cli'],
+    packages=['comitup', 'web', 'cli', 'ias'],
     version='1.8',
     description="Remotely manage wifi connections on a headless computer",
     classifiers=[
@@ -60,7 +60,7 @@ setup(
         'Environment :: Web Environment',
         'Framework :: Flask',
         'Intended Audience :: End Users/Desktop',
-        'License :: OSI Approved ' +
+        'License :: OSI Approved ',
         ':: GNU General Public License v2 or later (GPLv2+)',
         'Natural Language :: English',
         'Operating System :: POSIX :: Linux',
@@ -81,6 +81,8 @@ setup(
     },
     data_files=[
         ('/etc', ['conf/comitup.conf']),
+        # where to look for puppeteer scripts for automated IAS login
+        ('/etc/opt/comitup-ias-puppeteer-scripts', ['ias/_example.js']),
         ('/var/lib/comitup', ['conf/comitup.json']),
         ('/etc/dbus-1/system.d', ['conf/comitup-dbus.conf']),
         ('/usr/share/comitup/web/templates',
@@ -122,4 +124,5 @@ setup(
     author="David Steele",
     author_email="steele@debian.org",
     url='https://davesteele.github.io/comitup/',
+    zip_safe=False
     )

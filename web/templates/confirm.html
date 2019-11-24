@@ -1,55 +1,116 @@
 <!DOCTYPE html>
 <html lang="en" class="uk-height-1-1">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Comitup</title>
-    <link rel="icon" href="img/favicon.ico">
+    <link rel="icon" href="img/favicon.ico" />
     <!-- CSS FILES -->
-    <link rel="stylesheet" type="text/css" href="css/uikit.css">
-</head>
-<body class="uk-height-1-1">
-<div class="uk-flex uk-flex-center uk-flex-middle">
-    <div class="uk-position-bottom-center uk-position-small">
-        <span class="uk-text-small uk-text-muted">Comitup - Built with <a href="https://github.com/davesteele/comitup" title="Comitup" target="_blank" data-uk-tooltip>ComitUp</a></span>
-    </div>
-    <div class="uk-width-large uk-padding-small">
+    <link rel="stylesheet" type="text/css" href="css/uikit.css" />
+  </head>
+  <body class="uk-height-1-1">
+    <div class="uk-flex uk-flex-center uk-flex-middle">
+      <div class="uk-position-bottom-center uk-position-small">
+        <span class="uk-text-small uk-text-muted"
+          >Comitup - Built with
+          <a
+            href="https://github.com/davesteele/comitup"
+            title="Comitup"
+            target="_blank"
+            data-uk-tooltip
+            >ComitUp</a
+          ></span
+        >
+      </div>
+      <div class="uk-width-large uk-padding-small">
         <div class="uk-width-1-1 uk-text-center">
-            <span class="" uk-icon="icon: world; ratio: 5"></span>
-            <p class="uk-text-large">Connect to Wifi</p>
+          <span class="" uk-icon="icon: world; ratio: 5"></span>
+          <p class="uk-text-large">Connect to Wifi</p>
         </div>
 
         <div class="uk-margin">
-            <div class="uk-width-1-1">
-                <p>
-                    Press the Connect button to connect this device to {{ ssid }}. <br><br>
+          <div class="uk-width-1-1">
+            <p>
+              Press the Connect button to connect this device to {{ ssid }}.
+              <br /><br />
 
-                    {% if mode == 'single' %}
-                    This will terminate the current hotspot. Connect to {{ ssid }} for access.<br><br>
+              {% if mode == 'single' %} This will terminate the current hotspot.
+              Connect to {{ ssid }} for access.<br /><br />
 
-                    If the connection fails, this hotspot will be re-created.<br><br>
-                    {% else %}
-                    The hotspot will remain, but this web service will be terminated.<br><br>
+              If the connection fails, this hotspot will be re-created.<br /><br />
+              {% else %} The hotspot will remain, but this web service will be
+              terminated.<br /><br />
 
-                    If the connection fails, the web service will be restored.<br><br>
-                    {% endif %}
-                </p>
-            </div>
+              If the connection fails, the web service will be restored.<br /><br />
+              {% endif %}
+            </p>
+          </div>
         </div>
         <form action="/connect" method="POST">
-            <div class="uk-grid uk-grid-small">
-                <div class="uk-width-2-3">
-                    <input type="hidden" name="ssid" value="{{ ssid_encoded }}">
-                    <input class="uk-input" placeholder="Password (if required)" type="password" name="password">
-                </div>
-                <div class="uk-width-1-3">
-                    <button type="submit" value="Connect" class="uk-button uk-button-primary uk-width-expand">Connect</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+          <input type="hidden" name="ssid" value="{{ ssid_encoded }}" />
 
-<!-- JS FILES -->
-<script src="js/uikit.js"></script>
-<script src="js/uikit-icons.min.js"></script>
+          {% if is_8021x %}
+          <div class="uk-width-2-3">
+            <input class="uk-input" placeholder="Username" name="username" />
+          </div>
+          {% endif %}
+
+          <div class="uk-width-2-3">
+            <input
+              class="uk-input"
+              placeholder="Password (if required)"
+              type="password"
+              name="password"
+            />
+          </div>
+
+          <p class="uk-margin">
+            Some networks require an additional agreement to terms and
+            conditions etc by logging in through an online portal. The system
+            administrator can add scripts to automate this login process.
+          </p>
+
+          <div class="uk-margin uk-width-1-1">
+            <label>
+              <input
+                class="uk-radio"
+                type="radio"
+                name="ias_login_script"
+                value="none"
+              />
+              None
+            </label>
+          </div>
+
+          {% for ias_script in ias_login_scripts %}
+          <div class="uk-margin uk-width-1-1">
+            <label>
+              <input
+                class="uk-radio"
+                type="radio"
+                name="ias_login_script"
+                value="{{ ias_script }}"
+              />
+              {{ ias_script }}
+            </label>
+          </div>
+          {% endfor %}
+
+          <div class="uk-width-1-3">
+            <button
+              type="submit"
+              value="Connect"
+              class="uk-button uk-button-primary uk-width-expand"
+            >
+              Connect
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- JS FILES -->
+    <script src="js/uikit.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+  </body>
+</html>

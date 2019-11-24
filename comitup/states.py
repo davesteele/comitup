@@ -265,12 +265,18 @@ def set_state(state, connections=None, timeout=180):
 
     state_info = state_matrix(state)
 
+    log.info("get statematrix")
+
     nmmon.init_nmmon()
+
+    log.info("enable")
     nmmon.enable(
         modemgr.get_state_device(state),
         state_info.pass_fn,
         state_info.fail_fn
     )
+
+    log.info("nmmon enabled")
 
     if connections:
         conn_list = connections
@@ -278,6 +284,7 @@ def set_state(state, connections=None, timeout=180):
     state_id += 1
     com_state = state
     timeout_add(timeout*1000, state_info.timeout_fn, state_id)
+    log.info("state_info.start_fn()")
     state_info.start_fn()
 
 

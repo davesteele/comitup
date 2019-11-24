@@ -1,0 +1,15 @@
+{
+  "name": "comitup_ias",
+  "version": "1.0.0",
+  "description": "Puppeteering through IAS systems, common to WPA2-Enterprise networks such as university WiFi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "callumjhays@gmail.com",
+  "license": "GPL-2.0-only",
+  "dependencies": {
+    "args-parser": "^1.1.0",
+    "puppeteer-core": "^2.0.0"
+  }
+}
