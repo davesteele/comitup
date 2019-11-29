@@ -39,17 +39,18 @@ group = None
 def establish_group():
     global group
 
-    bus = dbus.SystemBus()
+    if not group:
+        bus = dbus.SystemBus()
 
-    server = dbus.Interface(
+        server = dbus.Interface(
             bus.get_object(DBUS_NAME, DBUS_PATH_SERVER),
             DBUS_INTERFACE_SERVER
-    )
+        )
 
-    group = dbus.Interface(
+        group = dbus.Interface(
             bus.get_object(DBUS_NAME, server.EntryGroupNew()),
             DBUS_INTERFACE_ENTRY_GROUP
-    )
+        )
 
 
 def encode_dns(name):
@@ -107,8 +108,12 @@ def add_service(host, devindex, addr):
 
 
 def clear_entries():
+    global group
+
     if group and not group.IsEmpty():
         group.Reset()
+        group.Free()
+        group = None
 
     establish_group()
 
