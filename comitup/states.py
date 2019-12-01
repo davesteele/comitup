@@ -89,8 +89,8 @@ def dns_to_conn(host):
 # Hotspot state
 #
 
-def fake_hs_pass():
-    hotspot_pass()
+def fake_hs_pass(sid):
+    hotspot_pass(sid)
     return False
 
 
@@ -110,9 +110,10 @@ def hotspot_start():
     else:
         log.debug("Didn't need to reactivate - already running")
         # the connect callback won't happen - let's 'pass' manually
-        timeout_add(100, fake_hs_pass)
+        timeout_add(100, fake_hs_pass, state_id)
 
 
+@timeout
 @state_callback
 def hotspot_pass():
     log.debug("Activating mdns")
@@ -128,6 +129,7 @@ def hotspot_pass():
         time.sleep(1)
 
 
+@timeout
 @state_callback
 def hotspot_fail():
     log.warning("Hotspot mode failure")
@@ -173,12 +175,14 @@ def connecting_start():
         set_state('HOTSPOT')
 
 
+@timeout
 @state_callback
 def connecting_pass():
     log.debug("Connection successful")
     set_state('CONNECTED')
 
 
+@timeout
 @state_callback
 def connecting_fail():
     log.debug("Connection failed")
@@ -190,7 +194,7 @@ def connecting_fail():
 
 @timeout
 def connecting_timeout():
-    connecting_fail()
+    connecting_fail(state_id)
 
 
 #
@@ -215,11 +219,13 @@ def connected_start():
     conn_list = []
 
 
+@timeout
 @state_callback
 def connected_pass():
     pass
 
 
+@timeout
 @state_callback
 def connected_fail():
     log.warning('Connection lost')
@@ -266,16 +272,19 @@ def set_state(state, connections=None, timeout=180):
     state_info = state_matrix(state)
 
     nmmon.init_nmmon()
+
+    state_id += 1
+
     nmmon.enable(
         modemgr.get_state_device(state),
         state_info.pass_fn,
-        state_info.fail_fn
+        state_info.fail_fn,
+        state_id,
     )
 
     if connections:
         conn_list = connections
 
-    state_id += 1
     com_state = state
     timeout_add(timeout*1000, state_info.timeout_fn, state_id)
     state_info.start_fn()

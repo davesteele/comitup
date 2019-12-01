@@ -12,6 +12,7 @@
 #
 
 import dbus
+from functools import partial
 from gi.repository.GLib import MainLoop, timeout_add
 
 from dbus.mainloop.glib import DBusGMainLoop
@@ -55,13 +56,13 @@ def disable():
     nm_dev_fail = None
 
 
-def enable(dev, connect_fn, fail_fn):
+def enable(dev, connect_fn, fail_fn, state_id):
     global monitored_dev, nm_dev_connect, nm_dev_fail
 
     monitored_dev = None
 
-    nm_dev_connect = connect_fn
-    nm_dev_fail = fail_fn
+    nm_dev_connect = partial(connect_fn, state_id)
+    nm_dev_fail = partial(fail_fn, state_id)
 
     monitored_dev = dev
 
