@@ -1,3 +1,12 @@
+comitup (1.9-1) UNRELEASED; urgency=medium
+
+  * Address a problem with connection failure.
+  * A leak in Avahi caused mdns failures after multiple connection
+    attempts.
+  * Disable caching for comitup-web pages.
+
+ -- David Steele <steele@debian.org>  Sun, 01 Dec 2019 08:31:57 -0500
+
 comitup (1.8-1) unstable; urgency=medium
 
   * Correct tabulate Suggests to Python 3 (Closes: 935731).
