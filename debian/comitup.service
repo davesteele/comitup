@@ -1,6 +1,7 @@
 [Unit]
 Description=Comitup Wifi Management
 After=NetworkManager.service Avahi.service
+Requires=avahi-daemon.service
 Documentation=man:comitup(8)
 
 [Service]
