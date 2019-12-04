@@ -312,8 +312,7 @@ def make_connection_for(ssid, password=None, interface=None):
             }),
         'ipv6': dbus.Dictionary(
             {
-                # assume ipv4-only
-                'method': 'ignore',
+                'method': 'auto',
             }),
     })
 
