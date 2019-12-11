@@ -1,3 +1,10 @@
+comitup (1.9-2) unstable; urgency=medium
+
+  * Clean up messy release of 1.9-1.
+  * Add systemd depends on Avahi.
+
+ -- David Steele <steele@debian.org>  Tue, 10 Dec 2019 22:44:43 -0500
+
 comitup (1.9-1) UNRELEASED; urgency=medium
 
   * Address a problem with connection failure.
