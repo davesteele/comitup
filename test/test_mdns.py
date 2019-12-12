@@ -31,8 +31,10 @@ def test_avahi_null(avahi_fxt):
 
 def test_avahi_establish_group(avahi_fxt):
     old_group = mdns.group
+    mdns.group = None
     mdns.establish_group()
-    assert mdns.group != old_group
+    assert mdns.group != None
+    mdns.group = old_group
 
 
 def test_avahi_make_a_record(avahi_fxt):
@@ -51,11 +53,12 @@ def test_avahi_clear_entries(avahi_fxt):
     mdns.group = Mock()
     mdns.group.IsEmpty = isempty
 
+    oldgroup = mdns.group
+
     mdns.clear_entries()
 
     assert isempty.called
-    assert mdns.group.Reset.called
-    assert mdns.establish_group.called
+    assert oldgroup.Reset.called
     assert not mdns.log.called
 
 
