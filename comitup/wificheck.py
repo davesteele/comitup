@@ -25,7 +25,7 @@ class DevInfo(object):
                 with open(path, 'r') as fp:
                     phy = fp.read().strip()
                 self.dev_list.append((dev, phy))
-            except FileNotFoundError:
+            except (NotADirectoryError, FileNotFoundError):
                 pass
 
     def get_devs(self):
