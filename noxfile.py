@@ -7,6 +7,7 @@ pkgs = [
     "libcairo2-dev",
     "gobject-introspection",
     "libgirepository1.0-dev",
+    "python3-dev",
 ]
 
 deps = [
