@@ -8,19 +8,14 @@ export PYBUILD_INSTALL_ARGS=--install-lib=/usr/share/comitup\
  --install-scripts=/usr/share/comitup
 
 %:
-	dh $@  --with python3,systemd --buildsystem=pybuild
+	dh $@ --buildsystem=pybuild
 
-override_dh_auto_build:
-	dh_auto_build
+execute_after_dh_auto_build:
 	for mn in ${manpages}; do \
 	  pandoc $$mn.md -s -t man -o $$mn; \
 	  sed -i 's/\\\[en\]/\\\-/' $$mn; \
 	  pandoc $$mn.md -s -t html -o $$mn.html; \
 	done
 
-override_dh_systemd_enable:
-	dh_systemd_enable
-	dh_systemd_enable --name=comitup-web
-
-override_dh_installinit:
-	# to silence lintian complaints about phantom init.d files
+execute_after_dh_installsystemd:
+	dh_installsystemd --name=comitup-web
