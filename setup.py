@@ -114,6 +114,7 @@ setup(
     install_requires=[
         'jinja2',
     ],
+    setup_requires=["pytest-runner"],
     tests_require=['pytest', 'mock'],
     cmdclass={
         'clean': MyClean,
