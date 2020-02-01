@@ -1,10 +1,10 @@
-comitup (1.10-1) UNRELEASED; urgency=medium
+comitup (1.10-1) unstable; urgency=medium
 
   * Add IPv6 support to upstream connections.
   * Fix tests, including those blocking migration (Closes: 947621).
   * Update Debian build environment.
 
- -- David Steele <steele@debian.org>  Sat, 01 Feb 2020 15:33:21 -0500
+ -- David Steele <steele@debian.org>  Sat, 01 Feb 2020 15:34:34 -0500
 
 comitup (1.9-2) unstable; urgency=medium
 
