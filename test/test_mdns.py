@@ -33,7 +33,7 @@ def test_avahi_establish_group(avahi_fxt):
     old_group = mdns.group
     mdns.group = None
     mdns.establish_group()
-    assert mdns.group != None
+    assert mdns.group is not None
     mdns.group = old_group
 
 
