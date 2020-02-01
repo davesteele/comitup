@@ -11,13 +11,14 @@ Build-Depends:
     python3-pytest-runner,
     pandoc,
 Standards-Version: 4.3.0
+Rules-Requires-Root: binary-targets
 Homepage: https://davesteele.github.io/comitup/
 Vcs-Git: https://github.com/davesteele/comitup.git -b debian
 Vcs-Browser: https://github.com/davesteele/comitup
 
 Package: comitup
 Architecture: all
-Depends: 
+Depends:
     ${python3:Depends},
     ${misc:Depends},
     systemd,
