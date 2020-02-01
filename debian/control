@@ -8,6 +8,7 @@ Build-Depends:
     dh-python,
     python3-all,
     python3-setuptools,
+    python3-pytest-runner,
     pandoc,
 Standards-Version: 4.3.0
 Homepage: https://davesteele.github.io/comitup/
