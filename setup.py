@@ -53,7 +53,7 @@ class MyClean(clean):
 setup(
     name='comitup',
     packages=['comitup', 'web', 'cli'],
-    version='1.9',
+    version='1.10',
     description="Remotely manage wifi connections on a headless computer",
     classifiers=[
         'Development Status :: 5 - Production/Stable',
@@ -114,6 +114,7 @@ setup(
     install_requires=[
         'jinja2',
     ],
+    setup_requires=["pytest-runner"],
     tests_require=['pytest', 'mock'],
     cmdclass={
         'clean': MyClean,

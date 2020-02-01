@@ -27,6 +27,7 @@ from comitup import client as ciu                 # noqa
 
 ciu_client = None
 LOG_PATH = "/var/log/comitup-web.log"
+TEMPLATE_PATH = "/usr/share/comitup/web/templates"
 
 
 def deflog():
@@ -56,7 +57,7 @@ def do_connect(ssid, password, log):
 
 
 def create_app(log):
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder=TEMPLATE_PATH)
 
     @app.after_request
     def add_header(response):
@@ -73,11 +74,11 @@ def create_app(log):
 
     @app.route('/js/<path:path>')
     def send_js(path):
-        return send_from_directory('templates/js', path)
+        return send_from_directory(TEMPLATE_PATH + '/js', path)
 
     @app.route('/css/<path:path>')
     def send_css(path):
-        return send_from_directory('templates/css', path)
+        return send_from_directory(TEMPLATE_PATH + '/css', path)
 
     @app.route("/confirm")
     def confirm():

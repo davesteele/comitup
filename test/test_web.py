@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 
+import pathlib
 import pytest
 import urllib
 
@@ -20,7 +21,10 @@ ssid_list = [
 
 
 @pytest.fixture
-def app():
+def app(monkeypatch):
+    templatedir = pathlib.Path(__file__).parent.parent / "web/templates"
+    monkeypatch.setattr("web.comitupweb.TEMPLATE_PATH", str(templatedir))
+
     app = comitupweb.create_app(Mock())
     app.debug = True
     app.testing = True
@@ -33,7 +37,7 @@ def test_webapp_null(app, ssid):
 
 
 @pytest.mark.parametrize('ssid', ssid_list)
-def test_webapp_index(app, ssid, monkeypatch):
+def test_webapp_index(app, ssid):
     point = {
         'ssid': ssid,
     }
