@@ -1,2 +1,2 @@
-Test-Command: py.test-3
+Test-Command: py.test-3 test/test_config.py test/test_persist.py test/test_web*
 Depends: @, @builddeps@

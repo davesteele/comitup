@@ -1,3 +1,9 @@
+comitup (1.10-2) unstable; urgency=medium
+
+  * Fix debci tests to run those that can be run on debci.
+
+ -- David Steele <steele@debian.org>  Sun, 02 Feb 2020 10:40:19 -0500
+
 comitup (1.10-1) unstable; urgency=medium
 
   * Add IPv6 support to upstream connections.

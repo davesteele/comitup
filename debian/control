@@ -8,8 +8,11 @@ Build-Depends:
     dh-python,
     python3-all,
     python3-setuptools,
+    python3-pytest,
     python3-pytest-runner,
+    python3-mock,
     pandoc,
+    python3-flask,
 Standards-Version: 4.3.0
 Rules-Requires-Root: binary-targets
 Homepage: https://davesteele.github.io/comitup/
