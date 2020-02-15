@@ -118,6 +118,9 @@ imgsinfo[imgname] = imginfo
 with open('imgs.json', 'w') as fp:
 	json.dump(imgsinfo, fp, indent=4, sort_keys=True)
 
+
+os.system("otto add {} {} ./torrent/{}.torrent".format(zip_path, info_path, zip_name))
+
 os.system("cp {} ~/Downloads".format(zip_path))
 os.system("transmission-remote -a ./torrent/{}.torrent".format(zip_name))
 
