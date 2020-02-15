@@ -1,22 +1,22 @@
 {
     "full": {
-        "compressed": 1163696529,
-        "compressedstr": "1.1 G",
-        "filename": "image_2019-09-30-Comitup.zip",
-        "infoname": "2019-09-30-Comitup.info",
-        "magnet": "magnet:?xt=urn:btih:af1e044f149b3cd6cabd05e9f2cbed03e8c933a9&dn=image%5F2019-09-30-Comitup.zip&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=https%3A%2F%2Ftracker.publictorrent.net%3A443%2Fannounce\n",
+        "compressed": 1210162184,
+        "compressedstr": "1.2 G",
+        "filename": "image_2020-02-15-Comitup.zip",
+        "infoname": "2020-02-15-Comitup.info",
+        "magnet": "magnet:?xt=urn:btih:664f7468d6fce2b3a5b9bfbe18cbec4e4e824e0a&dn=image%5F2020-02-15-Comitup.zip&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=https%3A%2F%2Ftracker.nanoha.org%3A443%2Fannounce\n",
         "name": "",
-        "uncompressed": 3804233728,
-        "uncompressedstr": "3.7 G"
+        "uncompressed": 3854565376,
+        "uncompressedstr": "3.8 G"
     },
     "lite": {
-        "compressed": 451710328,
-        "compressedstr": "441 M",
-        "filename": "image_2019-09-30-Comitup-lite.zip",
-        "infoname": "2019-09-30-Comitup-lite.info",
-        "magnet": "magnet:?xt=urn:btih:499db38f6c0fbf5c4cc9589cd5ebc9379d360b8b&dn=image%5F2019-09-30-Comitup-lite.zip&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=https%3A%2F%2Ftracker.publictorrent.net%3A443%2Fannounce\n",
+        "compressed": 477623403,
+        "compressedstr": "466 M",
+        "filename": "image_2020-02-15-Comitup-lite.zip",
+        "infoname": "2020-02-15-Comitup-lite.info",
+        "magnet": "magnet:?xt=urn:btih:c0763b4866a163b42b716d520723cd64155602af&dn=image%5F2020-02-15-Comitup-lite.zip&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=https%3A%2F%2Ftracker.nanoha.org%3A443%2Fannounce\n",
         "name": "Lite",
-        "uncompressed": 2239758336,
-        "uncompressedstr": "2.2 G"
+        "uncompressed": 1933574144,
+        "uncompressedstr": "1.9 G"
     }
 }
