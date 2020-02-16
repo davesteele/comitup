@@ -29,6 +29,10 @@ other devices, use a Zeroconf browser ([Android][], [Windows][]) to
 determine the IP address of the "Comitup Service", and browse to
 _http&#58;//&lt;ipaddress&gt;_. This address will be _http&#58;//10.41.0.1/_
 
+Comitup can remember multiple upstream connections, and will search among them
+in the connection attempt, making it easier to move your device to different
+locations.
+
 If two wifi interfaces are available, the first will persistently remain
 the hotspot, and the second will get the external connection. When both
 are connected, forwarding and masquerading are enabled so that
