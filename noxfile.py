@@ -1,7 +1,6 @@
 
 import nox
 import subprocess
-import sys
 
 pkgs = [
     "libcairo2-dev",
@@ -19,9 +18,11 @@ deps = [
     "pygobject",
 ]
 
+
 def missing_pkg(pkg):
     cmd = "dpkg -l {} > /dev/null".format(pkg)
     return subprocess.run(cmd, shell=True).returncode != 0
+
 
 @nox.session()
 def test(session):
@@ -33,6 +34,7 @@ def test(session):
         session.install(pkg)
 
     session.run("pytest")
+
 
 @nox.session()
 def flake8(session):
