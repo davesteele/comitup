@@ -16,7 +16,7 @@
     <div class="uk-width-large uk-padding-small">
         <div class="uk-width-1-1 uk-text-center">
             <span class="" uk-icon="icon: world; ratio: 5"></span>
-            <p class="uk-text-large">Choose Wifi Connection</p>
+            <p class="uk-text-large">Choose WiFi Connection</p>
         </div>
 
         <div class="uk-margin">
@@ -24,11 +24,11 @@
                 {% for point in points %}
                     {% if point.security == 'encrypted' %}
                         <a href="confirm?ssid={{ point.ssid_encoded }}&encrypted={{ point.security }}">
-                            <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"><span uk-icon="icon: lock"></span> {{ point.ssid }}</button>
+                            <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" style="text-transform: none;"><span uk-icon="icon: lock"></span> {{ point.ssid }}</button>
                         </a>
                     {% else %}
                         <a href="confirm?ssid={{ point.ssid_encoded }}&encrypted={{ point.security }}">
-                            <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">{{ point.ssid }}</button>
+                            <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" style="text-transform: none;">{{ point.ssid }}</button>
                         </a>
                     {% endif %}
                 {% endfor %}
