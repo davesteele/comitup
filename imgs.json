@@ -1,22 +1,22 @@
 {
     "full": {
-        "compressed": 1214995011,
+        "compressed": 1222021391,
         "compressedstr": "1.2 G",
-        "filename": "image_2020-04-05-Comitup.zip",
-        "infoname": "2020-04-05-Comitup.info",
-        "magnet": "magnet:?xt=urn:btih:22ce1ed9aa8ebbab9484e45b3c36b931545c2d39&dn=image%5F2020-04-05-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=https%3A%2F%2Ftracker.nanoha.org%3A443%2Fannounce\n",
+        "filename": "image_2020-06-05-Comitup.zip",
+        "infoname": "2020-06-05-Comitup.info",
+        "magnet": "magnet:?xt=urn:btih:adc908656a3a3bc5223d5d816f7d7d41a5e75a80&dn=image%5F2020-06-05-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=https%3A%2F%2Ftracker.nanoha.org%3A443%2Fannounce\n",
         "name": "",
-        "uncompressed": 3858759680,
+        "uncompressed": 3896508416,
         "uncompressedstr": "3.8 G"
     },
     "lite": {
-        "compressed": 478723443,
-        "compressedstr": "468 M",
-        "filename": "image_2020-04-05-Comitup-lite.zip",
-        "infoname": "2020-04-05-Comitup-lite.info",
-        "magnet": "magnet:?xt=urn:btih:49e9961636fee57b1dc949a5e38204163a62e3da&dn=image%5F2020-04-05-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=https%3A%2F%2Ftracker.nanoha.org%3A443%2Fannounce\n",
+        "compressed": 477982286,
+        "compressedstr": "467 M",
+        "filename": "image_2020-06-05-Comitup-lite.zip",
+        "infoname": "2020-06-05-Comitup-lite.info",
+        "magnet": "magnet:?xt=urn:btih:5d547e6f582ee5dd960741c47a4ebbe1a89b5543&dn=image%5F2020-06-05-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=https%3A%2F%2Ftracker.nanoha.org%3A443%2Fannounce\n",
         "name": "Lite",
-        "uncompressed": 1933574144,
+        "uncompressed": 1929379840,
         "uncompressedstr": "1.9 G"
     }
 }
