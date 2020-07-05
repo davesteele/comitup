@@ -114,8 +114,8 @@ class Comitup(dbus.service.Object):
 def expand_ap(ap_name, id):
     returnval = ap_name
 
-    for l in range(5):
-        returnval = re.sub("<{}>".format("n"*l), id[:l], returnval)
+    for num in range(5):
+        returnval = re.sub("<{}>".format("n"*num), id[:num], returnval)
 
     returnval = re.sub("<hostname>", socket.gethostname(), returnval)
 
