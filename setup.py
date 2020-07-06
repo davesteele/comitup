@@ -19,22 +19,6 @@ import shutil
 import sys
 
 
-class PyTest(test):
-    user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
-
-    def initialize_options(self):
-        test.initialize_options(self)
-        self.pytest_args = []
-
-    def finalize_options(self):
-        test.finalize_options(self)
-
-    def run_tests(self):
-        import pytest
-        errno = pytest.main(self.pytest_args)
-        sys.exit(errno)
-
-
 class MyClean(clean):
     def run(self):
         clean.run(self)
@@ -112,13 +96,16 @@ setup(
         ),  # noqa
     ],
     install_requires=[
-        'jinja2',
+        "jinja2",
+        "dbus-python",
+        "pygobject",
+        "flask",
+        "python-networkmanager",
     ],
     setup_requires=["pytest-runner"],
     tests_require=['pytest', 'mock'],
     cmdclass={
         'clean': MyClean,
-        'test': PyTest,
     },
     author="David Steele",
     author_email="steele@debian.org",
