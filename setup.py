@@ -12,11 +12,9 @@
 
 from setuptools import setup
 from distutils.command.clean import clean
-from setuptools.command.test import test
 
 import os
 import shutil
-import sys
 
 
 class MyClean(clean):
@@ -101,6 +99,7 @@ setup(
         "pygobject",
         "flask",
         "python-networkmanager",
+        "pycairo",
     ],
     setup_requires=["pytest-runner"],
     tests_require=['pytest', 'mock'],
