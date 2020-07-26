@@ -33,5 +33,10 @@ sd_unit_state = systemd_service.get_dbus_method(
     'org.freedesktop.systemd1.Manager',
 )
 
+sd_unit_jobs = systemd_service.get_dbus_method(
+    'GetUnitProcesses',
+    'org.freedesktop.systemd1.Manager',
+)
+
 if __name__ == "__main__":
     print(sd_unit_state("NetworkManager.service"))

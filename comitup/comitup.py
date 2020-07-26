@@ -5,23 +5,23 @@
 # License-Filename: LICENSE
 
 
-import os
-import logging
-from logging.handlers import TimedRotatingFileHandler
-from comitup import persist
-from comitup import config
-import random
 import argparse
+import logging
+import os
+import random
 import sys
+from logging.handlers import TimedRotatingFileHandler
 
-
+DBusGMainLoop(set_as_default=True)
 from gi.repository.GLib import MainLoop
 from dbus.mainloop.glib import DBusGMainLoop
-DBusGMainLoop(set_as_default=True)
 
 from comitup import cdns         # noqa
+from comitup import config       # noqa
 from comitup import iptmgr       # noqa
+from comitup import persist      # noqa
 from comitup import statemgr     # noqa
+from comitup import sysd         # noqa
 from comitup import webmgr       # noqa
 from comitup import wificheck    # noqa
 
@@ -68,6 +68,16 @@ def load_data():
     return (conf, data)
 
 
+def check_environment(log):
+    if sysd.sd_unit_jobs("systemd-resolved.service"):
+        for msg in [
+            "Warning: systemd-resolved service is active.",
+            "This may interfere with comitup providing DNS and DHCP services",
+        ]:
+            print(msg)
+            log.warn(msg)
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description="")
 
@@ -101,6 +111,8 @@ def main():
             sys.exit(0)
     else:
         wificheck.run_checks(verbose=False)
+
+    check_environment(log)
 
     webmgr.init_webmgr(conf.web_service)
     iptmgr.init_iptmgr()
