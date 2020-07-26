@@ -12,9 +12,9 @@ import random
 import sys
 from logging.handlers import TimedRotatingFileHandler
 
+from dbus.mainloop.glib import DBusGMainLoop
 DBusGMainLoop(set_as_default=True)
 from gi.repository.GLib import MainLoop
-from dbus.mainloop.glib import DBusGMainLoop
 
 from comitup import cdns         # noqa
 from comitup import config       # noqa
@@ -69,13 +69,18 @@ def load_data():
 
 
 def check_environment(log):
-    if sysd.sd_unit_jobs("systemd-resolved.service"):
-        for msg in [
-            "Warning: systemd-resolved service is active.",
-            "This may interfere with comitup providing DNS and DHCP services",
-        ]:
-            print(msg)
-            log.warn(msg)
+    for service in ["systemd-resolved", "dnsmasq"]:
+        try:
+            if sysd.sd_unit_jobs("{}.service".format(service)):
+                for msg in [
+                    "Warning: {} service is active.".format(service),
+                    "This may interfere with comitup providing "
+                    "DNS and DHCP services",
+                ]:
+                    print(msg)
+                    log.warn(msg)
+        except Exception:
+            pass
 
 
 def parse_args():
