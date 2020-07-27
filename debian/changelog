@@ -3,7 +3,7 @@ comitup (1.11-1) unstable; urgency=medium
   * Warn if other DNS providers running.
   * Bug - support non-uppercase SSIDs.
 
- --  David Steele <steele@debian.org>  Sun, 26 Jul 2020 21:22:53 -0400
+ -- David Steele <steele@debian.org>  Sun, 26 Jul 2020 21:22:53 -0400
 
 comitup (1.10-2) unstable; urgency=medium
 
