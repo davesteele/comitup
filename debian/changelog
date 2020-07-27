@@ -1,3 +1,9 @@
+comitup (1.11-2) unstable; urgency=medium
+
+  * Fix a dependency check problem with python-dbus.
+
+ -- David Steele <steele@debian.org>  Mon, 27 Jul 2020 16:43:59 -0400
+
 comitup (1.11-1) unstable; urgency=medium
 
   * Warn if other DNS providers running.

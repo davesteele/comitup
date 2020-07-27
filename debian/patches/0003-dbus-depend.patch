@@ -1,0 +1,10 @@
+--- a/setup.py
++++ b/setup.py
+@@ -94,7 +94,6 @@
+     ],
+     install_requires=[
+         "jinja2",
+-        "dbus-python",
+         "pygobject",
+         "flask",
+         "python-networkmanager",

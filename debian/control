@@ -30,6 +30,7 @@ Depends:
     python3-pkg-resources,
     python3-gi,
     python3-flask,
+    python3-dbus,
     iw,
     dnsmasq-base,
     avahi-daemon,
