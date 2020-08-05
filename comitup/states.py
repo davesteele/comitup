@@ -27,7 +27,6 @@ if __name__ == '__main__':
 
 from comitup import nmmon    # noqa
 from comitup import nm       # noqa
-from comitup import mdns     # noqa
 from comitup import modemgr  # noqa
 
 
@@ -103,7 +102,6 @@ def hotspot_start():
 
     log.debug("states: Calling nm.get_active_ssid()")
     if hs_ssid != nm.get_active_ssid(modemgr.get_state_device('HOTSPOT')):
-        mdns.clear_entries()
         conn_list = []
 
         activate_connection(hs_ssid, 'HOTSPOT')
@@ -116,17 +114,7 @@ def hotspot_start():
 @timeout
 @state_callback
 def hotspot_pass():
-    log.debug("Activating mdns")
-
-    # IP tolerance for PI 2
-    for _ in range(5):
-        log.debug("states: Calling nm.get_active_ip()")
-        ip = nm.get_active_ip(modemgr.get_state_device('HOTSPOT'))
-        if ip:
-            mdns.clear_entries()
-            mdns.add_hosts(dns_names)
-            break
-        time.sleep(1)
+    pass
 
 
 @timeout
@@ -161,8 +149,6 @@ def hotspot_timeout():
 @state_callback
 def connecting_start():
     global conn_list
-
-    mdns.clear_entries()
 
     if conn_list:
         log.debug("states: Calling nm.disconnect()")
@@ -205,16 +191,6 @@ def connecting_timeout():
 @state_callback
 def connected_start():
     global conn_list
-
-    # IP tolerance for PI 2
-    for _ in range(5):
-        log.debug("states: Calling nm.get_active_ip()")
-        ip = nm.get_active_ip(modemgr.get_state_device('CONNECTED'))
-        if ip:
-            mdns.clear_entries()
-            mdns.add_hosts(dns_names)
-            break
-        time.sleep(1)
 
     conn_list = []
 
