@@ -35,7 +35,7 @@ Depends:
     dnsmasq-base,
     avahi-daemon,
 Suggests: python3-tabulate
-Description: bootstrap Wifi using Wifi
- Comitup will attempt to connect to wifi using an established connection. If
+Description: bootstrap Wi-Fi using Wi-Fi
+ Comitup will attempt to connect to Wi-Fi using an established connection. If
  that fails, it creates a hotspot and web service to aid in configuring a
  connection.
