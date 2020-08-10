@@ -1,3 +1,7 @@
+Description: Remove the hard-to-satisfy python dependency on dbus-python
+
+Add the dependency at the OS package level.
+
 --- a/setup.py
 +++ b/setup.py
 @@ -94,7 +94,6 @@
