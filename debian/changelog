@@ -1,3 +1,9 @@
+comitup (1.12-1) UNRELEASED; urgency=medium
+
+  * Better manage mdns by moving from states to nmmon.
+
+ -- David Steele <steele@debian.org>  Tue, 11 Aug 2020 14:45:13 -0400
+
 comitup (1.11-2) unstable; urgency=medium
 
   * Fix a dependency check problem with python-dbus.
