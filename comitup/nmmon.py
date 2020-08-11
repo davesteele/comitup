@@ -97,6 +97,17 @@ def second_changed_state(state, *args):
         log.debug("nmm - secondary state {}".format(state))
 
 
+def any_changed_state(state, *args):
+    from comitup.states import dns_names
+    from comitup import mdns
+
+    interesting_states = PASS_STATES + FAIL_STATES
+
+    if state in interesting_states:
+        mdns.clear_entries()
+        mdns.add_hosts(dns_names)
+
+
 def set_device_listeners(ap_dev, second_dev):
     global ap_device, second_device_name
 
@@ -122,6 +133,12 @@ def set_device_listeners(ap_dev, second_dev):
         )
         log.debug("Listener is {}".format(device_listener))
 
+    device_listener = bus.add_signal_receiver(
+        any_changed_state,
+        signal_name="StateChanged",
+        dbus_interface="org.freedesktop.NetworkManager.Device",
+        path=None,
+    )
 
 def init_nmmon():
     set_device_listeners(
