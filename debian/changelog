@@ -1,4 +1,10 @@
-comitup (1.12-1) unstable; urgency=medium
+comitup (1.13-1) UNRELEASED; urgency=medium
+
+  * Fix the version error in master.
+
+ -- David Steele <steele@debian.org>  Wed, 12 Aug 2020 10:57:03 -0400
+
+comitup (1.12-1) comitup; urgency=medium
 
   * Better manage mdns by moving from states to nmmon.
 
