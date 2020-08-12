@@ -1,3 +1,7 @@
+Description: Fix the web template path for the build environment
+
+Allow the tests to be run as a part of package build.
+
 --- a/test/test_web.py
 +++ b/test/test_web.py
 @@ -22,7 +22,7 @@
