@@ -9,7 +9,6 @@ PRODUCT_VER = $(shell (grep -e "^\s*version" setup.py | tail -1 |  sed 's/[^0-9\
 manpages = $(shell (ls doc/*.md | sed 's/.md//'))
 
 export PYBUILD_NAME=comitup
-export PYBUILD_DISABLE=test
 export PYBUILD_INSTALL_ARGS=--install-lib=/usr/share/comitup\
  --install-scripts=/usr/share/comitup
 
