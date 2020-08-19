@@ -15,7 +15,6 @@
 from functools import wraps
 import hashlib
 import logging
-import time
 
 from comitup import iwscan
 from comitup import wpa

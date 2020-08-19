@@ -14,7 +14,7 @@ from logging.handlers import TimedRotatingFileHandler
 
 from dbus.mainloop.glib import DBusGMainLoop
 DBusGMainLoop(set_as_default=True)
-from gi.repository.GLib import MainLoop
+from gi.repository.GLib import MainLoop  # noqa
 
 from comitup import cdns         # noqa
 from comitup import config       # noqa
