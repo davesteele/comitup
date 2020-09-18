@@ -14,6 +14,15 @@ import os
 from functools import wraps
 
 
+def persist_decorator(klass):
+    """Add a save behavior to methods that update dict data"""
+    for method in [ "__setitem__", "__delitem__", "update", "setdefault" ]:
+        setattr(klass, method, klass.addsave(getattr(klass, method)))
+
+    return klass
+
+
+@persist_decorator
 class persist(dict):
     """A JSON-file backed persistent dictionary"""
 
@@ -22,47 +31,33 @@ class persist(dict):
 
         super(persist, self).__init__(*args, **kwargs)
 
-        self.__dict__["path"] = path
+        self.__dict__["_path"] = path
 
-        if os.path.exists(self.path):
+        if os.path.exists(self._path):
             self.load()
 
         self.save()
 
     def save(self):
-        with open(self.path, "w") as fp:
+        with open(self._path, "w") as fp:
             json.dump(self, fp, indent=2)
 
     def load(self):
-        with open(self.path, "r") as fp:
+        with open(self._path, "r") as fp:
             dict = json.load(fp)
 
         self.update(dict)
 
     def addsave(fn):
-        @wraps(fn)
-        def wrapper(inst, *args, **kwargs):
-            # give wrapped function a chance to validate arguments
-            fn(inst, *args, **kwargs)
+        """Decorator to add save behavior to methods"""
 
-            super_method = getattr(inst.__class__.__bases__[0], fn.__name__)
-            retval = super_method(inst, *args, **kwargs)
-            inst.save()
+        @wraps(fn)
+        def wrapper(self, *args, **kwargs):
+            retval = fn(self, *args, **kwargs)
+            self.save()
             return retval
 
         return wrapper
-
-    @addsave
-    def __setitem__(self, key, value, super_ret=None):
-        pass
-
-    @addsave
-    def update(self, *args, **kwargs):
-        pass
-
-    @addsave
-    def setdefault(self, *args, **kwargs):
-        pass
 
     def __setattr__(self, name, value):
         if name in self.__dict__:
