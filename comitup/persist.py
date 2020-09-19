@@ -16,7 +16,7 @@ from functools import wraps
 
 def persist_decorator(klass):
     """Add a save behavior to methods that update dict data"""
-    for method in [ "__setitem__", "__delitem__", "update", "setdefault" ]:
+    for method in ["__setitem__", "__delitem__", "update", "setdefault"]:
         setattr(klass, method, klass.addsave(getattr(klass, method)))
 
     return klass
