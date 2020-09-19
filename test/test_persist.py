@@ -125,4 +125,8 @@ def test_persist_get_attr_dict(jsonpath):
 def test_persist_set_attr_dict(jsonpath):
     mydict = persist(jsonpath)
 
-    mydict.path = jsonpath
+    mydict["_path"] = "foo"
+    mydict["a"] = "b"
+
+    newdict = persist(jsonpath)
+    assert newdict.a == "b"
