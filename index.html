@@ -41,13 +41,15 @@ extension of standard Raspberry Pi OS with the following capabilities:</p>
 <li>The comitup service, which automatically connects to any previously
 established 
 Wifi Access Points, if possible. Otherwise, it will create a stand-alone 
-Access Point with the name (SSID) 'comitup-&lt;nn&gt;', 
-where '&lt;nn&gt;' is a unique, persistent two-digit number.</li>
+Access Point with the name (SSID) 'comitup-&lt;nnn&gt;', 
+where '&lt;nnn&gt;' is a unique, persistent number.</li>
 <li>Defined ZeroConf mdns address name for
-'comitup-&lt;nn&gt;.local', advertising the IP address of the Raspbery
+'comitup-&lt;nnn&gt;.local', advertising the IP address of the Raspbery
 Pi on all interfaces.</li>
 <li>A comitup-web service, which provides a web interface for selecting and 
 authenticating against an existing Access Point.</li>
+<li>A captive portal, facilitating discovery of the web service on systems
+that support it.</li>
 <li>If two wifi interfaces are available on the device, the comitup hotspot
 will remain on one, and the other will be used for the upstream connection.
 Routing/masquerading between the two networks is established automatically.</li>
