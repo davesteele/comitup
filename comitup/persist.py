@@ -1,4 +1,3 @@
-
 # Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -10,8 +9,8 @@
 # or later
 #
 
-import os
 import json
+import os
 from functools import wraps
 
 
@@ -23,7 +22,7 @@ class persist(dict):
 
         super(persist, self).__init__(*args, **kwargs)
 
-        self.__dict__['path'] = path
+        self.__dict__["path"] = path
 
         if os.path.exists(self.path):
             self.load()
@@ -31,11 +30,11 @@ class persist(dict):
         self.save()
 
     def save(self):
-        with open(self.path, 'w') as fp:
+        with open(self.path, "w") as fp:
             json.dump(self, fp, indent=2)
 
     def load(self):
-        with open(self.path, 'r') as fp:
+        with open(self.path, "r") as fp:
             dict = json.load(fp)
 
         self.update(dict)
@@ -50,6 +49,7 @@ class persist(dict):
             retval = super_method(inst, *args, **kwargs)
             inst.save()
             return retval
+
         return wrapper
 
     @addsave
