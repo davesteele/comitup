@@ -11,7 +11,7 @@ comitup-cli -- command-line interface for comitup network management
     $ `comitup-cli`
     
     State: HOTSPOT
-    Connection: hotspot-1234
+    Connection: hotspot-123
     Points:
         1: MyAccessPoint
         2: HisAccessPoint
@@ -36,7 +36,7 @@ Display:
     The **comitup** states are **HOTSPOT**, **CONNECTING**, and **CONNECTED**. 
 
     In the **HOTSPOT** mode, **comitup** creates a wifi hotspot with the
-    name **comitup-&lt;nn&gt;**, where &lt;nn&gt; is a persistent 2-digit number.
+    name **comitup-&lt;nnn&gt;**, where &lt;nnn&gt; is a persistent number.
 
     Once in **HOTSPOT** mode, the system will occasionally (~1/min) cycle
     through available defined connections, by transitioning to the

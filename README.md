@@ -21,13 +21,17 @@ __comitup__ will create a custom hotspot, and establish a __comitup-web__
 web service on that network. The web service can be used to remotely select
 and authenticate a visible wifi connection. 
 
-The hotspot is named _comitup-&lt;nn&gt;_, where _&lt;nn&gt;_ is a
-persistent 2-digit number. The website is accessible on that hotspot as
-_ht&#8203;tp://comitup.local_ or _ht&#8203;tp://comitup-&lt;nn&gt;.local_
+The hotspot is named _comitup-&lt;nnn&gt;_, where _&lt;nnn&gt;_ is a
+persistent number. The website is accessible on that hotspot as
+_ht&#8203;tp://comitup-&lt;nnn&gt;.local_
 from any device which supports [Bonjour/ZeroConf/Avahi][zeroconf]. For
 other devices, use a Zeroconf browser ([Android][], [Windows][]) to
 determine the IP address of the "Comitup Service", and browse to
 _http&#58;//&lt;ipaddress&gt;_. This address will be _http&#58;//10.41.0.1/_
+
+The __comitup__ service implements a [captive portal](https://en.wikipedia.org/wiki/Captive_portal) while in HOTSPOT mode. On supported systems (IOS,
+Android, MacOS, Linux, or anything running Firefox), the connection web
+page will come up automatically when connecting to the access point.
 
 Comitup can remember multiple upstream connections, and will search among them
 in the connection attempt, making it easier to move your device to different

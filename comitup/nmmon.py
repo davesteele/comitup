@@ -140,6 +140,7 @@ def set_device_listeners(ap_dev, second_dev):
         path=None,
     )
 
+
 def init_nmmon():
     set_device_listeners(
         modemgr.get_ap_device(),

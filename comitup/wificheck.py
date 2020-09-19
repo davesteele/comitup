@@ -93,7 +93,7 @@ testspecs = [
         device_supports_ap,
         "comitup-no-ap - The Main wifi device doesn't support AP mode",
         textwrap.dedent("""
-            Comitup uses the first wifi device to implement the comitup-<nn>
+            Comitup uses the first wifi device to implement the comitup-<nnn>
             Access Point. For this to work, the device must include "AP" in
             list of "Supported interface modes" returned by "iw list".
         """),
