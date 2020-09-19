@@ -53,7 +53,7 @@ def load_data():
     conf = config.Config(
                 CONF_PATH,
                 defaults={
-                    'ap_name': 'comitup-<nn>',
+                    'ap_name': 'comitup-<nnn>',
                     'ap_password': '',
                     'web_service': '',
                     'external_callback': '/usr/local/bin/comitup-callback',

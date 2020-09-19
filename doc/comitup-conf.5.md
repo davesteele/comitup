@@ -14,12 +14,13 @@ It is located in the _/etc/_ directory.
 ## PARAMETERS
 
   * _ap_name_:
-    By default, comitup will create a hotspot named **comitup-&lt;nn&gt;**, and publish
-    avahi-daemon(8) host entries for **comitup-&lt;nn&gt;** and **comitup**. Setting this
-    entry will change the **comitup** string with one of the users choosing. If the
-    configuration variable contains an &lt;nn&gt; string, with one to 4 "n's", it will be
-    replaced with a persistent, random number. Similarly, the string &lt;hostname&gt; is
-    replaced with the computer's hostname.
+    By default, comitup will create a hotspot named **comitup-&lt;nnn&gt;**,
+    publish an avahi-daemon(8) host entry for **comitup-&lt;nnn&gt;**, and establish
+    an mdns identity for **comitup-&lt;nnn&gt;.local**.  Setting this parameter will
+    change the **comitup** string with one of the users choosing. If the
+    configuration variable contains an &lt;nnn&gt; string, with one to 4 "n's", it
+    will be replaced with a persistent, random number. Similarly, the string
+    &lt;hostname&gt; is replaced with the computer's hostname.
 
   * _ap_password_:
     If this parameter is defined in the configuration file, then the comitup hotspot will
