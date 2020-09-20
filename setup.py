@@ -82,8 +82,8 @@ setup(
         ),  # noqa
         ('/usr/share/comitup/web/templates/js',
             [
-                'web/templates/js/uikit.min.js',
-                'web/templates/js/uikit-icons.min.js',
+                'web/templates/js/uikit.js',
+                'web/templates/js/uikit-icons.js',
             ]
         ),  # noqa
         ('/usr/share/comitup/dns',
