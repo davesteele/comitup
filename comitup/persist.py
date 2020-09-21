@@ -31,7 +31,7 @@ class persist(dict):
 
         super(persist, self).__init__(*args, **kwargs)
 
-        self.__dict__["_path"] = path
+        self._path = path
 
         if os.path.exists(self._path):
             self.load()
@@ -60,7 +60,7 @@ class persist(dict):
         return wrapper
 
     def __setattr__(self, name, value):
-        if name in self.__dict__:
+        if name in self.__dict__ or name.startswith("_"):
             self.__dict__[name] = value
         else:
             self.__setitem__(name, value)
