@@ -16,6 +16,7 @@ ssid_list = [
     "simple+",
     "simplé",
     "simple 2",
+    "simplE",
 ]
 
 
