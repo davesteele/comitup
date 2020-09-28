@@ -1,6 +1,8 @@
 comitup (1.13-1) UNRELEASED; urgency=medium
 
   * Fix the version error in master.
+  * Remove the obsolete/deprecated python3-crypto dependency
+    (Closes: 971313).
 
  -- David Steele <steele@debian.org>  Wed, 12 Aug 2020 10:57:03 -0400
 
