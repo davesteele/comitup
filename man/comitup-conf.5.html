@@ -6,11 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="" />
   <title>comitup-conf(5)</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
   </style>
 </head>
 <body>
@@ -25,7 +27,7 @@
 <p>The <em>comitup.conf</em> file configures the wifi management service comitup(8). It is located in the <em>/etc/</em> directory.</p>
 <h2 id="parameters">PARAMETERS</h2>
 <ul>
-<li><p><em>ap_name</em>: By default, comitup will create a hotspot named <strong>comitup-&lt;nn&gt;</strong>, and publish avahi-daemon(8) host entries for <strong>comitup-&lt;nn&gt;</strong> and <strong>comitup</strong>. Setting this entry will change the <strong>comitup</strong> string with one of the users choosing. If the configuration variable contains an &lt;nn&gt; string, with one to 4 “n’s”, it will be replaced with a persistent, random number. Similarly, the string &lt;hostname&gt; is replaced with the computer’s hostname.</p></li>
+<li><p><em>ap_name</em>: By default, comitup will create a hotspot named <strong>comitup-&lt;nnn&gt;</strong>, publish an avahi-daemon(8) host entry for <strong>comitup-&lt;nnn&gt;</strong>, and establish an mdns identity for <strong>comitup-&lt;nnn&gt;.local</strong>. Setting this parameter will change the <strong>comitup</strong> string with one of the users choosing. If the configuration variable contains an &lt;nnn&gt; string, with one to 4 “n’s”, it will be replaced with a persistent, random number. Similarly, the string &lt;hostname&gt; is replaced with the computer’s hostname.</p></li>
 <li><p><em>ap_password</em>: If this parameter is defined in the configuration file, then the comitup hotspot will require that any connection to the hotspot be authenticated, using this password.</p></li>
 <li><p><em>web_service</em>: This defines a user web service to be controlled by <strong>comitup</strong>. This service will be disabled in the <strong>HOTSPOT</strong> state in preference of the comitup web service, and will be enabled in the <strong>CONNECTED</strong> state. This should be the name of the systemd web service, such as <em>apache2.service</em> or <em>nginx.service</em>. This defaults to a null string, meaning no service is controlled.</p></li>
 <li><p><em>enable_appliance_mode</em>: By default, comitup will use multiple wifi interfaces, if available, to connect to the local hotspot and to the internet simultaneously. Setting this to something other than “true” will limit comitup to the first wifi interface.</p></li>

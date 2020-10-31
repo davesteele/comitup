@@ -6,11 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="" />
   <title>comitup-cli(8)</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
   </style>
 </head>
 <body>
@@ -25,7 +27,7 @@
 <pre><code>$ `comitup-cli`
 
 State: HOTSPOT
-Connection: hotspot-1234
+Connection: hotspot-123
 Points:
     1: MyAccessPoint
     2: HisAccessPoint
@@ -41,7 +43,7 @@ command?:</code></pre>
 <ul>
 <li><p><strong>State</strong></p>
 <p>The <strong>comitup</strong> states are <strong>HOTSPOT</strong>, <strong>CONNECTING</strong>, and <strong>CONNECTED</strong>.</p>
-<p>In the <strong>HOTSPOT</strong> mode, <strong>comitup</strong> creates a wifi hotspot with the name <strong>comitup-&lt;nn&gt;</strong>, where &lt;nn&gt; is a persistent 2-digit number.</p>
+<p>In the <strong>HOTSPOT</strong> mode, <strong>comitup</strong> creates a wifi hotspot with the name <strong>comitup-&lt;nnn&gt;</strong>, where &lt;nnn&gt; is a persistent number.</p>
 <p>Once in <strong>HOTSPOT</strong> mode, the system will occasionally (~1/min) cycle through available defined connections, by transitioning to the <strong>CONNECTING</strong> mode. The Access Point list is updated by this process. Any command issued by <strong>comitup-cli</strong> will cause the next timeout instance to be skipped.</p>
 <p>Once a connection is established, the system will be in the <strong>CONNECTED</strong> mode. If the connection is lost, failed, or deleted, the system will transition back to the <strong>HOTSPOT</strong> state.</p></li>
 <li><p><strong>Connection</strong></p>
