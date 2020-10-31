@@ -44,9 +44,9 @@ class persist(dict):
 
     def load(self):
         with open(self._path, "r") as fp:
-            dict = json.load(fp)
+            dct = json.load(fp)
 
-        self.update(dict)
+        super().update(dct)
 
     def addsave(fn):
         """Decorator to add save behavior to methods"""
