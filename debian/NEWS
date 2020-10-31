@@ -1,4 +1,4 @@
-comitup (1.13-1) UNRELEASED; urgency=medium
+comitup (1.13-1) unstable; urgency=medium
 
     For new installations, the default number of digits in the
     "comitup-nnn" name has been increased from two to three.
