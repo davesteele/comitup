@@ -1,8 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
-import os
 import json
+import os
 import re
+from functools import reduce
 
 from distutils.version import LooseVersion
 from pkg_resources import parse_version
