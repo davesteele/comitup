@@ -1,3 +1,9 @@
+comitup (1.13-2) unstable; urgency=medium
+
+  * Fix build tests in a minimal environment.
+
+ -- David Steele <steele@debian.org>  Fri, 13 Nov 2020 22:20:57 -0500
+
 comitup (1.13-1) unstable; urgency=medium
 
   * Fix the version error in master.
