@@ -1,3 +1,9 @@
+comitup (1.13-3) unstable; urgency=medium
+
+  * Avoid remaining autopkgtest failures in Debian build
+
+ -- David Steele <steele@debian.org>  Sat, 14 Nov 2020 09:49:17 -0500
+
 comitup (1.13-2) unstable; urgency=medium
 
   * Fix build tests in a minimal environment.
