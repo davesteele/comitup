@@ -1,0 +1,91 @@
+--- a/test/test_comitup.py
++++ b/test/test_comitup.py
+@@ -9,6 +9,8 @@
+ import textwrap
+ import os
+ 
++NetworkManager = pytest.importorskip("NetworkManager")
++
+ from comitup import comitup as ciu
+ 
+ 
+--- a/test/test_mdns.py
++++ b/test/test_mdns.py
+@@ -1,12 +1,15 @@
+-import pytest
+ # Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
+ #
+ # SPDX-License-Identifier: GPL-2.0-or-later
+ # License-Filename: LICENSE
+ 
+-from comitup import mdns
++import pytest
+ from mock import Mock, patch
+ 
++NetworkManager = pytest.importorskip("NetworkManager")
++
++from comitup import mdns
++
+ 
+ @pytest.fixture()
+ def avahi_fxt(monkeypatch, request):
+--- a/test/test_nm.py
++++ b/test/test_nm.py
+@@ -1,10 +1,12 @@
+-import pytest
+ # Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
+ #
+ # SPDX-License-Identifier: GPL-2.0-or-later
+ # License-Filename: LICENSE
++import pytest
+ from mock import Mock, patch
+ 
++NetworkManager = pytest.importorskip("NetworkManager")
++
+ from comitup import nm
+ 
+ 
+--- a/test/test_states.py
++++ b/test/test_states.py
+@@ -6,6 +6,8 @@
+ import pytest
+ from mock import Mock, call
+ 
++NetworkManager = pytest.importorskip("NetworkManager")
++
+ from comitup import states
+ 
+ 
+--- a/test/test_statemgr.py
++++ b/test/test_statemgr.py
+@@ -8,6 +8,8 @@
+ from mock import Mock
+ import importlib
+ 
++Dbus = pytest.importorskip("dbus")
++
+ import dbus.service
+ 
+ 
+--- a/test/test_webmgr.py
++++ b/test/test_webmgr.py
+@@ -8,6 +8,8 @@
+ 
+ from mock import patch, call
+ 
++Dbus = pytest.importorskip("dbus")
++
+ from comitup import webmgr
+ 
+ 
+--- a/test/test_web.py
++++ b/test/test_web.py
+@@ -9,6 +9,8 @@
+ import pytest
+ from mock import Mock
+ 
++Dbus = pytest.importorskip("dbus")
++
+ from web import comitupweb
+ 
+ ssid_list = [
