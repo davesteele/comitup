@@ -80,11 +80,12 @@
  
 --- a/test/test_web.py
 +++ b/test/test_web.py
-@@ -9,6 +9,8 @@
+@@ -9,6 +9,9 @@
  import pytest
  from mock import Mock
  
 +Dbus = pytest.importorskip("dbus")
++NetworkManager = pytest.importorskip("NetworkManager")
 +
  from web import comitupweb
  
