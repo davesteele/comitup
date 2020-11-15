@@ -90,3 +90,14 @@
  from web import comitupweb
  
  ssid_list = [
+@@ -28,7 +31,9 @@
+ @pytest.fixture
+ def app(monkeypatch):
+     templatedir = pathlib.Path(__file__).parent.parent.parent.parent.parent / "web/templates"
+-    monkeypatch.setattr("web.comitupweb.TEMPLATE_PATH", str(templatedir))
++
++    if (templatedir / "index.html").exists():
++        monkeypatch.setattr("web.comitupweb.TEMPLATE_PATH", str(templatedir))
+ 
+     app = comitupweb.create_app(Mock())
+     app.debug = True
