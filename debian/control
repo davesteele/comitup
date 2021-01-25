@@ -13,7 +13,7 @@ Build-Depends:
     python3-mock,
     pandoc,
     python3-flask,
-Standards-Version: 4.5.0
+Standards-Version: 4.5.1
 Rules-Requires-Root: binary-targets
 Homepage: https://davesteele.github.io/comitup/
 Vcs-Git: https://github.com/davesteele/comitup.git -b debian
