@@ -14,7 +14,12 @@
 import dbus
 import socket
 import logging
+import random
+import shutil
+import os
 from comitup import nm
+from comitup import config
+from comitup import persist      # noqa
 import subprocess
 
 log = logging.getLogger('comitup')
@@ -32,6 +37,7 @@ DBUS_INTERFACE_ENTRY_GROUP = 'org.freedesktop.Avahi.EntryGroup'
 PROTO_INET = 0
 PERSIST_PATH = "/var/lib/comitup/comitup.json"
 CONF_PATH = "/etc/comitup.conf"
+BOOT_CONF_PATH = "/boot/comitup.conf"
 
 group = None
 
@@ -135,6 +141,14 @@ def get_interface_mapping():
     
 
 def load_data():
+    if os.path.isfile(BOOT_CONF_PATH):
+        try:
+            dest = shutil.copyfile(BOOT_CONF_PATH, CONF_PATH)
+            print("Boot config file copied:", dest)
+            os.remove(BOOT_CONF_PATH)
+        except:
+            print("Error occurred while copying file.")
+
     conf = config.Config(
                 CONF_PATH,
                 defaults={
