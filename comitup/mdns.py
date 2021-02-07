@@ -93,7 +93,7 @@ def string_array_to_txt_array(txt_array):
 
 def add_service(host, devindex, addr):
     name = host
-    conf = load_data
+    (conf, data) = load_data()
     if '.local' in name:
         name = name[:-len('.local')]
 
