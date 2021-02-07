@@ -33,6 +33,10 @@ It is located in the _/etc/_ directory.
     such as _apache2.service_ or _nginx.service_. This defaults to a null string,
     meaning no service is controlled.
 
+  * _service_name_:
+    This defines the mdns service name advertised by **comitup**. This defaults to "workstation",
+    and will be advertised as "_workstation._tcp".
+
   * _enable_appliance_mode_:
     By default, comitup will use multiple wifi interfaces, if available, to connect to the
     local hotspot and to the internet simultaneously. Setting this to something other than
