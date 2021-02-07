@@ -8,6 +8,7 @@
 import argparse
 import logging
 import os
+import shutil
 import random
 import sys
 from logging.handlers import TimedRotatingFileHandler
@@ -27,6 +28,7 @@ from comitup import wificheck    # noqa
 
 PERSIST_PATH = "/var/lib/comitup/comitup.json"
 CONF_PATH = "/etc/comitup.conf"
+BOOT_CONF_PATH = "/boot/comitup.conf"
 LOG_PATH = "/var/log/comitup.log"
 
 
@@ -50,6 +52,14 @@ def deflog():
 
 
 def load_data():
+    if os.path.isfile(BOOT_CONF_PATH):
+        try:
+            dest = shutil.copyfile(BOOT_CONF_PATH, CONF_PATH)
+            print("Boot config file copied:", dest)
+            os.remove(BOOT_CONF_PATH)
+        except: 
+            print("Error occurred while copying file.")
+
     conf = config.Config(
                 CONF_PATH,
                 defaults={
