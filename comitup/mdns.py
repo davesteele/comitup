@@ -19,7 +19,6 @@ import shutil
 import os
 from comitup import nm
 from comitup import config
-from comitup import persist      # noqa
 import subprocess
 
 log = logging.getLogger('comitup')
@@ -35,10 +34,6 @@ DBUS_PATH_SERVER = '/'
 DBUS_INTERFACE_SERVER = 'org.freedesktop.Avahi.Server'
 DBUS_INTERFACE_ENTRY_GROUP = 'org.freedesktop.Avahi.EntryGroup'
 PROTO_INET = 0
-PERSIST_PATH = "/var/lib/comitup/comitup.json"
-CONF_PATH = "/etc/comitup.conf"
-BOOT_CONF_PATH = "/boot/comitup.conf"
-
 group = None
 
 # functions
@@ -93,7 +88,7 @@ def string_array_to_txt_array(txt_array):
 
 def add_service(host, devindex, addr):
     name = host
-    (conf, data) = load_data()
+    (conf, data) = config.load_data()
     if '.local' in name:
         name = name[:-len('.local')]
 
@@ -139,34 +134,6 @@ def get_interface_mapping():
 
     return mapping
     
-
-def load_data():
-    if os.path.isfile(BOOT_CONF_PATH):
-        try:
-            dest = shutil.copyfile(BOOT_CONF_PATH, CONF_PATH)
-            print("Boot config file copied:", dest)
-            os.remove(BOOT_CONF_PATH)
-        except:
-            print("Error occurred while copying file.")
-
-    conf = config.Config(
-                CONF_PATH,
-                defaults={
-                    'ap_name': 'comitup-<nnn>',
-                    'ap_password': '',
-                    'web_service': '',
-                    'service_name': 'workstation',
-                    'external_callback': '/usr/local/bin/comitup-callback',
-                },
-             )
-
-    data = persist.persist(
-                PERSIST_PATH,
-                {'id': str(random.randrange(1000, 9999))},
-           )
-
-    return (conf, data)
-
 
 def add_hosts(hosts):
     establish_group()

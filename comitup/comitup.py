@@ -8,12 +8,12 @@
 import argparse
 import logging
 import os
-import shutil
-import random
 import sys
 from logging.handlers import TimedRotatingFileHandler
 
 from dbus.mainloop.glib import DBusGMainLoop
+
+
 DBusGMainLoop(set_as_default=True)
 from gi.repository.GLib import MainLoop  # noqa
 
@@ -26,9 +26,6 @@ from comitup import sysd         # noqa
 from comitup import webmgr       # noqa
 from comitup import wificheck    # noqa
 
-PERSIST_PATH = "/var/lib/comitup/comitup.json"
-CONF_PATH = "/etc/comitup.conf"
-BOOT_CONF_PATH = "/boot/comitup.conf"
 LOG_PATH = "/var/log/comitup.log"
 
 
@@ -49,34 +46,6 @@ def deflog():
     log.addHandler(handler)
 
     return log
-
-
-def load_data():
-    if os.path.isfile(BOOT_CONF_PATH):
-        try:
-            dest = shutil.copyfile(BOOT_CONF_PATH, CONF_PATH)
-            print("Boot config file copied:", dest)
-            os.remove(BOOT_CONF_PATH)
-        except: 
-            print("Error occurred while copying file.")
-
-    conf = config.Config(
-                CONF_PATH,
-                defaults={
-                    'ap_name': 'comitup-<nnn>',
-                    'ap_password': '',
-                    'web_service': '',
-                    'service_name': 'workstation',
-                    'external_callback': '/usr/local/bin/comitup-callback',
-                },
-             )
-
-    data = persist.persist(
-                PERSIST_PATH,
-                {'id': str(random.randrange(1000, 9999))},
-           )
-
-    return (conf, data)
 
 
 def check_environment(log):
@@ -118,7 +87,7 @@ def main():
     log = deflog()
     log.info("Starting comitup")
 
-    (conf, data) = load_data()
+    (conf, data) = config.load_data()
 
     if args.check:
         if wificheck.run_checks():
