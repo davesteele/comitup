@@ -30,6 +30,8 @@ DBUS_PATH_SERVER = '/'
 DBUS_INTERFACE_SERVER = 'org.freedesktop.Avahi.Server'
 DBUS_INTERFACE_ENTRY_GROUP = 'org.freedesktop.Avahi.EntryGroup'
 PROTO_INET = 0
+PERSIST_PATH = "/var/lib/comitup/comitup.json"
+CONF_PATH = "/etc/comitup.conf"
 
 group = None
 
@@ -85,6 +87,7 @@ def string_array_to_txt_array(txt_array):
 
 def add_service(host, devindex, addr):
     name = host
+    (conf, data) = load_data()
     if '.local' in name:
         name = name[:-len('.local')]
 
@@ -93,7 +96,7 @@ def add_service(host, devindex, addr):
         PROTO_INET,
         dbus.UInt32(0),
         name,
-        "_workstation._tcp",
+        "_%s._tcp" % conf.service_name,
         "",
         host,
         dbus.UInt16(9),
@@ -129,6 +132,26 @@ def get_interface_mapping():
             pass
 
     return mapping
+    
+
+def load_data():
+    conf = config.Config(
+                CONF_PATH,
+                defaults={
+                    'ap_name': 'comitup-<nnn>',
+                    'ap_password': '',
+                    'web_service': '',
+                    'service_name': 'workstation',
+                    'external_callback': '/usr/local/bin/comitup-callback',
+                },
+             )
+
+    data = persist.persist(
+                PERSIST_PATH,
+                {'id': str(random.randrange(1000, 9999))},
+           )
+
+    return (conf, data)
 
 
 def add_hosts(hosts):
