@@ -1,3 +1,9 @@
+comitup (1.15-1) unstable; urgency=medium
+
+  * Fix mis-spelled dnsmasq options.
+
+ -- David Steele <steele@debian.org>  Thu, 11 Feb 2021 16:04:28 -0500
+
 comitup (1.14-1) unstable; urgency=medium
 
   * Allow configuration of the mdns service name.
