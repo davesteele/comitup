@@ -13,6 +13,7 @@ def avahi_fxt(monkeypatch, request):
     monkeypatch.setattr("comitup.mdns.dbus.Interface", Mock())
     monkeypatch.setattr('comitup.mdns.dbus.SystemBus', Mock())
     monkeypatch.setattr('comitup.mdns.log', Mock())
+    monkeypatch.setattr('comitup.mdns.config.persist', Mock())
 
     save_group = mdns.group
     mdns.group = Mock()
