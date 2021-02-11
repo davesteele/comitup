@@ -23,7 +23,7 @@ def conf_fxt(tmpdir, monkeypatch):
         """
     ))
 
-    monkeypatch.setattr('comitup.comitup.CONF_PATH', path)
+    monkeypatch.setattr('comitup.comitup.config.CONF_PATH', path)
 
     return path
 
@@ -32,9 +32,9 @@ def conf_fxt(tmpdir, monkeypatch):
 def persist_fxt(tmpdir, monkeypatch):
     path = os.path.join(tmpdir.__str__(), 'persistfile')
 
-    monkeypatch.setattr('comitup.comitup.PERSIST_PATH', path)
+    monkeypatch.setattr('comitup.comitup.config.PERSIST_PATH', path)
     monkeypatch.setattr(
-                    'comitup.comitup.random.randrange',
+                    'comitup.comitup.config.random.randrange',
                     Mock(return_value=1234)
                 )
 
