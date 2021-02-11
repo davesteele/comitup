@@ -6,8 +6,8 @@
  
 +NetworkManager = pytest.importorskip("NetworkManager")
 +
+ from comitup import config
  from comitup import comitup as ciu
- 
  
 --- a/test/test_mdns.py
 +++ b/test/test_mdns.py
