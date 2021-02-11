@@ -1,22 +1,22 @@
 {
     "full": {
-        "compressed": 1253348226,
+        "compressed": 1250412448,
         "compressedstr": "1.2 G",
-        "filename": "image_2020-12-05-Comitup.zip",
-        "infoname": "2020-12-05-Comitup.info",
-        "magnet": "magnet:?xt=urn:btih:bba15508108ed8a5add366d64a1dca4dd37087f6&dn=image%5F2020-12-05-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
+        "filename": "image_2021-02-11-Comitup.zip",
+        "infoname": "2021-02-11-Comitup.info",
+        "magnet": "magnet:?xt=urn:btih:c129f042414ccd7b576498d0861ebe53d0086a20&dn=image%5F2021-02-11-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
         "name": "",
-        "uncompressed": 4030726144,
+        "uncompressed": 4022337536,
         "uncompressedstr": "3.9 G"
     },
     "lite": {
-        "compressed": 485727180,
-        "compressedstr": "474 M",
-        "filename": "image_2020-12-05-Comitup-lite.zip",
-        "infoname": "2020-12-05-Comitup-lite.info",
-        "magnet": "magnet:?xt=urn:btih:fbaa7d2d1dd2f05576e8d6f57e3de908f81e104c&dn=image%5F2020-12-05-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
+        "compressed": 489290833,
+        "compressedstr": "478 M",
+        "filename": "image_2021-02-11-Comitup-lite.zip",
+        "infoname": "2021-02-11-Comitup-lite.info",
+        "magnet": "magnet:?xt=urn:btih:828359a3186f59a3c4a24049d45655c95780b298&dn=image%5F2021-02-11-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
         "name": "Lite",
-        "uncompressed": 1941962752,
+        "uncompressed": 1946157056,
         "uncompressedstr": "1.9 G"
     }
 }
