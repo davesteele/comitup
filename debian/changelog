@@ -1,3 +1,9 @@
+comitup (1.14-1) unstable; urgency=medium
+
+  * Allow configuration of the mdns service name.
+
+ -- David Steele <steele@debian.org>  Thu, 11 Feb 2021 11:22:52 -0500
+
 comitup (1.13-4) unstable; urgency=medium
 
   * Another autopkgtest fix
