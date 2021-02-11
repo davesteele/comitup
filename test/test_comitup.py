@@ -9,6 +9,7 @@ from mock import Mock
 import textwrap
 import os
 
+from comitup import config
 from comitup import comitup as ciu
 
 
@@ -62,7 +63,7 @@ def test_ciu_deflog(log_fxt):
 
 
 def test_ciu_loadconf(conf_fxt, persist_fxt):
-    (conf, data) = ciu.load_data()
+    (conf, data) = config.load_data()
     assert conf.ap_name == 'test'
     assert os.path.isfile(persist_fxt)
 

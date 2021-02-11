@@ -122,6 +122,10 @@ def create_app(log):
     def catch_all(path):
         return redirect("http://10.41.0.1/", code=302)
 
+    @app.errorhandler(500)
+    def internal_error(error):
+        sys.exit(1)
+
     return app
 
 

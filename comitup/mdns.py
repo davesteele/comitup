@@ -14,7 +14,11 @@
 import dbus
 import socket
 import logging
+import random
+import shutil
+import os
 from comitup import nm
+from comitup import config
 import subprocess
 
 log = logging.getLogger('comitup')
@@ -30,7 +34,6 @@ DBUS_PATH_SERVER = '/'
 DBUS_INTERFACE_SERVER = 'org.freedesktop.Avahi.Server'
 DBUS_INTERFACE_ENTRY_GROUP = 'org.freedesktop.Avahi.EntryGroup'
 PROTO_INET = 0
-
 group = None
 
 # functions
@@ -85,6 +88,7 @@ def string_array_to_txt_array(txt_array):
 
 def add_service(host, devindex, addr):
     name = host
+    (conf, data) = config.load_data()
     if '.local' in name:
         name = name[:-len('.local')]
 
@@ -93,7 +97,7 @@ def add_service(host, devindex, addr):
         PROTO_INET,
         dbus.UInt32(0),
         name,
-        "_workstation._tcp",
+        "_%s._tcp" % conf.service_name,
         "",
         host,
         dbus.UInt16(9),
@@ -129,7 +133,7 @@ def get_interface_mapping():
             pass
 
     return mapping
-
+    
 
 def add_hosts(hosts):
     establish_group()
