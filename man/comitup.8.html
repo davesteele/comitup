@@ -6,17 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="" />
   <title>comitup(8)</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
 </head>
 <body>
-<header id="title-block-header">
+<header>
 <h1 class="title">comitup(8)</h1>
 <p class="author"></p>
 <p class="date">February 2019</p>
@@ -30,7 +28,7 @@
 <p>On startup, the service will attempt to connect to wifi using established networkmanager(8) connections. If this is not successful, <strong>comitup</strong> will establish a wifi hotspot with the name <em>comitup-&lt;nnn&gt;</em>, where &lt;nnn&gt; is a persistent number.</p>
 <p>While the hotspot is active, a comitup-web(8) service is available to manage connecting to an access point. A captive portal environment is established to aid in discovery of the web service.</p>
 <p>If two wifi interfaces are available, the hotspot will remain active on the first interface, and the internet connection will be made on the second. Otherwise, the hotspot will be replaced with the internet connection.</p>
-<p>In all states, avahi-daemon(8) is used to publish the mdns host name <em>comitup-&lt;nnn&gt;.local</em>, making the web service accessible as e.g. <em>http://comitup-123.local</em>, for systems supporting Zeroconf. For other systems, a <em>comitup</em> Workstation entry is published which is visible to Zeroconf browsing applications, allowing the IP address to be manually determined. The web service address is <em>http://10.41.0.1</em>.</p>
+<p>In all states, avahi-daemon(8) is used to publish the mdns host name <em>comitup-&lt;nnn&gt;.local</em>, making the web service accessible as e.g. <em>http://comitup-123.local</em>, for systems supporting Zeroconf. For other systems, a <em>comitup</em> Workstation entry is published which is visible to Zeroconf browsing applications, allowing the IP address to be manually determined. The web service address is <em>http://10.41.0.1</em>.</p>
 <p><strong>comitup</strong> logs to <em>/var/log/comitup.log</em>.</p>
 <h2 id="options">Options</h2>
 <ul>
