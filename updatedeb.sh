@@ -1,6 +1,7 @@
 #!/bin/sh
 
 cp ../comitup*deb deb/
+cp ../davesteele-comitup-apt-source*deb deb/
 
 cd deb
 echo MD5Sum >checksums.txt
