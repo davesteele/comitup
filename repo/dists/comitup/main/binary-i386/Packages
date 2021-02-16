@@ -18,6 +18,24 @@ Description: bootstrap Wi-Fi using Wi-Fi
  that fails, it creates a hotspot and web service to aid in configuring a
  connection.
 
+Package: davesteele-comitup-apt-source
+Source: davesteele-apt-source
+Version: 1.0
+Architecture: all
+Maintainer: David Steele <steele@debian.org>
+Installed-Size: 25
+Homepage: https://github.com/davesteele/davesteele-apt-source
+Priority: optional
+Section: misc
+Filename: pool/main/d/davesteele-apt-source/davesteele-comitup-apt-source_1.0_all.deb
+Size: 9348
+SHA256: 723934f10170dcf4fea34e14b2bf8ca5a1612c5ddfa09d95091b603960a93224
+SHA1: 1b8ff10c136a18c15e97b450e0532626ffbd05d3
+MD5sum: aa08515a6655eabc1ee37d328b163320
+Description: Apt configuration for comitup repository
+ This adds a managed key and apt sources entry for the comitup
+ repository managed by David Steele.
+
 Package: python3-dnslib
 Source: python-dnslib
 Version: 0.9.7+hg20170303-1
