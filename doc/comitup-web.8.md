@@ -25,4 +25,4 @@ Comitup is Copyright (C) 2016-2017 David Steele &lt;steele@debian.org&gt;
 
 ## SEE ALSO
 
-comitup(8), comitup-conf(5), comitup-cli(8)
+comitup(8), comitup-conf(5), comitup-cli(1)
