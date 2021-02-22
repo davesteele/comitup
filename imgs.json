@@ -1,20 +1,20 @@
 {
     "full": {
-        "compressed": 1250270783,
+        "compressed": 1250517967,
         "compressedstr": "1.2 G",
-        "filename": "image_2021-02-11b-Comitup.zip",
-        "infoname": "2021-02-11b-Comitup.info",
-        "magnet": "magnet:?xt=urn:btih:72748803e8573609260c0c245775e0a2d6f3b12f&dn=image%5F2021-02-11b-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
+        "filename": "image_2021-02-22-Comitup.zip",
+        "infoname": "2021-02-22-Comitup.info",
+        "magnet": "magnet:?xt=urn:btih:1b60a8796c297583d56c00ab648bfd93083dd910&dn=image%5F2021-02-22-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
         "name": "",
-        "uncompressed": 4022337536,
+        "uncompressed": 4026531840,
         "uncompressedstr": "3.9 G"
     },
     "lite": {
-        "compressed": 489304350,
+        "compressed": 489625933,
         "compressedstr": "478 M",
-        "filename": "image_2021-02-11b-Comitup-lite.zip",
-        "infoname": "2021-02-11b-Comitup-lite.info",
-        "magnet": "magnet:?xt=urn:btih:872c29717d3d7c42c914a6ff08695e42323701e8&dn=image%5F2021-02-11b-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
+        "filename": "image_2021-02-22-Comitup-lite.zip",
+        "infoname": "2021-02-22-Comitup-lite.info",
+        "magnet": "magnet:?xt=urn:btih:35f88cf64525b0206423503e980ecaa948411176&dn=image%5F2021-02-22-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
         "name": "Lite",
         "uncompressed": 1946157056,
         "uncompressedstr": "1.9 G"
