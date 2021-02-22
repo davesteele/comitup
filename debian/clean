@@ -1,10 +1,10 @@
 doc/comitup.8.html
 doc/comitup-conf.5.html
-doc/comitup-cli.8.html
+doc/comitup-cli.1.html
 doc/comitup-web.8.html
 doc/comitup.8
 doc/comitup-conf.5
-doc/comitup-cli.8
+doc/comitup-cli.1
 doc/comitup-web.8
 .pytest_cache/
 .nox/
