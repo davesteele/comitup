@@ -58,7 +58,7 @@ def load_data():
                     'ap_name': 'comitup-<nnn>',
                     'ap_password': '',
                     'web_service': '',
-                    'service_name': 'workstation',
+                    'service_name': 'comitup',
                     'external_callback': '/usr/local/bin/comitup-callback',
                 },
              )
