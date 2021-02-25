@@ -20,18 +20,18 @@ Description: bootstrap Wi-Fi using Wi-Fi
 
 Package: davesteele-comitup-apt-source
 Source: davesteele-apt-source
-Version: 1.0
+Version: 1.1
 Architecture: all
 Maintainer: David Steele <steele@debian.org>
-Installed-Size: 25
+Installed-Size: 28
 Homepage: https://github.com/davesteele/davesteele-apt-source
 Priority: optional
 Section: misc
-Filename: pool/main/d/davesteele-apt-source/davesteele-comitup-apt-source_1.0_all.deb
-Size: 9348
-SHA256: 723934f10170dcf4fea34e14b2bf8ca5a1612c5ddfa09d95091b603960a93224
-SHA1: 1b8ff10c136a18c15e97b450e0532626ffbd05d3
-MD5sum: aa08515a6655eabc1ee37d328b163320
+Filename: pool/main/d/davesteele-apt-source/davesteele-comitup-apt-source_1.1_all.deb
+Size: 11164
+SHA256: feaf18b0899fbd9438faaadf9eb1ef393be0f446d338c192ca0eb6bb8e895790
+SHA1: ce9ce5b95fd0ccb1e2588a03ea6983be7a96241c
+MD5sum: e9109afb6faa3f8d486b8f24a0724ef5
 Description: Apt configuration for comitup repository
  This adds a managed key and apt sources entry for the comitup
  repository managed by David Steele.

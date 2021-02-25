@@ -1,45 +1,45 @@
 Suite: stable
 Codename: comitup
-Date: Wed, 17 Feb 2021 15:54:27 UTC
+Date: Thu, 25 Feb 2021 14:14:18 UTC
 Architectures: amd64 i386 armhf armel
 Components: main
 Description: Apt repository for comitup on Jessie
 MD5Sum:
- 0dcd6822b66274d6fbb5c48939eaf2aa 3808 main/binary-amd64/Packages
- 822f3dfcf5a9a398ac5c612d499e0d1b 1701 main/binary-amd64/Packages.gz
+ 69d04548bfb6cd010ca6ec10e500a0bc 3809 main/binary-amd64/Packages
+ ba70deb05c96494443d0d3b0ff7b97ce 1700 main/binary-amd64/Packages.gz
  c6769702302d74ed5882984e94cfce5b 102 main/binary-amd64/Release
- 0dcd6822b66274d6fbb5c48939eaf2aa 3808 main/binary-i386/Packages
- 822f3dfcf5a9a398ac5c612d499e0d1b 1701 main/binary-i386/Packages.gz
+ 69d04548bfb6cd010ca6ec10e500a0bc 3809 main/binary-i386/Packages
+ ba70deb05c96494443d0d3b0ff7b97ce 1700 main/binary-i386/Packages.gz
  a298bf6155b31ef2349dbc0d9192e085 101 main/binary-i386/Release
- 0dcd6822b66274d6fbb5c48939eaf2aa 3808 main/binary-armhf/Packages
- 822f3dfcf5a9a398ac5c612d499e0d1b 1701 main/binary-armhf/Packages.gz
+ 69d04548bfb6cd010ca6ec10e500a0bc 3809 main/binary-armhf/Packages
+ ba70deb05c96494443d0d3b0ff7b97ce 1700 main/binary-armhf/Packages.gz
  c69162a720c4f06e5ba47fef2df53ec3 102 main/binary-armhf/Release
- 0dcd6822b66274d6fbb5c48939eaf2aa 3808 main/binary-armel/Packages
- 822f3dfcf5a9a398ac5c612d499e0d1b 1701 main/binary-armel/Packages.gz
+ 69d04548bfb6cd010ca6ec10e500a0bc 3809 main/binary-armel/Packages
+ ba70deb05c96494443d0d3b0ff7b97ce 1700 main/binary-armel/Packages.gz
  e386ab57b2853b759f1bd053a0a6fff8 102 main/binary-armel/Release
 SHA1:
- dee233b3bd2354ab47369eea9871ce0260e9ea46 3808 main/binary-amd64/Packages
- 5142bd45711d03e2c2abc8764643159ddff4522a 1701 main/binary-amd64/Packages.gz
+ f47322ac497351592d8751355c47b1554e37ee52 3809 main/binary-amd64/Packages
+ 18f8703a41da983ad66994d75a3c716c5919c88d 1700 main/binary-amd64/Packages.gz
  20731db1de05e360072f236d6a46c6fc850c2ec7 102 main/binary-amd64/Release
- dee233b3bd2354ab47369eea9871ce0260e9ea46 3808 main/binary-i386/Packages
- 5142bd45711d03e2c2abc8764643159ddff4522a 1701 main/binary-i386/Packages.gz
+ f47322ac497351592d8751355c47b1554e37ee52 3809 main/binary-i386/Packages
+ 18f8703a41da983ad66994d75a3c716c5919c88d 1700 main/binary-i386/Packages.gz
  e99b6dd826e7b46e531dcd70fdc9392185ab2eec 101 main/binary-i386/Release
- dee233b3bd2354ab47369eea9871ce0260e9ea46 3808 main/binary-armhf/Packages
- 5142bd45711d03e2c2abc8764643159ddff4522a 1701 main/binary-armhf/Packages.gz
+ f47322ac497351592d8751355c47b1554e37ee52 3809 main/binary-armhf/Packages
+ 18f8703a41da983ad66994d75a3c716c5919c88d 1700 main/binary-armhf/Packages.gz
  6ddbbd4b4ecb466aeb399548aca1f6579e2d20d4 102 main/binary-armhf/Release
- dee233b3bd2354ab47369eea9871ce0260e9ea46 3808 main/binary-armel/Packages
- 5142bd45711d03e2c2abc8764643159ddff4522a 1701 main/binary-armel/Packages.gz
+ f47322ac497351592d8751355c47b1554e37ee52 3809 main/binary-armel/Packages
+ 18f8703a41da983ad66994d75a3c716c5919c88d 1700 main/binary-armel/Packages.gz
  76238278554d09626bb4c5f877c35e380d776c57 102 main/binary-armel/Release
 SHA256:
- 8b4c7d35905767a102725d9af380eda1fafb6bcccdc0ca68224b9cece3fb2b30 3808 main/binary-amd64/Packages
- dc9f96f7e07300af5affa2a6d83dfc16d5668a0f733ef8d294621cbfff512c5a 1701 main/binary-amd64/Packages.gz
+ cd6fd4c8d2289647a9520b39763ee0711665284722081d17a3ab1f6a99f1bbed 3809 main/binary-amd64/Packages
+ c20cbf6a061626e22fcac9f88ff62ae7daaea1725c0a1b238e42bf832a881b9d 1700 main/binary-amd64/Packages.gz
  3b2886e4c95d617936e90098ea6311bf48387fdef82348ec433f8d43b1bf8168 102 main/binary-amd64/Release
- 8b4c7d35905767a102725d9af380eda1fafb6bcccdc0ca68224b9cece3fb2b30 3808 main/binary-i386/Packages
- dc9f96f7e07300af5affa2a6d83dfc16d5668a0f733ef8d294621cbfff512c5a 1701 main/binary-i386/Packages.gz
+ cd6fd4c8d2289647a9520b39763ee0711665284722081d17a3ab1f6a99f1bbed 3809 main/binary-i386/Packages
+ c20cbf6a061626e22fcac9f88ff62ae7daaea1725c0a1b238e42bf832a881b9d 1700 main/binary-i386/Packages.gz
  f01b4c909180d1179b6c63c8e2ed969dd58bf076f6e2546d6731becbeab7033b 101 main/binary-i386/Release
- 8b4c7d35905767a102725d9af380eda1fafb6bcccdc0ca68224b9cece3fb2b30 3808 main/binary-armhf/Packages
- dc9f96f7e07300af5affa2a6d83dfc16d5668a0f733ef8d294621cbfff512c5a 1701 main/binary-armhf/Packages.gz
+ cd6fd4c8d2289647a9520b39763ee0711665284722081d17a3ab1f6a99f1bbed 3809 main/binary-armhf/Packages
+ c20cbf6a061626e22fcac9f88ff62ae7daaea1725c0a1b238e42bf832a881b9d 1700 main/binary-armhf/Packages.gz
  f095947890f784e4aff75e5b1de330906d5696a0fafd291bbb1805ee56a7ea8f 102 main/binary-armhf/Release
- 8b4c7d35905767a102725d9af380eda1fafb6bcccdc0ca68224b9cece3fb2b30 3808 main/binary-armel/Packages
- dc9f96f7e07300af5affa2a6d83dfc16d5668a0f733ef8d294621cbfff512c5a 1701 main/binary-armel/Packages.gz
+ cd6fd4c8d2289647a9520b39763ee0711665284722081d17a3ab1f6a99f1bbed 3809 main/binary-armel/Packages
+ c20cbf6a061626e22fcac9f88ff62ae7daaea1725c0a1b238e42bf832a881b9d 1700 main/binary-armel/Packages.gz
  cec0bf59fe71cdad4d970511bfd7351bedeaa895b1d9478019a0f448381dce2e 102 main/binary-armel/Release
