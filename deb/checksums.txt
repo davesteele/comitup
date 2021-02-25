@@ -38,6 +38,7 @@ b2b001071cb2e52c7b4c49324e2b5f49  comitup_1.7-1_all.deb
 0eec2a9fe627a0d91307e7cea931622a  comitup_1.9-1_all.deb
 5293d15e94d77e9872a162a072954d08  comitup_1.9-2_all.deb
 aa08515a6655eabc1ee37d328b163320  davesteele-comitup-apt-source_1.0_all.deb
+e9109afb6faa3f8d486b8f24a0724ef5  davesteele-comitup-apt-source_1.1_all.deb
 110d9db131599f91a0c961d627609b1b  python3-dnslib_0.9.7+hg20170303-1_all.deb
 d48172762a117f40c2ea1ece6da9c56a  python3-networkmanager_2.0.1-3_all.deb
 8f579803d8ef74b8fff03db65d58a440  python3-networkmanager_2.0.1-4_all.deb
@@ -80,6 +81,7 @@ f5a7f0a09e72cf6d0699a6d26ca6c2f44c19059e  comitup_1.5-1_all.deb
 a6a6c88e0054dd6728a99402c61711938e29e2f1  comitup_1.9-1_all.deb
 4978ae2462a9dfa038a079086551752344af19d6  comitup_1.9-2_all.deb
 1b8ff10c136a18c15e97b450e0532626ffbd05d3  davesteele-comitup-apt-source_1.0_all.deb
+ce9ce5b95fd0ccb1e2588a03ea6983be7a96241c  davesteele-comitup-apt-source_1.1_all.deb
 6f20fa6a22cc37e14ab4804cb4216ffe99aca74a  python3-dnslib_0.9.7+hg20170303-1_all.deb
 b4397e78fa09b6cb0488f7761000c58df296b49c  python3-networkmanager_2.0.1-3_all.deb
 edb14e1bbb853ed3af98ea28bdd277dc1a8491c7  python3-networkmanager_2.0.1-4_all.deb
@@ -122,6 +124,7 @@ df838d50496e0ba8d6bca232838712f1eefe1c0fbff199675fd1bc2dc3801b14  comitup_1.8-1_
 6bb25e9a8c4b91640b962b7a6b4467d3d866993c2558750d44e4dbdce09866ea  comitup_1.9-1_all.deb
 ab38aa78649a216578eeddd63e4fe398317b4eb6be3bb7e7ffa8ff89a6153039  comitup_1.9-2_all.deb
 723934f10170dcf4fea34e14b2bf8ca5a1612c5ddfa09d95091b603960a93224  davesteele-comitup-apt-source_1.0_all.deb
+feaf18b0899fbd9438faaadf9eb1ef393be0f446d338c192ca0eb6bb8e895790  davesteele-comitup-apt-source_1.1_all.deb
 d203fcde35a350d5925123cbc99388ba523a3ac7f7c271f74a6f7b52ce4c2aa0  python3-dnslib_0.9.7+hg20170303-1_all.deb
 93ae15df3b310d5e4cbe0531178e88a6b53242588ad46e16e1b4029d9adb7ea0  python3-networkmanager_2.0.1-3_all.deb
 89c65fd8a986f9f69bbd3eb294b93319b3b7b14b928c3cecf037db48851d85c4  python3-networkmanager_2.0.1-4_all.deb
@@ -129,17 +132,17 @@ ec324d2a46dd6accbe6787ba5b570a0acdf09d09e8d24107d815fa40081994ad  python3-networ
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEFsJFjKR5Lf0iLhKW539ua4FQpagFAmAsJEMACgkQ539ua4FQ
-pajRSRAApuFZXE6hnKN7C7l76bTGbNNwPEwvBByD1vf9xh4ErMPZrZNWJRNyVwZV
-kosU/13TssgGUyjJEuAXGNy0hQcrqwOkZQB+VR4UuTdrJlCyYOvt05oNGiF1Wd5S
-ThUf+7BvNbTbSe/LQ9HIaXiKTndGXVG/vZtlX4Sg24c0dC7Y1fZZ3pu9+Z35PkX9
-0XvPUNCIVmNshTJ27ISgKG7/pvK4HoBz18Lz+Yde+6cm357amBf7mtG/Vy7w9GiM
-bvgGgZ1wJ5gYEO+E9W+SvxHClQp24RhgZgAjX7m1g98ZgURJeWMaB6JSwe0VdI2b
-3aDIvkQTR/LIoRbjJ6RcoRJ7k1f8rLSL0fbc8QiKTcGHpEFNvvEdUX3e9aRn4/LU
-+HFw/DFvlXYZz88gbQLHhdbVvnd310oRSw5KLnZueP+w/quqrjIOJuSmPW3xDqNY
-sbldl7CH9fOMHtk1iMdwiztfCRhNANLBVbvXcKgPT/dlmGUm8uQ+ZQQDIvRrSOl0
-+Ihg6jB59xPKff+3jNT80XHal50nsXx/QJbfXVBr5F0759DlQfBXb6XKdKtlL1oV
-b5ZZ0KAXQDot6rwH617LoDeFQfJnVp366Ja3eAZgKU8xZEVkC75q8p0u0gdZ57nP
-gZ8xz9KS7FZVZTFMaRQNYlCPM0ry4bLY/OGOY6r51o7yNDZnKQk=
-=Qmg2
+iQIzBAEBCgAdFiEEi4SQsUoAbTYxHS3FCVnEo9z4n78FAmA3tJ4ACgkQCVnEo9z4
+n78fFQ/+Prb93k/1VBsQtf0DqFHqW22Xe5ncTkTxc1gWbbCFtctyDlizWpWUnnf+
+dxIOjd2nPGuiuNXRnXNl9hBxJ+UagOlcVmdOGfLNqk49HUhBkrc7Dd+R8/TEKKHh
+ZEcjz25Nwy6PQe9pJtGOtIPjw3T9oxyURd5JGKsaQDbvydhm3t5u8wv1ju0I39/o
+qha5xwJ2qEtI2lxCprLRN4yQZN9vE3WWvJfL7xPGwDZ2IFS+ZSue3AmWzO48fvKt
+auwTBzb2m/Qrr5dF6QnuTapjtjjn5xP1+i4KEI7qDP6rpkmdKNISJnNLFTNy/W5t
+lYx3+1No1pmywsKcrc7jfykT5bl4GmklCkDYDTKMnE2miuUe8SVs4bM4YBdq5sMm
+jSR5vKjzF5Le/ZZEKCFRDSGpFpB61HqamN1aHSLP2RM1gm8x54rC1WbcaDMAAVq/
+q+f8c0rf2qW8HxNkZHR/dT39cIqUWzAZY5FKQMcuY+UGHBiR8JGFzB/23N0pkVhs
+ayV8+mmzK/r2RBw9Sm5dc6JUTZ2t9W5oj0OcvgMG99zsZ7vme0q/Z4mozegz4bdc
+oJUvsVTlmvE6UP5oXNpT3TJQZjiqlNo153F7rWpnnWeydgXKLACh2tYoOCvOftQt
+R5TgtEhWgiv2A7tPQRCcPDmijLxDcn+9bO91veiZQ+r1fLwKAGM=
+=ts/l
 -----END PGP SIGNATURE-----
