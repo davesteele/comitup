@@ -51,6 +51,8 @@ local terminal session.
 
 __comitup__ requires NetworkManager and systemd.
 
+See the [Home Page](https://davesteele.github.io/comitup/) for installation information.
+
 Man pages
 ---------
 
