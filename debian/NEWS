@@ -1,3 +1,18 @@
+comitup (1.16-1) comitup; urgency=medium
+
+    There will be an update of the key used for the comitup
+    repository later in 2021. To prepare for this, if you use the
+    repository to "apt" upgrade your comitup package, you should:
+    .
+      * Use apt to install the davesteele-comitup-apt-source package.
+      * Delete any references to davesteele.github.io in
+        sources.list.
+    .
+    Also, note that the default ZeroConf service name for the comitup
+    host has changed from "workstation" to "comitup".
+
+ -- David Steele <steele@debian.org>  Thu, 11 Mar 2021 17:16:13 -0500
+
 comitup (1.13-1) unstable; urgency=medium
 
     For new installations, the default number of digits in the
