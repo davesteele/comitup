@@ -73,6 +73,13 @@ def parse_args():
         help="Check the wifi devices and exit",
     )
 
+    parser.add_argument(
+        '-i',
+        '--info',
+        action='store_true',
+        help="Print info and exit",
+    )
+
     args = parser.parse_args()
 
     return args
@@ -88,6 +95,11 @@ def main():
     log.info("Starting comitup")
 
     (conf, data) = config.load_data()
+
+    if args.info:
+        for (key, val) in statemgr.get_info(conf, data).items():
+            print("{}: {}".format(key, val))
+        sys.exit(0)
 
     if args.check:
         if wificheck.run_checks():

@@ -101,14 +101,18 @@ class Comitup(dbus.service.Object):
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="a{ss}")
     def get_info(self):
-        info = {
-            'version': pkg_resources.get_distribution("comitup").version,
-            'apname': expand_ap(conf.ap_name, data.id),
-            'hostnames': ';'.join(get_hosts(conf, data)),
-            'imode': modemgr.get_mode(),
-            }
+        return get_info(conf, data)
 
-        return info
+
+def get_info(conf, data):
+    info = {
+        'version': pkg_resources.get_distribution("comitup").version,
+        'apname': expand_ap(conf.ap_name, data.id),
+        'hostnames': ';'.join(get_hosts(conf, data)),
+        'imode': modemgr.get_mode(),
+        }
+
+    return info
 
 
 def expand_ap(ap_name, id):
