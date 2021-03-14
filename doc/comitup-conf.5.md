@@ -34,8 +34,8 @@ It is located in the _/etc/_ directory.
     meaning no service is controlled.
 
   * _service_name_:
-    This defines the mdns service name advertised by **comitup**. This defaults to "workstation",
-    and will be advertised as "_workstation._tcp".
+    This defines the mdns service name advertised by **comitup**. This defaults to "comitup",
+    and will be advertised as "_comitup._tcp".
 
   * _enable_appliance_mode_:
     By default, comitup will use multiple wifi interfaces, if available, to connect to the
