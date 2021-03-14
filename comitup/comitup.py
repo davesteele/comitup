@@ -49,7 +49,7 @@ def deflog():
 
 
 def check_environment(log):
-    for service in ["systemd-resolved", "dnsmasq"]:
+    for service in ["systemd-resolved", "dnsmasq", "dhcpd"]:
         try:
             if sysd.sd_unit_jobs("{}.service".format(service)):
                 for msg in [
