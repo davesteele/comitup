@@ -7,7 +7,7 @@ Fork the [repository](https://github.com/davesteele/comitup), make the changes o
 
 Before you write up a troubleshooting issue consider the following:
 
-* Note that the [Comitup Image](https://davesteele.github.io/comitup/) is preferred.
+* Note that the [Comitup Image](https://davesteele.github.io/comitup/) is preferred. If you do use this, do an "apt-get update; apt-get upgrade" to ensure the most recent comitup version.
 * If you are using the package:
   * Make sure you have the [most recent](https://davesteele.github.io/comitup/archive.html) version installed
   * Verify that there are no conflicts for the dnsmasq (DHCP), wpa_supplicant, and resolved (DNS) services, as described in the [Installing Comitup](https://github.com/davesteele/comitup/wiki/Installing-Comitup) page.
