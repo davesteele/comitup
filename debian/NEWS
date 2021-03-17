@@ -1,3 +1,10 @@
+comitup (1.17-1) unstable; urgency=medium
+
+   The name of the ZeroConf service that Comitup advertises under
+   has changed from "_workstation._tcp" to "_comitup._tcp".
+
+ -- David Steele <steele@debian.org>  Tue, 16 Mar 2021 21:08:40 -0400
+
 comitup (1.16-1) comitup; urgency=medium
 
     There will be an update of the key used for the comitup

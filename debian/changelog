@@ -1,3 +1,11 @@
+comitup (1.17-1) unstable; urgency=medium
+
+  * Add an "info" option, to support 1st-run hostname setting.
+  * Change the ZeroConf service name from "workstation" to "comitup".
+  * Add dhcpd to the list of services to verify down.
+
+ -- David Steele <steele@debian.org>  Tue, 16 Mar 2021 21:18:59 -0400
+
 comitup (1.16-1) comitup; urgency=medium
 
   * Add NEWS on how to prepare for comitup repo key upgrade.
