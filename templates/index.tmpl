@@ -31,11 +31,8 @@
         <h3>Wifi Network Bootstrap for the Raspberry Pi</h3>
 
 <p>Comitup is a software package that provides a service to establish Wifi
-networking on a headless computer (that is, one with no video, keyboard, or mouse).</p>
-
-<p>The Comitup Image is a microSD disk image for the Raspberry Pi, providing
-an operating system with the comitup service included. The Comitup Image is an
-extension of standard Raspberry Pi OS with the following capabilities:</p>
+networking on a headless computer (that is, one with no video, keyboard, or mouse).
+Comitup supports the following capabilities:</p>
 
 <ul>
 <li>The comitup service, which automatically connects to any previously
@@ -46,6 +43,8 @@ where '&lt;nnn&gt;' is a unique, persistent number.</li>
 <li>Defined ZeroConf mdns address name for
 'comitup-&lt;nnn&gt;.local', advertising the IP address of the Raspbery
 Pi on all interfaces.</li>
+<li>Connection information is published as a _comitup._tcp service, visible
+using a ZeroConf Browser.</li>
 <li>A comitup-web service, which provides a web interface for selecting and 
 authenticating against an existing Access Point.</li>
 <li>A captive portal, facilitating discovery of the web service on systems
@@ -54,6 +53,15 @@ that support it.</li>
 will remain on one, and the other will be used for the upstream connection.
 Routing/masquerading between the two networks is established automatically.</li>
 <li>A comitup-cli command-line utility for interacting with comitup.</li>
+</ul>
+
+<p>The Comitup Image is a microSD disk image for the Raspberry Pi, providing
+an operating system with the comitup service included. The Comitup Image is an
+extension of standard Raspberry Pi OS which includes Comitup, and supports
+the following additional
+capabilities:</p>
+
+<ul>
 <li>The ssh service is enabled by default. Be sure to change the "pi" user
 password.</li>
 <li>The Raspberry Pi Ethernet port will automatically configure for the host
