@@ -1,3 +1,9 @@
+comitup (1.17-2) unstable; urgency=medium
+
+  * Fix watch pgpsigurlmangle for GitHub.
+
+ -- David Steele <steele@debian.org>  Sat, 20 Mar 2021 11:19:20 -0400
+
 comitup (1.17-1) unstable; urgency=medium
 
   * Add an "info" option, to support 1st-run hostname setting.
