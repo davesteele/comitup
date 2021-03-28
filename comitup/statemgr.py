@@ -33,7 +33,7 @@ DBusGMainLoop(set_as_default=True)
 from comitup import states                                 # noqa
 from comitup import nm                                     # noqa
 from comitup import modemgr                                # noqa
-from comitup.config import REGEX_APNAME_SPEC, REGEX_APNAME_SUB
+from comitup.config import REGEX_APNAME_ID
 
 comitup_path = "/com/github/davesteele/comitup"
 
@@ -118,20 +118,21 @@ def get_info(conf, data):
 
 def expand_ap(ap_name, data):
     returnval = ap_name
-    expand_spec_srch = re.search(REGEX_APNAME_SPEC, ap_name)
+
+    expand_spec_srch = re.search(REGEX_APNAME_ID, ap_name)
     if expand_spec_srch is not None:
-        # There is a'-<###>' section of the ap_name, process it
+        # There is a'<###>' section in the ap_name, substitute it
         expand_spec = expand_spec_srch.group()
         num = len(expand_spec)
 
-        if expand_spec.startswith("s"):
+        if expand_spec.startswith("<s"):
             id = data.sn[-num:]
-        elif expand_spec.startswith("M"):
+        elif expand_spec.startswith("<M"):
             id = data.mac[-num:]
-        else:  # default case, we assume <nn...> based on config's validation
+        else:  # default case, we assume <nn...> based on config's REGEX_APNAME_ID validation
             id = data.id[:num]
 
-        returnval = re.sub(REGEX_APNAME_SUB, id, ap_name)
+        returnval = re.sub(REGEX_APNAME_ID, id, ap_name)
 
     returnval = re.sub("<hostname>", socket.gethostname(), returnval)
     log.info("using SSID: {}".format(returnval))

@@ -29,9 +29,12 @@ BOOT_CONF_PATH = "/boot/comitup.conf"
 DEFAULT_AP = "comitup-<nnn>"
 
 # ap_name regex patterns
-REGEX_APNAME_FORMAT = r'[a-zA-Z\<\>](\w*)-\<([nMs]+?)\>'  # validate format name-<###>|<hostname>-<###>
-REGEX_APNAME_SPEC = r'(?<=\-<).+?(?=\>)'   # extract ### from name-<###>, exclude <>
-REGEX_APNAME_SUB = r'<(?<=\-<).+?(?=\>)>'  # sub includes <>, takes second match if <hostname>-<nnn>
+REGEX_APNAME_ID = r'<(?<=\<)([n]{1,4}|[M]{1,12}|[s]{1,16})(?=\>)>'
+# matches '<#...>' where # is M... MAC address, 1-12 characters
+#                             s... RPi serial number, 1-16 characters
+#                             n... randomly generated number
+# ID spec may appear anywhere in the apname, with, or without a hyphen separator
+# Valid match examples: <nn>-myname, p1125-<nnn>, <ss>-<hostname>, <hostname>-<MMMM>, first<MMM>second
 
 
 class Config(object):
@@ -109,26 +112,19 @@ def load_data():
                 },
              )
 
-    # validate that if the ap_name has '<' or '>' and '-', it follows spec
-    if ('<' in conf.ap_name or '>' in conf.ap_name) and \
-            '-' in conf.ap_name and \
-            re.search(REGEX_APNAME_FORMAT, conf.ap_name) is None:
-        log.error("malformed ap name {}, using default {}".format(conf.ap_name, DEFAULT_AP))
-        conf.ap_name = DEFAULT_AP
-
     data = persist.persist(
                 PERSIST_PATH,
                 {'id': str(random.randrange(1000, 9999))},
            )
 
-    spec = re.search(REGEX_APNAME_SPEC, conf.ap_name)
+    spec = re.search(REGEX_APNAME_ID, conf.ap_name)
     if spec is not None:
-        # if spec is 'nnn...' data already includes 'id' random number
+        # if spec is '<nnn...' data already includes 'id' random number
         # get MAC or SerialNumber if required
-        if spec.group().startswith('M'):
+        if spec.group().startswith('<M'):
             data['mac'] = _get_mac()
 
-        if spec.group().startswith('s'):
+        if spec.group().startswith('<s'):
             data['sn']: _getserial()
 
     log.debug(data)
