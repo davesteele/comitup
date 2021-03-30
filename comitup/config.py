@@ -49,7 +49,7 @@ def load_data():
             dest = shutil.copyfile(BOOT_CONF_PATH, CONF_PATH)
             print("Boot config file copied:", dest)
             os.remove(BOOT_CONF_PATH)
-        except:
+        except Exception:
             print("Error occurred while copying file.")
 
     conf = Config(

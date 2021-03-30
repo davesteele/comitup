@@ -14,9 +14,6 @@
 import dbus
 import socket
 import logging
-import random
-import shutil
-import os
 from comitup import nm
 from comitup import config
 import subprocess
@@ -133,7 +130,7 @@ def get_interface_mapping():
             pass
 
     return mapping
-    
+
 
 def add_hosts(hosts):
     establish_group()
