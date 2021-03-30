@@ -12,6 +12,7 @@
 #
 
 import dbus
+import NetworkManager
 from functools import partial
 from gi.repository.GLib import MainLoop, timeout_add
 
@@ -43,8 +44,11 @@ second_device_name = None
 nm_dev_connect = None
 nm_dev_fail = None
 
-PASS_STATES = [nm.NM_DEVICE_STATE_IP_CHECK, nm.NM_DEVICE_STATE_ACTIVATED]
-FAIL_STATES = [nm.NM_DEVICE_STATE_FAILED]
+PASS_STATES = [
+    NetworkManager.NM_DEVICE_STATE_IP_CHECK,
+    NetworkManager.NM_DEVICE_STATE_ACTIVATED
+]
+FAIL_STATES = [NetworkManager.NM_DEVICE_STATE_FAILED]
 
 
 def disable():
