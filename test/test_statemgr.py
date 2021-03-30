@@ -4,9 +4,10 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 
-import pytest
-from mock import Mock
 import importlib
+import pytest
+from collections import namedtuple
+from mock import Mock
 
 import dbus.service
 
@@ -51,3 +52,35 @@ def test_sm_none(statemgr_fxt):
 def test_sm_state(statemgr_fxt):
     obj = sm.Comitup()
     assert obj.state() == ['CONNECTED', 'connection']
+
+
+@pytest.fixture()
+def ap_name_fxt(monkeypatch):
+    monkeypatch.setattr(
+        'socket.gethostname', Mock(return_value="host")
+    )
+
+    return None
+
+
+Case = namedtuple("ApName", ["input", "out"])
+
+
+@pytest.mark.parametrize(
+    "case",
+    [
+        Case("comitup-<nnn>", "comitup-123"),
+        Case("<n>", "1"),
+        Case("<nn>", "12"),
+        Case("<nnn>", "123"),
+        Case("<nnnn>", "1234"),
+        Case("<nnnnn>", "<nnnnn>"),
+        Case("A<n>", "A1"),
+        Case("<n>A", "1A"),
+        Case("<hostname>", "host"),
+        Case("<hostname>-<n>", "host-1"),
+        Case("<bogus>", "<bogus>"),
+    ]
+)
+def test_expand_ap(ap_name_fxt, case):
+    assert sm.expand_ap(case.input, "1234") == case.out
