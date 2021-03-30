@@ -1,6 +1,6 @@
 % comitup-conf(5)
 %
-% February 2019
+% March 2021
 
 # NAME
 
@@ -18,7 +18,7 @@ It is located in the _/etc/_ directory.
     publish an avahi-daemon(8) host entry for **comitup-&lt;nnn&gt;**, and establish
     an mdns identity for **comitup-&lt;nnn&gt;.local**.  Setting this parameter will
     change the **comitup** string with one of the users choosing. If the
-    configuration variable contains an &lt;nnn&gt; string, with one to 4 "n's", it
+    configuration variable contains an &lt;nnn&gt; string, with between one and four "n's", it
     will be replaced with a persistent, random number. Similarly, the string
     &lt;hostname&gt; is replaced with the computer's hostname.
 
