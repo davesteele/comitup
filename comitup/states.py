@@ -12,22 +12,21 @@
 #
 
 
-from functools import wraps
 import hashlib
 import logging
-
-from comitup import iwscan
-from comitup import wpa
+from functools import wraps
 
 from gi.repository.GLib import MainLoop, timeout_add
+
+from comitup import iwscan, wpa
+
 if __name__ == '__main__':
     from dbus.mainloop.glib import DBusGMainLoop
     DBusGMainLoop(set_as_default=True)
 
-from comitup import nmmon    # noqa
-from comitup import nm       # noqa
 from comitup import modemgr  # noqa
-
+from comitup import nm  # noqa
+from comitup import nmmon  # noqa
 
 log = logging.getLogger('comitup')
 

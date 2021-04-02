@@ -13,18 +13,17 @@ from logging.handlers import TimedRotatingFileHandler
 
 from dbus.mainloop.glib import DBusGMainLoop
 
-
 DBusGMainLoop(set_as_default=True)
 from gi.repository.GLib import MainLoop  # noqa
 
-from comitup import cdns         # noqa
-from comitup import config       # noqa
-from comitup import iptmgr       # noqa
-from comitup import persist      # noqa
-from comitup import statemgr     # noqa
-from comitup import sysd         # noqa
-from comitup import webmgr       # noqa
-from comitup import wificheck    # noqa
+from comitup import cdns  # noqa
+from comitup import config  # noqa
+from comitup import iptmgr  # noqa
+from comitup import persist  # noqa
+from comitup import statemgr  # noqa
+from comitup import sysd  # noqa
+from comitup import webmgr  # noqa
+from comitup import wificheck  # noqa
 
 LOG_PATH = "/var/log/comitup.log"
 

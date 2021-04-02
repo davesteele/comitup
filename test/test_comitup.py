@@ -5,15 +5,16 @@
 # License-Filename: LICENSE
 
 import os
-import pytest
 import sys
 import textwrap
+
+import pytest
 from mock import Mock
 
 sys.modules["NetworkManager"] = Mock()
 
-from comitup import config
-from comitup import comitup as ciu
+from comitup import comitup as ciu  # noqa
+from comitup import config  # noqa
 
 
 @pytest.fixture()

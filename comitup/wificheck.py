@@ -5,13 +5,12 @@
 # License-Filename: LICENSE
 
 
-from collections import namedtuple
 import logging
 import os
 import re
 import subprocess
 import textwrap
-
+from collections import namedtuple
 
 log = logging.getLogger('comitup')
 

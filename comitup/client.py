@@ -11,8 +11,9 @@
 # or later
 #
 
-import dbus
 import sys
+
+import dbus
 
 
 class CiuClient(object):

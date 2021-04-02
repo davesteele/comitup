@@ -12,14 +12,15 @@
 #
 
 import argparse
-import dbus
-from functools import wraps
 import getpass
 import logging
-import NetworkManager as nm
 import pprint
 import sys
 import uuid
+from functools import wraps
+
+import dbus
+import NetworkManager as nm
 
 if __name__ == '__main__':
     import os

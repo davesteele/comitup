@@ -3,9 +3,10 @@
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
-import pytest
-import textwrap
 import os
+import textwrap
+
+import pytest
 
 from comitup import config
 

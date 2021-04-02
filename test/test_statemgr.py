@@ -5,11 +5,11 @@
 # License-Filename: LICENSE
 
 import importlib
-import pytest
 from collections import namedtuple
-from mock import Mock
 
 import dbus.service
+import pytest
+from mock import Mock
 
 
 def nullwrapper(*args, **kwargs):

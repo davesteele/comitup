@@ -11,12 +11,13 @@
 # or later
 #
 
-import dbus
-import socket
 import logging
-from comitup import nm
-from comitup import config
+import socket
 import subprocess
+
+import dbus
+
+from comitup import config, nm
 
 log = logging.getLogger('comitup')
 
