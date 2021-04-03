@@ -39,6 +39,8 @@ bus = dbus.SystemBus()
 monitored_dev = None
 ap_device = None
 second_device_name = None
+wired_device = None
+wired_is_connected = False
 
 nm_dev_connect = None
 nm_dev_fail = None
@@ -78,7 +80,29 @@ def send_cb(cb):
     timeout_add(1, cb_to, cb)
 
 
+def wired_changed_state(state, *args):
+    global wired_is_connected
+
+    log.info("MGAG: wired_changed_state {}".format(state))
+    from comitup.states import set_state
+
+    if state in PASS_STATES:
+        log.info("MGAG nmm - primary pass, set_state CONNECTED")
+        set_state('CONNECTED')
+        wired_is_connected = True
+        #send_cb(nm_dev_connect)
+    else:
+        wired_is_connected = False
+        set_state('HOTSPOT')
+        #send_cb(nm_dev_fail)
+        log.debug("nmm - primary state {}".format(state))
+
+
 def ap_changed_state(state, *args):
+    if wired_is_connected:
+        log.info("MGAG wired_is_connected, ignoring AP state change {}".format(state))
+        return
+
     if state in PASS_STATES:
         log.debug("nmm - primary pass")
         send_cb(nm_dev_connect)
@@ -111,8 +135,8 @@ def any_changed_state(state, *args):
         mdns.add_hosts(dns_names)
 
 
-def set_device_listeners(ap_dev, second_dev):
-    global ap_device, second_device_name
+def set_device_listeners(ap_dev, second_dev, wired_dev):
+    global ap_device, second_device_name, wired_device
 
     if ap_device is None:
         log.debug("nmm - Setting primary listener for {}".format(ap_dev))
@@ -136,6 +160,16 @@ def set_device_listeners(ap_dev, second_dev):
         )
         log.debug("Listener is {}".format(device_listener))
 
+    if wired_device is None and wired_dev is not None:
+        wired_device = wired_dev
+        device_listener = bus.add_signal_receiver(
+            wired_changed_state,
+            signal_name="StateChanged",
+            dbus_interface="org.freedesktop.NetworkManager.Device",
+            path=nm.get_device_path(wired_dev)
+        )
+        log.info("MGAG Listener is {}".format(device_listener))
+
     device_listener = bus.add_signal_receiver(
         any_changed_state,
         signal_name="StateChanged",
@@ -147,7 +181,8 @@ def set_device_listeners(ap_dev, second_dev):
 def init_nmmon():
     set_device_listeners(
         modemgr.get_ap_device(),
-        modemgr.get_link_device()
+        modemgr.get_link_device(),
+        nm.get_wired_device(),
     )
 
 

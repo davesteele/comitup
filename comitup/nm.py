@@ -87,6 +87,12 @@ def device_name(device):
     return device.Interface
 
 
+def get_wired_device():
+    dev = [x for x in get_devices() if x.DeviceType == 1]
+    if dev: return dev[0]
+    return None
+
+
 def get_wifi_devices():
     return [x for x in get_devices() if x.DeviceType == 2]
 
