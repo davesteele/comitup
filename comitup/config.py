@@ -97,7 +97,7 @@ def load_data():
             print("Boot config file copied:", dest)
             log.info("Boot config file copied: {}".format(dest))
             os.remove(BOOT_CONF_PATH)
-        except:
+        except Exception:
             print("Error occurred while copying file.")
             log.error("Error occurred while copying file.")
 

@@ -7,10 +7,10 @@
 
 import logging
 import os
-from pathlib import Path
 import signal
 import subprocess
 import time
+from pathlib import Path
 
 from comitup import modemgr
 

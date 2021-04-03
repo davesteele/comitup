@@ -7,6 +7,8 @@ pkgs = [
     "gobject-introspection",
     "libgirepository1.0-dev",
     "python3-dev",
+    "libdbus-glib-1-dev",
+    "libdbus-1-dev",
 ]
 
 deps = [

@@ -11,23 +11,26 @@
 # or later
 #
 
-import dbus
-import dbus.service
 import logging
-from comitup import iwscan
 import os
 import re
 import socket
 import subprocess
-
 import sys
+
+import dbus
+import dbus.service
+
+from comitup import iwscan
+
 sys.path.append("/usr/share/comitup")
 
-import pkg_resources                          # noqa
+import time  # noqa
 
-from gi.repository.GLib import MainLoop, timeout_add       # noqa
-import time                                   # noqa
+import pkg_resources  # noqa
 from dbus.mainloop.glib import DBusGMainLoop  # noqa
+from gi.repository.GLib import MainLoop, timeout_add  # noqa
+
 DBusGMainLoop(set_as_default=True)
 
 from comitup import states                                 # noqa

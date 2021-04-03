@@ -6,6 +6,8 @@
 Comitup
 ======
 
+[![Build Status](https://github.com/davesteele/comitup/actions/workflows/testnox.yml/badge.svg?branch=master)](https://github.com/davesteele/comitup/actions)
+
 [Home Page](https://davesteele.github.io/comitup/)
 
 [Wiki](https://github.com/davesteele/comitup/wiki)

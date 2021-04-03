@@ -1,6 +1,6 @@
 % comitup-conf(5)
 %
-% February 2019
+% March 2021
 
 # NAME
 

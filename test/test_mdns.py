@@ -1,11 +1,13 @@
 import pytest
+from mock import Mock, patch
+
+from comitup import mdns
+
 # Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 
-from comitup import mdns
-from mock import Mock, patch
 
 
 @pytest.fixture()
