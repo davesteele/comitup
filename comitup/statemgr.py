@@ -33,9 +33,9 @@ from gi.repository.GLib import MainLoop, timeout_add  # noqa
 
 DBusGMainLoop(set_as_default=True)
 
-from comitup import states                                 # noqa
-from comitup import nm                                     # noqa
-from comitup import modemgr                                # noqa
+from comitup import modemgr  # noqa
+from comitup import nm  # noqa
+from comitup import states  # noqa
 from comitup.config import REGEX_APNAME_ID
 
 comitup_path = "/com/github/davesteele/comitup"
