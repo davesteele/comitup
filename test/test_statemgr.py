@@ -83,4 +83,9 @@ Case = namedtuple("ApName", ["input", "out"])
     ]
 )
 def test_expand_ap(ap_name_fxt, case):
-    assert sm.expand_ap(case.input, "1234") == case.out
+    class Object(object):
+        pass
+
+    data=Object()
+    data.id = "1234"
+    assert sm.expand_ap(case.input, data) == case.out

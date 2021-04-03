@@ -126,7 +126,7 @@ def expand_ap(ap_name, data):
     if expand_spec_srch is not None:
         # There is a'<###>' section in the ap_name, substitute it
         expand_spec = expand_spec_srch.group()
-        num = len(expand_spec)
+        num = len(expand_spec) - 2 # remove <> contribution
 
         if expand_spec.startswith("<s"):
             id = data.sn[-num:]
