@@ -115,7 +115,7 @@ def create_app(log):
         return resp
 
     @app.route("/img/favicon.ico")
-    def favicon(path):
+    def favicon():
         log.info("Returning 404 for favicon request")
         abort(404)
 
