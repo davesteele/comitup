@@ -36,6 +36,7 @@ DBusGMainLoop(set_as_default=True)
 from comitup import modemgr  # noqa
 from comitup import nm  # noqa
 from comitup import states  # noqa
+from comitup.config import REGEX_APNAME_ID  # noqa
 
 comitup_path = "/com/github/davesteele/comitup"
 
@@ -118,20 +119,32 @@ def get_info(conf, data):
     return info
 
 
-def expand_ap(ap_name, id):
+def expand_ap(ap_name, data):
     returnval = ap_name
 
-    for num in range(5):
-        returnval = re.sub("<{}>".format("n"*num), id[:num], returnval)
+    expand_spec_srch = re.search(REGEX_APNAME_ID, ap_name)
+    if expand_spec_srch is not None:
+        # There is a'<###>' section in the ap_name, substitute it
+        expand_spec = expand_spec_srch.group()
+        num = len(expand_spec) - 2  # -2 remove <> contribution
+
+        if expand_spec.startswith("<s"):
+            id = data.sn[-num:]
+        elif expand_spec.startswith("<M"):
+            id = data.mac[-num:]
+        else:  # default case <nn...>, based on regex search
+            id = data.id[:num]
+
+        returnval = re.sub(REGEX_APNAME_ID, id, ap_name)
 
     returnval = re.sub("<hostname>", socket.gethostname(), returnval)
-
+    log.info("using SSID: {}".format(returnval))
     return returnval
 
 
 def get_hosts(conf, data):
     return [
-        "{}.local".format(expand_ap(conf.ap_name, data.id)),
+        "{}.local".format(expand_ap(conf.ap_name, data)),
     ]
 
 
