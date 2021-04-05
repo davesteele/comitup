@@ -9,7 +9,6 @@ from comitup import mdns
 # License-Filename: LICENSE
 
 
-
 @pytest.fixture()
 def avahi_fxt(monkeypatch, request):
     monkeypatch.setattr("comitup.mdns.dbus.Interface", Mock())

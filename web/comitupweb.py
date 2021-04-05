@@ -19,7 +19,7 @@ from logging.handlers import TimedRotatingFileHandler
 from multiprocessing import Process
 
 from flask import (Flask, abort, redirect, render_template, request,
-                   send_from_directory)
+                   send_from_directory, jsonify)
 
 sys.path.append(".")
 sys.path.append("..")
@@ -73,14 +73,6 @@ def create_app(log):
         log.info("index.html - {} points".format(len(points)))
         return render_template("index.html", points=points)
 
-    @app.route("/js/<path:path>")
-    def send_js(path):
-        return send_from_directory(TEMPLATE_PATH + "/js", path)
-
-    @app.route("/css/<path:path>")
-    def send_css(path):
-        return send_from_directory(TEMPLATE_PATH + "/css", path)
-
     @app.route("/confirm")
     def confirm():
         ssid = request.args.get("ssid", "")
@@ -97,6 +89,7 @@ def create_app(log):
             encrypted=encrypted,
             ssid_encoded=ssid_encoded,
             mode=mode,
+            can_blink=ciu.can_blink(),
         )
 
     @app.route("/connect", methods=["POST"])
@@ -114,10 +107,29 @@ def create_app(log):
             password=password,
         )
 
+    @app.route("/blink")
+    def blink():
+        ciu.blink()
+
+        resp = jsonify(success=True)
+        return resp
+
     @app.route("/img/favicon.ico")
     def favicon(path):
         log.info("Returning 404 for favicon request")
         abort(404)
+
+    @app.route("/img/<path:path>")
+    def send_image(path):
+        return send_from_directory(TEMPLATE_PATH + "/images", path)
+
+    @app.route("/js/<path:path>")
+    def send_js(path):
+        return send_from_directory(TEMPLATE_PATH + "/js", path)
+
+    @app.route("/css/<path:path>")
+    def send_css(path):
+        return send_from_directory(TEMPLATE_PATH + "/css", path)
 
     @app.route("/<path:path>")
     def catch_all(path):

@@ -15,6 +15,9 @@ comitup-web -- Wifi configuration web server for the Comitup service
 __comitup-web__ is a web service that provides access to the comitup(8) Wifi
 bootstrap service.
 
+The web interface also supports a "Locate" feature, that blinks the green led
+on the front of a Raspberry Pi.
+
 ## OPTIONS
 
 See comitup-conf(5).
