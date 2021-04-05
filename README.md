@@ -44,6 +44,9 @@ the hotspot, and the second will get the external connection. When both
 are connected, forwarding and masquerading are enabled so that
 hotspot-connected devices can access external networks.
 
+On the Raspberry Pi, the comitup-web service, running in the hotspot mode,
+supports a "Locate" feature that blinks the green led on the front of the unit.
+
 [zeroconf]: https://en.wikipedia.org/wiki/Zero-configuration_networking
 [Android]: https://play.google.com/store/apps/details?id=com.melloware.zeroconf&hl=en
 [Windows]: http://hobbyistsoftware.com/bonjourbrowser

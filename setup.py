@@ -84,6 +84,13 @@ setup(
             [
                 'web/templates/js/uikit.js',
                 'web/templates/js/uikit-icons.js',
+                'web/templates/js/blink.js',
+            ]
+        ),  # noqa
+        ('/usr/share/comitup/web/templates/images',
+            [
+                'web/templates/images/ledon.gif',
+                'web/templates/images/ledoff.gif',
             ]
         ),  # noqa
         ('/usr/share/comitup/dns',

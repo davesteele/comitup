@@ -61,9 +61,12 @@ def blink():
         oldtrig = get_trigger()
 
         set_trigger("gpio")
+        brightPath.write_text(offval())
+        time.sleep(0.25)
         brightPath.write_text(onval())
         time.sleep(0.5)
         brightPath.write_text(offval())
+        time.sleep(0.25)
 
         set_trigger(oldtrig)
 
