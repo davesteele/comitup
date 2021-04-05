@@ -111,7 +111,7 @@ class Comitup(dbus.service.Object):
 def get_info(conf, data):
     info = {
         'version': pkg_resources.get_distribution("comitup").version,
-        'apname': expand_ap(conf.ap_name, data.id),
+        'apname': expand_ap(conf.ap_name, data),
         'hostnames': ';'.join(get_hosts(conf, data)),
         'imode': modemgr.get_mode(),
         }
