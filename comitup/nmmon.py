@@ -13,6 +13,7 @@
 
 import logging
 from functools import partial
+import threading
 
 import dbus
 import NetworkManager
@@ -86,15 +87,13 @@ def wired_changed_state(state, *args):
     log.info("MGAG: wired_changed_state {}".format(state))
     from comitup.states import set_state
 
-    if state in PASS_STATES:
+    if state in [NetworkManager.NM_DEVICE_STATE_ACTIVATED, ]:
+        wired_is_connected = True
         log.info("MGAG nmm - primary pass, set_state CONNECTED")
         set_state('CONNECTED')
-        wired_is_connected = True
-        #send_cb(nm_dev_connect)
     else:
         wired_is_connected = False
         set_state('HOTSPOT')
-        #send_cb(nm_dev_fail)
         log.debug("nmm - primary state {}".format(state))
 
 
@@ -169,6 +168,9 @@ def set_device_listeners(ap_dev, second_dev, wired_dev):
             path=nm.get_device_path(wired_dev)
         )
         log.info("MGAG Listener is {}".format(device_listener))
+        # kicks wired state on boot, otherwise wired state is missed
+        if wired_device.State == NetworkManager.NM_DEVICE_STATE_ACTIVATED:
+            threading.Timer(5.0, wired_changed_state, [wired_device.State]).start()
 
     device_listener = bus.add_signal_receiver(
         any_changed_state,
