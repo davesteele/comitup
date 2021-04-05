@@ -33,8 +33,9 @@ REGEX_APNAME_ID = r'<(?<=\<)([n]{1,4}|[M]{1,12}|[s]{1,16})(?=\>)>'
 # matches '<#...>' where # is M... MAC address, 1-12 characters
 #                             s... RPi serial number, 1-16 characters
 #                             n... randomly generated number
-# ID spec may appear anywhere in the apname, with, or without a hyphen separator
-# Valid match examples: <nn>-myname, p1125-<nnn>, <ss>-<hostname>, <hostname>-<MMMM>, first<MMM>second
+# ID spec may appear anywhere in the apname, with/without a '-' separator
+# Valid match examples: <nn>-myname, p1125-<nnn>, <ss>-<hostname>,
+#                       <hostname>-<MMMM>, first<MMM>second
 
 
 class Config(object):

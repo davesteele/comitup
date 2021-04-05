@@ -36,7 +36,7 @@ DBusGMainLoop(set_as_default=True)
 from comitup import modemgr  # noqa
 from comitup import nm  # noqa
 from comitup import states  # noqa
-from comitup.config import REGEX_APNAME_ID
+from comitup.config import REGEX_APNAME_ID  # noqa
 
 comitup_path = "/com/github/davesteele/comitup"
 
@@ -126,13 +126,13 @@ def expand_ap(ap_name, data):
     if expand_spec_srch is not None:
         # There is a'<###>' section in the ap_name, substitute it
         expand_spec = expand_spec_srch.group()
-        num = len(expand_spec) - 2 # remove <> contribution
+        num = len(expand_spec) - 2  # -2 remove <> contribution
 
         if expand_spec.startswith("<s"):
             id = data.sn[-num:]
         elif expand_spec.startswith("<M"):
             id = data.mac[-num:]
-        else:  # default case, we assume <nn...> based on config's REGEX_APNAME_ID validation
+        else:  # default case <nn...>, based on regex search
             id = data.id[:num]
 
         returnval = re.sub(REGEX_APNAME_ID, id, ap_name)
