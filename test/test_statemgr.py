@@ -80,7 +80,24 @@ Case = namedtuple("ApName", ["input", "out"])
         Case("<hostname>", "host"),
         Case("<hostname>-<n>", "host-1"),
         Case("<bogus>", "<bogus>"),
+        Case("<M>", "1"),
+        Case("<MMMMMM>", "654321"),
+        Case("<hostname>-<MMMMMM>", "host-654321"),
+        Case("<MMMM>-<hostname>", "4321-host"),
+        Case("<MMMM><hostname>", "4321host"),
+        Case("<s>", "1"),
+        Case("<ssssss>", "654321"),
+        Case("<hostname>-<ssssss>", "host-654321"),
+        Case("<ssss>-<hostname>", "4321-host"),
+        Case("<ssss><hostname>", "4321host"),
     ]
 )
 def test_expand_ap(ap_name_fxt, case):
-    assert sm.expand_ap(case.input, "1234") == case.out
+    class Object(object):
+        pass
+
+    data=Object()
+    data.id = "1234"
+    data.mac = "CBA987654321"
+    data.sn = "1000000087654321"
+    assert sm.expand_ap(case.input, data) == case.out
