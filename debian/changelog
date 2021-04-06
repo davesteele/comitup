@@ -1,3 +1,12 @@
+comitup (1.18-1) UNRELEASED; urgency=medium
+
+  * Fix crash when running in Spanish locale.
+  * Add support for mac addr, sn, in ap_name (thanks systemicorp).
+  * Add a "Locate" web/cli LED blink function to identify Comitup Pis.
+  * Bug fixes - cleaner set_state(), start comitup-web cleanly.
+
+ -- David Steele <steele@debian.org>  Mon, 05 Apr 2021 21:48:19 -0400
+
 comitup (1.17-1) unstable; urgency=medium
 
   * Add an "info" option, to support 1st-run hostname setting.
