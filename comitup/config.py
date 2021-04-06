@@ -110,6 +110,7 @@ def load_data():
                     'web_service': '',
                     'service_name': 'comitup',
                     'external_callback': '/usr/local/bin/comitup-callback',
+                    'manage_wired_device': False,
                 },
              )
 
@@ -128,5 +129,5 @@ def load_data():
         if spec.group().startswith('<s'):
             data['sn']: _getserial()
 
-    log.debug(data)
+    log.info("MGAG load_data manage_wired_device {}".format(conf.manage_wired_device))
     return (conf, data)

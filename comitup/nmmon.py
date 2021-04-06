@@ -32,6 +32,7 @@ if __name__ == '__main__':
 
 from comitup import modemgr  # noqa
 from comitup import nm  # noqa
+from comitup import config  # noqa
 
 log = logging.getLogger('comitup')
 
@@ -181,10 +182,18 @@ def set_device_listeners(ap_dev, second_dev, wired_dev):
 
 
 def init_nmmon():
+    (conf, data) = config.load_data()
+
+    log.info("MGAG: set_device_listeners manage_wired_device {}".format(conf.manage_wired_device))
+    if conf.manage_wired_device:
+        wd = nm.get_wired_device()
+    else:
+        wd = None
+
     set_device_listeners(
         modemgr.get_ap_device(),
         modemgr.get_link_device(),
-        nm.get_wired_device(),
+        wd,
     )
 
 

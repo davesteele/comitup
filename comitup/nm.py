@@ -21,7 +21,6 @@ from functools import wraps
 
 import dbus
 import NetworkManager as nm
-from statemgr import conf
 
 if __name__ == '__main__':
     import os
@@ -90,11 +89,8 @@ def device_name(device):
 
 def get_wired_device():
     dev = [x for x in get_devices() if x.DeviceType == 1]
-
-    if not dev or not getattr(conf, 'manage_wired_device', False):
-        return None
-
-    return dev[0]
+    if dev: return dev[0]
+    return None
 
 
 def get_wifi_devices():
