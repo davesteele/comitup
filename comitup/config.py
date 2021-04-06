@@ -129,5 +129,5 @@ def load_data():
         if spec.group().startswith('<s'):
             data['sn']: _getserial()
 
-    log.info("MGAG load_data manage_wired_device {}".format(conf.manage_wired_device))
+    log.debug(data)
     return (conf, data)

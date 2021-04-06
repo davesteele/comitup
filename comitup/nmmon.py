@@ -53,6 +53,7 @@ PASS_STATES = [
 ]
 FAIL_STATES = [NetworkManager.NM_DEVICE_STATE_FAILED]
 
+TIMER_WIRED_PUSH_STATE_S = 5.0  # delay to push eth0 (wired) state
 
 def disable():
     global monitored_dev, nm_dev_connect, nm_dev_fail
@@ -85,22 +86,23 @@ def send_cb(cb):
 def wired_changed_state(state, *args):
     global wired_is_connected
 
-    log.info("MGAG: wired_changed_state {}".format(state))
     from comitup.states import set_state
 
     if state in [NetworkManager.NM_DEVICE_STATE_ACTIVATED, ]:
         wired_is_connected = True
-        log.info("MGAG nmm - primary pass, set_state CONNECTED")
+        log.info("nmm - wired CONNECTED")
         set_state('CONNECTED')
-    else:
+    elif state in [NetworkManager.NM_DEVICE_STATE_DISCONNECTED, ]:
         wired_is_connected = False
         set_state('HOTSPOT')
-        log.debug("nmm - primary state {}".format(state))
+        log.debug("nmm - wired {}".format(state))
+    else:
+        wired_is_connected = False
+        log.debug("nmm - wired {}".format(state))
 
 
 def ap_changed_state(state, *args):
     if wired_is_connected:
-        log.info("MGAG wired_is_connected, ignoring AP state change {}".format(state))
         return
 
     if state in PASS_STATES:
@@ -114,6 +116,9 @@ def ap_changed_state(state, *args):
 
 
 def second_changed_state(state, *args):
+    if wired_is_connected:
+        return
+
     if state in PASS_STATES:
         log.debug("nmm - secondary pass")
         send_cb(nm_dev_connect)
@@ -168,10 +173,10 @@ def set_device_listeners(ap_dev, second_dev, wired_dev):
             dbus_interface="org.freedesktop.NetworkManager.Device",
             path=nm.get_device_path(wired_dev)
         )
-        log.info("MGAG Listener is {}".format(device_listener))
+        log.debug("Listener is {}".format(device_listener))
         # kicks wired state on boot, otherwise wired state is missed
         if wired_device.State == NetworkManager.NM_DEVICE_STATE_ACTIVATED:
-            threading.Timer(5.0, wired_changed_state, [wired_device.State]).start()
+            threading.Timer(TIMER_WIRED_PUSH_STATE_S, wired_changed_state, [wired_device.State]).start()
 
     device_listener = bus.add_signal_receiver(
         any_changed_state,
@@ -184,7 +189,6 @@ def set_device_listeners(ap_dev, second_dev, wired_dev):
 def init_nmmon():
     (conf, data) = config.load_data()
 
-    log.info("MGAG: set_device_listeners manage_wired_device {}".format(conf.manage_wired_device))
     if conf.manage_wired_device:
         wd = nm.get_wired_device()
     else:
