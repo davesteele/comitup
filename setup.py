@@ -10,11 +10,11 @@
 # or later
 #
 
-from setuptools import setup
-from distutils.command.clean import clean
-
 import os
 import shutil
+from distutils.command.clean import clean
+
+from setuptools import setup
 
 
 class MyClean(clean):

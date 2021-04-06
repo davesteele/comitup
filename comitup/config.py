@@ -12,11 +12,11 @@
 
 import configparser
 import io
+import logging
 import os
 import random
-import shutil
 import re
-import logging
+import shutil
 import subprocess
 
 from comitup import persist
