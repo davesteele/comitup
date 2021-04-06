@@ -55,6 +55,7 @@ FAIL_STATES = [NetworkManager.NM_DEVICE_STATE_FAILED]
 
 TIMER_WIRED_PUSH_STATE_S = 5.0  # delay to push eth0 (wired) state
 
+
 def disable():
     global monitored_dev, nm_dev_connect, nm_dev_fail
 
@@ -92,13 +93,12 @@ def wired_changed_state(state, *args):
         wired_is_connected = True
         log.info("nmm - wired CONNECTED")
         set_state('CONNECTED')
-    elif state in [NetworkManager.NM_DEVICE_STATE_DISCONNECTED, ]:
+    elif wired_is_connected:
         wired_is_connected = False
         set_state('HOTSPOT')
         log.debug("nmm - wired {}".format(state))
     else:
-        wired_is_connected = False
-        log.debug("nmm - wired {}".format(state))
+        log.debug("nmm - wired state {}".format(state))
 
 
 def ap_changed_state(state, *args):
@@ -189,7 +189,7 @@ def set_device_listeners(ap_dev, second_dev, wired_dev):
 def init_nmmon():
     (conf, data) = config.load_data()
 
-    if conf.manage_wired_device:
+    if conf.monitor_wired_device:
         wd = nm.get_wired_device()
     else:
         wd = None

@@ -110,7 +110,7 @@ def load_data():
                     'web_service': '',
                     'service_name': 'comitup',
                     'external_callback': '/usr/local/bin/comitup-callback',
-                    'manage_wired_device': False,
+                    'monitor_wired_device': False,
                 },
              )
 
