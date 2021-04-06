@@ -41,6 +41,8 @@ def test_webapp_null(app, ssid):
 
 
 def test_webapp_index(app, ssid, monkeypatch):
+    comitupweb.ttl_cache.clear()
+
     point = {
         "ssid": ssid,
     }

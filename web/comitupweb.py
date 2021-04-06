@@ -20,6 +20,7 @@ from multiprocessing import Process
 
 from flask import (Flask, abort, jsonify, redirect, render_template, request,
                    send_from_directory)
+from cachetools import cached, TTLCache
 
 sys.path.append(".")
 sys.path.append("..")
@@ -29,6 +30,8 @@ from comitup import client as ciu  # noqa
 ciu_client = None
 LOG_PATH = "/var/log/comitup-web.log"
 TEMPLATE_PATH = "/usr/share/comitup/web/templates"
+
+ttl_cache = TTLCache(maxsize=10, ttl=5)
 
 
 def deflog():
@@ -57,6 +60,11 @@ def do_connect(ssid, password, log):
     ciu_client.ciu_connect(ssid, password)
 
 
+@cached(cache=ttl_cache)
+def cached_points():
+    return ciu_client.ciu_points()
+
+
 def create_app(log):
     app = Flask(__name__, template_folder=TEMPLATE_PATH)
 
@@ -67,7 +75,7 @@ def create_app(log):
 
     @app.route("/")
     def index():
-        points = ciu_client.ciu_points()
+        points = cached_points()
         for point in points:
             point["ssid_encoded"] = urllib.parse.quote(point["ssid"])
         log.info("index.html - {} points".format(len(points)))
@@ -98,6 +106,8 @@ def create_app(log):
     def connect():
         ssid = urllib.parse.unquote(request.form["ssid"])
         password = request.form["password"].encode()
+
+        cached_points()
 
         p = Process(target=do_connect, args=(ssid, password, log))
         p.start()
