@@ -31,6 +31,8 @@ ciu_client = None
 LOG_PATH = "/var/log/comitup-web.log"
 TEMPLATE_PATH = "/usr/share/comitup/web/templates"
 
+ttl_cache = TTLCache(maxsize=10, ttl=5)
+
 
 def deflog():
     log = logging.getLogger("comitup_web")
@@ -58,7 +60,7 @@ def do_connect(ssid, password, log):
     ciu_client.ciu_connect(ssid, password)
 
 
-@cached(cache=TTLCache(maxsize=10, ttl=5))
+@cached(cache=ttl_cache)
 def cached_points():
     return ciu_client.ciu_points()
 
