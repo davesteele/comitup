@@ -101,6 +101,7 @@ setup(
         ),  # noqa
     ],
     install_requires=[
+        "cachetools",
         "jinja2",
         "dbus-python",
         "pygobject",
