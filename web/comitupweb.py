@@ -71,7 +71,9 @@ def create_app(log):
         for point in points:
             point["ssid_encoded"] = urllib.parse.quote(point["ssid"])
         log.info("index.html - {} points".format(len(points)))
-        return render_template("index.html", points=points)
+        return render_template(
+            "index.html", points=points, can_blink=ciu.can_blink()
+        )
 
     @app.route("/confirm")
     def confirm():
@@ -115,7 +117,7 @@ def create_app(log):
         return resp
 
     @app.route("/img/favicon.ico")
-    def favicon(path):
+    def favicon():
         log.info("Returning 404 for favicon request")
         abort(404)
 

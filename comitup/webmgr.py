@@ -56,6 +56,8 @@ def callback_target():
 def init_webmgr(web_svc):
     global web_service
 
+    stop_service(COMITUP_SERVICE)
+
     web_service = web_svc
 
     log.debug("web service is %s" % web_service)
