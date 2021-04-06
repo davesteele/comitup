@@ -176,7 +176,9 @@ def set_device_listeners(ap_dev, second_dev, wired_dev):
         log.debug("Listener is {}".format(device_listener))
         # kicks wired state on boot, otherwise wired state is missed
         if wired_device.State == NetworkManager.NM_DEVICE_STATE_ACTIVATED:
-            threading.Timer(TIMER_WIRED_PUSH_STATE_S, wired_changed_state, [wired_device.State]).start()
+            threading.Timer(TIMER_WIRED_PUSH_STATE_S,
+                            wired_changed_state,
+                            [wired_device.State]).start()
 
     device_listener = bus.add_signal_receiver(
         any_changed_state,

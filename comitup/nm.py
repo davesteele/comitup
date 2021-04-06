@@ -89,7 +89,8 @@ def device_name(device):
 
 def get_wired_device():
     dev = [x for x in get_devices() if x.DeviceType == 1]
-    if dev: return dev[0]
+    if dev:
+        return dev[0]
     return None
 
 
