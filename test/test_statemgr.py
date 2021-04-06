@@ -96,7 +96,7 @@ def test_expand_ap(ap_name_fxt, case):
     class Object(object):
         pass
 
-    data=Object()
+    data = Object()
     data.id = "1234"
     data.mac = "CBA987654321"
     data.sn = "1000000087654321"
