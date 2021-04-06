@@ -7,6 +7,7 @@
     <link rel="icon" href="img/favicon.ico">
     <!-- CSS FILES -->
     <link rel="stylesheet" type="text/css" href="css/uikit.css">
+    <script src="js/blink.js"></script>
 </head>
 <body class="uk-height-1-1">
 <div class="uk-flex uk-flex-center uk-flex-middle">
@@ -25,7 +26,7 @@
                     Press the Connect button to connect this device to {{ ssid }}. <br><br>
 
                     {% if mode == 'single' %}
-                    This will terminate the current hotspot. Connect to {{ ssid }} for access.<br><br>
+                    This will terminate the current hotspot. Connect to {{ ssid }}.local for access.<br><br>
 
                     If the connection fails, this hotspot will be re-created.<br><br>
                     {% else %}
@@ -47,6 +48,18 @@
                 </div>
             </div>
         </form>
+            <div class="uk-margin">
+            <div class="uk-flex uk-flex-center">
+		{% if can_blink %}
+		    <div>
+                        <img src="img/ledoff.gif" id="ledimg">
+		    </div>
+		    <div>
+                        <button onclick="blink()" class="uk-button uk-margin-left">Locate</button>
+		    </div>
+		{% endif %}
+            </div>
+	    </div>
     </div>
 </div>
 

@@ -11,19 +11,20 @@
 # or later
 #
 
-from flask import Flask, render_template, request, send_from_directory,\
-                  redirect, abort
 import logging
-from logging.handlers import TimedRotatingFileHandler
-from multiprocessing import Process
 import sys
 import time
 import urllib
+from logging.handlers import TimedRotatingFileHandler
+from multiprocessing import Process
 
-sys.path.append('.')
-sys.path.append('..')
+from flask import (Flask, abort, redirect, render_template, request,
+                   send_from_directory, jsonify)
 
-from comitup import client as ciu                 # noqa
+sys.path.append(".")
+sys.path.append("..")
+
+from comitup import client as ciu  # noqa
 
 ciu_client = None
 LOG_PATH = "/var/log/comitup-web.log"
@@ -31,18 +32,18 @@ TEMPLATE_PATH = "/usr/share/comitup/web/templates"
 
 
 def deflog():
-    log = logging.getLogger('comitup_web')
+    log = logging.getLogger("comitup_web")
     log.setLevel(logging.INFO)
     handler = TimedRotatingFileHandler(
-                LOG_PATH,
-                encoding='utf=8',
-                when='D',
-                interval=7,
-                backupCount=8,
-              )
+        LOG_PATH,
+        encoding="utf=8",
+        when="D",
+        interval=7,
+        backupCount=8,
+    )
     fmtr = logging.Formatter(
-            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-           )
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
     handler.setFormatter(fmtr)
     log.addHandler(handler)
 
@@ -68,17 +69,11 @@ def create_app(log):
     def index():
         points = ciu_client.ciu_points()
         for point in points:
-            point['ssid_encoded'] = urllib.parse.quote(point['ssid'])
+            point["ssid_encoded"] = urllib.parse.quote(point["ssid"])
         log.info("index.html - {} points".format(len(points)))
-        return render_template("index.html", points=points)
-
-    @app.route('/js/<path:path>')
-    def send_js(path):
-        return send_from_directory(TEMPLATE_PATH + '/js', path)
-
-    @app.route('/css/<path:path>')
-    def send_css(path):
-        return send_from_directory(TEMPLATE_PATH + '/css', path)
+        return render_template(
+            "index.html", points=points, can_blink=ciu.can_blink()
+        )
 
     @app.route("/confirm")
     def confirm():
@@ -86,19 +81,20 @@ def create_app(log):
         ssid_encoded = urllib.parse.quote(ssid.encode())
         encrypted = request.args.get("encrypted", "unencrypted")
 
-        mode = ciu_client.ciu_info()['imode']
+        mode = ciu_client.ciu_info()["imode"]
 
         log.info("confirm.html - ssid {0}, mode {1}".format(ssid, mode))
 
         return render_template(
-                                "confirm.html",
-                                ssid=ssid,
-                                encrypted=encrypted,
-                                ssid_encoded=ssid_encoded,
-                                mode=mode,
-                                )
+            "confirm.html",
+            ssid=ssid,
+            encrypted=encrypted,
+            ssid_encoded=ssid_encoded,
+            mode=mode,
+            can_blink=ciu.can_blink(),
+        )
 
-    @app.route("/connect", methods=['POST'])
+    @app.route("/connect", methods=["POST"])
     def connect():
         ssid = urllib.parse.unquote(request.form["ssid"])
         password = request.form["password"].encode()
@@ -108,15 +104,34 @@ def create_app(log):
 
         log.info("connect.html - ssid {0}".format(ssid))
         return render_template(
-                "connect.html",
-                ssid=ssid,
-                password=password,
-                )
+            "connect.html",
+            ssid=ssid,
+            password=password,
+        )
+
+    @app.route("/blink")
+    def blink():
+        ciu.blink()
+
+        resp = jsonify(success=True)
+        return resp
 
     @app.route("/img/favicon.ico")
-    def favicon(path):
+    def favicon():
         log.info("Returning 404 for favicon request")
         abort(404)
+
+    @app.route("/img/<path:path>")
+    def send_image(path):
+        return send_from_directory(TEMPLATE_PATH + "/images", path)
+
+    @app.route("/js/<path:path>")
+    def send_js(path):
+        return send_from_directory(TEMPLATE_PATH + "/js", path)
+
+    @app.route("/css/<path:path>")
+    def send_css(path):
+        return send_from_directory(TEMPLATE_PATH + "/css", path)
 
     @app.route("/<path:path>")
     def catch_all(path):
@@ -143,5 +158,5 @@ def main():
     app.run(host="0.0.0.0", port=80, debug=False, threaded=True)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

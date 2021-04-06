@@ -6,6 +6,8 @@
 Comitup
 ======
 
+[![Build Status](https://github.com/davesteele/comitup/actions/workflows/testnox.yml/badge.svg?branch=master)](https://github.com/davesteele/comitup/actions)
+
 [Home Page](https://davesteele.github.io/comitup/)
 
 [Wiki](https://github.com/davesteele/comitup/wiki)
@@ -41,6 +43,9 @@ If two wifi interfaces are available, the first will persistently remain
 the hotspot, and the second will get the external connection. When both
 are connected, forwarding and masquerading are enabled so that
 hotspot-connected devices can access external networks.
+
+On the Raspberry Pi, the comitup-web service, running in the hotspot mode,
+supports a "Locate" feature that blinks the green led on the front of the unit.
 
 [zeroconf]: https://en.wikipedia.org/wiki/Zero-configuration_networking
 [Android]: https://play.google.com/store/apps/details?id=com.melloware.zeroconf&hl=en

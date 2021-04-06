@@ -45,6 +45,14 @@ def do_info(ciu_client, connection):
     print("'%s' mode" % info['imode'])
 
 
+def do_locate(ciu_client, connection):
+    print("Attempting to blink the Pi front green led once")
+    try:
+        ciu.blink()
+    except PermissionError:
+        print("ERROR: Run as root")
+
+
 CmdState = namedtuple('CmdState', "fn, desc, HOTSPOT, CONNECTING, CONNECTED")
 
 commands = OrderedDict([
@@ -54,6 +62,7 @@ commands = OrderedDict([
     ('q',   CmdState(do_quit,    '(q)uit',               True,  True, True)),
     ('<n>', CmdState(do_connect, 'connect to <n>',       True,  False, False)),
     ('m',   CmdState(do_connect, '(m)anual connection',  True,  False, False)),
+    ('l',   CmdState(do_locate,  '(l)ocate the device',  True,  True, True)),
 ])
 
 

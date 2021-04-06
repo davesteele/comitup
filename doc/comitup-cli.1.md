@@ -1,6 +1,6 @@
 % comitup-cli(1)
 %
-% February 2019
+% April 2021
 
 # NAME
 
@@ -19,6 +19,7 @@ comitup-cli -- command-line interface for comitup network management
         (r)eload
         (q)uit
         connect to (<n>)
+        [l]ocate the device
     command?:
 
 ## DESCRIPTION
@@ -90,6 +91,11 @@ Commands:
   * __i__ - **Get information**
 
     Return the comitup version and host name for the current instance.
+
+  * __l__ - **Locate**
+
+    Locate the headless Raspberry Pi running Comitup by blinking the front
+    green LED once.
 
 ## COPYRIGHT
 

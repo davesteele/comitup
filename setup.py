@@ -35,7 +35,7 @@ class MyClean(clean):
 setup(
     name='comitup',
     packages=['comitup', 'web', 'cli'],
-    version='1.17',
+    version='1.18',
     description="Remotely manage wifi connections on a headless computer",
     classifiers=[
         'Development Status :: 5 - Production/Stable',
@@ -84,6 +84,13 @@ setup(
             [
                 'web/templates/js/uikit.js',
                 'web/templates/js/uikit-icons.js',
+                'web/templates/js/blink.js',
+            ]
+        ),  # noqa
+        ('/usr/share/comitup/web/templates/images',
+            [
+                'web/templates/images/ledon.gif',
+                'web/templates/images/ledoff.gif',
             ]
         ),  # noqa
         ('/usr/share/comitup/dns',

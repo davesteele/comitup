@@ -12,9 +12,8 @@
 
 import logging
 import subprocess
-from comitup import modemgr
-from comitup import nm
 
+from comitup import modemgr, nm
 
 start_cmds = [
     # HOTSPOT rules

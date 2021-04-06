@@ -5,10 +5,9 @@
 # License-Filename: LICENSE
 
 import logging
-import subprocess
 import re
+import subprocess
 from multiprocessing import Process, Queue
-
 
 log = logging.getLogger("comitup")
 

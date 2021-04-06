@@ -5,8 +5,7 @@
 # License-Filename: LICENSE
 
 import pytest
-
-from mock import patch, call
+from mock import call, patch
 
 from comitup import webmgr
 
@@ -29,12 +28,12 @@ def websvc_fxt(request):
     ('HOTSPOT',    'start', lambda: webmgr.stop_service,
                             lambda: webmgr.web_service),        # noqa
     ('HOTSPOT',     'pass', lambda: webmgr.start_service,
-                            lambda: webmgr.COMITUP_SERVICE),
+                            lambda: webmgr.COMITUP_SERVICE),    # noqa
     ('CONNECTING', 'start', lambda: webmgr.stop_service,
-                            lambda: webmgr.COMITUP_SERVICE),
+                            lambda: webmgr.COMITUP_SERVICE),    # noqa
     ('CONNECTED',  'start', lambda: webmgr.start_service,
-                            lambda: webmgr.web_service),
-))
+                            lambda: webmgr.web_service),        # noqa
+))  # noqa
 @pytest.mark.parametrize("svc", ("", "foo"))
 @patch('comitup.webmgr.start_service')
 @patch('comitup.webmgr.stop_service')

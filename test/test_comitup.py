@@ -4,13 +4,17 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 
+import os
+import sys
+import textwrap
+
 import pytest
 from mock import Mock
-import textwrap
-import os
 
-from comitup import config
-from comitup import comitup as ciu
+sys.modules["NetworkManager"] = Mock()
+
+from comitup import comitup as ciu  # noqa
+from comitup import config  # noqa
 
 
 @pytest.fixture()

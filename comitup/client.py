@@ -11,8 +11,11 @@
 # or later
 #
 
-import dbus
 import sys
+
+import dbus
+
+from comitup.blink import blink, can_blink  # noqa
 
 
 class CiuClient(object):
@@ -22,11 +25,11 @@ class CiuClient(object):
     # These are the methods supported, with the corresponding dbus
     # endpoint name.
     methods = {
-        'ciu_info': 'get_info',
-        'ciu_state': 'state',
-        'ciu_points': 'access_points',
-        'ciu_connect': 'connect',
-        'ciu_delete': 'delete_connection',
+        "ciu_info": "get_info",
+        "ciu_state": "state",
+        "ciu_points": "access_points",
+        "ciu_connect": "connect",
+        "ciu_delete": "delete_connection",
     }
 
     def __init__(self):
@@ -39,12 +42,13 @@ class CiuClient(object):
         try:
             if not self.service:
                 bus = dbus.SystemBus()
-                self.service = bus.get_object('com.github.davesteele.comitup',
-                                              '/com/github/davesteele/comitup')
+                self.service = bus.get_object(
+                    "com.github.davesteele.comitup",
+                    "/com/github/davesteele/comitup",
+                )
             func = self.service.get_dbus_method(
-                    self.methods[name],
-                    'com.github.davesteele.comitup'
-                    )
+                self.methods[name], "com.github.davesteele.comitup"
+            )
         except dbus.exceptions.DBusException:
             sys.exit(1)
 

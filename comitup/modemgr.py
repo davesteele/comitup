@@ -11,9 +11,7 @@
 # or later
 #
 
-from comitup import nm
-from comitup import config
-
+from comitup import config, nm
 
 SINGLE_MODE = "single"
 MULTI_MODE = "router"

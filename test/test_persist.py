@@ -4,12 +4,13 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 
-from comitup.persist import persist
+import os
+import shutil
+import tempfile
 
 import pytest
-import os
-import tempfile
-import shutil
+
+from comitup.persist import persist
 
 
 @pytest.fixture(scope='module')

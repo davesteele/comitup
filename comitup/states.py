@@ -12,22 +12,21 @@
 #
 
 
-from functools import wraps
 import hashlib
 import logging
-
-from comitup import iwscan
-from comitup import wpa
+from functools import wraps
 
 from gi.repository.GLib import MainLoop, timeout_add
+
+from comitup import iwscan, wpa
+
 if __name__ == '__main__':
     from dbus.mainloop.glib import DBusGMainLoop
     DBusGMainLoop(set_as_default=True)
 
-from comitup import nmmon    # noqa
-from comitup import nm       # noqa
 from comitup import modemgr  # noqa
-
+from comitup import nm  # noqa
+from comitup import nmmon  # noqa
 
 log = logging.getLogger('comitup')
 
@@ -240,6 +239,10 @@ class state_matrix(object):
 
 
 def set_state(state, connections=None, timeout=180):
+    timeout_add(0, set_state_to, state, connections, timeout)
+
+
+def set_state_to(state, connections=None, timeout=180):
     global com_state, conn_list, state_id, points
 
     log.info('Setting state to %s' % state)
@@ -258,11 +261,16 @@ def set_state(state, connections=None, timeout=180):
     )
 
     if connections:
-        conn_list = connections
+        if type(conn_list) == str:
+            conn_list = [connections]
+        else:
+            conn_list = connections
 
     com_state = state
     timeout_add(timeout*1000, state_info.timeout_fn, state_id)
     state_info.start_fn()
+
+    return False
 
 
 def activate_connection(name, state):

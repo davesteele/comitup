@@ -11,13 +11,13 @@
 # or later
 #
 
-import dbus
-from functools import partial
-from gi.repository.GLib import MainLoop, timeout_add
-
-from dbus.mainloop.glib import DBusGMainLoop
-
 import logging
+from functools import partial
+
+import dbus
+import NetworkManager
+from dbus.mainloop.glib import DBusGMainLoop
+from gi.repository.GLib import MainLoop, timeout_add
 
 if __name__ == '__main__':
     DBusGMainLoop(set_as_default=True)
@@ -29,8 +29,8 @@ if __name__ == '__main__':
     parentdir = '/'.join(fullpath.split('/')[:-2])
     sys.path.insert(0, parentdir)
 
-from comitup import nm       # noqa
 from comitup import modemgr  # noqa
+from comitup import nm  # noqa
 
 log = logging.getLogger('comitup')
 
@@ -43,8 +43,11 @@ second_device_name = None
 nm_dev_connect = None
 nm_dev_fail = None
 
-PASS_STATES = [nm.NM_DEVICE_STATE_IP_CHECK, nm.NM_DEVICE_STATE_ACTIVATED]
-FAIL_STATES = [nm.NM_DEVICE_STATE_FAILED]
+PASS_STATES = [
+    NetworkManager.NM_DEVICE_STATE_IP_CHECK,
+    NetworkManager.NM_DEVICE_STATE_ACTIVATED
+]
+FAIL_STATES = [NetworkManager.NM_DEVICE_STATE_FAILED]
 
 
 def disable():
@@ -98,8 +101,8 @@ def second_changed_state(state, *args):
 
 
 def any_changed_state(state, *args):
-    from comitup.states import dns_names
     from comitup import mdns
+    from comitup.states import dns_names
 
     interesting_states = PASS_STATES + FAIL_STATES
 

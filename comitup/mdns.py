@@ -11,15 +11,13 @@
 # or later
 #
 
-import dbus
-import socket
 import logging
-import random
-import shutil
-import os
-from comitup import nm
-from comitup import config
+import socket
 import subprocess
+
+import dbus
+
+from comitup import config, nm
 
 log = logging.getLogger('comitup')
 
@@ -133,7 +131,7 @@ def get_interface_mapping():
             pass
 
     return mapping
-    
+
 
 def add_hosts(hosts):
     establish_group()

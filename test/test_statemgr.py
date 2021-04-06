@@ -4,11 +4,12 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 
-import pytest
-from mock import Mock
 import importlib
+from collections import namedtuple
 
 import dbus.service
+import pytest
+from mock import Mock
 
 
 def nullwrapper(*args, **kwargs):
@@ -51,3 +52,52 @@ def test_sm_none(statemgr_fxt):
 def test_sm_state(statemgr_fxt):
     obj = sm.Comitup()
     assert obj.state() == ['CONNECTED', 'connection']
+
+
+@pytest.fixture()
+def ap_name_fxt(monkeypatch):
+    monkeypatch.setattr(
+        'socket.gethostname', Mock(return_value="host")
+    )
+
+    return None
+
+
+Case = namedtuple("ApName", ["input", "out"])
+
+
+@pytest.mark.parametrize(
+    "case",
+    [
+        Case("comitup-<nnn>", "comitup-123"),
+        Case("<n>", "1"),
+        Case("<nn>", "12"),
+        Case("<nnn>", "123"),
+        Case("<nnnn>", "1234"),
+        Case("<nnnnn>", "<nnnnn>"),
+        Case("A<n>", "A1"),
+        Case("<n>A", "1A"),
+        Case("<hostname>", "host"),
+        Case("<hostname>-<n>", "host-1"),
+        Case("<bogus>", "<bogus>"),
+        Case("<M>", "1"),
+        Case("<MMMMMM>", "654321"),
+        Case("<hostname>-<MMMMMM>", "host-654321"),
+        Case("<MMMM>-<hostname>", "4321-host"),
+        Case("<MMMM><hostname>", "4321host"),
+        Case("<s>", "1"),
+        Case("<ssssss>", "654321"),
+        Case("<hostname>-<ssssss>", "host-654321"),
+        Case("<ssss>-<hostname>", "4321-host"),
+        Case("<ssss><hostname>", "4321host"),
+    ]
+)
+def test_expand_ap(ap_name_fxt, case):
+    class Object(object):
+        pass
+
+    data=Object()
+    data.id = "1234"
+    data.mac = "CBA987654321"
+    data.sn = "1000000087654321"
+    assert sm.expand_ap(case.input, data) == case.out

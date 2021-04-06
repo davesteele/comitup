@@ -5,13 +5,12 @@
 # License-Filename: LICENSE
 
 
-from collections import namedtuple
 import logging
 import os
 import re
 import subprocess
 import textwrap
-
+from collections import namedtuple
 
 log = logging.getLogger('comitup')
 
@@ -65,7 +64,13 @@ def device_supports_ap():
 def device_nm_managed():
     try:
         cmd = "nmcli device show"
-        devsinfo = subprocess.check_output(cmd.split(), re.MULTILINE).decode()
+        try:
+            devsinfo = subprocess.check_output(
+                cmd.split(), re.MULTILINE
+            ).decode()
+        except UnicodeDecodeError:
+            # shouldn't happen, but it does. Move on
+            return None
 
         for dev in dev_info.get_devs():
             if dev not in devsinfo:
