@@ -1,4 +1,10 @@
-comitup (1.18-1) UNRELEASED; urgency=medium
+comitup (1.19-1) UNRELEASED; urgency=medium
+
+  * Fix WiFi connection problem involving iPhone (Closes #71).
+
+ -- David Steele <steele@debian.org>  Tue, 06 Apr 2021 21:13:19 -0400
+
+comitup (1.18-1) comitup; urgency=medium
 
   * Fix crash when running in Spanish locale.
   * Add support for mac addr, sn, in ap_name (thanks systemicorp).
