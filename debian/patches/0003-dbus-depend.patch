@@ -4,9 +4,9 @@ Add the dependency at the OS package level.
 
 --- a/setup.py
 +++ b/setup.py
-@@ -94,7 +94,6 @@
-     ],
+@@ -102,7 +102,6 @@
      install_requires=[
+         "cachetools",
          "jinja2",
 -        "dbus-python",
          "pygobject",
