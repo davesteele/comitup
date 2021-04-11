@@ -1,6 +1,7 @@
 comitup (1.19-1) UNRELEASED; urgency=medium
 
   * Fix WiFi connection problem involving iPhone (Closes #71).
+  * Change the upstream main branch name to "main".
 
  -- David Steele <steele@debian.org>  Tue, 06 Apr 2021 21:13:19 -0400
 
