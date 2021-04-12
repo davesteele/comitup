@@ -1,4 +1,4 @@
-comitup (1.19-1) UNRELEASED; urgency=medium
+comitup (1.19-1) comitup; urgency=medium
 
   * Fix WiFi connection problem involving iPhone (Closes #71).
   * Change the upstream main branch name to "main".
