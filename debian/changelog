@@ -1,3 +1,9 @@
+comitup (1.20-1) comitup; urgency=medium
+
+  * Fix a problem with initial connection attempts.
+
+ -- David Steele <steele@debian.org>  Thu, 15 Apr 2021 12:58:43 -0400
+
 comitup (1.19-1) comitup; urgency=medium
 
   * Fix WiFi connection problem involving iPhone (Closes #71).
