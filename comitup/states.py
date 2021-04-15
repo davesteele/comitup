@@ -245,6 +245,9 @@ def set_state(state, connections=None, timeout=180):
 def set_state_to(state, connections=None, timeout=180):
     global com_state, conn_list, state_id, points
 
+    if state == com_state:
+        return False
+
     log.info('Setting state to %s' % state)
 
     state_info = state_matrix(state)
