@@ -328,7 +328,7 @@ def is_hotspot_current(connection):
 
 
 def init_states(hosts, callbacks, hotspot_pw):
-    global hotspot_name
+    global hotspot_name, conn_list
 
     nmmon.init_nmmon()
     set_hosts(*hosts)
@@ -339,9 +339,9 @@ def init_states(hosts, callbacks, hotspot_pw):
     hotspot_name = dns_to_conn(hosts[0])
     assure_hotspot(hotspot_name, modemgr.get_ap_device(), hotspot_pw)
 
-    # Set an early kick to set CONNECTING mode
-    set_state('HOTSPOT')
-    timeout_add(5*1000, hotspot_timeout, state_id)
+    dev = modemgr.get_state_device("CONNECTED")
+    conn_list = candidate_connections(dev)
+    set_state('CONNECTING')
 
 
 def add_state_callback(callback):
