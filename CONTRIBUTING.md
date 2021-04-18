@@ -1,7 +1,7 @@
 
 ## Making a code contribution
 
-Fork the [repository](https://github.com/davesteele/comitup), make the changes on a new branch off of _master_ (or _main_, if I've gotten around to creating it), and submit a [Pull Request](https://github.com/davesteele/comitup/pulls).
+Fork the [repository](https://github.com/davesteele/comitup), make the changes on a new branch off of _main_, and submit a [Pull Request](https://github.com/davesteele/comitup/pulls).
 
 ## Submitting a Bug Report/Troubleshooting request
 
