@@ -126,7 +126,7 @@ def load_data():
             data['mac'] = _get_mac()
 
         if spec.group().startswith('<s'):
-            data['sn']: _getserial()
+            data['sn'] = _getserial()
 
     log.debug(data)
     return (conf, data)
