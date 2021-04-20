@@ -18,6 +18,7 @@ deps = [
     "python-networkmanager",
     "flask",
     "pygobject",
+    "cachetools",
 ]
 
 

@@ -16,9 +16,10 @@ import sys
 sys.path.append('.')
 sys.path.append('..')
 
-from collections import namedtuple, OrderedDict  # noqa
-from getpass import getpass                      # noqa
-from comitup import client as ciu                # noqa
+from collections import OrderedDict, namedtuple  # noqa
+from getpass import getpass  # noqa
+
+from comitup import client as ciu  # noqa
 
 
 def do_reload(ciu_client, connection):

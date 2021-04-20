@@ -10,11 +10,11 @@
 # or later
 #
 
-from setuptools import setup
-from distutils.command.clean import clean
-
 import os
 import shutil
+from distutils.command.clean import clean
+
+from setuptools import setup
 
 
 class MyClean(clean):
@@ -35,7 +35,7 @@ class MyClean(clean):
 setup(
     name='comitup',
     packages=['comitup', 'web', 'cli'],
-    version='1.18',
+    version='1.21',
     description="Remotely manage wifi connections on a headless computer",
     classifiers=[
         'Development Status :: 5 - Production/Stable',
@@ -101,6 +101,7 @@ setup(
         ),  # noqa
     ],
     install_requires=[
+        "cachetools",
         "jinja2",
         "dbus-python",
         "pygobject",
