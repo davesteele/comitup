@@ -68,6 +68,9 @@ def disable():
 def enable(dev, connect_fn, fail_fn, state_id):
     global monitored_dev, nm_dev_connect, nm_dev_fail
 
+    if wired_is_connected:
+        return
+
     monitored_dev = None
 
     nm_dev_connect = partial(connect_fn, state_id)
