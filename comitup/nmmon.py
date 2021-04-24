@@ -78,26 +78,24 @@ def send_cb(cb):
     timeout_add(1, cb_to, cb)
 
 
-def ap_changed_state(state, *args):
+def ap_changed_state(state, oldstate, reason, *args):
+    log.debug("nmm - primary state {}, was {}, reason {}".format(state, oldstate, reason))
     if state in PASS_STATES:
         log.debug("nmm - primary pass")
         send_cb(nm_dev_connect)
     elif state in FAIL_STATES:
         log.debug("nmm - primary fail")
         send_cb(nm_dev_fail)
-    else:
-        log.debug("nmm - primary state {}".format(state))
 
 
-def second_changed_state(state, *args):
+def second_changed_state(state, oldstate, reason, *args):
+    log.debug("nmm - secondary state {}, was {}, reason {}".format(state, oldstate, reason))
     if state in PASS_STATES:
         log.debug("nmm - secondary pass")
         send_cb(nm_dev_connect)
     elif state in FAIL_STATES:
         log.debug("nmm - secondary fail")
         send_cb(nm_dev_fail)
-    else:
-        log.debug("nmm - secondary state {}".format(state))
 
 
 def any_changed_state(state, *args):
