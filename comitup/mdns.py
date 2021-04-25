@@ -150,7 +150,10 @@ def add_hosts(hosts):
 
             add_service(hosts[0], index, addr)
 
-    group.Commit()
+    try:
+        group.Commit()
+    except dbus.exceptions.DBusException as e:
+        log.exception("Error committing Avahi group")
 
 
 if __name__ == '__main__':
