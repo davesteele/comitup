@@ -79,7 +79,11 @@ def send_cb(cb):
 
 
 def ap_changed_state(state, oldstate, reason, *args):
-    log.debug("nmm - primary state {}, was {}, reason {}".format(state, oldstate, reason))
+    log.debug(
+        "nmm - primary state {}, was {}, reason {}".format(
+            state, oldstate, reason
+        )
+    )
     if state in PASS_STATES:
         log.debug("nmm - primary pass")
         send_cb(nm_dev_connect)
@@ -89,7 +93,11 @@ def ap_changed_state(state, oldstate, reason, *args):
 
 
 def second_changed_state(state, oldstate, reason, *args):
-    log.debug("nmm - secondary state {}, was {}, reason {}".format(state, oldstate, reason))
+    log.debug(
+        "nmm - secondary state {}, was {}, reason {}".format(
+            state, oldstate, reason
+        )
+    )
     if state in PASS_STATES:
         log.debug("nmm - secondary pass")
         send_cb(nm_dev_connect)
