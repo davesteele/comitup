@@ -152,7 +152,7 @@ def add_hosts(hosts):
 
     try:
         group.Commit()
-    except dbus.exceptions.DBusException as e:
+    except dbus.exceptions.DBusException:
         log.exception("Error committing Avahi group")
 
 
