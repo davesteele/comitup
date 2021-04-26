@@ -17,18 +17,10 @@ It is located in the _/etc/_ directory.
     By default, comitup will create a hotspot named **comitup-&lt;nnn&gt;**,
     publish an avahi-daemon(8) host entry for **comitup-&lt;nnn&gt;**, and establish
     an mdns identity for **comitup-&lt;nnn&gt;.local**.  Setting this parameter will
-    change the **comitup** string with one of the users choosing. 
-
-    * There are three options for creating a unique identifier, the length of which is
-      determined by the number of letters,
-      * <n...> Random (persisted) number, 1-4 n's
-      * <M...> RPi wlan0 MAC address, 1-12 M's
-      * <s...> RPi Serial Number, 1-16 s's
-      * Note that only one unique identifier is allowed
-
-    * Similarly, the string &lt;hostname&gt; is replaced with the computer's hostname.
-    * The unique identifier may appear anywhere in the name, for example,
-      * rasp-\<nnn\>, \<MMMMMM\>RPi, \<hostname\>-\<ssss\> 
+    change the **comitup** string with one of the users choosing. If the
+    configuration variable contains an &lt;nnn&gt; string, with between one and four "n's", it
+    will be replaced with a persistent, random number. Similarly, the string
+    &lt;hostname&gt; is replaced with the computer's hostname.
 
   * _ap_password_:
     If this parameter is defined in the configuration file, then the comitup hotspot will
