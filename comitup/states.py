@@ -41,8 +41,6 @@ conn_list = []
 connection = ''
 state_id = 0
 
-points = []
-
 state_callbacks: List[Callable[[str, str], None]]  = []
 
 hotspot_name = None
@@ -244,7 +242,7 @@ def set_state(state, connections=None, timeout=180):
 
 
 def set_state_to(state, connections=None, timeout=180):
-    global com_state, conn_list, state_id, points
+    global com_state, conn_list, state_id
 
     if state == com_state:
         return False
@@ -282,10 +280,7 @@ def activate_connection(name, state):
     connection = name
     log.debug('Connecting to %s' % connection)
 
-    try:
-        path = [x['nmpath'] for x in points if x['ssid'] == name][0]
-    except IndexError:
-        path = '/'
+    path = '/'
 
     log.debug("states: Calling nm.activate_connection_by_ssid()")
     nm.activate_connection_by_ssid(connection,
