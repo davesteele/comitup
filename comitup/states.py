@@ -15,6 +15,7 @@
 import hashlib
 import logging
 from functools import wraps
+from typing import Callable, List
 
 from gi.repository.GLib import MainLoop, timeout_add
 
@@ -31,7 +32,7 @@ from comitup import nmmon  # noqa
 log = logging.getLogger('comitup')
 
 # definitions
-dns_names = []
+dns_names: List[str] = []
 
 
 # Global state information
@@ -42,7 +43,7 @@ state_id = 0
 
 points = []
 
-state_callbacks = []
+state_callbacks: List[Callable[[str, str], None]]  = []
 
 hotspot_name = None
 

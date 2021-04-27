@@ -63,7 +63,7 @@ def ap_name_fxt(monkeypatch):
     return None
 
 
-Case = namedtuple("ApName", ["input", "out"])
+Case = namedtuple("Case", ["input", "out"])
 
 
 @pytest.mark.parametrize(

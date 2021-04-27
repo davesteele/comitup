@@ -31,7 +31,7 @@ ciu_client = None
 LOG_PATH = "/var/log/comitup-web.log"
 TEMPLATE_PATH = "/usr/share/comitup/web/templates"
 
-ttl_cache = TTLCache(maxsize=10, ttl=5)
+ttl_cache: TTLCache = TTLCache(maxsize=10, ttl=5)
 
 
 def deflog():
