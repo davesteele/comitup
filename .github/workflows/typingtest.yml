@@ -1,0 +1,28 @@
+name: Comitup Mypy Typing Tests
+
+on: [push, pull_request]
+
+jobs:
+  typingtest:
+    name: Typing Test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out
+      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.x"
+    - name: Install deb packages
+      run: >
+        sudo apt-get install
+        libcairo2-dev gobject-introspection libgirepository1.0-dev
+        python3-dev libdbus-glib-1-dev libdbus-1-dev
+    - name: Install pip dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .
+        pip install mypy
+    - name: Run mypy test
+      run: |
+        mypy comitup cli web test
