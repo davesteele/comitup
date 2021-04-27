@@ -13,15 +13,12 @@
 
 import logging
 from functools import partial
-from typing import Callable, List, Optional, TYPE_CHECKING
+from typing import Callable, List, Optional
 
 import dbus
 import NetworkManager
 from dbus.mainloop.glib import DBusGMainLoop
 from gi.repository.GLib import MainLoop, timeout_add
-
-if TYPE_CHECKING:
-    import NetworkManager
 
 if __name__ == '__main__':
     DBusGMainLoop(set_as_default=True)
@@ -40,9 +37,9 @@ log: logging.Logger = logging.getLogger('comitup')
 
 bus: dbus.SystemBus = dbus.SystemBus()
 
-monitored_dev: Optional["NetworkManager.Device"] = None
-ap_device: Optional["NetworkManager.Device"] = None
-second_device_name: Optional["NetworkManager.Device"] = None
+monitored_dev: Optional[NetworkManager.Device] = None
+ap_device: Optional[NetworkManager.Device] = None
+second_device_name: Optional[NetworkManager.Device] = None
 
 nm_dev_connect: Optional[Callable[[], None]] = None
 nm_dev_fail: Optional[Callable[[], None]] = None
@@ -64,11 +61,11 @@ def disable() -> None:
 
 
 def enable(
-        dev: "NetworkManager.Device",
+        dev: NetworkManager.Device,
         connect_fn: Callable[[], None],
         fail_fn: Callable[[], None],
         state_id: int,
-    ) -> None:
+) -> None:
     global monitored_dev, nm_dev_connect, nm_dev_fail
 
     monitored_dev = None
@@ -131,9 +128,9 @@ def any_changed_state(state: int, *args) -> None:
 
 
 def set_device_listeners(
-        ap_dev: "NetworkManager.Device",
-        second_dev: "NetworkManager.Device",
-    ) -> None:
+        ap_dev: NetworkManager.Device,
+        second_dev: NetworkManager.Device,
+) -> None:
     global ap_device, second_device_name
 
     if ap_device is None:
