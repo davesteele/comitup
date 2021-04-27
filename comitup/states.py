@@ -17,12 +17,12 @@ import logging
 from functools import wraps
 from typing import Callable, List, Optional, TYPE_CHECKING
 
-from gi.repository.GLib import MainLoop, timeout_add
+from gi.repository.GLib import timeout_add
 
 from comitup import iwscan, wpa
 
 if TYPE_CHECKING:
-    import NetworkManager
+    import NetworkManager  # noqa
 
 if __name__ == '__main__':
     from dbus.mainloop.glib import DBusGMainLoop
@@ -47,6 +47,7 @@ state_id: int = 0
 state_callbacks: List[Callable[[str, str], None]] = []
 
 hotspot_name: str = ""
+
 
 def state_callback(fn):
     @wraps(fn)
@@ -326,10 +327,10 @@ def is_hotspot_current(connection):
 
 
 def init_states(
-        hosts: List[str],
-        callbacks: List[Callable],
-        hotspot_pw: str,
-    ):
+    hosts: List[str],
+    callbacks: List[Callable],
+    hotspot_pw: str,
+):
     global hotspot_name, conn_list
 
     nmmon.init_nmmon()
