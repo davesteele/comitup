@@ -15,7 +15,7 @@ triggerPath = Path("/sys/class/leds/led0/trigger")
 modelPath = Path("/sys/firmware/devicetree/base/model")
 
 
-def onval():
+def onval() -> str:
     """A "1" turns on the led, except on a Zero."""
     val = "1"
     if can_blink():
@@ -25,12 +25,12 @@ def onval():
     return val
 
 
-def offval():
+def offval() -> str:
     """Value to turn the led off."""
     return "0" if onval() == "1" else "1"
 
 
-def can_blink():
+def can_blink() -> bool:
     """ Is this a Pi with a blinkable green led?"""
     if brightPath.exists() and triggerPath.exists():
         return True
@@ -38,24 +38,26 @@ def can_blink():
     return False
 
 
-def get_trigger():
+def get_trigger() -> str:
     """Save the current led trigger, for later restoration."""
     text = triggerPath.read_text()
 
-    try:
-        mode = re.search(r"\[(.+)\]", text).group(1)
-    except Exception:
+    match = re.search(r"\[(.+)\]", text)
+
+    if match:
+        mode = match.group(1)
+    else:
         mode = "none"
 
     return mode
 
 
-def set_trigger(trigger):
+def set_trigger(trigger: str) -> None:
     """Set the green led trigger."""
     triggerPath.write_text(trigger)
 
 
-def blink():
+def blink() -> None:
     """Blink the green led once."""
     if can_blink():
         oldtrig = get_trigger()

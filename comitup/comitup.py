@@ -28,7 +28,7 @@ from comitup import wificheck  # noqa
 LOG_PATH = "/var/log/comitup.log"
 
 
-def deflog():
+def deflog() -> logging.Logger:
     log = logging.getLogger('comitup')
     log.setLevel(logging.INFO)
     handler = TimedRotatingFileHandler(
@@ -47,7 +47,7 @@ def deflog():
     return log
 
 
-def check_environment(log):
+def check_environment(log: logging.Logger) -> None:
     for service in ["systemd-resolved", "dnsmasq", "dhcpd"]:
         try:
             if sysd.sd_unit_jobs("{}.service".format(service)):
@@ -62,7 +62,7 @@ def check_environment(log):
             pass
 
 
-def parse_args():
+def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="")
 
     parser.add_argument(

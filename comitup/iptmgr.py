@@ -12,10 +12,11 @@
 
 import logging
 import subprocess
+from typing import List
 
 from comitup import modemgr, nm
 
-start_cmds = [
+start_cmds: List[str] = [
     # HOTSPOT rules
     "iptables -w -N COMITUP-OUT",
     "iptables -w -A COMITUP-OUT "
@@ -26,7 +27,7 @@ start_cmds = [
     "iptables -w -I OUTPUT -o {ap} -j COMITUP-OUT",
 ]
 
-end_cmds = [
+end_cmds: List[str] = [
     # Clear HOTSPOT rules
     "iptables -w -D OUTPUT -o {ap} -j COMITUP-OUT >/dev/null 2>&1",
     "iptables -w -D COMITUP-OUT "
@@ -39,7 +40,7 @@ end_cmds = [
     "iptables -w -X COMITUP-OUT >/dev/null 2>&1",
 ]
 
-appliance_cmds = [
+appliance_cmds: List[str] = [
     "iptables -w -t nat -N COMITUP-FWD",
     "iptables -w -t nat -A COMITUP-FWD -o {link} -j MASQUERADE",
     "iptables -w -t nat -A COMITUP-FWD -j RETURN",
@@ -47,7 +48,7 @@ appliance_cmds = [
     "echo 1 > /proc/sys/net/ipv4/ip_forward",
 ]
 
-appliance_clear = [
+appliance_clear: List[str] = [
     "iptables -w -t nat -D POSTROUTING -j COMITUP-FWD >/dev/null 2>&1",
     "iptables -w -t nat -D COMITUP-FWD -o {link} "
         "-j MASQUERADE >/dev/null 2>&1",  # noqa
@@ -56,17 +57,17 @@ appliance_clear = [
 ]
 
 
-log = logging.getLogger('comitup')
+log: logging.Logger = logging.getLogger('comitup')
 
 
-def run_cmds(cmds):
+def run_cmds(cmds: List[str]) -> None:
     linkdev = nm.device_name(modemgr.get_link_device())
     apdev = nm.device_name(modemgr.get_ap_device())
     for cmd in cmds:
         subprocess.call(cmd.format(link=linkdev, ap=apdev), shell=True)
 
 
-def state_callback(state, action):
+def state_callback(state: str, action: str) -> None:
     if (state, action) == ('HOTSPOT', 'start'):
         log.debug("Running iptables commands for HOTSPOT")
 
@@ -89,7 +90,7 @@ def state_callback(state, action):
         log.debug("Done with iptables commands for CONNECTED")
 
 
-def init_iptmgr():
+def init_iptmgr() -> None:
     pass
 
 

@@ -11,13 +11,14 @@ import re
 import subprocess
 import textwrap
 from collections import namedtuple
+from typing import List, Optional, Tuple
 
 log = logging.getLogger('comitup')
 
 
 class DevInfo(object):
     def __init__(self):
-        self.dev_list = []
+        self.dev_list: List[Tuple[str, str]] = []
         for dev in os.listdir("/sys/class/net"):
             try:
                 path = "/sys/class/net/{}/phy80211/name".format(dev)
@@ -27,17 +28,17 @@ class DevInfo(object):
             except (NotADirectoryError, FileNotFoundError):
                 pass
 
-    def get_devs(self):
+    def get_devs(self) -> List[str]:
         return sorted([x[0] for x in self.dev_list])
 
-    def get_phy(self, dev):
+    def get_phy(self, dev: str) -> str:
         return [x[1] for x in self.dev_list if x[0] == dev][0]
 
 
 dev_info = DevInfo()
 
 
-def device_present():
+def device_present() -> Optional[str]:
     if dev_info.get_devs():
         return None
     else:
@@ -45,7 +46,7 @@ def device_present():
         return ""
 
 
-def device_supports_ap():
+def device_supports_ap() -> Optional[str]:
     dev = dev_info.get_devs()[0]
     phy = dev_info.get_phy(dev)
 
@@ -61,7 +62,7 @@ def device_supports_ap():
     return None
 
 
-def device_nm_managed():
+def device_nm_managed() -> Optional[str]:
     try:
         cmd = "nmcli device show"
         try:
@@ -117,7 +118,7 @@ testspecs = [
 ]
 
 
-def run_checks(logit=True, printit=True, verbose=True):
+def run_checks(logit=True, printit=True, verbose=True) -> bool:
     for testspec in testspecs:
         testresult = testspec.testfn()
         if testresult is not None:
@@ -134,7 +135,7 @@ def run_checks(logit=True, printit=True, verbose=True):
                     print(testspec.description)
             return True
 
-    return None
+    return False
 
 
 if __name__ == '__main__':

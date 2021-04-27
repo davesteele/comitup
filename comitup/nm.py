@@ -18,6 +18,7 @@ import pprint
 import sys
 import uuid
 from functools import wraps
+from typing import List, Optional
 
 import dbus
 import NetworkManager as nm
@@ -30,7 +31,7 @@ if __name__ == '__main__':
 
 from comitup import iwscan  # noqa
 
-device_list = None
+device_list: Optional[List[nm.Device]] = None
 settings_cache = {}
 
 pp = pprint.PrettyPrinter(indent=4)
