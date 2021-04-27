@@ -16,4 +16,6 @@ Before you write up a troubleshooting issue consider the following:
 
 Make a note in the issue that you have covered these topics.
 
+Also note your hardware platform, and whether or not you are running with two WiFi adapters.
+
 Another troubleshooting write up - https://github.com/davesteele/comitup/issues/91#issuecomment-576462758
