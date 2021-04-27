@@ -11,22 +11,23 @@
 #
 
 import logging
+from typing import Callable
 
 from .sysd import sd_start_unit, sd_stop_unit
 
-log = logging.getLogger('comitup')
+log: logging.Logger = logging.getLogger('comitup')
 
-COMITUP_SERVICE = 'comitup-web.service'
+COMITUP_SERVICE: str = 'comitup-web.service'
 
-web_service = ""
+web_service: str = ""
 
 
-def start_service(service):
+def start_service(service: str) -> None:
     log.debug("starting %s web service", service)
     sd_start_unit(service, 'replace')
 
 
-def stop_service(service):
+def stop_service(service: str) -> None:
     log.debug("stopping %s web service", service)
     sd_stop_unit(service, 'replace')
 
@@ -39,7 +40,7 @@ callmatrix = {
 }
 
 
-def state_callback(state, action):
+def state_callback(state: str, action: str) -> None:
     try:
         (fn_fact, svc_fact) = callmatrix[(state, action)]
     except KeyError:
@@ -49,11 +50,11 @@ def state_callback(state, action):
         fn_fact()(svc_fact())
 
 
-def callback_target():
+def callback_target() -> Callable[[str, str], None]:
     return state_callback
 
 
-def init_webmgr(web_svc):
+def init_webmgr(web_svc: str) -> None:
     global web_service
 
     stop_service(COMITUP_SERVICE)

@@ -15,11 +15,14 @@
 import hashlib
 import logging
 from functools import wraps
-from typing import Callable, List
+from typing import Callable, List, Optional, TYPE_CHECKING
 
 from gi.repository.GLib import MainLoop, timeout_add
 
 from comitup import iwscan, wpa
+
+if TYPE_CHECKING:
+    import NetworkManager
 
 if __name__ == '__main__':
     from dbus.mainloop.glib import DBusGMainLoop
@@ -36,15 +39,14 @@ dns_names: List[str] = []
 
 
 # Global state information
-com_state = None
-conn_list = []
-connection = ''
-state_id = 0
+com_state: Optional[str] = None
+conn_list: List["NetworkManager.Connection"] = []
+connection: str = ''
+state_id: int = 0
 
 state_callbacks: List[Callable[[str, str], None]] = []
 
-hotspot_name = None
-
+hotspot_name: str = ""
 
 def state_callback(fn):
     @wraps(fn)
@@ -74,7 +76,7 @@ def timeout(fn):
     return wrapper
 
 
-def dns_to_conn(host):
+def dns_to_conn(host: str) -> str:
     if '.local' in host:
         return host[:-len('.local')]
     else:
@@ -85,7 +87,7 @@ def dns_to_conn(host):
 # Hotspot state
 #
 
-def fake_hs_pass(sid):
+def fake_hs_pass(sid: int) -> bool:
     hotspot_pass(sid)
     return False
 
@@ -237,7 +239,7 @@ class state_matrix(object):
             raise AttributeError
 
 
-def set_state(state, connections=None, timeout=180):
+def set_state(state, connections=None, timeout=180) -> None:
     timeout_add(0, set_state_to, state, connections, timeout)
 
 
@@ -323,7 +325,11 @@ def is_hotspot_current(connection):
     return hs_hash == cf_hash
 
 
-def init_states(hosts, callbacks, hotspot_pw):
+def init_states(
+        hosts: List[str],
+        callbacks: List[Callable],
+        hotspot_pw: str,
+    ):
     global hotspot_name, conn_list
 
     nmmon.init_nmmon()
@@ -344,19 +350,3 @@ def add_state_callback(callback):
     global state_callbacks
 
     state_callbacks.append(callback)
-
-
-if __name__ == '__main__':
-    handler = logging.StreamHandler(stream=None)
-    log.addHandler(handler)
-    log.setLevel(logging.DEBUG)
-
-    log.info("Starting")
-
-    init_states('comitup.local', 'comitup-1111.local', "")
-
-    set_state('HOTSPOT')
-    # set_state('CONNECTING', candidate_connections())
-
-    loop = MainLoop()
-    loop.run()
