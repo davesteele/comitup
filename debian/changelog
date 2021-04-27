@@ -1,3 +1,9 @@
+comitup (1.22-1) comitup; urgency=medium
+
+  * Fix new crashing bug on starting hotspot.
+
+ -- David Steele <steele@debian.org>  Mon, 26 Apr 2021 21:28:33 -0400
+
 comitup (1.21-1) comitup; urgency=medium
 
   * Fix a startup problem in config.py.
