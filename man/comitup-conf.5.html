@@ -25,21 +25,7 @@
 <p>The <em>comitup.conf</em> file configures the wifi management service comitup(8). It is located in the <em>/etc/</em> directory.</p>
 <h2 id="parameters">PARAMETERS</h2>
 <ul>
-<li><p><em>ap_name</em>: By default, comitup will create a hotspot named <strong>comitup-&lt;nnn&gt;</strong>, publish an avahi-daemon(8) host entry for <strong>comitup-&lt;nnn&gt;</strong>, and establish an mdns identity for <strong>comitup-&lt;nnn&gt;.local</strong>. Setting this parameter will change the <strong>comitup</strong> string with one of the users choosing.</p>
-<ul>
-<li>There are three options for creating a unique identifier, the length of which is determined by the number of letters,
-<ul>
-<li>&lt;n…&gt; Random (persisted) number, 1-4 n’s</li>
-<li>&lt;M…&gt; RPi wlan0 MAC address, 1-12 M’s</li>
-<li>&lt;s…&gt; RPi Serial Number, 1-16 s’s</li>
-<li>Note that only one unique identifier is allowed</li>
-</ul></li>
-<li>Similarly, the string &lt;hostname&gt; is replaced with the computer’s hostname.</li>
-<li>The unique identifier may appear anywhere in the name, for example,
-<ul>
-<li>rasp-&lt;nnn&gt;, &lt;MMMMMM&gt;RPi, &lt;hostname&gt;-&lt;ssss&gt;</li>
-</ul></li>
-</ul></li>
+<li><p><em>ap_name</em>: By default, comitup will create a hotspot named <strong>comitup-&lt;nnn&gt;</strong>, publish an avahi-daemon(8) host entry for <strong>comitup-&lt;nnn&gt;</strong>, and establish an mdns identity for <strong>comitup-&lt;nnn&gt;.local</strong>. Setting this parameter will change the <strong>comitup</strong> string with one of the users choosing. If the configuration variable contains an &lt;nnn&gt; string, with between one and four “n’s”, it will be replaced with a persistent, random number. Similarly, the string &lt;hostname&gt; is replaced with the computer’s hostname.</p></li>
 <li><p><em>ap_password</em>: If this parameter is defined in the configuration file, then the comitup hotspot will require that any connection to the hotspot be authenticated, using this password.</p></li>
 <li><p><em>web_service</em>: This defines a user web service to be controlled by <strong>comitup</strong>. This service will be disabled in the <strong>HOTSPOT</strong> state in preference of the comitup web service, and will be enabled in the <strong>CONNECTED</strong> state. This should be the name of the systemd web service, such as <em>apache2.service</em> or <em>nginx.service</em>. This defaults to a null string, meaning no service is controlled.</p></li>
 <li><p><em>service_name</em>: This defines the mdns service name advertised by <strong>comitup</strong>. This defaults to “comitup”, and will be advertised as &quot;_comitup._tcp&quot;.</p></li>
