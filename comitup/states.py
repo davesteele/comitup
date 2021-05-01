@@ -41,7 +41,7 @@ conn_list = []
 connection = ''
 state_id = 0
 
-state_callbacks: List[Callable[[str, str], None]]  = []
+state_callbacks: List[Callable[[str, str], None]] = []
 
 hotspot_name = None
 
