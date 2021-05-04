@@ -18,7 +18,7 @@ import pprint
 import sys
 import uuid
 from functools import wraps
-from typing import List, Optional
+from typing import List, Optional, cast
 
 import dbus
 import NetworkManager as nm
@@ -70,7 +70,7 @@ def none_on_exception(*exceptions):
     return _none_on_exception
 
 
-def get_devices():
+def get_devices() -> Optional[List[nm.Device]]:
     global device_list
 
     if not device_list:
@@ -81,6 +81,9 @@ def get_devices():
             # NetworkManager is gone for some reason. Bail big time.
             sys.exit(1)
 
+    if not device_list:
+        log.error("No devices found in nm.get_devices()")
+
     return device_list
 
 
@@ -88,12 +91,25 @@ def device_name(device):
     return device.Interface
 
 
-def get_wifi_devices():
-    return [x for x in get_devices() if x.DeviceType == 2]
+def get_wifi_devices() -> List[nm.WirelessDevice]:
+    devices: Optional[List[nm.Device]] = get_devices()
+
+    if devices is not None:
+        return [cast(nm.WirelessDevice, x) for x in devices if x.DeviceType == 2]
+    else:
+        log.error("No WiFi devices found in nm.get_wifi_devices()")
+        return []
 
 
-def get_phys_dev_names():
-    return [device_name(x) for x in get_devices() if x.DeviceType in (1, 2)]
+def get_phys_dev_names() -> List[str]:
+
+    devices = get_devices()
+
+    if devices is not None:
+        return [device_name(x) for x in devices if x.DeviceType in (1, 2)]
+    else:
+        log.error("No devices found in nm.get_phys_dev_names")
+        return []
 
 
 @none_on_exception(IndexError)

@@ -14,11 +14,14 @@
 import logging
 import socket
 import subprocess
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, TYPE_CHECKING
 
 import dbus
 
 from comitup import config, nm
+
+if TYPE_CHECKING:
+    import NetworkManager
 
 log = logging.getLogger('comitup')
 
@@ -140,7 +143,17 @@ def add_hosts(hosts: List[str]) -> None:
     establish_group()
     int_mapping = get_interface_mapping()
 
-    for device in nm.get_devices():
+    devices: Optional[List["NetworkManager.Device"]] = nm.get_devices()
+
+    if devices is None:
+        log.error("Null device list returned in add_hosts()")
+        return
+
+    if not devices:
+        log.error("No devices found in add_hosts()")
+        return
+
+    for device in devices:
         name = nm.device_name(device)
         addr = nm.get_active_ip(device)
         if (name in nm.get_phys_dev_names()
