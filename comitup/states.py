@@ -49,7 +49,7 @@ state_callbacks: List[Callable[[str, str], None]] = []
 hotspot_name: str = ""
 
 
-def state_callback(fn):
+def state_callback(fn: Callable[[], None]):
     @wraps(fn)
     def wrapper(*args, **kwargs):
         returnvalue = fn(*args, **kwargs)
@@ -94,11 +94,11 @@ def fake_hs_pass(sid: int) -> bool:
 
 
 @state_callback
-def hotspot_start():
+def hotspot_start() -> None:
     global conn_list
     log.info("Activating hotspot")
 
-    hs_ssid = dns_to_conn(dns_names[0])
+    hs_ssid: str = dns_to_conn(dns_names[0])
 
     log.debug("states: Calling nm.get_active_ssid()")
     if hs_ssid != nm.get_active_ssid(modemgr.get_state_device('HOTSPOT')):
@@ -210,9 +210,11 @@ def connected_fail():
 
 
 @timeout
-def connected_timeout():
+def connected_timeout() -> None:
     log.debug("states: Calling nm.get_active_ssid()")
-    if connection != nm.get_active_ssid(modemgr.get_state_device('CONNECTED')):
+    active_ssid: str = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
+    log.debug("connected_timeout comparing {} to {}".format(connection, active_ssid))
+    if connection != active_ssid:
         log.warning("Connection lost on timeout")
         set_state('HOTSPOT')
 

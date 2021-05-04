@@ -151,7 +151,7 @@ def get_device_settings(device):
 
 
 @none_on_exception(AttributeError)
-def get_active_ssid(device):
+def get_active_ssid(device: nm.Device) -> str:
     return get_device_settings(device)['802-11-wireless']['ssid']
 
 
