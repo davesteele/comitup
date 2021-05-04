@@ -21,7 +21,7 @@ import dbus
 from comitup import config, nm
 
 if TYPE_CHECKING:
-    import NetworkManager
+    import NetworkManager  # noqa
 
 log = logging.getLogger('comitup')
 
