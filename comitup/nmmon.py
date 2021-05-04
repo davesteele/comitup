@@ -44,7 +44,7 @@ nm_dev_connect = None
 nm_dev_fail = None
 
 PASS_STATES = [
-    NetworkManager.NM_DEVICE_STATE_IP_CHECK,
+#    NetworkManager.NM_DEVICE_STATE_IP_CHECK,
     NetworkManager.NM_DEVICE_STATE_ACTIVATED
 ]
 FAIL_STATES = [NetworkManager.NM_DEVICE_STATE_FAILED]
