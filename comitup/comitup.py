@@ -123,7 +123,14 @@ def main():
              )
 
     loop = MainLoop()
-    loop.run()
+
+    try:
+        loop.run()
+    except Exception:
+        log.error("Terminal exception encountered")
+        raise
+    finally:
+        log.info("Stopping comitup")
 
 
 if __name__ == '__main__':
