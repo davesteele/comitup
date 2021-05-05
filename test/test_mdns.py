@@ -64,7 +64,8 @@ def test_avahi_clear_entries(avahi_fxt):
     assert not mdns.log.called
 
 
-@patch('comitup.nm.get_devices', Mock(return_value=[]))
+@patch('comitup.nm.get_devices', Mock(return_value=[Mock()]))
+@patch('comitup.nm.get_active_ip', Mock(return_value="1.2.3.4"))
 def test_avahi_add_hosts(avahi_fxt):
     mdns.add_hosts(['host1', 'host2'])
 
