@@ -153,7 +153,7 @@ def add_hosts(hosts):
     try:
         group.Commit()
     except dbus.exceptions.DBusException:
-        log.ERROR("Error committing Avahi group")
+        log.error("Error committing Avahi group")
 
 
 if __name__ == '__main__':
