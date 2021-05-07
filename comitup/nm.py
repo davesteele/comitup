@@ -91,12 +91,12 @@ def device_name(device):
     return device.Interface
 
 
-def get_wifi_devices() -> List[nm.WirelessDevice]:
+def get_wifi_devices() -> List[nm.Wireless]:
     devices: Optional[List[nm.Device]] = get_devices()
 
     if devices is not None:
         devices = [x for x in devices if x.DeviceType == 2]
-        return [cast(nm.WirelessDevice, x) for x in devices]
+        return [cast(nm.Wireless, x) for x in devices]
     else:
         log.error("No WiFi devices found in nm.get_wifi_devices()")
         return []
