@@ -15,6 +15,7 @@ import io
 import os
 import random
 import shutil
+from typing import Tuple
 
 from comitup import persist
 
@@ -43,7 +44,7 @@ class Config(object):
             raise AttributeError
 
 
-def load_data():
+def load_data() -> Tuple[Config, persist.persist]:
     if os.path.isfile(BOOT_CONF_PATH):
         try:
             dest = shutil.copyfile(BOOT_CONF_PATH, CONF_PATH)

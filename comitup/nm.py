@@ -18,6 +18,7 @@ import pprint
 import sys
 import uuid
 from functools import wraps
+from typing import List, Optional, cast
 
 import dbus
 import NetworkManager as nm
@@ -30,7 +31,7 @@ if __name__ == '__main__':
 
 from comitup import iwscan  # noqa
 
-device_list = None
+device_list: Optional[List[nm.Device]] = None
 settings_cache = {}
 
 pp = pprint.PrettyPrinter(indent=4)
@@ -69,7 +70,7 @@ def none_on_exception(*exceptions):
     return _none_on_exception
 
 
-def get_devices():
+def get_devices() -> Optional[List[nm.Device]]:
     global device_list
 
     if not device_list:
@@ -80,6 +81,9 @@ def get_devices():
             # NetworkManager is gone for some reason. Bail big time.
             sys.exit(1)
 
+    if not device_list:
+        log.error("No devices found in nm.get_devices()")
+
     return device_list
 
 
@@ -87,12 +91,26 @@ def device_name(device):
     return device.Interface
 
 
-def get_wifi_devices():
-    return [x for x in get_devices() if x.DeviceType == 2]
+def get_wifi_devices() -> List[nm.Wireless]:
+    devices: Optional[List[nm.Device]] = get_devices()
+
+    if devices is not None:
+        devices = [x for x in devices if x.DeviceType == 2]
+        return [cast(nm.Wireless, x) for x in devices]
+    else:
+        log.error("No WiFi devices found in nm.get_wifi_devices()")
+        return []
 
 
-def get_phys_dev_names():
-    return [device_name(x) for x in get_devices() if x.DeviceType in (1, 2)]
+def get_phys_dev_names() -> List[str]:
+
+    devices = get_devices()
+
+    if devices is not None:
+        return [device_name(x) for x in devices if x.DeviceType in (1, 2)]
+    else:
+        log.error("No devices found in nm.get_phys_dev_names")
+        return []
 
 
 @none_on_exception(IndexError)
@@ -134,7 +152,7 @@ def get_device_settings(device):
 
 
 @none_on_exception(AttributeError)
-def get_active_ssid(device):
+def get_active_ssid(device: nm.Device) -> str:
     return get_device_settings(device)['802-11-wireless']['ssid']
 
 
@@ -176,7 +194,12 @@ def activate_connection_by_ssid(ssid, device, path='/'):
     connection = get_connection_by_ssid(ssid)
 
     log.debug("Calling nm.ActivateConnection()")
-    nm.NetworkManager.ActivateConnection(connection, device, path)
+    log.debug("    {}".format(get_ssid_from_connection(connection)))
+    log.debug("    {}".format(device_name(device)))
+
+    opath = nm.NetworkManager.ActivateConnection(connection, device, path)
+
+    log.debug("ActivateConnection returned {}".format(opath.object_path))
 
 
 def deactivate_connection(device):

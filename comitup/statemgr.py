@@ -17,11 +17,16 @@ import re
 import socket
 import subprocess
 import sys
+from typing import Dict, List, Optional, TYPE_CHECKING
 
 import dbus
 import dbus.service
 
 from comitup import iwscan
+
+if TYPE_CHECKING:
+    from comitup.persist import persist
+    from comitup.config import Config
 
 sys.path.append("/usr/share/comitup")
 
@@ -37,19 +42,19 @@ from comitup import modemgr  # noqa
 from comitup import nm  # noqa
 from comitup import states  # noqa
 
-comitup_path = "/com/github/davesteele/comitup"
+comitup_path: str = "/com/github/davesteele/comitup"
 
-comitup_int = "com.github.davesteele.comitup"
+comitup_int: str = "com.github.davesteele.comitup"
 
-log = logging.getLogger('comitup')
+log: logging.Logger = logging.getLogger('comitup')
 
 
-com_obj = None
-conf = None
-data = None
+com_obj: Optional["Comitup"] = None
+conf: Optional["Config"] = None
+data: Optional["persist"] = None
 
-apcache = None
-cachetime = 0
+apcache: List[Dict[str, str]] = []
+cachetime: float = 0
 
 
 class Comitup(dbus.service.Object):
@@ -58,7 +63,7 @@ class Comitup(dbus.service.Object):
         dbus.service.Object.__init__(self, bus_name, comitup_path)
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="aa{ss}")
-    def access_points(self):
+    def access_points(self) -> List[Dict[str, str]]:
         global apcache, cachetime
 
         if time.time() - cachetime > 5:
@@ -80,7 +85,7 @@ class Comitup(dbus.service.Object):
         return [states.com_state, states.connection]
 
     @dbus.service.method(comitup_int, in_signature="ss", out_signature="")
-    def connect(self, ssid, password):
+    def connect(self, ssid: str, password: str) -> None:
         def to_fn(ssid, password):
             if nm.get_connection_by_ssid(ssid):
                 nm.del_connection_by_ssid(ssid)
@@ -93,7 +98,7 @@ class Comitup(dbus.service.Object):
         timeout_add(1, to_fn, ssid, password)
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="")
-    def delete_connection(self):
+    def delete_connection(self) -> None:
         def to_fn():
             ssid = nm.get_active_ssid(modemgr.get_link_device())
             nm.del_connection_by_ssid(ssid)
@@ -103,11 +108,16 @@ class Comitup(dbus.service.Object):
         timeout_add(1, to_fn)
 
     @dbus.service.method(comitup_int, in_signature="", out_signature="a{ss}")
-    def get_info(self):
+    def get_info(self) -> Dict[str, str]:
+        if not conf or not data:
+            sys.exit(1)
         return get_info(conf, data)
 
 
-def get_info(conf, data):
+def get_info(conf: "Config", data: "persist") -> Dict[str, str]:
+    if not conf or not data:
+        sys.exit(1)
+
     info = {
         'version': pkg_resources.get_distribution("comitup").version,
         'apname': expand_ap(conf.ap_name, data.id),
@@ -118,7 +128,7 @@ def get_info(conf, data):
     return info
 
 
-def expand_ap(ap_name, id):
+def expand_ap(ap_name: str, id: str) -> str:
     returnval = ap_name
 
     for num in range(5):
@@ -129,17 +139,17 @@ def expand_ap(ap_name, id):
     return returnval
 
 
-def get_hosts(conf, data):
+def get_hosts(conf: "Config", data: "persist") -> List[str]:
     return [
         "{}.local".format(expand_ap(conf.ap_name, data.id)),
     ]
 
 
-def external_callback(state, action):
+def external_callback(state: str, action: str) -> None:
     if action != 'start':
         return
 
-    script = conf.external_callback
+    script = conf.external_callback  # type: ignore
 
     if not os.path.isfile(script):
         return
@@ -167,7 +177,7 @@ def external_callback(state, action):
         )
 
 
-def init_state_mgr(gconf, gdata, callbacks):
+def init_state_mgr(gconf: "Config", gdata: "persist", callbacks) -> None:
     global com_obj, conf, data
 
     conf, data = (gconf, gdata)

@@ -8,6 +8,7 @@ import logging
 import re
 import subprocess
 from multiprocessing import Process, Queue
+from typing import Dict, List
 
 log = logging.getLogger("comitup")
 
@@ -15,7 +16,7 @@ log = logging.getLogger("comitup")
 # in AP mode. Use the 'iw' command to get the AP list.
 
 
-def docmd(cmd):
+def docmd(cmd: str) -> str:
     cmd = "timeout 5 " + cmd
 
     try:
@@ -26,7 +27,7 @@ def docmd(cmd):
     return out
 
 
-def devlist():
+def devlist() -> List[str]:
     """Get a list of supported devices from 'iw'"""
     log.debug("Getting device list from 'iw'")
     out = docmd("iw dev")
@@ -34,7 +35,7 @@ def devlist():
     return devs
 
 
-def blk2dict(blk):
+def blk2dict(blk: str) -> Dict[str, str]:
     """Convert a 'iw dev scan' block into a tagged dict"""
 
     lines = [x.strip().split(':') for x in blk.split('\n') if ':' in x]
@@ -43,14 +44,14 @@ def blk2dict(blk):
     return dict(tups)
 
 
-def dbm2pct(dbm):
+def dbm2pct(dbm: float) -> str:
     pct = (dbm + 100.0) * 2
     pct = max(0, pct)
     pct = min(100, pct)
     return str(pct)
 
 
-def devaps(dev, dump=""):
+def devaps(dev: str, dump: str = "") -> List[Dict[str, str]]:
     """Get a list of Access Points (as dicts) for a device"""
     if not dump:
         log.debug("Getting AP list from 'iw' dev %s" % dev)
@@ -69,7 +70,7 @@ def devaps(dev, dump=""):
     return aps
 
 
-def apgen(dev, q, dump=""):
+def apgen(dev: str, q: Queue, dump: str = "") -> None:
     for ap in devaps(dev, dump):
         pt = {}
         pt['ssid'] = ap['SSID']
@@ -84,13 +85,13 @@ def apgen(dev, q, dump=""):
     q.put("DONE")
 
 
-def dedup_aplist(aplist):
+def dedup_aplist(aplist: List[Dict[str, str]]) -> List[Dict[str, str]]:
     apdict = {x['ssid']: x for x in aplist}
 
     return [apdict[x] for x in apdict]
 
 
-def candidates(device=None):
+def candidates(device: str = None) -> List[Dict[str, str]]:
     """Return a list of reachable Access Point SSIDs, sorted by power"""
 
     if device:
@@ -99,7 +100,7 @@ def candidates(device=None):
         dev_list = devlist()
 
     jobs = []
-    q = Queue()
+    q: Queue = Queue()
     for dev in dev_list:
         p = Process(target=apgen, args=(dev, q))
         p.start()
@@ -124,7 +125,7 @@ def candidates(device=None):
     return clist
 
 
-def ap_conn_count():
+def ap_conn_count() -> int:
     count = 0
     for dev in devlist():
         log.debug("Getting iw station dump")

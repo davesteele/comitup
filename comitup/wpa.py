@@ -17,15 +17,15 @@ log = logging.getLogger("comitup")
 # The minimal workaround fix is to call disconnect, then reconnect from
 # wpa_cli.
 
-last_kick_time = 0
-kick_period_secs = 5*60
+last_kick_time: float = 0
+kick_period_secs: int = 5*60
 
 
-def needs_kick(devstring):
+def needs_kick(devstring: str) -> bool:
     return (time.time() - kick_period_secs) > last_kick_time
 
 
-def kick_wpa(devstring):
+def kick_wpa(devstring: str) -> None:
     global last_kick_time
 
     log.debug("Kicking wpa on {}".format(devstring))
@@ -37,6 +37,6 @@ def kick_wpa(devstring):
     last_kick_time = time.time()
 
 
-def check_wpa(devstring):
+def check_wpa(devstring: str) -> None:
     if needs_kick(devstring):
         kick_wpa(devstring)

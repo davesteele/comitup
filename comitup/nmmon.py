@@ -13,6 +13,7 @@
 
 import logging
 from functools import partial
+from typing import Callable, List, Optional
 
 import dbus
 import NetworkManager
@@ -32,25 +33,25 @@ if __name__ == '__main__':
 from comitup import modemgr  # noqa
 from comitup import nm  # noqa
 
-log = logging.getLogger('comitup')
+log: logging.Logger = logging.getLogger('comitup')
 
-bus = dbus.SystemBus()
+bus: dbus.SystemBus = dbus.SystemBus()
 
-monitored_dev = None
-ap_device = None
-second_device_name = None
+monitored_dev: Optional[NetworkManager.Device] = None
+ap_device: Optional[NetworkManager.Device] = None
+second_device_name: Optional[NetworkManager.Device] = None
 
-nm_dev_connect = None
-nm_dev_fail = None
+nm_dev_connect: Optional[Callable[[], None]] = None
+nm_dev_fail: Optional[Callable[[], None]] = None
 
-PASS_STATES = [
-    NetworkManager.NM_DEVICE_STATE_IP_CHECK,
+PASS_STATES: List[int] = [
+    # NetworkManager.NM_DEVICE_STATE_IP_CHECK,
     NetworkManager.NM_DEVICE_STATE_ACTIVATED
 ]
-FAIL_STATES = [NetworkManager.NM_DEVICE_STATE_FAILED]
+FAIL_STATES: List[int] = [NetworkManager.NM_DEVICE_STATE_FAILED]
 
 
-def disable():
+def disable() -> None:
     global monitored_dev, nm_dev_connect, nm_dev_fail
 
     monitored_dev = None
@@ -59,7 +60,12 @@ def disable():
     nm_dev_fail = None
 
 
-def enable(dev, connect_fn, fail_fn, state_id):
+def enable(
+        dev: NetworkManager.Device,
+        connect_fn: Callable[[], None],
+        fail_fn: Callable[[], None],
+        state_id: int,
+) -> None:
     global monitored_dev, nm_dev_connect, nm_dev_fail
 
     monitored_dev = None
@@ -70,7 +76,7 @@ def enable(dev, connect_fn, fail_fn, state_id):
     monitored_dev = dev
 
 
-def send_cb(cb):
+def send_cb(cb: Callable[[], None]) -> None:
     def cb_to(cb):
         cb()
         return False
@@ -78,7 +84,7 @@ def send_cb(cb):
     timeout_add(1, cb_to, cb)
 
 
-def ap_changed_state(state, oldstate, reason, *args):
+def ap_changed_state(state, oldstate, reason, *args) -> None:
     log.debug(
         "nmm - primary state {}, was {}, reason {}".format(
             state, oldstate, reason
@@ -86,13 +92,15 @@ def ap_changed_state(state, oldstate, reason, *args):
     )
     if state in PASS_STATES:
         log.debug("nmm - primary pass")
-        send_cb(nm_dev_connect)
+        if nm_dev_connect:
+            send_cb(nm_dev_connect)
     elif state in FAIL_STATES:
         log.debug("nmm - primary fail")
-        send_cb(nm_dev_fail)
+        if nm_dev_fail:
+            send_cb(nm_dev_fail)
 
 
-def second_changed_state(state, oldstate, reason, *args):
+def second_changed_state(state, oldstate, reason, *args) -> None:
     log.debug(
         "nmm - secondary state {}, was {}, reason {}".format(
             state, oldstate, reason
@@ -100,13 +108,15 @@ def second_changed_state(state, oldstate, reason, *args):
     )
     if state in PASS_STATES:
         log.debug("nmm - secondary pass")
-        send_cb(nm_dev_connect)
+        if nm_dev_connect:
+            send_cb(nm_dev_connect)
     elif state in FAIL_STATES:
         log.debug("nmm - secondary fail")
-        send_cb(nm_dev_fail)
+        if nm_dev_fail:
+            send_cb(nm_dev_fail)
 
 
-def any_changed_state(state, *args):
+def any_changed_state(state: int, *args) -> None:
     from comitup import mdns
     from comitup.states import dns_names
 
@@ -117,7 +127,10 @@ def any_changed_state(state, *args):
         mdns.add_hosts(dns_names)
 
 
-def set_device_listeners(ap_dev, second_dev):
+def set_device_listeners(
+        ap_dev: NetworkManager.Device,
+        second_dev: NetworkManager.Device,
+) -> None:
     global ap_device, second_device_name
 
     if ap_device is None:
@@ -150,7 +163,7 @@ def set_device_listeners(ap_dev, second_dev):
     )
 
 
-def init_nmmon():
+def init_nmmon() -> None:
     set_device_listeners(
         modemgr.get_ap_device(),
         modemgr.get_link_device()
