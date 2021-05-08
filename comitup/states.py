@@ -175,7 +175,7 @@ def connecting_pass():
 def connecting_fail():
     log.debug("Connection failed")
     if conn_list:
-        set_state('CONNECTING')
+        set_state('CONNECTING', force=True)
     else:
         set_state('HOTSPOT')
 
@@ -247,14 +247,17 @@ class state_matrix(object):
             raise AttributeError
 
 
-def set_state(state, connections=None, timeout=180) -> None:
-    timeout_add(0, set_state_to, state, connections, timeout)
+def set_state(state, connections=[], timeout=180, force=False) -> None:
+    timeout_add(0, set_state_to, state, connections, timeout, force, state_id)
 
 
-def set_state_to(state, connections=None, timeout=180):
+def set_state_to(state, connections, timeout, force, curr_state_id):
     global com_state, conn_list, state_id
 
-    if state == com_state:
+    if state == com_state and not force:
+        return False
+
+    if curr_state_id < state_id:
         return False
 
     log.info('Setting state to %s' % state)
@@ -273,10 +276,7 @@ def set_state_to(state, connections=None, timeout=180):
     )
 
     if connections:
-        if type(conn_list) == str:
-            conn_list = [connections]
-        else:
-            conn_list = connections
+        conn_list = connections
 
     com_state = state
     timeout_add(timeout*1000, state_info.timeout_fn, state_id)
@@ -351,7 +351,7 @@ def init_states(
 
     dev = modemgr.get_state_device("CONNECTED")
     conn_list = candidate_connections(dev)
-    set_state('CONNECTING')
+    set_state('CONNECTING', conn_list)
 
 
 def add_state_callback(callback):
