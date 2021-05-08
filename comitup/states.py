@@ -40,7 +40,7 @@ dns_names: List[str] = []
 
 # Global state information
 com_state: Optional[str] = None
-conn_list: List["NetworkManager.Connection"] = []
+conn_list: List[str] = []
 connection: str = ''
 state_id: int = 0
 
@@ -52,11 +52,13 @@ hotspot_name: str = ""
 def state_callback(fn: Callable[[], None]):
     @wraps(fn)
     def wrapper(*args, **kwargs):
-        returnvalue = fn(*args, **kwargs)
-
         state, action = fn.__name__.split('_')
 
+        log.debug("State call - {}-{}".format(state, action))
+
         state = state.upper()
+
+        returnvalue = fn(*args, **kwargs)
 
         for callback in state_callbacks:
             callback(state, action)
@@ -130,7 +132,7 @@ def hotspot_timeout():
         log.debug('Periodic connection attempt')
 
         dev = modemgr.get_state_device('CONNECTED')
-        conn_list = candidate_connections(dev)
+        conn_list: List[str] = candidate_connections(dev)
         if conn_list:
             set_state('CONNECTING', conn_list)
         else:

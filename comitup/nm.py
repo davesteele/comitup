@@ -194,7 +194,12 @@ def activate_connection_by_ssid(ssid, device, path='/'):
     connection = get_connection_by_ssid(ssid)
 
     log.debug("Calling nm.ActivateConnection()")
-    nm.NetworkManager.ActivateConnection(connection, device, path)
+    log.debug("    {}".format(get_ssid_from_connection(connection)))
+    log.debug("    {}".format(device_name(device)))
+
+    opath = nm.NetworkManager.ActivateConnection(connection, device, path)
+
+    log.debug("ActivateConnection returned {}".format(opath.object_path))
 
 
 def deactivate_connection(device):
