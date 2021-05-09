@@ -8,6 +8,7 @@
 import argparse
 import logging
 import os
+import signal
 import sys
 from logging.handlers import TimedRotatingFileHandler
 
@@ -26,6 +27,7 @@ from comitup import webmgr  # noqa
 from comitup import wificheck  # noqa
 
 LOG_PATH = "/var/log/comitup.log"
+log = None
 
 
 def deflog() -> logging.Logger:
@@ -84,7 +86,21 @@ def parse_args() -> argparse.Namespace:
     return args
 
 
+def cleanup():
+    # leave the network setup as it, but kill comitup-web
+    webmgr.stop_service(webmgr.COMITUP_SERVICE)
+    if log:
+        log.info("Stopping comitup")
+
+
+def handle_term(signum, frame):
+    cleanup()
+    sys.exit(0)
+
+
 def main():
+    global log
+
     if os.geteuid() != 0:
         exit("Comitup requires root privileges")
 
@@ -122,6 +138,8 @@ def main():
                 ],
              )
 
+    signal.signal(signal.SIGTERM, handle_term)
+
     loop = MainLoop()
 
     try:
@@ -130,7 +148,7 @@ def main():
         log.error("Terminal exception encountered")
         raise
     finally:
-        log.info("Stopping comitup")
+        cleanup()
 
 
 if __name__ == '__main__':
