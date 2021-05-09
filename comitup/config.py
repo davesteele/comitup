@@ -22,10 +22,11 @@ from comitup import persist
 PERSIST_PATH = "/var/lib/comitup/comitup.json"
 CONF_PATH = "/etc/comitup.conf"
 BOOT_CONF_PATH = "/boot/comitup.conf"
+SECTION = "DEFAULT"
 
 
 class Config(object):
-    def __init__(self, filename, section='DEFAULT', defaults={}):
+    def __init__(self, filename, section=SECTION, defaults={}):
         self._section = section
 
         self._config = configparser.ConfigParser(defaults=defaults)
@@ -36,6 +37,9 @@ class Config(object):
             self._config.read_file(conf_fp)
         except FileNotFoundError:
             pass
+
+    def getboolean(self, tag: str) -> bool:
+        return self._config.getboolean(SECTION, tag)
 
     def __getattr__(self, tag):
         try:
