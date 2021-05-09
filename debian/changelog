@@ -1,3 +1,13 @@
+comitup (1.23-1) comitup; urgency=medium
+
+  * Fixed a problem causing connect failure if more than one WiFi connection
+    is configured.
+  * Fixed a problem causing connection attempts to be unreliable.
+  * Added typing hints to the source code. As a result, Comitup is no longer
+    compatible with Python 3.5.
+
+ -- David Steele <steele@debian.org>  Sat, 08 May 2021 17:25:36 -0400
+
 comitup (1.22-1) comitup; urgency=medium
 
   * Fix new crashing bug on starting hotspot.
