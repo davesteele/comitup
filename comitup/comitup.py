@@ -30,7 +30,11 @@ LOG_PATH = "/var/log/comitup.log"
 log = None
 
 
-def deflog(level: int) -> logging.Logger:
+def deflog(verbose: bool) -> logging.Logger:
+    level = logging.INFO
+    if verbose:
+        level = logging.DEBUG
+
     log = logging.getLogger('comitup')
     log.setLevel(level)
     handler = TimedRotatingFileHandler(
@@ -84,10 +88,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "-v",
         "--verbose",
-        action="store_const",
-        const=logging.DEBUG,
-        default=logging.INFO,
-        dest="loglevel",
+        action="store_true",
         help="More verbose logging",
     )
 
@@ -116,10 +117,10 @@ def main():
 
     args = parse_args()
 
-    log = deflog(args.loglevel)
-    log.info("Starting comitup")
-
     (conf, data) = config.load_data()
+
+    log = deflog(args.verbose or conf.getboolean("verbose"))
+    log.info("Starting comitup")
 
     if args.info:
         for (key, val) in statemgr.get_info(conf, data).items():

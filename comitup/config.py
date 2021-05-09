@@ -65,6 +65,7 @@ def load_data() -> Tuple[Config, persist.persist]:
                     'web_service': '',
                     'service_name': 'comitup',
                     'external_callback': '/usr/local/bin/comitup-callback',
+                    'verbose': '0',
                 },
              )
 
