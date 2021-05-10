@@ -12,3 +12,12 @@ for page in ['index', 'archive']:
 
     with open(page + ".html", 'w') as fp:
         fp.write(output)
+
+for deb in pkgs["latest_pkgs"]:
+    pkg = deb.split("_")[0]
+    page = "latest/{}_latest.html".format(pkg)
+    template = Template(open("templates/latest.tmpl").read())
+    output = template.render(deb=deb, pkg=pkg)
+
+    with open(page, 'w') as fp:
+        fp.write(output)
