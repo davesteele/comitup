@@ -1,5 +1,5 @@
 
-# Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
+# Copyright (c) 2017-2021 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
@@ -66,6 +66,8 @@ def load_data() -> Tuple[Config, persist.persist]:
                     'service_name': 'comitup',
                     'external_callback': '/usr/local/bin/comitup-callback',
                     'verbose': '0',
+                    'enable_appliance_mode': 'true',
+                    'primary_wifi_device': '',
                 },
              )
 

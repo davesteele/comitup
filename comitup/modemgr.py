@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
+# Copyright (c) 2017-2021 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
@@ -33,19 +33,13 @@ def get_conf() -> config.Config:
     global conf
 
     if not conf:
-        conf = config.Config(
-                CONF_PATH,
-                defaults={
-                    'enable_appliance_mode': 'true',
-                    'primary_wifi_device': '',
-                    }
-                )
+        (conf, _) = config.load_data()
 
     return conf
 
 
 def dual_enabled() -> bool:
-    return get_conf().enable_appliance_mode == 'true'
+    return get_conf().getboolean("enable_appliance_mode")
 
 
 def get_mode() -> str:
