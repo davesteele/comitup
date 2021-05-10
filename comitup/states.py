@@ -338,7 +338,7 @@ def init_states(
     callbacks: List[Callable],
     hotspot_pw: str,
 ):
-    global hotspot_name, conn_list
+    global hotspot_name, conn_list, connection
 
     nmmon.init_nmmon()
     set_hosts(*hosts)
@@ -351,7 +351,13 @@ def init_states(
 
     dev = modemgr.get_state_device("CONNECTED")
     conn_list = candidate_connections(dev)
-    set_state('CONNECTING', conn_list)
+    active_ssid: str
+    active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
+    if active_ssid in conn_list:
+        connection = active_ssid
+        set_state("CONNECTED")
+    else:
+        set_state('CONNECTING', conn_list)
 
 
 def add_state_callback(callback):
