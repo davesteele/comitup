@@ -19,7 +19,7 @@ from typing import Callable, List, Optional, TYPE_CHECKING
 
 from gi.repository.GLib import timeout_add
 
-from comitup import iwscan, wpa
+from comitup import iwscan, mdns, wpa
 
 if TYPE_CHECKING:
     import NetworkManager  # noqa
@@ -356,6 +356,9 @@ def init_states(
     if active_ssid in conn_list:
         connection = active_ssid
         set_state("CONNECTED")
+
+        mdns.clear_entries()
+        mdns.add_hosts(dns_names)
     else:
         set_state('CONNECTING', conn_list)
 
