@@ -24,7 +24,7 @@ CONF_PATH = "/etc/comitup.conf"
 BOOT_CONF_PATH = "/boot/comitup.conf"
 SECTION = "DEFAULT"
 
-data_cache: Optional[Tuple[Config, persist.persist]] = None
+data_cache: Optional[Tuple["Config", persist.persist]] = None
 
 
 class Config(object):
