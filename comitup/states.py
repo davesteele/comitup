@@ -60,11 +60,15 @@ def state_callback(fn: Callable[[], None]):
 
         returnvalue = fn(*args, **kwargs)
 
-        for callback in state_callbacks:
-            callback(state, action)
+        call_callbacks(state, action)
 
         return returnvalue
     return wrapper
+
+
+def call_callbacks(state: str, action: str) -> None:
+    for callback in state_callbacks:
+        callback(state, action)
 
 
 def timeout(fn):
@@ -354,6 +358,9 @@ def init_states(
     active_ssid: str
     active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
     if active_ssid in conn_list:
+        call_callbacks("CONNECTING", "start")
+        call_callbacks("CONNECTING", "pass")
+
         connection = active_ssid
         set_state("CONNECTED")
 
