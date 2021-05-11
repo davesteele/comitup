@@ -8,6 +8,7 @@
 import argparse
 import logging
 import os
+import signal
 import sys
 from logging.handlers import TimedRotatingFileHandler
 
@@ -26,11 +27,16 @@ from comitup import webmgr  # noqa
 from comitup import wificheck  # noqa
 
 LOG_PATH = "/var/log/comitup.log"
+log = None
 
 
-def deflog() -> logging.Logger:
+def deflog(verbose: bool) -> logging.Logger:
+    level = logging.INFO
+    if verbose:
+        level = logging.DEBUG
+
     log = logging.getLogger('comitup')
-    log.setLevel(logging.INFO)
+    log.setLevel(level)
     handler = TimedRotatingFileHandler(
                 LOG_PATH,
                 encoding='utf=8',
@@ -79,21 +85,42 @@ def parse_args() -> argparse.Namespace:
         help="Print info and exit",
     )
 
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="More verbose logging",
+    )
+
     args = parser.parse_args()
 
     return args
 
 
+def cleanup():
+    # leave the network setup as it, but kill comitup-web
+    webmgr.stop_service(webmgr.COMITUP_SERVICE)
+    if log:
+        log.info("Stopping comitup")
+
+
+def handle_term(signum, frame):
+    cleanup()
+    sys.exit(0)
+
+
 def main():
+    global log
+
     if os.geteuid() != 0:
         exit("Comitup requires root privileges")
 
     args = parse_args()
 
-    log = deflog()
-    log.info("Starting comitup")
-
     (conf, data) = config.load_data()
+
+    log = deflog(args.verbose or conf.getboolean("verbose"))
+    log.info("Starting comitup")
 
     if args.info:
         for (key, val) in statemgr.get_info(conf, data).items():
@@ -122,6 +149,8 @@ def main():
                 ],
              )
 
+    signal.signal(signal.SIGTERM, handle_term)
+
     loop = MainLoop()
 
     try:
@@ -130,7 +159,7 @@ def main():
         log.error("Terminal exception encountered")
         raise
     finally:
-        log.info("Stopping comitup")
+        cleanup()
 
 
 if __name__ == '__main__':

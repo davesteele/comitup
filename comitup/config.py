@@ -1,5 +1,5 @@
 
-# Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
+# Copyright (c) 2017-2021 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
@@ -15,17 +15,20 @@ import io
 import os
 import random
 import shutil
-from typing import Tuple
+from typing import Optional, Tuple
 
 from comitup import persist
 
 PERSIST_PATH = "/var/lib/comitup/comitup.json"
 CONF_PATH = "/etc/comitup.conf"
 BOOT_CONF_PATH = "/boot/comitup.conf"
+SECTION = "DEFAULT"
+
+data_cache: Optional[Tuple["Config", persist.persist]] = None
 
 
 class Config(object):
-    def __init__(self, filename, section='DEFAULT', defaults={}):
+    def __init__(self, filename, section=SECTION, defaults={}):
         self._section = section
 
         self._config = configparser.ConfigParser(defaults=defaults)
@@ -37,6 +40,9 @@ class Config(object):
         except FileNotFoundError:
             pass
 
+    def getboolean(self, tag: str) -> bool:
+        return self._config.getboolean(SECTION, tag)
+
     def __getattr__(self, tag):
         try:
             return self._config.get(self._section, tag)
@@ -45,28 +51,36 @@ class Config(object):
 
 
 def load_data() -> Tuple[Config, persist.persist]:
-    if os.path.isfile(BOOT_CONF_PATH):
-        try:
-            dest = shutil.copyfile(BOOT_CONF_PATH, CONF_PATH)
-            print("Boot config file copied:", dest)
-            os.remove(BOOT_CONF_PATH)
-        except Exception:
-            print("Error occurred while copying file.")
+    global data_cache
 
-    conf = Config(
-                CONF_PATH,
-                defaults={
-                    'ap_name': 'comitup-<nnn>',
-                    'ap_password': '',
-                    'web_service': '',
-                    'service_name': 'comitup',
-                    'external_callback': '/usr/local/bin/comitup-callback',
-                },
-             )
+    if not data_cache:
+        if os.path.isfile(BOOT_CONF_PATH):
+            try:
+                dest = shutil.copyfile(BOOT_CONF_PATH, CONF_PATH)
+                print("Boot config file copied:", dest)
+                os.remove(BOOT_CONF_PATH)
+            except Exception:
+                print("Error occurred while copying file.")
 
-    data = persist.persist(
-                PERSIST_PATH,
-                {'id': str(random.randrange(1000, 9999))},
-           )
+        conf = Config(
+                    CONF_PATH,
+                    defaults={
+                        'ap_name': 'comitup-<nnn>',
+                        'ap_password': '',
+                        'web_service': '',
+                        'service_name': 'comitup',
+                        'external_callback': '/usr/local/bin/comitup-callback',
+                        'verbose': '0',
+                        'enable_appliance_mode': 'true',
+                        'primary_wifi_device': '',
+                    },
+                 )
 
-    return (conf, data)
+        data = persist.persist(
+                    PERSIST_PATH,
+                    {'id': str(random.randrange(1000, 9999))},
+               )
+
+        data_cache = (conf, data)
+
+    return data_cache

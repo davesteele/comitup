@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 
+import logging
 import os
 import sys
 import textwrap
@@ -55,7 +56,7 @@ def log_fxt(tmpdir, monkeypatch):
 
 
 def test_ciu_deflog(log_fxt):
-    log = ciu.deflog()
+    log = ciu.deflog(logging.INFO)
 
     log.info('foo')
 

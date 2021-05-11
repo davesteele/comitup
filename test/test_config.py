@@ -5,6 +5,7 @@
 # License-Filename: LICENSE
 import os
 import textwrap
+from collections import namedtuple
 
 import pytest
 
@@ -41,3 +42,36 @@ def test_conf_vals(idx, conf_fxt):
 def test_conf_miss(conf_fxt):
     with pytest.raises(AttributeError):
         conf_fxt.tag4
+
+
+Case = namedtuple("Case", ["data", "result"])
+BoolFixt = namedtuple("BoolFixt", ["config", "result"])
+
+
+@pytest.fixture(
+    params=[
+        Case("0", False),
+        Case("1", True),
+        Case("yes", True),
+        Case("Yes", True),
+        Case("no", False),
+        # these two don't work
+        # Case("y", True),
+        # Case("n", False),
+        Case("true", True),
+        Case("True", True),
+        Case("TRUE", True),
+        Case("false", False),
+    ]
+)
+def bool_fixt(tmpdir, request):
+    path = os.path.join(tmpdir.__str__(), "conf.conf")
+
+    with open(path, 'w') as fp:
+        fp.write("tag = {}".format(request.param.data))
+
+    return BoolFixt(config.Config(path), request.param.result)
+
+
+def test_conf_bool(bool_fixt):
+    assert bool_fixt.config.getboolean("tag") == bool_fixt.result

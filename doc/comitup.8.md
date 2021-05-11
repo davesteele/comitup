@@ -1,6 +1,6 @@
 % comitup(8)
 %
-% March 2021
+% May 2021
 
 # NAME
 
@@ -41,7 +41,8 @@ The web service address is _http://10.41.0.1_.
 ## Options
   * _-h_, _--help_ - Print help and exit
   * _-c_, _--check_ - Check the wifi device configuration and exit
-  * _-i_, _--info - Print info about the current configuration, and exit
+  * _-i_, _--info_ - Print info about the current configuration, and exit
+  * _-v_, _--verbose_ - Increase logging to _/var/log/comitup.log_
 
 ## D-Bus Interface
 

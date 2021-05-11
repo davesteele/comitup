@@ -19,7 +19,7 @@ from typing import Callable, List, Optional, TYPE_CHECKING
 
 from gi.repository.GLib import timeout_add
 
-from comitup import iwscan, wpa
+from comitup import iwscan, mdns, wpa
 
 if TYPE_CHECKING:
     import NetworkManager  # noqa
@@ -60,11 +60,15 @@ def state_callback(fn: Callable[[], None]):
 
         returnvalue = fn(*args, **kwargs)
 
-        for callback in state_callbacks:
-            callback(state, action)
+        call_callbacks(state, action)
 
         return returnvalue
     return wrapper
+
+
+def call_callbacks(state: str, action: str) -> None:
+    for callback in state_callbacks:
+        callback(state, action)
 
 
 def timeout(fn):
@@ -338,7 +342,7 @@ def init_states(
     callbacks: List[Callable],
     hotspot_pw: str,
 ):
-    global hotspot_name, conn_list
+    global hotspot_name, conn_list, connection
 
     nmmon.init_nmmon()
     set_hosts(*hosts)
@@ -351,7 +355,19 @@ def init_states(
 
     dev = modemgr.get_state_device("CONNECTED")
     conn_list = candidate_connections(dev)
-    set_state('CONNECTING', conn_list)
+    active_ssid: str
+    active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
+    if active_ssid in conn_list:
+        call_callbacks("CONNECTING", "start")
+        call_callbacks("CONNECTING", "pass")
+
+        connection = active_ssid
+        set_state("CONNECTED")
+
+        mdns.clear_entries()
+        mdns.add_hosts(dns_names)
+    else:
+        set_state('CONNECTING', conn_list)
 
 
 def add_state_callback(callback):

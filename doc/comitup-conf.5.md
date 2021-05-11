@@ -1,6 +1,6 @@
 % comitup-conf(5)
 %
-% March 2021
+% May 2021
 
 # NAME
 
@@ -51,6 +51,10 @@ It is located in the _/etc/_ directory.
   * _primary_wifi_device_;
 
     Override the default choice for the primary WiFi device to use.
+
+  * _verbose_:
+
+    Set to '1' (or 'yes' or 'true') to enable more verbose logging.
 
 ## COPYRIGHT
 
