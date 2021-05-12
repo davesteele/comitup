@@ -17,7 +17,7 @@ from functools import wraps
 def persist_decorator(klass):
     """Add a save behavior to methods that update dict data"""
     for method in ["__setitem__", "__delitem__", "update", "setdefault"]:
-        setattr(klass, method, klass.addsave(getattr(klass, method)))
+        setattr(klass, method, klass._addsave(getattr(klass, method)))
 
     return klass
 
@@ -34,27 +34,27 @@ class persist(dict):
         self._path = path
 
         if os.path.exists(self._path):
-            self.load()
+            self._load()
 
-        self.save()
+        self._save()
 
-    def save(self):
+    def _save(self):
         with open(self._path, "w") as fp:
             json.dump(self, fp, indent=2)
 
-    def load(self):
+    def _load(self):
         with open(self._path, "r") as fp:
             dct = json.load(fp)
 
         super().update(dct)
 
-    def addsave(fn):
+    def _addsave(fn):
         """Decorator to add save behavior to methods"""
 
         @wraps(fn)
         def wrapper(self, *args, **kwargs):
             retval = fn(self, *args, **kwargs)
-            self.save()
+            self._save()
             return retval
 
         return wrapper
