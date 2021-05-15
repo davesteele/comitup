@@ -39,7 +39,7 @@ bus: dbus.SystemBus = dbus.SystemBus()
 
 monitored_dev: Optional[NetworkManager.Device] = None
 ap_device: Optional[NetworkManager.Device] = None
-second_device_name: Optional[NetworkManager.Device] = None
+second_device_name: Optional[str] = None
 
 nm_dev_connect: Optional[Callable[[], None]] = None
 nm_dev_fail: Optional[Callable[[], None]] = None
