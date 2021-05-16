@@ -144,7 +144,10 @@ def set_device_listeners(
         )
         log.debug("Listener is {}".format(device_listener))
 
-    if second_device_name != second_dev.Interface:
+    if (
+        second_device_name != second_dev.Interface
+        and ap_dev.Interface != second_dev.Interface
+    ):
         log.debug("nmm - Setting 2nd listener for {}".format(second_dev))
         second_device_name = second_dev.Interface
         device_listener = bus.add_signal_receiver(
