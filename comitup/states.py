@@ -218,8 +218,13 @@ def connected_pass(reason):
 def connected_fail(reason):
     log.warning('Connection lost')
 
-    dev = modemgr.get_state_device("CONNECTED")
-    set_state("CONNECTING", candidate_connections(dev))
+    active_ssid: str = nm.get_active_ssid(modemgr.get_state_device("HOTSPOT"))
+    if modemgr.get_mode() == modemgr.MULTI_MODE and not active_ssid:
+        log.warning("Hotspot lost while CONNECTED")
+        set_state("HOTSPOT")
+    else:
+        dev = modemgr.get_state_device("CONNECTED")
+        set_state("CONNECTING", candidate_connections(dev))
 
 
 @timeout
