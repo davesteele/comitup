@@ -212,7 +212,6 @@ def connected_pass():
 def connected_fail():
     log.warning('Connection lost')
     set_state('HOTSPOT')
-    timeout_add(5*1000, hotspot_timeout, state_id)
 
 
 @timeout
@@ -225,7 +224,8 @@ def connected_timeout() -> None:
     ))
     if connection != active_ssid:
         log.warning("Connection lost on timeout")
-        set_state('HOTSPOT')
+        dev = modemgr.get_state_device("CONNECTED")
+        set_state('CONNECTING', candidate_connections(dev))
 
     if modemgr.get_mode() == modemgr.MULTI_MODE:
         wpa.check_wpa(modemgr.get_ap_device().Interface)
