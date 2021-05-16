@@ -15,14 +15,12 @@
 import hashlib
 import logging
 from functools import wraps
-from typing import Callable, List, Optional, TYPE_CHECKING
+from typing import Callable, List, Optional
 
+import NetworkManager
 from gi.repository.GLib import timeout_add
 
 from comitup import iwscan, mdns, wpa
-
-if TYPE_CHECKING:
-    import NetworkManager  # noqa
 
 if __name__ == '__main__':
     from dbus.mainloop.glib import DBusGMainLoop
@@ -49,7 +47,7 @@ state_callbacks: List[Callable[[str, str], None]] = []
 hotspot_name: str = ""
 
 
-def state_callback(fn: Callable[[], None]):
+def state_callback(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):
         state, action = fn.__name__.split('_')
@@ -73,9 +71,9 @@ def call_callbacks(state: str, action: str) -> None:
 
 def timeout(fn):
     @wraps(fn)
-    def wrapper(id):
+    def wrapper(id, *args, **kwargs):
         if id == state_id:
-            fn()
+            fn(*args, **kwargs)
             return True
         else:
             return False
@@ -119,13 +117,13 @@ def hotspot_start() -> None:
 
 @timeout
 @state_callback
-def hotspot_pass():
+def hotspot_pass(reason):
     pass
 
 
 @timeout
 @state_callback
-def hotspot_fail():
+def hotspot_fail(reason):
     log.warning("Hotspot mode failure")
     pass
 
@@ -169,14 +167,14 @@ def connecting_start():
 
 @timeout
 @state_callback
-def connecting_pass():
+def connecting_pass(reason):
     log.debug("Connection successful")
     set_state('CONNECTED')
 
 
 @timeout
 @state_callback
-def connecting_fail():
+def connecting_fail(reason):
     log.debug("Connection failed")
     if conn_list:
         set_state('CONNECTING', force=True)
@@ -203,13 +201,13 @@ def connected_start():
 
 @timeout
 @state_callback
-def connected_pass():
+def connected_pass(reason):
     pass
 
 
 @timeout
 @state_callback
-def connected_fail():
+def connected_fail(reason):
     log.warning('Connection lost')
 
     dev = modemgr.get_state_device("CONNECTED")

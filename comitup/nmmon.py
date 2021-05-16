@@ -76,12 +76,12 @@ def enable(
     monitored_dev = dev
 
 
-def send_cb(cb: Callable[[], None]) -> None:
-    def cb_to(cb):
-        cb()
+def send_cb(cb: Callable[[], None], reason) -> None:
+    def cb_to(cb, reason):
+        cb(reason)
         return False
 
-    timeout_add(1, cb_to, cb)
+    timeout_add(1, cb_to, cb, reason)
 
 
 def ap_changed_state(state, oldstate, reason, *args) -> None:
@@ -93,11 +93,11 @@ def ap_changed_state(state, oldstate, reason, *args) -> None:
     if state in PASS_STATES:
         log.debug("nmm - primary pass")
         if nm_dev_connect:
-            send_cb(nm_dev_connect)
+            send_cb(nm_dev_connect, reason)
     elif state in FAIL_STATES:
         log.debug("nmm - primary fail")
         if nm_dev_fail:
-            send_cb(nm_dev_fail)
+            send_cb(nm_dev_fail, reason)
 
 
 def second_changed_state(state, oldstate, reason, *args) -> None:
@@ -109,11 +109,11 @@ def second_changed_state(state, oldstate, reason, *args) -> None:
     if state in PASS_STATES:
         log.debug("nmm - secondary pass")
         if nm_dev_connect:
-            send_cb(nm_dev_connect)
+            send_cb(nm_dev_connect, reason)
     elif state in FAIL_STATES:
         log.debug("nmm - secondary fail")
         if nm_dev_fail:
-            send_cb(nm_dev_fail)
+            send_cb(nm_dev_fail, reason)
 
 
 def any_changed_state(state: int, *args) -> None:
