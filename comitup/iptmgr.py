@@ -30,13 +30,7 @@ start_cmds: List[str] = [
 end_cmds: List[str] = [
     # Clear HOTSPOT rules
     "iptables -w -D OUTPUT -o {ap} -j COMITUP-OUT >/dev/null 2>&1",
-    "iptables -w -D COMITUP-OUT "
-        "-p icmp --icmp-type destination-unreachable "        # noqa
-        "-j DROP >/dev/null 2>&1",                            # noqa
-    "iptables -w -D COMITUP-OUT "
-        "-p icmp --icmp-type port-unreachable "        # noqa
-        "-j DROP >/dev/null 2>&1",                            # noqa
-    "iptables -w -D COMITUP-OUT -j RETURN >/dev/null 2>&1",
+    "iptables -w -F COMITUP-OUT >/dev/null 2>&1",
     "iptables -w -X COMITUP-OUT >/dev/null 2>&1",
 ]
 
@@ -50,9 +44,7 @@ appliance_cmds: List[str] = [
 
 appliance_clear: List[str] = [
     "iptables -w -t nat -D POSTROUTING -j COMITUP-FWD >/dev/null 2>&1",
-    "iptables -w -t nat -D COMITUP-FWD -o {link} "
-        "-j MASQUERADE >/dev/null 2>&1",  # noqa
-    "iptables -w -t nat -D COMITUP-FWD -j RETURN >/dev/null 2>&1",
+    "iptables -w -t nat -F COMITUP-FWD >/dev/null 2>&1",
     "iptables -w -t nat -X COMITUP-FWD >/dev/null 2>&1",
 ]
 
@@ -74,7 +66,7 @@ def state_callback(state: str, action: str) -> None:
         run_cmds(end_cmds)
         run_cmds(start_cmds)
 
-        if modemgr.get_mode() == 'router':
+        if modemgr.get_mode() == modemgr.MULTI_MODE:
             run_cmds(appliance_clear)
 
         log.debug("Done with iptables commands for HOTSPOT")
@@ -83,7 +75,7 @@ def state_callback(state: str, action: str) -> None:
         log.debug("Running iptables commands for CONNECTED")
         run_cmds(end_cmds)
 
-        if modemgr.get_mode() == 'router':
+        if modemgr.get_mode() == modemgr.MULTI_MODE:
             run_cmds(appliance_clear)
             run_cmds(appliance_cmds)
 
