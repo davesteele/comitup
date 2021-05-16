@@ -292,6 +292,9 @@ def set_state_to(state, connections, timeout, force, curr_state_id):
         state_id,
     )
 
+    if state == "CONNECTED":
+        nmmon.enhance_fail_states()
+
     if connections:
         conn_list = connections
 

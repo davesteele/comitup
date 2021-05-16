@@ -3,6 +3,7 @@ from typing import List
 
 NM_DEVICE_STATE_ACTIVATED: int
 NM_DEVICE_STATE_FAILED: int
+NM_DEVICE_STATE_DISCONNECTED: int
 
 class NMDbusInterfaceType(type): ...
 

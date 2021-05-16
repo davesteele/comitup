@@ -48,7 +48,21 @@ PASS_STATES: List[int] = [
     # NetworkManager.NM_DEVICE_STATE_IP_CHECK,
     NetworkManager.NM_DEVICE_STATE_ACTIVATED
 ]
-FAIL_STATES: List[int] = [NetworkManager.NM_DEVICE_STATE_FAILED]
+BASE_FAIL_STATES: List[int] = [NetworkManager.NM_DEVICE_STATE_FAILED]
+ENHANCED_FAIL_STATES: List[int] = [NetworkManager.NM_DEVICE_STATE_DISCONNECTED]
+FAIL_STATES: List[int] = BASE_FAIL_STATES
+
+
+def base_fail_states() -> None:
+    global FAIL_STATES
+
+    FAIL_STATES = BASE_FAIL_STATES
+
+
+def enhance_fail_states() -> None:
+    global FAIL_STATES
+
+    FAIL_STATES = BASE_FAIL_STATES + ENHANCED_FAIL_STATES
 
 
 def disable() -> None:
@@ -72,6 +86,8 @@ def enable(
 
     nm_dev_connect = partial(connect_fn, state_id)
     nm_dev_fail = partial(fail_fn, state_id)
+
+    base_fail_states()
 
     monitored_dev = dev
 
