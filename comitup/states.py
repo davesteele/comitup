@@ -175,7 +175,15 @@ def connecting_pass(reason):
 @timeout
 @state_callback
 def connecting_fail(reason):
-    log.debug("Connection failed")
+    log.debug("Connection failed - reason {}".format(reason))
+
+    badreasons = [
+        NetworkManager.NM_DEVICE_STATE_REASON_NO_SECRETS,
+    ]
+    if reason in badreasons:
+        log.error("Connection {} config failure - DELETING".format(connection))
+        nm.del_connection_by_ssid(connection)
+
     if conn_list:
         set_state('CONNECTING', force=True)
     else:

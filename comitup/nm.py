@@ -183,7 +183,7 @@ def get_connection_by_ssid(name):
     return None
 
 
-def del_connection_by_ssid(name):
+def del_connection_by_ssid(name: str) -> None:
     for connection in get_all_connections():
         ssid = get_ssid_from_connection(connection)
         if name == ssid:
