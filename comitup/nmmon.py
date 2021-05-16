@@ -81,7 +81,7 @@ def send_cb(cb: Callable[[], None], reason) -> None:
         cb(reason)
         return False
 
-    timeout_add(1, cb_to, cb, reason)
+    timeout_add(0, cb_to, cb, reason)
 
 
 def ap_changed_state(state, oldstate, reason, *args) -> None:
