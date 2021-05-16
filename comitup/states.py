@@ -65,8 +65,16 @@ def state_callback(fn):
 
 
 def call_callbacks(state: str, action: str) -> None:
+    if state not in ["HOTSPOT", "CONNECTING", "CONNECTED"]:
+        log.debug("Illegal state {}".format(state))
+
+    if action not in ["start", "pass", "fail", "timeout"]:
+        log.debug("Illegal action {}".format(action))
+
+    log.debug("Calling callbacks")
     for callback in state_callbacks:
         callback(state, action)
+    log.debug("Callbacks complete")
 
 
 def timeout(fn):

@@ -78,6 +78,7 @@ def run_cmds(cmds: List[str]) -> None:
 
 
 def state_callback(state: str, action: str) -> None:
+    log.debug("Iptmgr callback")
     if (state, action) == ('HOTSPOT', 'start'):
         log.debug("Running iptables commands for HOTSPOT")
 

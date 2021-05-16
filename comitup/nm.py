@@ -61,8 +61,7 @@ def none_on_exception(*exceptions):
             try:
                 return fp(*args, **kwargs)
             except exceptions:
-                log.debug("Got an exception, returning None, %s", fp.__name__,
-                          exc_info=True)
+                log.debug("Got an exception, returning None, %s", fp.__name__)
                 return None
 
         return wrapper

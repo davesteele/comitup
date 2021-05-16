@@ -146,6 +146,7 @@ def get_hosts(conf: "Config", data: "persist") -> List[str]:
 
 
 def external_callback(state: str, action: str) -> None:
+    log.debug("External callback")
     if action != 'start':
         return
 
