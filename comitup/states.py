@@ -211,7 +211,9 @@ def connected_pass():
 @state_callback
 def connected_fail():
     log.warning('Connection lost')
-    set_state('HOTSPOT')
+
+    dev = modemgr.get_state_device("CONNECTED")
+    set_state("CONNECTING", candidate_connections(dev))
 
 
 @timeout
