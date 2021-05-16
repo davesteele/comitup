@@ -227,10 +227,15 @@ def connected_timeout() -> None:
     if connection != active_ssid:
         log.warning("Connection lost on timeout")
         dev = modemgr.get_state_device("CONNECTED")
-        set_state('CONNECTING', candidate_connections(dev))
+        set_state("CONNECTING", candidate_connections(dev))
 
     if modemgr.get_mode() == modemgr.MULTI_MODE:
         wpa.check_wpa(modemgr.get_ap_device().Interface)
+
+        active_ssid = nm.get_active_ssid(modemgr.get_state_device("HOTSPOT"))
+        if not active_ssid:
+            log.warning("Hotspot lost on timeout")
+            set_state("HOTSPOT")
 
 
 #
