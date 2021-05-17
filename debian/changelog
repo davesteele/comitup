@@ -2,8 +2,11 @@ comitup (1.24-1) UNRELEASED; urgency=medium
 
   * Improve shutdown cleanup. In particular, stop comitup-web.
   * Add cli option and config variable to set verbose logging.
-  * Start in CONNECTED mode, if appropriate, for a cleaner "apt"
+  * Don't interrupt connections already in place, for a cleaner "apt"
     experience.
+  * Improve network connection/recovery reliability and performance.
+  * Fixed bug for connected router mode with a valid Ethernet connection.
+  * Delete connections with a bad password, to avoid retries.
 
  -- David Steele <steele@debian.org>  Tue, 11 May 2021 15:03:38 -0400
 
