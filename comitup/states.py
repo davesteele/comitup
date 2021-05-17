@@ -41,6 +41,7 @@ com_state: Optional[str] = None
 conn_list: List[str] = []
 connection: str = ''
 state_id: int = 0
+startup: bool = False
 
 state_callbacks: List[Callable[[str, str], None]] = []
 
@@ -71,7 +72,7 @@ def call_callbacks(state: str, action: str) -> None:
     if action not in ["start", "pass", "fail", "timeout"]:
         log.debug("Illegal action {}".format(action))
 
-    log.debug("Calling callbacks")
+    log.debug("Calling callbacks for {}:{}".format(state, action))
     for callback in state_callbacks:
         callback(state, action)
     log.debug("Callbacks complete")
@@ -101,7 +102,7 @@ def dns_to_conn(host: str) -> str:
 #
 
 def fake_hs_pass(sid: int) -> bool:
-    hotspot_pass(sid)
+    hotspot_pass(sid, 0)
     return False
 
 
@@ -122,18 +123,31 @@ def hotspot_start() -> None:
         # the connect callback won't happen - let's 'pass' manually
         timeout_add(100, fake_hs_pass, state_id)
 
+    dev = modemgr.get_state_device("CONNECTED")
+    conn_list = candidate_connections(dev)
+    active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
+    if active_ssid in conn_list:
+        set_state("CONNECTING")
+
 
 @timeout
 @state_callback
 def hotspot_pass(reason):
-    skip_states()
+    global startup
+
+    dev = modemgr.get_state_device("CONNECTED")
+    conn_list = candidate_connections(dev)
+    active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
+    if startup or active_ssid in conn_list:
+        set_state("CONNECTING", conn_list)
+        startup = False
 
 
 @timeout
 @state_callback
 def hotspot_fail(reason):
     log.warning("Hotspot mode failure")
-    pass
+    set_state("HOTSPOT", force=True)
 
 
 @timeout
@@ -157,20 +171,32 @@ def hotspot_timeout():
 # Connecting state
 #
 
+def fake_cg(sid: int) -> bool:
+    connecting_pass(sid, 0)
+    return False
+
 
 @state_callback
 def connecting_start():
     global conn_list
 
-    if conn_list:
-        log.debug("states: Calling nm.disconnect()")
-        nm.disconnect(modemgr.get_state_device('CONNECTING'))
-
-        conn = conn_list.pop(0)
-        log.info('Attempting connection to %s' % conn)
-        activate_connection(conn, 'CONNECTING')
+    dev = modemgr.get_state_device("CONNECTED")
+    conn_list = candidate_connections(dev)
+    active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
+    if active_ssid in conn_list:
+        log.debug("Didn't need to connect - already connected")
+        # the connect callback won't happen - let's 'pass' manually
+        timeout_add(100, fake_cg, state_id)
     else:
-        set_state('HOTSPOT')
+        if conn_list:
+            log.debug("states: Calling nm.disconnect()")
+            nm.disconnect(modemgr.get_state_device('CONNECTING'))
+
+            conn = conn_list.pop(0)
+            log.info('Attempting connection to %s' % conn)
+            activate_connection(conn, 'CONNECTING')
+        else:
+            set_state('HOTSPOT')
 
 
 @timeout
@@ -305,7 +331,7 @@ def set_state_to(state, connections, timeout, force, curr_state_id):
         state_id,
     )
 
-    if state == "CONNECTED":
+    if state in ["CONNECTED", "HOTSPOT"]:
         nmmon.enhance_fail_states()
 
     if connections:
@@ -341,13 +367,6 @@ def set_hosts(*args):
     dns_names = args
 
 
-def assure_hotspot(ssid, device, password):
-    log.debug("states: Calling nm.get_connection_by_ssid()")
-    nm.del_connection_by_ssid(ssid)
-    if not nm.get_connection_by_ssid(ssid):
-        nm.make_hotspot(ssid, device, password)
-
-
 def hash_conf():
     m = hashlib.sha256()
     with open("/etc/comitup.conf", 'rb') as fp:
@@ -366,38 +385,12 @@ def is_hotspot_current(connection):
     return hs_hash == cf_hash
 
 
-def skip_states() -> bool:
-    """Skip from HOTSPOT to CONNECTED if applicable, and return True."""
-    dev = modemgr.get_state_device("CONNECTED")
-    conn_list = candidate_connections(dev)
-    active_ssid: str
-    active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
-    if active_ssid in conn_list:
-        if modemgr.get_mode() == modemgr.MULTI_MODE:
-            hotspot_start()
-            call_callbacks("HOTSPOT", "pass")
-        call_callbacks("CONNECTING", "start")
-        call_callbacks("CONNECTING", "pass")
-
-        log.info("Skipping to CONNECTED")
-        global connection
-        connection = active_ssid
-        set_state("CONNECTED")
-
-        mdns.clear_entries()
-        mdns.add_hosts(dns_names)
-
-        return True
-
-    return False
-
-
 def init_states(
     hosts: List[str],
     callbacks: List[Callable],
     hotspot_pw: str,
 ):
-    global hotspot_name, conn_list, connection
+    global hotspot_name, conn_list, connection, startup
 
     nmmon.init_nmmon()
     set_hosts(*hosts)
@@ -405,13 +398,13 @@ def init_states(
     for callback in callbacks:
         add_state_callback(callback)
 
-    hotspot_name = dns_to_conn(hosts[0])
-    assure_hotspot(hotspot_name, modemgr.get_ap_device(), hotspot_pw)
-
-    if not skip_states():
+    if modemgr.get_mode() == modemgr.MULTI_MODE:
+        startup = True
+        set_state('HOTSPOT')
+    else:
         dev = modemgr.get_state_device("CONNECTED")
         conn_list = candidate_connections(dev)
-        set_state('CONNECTING', conn_list)
+        set_state('HOTSPOT', conn_list)
 
 
 def add_state_callback(callback):
