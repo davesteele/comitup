@@ -385,6 +385,13 @@ def is_hotspot_current(connection):
     return hs_hash == cf_hash
 
 
+def assure_hotspot(ssid, device, password):
+    log.debug("states: Calling nm.get_connection_by_ssid()")
+    nm.del_connection_by_ssid(ssid)
+    if not nm.get_connection_by_ssid(ssid):
+        nm.make_hotspot(ssid, device, password)
+
+
 def init_states(
     hosts: List[str],
     callbacks: List[Callable],
@@ -397,6 +404,9 @@ def init_states(
 
     for callback in callbacks:
         add_state_callback(callback)
+
+    hotspot_name = dns_to_conn(hosts[0])
+    assure_hotspot(hotspot_name, modemgr.get_ap_device(), hotspot_pw)
 
     if modemgr.get_mode() == modemgr.MULTI_MODE:
         startup = True
