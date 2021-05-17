@@ -20,7 +20,7 @@ from typing import Callable, List, Optional
 import NetworkManager
 from gi.repository.GLib import timeout_add
 
-from comitup import iwscan, mdns, wpa
+from comitup import iwscan, wpa
 
 if __name__ == '__main__':
     from dbus.mainloop.glib import DBusGMainLoop
