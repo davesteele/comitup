@@ -39,7 +39,7 @@ bus: dbus.SystemBus = dbus.SystemBus()
 
 monitored_dev: Optional[NetworkManager.Device] = None
 ap_device: Optional[NetworkManager.Device] = None
-second_device_name: Optional[NetworkManager.Device] = None
+second_device_name: Optional[str] = None
 
 nm_dev_connect: Optional[Callable[[], None]] = None
 nm_dev_fail: Optional[Callable[[], None]] = None
@@ -48,7 +48,21 @@ PASS_STATES: List[int] = [
     # NetworkManager.NM_DEVICE_STATE_IP_CHECK,
     NetworkManager.NM_DEVICE_STATE_ACTIVATED
 ]
-FAIL_STATES: List[int] = [NetworkManager.NM_DEVICE_STATE_FAILED]
+BASE_FAIL_STATES: List[int] = [NetworkManager.NM_DEVICE_STATE_FAILED]
+ENHANCED_FAIL_STATES: List[int] = [NetworkManager.NM_DEVICE_STATE_DISCONNECTED]
+FAIL_STATES: List[int] = BASE_FAIL_STATES
+
+
+def base_fail_states() -> None:
+    global FAIL_STATES
+
+    FAIL_STATES = BASE_FAIL_STATES
+
+
+def enhance_fail_states() -> None:
+    global FAIL_STATES
+
+    FAIL_STATES = BASE_FAIL_STATES + ENHANCED_FAIL_STATES
 
 
 def disable() -> None:
@@ -73,15 +87,17 @@ def enable(
     nm_dev_connect = partial(connect_fn, state_id)
     nm_dev_fail = partial(fail_fn, state_id)
 
+    base_fail_states()
+
     monitored_dev = dev
 
 
-def send_cb(cb: Callable[[], None]) -> None:
-    def cb_to(cb):
-        cb()
+def send_cb(cb: Callable[[], None], reason) -> None:
+    def cb_to(cb, reason):
+        cb(reason)
         return False
 
-    timeout_add(1, cb_to, cb)
+    timeout_add(0, cb_to, cb, reason)
 
 
 def ap_changed_state(state, oldstate, reason, *args) -> None:
@@ -93,11 +109,11 @@ def ap_changed_state(state, oldstate, reason, *args) -> None:
     if state in PASS_STATES:
         log.debug("nmm - primary pass")
         if nm_dev_connect:
-            send_cb(nm_dev_connect)
+            send_cb(nm_dev_connect, reason)
     elif state in FAIL_STATES:
         log.debug("nmm - primary fail")
         if nm_dev_fail:
-            send_cb(nm_dev_fail)
+            send_cb(nm_dev_fail, reason)
 
 
 def second_changed_state(state, oldstate, reason, *args) -> None:
@@ -109,11 +125,11 @@ def second_changed_state(state, oldstate, reason, *args) -> None:
     if state in PASS_STATES:
         log.debug("nmm - secondary pass")
         if nm_dev_connect:
-            send_cb(nm_dev_connect)
+            send_cb(nm_dev_connect, reason)
     elif state in FAIL_STATES:
         log.debug("nmm - secondary fail")
         if nm_dev_fail:
-            send_cb(nm_dev_fail)
+            send_cb(nm_dev_fail, reason)
 
 
 def any_changed_state(state: int, *args) -> None:
@@ -144,7 +160,10 @@ def set_device_listeners(
         )
         log.debug("Listener is {}".format(device_listener))
 
-    if second_device_name != second_dev.Interface:
+    if (
+        second_device_name != second_dev.Interface
+        and ap_dev.Interface != second_dev.Interface
+    ):
         log.debug("nmm - Setting 2nd listener for {}".format(second_dev))
         second_device_name = second_dev.Interface
         device_listener = bus.add_signal_receiver(

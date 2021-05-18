@@ -61,8 +61,7 @@ def none_on_exception(*exceptions):
             try:
                 return fp(*args, **kwargs)
             except exceptions:
-                log.debug("Got an exception, returning None, %s", fp.__name__,
-                          exc_info=True)
+                log.debug("Got an exception, returning None, %s", fp.__name__)
                 return None
 
         return wrapper
@@ -183,7 +182,7 @@ def get_connection_by_ssid(name):
     return None
 
 
-def del_connection_by_ssid(name):
+def del_connection_by_ssid(name: str) -> None:
     for connection in get_all_connections():
         ssid = get_ssid_from_connection(connection)
         if name == ssid:

@@ -11,6 +11,7 @@
 #
 
 import logging
+import re
 import subprocess
 from typing import List
 
@@ -30,13 +31,7 @@ start_cmds: List[str] = [
 end_cmds: List[str] = [
     # Clear HOTSPOT rules
     "iptables -w -D OUTPUT -o {ap} -j COMITUP-OUT >/dev/null 2>&1",
-    "iptables -w -D COMITUP-OUT "
-        "-p icmp --icmp-type destination-unreachable "        # noqa
-        "-j DROP >/dev/null 2>&1",                            # noqa
-    "iptables -w -D COMITUP-OUT "
-        "-p icmp --icmp-type port-unreachable "        # noqa
-        "-j DROP >/dev/null 2>&1",                            # noqa
-    "iptables -w -D COMITUP-OUT -j RETURN >/dev/null 2>&1",
+    "iptables -w -F COMITUP-OUT >/dev/null 2>&1",
     "iptables -w -X COMITUP-OUT >/dev/null 2>&1",
 ]
 
@@ -50,14 +45,29 @@ appliance_cmds: List[str] = [
 
 appliance_clear: List[str] = [
     "iptables -w -t nat -D POSTROUTING -j COMITUP-FWD >/dev/null 2>&1",
-    "iptables -w -t nat -D COMITUP-FWD -o {link} "
-        "-j MASQUERADE >/dev/null 2>&1",  # noqa
-    "iptables -w -t nat -D COMITUP-FWD -j RETURN >/dev/null 2>&1",
+    "iptables -w -t nat -F COMITUP-FWD >/dev/null 2>&1",
     "iptables -w -t nat -X COMITUP-FWD >/dev/null 2>&1",
 ]
 
 
 log: logging.Logger = logging.getLogger('comitup')
+
+
+def default_dev():
+    cp = subprocess.run(
+        "ip route",
+        stdout=subprocess.PIPE,
+        shell=True,
+        encoding="utf-8",
+    )
+
+    stdout = cp.stdout.strip()
+    line = stdout.split("\n")[0]
+    match = re.search("dev ([^ ]+)", line)
+    if match:
+        return match.group(1)
+    else:
+        return None
 
 
 def run_cmds(cmds: List[str]) -> None:
@@ -68,13 +78,14 @@ def run_cmds(cmds: List[str]) -> None:
 
 
 def state_callback(state: str, action: str) -> None:
+    log.debug("Iptmgr callback")
     if (state, action) == ('HOTSPOT', 'start'):
         log.debug("Running iptables commands for HOTSPOT")
 
         run_cmds(end_cmds)
         run_cmds(start_cmds)
 
-        if modemgr.get_mode() == 'router':
+        if modemgr.get_mode() == modemgr.MULTI_MODE:
             run_cmds(appliance_clear)
 
         log.debug("Done with iptables commands for HOTSPOT")
@@ -83,9 +94,17 @@ def state_callback(state: str, action: str) -> None:
         log.debug("Running iptables commands for CONNECTED")
         run_cmds(end_cmds)
 
-        if modemgr.get_mode() == 'router':
+        if modemgr.get_mode() == modemgr.MULTI_MODE:
             run_cmds(appliance_clear)
             run_cmds(appliance_cmds)
+            defaultdev = default_dev()
+            if defaultdev:
+                run_cmds(
+                    [
+                        "iptables -w -t nat -I COMITUP-FWD -o "
+                        "{} -j MASQUERADE".format(defaultdev)
+                    ],
+                )
 
         log.debug("Done with iptables commands for CONNECTED")
 
