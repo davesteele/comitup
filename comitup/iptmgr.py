@@ -98,7 +98,8 @@ def state_callback(state: str, action: str) -> None:
             run_cmds(appliance_clear)
             run_cmds(appliance_cmds)
             defaultdev = default_dev()
-            if defaultdev:
+            apdev: str = modemgr.get_ap_device().Interface
+            if defaultdev and defaultdev != apdev:
                 run_cmds(
                     [
                         "iptables -w -t nat -I COMITUP-FWD -o "
