@@ -1,0 +1,380 @@
+comitup (1.24-1) comitup; urgency=medium
+
+  * Improve shutdown cleanup. In particular, stop comitup-web.
+  * Add cli option and config variable to set verbose logging.
+  * Don't interrupt connections already in place, for a cleaner "apt"
+    experience.
+  * Improve network connection/recovery reliability and performance.
+  * Fixed bug for connected router mode with a valid Ethernet connection.
+  * Delete connections with a bad password, to avoid retries.
+
+ -- David Steele <steele@debian.org>  Mon, 17 May 2021 20:21:23 -0400
+
+comitup (1.23-1) comitup; urgency=medium
+
+  * Fixed a problem causing connect failure if more than one WiFi connection
+    is configured.
+  * Fixed a problem causing connection attempts to be unreliable.
+  * Added typing hints to the source code. As a result, Comitup is no longer
+    compatible with Python 3.5.
+
+ -- David Steele <steele@debian.org>  Sat, 08 May 2021 17:25:36 -0400
+
+comitup (1.22-1) comitup; urgency=medium
+
+  * Fix new crashing bug on starting hotspot.
+
+ -- David Steele <steele@debian.org>  Mon, 26 Apr 2021 21:28:33 -0400
+
+comitup (1.21-1) comitup; urgency=medium
+
+  * Fix a startup problem in config.py.
+
+ -- David Steele <steele@debian.org>  Mon, 19 Apr 2021 22:28:16 -0400
+
+comitup (1.20-1) comitup; urgency=medium
+
+  * Fix a problem with initial connection attempts.
+
+ -- David Steele <steele@debian.org>  Thu, 15 Apr 2021 12:58:43 -0400
+
+comitup (1.19-1) comitup; urgency=medium
+
+  * Fix WiFi connection problem involving iPhone (Closes #71).
+  * Change the upstream main branch name to "main".
+
+ -- David Steele <steele@debian.org>  Tue, 06 Apr 2021 21:13:19 -0400
+
+comitup (1.18-1) comitup; urgency=medium
+
+  * Fix crash when running in Spanish locale.
+  * Add support for mac addr, sn, in ap_name (thanks systemicorp).
+  * Add a "Locate" web/cli LED blink function to identify Comitup Pis.
+  * Bug fixes - cleaner set_state(), start comitup-web cleanly.
+
+ -- David Steele <steele@debian.org>  Mon, 05 Apr 2021 21:48:19 -0400
+
+comitup (1.17-1) unstable; urgency=medium
+
+  * Add an "info" option, to support 1st-run hostname setting.
+  * Change the ZeroConf service name from "workstation" to "comitup".
+  * Add dhcpd to the list of services to verify down.
+
+ -- David Steele <steele@debian.org>  Tue, 16 Mar 2021 21:18:59 -0400
+
+comitup (1.16-1) comitup; urgency=medium
+
+  * Add NEWS on how to prepare for comitup repo key upgrade.
+  * Change the default Avahi service name from "workstation" to
+    "comitup.
+  * Move the comitup-cli from section 8 to section 1.
+
+ -- David Steele <steele@debian.org>  Thu, 11 Mar 2021 17:12:37 -0500
+
+comitup (1.15-1) unstable; urgency=medium
+
+  * Fix mis-spelled dnsmasq options.
+
+ -- David Steele <steele@debian.org>  Thu, 11 Feb 2021 16:04:28 -0500
+
+comitup (1.14-1) unstable; urgency=medium
+
+  * Allow configuration of the mdns service name.
+
+ -- David Steele <steele@debian.org>  Thu, 11 Feb 2021 11:22:52 -0500
+
+comitup (1.13-4) unstable; urgency=medium
+
+  * Another autopkgtest fix
+
+ -- David Steele <steele@debian.org>  Sat, 14 Nov 2020 20:55:09 -0500
+
+comitup (1.13-3) unstable; urgency=medium
+
+  * Avoid remaining autopkgtest failures in Debian build
+
+ -- David Steele <steele@debian.org>  Sat, 14 Nov 2020 09:49:17 -0500
+
+comitup (1.13-2) unstable; urgency=medium
+
+  * Fix build tests in a minimal environment.
+
+ -- David Steele <steele@debian.org>  Fri, 13 Nov 2020 22:20:57 -0500
+
+comitup (1.13-1) unstable; urgency=medium
+
+  * Fix the version error in master.
+  * Remove the obsolete/deprecated python3-crypto dependency
+    (Closes: 971313).
+  * Bump # of SSID digits from 2 to 3
+
+ -- David Steele <steele@debian.org>  Sat, 31 Oct 2020 14:43:29 -0400
+
+comitup (1.12-1) unstable; urgency=medium
+
+  * Better manage mdns by moving from states to nmmon.
+
+ -- David Steele <steele@debian.org>  Tue, 11 Aug 2020 20:54:19 -0400
+
+comitup (1.11-2) comitup; urgency=medium
+
+  * Fix a dependency check problem with python-dbus.
+
+ -- David Steele <steele@debian.org>  Mon, 27 Jul 2020 16:43:59 -0400
+
+comitup (1.11-1) unstable; urgency=medium
+
+  * Warn if other DNS providers running.
+  * Bug - support non-uppercase SSIDs.
+
+ -- David Steele <steele@debian.org>  Sun, 26 Jul 2020 21:22:53 -0400
+
+comitup (1.10-2) unstable; urgency=medium
+
+  * Fix debci tests to run those that can be run on debci.
+
+ -- David Steele <steele@debian.org>  Sun, 02 Feb 2020 10:40:19 -0500
+
+comitup (1.10-1) unstable; urgency=medium
+
+  * Add IPv6 support to upstream connections.
+  * Fix tests, including those blocking migration (Closes: 947621).
+  * Update Debian build environment.
+
+ -- David Steele <steele@debian.org>  Sat, 01 Feb 2020 15:34:34 -0500
+
+comitup (1.9-2) unstable; urgency=medium
+
+  * Clean up messy release of 1.9-1.
+  * Add systemd depends on Avahi.
+
+ -- David Steele <steele@debian.org>  Tue, 10 Dec 2019 22:44:43 -0500
+
+comitup (1.9-1) UNRELEASED; urgency=medium
+
+  * Address a problem with connection failure.
+  * A leak in Avahi caused mdns failures after multiple connection
+    attempts.
+  * Disable caching for comitup-web pages.
+
+ -- David Steele <steele@debian.org>  Sun, 01 Dec 2019 08:31:57 -0500
+
+comitup (1.8-1) unstable; urgency=medium
+
+  * Correct tabulate Suggests to Python 3 (Closes: 935731).
+  * Set a short-term reconnect attampt on connect fail.
+  * Fix a connection error when used from IOS devices.
+
+ -- David Steele <steele@debian.org>  Sun, 10 Nov 2019 19:58:43 -0500
+
+comitup (1.7-1) unstable; urgency=medium
+
+  * The primary Wifi device was still serving hotspot dhcp addresses
+    when connected to an upstream AP.
+  * Ensure the obsolete NetworkManager dnsmasq sabotage file is gone.
+  * Require a compatible version of the Python NetworkManager interface.
+  * Move the Hotspot network to 10.41.0.0/24.
+
+ -- David Steele <steele@debian.org>  Thu, 08 Aug 2019 22:02:35 -0400
+
+comitup (1.6.1-1) unstable; urgency=medium
+
+  * Move comitup-cli man to section 8.
+  * Source-only upload.
+
+ -- David Steele <steele@debian.org>  Mon, 22 Jul 2019 22:03:51 -0400
+
+comitup (1.6-1) unstable; urgency=medium
+
+  * Rework hotspot AP dhcp for Buster compatibility.
+
+ -- David Steele <steele@debian.org>  Sat, 20 Jul 2019 11:50:46 -0400
+
+comitup (1.5-1) comitup; urgency=medium
+
+  * Fix a race condition in the "web_service" start.
+  * Fix a web page problem making unsecured APs unusable.
+  * Restore the ability to secure the comitup hotspot.
+  * Fix a DBUS crash when deleting connections in MULTI mode.
+  * Fix problem causing a hang in the "CONNECTING" state.
+    - Improves startup time.
+
+ -- David Steele <steele@debian.org>  Mon, 10 Jun 2019 12:22:10 -0400
+
+comitup (1.4-1) comitup; urgency=medium
+
+  * Fix network instabilities.
+  * Implement captive portal for establishing upstream wifi configuration.
+  * Attempt to connect to all defined connections, not just the
+    visible ones.
+  * Support an optional password on accessing the hotspot.
+  * Support using the hostname in ap_name.
+  * Limit the hotspot to 2.4 GHz for global compatibility.
+
+ -- David Steele <steele@debian.org>  Sat, 30 Mar 2019 15:02:27 -0400
+
+comitup (1.3.1-1) unstable; urgency=medium
+
+  * Change the default number of digits in the hotspot from 4 to 2.
+  * Fix CI testing.
+
+ -- David Steele <steele@debian.org>  Tue, 22 Jan 2019 20:49:56 -0500
+
+comitup (1.3-1) unstable; urgency=medium
+
+  * New web gui look (thanks Krebbi).
+  * Add "primary_wifi_device" configuration variable.
+  * Replace "base_name" config with "ap_name".
+  * Improve robustness with Pi 3 Model B+.
+  * Limit AP iptables rules to AP traffic.
+  * Other networking fixes.
+  * Address bug in callback privilege dropping.
+  * comitup-web logging.
+
+ -- David Steele <steele@debian.org>  Sun, 20 Jan 2019 16:59:45 -0500
+
+comitup (1.2.5-1) unstable; urgency=medium
+
+  * Use pandoc to create the man pages.
+  * Detect 'iw' command failure.
+  * Add the # of interfaces mode to the get_info command.
+  * Correct the web 'confirm' text, based on mode.
+
+ -- David Steele <steele@debian.org>  Tue, 03 Apr 2018 21:47:55 -0400
+
+comitup (1.2.4-1) unstable; urgency=medium
+
+  * Fix a bug in the startup wifi tests.
+  * Fix the comitup-cli 'info' command.
+
+ -- David Steele <steele@debian.org>  Tue, 13 Mar 2018 20:44:12 -0400
+
+comitup (1.2.3-1) unstable; urgency=medium
+
+  * Add a states monitor task. Use it to monitor hotspot.
+
+ -- David Steele <steele@debian.org>  Sun, 25 Feb 2018 09:57:32 -0500
+
+comitup (1.2.2-1) UNRELEASED; urgency=medium
+
+  * Workaround for NetworkManager crash, which mangles the hotspot.
+  * More logging.
+
+ -- David Steele <steele@debian.org>  Sat, 24 Feb 2018 19:59:49 -0500
+
+comitup (1.2.1-1) unstable; urgency=medium
+
+  * Add restart delay to systemd conf files.
+  * Interpret 'iw list' failure correctly.
+  * Catch NetworkManager loss, and kill comitup.
+
+ -- David Steele <steele@debian.org>  Fri, 23 Feb 2018 21:57:18 -0500
+
+comitup (1.2-1) unstable; urgency=medium
+
+  * Update to python3
+
+ -- David Steele <steele@debian.org>  Tue, 20 Feb 2018 22:08:28 -0500
+
+comitup (1.1-2) unstable; urgency=medium
+
+  * Tolerate missing comitup.json on preinst upgrade.
+    (Closes: 881673)
+
+ -- David Steele <steele@debian.org>  Mon, 13 Nov 2017 21:24:04 -0500
+
+comitup (1.1-1) unstable; urgency=medium
+
+  * Fix web failure for open APs.
+  * Fix web failure for SSIDs with special characters.
+  * Run the callback with the permissions of the script owner.
+
+ -- David Steele <steele@debian.org>  Sat, 04 Nov 2017 22:00:22 -0400
+
+comitup (1.0-1) UNRELEASED; urgency=medium
+
+  * Update some dependencies to modern replacements/versions.
+  * Add a wifi configuration check on install.
+  * Support external script callback.
+  * Preserve the comitup number across upgrades.
+
+ -- David Steele <steele@debian.org>  Wed, 18 Oct 2017 21:00:38 -0400
+
+comitup (0.9.1-1) unstable; urgency=medium
+
+  * Remove explicit network interface names.
+  * Configuration option to remove dual interface mode.
+  * Update documentation for dual interface mode.
+  * Fix tests.
+
+ -- David Steele <steele@debian.org>  Sat, 16 Sep 2017 17:25:52 -0400
+
+comitup (0.9-1) unstable; urgency=medium
+
+  * Better dual-wlan support for mobile devices.
+    - Eliminate AP drops.
+    - Tolerate iptables collisions.
+    - Increase timeout to 3 minutes to allow Android time to ip-up.
+    - Don't update iptables and web server till CONNECTED.
+
+ -- David Steele <steele@debian.org>  Thu, 27 Jul 2017 19:57:56 -0400
+
+comitup (0.8-1) unstable; urgency=medium
+
+  * New master version.
+    - Support for 2-wifi device mode.
+    - Mdns serves IP addresses appropirate for each interface.
+    - Better detection of encrypted Access points.
+    - Update comitup-web from cherrypy to flask.
+
+ -- David Steele <steele@debian.org>  Sat, 22 Jul 2017 00:14:35 -0400
+
+comitup (0.7-1) unstable; urgency=medium
+
+  * Make it more robust for non Raspberry Pi 3 use.
+    - Tested on a Pi 2 with a KOOTEK wifi adapter.
+
+ -- David Steele <steele@debian.org>  Mon, 23 Jan 2017 21:46:58 -0500
+
+comitup (0.6-1) unstable; urgency=medium
+
+  * Replace 'activity' with 'get-info' in the D-Bus interface.
+  * Eliminate the 'comitup.local' mdns name.
+  * Publish as a mdns Workstation.
+
+ -- David Steele <steele@debian.org>  Sat, 21 Jan 2017 23:40:34 -0500
+
+comitup (0.5-1) unstable; urgency=medium
+
+  * Minor doc fixes.
+  * git-buildpackage build support.
+  * Fix comitup-cli print statements.
+  * Obscure the web password field.
+
+ -- David Steele <steele@debian.org>  Wed, 24 Aug 2016 13:46:33 -0400
+
+comitup (0.4-1) unstable; urgency=medium
+
+  * Fix the WPA security detection logic for the 'iw' command.
+  * RFS feedback.
+
+ -- David Steele <steele@debian.org>  Wed, 13 Jul 2016 15:05:21 -0400
+
+comitup (0.3-1) UNRELEASED; urgency=medium
+
+  * Use the 'iw' command for a better list of available Access Points.
+
+ -- David Steele <steele@debian.org>  Mon, 11 Jul 2016 15:50:35 -0400
+
+comitup (0.2-1) UNRELEASED; urgency=medium
+
+  * Add a manual Access Point selection capability.
+  * Minor bug fixes.
+
+ -- David Steele <steele@debian.org>  Thu, 07 Jul 2016 11:56:33 -0400
+
+comitup (0.1-1) UNRELEASED; urgency=low
+
+  * Initial release (Closes: #821145)
+
+ -- David Steele <steele@debian.org>  Wed, 23 Mar 2016 23:07:38 -0400

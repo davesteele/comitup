@@ -1,5 +1,13 @@
 #!/bin/sh
 
+git checkout debian -- debian/changelog
+if (head -1 debian/changelog | grep UNRELEASED ); then
+  echo "Latest changelog is UNRELEASED"
+  exit 1
+fi
+rm debian/changelog
+rmdir debian
+
 cp ../comitup*deb deb/
 cp ../davesteele-comitup-apt-source*deb deb/
 
