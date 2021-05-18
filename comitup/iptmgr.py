@@ -13,7 +13,7 @@
 import logging
 import re
 import subprocess
-from typing import List
+from typing import List, Optional
 
 from comitup import modemgr, nm
 
@@ -53,7 +53,7 @@ appliance_clear: List[str] = [
 log: logging.Logger = logging.getLogger('comitup')
 
 
-def default_dev():
+def default_dev() -> Optional[str]:
     cp = subprocess.run(
         "ip route",
         stdout=subprocess.PIPE,
@@ -97,7 +97,7 @@ def state_callback(state: str, action: str) -> None:
         if modemgr.get_mode() == modemgr.MULTI_MODE:
             run_cmds(appliance_clear)
             run_cmds(appliance_cmds)
-            defaultdev = default_dev()
+            defaultdev: Optional[str] = default_dev()
             apdev: str = modemgr.get_ap_device().Interface
             if defaultdev and defaultdev != apdev:
                 run_cmds(
