@@ -1,3 +1,9 @@
+comitup (1.25-1) UNRELEASED; urgency=medium
+
+  * Fix intermittent network forwarding problem, router mode, CONNECTED.
+
+ -- David Steele <steele@debian.org>  Tue, 18 May 2021 14:15:08 -0400
+
 comitup (1.24-1) comitup; urgency=medium
 
   * Improve shutdown cleanup. In particular, stop comitup-web.
