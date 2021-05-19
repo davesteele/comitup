@@ -82,12 +82,12 @@ def enable(
 ) -> None:
     global monitored_dev, nm_dev_connect, nm_dev_fail
 
+    base_fail_states()
+
     monitored_dev = None
 
     nm_dev_connect = partial(connect_fn, state_id)
     nm_dev_fail = partial(fail_fn, state_id)
-
-    base_fail_states()
 
     monitored_dev = dev
 
