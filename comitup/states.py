@@ -195,7 +195,7 @@ def connecting_start():
             log.debug("states: Calling nm.disconnect()")
             nm.disconnect(modemgr.get_state_device('CONNECTING'))
 
-            conn = conn_list[0]
+            conn = conn_list.pop(0)
             log.info('Attempting connection to %s' % conn)
             activate_connection(conn, 'CONNECTING')
         else:
@@ -224,7 +224,6 @@ def connecting_fail(reason):
         nm.del_connection_by_ssid(connection)
 
     if conn_list:
-        conn_list.pop(0)
         set_state('CONNECTING', force=True)
     else:
         set_state('HOTSPOT')
