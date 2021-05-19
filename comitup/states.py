@@ -113,8 +113,10 @@ def hotspot_start() -> None:
 
     hs_ssid: str = dns_to_conn(dns_names[0])
 
-    log.debug("states: Calling nm.get_active_ssid()")
-    if hs_ssid != nm.get_active_ssid(modemgr.get_state_device('HOTSPOT')):
+    if startup and modemgr.get_mode() == modemgr.SINGLE_MODE:
+        log.debug("Passing on hotspot connection for now")
+        timeout_add(100, fake_hs_pass, state_id)
+    elif hs_ssid != nm.get_active_ssid(modemgr.get_state_device('HOTSPOT')):
         conn_list = []
 
         activate_connection(hs_ssid, 'HOTSPOT')
@@ -178,13 +180,14 @@ def fake_cg(sid: int) -> bool:
 
 @state_callback
 def connecting_start():
-    global conn_list
+    global conn_list, connection
 
     dev = modemgr.get_state_device("CONNECTED")
     full_conn_list = candidate_connections(dev)
     active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
     if active_ssid in full_conn_list:
         log.debug("Didn't need to connect - already connected")
+        connection = active_ssid
         # the connect callback won't happen - let's 'pass' manually
         timeout_add(100, fake_cg, state_id)
     else:
@@ -192,7 +195,7 @@ def connecting_start():
             log.debug("states: Calling nm.disconnect()")
             nm.disconnect(modemgr.get_state_device('CONNECTING'))
 
-            conn = conn_list[0]
+            conn = conn_list.pop(0)
             log.info('Attempting connection to %s' % conn)
             activate_connection(conn, 'CONNECTING')
         else:
@@ -221,7 +224,6 @@ def connecting_fail(reason):
         nm.del_connection_by_ssid(connection)
 
     if conn_list:
-        conn_list.pop(0)
         set_state('CONNECTING', force=True)
     else:
         set_state('HOTSPOT')
@@ -411,13 +413,8 @@ def init_states(
     hotspot_name = dns_to_conn(hosts[0])
     assure_hotspot(hotspot_name, modemgr.get_ap_device(), hotspot_pw)
 
-    if modemgr.get_mode() == modemgr.MULTI_MODE:
-        startup = True
-        set_state('HOTSPOT')
-    else:
-        dev = modemgr.get_state_device("CONNECTED")
-        conn_list = candidate_connections(dev)
-        set_state('CONNECTING', conn_list)
+    startup = True
+    set_state('HOTSPOT')
 
 
 def add_state_callback(callback):
