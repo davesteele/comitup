@@ -7,6 +7,7 @@ if (head -1 debian/changelog | grep UNRELEASED ); then
 fi
 rm debian/changelog
 rmdir debian
+git rm debian/changelog
 
 cp ../comitup*deb deb/
 cp ../davesteele-comitup-apt-source*deb deb/
