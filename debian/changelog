@@ -1,4 +1,4 @@
-comitup (1.27-1) UNRELEASED; urgency=medium
+comitup (1.27-1) comitup; urgency=medium
 
   * Bug fix - cycling through CONNECTING if upstream connection already
     established at startup.
@@ -6,7 +6,7 @@ comitup (1.27-1) UNRELEASED; urgency=medium
     established at startup.
   * Pass through HOTSPOT mode to CONNECTING mode immediately on startup.
 
- -- David Steele <steele@debian.org>  Wed, 19 May 2021 12:40:18 -0400
+ -- David Steele <steele@debian.org>  Wed, 19 May 2021 17:13:48 -0400
 
 comitup (1.26-1) comitup; urgency=medium
 
