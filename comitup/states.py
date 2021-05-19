@@ -178,13 +178,14 @@ def fake_cg(sid: int) -> bool:
 
 @state_callback
 def connecting_start():
-    global conn_list
+    global conn_list, connection
 
     dev = modemgr.get_state_device("CONNECTED")
     full_conn_list = candidate_connections(dev)
     active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
     if active_ssid in full_conn_list:
         log.debug("Didn't need to connect - already connected")
+        connection = active_ssid
         # the connect callback won't happen - let's 'pass' manually
         timeout_add(100, fake_cg, state_id)
     else:
