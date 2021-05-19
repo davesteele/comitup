@@ -1,3 +1,9 @@
+comitup (1.26-1) comitup; urgency=medium
+
+  * Fix a bug that doesn't allow connection to 2nd defined connection.
+
+ -- David Steele <steele@debian.org>  Wed, 19 May 2021 09:44:09 -0400
+
 comitup (1.25-1) comitup; urgency=medium
 
   * Fix intermittent network forwarding problem, router mode, CONNECTED.
