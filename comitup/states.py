@@ -113,8 +113,10 @@ def hotspot_start() -> None:
 
     hs_ssid: str = dns_to_conn(dns_names[0])
 
-    log.debug("states: Calling nm.get_active_ssid()")
-    if hs_ssid != nm.get_active_ssid(modemgr.get_state_device('HOTSPOT')):
+    if startup and modemgr.get_mode() == modemgr.SINGLE_MODE:
+        log.debug("Passing on hotspot connection for now")
+        timeout_add(100, fake_hs_pass, state_id)
+    elif hs_ssid != nm.get_active_ssid(modemgr.get_state_device('HOTSPOT')):
         conn_list = []
 
         activate_connection(hs_ssid, 'HOTSPOT')
