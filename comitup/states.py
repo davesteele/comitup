@@ -181,9 +181,9 @@ def connecting_start():
     global conn_list
 
     dev = modemgr.get_state_device("CONNECTED")
-    conn_list = candidate_connections(dev)
+    full_conn_list = candidate_connections(dev)
     active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
-    if active_ssid in conn_list:
+    if active_ssid in full_conn_list:
         log.debug("Didn't need to connect - already connected")
         # the connect callback won't happen - let's 'pass' manually
         timeout_add(100, fake_cg, state_id)
@@ -192,7 +192,7 @@ def connecting_start():
             log.debug("states: Calling nm.disconnect()")
             nm.disconnect(modemgr.get_state_device('CONNECTING'))
 
-            conn = conn_list.pop(0)
+            conn = conn_list[0]
             log.info('Attempting connection to %s' % conn)
             activate_connection(conn, 'CONNECTING')
         else:
@@ -209,6 +209,8 @@ def connecting_pass(reason):
 @timeout
 @state_callback
 def connecting_fail(reason):
+    global conn_list
+
     log.debug("Connection failed - reason {}".format(reason))
 
     badreasons = [
@@ -219,6 +221,7 @@ def connecting_fail(reason):
         nm.del_connection_by_ssid(connection)
 
     if conn_list:
+        conn_list.pop(0)
         set_state('CONNECTING', force=True)
     else:
         set_state('HOTSPOT')
@@ -414,7 +417,7 @@ def init_states(
     else:
         dev = modemgr.get_state_device("CONNECTED")
         conn_list = candidate_connections(dev)
-        set_state('HOTSPOT', conn_list)
+        set_state('CONNECTING', conn_list)
 
 
 def add_state_callback(callback):
