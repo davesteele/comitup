@@ -412,13 +412,8 @@ def init_states(
     hotspot_name = dns_to_conn(hosts[0])
     assure_hotspot(hotspot_name, modemgr.get_ap_device(), hotspot_pw)
 
-    if modemgr.get_mode() == modemgr.MULTI_MODE:
-        startup = True
-        set_state('HOTSPOT')
-    else:
-        dev = modemgr.get_state_device("CONNECTED")
-        conn_list = candidate_connections(dev)
-        set_state('CONNECTING', conn_list)
+    startup = True
+    set_state('HOTSPOT')
 
 
 def add_state_callback(callback):
