@@ -6,14 +6,18 @@
 # License-Filename: LICENSE
 
 import re
-from subprocess import run, PIPE
+import subprocess
 from typing import Optional
 
 
 def defroute_dev() -> Optional[str]:
     """Return the name of the interface holding the default route."""
 
-    cp = run("ip route".split(), stdout=PIPE, encoding="utf-8")
+    cp = subprocess.run(
+        "ip route".split(),
+        stdout=subprocess.PIPE,
+        encoding="utf-8"
+    )
     fstline = cp.stdout.split("\n")[0]
     match = re.search("^default.+dev ([^ ]+)", fstline)
 
