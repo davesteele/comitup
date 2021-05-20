@@ -125,12 +125,6 @@ def hotspot_start() -> None:
         # the connect callback won't happen - let's 'pass' manually
         timeout_add(100, fake_hs_pass, state_id)
 
-    dev = modemgr.get_state_device("CONNECTED")
-    conn_list = candidate_connections(dev)
-    active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
-    if active_ssid in conn_list:
-        set_state("CONNECTING")
-
 
 @timeout
 @state_callback
