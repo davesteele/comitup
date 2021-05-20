@@ -20,7 +20,7 @@ from typing import Callable, List, Optional
 import NetworkManager
 from gi.repository.GLib import timeout_add
 
-from comitup import iwscan, wpa
+from comitup import iwscan, routemgr, wpa
 
 if __name__ == '__main__':
     from dbus.mainloop.glib import DBusGMainLoop
@@ -286,6 +286,15 @@ def connected_timeout() -> None:
         if not active_ssid:
             log.warning("Hotspot lost on timeout")
             set_state("HOTSPOT")
+
+        defroute_devname = routemgr.defroute_dev()
+        ap_dev = modemgr.get_ap_device()
+        link_dev = modemgr.get_link_device()
+        if defroute_devname == nm.device_name(ap_dev):
+            # default route is bad. Disconnect link and count on state
+            # processing to restore
+            log.error("AP is holding default route while CONNECTED, kicking")
+            nm.disconnect(link_dev)
 
 
 #
