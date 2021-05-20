@@ -131,7 +131,7 @@ def hotspot_start() -> None:
 def hotspot_pass(reason):
     global startup
 
-    dev = modemgr.get_state_device("CONNECTED")
+    dev: nm.Device = modemgr.get_state_device("CONNECTED")
     conn_list = candidate_connections(dev)
     active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
     if startup or active_ssid in conn_list:
@@ -282,9 +282,9 @@ def connected_timeout() -> None:
             log.warning("Hotspot lost on timeout")
             set_state("HOTSPOT")
 
-        defroute_devname = routemgr.defroute_dev()
-        ap_dev = modemgr.get_ap_device()
-        link_dev = modemgr.get_link_device()
+        defroute_devname: Optional[str] = routemgr.defroute_dev()
+        ap_dev: NetworkManager.Device = modemgr.get_ap_device()
+        link_dev: NetworkManager.Device = modemgr.get_link_device()
         if defroute_devname == nm.device_name(ap_dev):
             # default route is bad. Disconnect link and count on state
             # processing to restore
@@ -300,23 +300,34 @@ def connected_timeout() -> None:
 class state_matrix(object):
     """Map e.g. state_matrix('HOTSPOT').pass_fn to the function hotspot_pass"""
 
-    def __init__(self, state):
-        self.state = state.lower()
+    def __init__(self, state: str):
+        self.state: str = state.lower()
 
     def __getattr__(self, attr):
         try:
-            fname = self.state + '_' + attr[:-3]
+            fname: str = self.state + '_' + attr[:-3]
             return globals()[fname]
         except KeyError:
             print(attr)
             raise AttributeError
 
 
-def set_state(state, connections=[], timeout=180, force=False) -> None:
+def set_state(
+    state: str,
+    connections: List[str] = [],
+    timeout: int = 180,
+    force: bool = False,
+) -> None:
     timeout_add(0, set_state_to, state, connections, timeout, force, state_id)
 
 
-def set_state_to(state, connections, timeout, force, curr_state_id):
+def set_state_to(
+    state: str,
+    connections: List[str],
+    timeout: int,
+    force: bool,
+    curr_state_id: int,
+):
     global com_state, conn_list, state_id
 
     if state == com_state and not force:
@@ -327,7 +338,7 @@ def set_state_to(state, connections, timeout, force, curr_state_id):
 
     log.info('Setting state to %s' % state)
 
-    state_info = state_matrix(state)
+    state_info: state_matrix = state_matrix(state)
 
     nmmon.init_nmmon()
 
@@ -353,7 +364,7 @@ def set_state_to(state, connections, timeout, force, curr_state_id):
     return False
 
 
-def activate_connection(name, state):
+def activate_connection(name: str, state: str) -> None:
     global connection
     connection = name
     log.debug('Connecting to %s' % connection)
@@ -366,7 +377,7 @@ def activate_connection(name, state):
                                    path=path)
 
 
-def candidate_connections(device):
+def candidate_connections(device: NetworkManager.Device) -> List[str]:
     log.debug("states: Calling nm.get_candidate_connections()")
     return nm.get_candidate_connections(device)
 
@@ -376,7 +387,7 @@ def set_hosts(*args):
     dns_names = args
 
 
-def hash_conf():
+def hash_conf() -> str:
     m = hashlib.sha256()
     with open("/etc/comitup.conf", 'rb') as fp:
         m.update(fp.read())
@@ -384,17 +395,9 @@ def hash_conf():
     return m.hexdigest()[-4:]
 
 
-def is_hotspot_current(connection):
-    hs_filename = nm.get_connection_settings(connection)['connection']['id']
-
-    hs_hash = hs_filename[-4:]
-
-    cf_hash = hash_conf()
-
-    return hs_hash == cf_hash
-
-
-def assure_hotspot(ssid, device, password):
+def assure_hotspot(
+    ssid: str, device: NetworkManager.Device, password: str
+) -> None:
     log.debug("states: Calling nm.get_connection_by_ssid()")
     nm.del_connection_by_ssid(ssid)
     if not nm.get_connection_by_ssid(ssid):
@@ -405,7 +408,7 @@ def init_states(
     hosts: List[str],
     callbacks: List[Callable],
     hotspot_pw: str,
-):
+) -> None:
     global hotspot_name, conn_list, connection, startup
 
     nmmon.init_nmmon()
@@ -421,7 +424,7 @@ def init_states(
     set_state('HOTSPOT')
 
 
-def add_state_callback(callback):
+def add_state_callback(callback: Callable[[str, str], None]) -> None:
     global state_callbacks
 
     state_callbacks.append(callback)
