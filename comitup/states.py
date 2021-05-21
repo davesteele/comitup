@@ -78,11 +78,11 @@ def call_callbacks(state: str, action: str) -> None:
     log.debug("Callbacks complete")
 
 
-def timeout(fn):
+def timeout(fn: Callable[[int], None]) -> Callable[[int, int], bool]:
     @wraps(fn)
-    def wrapper(id, *args, **kwargs):
+    def wrapper(id: int, reason: int) -> bool:
         if id == state_id:
-            fn(*args, **kwargs)
+            fn(reason)
             return True
         else:
             return False
@@ -147,7 +147,7 @@ def hotspot_fail(reason):
 
 
 @timeout
-def hotspot_timeout():
+def hotspot_timeout(dummy: int) -> None:
     if iwscan.ap_conn_count() == 0 or modemgr.get_mode() != 'single':
         log.debug('Periodic connection attempt')
 
@@ -224,8 +224,8 @@ def connecting_fail(reason):
 
 
 @timeout
-def connecting_timeout():
-    connecting_fail(state_id)
+def connecting_timeout(dummy: int) -> None:
+    connecting_fail(state_id, 0)
 
 
 #
@@ -262,7 +262,7 @@ def connected_fail(reason):
 
 
 @timeout
-def connected_timeout() -> None:
+def connected_timeout(dummy: int) -> None:
     log.debug("states: Calling nm.get_active_ssid()")
     active_ssid: str
     active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
@@ -358,7 +358,7 @@ def set_state_to(
         conn_list = connections
 
     com_state = state
-    timeout_add(timeout*1000, state_info.timeout_fn, state_id)
+    timeout_add(timeout*1000, state_info.timeout_fn, state_id, 0)
     state_info.start_fn()
 
     return False
