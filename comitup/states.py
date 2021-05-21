@@ -26,6 +26,7 @@ if __name__ == '__main__':
     from dbus.mainloop.glib import DBusGMainLoop
     DBusGMainLoop(set_as_default=True)
 
+from comitup import mdns  # noqa
 from comitup import modemgr  # noqa
 from comitup import nm  # noqa
 from comitup import nmmon  # noqa
@@ -110,6 +111,10 @@ def fake_hs_pass(sid: int) -> bool:
 def hotspot_start(dummy: int) -> None:
     global conn_list
     log.info("Activating hotspot")
+
+    if startup:
+        mdns.clear_entries()
+        mdns.add_hosts(dns_names)
 
     hs_ssid: str = dns_to_conn(dns_names[0])
 
