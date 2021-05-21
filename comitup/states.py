@@ -48,20 +48,20 @@ state_callbacks: List[Callable[[str, str], None]] = []
 hotspot_name: str = ""
 
 
-def state_callback(fn):
+def state_callback(fn: Callable[[int], None]) -> Callable[[int], None]:
     @wraps(fn)
-    def wrapper(*args, **kwargs):
+    def wrapper(reason: int) -> None:
+        state: str
+        action: str
         state, action = fn.__name__.split('_')
 
         log.debug("State call - {}-{}".format(state, action))
 
         state = state.upper()
 
-        returnvalue = fn(*args, **kwargs)
+        fn(reason)
 
         call_callbacks(state, action)
-
-        return returnvalue
     return wrapper
 
 
@@ -107,7 +107,7 @@ def fake_hs_pass(sid: int) -> bool:
 
 
 @state_callback
-def hotspot_start() -> None:
+def hotspot_start(dummy: int) -> None:
     global conn_list
     log.info("Activating hotspot")
 
@@ -128,10 +128,10 @@ def hotspot_start() -> None:
 
 @timeout
 @state_callback
-def hotspot_pass(reason):
+def hotspot_pass(reason: int) -> None:
     global startup
 
-    dev: nm.Device = modemgr.get_state_device("CONNECTED")
+    dev: NetworkManager.Device = modemgr.get_state_device("CONNECTED")
     conn_list = candidate_connections(dev)
     active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
     if startup or active_ssid in conn_list:
@@ -141,7 +141,7 @@ def hotspot_pass(reason):
 
 @timeout
 @state_callback
-def hotspot_fail(reason):
+def hotspot_fail(reason: int) -> None:
     log.warning("Hotspot mode failure")
     set_state("HOTSPOT", force=True)
 
@@ -173,7 +173,7 @@ def fake_cg(sid: int) -> bool:
 
 
 @state_callback
-def connecting_start():
+def connecting_start(dummy: int) -> None:
     global conn_list, connection
 
     dev = modemgr.get_state_device("CONNECTED")
@@ -198,14 +198,14 @@ def connecting_start():
 
 @timeout
 @state_callback
-def connecting_pass(reason):
+def connecting_pass(reason: int) -> None:
     log.debug("Connection successful")
     set_state('CONNECTED')
 
 
 @timeout
 @state_callback
-def connecting_fail(reason):
+def connecting_fail(reason: int) -> None:
     global conn_list
 
     log.debug("Connection failed - reason {}".format(reason))
@@ -234,7 +234,7 @@ def connecting_timeout(dummy: int) -> None:
 
 
 @state_callback
-def connected_start():
+def connected_start(dummy: int) -> None:
     global conn_list
 
     conn_list = []
@@ -242,13 +242,13 @@ def connected_start():
 
 @timeout
 @state_callback
-def connected_pass(reason):
+def connected_pass(reason: int) -> None:
     pass
 
 
 @timeout
 @state_callback
-def connected_fail(reason):
+def connected_fail(reason: int) -> None:
     global startup
     log.warning('Connection lost')
 
@@ -359,7 +359,7 @@ def set_state_to(
 
     com_state = state
     timeout_add(timeout*1000, state_info.timeout_fn, state_id, 0)
-    state_info.start_fn()
+    state_info.start_fn(0)
 
     return False
 
