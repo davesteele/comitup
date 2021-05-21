@@ -415,7 +415,7 @@ def assure_hotspot(
 
 def init_states(
     hosts: List[str],
-    callbacks: List[Callable],
+    callbacks: List[Callable[[str, str], None]],
     hotspot_pw: str,
 ) -> None:
     global hotspot_name, conn_list, connection, startup

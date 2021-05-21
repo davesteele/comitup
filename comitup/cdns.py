@@ -16,10 +16,10 @@ from comitup import modemgr
 
 log = logging.getLogger('comitup')
 
-hotspot_config = "/usr/share/comitup/dns/dns-hotspot.conf"
-connected_config = "/usr/share/comitup/dns/dns-connected.conf"
+hotspot_config: str = "/usr/share/comitup/dns/dns-hotspot.conf"
+connected_config: str = "/usr/share/comitup/dns/dns-connected.conf"
 
-pidpath = Path("/var/run/comitup-dns")
+pidpath: Path = Path("/var/run/comitup-dns")
 
 callmatrix = {
     ('HOTSPOT',    'pass', "router"):
@@ -33,17 +33,17 @@ callmatrix = {
 }
 
 
-def kill_dns(ppath, sig):
+def kill_dns(ppath: Path, sig):
     try:
-        pid = int(pidpath.read_text().strip())
-        os.kill(pid, signal.SIGTERM)
+        pid: int = int(pidpath.read_text().strip())
+        os.kill(pid, sig)
         os.waitpid(pid, 0)
     except (ValueError, ProcessLookupError,
             FileNotFoundError, ChildProcessError):
         pass
 
 
-def run_dns(confpath):
+def run_dns(confpath: str) -> None:
     log.debug("Running dnsmasq using {}".format(confpath))
 
     kill_dns(pidpath, signal.SIGTERM)
@@ -60,7 +60,7 @@ def run_dns(confpath):
             time.sleep(.1)
 
 
-def state_callback(state, action):
+def state_callback(state: str, action: str) -> None:
     log.debug("Cdns callback")
     try:
         (fn_fact, svc_fact) = callmatrix[(state, action, modemgr.get_mode())]
