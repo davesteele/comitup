@@ -172,7 +172,7 @@ def hotspot_timeout(dummy: int) -> None:
 # Connecting state
 #
 
-def fake_cg(sid: int) -> bool:
+def fake_cg_pass(sid: int) -> bool:
     connecting_pass(sid, 0)
     return False
 
@@ -188,7 +188,7 @@ def connecting_start(dummy: int) -> None:
         log.debug("Didn't need to connect - already connected")
         connection = active_ssid
         # the connect callback won't happen - let's 'pass' manually
-        timeout_add(100, fake_cg, state_id)
+        timeout_add(100, fake_cg_pass, state_id)
     else:
         if conn_list:
             log.debug("states: Calling nm.disconnect()")
@@ -238,11 +238,19 @@ def connecting_timeout(dummy: int) -> None:
 #
 
 
+def fake_cn_pass(sid: int) -> bool:
+    connected_pass(sid, 0)
+    return False
+
+
 @state_callback
 def connected_start(dummy: int) -> None:
     global conn_list
 
     conn_list = []
+
+    # Connected mode always passes
+    timeout_add(100, fake_cn_pass, state_id)
 
 
 @timeout
