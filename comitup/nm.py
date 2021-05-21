@@ -146,7 +146,6 @@ def get_device_settings(device):
     except nm.ObjectVanished:
         sys.exit(1)
 
-    log.debug("Getting Connection settings")
     return get_connection_settings(connection.Connection)
 
 

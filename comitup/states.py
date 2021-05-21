@@ -268,7 +268,6 @@ def connected_fail(reason: int) -> None:
 
 @timeout
 def connected_timeout(dummy: int) -> None:
-    log.debug("states: Calling nm.get_active_ssid()")
     active_ssid: str
     active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
     log.debug("connected_timeout comparing {} to {}".format(
@@ -376,14 +375,12 @@ def activate_connection(name: str, state: str) -> None:
 
     path = '/'
 
-    log.debug("states: Calling nm.activate_connection_by_ssid()")
     nm.activate_connection_by_ssid(connection,
                                    modemgr.get_state_device(state),
                                    path=path)
 
 
 def candidate_connections(device: NetworkManager.Device) -> List[str]:
-    log.debug("states: Calling nm.get_candidate_connections()")
     return nm.get_candidate_connections(device)
 
 
@@ -403,7 +400,6 @@ def hash_conf() -> str:
 def assure_hotspot(
     ssid: str, device: NetworkManager.Device, password: str
 ) -> None:
-    log.debug("states: Calling nm.get_connection_by_ssid()")
     nm.del_connection_by_ssid(ssid)
     if not nm.get_connection_by_ssid(ssid):
         nm.make_hotspot(ssid, device, password)
