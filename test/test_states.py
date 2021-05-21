@@ -74,10 +74,10 @@ def test_state_timeout_wrapper(offset, match):
     themock = Mock()
 
     @states.timeout
-    def timeout_fn():
+    def timeout_fn(dummy):
         themock()
 
-    assert timeout_fn(states.state_id + offset) == match
+    assert timeout_fn(states.state_id + offset, 0) == match
     assert themock.called == match
 
 
@@ -85,10 +85,10 @@ def test_state_timeout_activity():
     themock = Mock()
 
     @states.timeout
-    def timeout_fn():
+    def timeout_fn(dummy):
         themock()
 
-    timeout_fn(states.state_id)
+    timeout_fn(states.state_id, 0)
 
     assert themock.called
 
@@ -110,12 +110,12 @@ def test_state_callback_decorator(state_globals):
     callback = Mock()
 
     @states.state_callback
-    def foo_bar():
+    def foo_bar(dummy):
         pass
 
     states.add_state_callback(callback)
 
-    foo_bar()
+    foo_bar(0)
 
     assert callback.call_args == call('FOO', 'bar')
 
