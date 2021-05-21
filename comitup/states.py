@@ -20,12 +20,13 @@ from typing import Callable, List, Optional
 import NetworkManager
 from gi.repository.GLib import timeout_add
 
-from comitup import iwscan, wpa
+from comitup import iwscan, routemgr, wpa
 
 if __name__ == '__main__':
     from dbus.mainloop.glib import DBusGMainLoop
     DBusGMainLoop(set_as_default=True)
 
+from comitup import mdns  # noqa
 from comitup import modemgr  # noqa
 from comitup import nm  # noqa
 from comitup import nmmon  # noqa
@@ -48,20 +49,20 @@ state_callbacks: List[Callable[[str, str], None]] = []
 hotspot_name: str = ""
 
 
-def state_callback(fn):
+def state_callback(fn: Callable[[int], None]) -> Callable[[int], None]:
     @wraps(fn)
-    def wrapper(*args, **kwargs):
+    def wrapper(reason: int) -> None:
+        state: str
+        action: str
         state, action = fn.__name__.split('_')
 
         log.debug("State call - {}-{}".format(state, action))
 
         state = state.upper()
 
-        returnvalue = fn(*args, **kwargs)
+        fn(reason)
 
         call_callbacks(state, action)
-
-        return returnvalue
     return wrapper
 
 
@@ -78,11 +79,11 @@ def call_callbacks(state: str, action: str) -> None:
     log.debug("Callbacks complete")
 
 
-def timeout(fn):
+def timeout(fn: Callable[[int], None]) -> Callable[[int, int], bool]:
     @wraps(fn)
-    def wrapper(id, *args, **kwargs):
+    def wrapper(id: int, reason: int) -> bool:
         if id == state_id:
-            fn(*args, **kwargs)
+            fn(reason)
             return True
         else:
             return False
@@ -107,9 +108,13 @@ def fake_hs_pass(sid: int) -> bool:
 
 
 @state_callback
-def hotspot_start() -> None:
+def hotspot_start(dummy: int) -> None:
     global conn_list
     log.info("Activating hotspot")
+
+    if startup:
+        mdns.clear_entries()
+        mdns.add_hosts(dns_names)
 
     hs_ssid: str = dns_to_conn(dns_names[0])
 
@@ -125,19 +130,13 @@ def hotspot_start() -> None:
         # the connect callback won't happen - let's 'pass' manually
         timeout_add(100, fake_hs_pass, state_id)
 
-    dev = modemgr.get_state_device("CONNECTED")
-    conn_list = candidate_connections(dev)
-    active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
-    if active_ssid in conn_list:
-        set_state("CONNECTING")
-
 
 @timeout
 @state_callback
-def hotspot_pass(reason):
+def hotspot_pass(reason: int) -> None:
     global startup
 
-    dev = modemgr.get_state_device("CONNECTED")
+    dev: NetworkManager.Device = modemgr.get_state_device("CONNECTED")
     conn_list = candidate_connections(dev)
     active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
     if startup or active_ssid in conn_list:
@@ -147,13 +146,13 @@ def hotspot_pass(reason):
 
 @timeout
 @state_callback
-def hotspot_fail(reason):
+def hotspot_fail(reason: int) -> None:
     log.warning("Hotspot mode failure")
     set_state("HOTSPOT", force=True)
 
 
 @timeout
-def hotspot_timeout():
+def hotspot_timeout(dummy: int) -> None:
     if iwscan.ap_conn_count() == 0 or modemgr.get_mode() != 'single':
         log.debug('Periodic connection attempt')
 
@@ -173,13 +172,13 @@ def hotspot_timeout():
 # Connecting state
 #
 
-def fake_cg(sid: int) -> bool:
+def fake_cg_pass(sid: int) -> bool:
     connecting_pass(sid, 0)
     return False
 
 
 @state_callback
-def connecting_start():
+def connecting_start(dummy: int) -> None:
     global conn_list, connection
 
     dev = modemgr.get_state_device("CONNECTED")
@@ -189,7 +188,7 @@ def connecting_start():
         log.debug("Didn't need to connect - already connected")
         connection = active_ssid
         # the connect callback won't happen - let's 'pass' manually
-        timeout_add(100, fake_cg, state_id)
+        timeout_add(100, fake_cg_pass, state_id)
     else:
         if conn_list:
             log.debug("states: Calling nm.disconnect()")
@@ -204,14 +203,14 @@ def connecting_start():
 
 @timeout
 @state_callback
-def connecting_pass(reason):
+def connecting_pass(reason: int) -> None:
     log.debug("Connection successful")
     set_state('CONNECTED')
 
 
 @timeout
 @state_callback
-def connecting_fail(reason):
+def connecting_fail(reason: int) -> None:
     global conn_list
 
     log.debug("Connection failed - reason {}".format(reason))
@@ -230,8 +229,8 @@ def connecting_fail(reason):
 
 
 @timeout
-def connecting_timeout():
-    connecting_fail(state_id)
+def connecting_timeout(dummy: int) -> None:
+    connecting_fail(state_id, 0)
 
 
 #
@@ -239,22 +238,31 @@ def connecting_timeout():
 #
 
 
+def fake_cn_pass(sid: int) -> bool:
+    connected_pass(sid, 0)
+    return False
+
+
 @state_callback
-def connected_start():
+def connected_start(dummy: int) -> None:
     global conn_list
 
     conn_list = []
 
+    # Connected mode always passes
+    timeout_add(100, fake_cn_pass, state_id)
+
 
 @timeout
 @state_callback
-def connected_pass(reason):
+def connected_pass(reason: int) -> None:
     pass
 
 
 @timeout
 @state_callback
-def connected_fail(reason):
+def connected_fail(reason: int) -> None:
+    global startup
     log.warning('Connection lost')
 
     active_ssid: str = nm.get_active_ssid(modemgr.get_state_device("HOTSPOT"))
@@ -262,13 +270,12 @@ def connected_fail(reason):
         log.warning("Hotspot lost while CONNECTED")
         set_state("HOTSPOT")
     else:
-        dev = modemgr.get_state_device("CONNECTED")
-        set_state("CONNECTING", candidate_connections(dev))
+        startup = True
+        set_state("HOTSPOT")
 
 
 @timeout
-def connected_timeout() -> None:
-    log.debug("states: Calling nm.get_active_ssid()")
+def connected_timeout(dummy: int) -> None:
     active_ssid: str
     active_ssid = nm.get_active_ssid(modemgr.get_state_device('CONNECTED'))
     log.debug("connected_timeout comparing {} to {}".format(
@@ -287,6 +294,15 @@ def connected_timeout() -> None:
             log.warning("Hotspot lost on timeout")
             set_state("HOTSPOT")
 
+        defroute_devname: Optional[str] = routemgr.defroute_dev()
+        ap_dev: NetworkManager.Device = modemgr.get_ap_device()
+        link_dev: NetworkManager.Device = modemgr.get_link_device()
+        if defroute_devname == nm.device_name(ap_dev):
+            # default route is bad. Disconnect link and count on state
+            # processing to restore
+            log.error("AP is holding default route while CONNECTED, kicking")
+            nm.disconnect(link_dev)
+
 
 #
 # State Management
@@ -296,23 +312,34 @@ def connected_timeout() -> None:
 class state_matrix(object):
     """Map e.g. state_matrix('HOTSPOT').pass_fn to the function hotspot_pass"""
 
-    def __init__(self, state):
-        self.state = state.lower()
+    def __init__(self, state: str):
+        self.state: str = state.lower()
 
     def __getattr__(self, attr):
         try:
-            fname = self.state + '_' + attr[:-3]
+            fname: str = self.state + '_' + attr[:-3]
             return globals()[fname]
         except KeyError:
             print(attr)
             raise AttributeError
 
 
-def set_state(state, connections=[], timeout=180, force=False) -> None:
+def set_state(
+    state: str,
+    connections: List[str] = [],
+    timeout: int = 180,
+    force: bool = False,
+) -> None:
     timeout_add(0, set_state_to, state, connections, timeout, force, state_id)
 
 
-def set_state_to(state, connections, timeout, force, curr_state_id):
+def set_state_to(
+    state: str,
+    connections: List[str],
+    timeout: int,
+    force: bool,
+    curr_state_id: int,
+):
     global com_state, conn_list, state_id
 
     if state == com_state and not force:
@@ -323,7 +350,7 @@ def set_state_to(state, connections, timeout, force, curr_state_id):
 
     log.info('Setting state to %s' % state)
 
-    state_info = state_matrix(state)
+    state_info: state_matrix = state_matrix(state)
 
     nmmon.init_nmmon()
 
@@ -343,27 +370,25 @@ def set_state_to(state, connections, timeout, force, curr_state_id):
         conn_list = connections
 
     com_state = state
-    timeout_add(timeout*1000, state_info.timeout_fn, state_id)
-    state_info.start_fn()
+    timeout_add(timeout*1000, state_info.timeout_fn, state_id, 0)
+    state_info.start_fn(0)
 
     return False
 
 
-def activate_connection(name, state):
+def activate_connection(name: str, state: str) -> None:
     global connection
     connection = name
     log.debug('Connecting to %s' % connection)
 
     path = '/'
 
-    log.debug("states: Calling nm.activate_connection_by_ssid()")
     nm.activate_connection_by_ssid(connection,
                                    modemgr.get_state_device(state),
                                    path=path)
 
 
-def candidate_connections(device):
-    log.debug("states: Calling nm.get_candidate_connections()")
+def candidate_connections(device: NetworkManager.Device) -> List[str]:
     return nm.get_candidate_connections(device)
 
 
@@ -372,7 +397,7 @@ def set_hosts(*args):
     dns_names = args
 
 
-def hash_conf():
+def hash_conf() -> str:
     m = hashlib.sha256()
     with open("/etc/comitup.conf", 'rb') as fp:
         m.update(fp.read())
@@ -380,18 +405,9 @@ def hash_conf():
     return m.hexdigest()[-4:]
 
 
-def is_hotspot_current(connection):
-    hs_filename = nm.get_connection_settings(connection)['connection']['id']
-
-    hs_hash = hs_filename[-4:]
-
-    cf_hash = hash_conf()
-
-    return hs_hash == cf_hash
-
-
-def assure_hotspot(ssid, device, password):
-    log.debug("states: Calling nm.get_connection_by_ssid()")
+def assure_hotspot(
+    ssid: str, device: NetworkManager.Device, password: str
+) -> None:
     nm.del_connection_by_ssid(ssid)
     if not nm.get_connection_by_ssid(ssid):
         nm.make_hotspot(ssid, device, password)
@@ -399,9 +415,9 @@ def assure_hotspot(ssid, device, password):
 
 def init_states(
     hosts: List[str],
-    callbacks: List[Callable],
+    callbacks: List[Callable[[str, str], None]],
     hotspot_pw: str,
-):
+) -> None:
     global hotspot_name, conn_list, connection, startup
 
     nmmon.init_nmmon()
@@ -417,7 +433,7 @@ def init_states(
     set_state('HOTSPOT')
 
 
-def add_state_callback(callback):
+def add_state_callback(callback: Callable[[str, str], None]) -> None:
     global state_callbacks
 
     state_callbacks.append(callback)

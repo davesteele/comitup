@@ -11,11 +11,10 @@
 #
 
 import logging
-import re
 import subprocess
 from typing import List, Optional
 
-from comitup import modemgr, nm
+from comitup import modemgr, nm, routemgr
 
 start_cmds: List[str] = [
     # HOTSPOT rules
@@ -53,23 +52,6 @@ appliance_clear: List[str] = [
 log: logging.Logger = logging.getLogger('comitup')
 
 
-def default_dev() -> Optional[str]:
-    cp = subprocess.run(
-        "ip route",
-        stdout=subprocess.PIPE,
-        shell=True,
-        encoding="utf-8",
-    )
-
-    stdout = cp.stdout.strip()
-    line = stdout.split("\n")[0]
-    match = re.search("dev ([^ ]+)", line)
-    if match:
-        return match.group(1)
-    else:
-        return None
-
-
 def run_cmds(cmds: List[str]) -> None:
     linkdev = nm.device_name(modemgr.get_link_device())
     apdev = nm.device_name(modemgr.get_ap_device())
@@ -97,7 +79,7 @@ def state_callback(state: str, action: str) -> None:
         if modemgr.get_mode() == modemgr.MULTI_MODE:
             run_cmds(appliance_clear)
             run_cmds(appliance_cmds)
-            defaultdev: Optional[str] = default_dev()
+            defaultdev: Optional[str] = routemgr.defroute_dev()
             apdev: str = modemgr.get_ap_device().Interface
             if defaultdev and defaultdev != apdev:
                 run_cmds(

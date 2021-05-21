@@ -4,7 +4,7 @@ import textwrap
 import pytest
 from mock import Mock
 
-from comitup import iptmgr
+from comitup import iptmgr, routemgr
 
 routetxt = textwrap.dedent(
     """
@@ -23,7 +23,7 @@ def defroute(monkeypatch):
     cp = Mock()
     cp.stdout = routetxt
     runmethod = Mock(return_value=cp)
-    monkeypatch.setattr("comitup.iptmgr.subprocess.run", runmethod)
+    monkeypatch.setattr("comitup.routemgr.subprocess.run", runmethod)
 
 
 def test_defroute_fixture(defroute):
@@ -37,4 +37,4 @@ def test_defroute_fixture(defroute):
 
 
 def test_default_dev(defroute):
-    assert iptmgr.default_dev() == "ethn"
+    assert routemgr.defroute_dev() == "ethn"

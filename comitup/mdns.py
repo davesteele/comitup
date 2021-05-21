@@ -162,15 +162,14 @@ def add_hosts(hosts: List[str]) -> None:
 
             index = int_mapping[name]
             for host in hosts:
+                log.debug("Add A record {}-{}-{}".format(host, index, addr))
                 make_a_record(host, index, addr)
 
+            log.debug("Add service {}, {}, {}".format(host, index, addr))
             add_service(hosts[0], index, addr)
 
-    try:
-        if group:
-            group.Commit()
-    except dbus.exceptions.DBusException:
-        log.error("Error committing Avahi group")
+    if group:
+        group.Commit()
 
 
 if __name__ == '__main__':

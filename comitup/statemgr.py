@@ -17,7 +17,7 @@ import re
 import socket
 import subprocess
 import sys
-from typing import Dict, List, Optional, TYPE_CHECKING
+from typing import Callable, Dict, List, Optional, TYPE_CHECKING
 
 import dbus
 import dbus.service
@@ -150,7 +150,7 @@ def external_callback(state: str, action: str) -> None:
     if action != 'start':
         return
 
-    script = conf.external_callback  # type: ignore
+    script: str = conf.external_callback  # type: ignore
 
     if not os.path.isfile(script):
         return
@@ -178,7 +178,11 @@ def external_callback(state: str, action: str) -> None:
         )
 
 
-def init_state_mgr(gconf: "Config", gdata: "persist", callbacks) -> None:
+def init_state_mgr(
+    gconf: "Config",
+    gdata: "persist",
+    callbacks: List[Callable[[str, str], None]]
+) -> None:
     global com_obj, conf, data
 
     conf, data = (gconf, gdata)
