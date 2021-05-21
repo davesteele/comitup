@@ -10,10 +10,6 @@ from mock import call, patch
 from comitup import webmgr
 
 
-def test_webmgr_callback_target():
-    assert webmgr.callback_target() == webmgr.state_callback
-
-
 @pytest.fixture()
 def websvc_fxt(request):
     web_svc = webmgr.web_service

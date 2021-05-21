@@ -68,7 +68,3 @@ def state_callback(state: str, action: str) -> None:
         return
 
     fn_fact()(svc_fact())
-
-
-def callback_target():
-    return state_callback

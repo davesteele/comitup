@@ -11,7 +11,6 @@
 #
 
 import logging
-from typing import Callable
 
 from .sysd import sd_start_unit, sd_stop_unit
 
@@ -49,10 +48,6 @@ def state_callback(state: str, action: str) -> None:
 
     if svc_fact():
         fn_fact()(svc_fact())
-
-
-def callback_target() -> Callable[[str, str], None]:
-    return state_callback
 
 
 def init_webmgr(web_svc: str) -> None:
