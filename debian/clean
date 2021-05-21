@@ -11,3 +11,4 @@ doc/comitup-web.8
 .tox/
 .mypy_cache/
 */.mypy_cache/
+.eggs/
