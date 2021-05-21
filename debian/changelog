@@ -1,11 +1,11 @@
-comitup (1.28-1) UNRELEASED; urgency=medium
+comitup (1.28-1) comitup; urgency=medium
 
   * Fix occasional routing bug when connected in 'router'/'appliance' mode.
   * ZeroConf services were not showing up when starting up, if the required
     connections were already active.
   * Minor bug fixes.
 
- -- David Steele <steele@debian.org>  Fri, 21 May 2021 15:05:21 -0400
+ -- David Steele <steele@debian.org>  Fri, 21 May 2021 16:06:46 -0400
 
 comitup (1.27-1) comitup; urgency=medium
 
