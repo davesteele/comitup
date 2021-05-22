@@ -153,9 +153,11 @@ def add_hosts(hosts: List[str]) -> None:
         log.error("No devices found in add_hosts()")
         return
 
+    entries = False
     for device in devices:
         name = nm.device_name(device)
         addr = nm.get_active_ip(device)
+        log.debug("add_hosts: {}, {}".format(name, addr))
         if (name in nm.get_phys_dev_names()
                 and name in int_mapping
                 and addr):
@@ -168,7 +170,9 @@ def add_hosts(hosts: List[str]) -> None:
             log.debug("Add service {}, {}, {}".format(host, index, addr))
             add_service(hosts[0], index, addr)
 
-    if group:
+            entries = True
+
+    if group and entries:
         group.Commit()
 
 
