@@ -1,3 +1,9 @@
+comitup (1.29-1) comitup; urgency=medium
+
+  * Fix startup bug - no active connections.
+
+ -- David Steele <steele@debian.org>  Sat, 22 May 2021 08:55:44 -0400
+
 comitup (1.28-1) comitup; urgency=medium
 
   * Fix occasional routing bug when connected in 'router'/'appliance' mode.
