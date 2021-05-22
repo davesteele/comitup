@@ -124,6 +124,7 @@ def hotspot_start(dummy: int) -> None:
     elif hs_ssid != nm.get_active_ssid(modemgr.get_state_device('HOTSPOT')):
         conn_list = []
 
+        log.debug("Activating connection {}".format(hs_ssid))
         activate_connection(hs_ssid, 'HOTSPOT')
     else:
         log.debug("Didn't need to reactivate - already running")
