@@ -33,7 +33,8 @@ def device_fxt(monkeypatch):
             'ssid': "myssid",
         }
     }
-    device.Ip4Config.Addresses = [['1.2.3.4', '5.6.7.8', '1.2.3.1']]
+    # device.Ip4Config.Addresses = [['1.2.3.4', '5.6.7.8', '1.2.3.1']]
+    device.Ip4Address = "1.2.3.4"
 
     point = Mock()
     point.Ssid = "myssid"

@@ -13,6 +13,7 @@ class NMDbusInterface(object): ...
 class Device(NMDbusInterface):
     DeviceType: int
     Interface: str
+    Ip4Address: str
 
 class Wireless(Device): ...
 

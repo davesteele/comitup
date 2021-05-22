@@ -152,9 +152,10 @@ def get_active_ssid(device: nm.Device) -> str:
     return get_device_settings(device)['802-11-wireless']['ssid']
 
 
-@none_on_exception(AttributeError, IndexError)
-def get_active_ip(device):
-    return device.Ip4Config.Addresses[0][0]
+@none_on_exception(AttributeError)
+def get_active_ip(device: nm.Device) -> Optional[str]:
+    addr = device.Ip4Address
+    return addr if addr else None
 
 
 def get_all_connections():
