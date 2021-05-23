@@ -1,4 +1,3 @@
-
 import textwrap
 
 import pytest
@@ -28,10 +27,7 @@ def defroute(monkeypatch):
 
 def test_defroute_fixture(defroute):
     cp = iptmgr.subprocess.run(
-        "ip route",
-        stdout=iptmgr.subprocess.PIPE,
-        shell=True,
-        encoding="utf-8"
+        "ip route", stdout=iptmgr.subprocess.PIPE, shell=True, encoding="utf-8"
     )
     assert "ethn" in cp.stdout
 
