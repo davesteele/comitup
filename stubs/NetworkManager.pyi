@@ -1,4 +1,3 @@
-
 import dbus
 from typing import Any, Dict, List
 
@@ -7,9 +6,7 @@ NM_DEVICE_STATE_FAILED: int
 NM_DEVICE_STATE_DISCONNECTED: int
 NM_DEVICE_STATE_REASON_NO_SECRETS: int
 
-
 class ObjectVanished(Exception): ...
-
 class NMDbusInterfaceType(type): ...
 
 class NMDbusInterface(object):
@@ -20,13 +17,10 @@ class Device(NMDbusInterface):
     Interface: str
     Ip4Address: str
     ActiveConnection: Connection
-
     @staticmethod
     def SpecificDevice() -> Device: ...
-
     @staticmethod
     def Disconnect() -> None: ...
-
     @staticmethod
     def GetAllAccessPoints() -> List[AccessPoint]: ...
 
@@ -34,40 +28,30 @@ class Wireless(Device): ...
 
 class NetworkManager(NMDbusInterface):
     State: int
-
     @staticmethod
     def GetDevices() -> List[Device]: ...
-
     @staticmethod
     def ActivateConnection(
         connection: Connection, dev: Device, path: str
     ) -> Connection: ...
-
     @staticmethod
     def DeactivateConnection(connection: Connection) -> Connection: ...
-
-
 
 class Settings(NMDbusInterface):
     @staticmethod
     def ListConnections() -> List[Connection]: ...
-
     @staticmethod
     def ReloadConnections() -> None: ...
-
     @staticmethod
     def AddConnection(settings: Dict[str, Any]) -> None: ...
 
 class Connection(NMDbusInterface):
     uuid: str
     Connection: Connection
-
     @staticmethod
     def Delete() -> None: ...
-
     @staticmethod
     def GetSettings() -> Dict[str, Any]: ...
-
 
 class AccessPoint(NMDbusInterface):
     Strength: int

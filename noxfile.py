@@ -1,4 +1,3 @@
-
 import nox
 import subprocess
 
@@ -43,6 +42,7 @@ def test(session):
 def flake8(session):
     session.install("flake8")
     session.run("flake8", "setup.py", "cli", "comitup", "web", "test")
+
 
 @nox.session()
 def mypy(session):
