@@ -18,7 +18,7 @@ import pprint
 import sys
 import uuid
 from functools import wraps
-from typing import Dict, List, Optional, cast
+from typing import Any, Dict, List, Optional, cast
 
 import dbus
 import NetworkManager as nm
@@ -32,7 +32,7 @@ if __name__ == '__main__':
 from comitup import iwscan  # noqa
 
 device_list: Optional[List[nm.Device]] = None
-settings_cache: Optional[Dict] = {}
+settings_cache: Dict[str, Any] = {}
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -44,11 +44,11 @@ for key in nm.__dict__:
         setattr(this_module, key, nm.__dict__[key])
 
 
-def initialize():
+def initialize() -> None:
     nm.Settings.ReloadConnections()
 
 
-def nm_state():
+def nm_state() -> int:
 
     return nm.NetworkManager.State
 
@@ -84,7 +84,7 @@ def get_devices() -> Optional[List[nm.Device]]:
     return device_list
 
 
-def device_name(device):
+def device_name(device: nm.Device) -> str:
     return device.Interface
 
 
@@ -111,16 +111,16 @@ def get_phys_dev_names() -> List[str]:
 
 
 @none_on_exception(IndexError)
-def get_wifi_device(index=0):
+def get_wifi_device(index: int = 0) -> nm.Device:
     return get_wifi_devices()[index]
 
 
-def get_device_path(device):
+def get_device_path(device: nm.Device) -> dbus.ObjectPath:
     log.debug("Getting specific device for path")
     return device.SpecificDevice().object_path
 
 
-def disconnect(device):
+def disconnect(device: nm.Device) -> None:
     try:
         log.debug("Calling disconnect")
         device.Disconnect()
@@ -128,7 +128,7 @@ def disconnect(device):
         log.debug("Error received in disconnect")
 
 
-def get_connection_settings(connection):
+def get_connection_settings(connection: nm.Connection) -> Dict[str, Any]:
     global settings_cache
 
     if connection.uuid not in settings_cache:
@@ -138,7 +138,7 @@ def get_connection_settings(connection):
     return settings_cache[connection.uuid]
 
 
-def get_device_settings(device):
+def get_device_settings(device: nm.Device) -> Dict[str, Any]:
     try:
         connection = device.ActiveConnection
     except nm.ObjectVanished:
@@ -158,18 +158,18 @@ def get_active_ip(device: nm.Device) -> Optional[str]:
     return addr if addr else None
 
 
-def get_all_connections():
+def get_all_connections() -> List[nm.Connection]:
     return [x for x in nm.Settings.ListConnections()]
 
 
 @none_on_exception(AttributeError, KeyError)
-def get_ssid_from_connection(connection):
+def get_ssid_from_connection(connection: nm.Connection):
     settings = get_connection_settings(connection)
 
     return settings['802-11-wireless']['ssid']
 
 
-def get_connection_by_ssid(name):
+def get_connection_by_ssid(name: str) -> Optional[nm.Connection]:
     for connection in get_all_connections():
         ssid = get_ssid_from_connection(connection)
         if name == ssid:
@@ -185,29 +185,32 @@ def del_connection_by_ssid(name: str) -> None:
             connection.Delete()
 
 
-def activate_connection_by_ssid(ssid, device, path='/'):
+def activate_connection_by_ssid(
+    ssid: str, device: nm.Device, path: str = '/'
+):
     connection = get_connection_by_ssid(ssid)
 
     log.debug("    {}".format(get_ssid_from_connection(connection)))
     log.debug("    {}".format(device_name(device)))
 
-    opath = nm.NetworkManager.ActivateConnection(connection, device, path)
+    if connection:
+        opath = nm.NetworkManager.ActivateConnection(connection, device, path)
 
-    log.debug("ActivateConnection returned {}".format(opath.object_path))
+        log.debug("ActivateConnection returned {}".format(opath.object_path))
 
 
-def deactivate_connection(device):
+def deactivate_connection(device: nm.Device) -> None:
     connection = device.ActiveConnection
     if connection:
         nm.NetworkManager.DeactivateConnection(connection)
 
 
 @none_on_exception(AttributeError)
-def get_access_points(device):
+def get_access_points(device: nm.Device) -> List[nm.AccessPoint]:
     return device.SpecificDevice().GetAllAccessPoints()
 
 
-def get_points_ext(device):
+def get_points_ext(device: nm.Device) -> List[Dict[str, Any]]:
     try:
         inlist = sorted(get_access_points(device), key=lambda x: -x.Strength)
     except (TypeError, dbus.exceptions.DBusException):
@@ -237,7 +240,7 @@ def get_points_ext(device):
     return outlist
 
 
-def get_candidate_connections(device):
+def get_candidate_connections(device: nm.Device) -> List[str]:
     candidates = []
 
     for conn in get_all_connections():
@@ -306,8 +309,9 @@ def make_hotspot(name='comitup', device=None, password="", hash="0000"):
     nm.Settings.AddConnection(settings)
 
 
-def make_connection_for(ssid, password=None, interface=None):
-
+def make_connection_for(
+    ssid: str, password: str = None, interface: Optional[str] = None
+) -> None:
     settings = dbus.Dictionary({
         'connection': dbus.Dictionary(
             {
