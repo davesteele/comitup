@@ -69,4 +69,9 @@ class Connection(NMDbusInterface):
     def GetSettings() -> Dict[str, Any]: ...
 
 
-class AccessPoint(NMDbusInterface): ...
+class AccessPoint(NMDbusInterface):
+    Strength: int
+    Ssid: str
+    Flags: int
+    WpaFlags: int
+    RsnFlags: int

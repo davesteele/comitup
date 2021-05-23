@@ -18,7 +18,7 @@ import pprint
 import sys
 import uuid
 from functools import wraps
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, Callable, Dict, List, Optional, cast, TypeVar
 
 import dbus
 import NetworkManager as nm
@@ -53,9 +53,12 @@ def nm_state() -> int:
     return nm.NetworkManager.State
 
 
-def none_on_exception(*exceptions):
-    def _none_on_exception(fp):
-        @wraps(fp)
+T = TypeVar("T")
+
+
+def none_on_exception(*exceptions) -> Callable[[T], T]:
+    def _none_on_exception(fp: T) -> T:
+        @wraps(cast(Callable[..., Any], fp))
         def wrapper(*args, **kwargs):
             try:
                 return fp(*args, **kwargs)
@@ -63,7 +66,7 @@ def none_on_exception(*exceptions):
                 log.debug("Got an exception, returning None, %s", fp.__name__)
                 return None
 
-        return wrapper
+        return cast(T, wrapper)
 
     return _none_on_exception
 
@@ -190,13 +193,15 @@ def activate_connection_by_ssid(
 ):
     connection = get_connection_by_ssid(ssid)
 
-    log.debug("    {}".format(get_ssid_from_connection(connection)))
-    log.debug("    {}".format(device_name(device)))
-
     if connection:
+        log.debug("    {}".format(get_ssid_from_connection(connection)))
+        log.debug("    {}".format(device_name(device)))
+
         opath = nm.NetworkManager.ActivateConnection(connection, device, path)
 
         log.debug("ActivateConnection returned {}".format(opath.object_path))
+    else:
+        log.error("Connection for {} not found".format(ssid))
 
 
 def deactivate_connection(device: nm.Device) -> None:
