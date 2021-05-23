@@ -100,7 +100,7 @@ def get_phys_dev_names() -> List[str]:
 
 
 @none_on_exception(IndexError)
-def get_wifi_device(index: int = 0) -> nm.Device:
+def get_wifi_device(index: int = 0) -> Optional[nm.Device]:
     return get_wifi_devices()[index]
 
 
@@ -137,7 +137,7 @@ def get_device_settings(device: nm.Device) -> Dict[str, Any]:
 
 
 @none_on_exception(AttributeError)
-def get_active_ssid(device: nm.Device) -> str:
+def get_active_ssid(device: nm.Device) -> Optional[str]:
     return get_device_settings(device)["802-11-wireless"]["ssid"]
 
 
@@ -152,7 +152,7 @@ def get_all_connections() -> List[nm.Connection]:
 
 
 @none_on_exception(AttributeError, KeyError)
-def get_ssid_from_connection(connection: nm.Connection):
+def get_ssid_from_connection(connection: nm.Connection) -> Optional[str]:
     settings = get_connection_settings(connection)
 
     return settings["802-11-wireless"]["ssid"]
@@ -195,13 +195,16 @@ def deactivate_connection(device: nm.Device) -> None:
 
 
 @none_on_exception(AttributeError)
-def get_access_points(device: nm.Device) -> List[nm.AccessPoint]:
+def get_access_points(device: nm.Device) -> Optional[List[nm.AccessPoint]]:
     return device.SpecificDevice().GetAllAccessPoints()
 
 
 def get_points_ext(device: nm.Device) -> List[Dict[str, Any]]:
     try:
-        inlist = sorted(get_access_points(device), key=lambda x: -x.Strength)
+        inlist = get_access_points(device)
+        if inlist is None:
+            return []
+        inlist = sorted(inlist, key=lambda x: -x.Strength)
     except (TypeError, dbus.exceptions.DBusException):
         log.debug("Error getting access points")
         inlist = []
@@ -215,6 +218,7 @@ def get_points_ext(device: nm.Device) -> List[Dict[str, Any]]:
             else:
                 encstr = "unencrypted"
 
+            outpoint: Dict[str, Any]
             outpoint = {
                 "ssid": point.Ssid,
                 "strength": str(point.Strength),

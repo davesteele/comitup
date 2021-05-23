@@ -257,7 +257,8 @@ def connected_fail(reason: int) -> None:
     global startup
     log.warning("Connection lost")
 
-    active_ssid: str = nm.get_active_ssid(modemgr.get_state_device("HOTSPOT"))
+    active_ssid: Optional[str]
+    active_ssid = nm.get_active_ssid(modemgr.get_state_device("HOTSPOT"))
     if modemgr.get_mode() == modemgr.MULTI_MODE and not active_ssid:
         log.warning("Hotspot lost while CONNECTED")
         set_state("HOTSPOT")
@@ -268,7 +269,7 @@ def connected_fail(reason: int) -> None:
 
 @timeout
 def connected_timeout(dummy: int) -> None:
-    active_ssid: str
+    active_ssid: Optional[str]
     active_ssid = nm.get_active_ssid(modemgr.get_state_device("CONNECTED"))
     log.debug(
         "connected_timeout comparing {} to {}".format(connection, active_ssid)
