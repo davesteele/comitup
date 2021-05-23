@@ -18,7 +18,7 @@ import pprint
 import sys
 import uuid
 from functools import wraps
-from typing import Any, Callable, Dict, List, Optional, cast, TypeVar
+from typing import Any, Callable, Dict, List, Optional, TypeVar, cast
 
 import dbus
 import NetworkManager as nm

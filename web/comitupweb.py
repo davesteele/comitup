@@ -18,6 +18,7 @@ import urllib
 from logging.handlers import TimedRotatingFileHandler
 from multiprocessing import Process
 
+from cachetools import TTLCache, cached
 from flask import (
     Flask,
     abort,
@@ -27,7 +28,6 @@ from flask import (
     request,
     send_from_directory,
 )
-from cachetools import cached, TTLCache
 
 sys.path.append(".")
 sys.path.append("..")

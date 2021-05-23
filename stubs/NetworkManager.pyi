@@ -1,5 +1,6 @@
-import dbus
 from typing import Any, Dict, List
+
+import dbus
 
 NM_DEVICE_STATE_ACTIVATED: int
 NM_DEVICE_STATE_FAILED: int

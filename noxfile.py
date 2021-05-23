@@ -1,5 +1,6 @@
-import nox
 import subprocess
+
+import nox
 
 pkgs = [
     "libcairo2-dev",

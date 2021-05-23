@@ -17,7 +17,7 @@ import re
 import socket
 import subprocess
 import sys
-from typing import Callable, Dict, List, Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, Callable, Dict, List, Optional
 
 import dbus
 import dbus.service
@@ -25,8 +25,8 @@ import dbus.service
 from comitup import iwscan
 
 if TYPE_CHECKING:
-    from comitup.persist import persist
     from comitup.config import Config
+    from comitup.persist import persist
 
 sys.path.append("/usr/share/comitup")
 

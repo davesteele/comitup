@@ -14,7 +14,7 @@
 import logging
 import socket
 import subprocess
-from typing import Dict, List, Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, Dict, List, Optional
 
 import dbus
 
