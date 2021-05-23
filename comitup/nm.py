@@ -23,10 +23,11 @@ from typing import Any, Callable, Dict, List, Optional, cast, TypeVar
 import dbus
 import NetworkManager as nm
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import os
+
     fullpath = os.path.abspath(__file__)
-    parentdir = '/'.join(fullpath.split('/')[:-2])
+    parentdir = "/".join(fullpath.split("/")[:-2])
     sys.path.insert(0, parentdir)
 
 from comitup import iwscan  # noqa
@@ -36,7 +37,7 @@ settings_cache: Dict[str, Any] = {}
 
 pp = pprint.PrettyPrinter(indent=4)
 
-log = logging.getLogger('comitup')
+log = logging.getLogger("comitup")
 
 this_module = sys.modules[__name__]
 for key in nm.__dict__:
@@ -127,7 +128,7 @@ def disconnect(device: nm.Device) -> None:
     try:
         log.debug("Calling disconnect")
         device.Disconnect()
-    except:   # noqa
+    except:  # noqa
         log.debug("Error received in disconnect")
 
 
@@ -152,7 +153,7 @@ def get_device_settings(device: nm.Device) -> Dict[str, Any]:
 
 @none_on_exception(AttributeError)
 def get_active_ssid(device: nm.Device) -> str:
-    return get_device_settings(device)['802-11-wireless']['ssid']
+    return get_device_settings(device)["802-11-wireless"]["ssid"]
 
 
 @none_on_exception(AttributeError)
@@ -169,7 +170,7 @@ def get_all_connections() -> List[nm.Connection]:
 def get_ssid_from_connection(connection: nm.Connection):
     settings = get_connection_settings(connection)
 
-    return settings['802-11-wireless']['ssid']
+    return settings["802-11-wireless"]["ssid"]
 
 
 def get_connection_by_ssid(name: str) -> Optional[nm.Connection]:
@@ -188,9 +189,7 @@ def del_connection_by_ssid(name: str) -> None:
             connection.Delete()
 
 
-def activate_connection_by_ssid(
-    ssid: str, device: nm.Device, path: str = '/'
-):
+def activate_connection_by_ssid(ssid: str, device: nm.Device, path: str = "/"):
     connection = get_connection_by_ssid(ssid)
 
     if connection:
@@ -232,10 +231,10 @@ def get_points_ext(device: nm.Device) -> List[Dict[str, Any]]:
                 encstr = "unencrypted"
 
             outpoint = {
-                'ssid': point.Ssid,
-                'strength': str(point.Strength),
-                'security': encstr,
-                'nmpath': point.object_path,
+                "ssid": point.Ssid,
+                "strength": str(point.Strength),
+                "security": encstr,
+                "nmpath": point.object_path,
             }
 
             outlist.append(outpoint)
@@ -254,62 +253,60 @@ def get_candidate_connections(device: nm.Device) -> List[str]:
         ssid = get_ssid_from_connection(conn)
 
         try:
-            if ssid \
-               and settings['connection']['type'] == '802-11-wireless' \
-               and settings['802-11-wireless']['mode'] == 'infrastructure':
+            if (
+                ssid
+                and settings["connection"]["type"] == "802-11-wireless"
+                and settings["802-11-wireless"]["mode"] == "infrastructure"
+            ):
 
                 candidates.append(ssid)
         except KeyError:
             log.debug("Unexpected connection format for %s" % ssid)
 
-#     # kicknm
-#     get_access_points(device)
-#     iwscan.candidates()
+    #     # kicknm
+    #     get_access_points(device)
+    #     iwscan.candidates()
 
     log.debug("candidates: %s" % candidates)
 
     return candidates
 
 
-def make_hotspot(name='comitup', device=None, password="", hash="0000"):
+def make_hotspot(name="comitup", device=None, password="", hash="0000"):
     comitup_uuid = str(uuid.uuid4())
     settings = {
-        'connection':
-        {
-            'type': '802-11-wireless',
-            'uuid': comitup_uuid,
-            'id': "{0}-{1}".format(name, hash),
-            'autoconnect': False,
+        "connection": {
+            "type": "802-11-wireless",
+            "uuid": comitup_uuid,
+            "id": "{0}-{1}".format(name, hash),
+            "autoconnect": False,
         },
-        '802-11-wireless':
-        {
-            'mode': 'ap',
-            'ssid': name,
-            'band': "bg",
+        "802-11-wireless": {
+            "mode": "ap",
+            "ssid": name,
+            "band": "bg",
         },
-        'ipv4':
-        {
-            'method': 'manual',
-            'address-data': [
+        "ipv4": {
+            "method": "manual",
+            "address-data": [
                 {
-                    'address': '10.41.0.1',
-                    'prefix': 24,
+                    "address": "10.41.0.1",
+                    "prefix": 24,
                 }
-            ]
+            ],
         },
-        'ipv6':
-        {
-            'method': 'ignore',
+        "ipv6": {
+            "method": "ignore",
         },
     }
 
     if device:
-        settings['connection']['interface-name'] = device_name(device)
+        settings["connection"]["interface-name"] = device_name(device)
 
     if password and len(password) >= 8:
-        settings['802-11-wireless-security'] = {}
-        settings['802-11-wireless-security']['key-mgmt'] = "wpa-psk"
-        settings['802-11-wireless-security']['psk'] = password
+        settings["802-11-wireless-security"] = {}
+        settings["802-11-wireless-security"]["key-mgmt"] = "wpa-psk"
+        settings["802-11-wireless-security"]["psk"] = password
 
     nm.Settings.AddConnection(settings)
 
@@ -317,40 +314,48 @@ def make_hotspot(name='comitup', device=None, password="", hash="0000"):
 def make_connection_for(
     ssid: str, password: str = None, interface: Optional[str] = None
 ) -> None:
-    settings = dbus.Dictionary({
-        'connection': dbus.Dictionary(
-            {
-                'id': ssid,
-                'type': '802-11-wireless',
-                'uuid': str(uuid.uuid4()),
-            }),
-        '802-11-wireless': dbus.Dictionary(
-            {
-                'ssid': dbus.ByteArray(ssid.encode()),
-                'mode': 'infrastructure',
-            }),
-        'ipv4': dbus.Dictionary(
-            {
-                # assume DHCP
-                'method': 'auto',
-            }),
-        'ipv6': dbus.Dictionary(
-            {
-                'method': 'auto',
-            }),
-    })
+    settings = dbus.Dictionary(
+        {
+            "connection": dbus.Dictionary(
+                {
+                    "id": ssid,
+                    "type": "802-11-wireless",
+                    "uuid": str(uuid.uuid4()),
+                }
+            ),
+            "802-11-wireless": dbus.Dictionary(
+                {
+                    "ssid": dbus.ByteArray(ssid.encode()),
+                    "mode": "infrastructure",
+                }
+            ),
+            "ipv4": dbus.Dictionary(
+                {
+                    # assume DHCP
+                    "method": "auto",
+                }
+            ),
+            "ipv6": dbus.Dictionary(
+                {
+                    "method": "auto",
+                }
+            ),
+        }
+    )
 
     if interface:
-        settings['connection']['interface-name'] = interface
+        settings["connection"]["interface-name"] = interface
 
     # assume privacy = WPA(2) psk
     if password:
-        settings['802-11-wireless']['security'] = '802-11-wireless-security'
-        settings['802-11-wireless-security'] = dbus.Dictionary({
-            'auth-alg': 'open',
-            'key-mgmt': 'wpa-psk',
-            'psk': password,
-        })
+        settings["802-11-wireless"]["security"] = "802-11-wireless-security"
+        settings["802-11-wireless-security"] = dbus.Dictionary(
+            {
+                "auth-alg": "open",
+                "key-mgmt": "wpa-psk",
+                "psk": password,
+            }
+        )
 
     nm.Settings.AddConnection(settings)
 
@@ -365,21 +370,25 @@ def do_listaccess(arg):
     rows = []
     for point in get_access_points(get_wifi_device()):
         row = (
-            point.Ssid, point.HwAddress,
-            point.Flags, point.WpaFlags,
-            point.RsnFlags, point.Strength,
-            point.Frequency
+            point.Ssid,
+            point.HwAddress,
+            point.Flags,
+            point.WpaFlags,
+            point.RsnFlags,
+            point.Strength,
+            point.Frequency,
         )
         rows.append(row)
 
     bypwr = sorted(rows, key=lambda x: -x[5])
 
-    hdrs = ('SSID', 'MAC', 'Private', 'WPA', 'RSN', 'Power', 'Frequency')
+    hdrs = ("SSID", "MAC", "Private", "WPA", "RSN", "Power", "Frequency")
 
     try:
         import tabulate
+
         print(tabulate.tabulate(bypwr, headers=hdrs))
-    except:    # noqa
+    except:  # noqa
         for entry in bypwr:
             print(entry)
 
@@ -439,7 +448,7 @@ def do_listcandidates(dummy):
 def do_makeconnection(ssid):
     """Create a connection for an access point, for future use"""
 
-    password = getpass.getpass('password: ')
+    password = getpass.getpass("password: ")
 
     make_connection_for(ssid, password)
 
@@ -448,13 +457,13 @@ def get_command(cmd):
     cmd_name = "do_" + cmd
 
     try:
-        return(globals()[cmd_name])
+        return globals()[cmd_name]
     except KeyError:
         return None
 
 
 def parse_args():
-    prog = 'comitup'
+    prog = "comitup"
     epilog = "Commands:\n"
     for x in sorted([x for x in globals().keys() if x[0:3] == "do_"]):
         epilog += "  %s - %s\n" % (x[3:], globals()[x].__doc__)
@@ -467,13 +476,13 @@ def parse_args():
     )
 
     parser.add_argument(
-        'command',
+        "command",
         help="command",
     )
 
     parser.add_argument(
-        'arg',
-        nargs='?',
+        "arg",
+        nargs="?",
         help="command argument",
     )
 
@@ -497,5 +506,5 @@ def main():
     fn(args.arg)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

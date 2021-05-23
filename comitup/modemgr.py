@@ -87,7 +87,7 @@ def get_link_device() -> "NetworkManager.Device":
 
 
 def get_state_device(state: str) -> "NetworkManager.Device":
-    if state == 'HOTSPOT':
+    if state == "HOTSPOT":
         return get_ap_device()
     else:
         return get_link_device()

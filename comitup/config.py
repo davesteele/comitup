@@ -1,4 +1,3 @@
-
 # Copyright (c) 2017-2021 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -33,8 +32,8 @@ class Config(object):
 
         self._config = configparser.ConfigParser(defaults=defaults)
         try:
-            with open(filename, 'r') as fp:
-                conf_str = '[%s]\n' % self._section + fp.read()
+            with open(filename, "r") as fp:
+                conf_str = "[%s]\n" % self._section + fp.read()
             conf_fp = io.StringIO(conf_str)
             self._config.read_file(conf_fp)
         except FileNotFoundError:
@@ -63,23 +62,23 @@ def load_data() -> Tuple[Config, persist.persist]:
                 print("Error occurred while copying file.")
 
         conf = Config(
-                    CONF_PATH,
-                    defaults={
-                        'ap_name': 'comitup-<nnn>',
-                        'ap_password': '',
-                        'web_service': '',
-                        'service_name': 'comitup',
-                        'external_callback': '/usr/local/bin/comitup-callback',
-                        'verbose': '0',
-                        'enable_appliance_mode': 'true',
-                        'primary_wifi_device': '',
-                    },
-                 )
+            CONF_PATH,
+            defaults={
+                "ap_name": "comitup-<nnn>",
+                "ap_password": "",
+                "web_service": "",
+                "service_name": "comitup",
+                "external_callback": "/usr/local/bin/comitup-callback",
+                "verbose": "0",
+                "enable_appliance_mode": "true",
+                "primary_wifi_device": "",
+            },
+        )
 
         data = persist.persist(
-                    PERSIST_PATH,
-                    {'id': str(random.randrange(1000, 9999))},
-               )
+            PERSIST_PATH,
+            {"id": str(random.randrange(1000, 9999))},
+        )
 
         data_cache = (conf, data)
 

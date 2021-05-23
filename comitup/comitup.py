@@ -35,18 +35,16 @@ def deflog(verbose: bool) -> logging.Logger:
     if verbose:
         level = logging.DEBUG
 
-    log = logging.getLogger('comitup')
+    log = logging.getLogger("comitup")
     log.setLevel(level)
     handler = TimedRotatingFileHandler(
-                LOG_PATH,
-                encoding='utf=8',
-                when='D',
-                interval=7,
-                backupCount=8,
-              )
-    fmtr = logging.Formatter(
-            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-           )
+        LOG_PATH,
+        encoding="utf=8",
+        when="D",
+        interval=7,
+        backupCount=8,
+    )
+    fmtr = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
     handler.setFormatter(fmtr)
     log.addHandler(handler)
 
@@ -72,16 +70,16 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="")
 
     parser.add_argument(
-        '-c',
-        '--check',
-        action='store_true',
+        "-c",
+        "--check",
+        action="store_true",
         help="Check the wifi devices and exit",
     )
 
     parser.add_argument(
-        '-i',
-        '--info',
-        action='store_true',
+        "-i",
+        "--info",
+        action="store_true",
         help="Print info and exit",
     )
 
@@ -141,13 +139,14 @@ def main():
     iptmgr.init_iptmgr()
 
     statemgr.init_state_mgr(
-                conf, data,
-                [
-                    webmgr.state_callback,
-                    iptmgr.state_callback,
-                    cdns.state_callback,
-                ],
-             )
+        conf,
+        data,
+        [
+            webmgr.state_callback,
+            iptmgr.state_callback,
+            cdns.state_callback,
+        ],
+    )
 
     signal.signal(signal.SIGTERM, handle_term)
 
@@ -162,5 +161,5 @@ def main():
         cleanup()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

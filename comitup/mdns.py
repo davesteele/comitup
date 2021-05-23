@@ -23,7 +23,7 @@ from comitup import config, nm
 if TYPE_CHECKING:
     import NetworkManager  # noqa
 
-log = logging.getLogger('comitup')
+log = logging.getLogger("comitup")
 
 # globals
 
@@ -31,10 +31,10 @@ CLASS_IN = 0x01
 TYPE_A = 0x01
 TTL = 5
 
-DBUS_NAME = 'org.freedesktop.Avahi'
-DBUS_PATH_SERVER = '/'
-DBUS_INTERFACE_SERVER = 'org.freedesktop.Avahi.Server'
-DBUS_INTERFACE_ENTRY_GROUP = 'org.freedesktop.Avahi.EntryGroup'
+DBUS_NAME = "org.freedesktop.Avahi"
+DBUS_PATH_SERVER = "/"
+DBUS_INTERFACE_SERVER = "org.freedesktop.Avahi.Server"
+DBUS_INTERFACE_ENTRY_GROUP = "org.freedesktop.Avahi.EntryGroup"
 PROTO_INET = 0
 group: Optional[dbus.Interface] = None
 
@@ -48,20 +48,19 @@ def establish_group() -> None:
         bus = dbus.SystemBus()
 
         server = dbus.Interface(
-            bus.get_object(DBUS_NAME, DBUS_PATH_SERVER),
-            DBUS_INTERFACE_SERVER
+            bus.get_object(DBUS_NAME, DBUS_PATH_SERVER), DBUS_INTERFACE_SERVER
         )
 
         group = dbus.Interface(
             bus.get_object(DBUS_NAME, server.EntryGroupNew()),
-            DBUS_INTERFACE_ENTRY_GROUP
+            DBUS_INTERFACE_ENTRY_GROUP,
         )
 
 
 def encode_dns(name: str) -> bytes:
-    components = [x for x in name.split('.') if len(x) > 0]
-    fixed_name = '.'.join(components)
-    return fixed_name.encode('ascii')
+    components = [x for x in name.split(".") if len(x) > 0]
+    fixed_name = ".".join(components)
+    return fixed_name.encode("ascii")
 
 
 def make_a_record(host: str, devindex: int, addr: str) -> None:
@@ -74,7 +73,7 @@ def make_a_record(host: str, devindex: int, addr: str) -> None:
             CLASS_IN,
             TYPE_A,
             TTL,
-            socket.inet_aton(addr)
+            socket.inet_aton(addr),
         )
 
 
@@ -92,8 +91,8 @@ def string_array_to_txt_array(txt_array: List[str]) -> List[List[bytes]]:
 def add_service(host: str, devindex: int, addr: str) -> None:
     name = host
     (conf, data) = config.load_data()
-    if '.local' in name:
-        name = name[:-len('.local')]
+    if ".local" in name:
+        name = name[: -len(".local")]
 
     if group:
         group.AddService(
@@ -105,12 +104,15 @@ def add_service(host: str, devindex: int, addr: str) -> None:
             "",
             host,
             dbus.UInt16(9),
-            string_array_to_txt_array([
-                "hostname=%s" % host,
-                "ipaddr=%s" % addr,
-                "comitup-home=https://davesteele.github.io/comitup/",
-            ])
+            string_array_to_txt_array(
+                [
+                    "hostname=%s" % host,
+                    "ipaddr=%s" % addr,
+                    "comitup-home=https://davesteele.github.io/comitup/",
+                ]
+            ),
         )
+
 
 # public functions
 
@@ -129,7 +131,7 @@ def clear_entries() -> None:
 def get_interface_mapping() -> Dict[str, int]:
     mapping: Dict[str, int] = {}
 
-    for line in subprocess.check_output(["ip", "addr"]).decode().split('\n'):
+    for line in subprocess.check_output(["ip", "addr"]).decode().split("\n"):
         try:
             asc_index, name = line.split(": ")[0:2]
             mapping[name] = int(asc_index)
@@ -158,9 +160,7 @@ def add_hosts(hosts: List[str]) -> None:
         name = nm.device_name(device)
         addr = nm.get_active_ip(device)
         log.debug("add_hosts: {}, {}".format(name, addr))
-        if (name in nm.get_phys_dev_names()
-                and name in int_mapping
-                and addr):
+        if name in nm.get_phys_dev_names() and name in int_mapping and addr:
 
             index = int_mapping[name]
             for host in hosts:
@@ -176,8 +176,8 @@ def add_hosts(hosts: List[str]) -> None:
         group.Commit()
 
 
-if __name__ == '__main__':
-    add_hosts(['comitup-1111.local', 'comitup.local'])
+if __name__ == "__main__":
+    add_hosts(["comitup-1111.local", "comitup.local"])
 
     while True:
         pass

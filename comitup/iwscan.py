@@ -31,14 +31,14 @@ def devlist() -> List[str]:
     """Get a list of supported devices from 'iw'"""
     log.debug("Getting device list from 'iw'")
     out = docmd("iw dev")
-    devs = [x.split()[1] for x in out.split('\n') if "Interface" in x]
+    devs = [x.split()[1] for x in out.split("\n") if "Interface" in x]
     return devs
 
 
 def blk2dict(blk: str) -> Dict[str, str]:
     """Convert a 'iw dev scan' block into a tagged dict"""
 
-    lines = [x.strip().split(':') for x in blk.split('\n') if ':' in x]
+    lines = [x.strip().split(":") for x in blk.split("\n") if ":" in x]
     tups = [(x[0].strip(), x[1].strip()) for x in lines if len(x) > 1]
 
     return dict(tups)
@@ -55,14 +55,14 @@ def devaps(dev: str, dump: str = "") -> List[Dict[str, str]]:
     """Get a list of Access Points (as dicts) for a device"""
     if not dump:
         log.debug("Getting AP list from 'iw' dev %s" % dev)
-        dump = docmd('iw dev %s scan' % dev)
+        dump = docmd("iw dev %s scan" % dev)
 
     aps = []
-    for blk in re.split('\nBSS ', dump[4:]):
+    for blk in re.split("\nBSS ", dump[4:]):
         try:
             ap = blk2dict(blk)
-            ap['power'] = dbm2pct(float(ap['signal'].split()[0]))
-            if ap['SSID']:
+            ap["power"] = dbm2pct(float(ap["signal"].split()[0]))
+            if ap["SSID"]:
                 aps.append(ap)
         except KeyError:
             pass
@@ -73,12 +73,12 @@ def devaps(dev: str, dump: str = "") -> List[Dict[str, str]]:
 def apgen(dev: str, q: Queue, dump: str = "") -> None:
     for ap in devaps(dev, dump):
         pt = {}
-        pt['ssid'] = ap['SSID']
-        pt['strength'] = ap['power']
-        if 'WPA' in ap or 'RSN' in ap:
-            pt['security'] = 'encrypted'
+        pt["ssid"] = ap["SSID"]
+        pt["strength"] = ap["power"]
+        if "WPA" in ap or "RSN" in ap:
+            pt["security"] = "encrypted"
         else:
-            pt['security'] = 'unencrypted'
+            pt["security"] = "unencrypted"
 
         q.put(pt)
 
@@ -86,7 +86,7 @@ def apgen(dev: str, q: Queue, dump: str = "") -> None:
 
 
 def dedup_aplist(aplist: List[Dict[str, str]]) -> List[Dict[str, str]]:
-    apdict = {x['ssid']: x for x in aplist}
+    apdict = {x["ssid"]: x for x in aplist}
 
     return [apdict[x] for x in apdict]
 
@@ -120,7 +120,7 @@ def candidates(device: str = None) -> List[Dict[str, str]]:
 
     clist = dedup_aplist(clist)
 
-    clist = sorted(clist, key=lambda x: -float(x['strength']))
+    clist = sorted(clist, key=lambda x: -float(x["strength"]))
 
     return clist
 
@@ -129,13 +129,13 @@ def ap_conn_count() -> int:
     count = 0
     for dev in devlist():
         log.debug("Getting iw station dump")
-        out = docmd('iw dev %s station dump' % dev)
-        count += len([x for x in out.split('\n') if "Station" in x])
+        out = docmd("iw dev %s station dump" % dev)
+        count += len([x for x in out.split("\n") if "Station" in x])
 
     return count
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(candidates())
 
     print(ap_conn_count())

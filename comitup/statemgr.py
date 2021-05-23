@@ -46,7 +46,7 @@ comitup_path: str = "/com/github/davesteele/comitup"
 
 comitup_int: str = "com.github.davesteele.comitup"
 
-log: logging.Logger = logging.getLogger('comitup')
+log: logging.Logger = logging.getLogger("comitup")
 
 
 com_obj: Optional["Comitup"] = None
@@ -67,14 +67,14 @@ class Comitup(dbus.service.Object):
         global apcache, cachetime
 
         if time.time() - cachetime > 5:
-            cachetime = time.time()   # keep anyone else from processing
+            cachetime = time.time()  # keep anyone else from processing
             aps = iwscan.candidates()
-            aps = [x for x in aps if x['ssid'] != states.hotspot_name]
+            aps = [x for x in aps if x["ssid"] != states.hotspot_name]
             apcache = aps
 
             # set a timeout, if we got something
             if len(apcache):
-                cachetime = time.time()   # cache time actually starts now
+                cachetime = time.time()  # cache time actually starts now
             else:
                 cachetime = 0
 
@@ -92,7 +92,7 @@ class Comitup(dbus.service.Object):
 
             nm.make_connection_for(ssid, password)
 
-            states.set_state('CONNECTING', [ssid, ssid])
+            states.set_state("CONNECTING", [ssid, ssid])
             return False
 
         timeout_add(1, to_fn, ssid, password)
@@ -102,7 +102,7 @@ class Comitup(dbus.service.Object):
         def to_fn():
             ssid = nm.get_active_ssid(modemgr.get_link_device())
             nm.del_connection_by_ssid(ssid)
-            states.set_state('HOTSPOT')
+            states.set_state("HOTSPOT")
             return False
 
         timeout_add(1, to_fn)
@@ -119,11 +119,11 @@ def get_info(conf: "Config", data: "persist") -> Dict[str, str]:
         sys.exit(1)
 
     info = {
-        'version': pkg_resources.get_distribution("comitup").version,
-        'apname': expand_ap(conf.ap_name, data.id),
-        'hostnames': ';'.join(get_hosts(conf, data)),
-        'imode': modemgr.get_mode(),
-        }
+        "version": pkg_resources.get_distribution("comitup").version,
+        "apname": expand_ap(conf.ap_name, data.id),
+        "hostnames": ";".join(get_hosts(conf, data)),
+        "imode": modemgr.get_mode(),
+    }
 
     return info
 
@@ -132,7 +132,7 @@ def expand_ap(ap_name: str, id: str) -> str:
     returnval = ap_name
 
     for num in range(5):
-        returnval = re.sub("<{}>".format("n"*num), id[:num], returnval)
+        returnval = re.sub("<{}>".format("n" * num), id[:num], returnval)
 
     returnval = re.sub("<hostname>", socket.gethostname(), returnval)
 
@@ -147,7 +147,7 @@ def get_hosts(conf: "Config", data: "persist") -> List[str]:
 
 def external_callback(state: str, action: str) -> None:
     log.debug("External callback")
-    if action != 'start':
+    if action != "start":
         return
 
     script: str = conf.external_callback  # type: ignore
@@ -169,7 +169,7 @@ def external_callback(state: str, action: str) -> None:
 
     stats = os.stat(script)
 
-    with open(os.devnull, 'w') as nul:
+    with open(os.devnull, "w") as nul:
         subprocess.call(
             [script, state],
             stdout=nul,
@@ -179,18 +179,14 @@ def external_callback(state: str, action: str) -> None:
 
 
 def init_state_mgr(
-    gconf: "Config",
-    gdata: "persist",
-    callbacks: List[Callable[[str, str], None]]
+    gconf: "Config", gdata: "persist", callbacks: List[Callable[[str, str], None]]
 ) -> None:
     global com_obj, conf, data
 
     conf, data = (gconf, gdata)
 
     states.init_states(
-        get_hosts(conf, data),
-        callbacks + [external_callback],
-        conf.ap_password
+        get_hosts(conf, data), callbacks + [external_callback], conf.ap_password
     )
     com_obj = Comitup()
 
@@ -200,14 +196,14 @@ def main():
     log.addHandler(handler)
     log.setLevel(logging.DEBUG)
 
-    log.info('starting')
+    log.info("starting")
 
-    init_state_mgr('comitup.local', 'comitup-1111.local')
-    states.set_state('HOTSPOT', timeout=5)
+    init_state_mgr("comitup.local", "comitup-1111.local")
+    states.set_state("HOTSPOT", timeout=5)
 
     loop = MainLoop()
     loop.run()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
