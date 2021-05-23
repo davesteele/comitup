@@ -20,25 +20,12 @@ from typing import Callable, List, Optional
 import NetworkManager
 from gi.repository.GLib import timeout_add
 
-from comitup import iwscan, routemgr, wpa
-
-if __name__ == "__main__":
-    from dbus.mainloop.glib import DBusGMainLoop
-
-    DBusGMainLoop(set_as_default=True)
-
-from comitup import mdns  # noqa
-from comitup import modemgr  # noqa
-from comitup import nm  # noqa
-from comitup import nmmon  # noqa
+from comitup import iwscan, mdns, modemgr, nm, nmmon, routemgr, wpa
 
 log = logging.getLogger("comitup")
 
-# definitions
-dns_names: List[str] = []
-
-
 # Global state information
+dns_names: List[str] = []
 com_state: Optional[str] = None
 conn_list: List[str] = []
 connection: str = ""
