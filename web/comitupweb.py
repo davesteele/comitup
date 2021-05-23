@@ -18,8 +18,15 @@ import urllib
 from logging.handlers import TimedRotatingFileHandler
 from multiprocessing import Process
 
-from flask import (Flask, abort, jsonify, redirect, render_template, request,
-                   send_from_directory)
+from flask import (
+    Flask,
+    abort,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    send_from_directory,
+)
 from cachetools import cached, TTLCache
 
 sys.path.append(".")
@@ -44,9 +51,7 @@ def deflog():
         interval=7,
         backupCount=8,
     )
-    fmtr = logging.Formatter(
-        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    )
+    fmtr = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
     handler.setFormatter(fmtr)
     log.addHandler(handler)
 
@@ -79,9 +84,7 @@ def create_app(log):
         for point in points:
             point["ssid_encoded"] = urllib.parse.quote(point["ssid"])
         log.info("index.html - {} points".format(len(points)))
-        return render_template(
-            "index.html", points=points, can_blink=ciu.can_blink()
-        )
+        return render_template("index.html", points=points, can_blink=ciu.can_blink())
 
     @app.route("/confirm")
     def confirm():
