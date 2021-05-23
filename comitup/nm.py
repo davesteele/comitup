@@ -39,18 +39,12 @@ pp = pprint.PrettyPrinter(indent=4)
 
 log = logging.getLogger("comitup")
 
-this_module = sys.modules[__name__]
-for key in nm.__dict__:
-    if key.startswith("NM_"):
-        setattr(this_module, key, nm.__dict__[key])
-
 
 def initialize() -> None:
     nm.Settings.ReloadConnections()
 
 
 def nm_state() -> int:
-
     return nm.NetworkManager.State
 
 
