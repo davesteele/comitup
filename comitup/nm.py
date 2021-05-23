@@ -23,15 +23,6 @@ from typing import Any, Callable, Dict, List, Optional, TypeVar, cast
 import dbus
 import NetworkManager as nm
 
-if __name__ == "__main__":
-    import os
-
-    fullpath = os.path.abspath(__file__)
-    parentdir = "/".join(fullpath.split("/")[:-2])
-    sys.path.insert(0, parentdir)
-
-from comitup import iwscan  # noqa
-
 device_list: Optional[List[nm.Device]] = None
 settings_cache: Dict[str, Any] = {}
 
@@ -256,10 +247,6 @@ def get_candidate_connections(device: nm.Device) -> List[str]:
                 candidates.append(ssid)
         except KeyError:
             log.debug("Unexpected connection format for %s" % ssid)
-
-    #     # kicknm
-    #     get_access_points(device)
-    #     iwscan.candidates()
 
     log.debug("candidates: %s" % candidates)
 
