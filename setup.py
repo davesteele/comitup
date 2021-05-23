@@ -25,7 +25,13 @@ class MyClean(clean):
                 shutil.rmtree(os.path.join(root, x))
                 for x in dirs
                 if x
-                in (".pyc", ".coverage", ".cache", "__pycache__", "comitup.egg-info")
+                in (
+                    ".pyc",
+                    ".coverage",
+                    ".cache",
+                    "__pycache__",
+                    "comitup.egg-info",
+                )
             ]
 
             for file in files:

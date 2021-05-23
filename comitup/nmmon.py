@@ -103,7 +103,9 @@ def send_cb(cb: Callable[[], None], reason) -> None:
 
 def ap_changed_state(state, oldstate, reason, *args) -> None:
     log.debug(
-        "nmm - primary state {}, was {}, reason {}".format(state, oldstate, reason)
+        "nmm - primary state {}, was {}, reason {}".format(
+            state, oldstate, reason
+        )
     )
     if state in PASS_STATES:
         log.debug("nmm - primary pass")
@@ -117,7 +119,9 @@ def ap_changed_state(state, oldstate, reason, *args) -> None:
 
 def second_changed_state(state, oldstate, reason, *args) -> None:
     log.debug(
-        "nmm - secondary state {}, was {}, reason {}".format(state, oldstate, reason)
+        "nmm - secondary state {}, was {}, reason {}".format(
+            state, oldstate, reason
+        )
     )
     if state in PASS_STATES:
         log.debug("nmm - secondary pass")

@@ -41,7 +41,9 @@ def state_fxt(monkeypatch, state_globals):
         else:
             monkeypatch.setattr(path, Mock())
 
-    monkeypatch.setattr("comitup.states.iwscan.ap_conn_count", Mock(return_value=0))
+    monkeypatch.setattr(
+        "comitup.states.iwscan.ap_conn_count", Mock(return_value=0)
+    )
 
     monkeypatch.setattr("comitup.states.modemgr.CONF_PATH", "/dev/null")
 
@@ -55,7 +57,9 @@ def points_fxt(monkeypatch):
         "ssid": "ssid",
     }
 
-    monkeypatch.setattr("comitup.states.nm.get_points_ext", Mock(return_value=[pt]))
+    monkeypatch.setattr(
+        "comitup.states.nm.get_points_ext", Mock(return_value=[pt])
+    )
 
     return None
 
@@ -90,7 +94,9 @@ def test_state_set_hosts():
     assert states.dns_names == ("a", "b")
 
 
-@pytest.mark.parametrize("hostin, hostout", (("host", "host"), ("host.local", "host")))
+@pytest.mark.parametrize(
+    "hostin, hostout", (("host", "host"), ("host.local", "host"))
+)
 def test_state_dns_to_conn(hostin, hostout):
     assert states.dns_to_conn(hostin) == hostout
 

@@ -41,7 +41,9 @@ def do_connect(ciu_client, ssid, password):
 def do_info(ciu_client, connection):
     info = ciu_client.ciu_info(connection)
     print("")
-    print("Host %s on comitup version %s" % (info["hostnames"], info["version"]))
+    print(
+        "Host %s on comitup version %s" % (info["hostnames"], info["version"])
+    )
     print("'%s' mode" % info["imode"])
 
 

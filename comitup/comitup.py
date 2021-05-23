@@ -44,7 +44,9 @@ def deflog(verbose: bool) -> logging.Logger:
         interval=7,
         backupCount=8,
     )
-    fmtr = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    fmtr = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
     handler.setFormatter(fmtr)
     log.addHandler(handler)
 

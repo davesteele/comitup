@@ -66,7 +66,9 @@ def device_nm_managed() -> Optional[str]:
     try:
         cmd = "nmcli device show"
         try:
-            devsinfo = subprocess.check_output(cmd.split(), re.MULTILINE).decode()
+            devsinfo = subprocess.check_output(
+                cmd.split(), re.MULTILINE
+            ).decode()
         except UnicodeDecodeError:
             # shouldn't happen, but it does. Move on
             return None

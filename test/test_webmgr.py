@@ -68,7 +68,9 @@ def test_webmgr_callback(
 
 
 others = [
-    (x, y) for x in ("HOTSPOT", "CONNECTING", "CONNECTED") for y in ("fail", "timeout")
+    (x, y)
+    for x in ("HOTSPOT", "CONNECTING", "CONNECTED")
+    for y in ("fail", "timeout")
 ]  # noqa
 
 

@@ -22,7 +22,10 @@ pidpath: Path = Path("/var/run/comitup-dns")
 
 callmatrix = {
     ("HOTSPOT", "pass", "router"): (lambda: run_dns, lambda: hotspot_config),
-    ("CONNECTING", "start", "router"): (lambda: run_dns, lambda: connected_config),
+    ("CONNECTING", "start", "router"): (
+        lambda: run_dns,
+        lambda: connected_config,
+    ),
     ("HOTSPOT", "pass", "single"): (lambda: run_dns, lambda: hotspot_config),
     ("CONNECTING", "start", "single"): (lambda: run_dns, lambda: ""),
 }
@@ -33,7 +36,12 @@ def kill_dns(ppath: Path, sig):
         pid: int = int(pidpath.read_text().strip())
         os.kill(pid, sig)
         os.waitpid(pid, 0)
-    except (ValueError, ProcessLookupError, FileNotFoundError, ChildProcessError):
+    except (
+        ValueError,
+        ProcessLookupError,
+        FileNotFoundError,
+        ChildProcessError,
+    ):
         pass
 
 

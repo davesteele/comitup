@@ -283,7 +283,9 @@ def connected_fail(reason: int) -> None:
 def connected_timeout(dummy: int) -> None:
     active_ssid: str
     active_ssid = nm.get_active_ssid(modemgr.get_state_device("CONNECTED"))
-    log.debug("connected_timeout comparing {} to {}".format(connection, active_ssid))
+    log.debug(
+        "connected_timeout comparing {} to {}".format(connection, active_ssid)
+    )
     if connection != active_ssid:
         log.warning("Connection lost on timeout")
         dev = modemgr.get_state_device("CONNECTED")
@@ -408,7 +410,9 @@ def hash_conf() -> str:
     return m.hexdigest()[-4:]
 
 
-def assure_hotspot(ssid: str, device: NetworkManager.Device, password: str) -> None:
+def assure_hotspot(
+    ssid: str, device: NetworkManager.Device, password: str
+) -> None:
     nm.del_connection_by_ssid(ssid)
     if not nm.get_connection_by_ssid(ssid):
         nm.make_hotspot(ssid, device, password)

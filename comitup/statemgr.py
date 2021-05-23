@@ -179,14 +179,18 @@ def external_callback(state: str, action: str) -> None:
 
 
 def init_state_mgr(
-    gconf: "Config", gdata: "persist", callbacks: List[Callable[[str, str], None]]
+    gconf: "Config",
+    gdata: "persist",
+    callbacks: List[Callable[[str, str], None]],
 ) -> None:
     global com_obj, conf, data
 
     conf, data = (gconf, gdata)
 
     states.init_states(
-        get_hosts(conf, data), callbacks + [external_callback], conf.ap_password
+        get_hosts(conf, data),
+        callbacks + [external_callback],
+        conf.ap_password,
     )
     com_obj = Comitup()
 

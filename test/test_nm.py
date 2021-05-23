@@ -55,7 +55,9 @@ def device_fxt(monkeypatch):
 
 @pytest.fixture()
 def no_connections_fxt(monkeypatch):
-    monkeypatch.setattr("comitup.nm.nm.Settings.ListConnections", Mock(return_value=[]))
+    monkeypatch.setattr(
+        "comitup.nm.nm.Settings.ListConnections", Mock(return_value=[])
+    )
     return None
 
 
@@ -69,7 +71,8 @@ def connections_fxt(monkeypatch):
     }
 
     monkeypatch.setattr(
-        "comitup.nm.nm.Settings.ListConnections", Mock(return_value=[connection])
+        "comitup.nm.nm.Settings.ListConnections",
+        Mock(return_value=[connection]),
     )
 
     return connection
@@ -100,7 +103,9 @@ def test_del_connection_by_ssid(connections_fxt):
 @patch("comitup.nm.get_wifi_device")
 def test_activate_connection_by_id(get_dev, monkeypatch, connections_fxt):
     activate = Mock()
-    monkeypatch.setattr("comitup.nm.nm.NetworkManager.ActivateConnection", activate)
+    monkeypatch.setattr(
+        "comitup.nm.nm.NetworkManager.ActivateConnection", activate
+    )
 
     nm.activate_connection_by_ssid("myssid", nm.get_wifi_device())
     assert activate.called
