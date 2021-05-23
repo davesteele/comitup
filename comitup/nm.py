@@ -35,10 +35,6 @@ def initialize() -> None:
     nm.Settings.ReloadConnections()
 
 
-def nm_state() -> int:
-    return nm.NetworkManager.State
-
-
 T = TypeVar("T")
 
 
@@ -188,49 +184,9 @@ def activate_connection_by_ssid(ssid: str, device: nm.Device, path: str = "/"):
         log.error("Connection for {} not found".format(ssid))
 
 
-def deactivate_connection(device: nm.Device) -> None:
-    connection = device.ActiveConnection
-    if connection:
-        nm.NetworkManager.DeactivateConnection(connection)
-
-
 @none_on_exception(AttributeError)
 def get_access_points(device: nm.Device) -> Optional[List[nm.AccessPoint]]:
     return device.SpecificDevice().GetAllAccessPoints()
-
-
-def get_points_ext(device: nm.Device) -> List[Dict[str, Any]]:
-    try:
-        inlist = get_access_points(device)
-        if inlist is None:
-            return []
-        inlist = sorted(inlist, key=lambda x: -x.Strength)
-    except (TypeError, dbus.exceptions.DBusException):
-        log.debug("Error getting access points")
-        inlist = []
-
-    outlist = []
-    for point in inlist:
-
-        try:
-            if point.Flags or point.WpaFlags or point.RsnFlags:
-                encstr = "encrypted"
-            else:
-                encstr = "unencrypted"
-
-            outpoint: Dict[str, Any]
-            outpoint = {
-                "ssid": point.Ssid,
-                "strength": str(point.Strength),
-                "security": encstr,
-                "nmpath": point.object_path,
-            }
-
-            outlist.append(outpoint)
-        except dbus.exceptions.DBusException:
-            log.debug("Error getting point info")
-
-    return outlist
 
 
 def get_candidate_connections(device: nm.Device) -> List[str]:
