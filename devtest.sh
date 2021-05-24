@@ -26,3 +26,5 @@ mypy comitup cli web test
 
 echo "Running flake8"
 flake8 comitup cli web test *.py
+
+echo "Tests completed successfully"
