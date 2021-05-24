@@ -160,7 +160,12 @@ def add_hosts(hosts: List[str]) -> None:
         name = nm.device_name(device)
         addr = nm.get_active_ip(device)
         log.debug("add_hosts: {}, {}".format(name, addr))
-        if name in nm.get_phys_dev_names() and name in int_mapping and addr:
+        if (
+            name in nm.get_phys_dev_names()
+            and name in int_mapping
+            and addr
+            and addr != "0.0.0.0"
+        ):
 
             index = int_mapping[name]
             for host in hosts:

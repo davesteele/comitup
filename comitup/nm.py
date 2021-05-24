@@ -139,8 +139,11 @@ def get_active_ssid(device: nm.Device) -> Optional[str]:
 
 @none_on_exception(AttributeError)
 def get_active_ip(device: nm.Device) -> Optional[str]:
-    addr = device.Ip4Address
-    return addr if addr else None
+    addr: str = device.Ip4Address
+    if addr == "0.0.0.0":
+        addr = device.Ip4Config.Addresses[0][0]
+
+    return addr
 
 
 def get_all_connections() -> List[nm.Connection]:

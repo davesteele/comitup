@@ -25,6 +25,9 @@ class Device(NMDbusInterface):
     @staticmethod
     def GetAllAccessPoints() -> List[AccessPoint]: ...
 
+    class Ip4Config():
+        Addresses:  List[List[str]]
+
 class Wireless(Device): ...
 
 class NetworkManager(NMDbusInterface):
