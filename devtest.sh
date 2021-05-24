@@ -22,7 +22,7 @@ echo "Running pytest"
 py.test-3
 
 echo "Running mypy"
-mypy comitup cli web test
+mypy comitup cli web test *.py
 
 echo "Running flake8"
 flake8 comitup cli web test *.py

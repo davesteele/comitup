@@ -9,34 +9,7 @@
 # or later
 #
 
-import os
-import shutil
-from distutils.command.clean import clean
-
 from setuptools import setup
-
-
-class MyClean(clean):
-    def run(self):
-        clean.run(self)
-
-        clean_dirs = (
-            ".pyc",
-            ".coverage",
-            ".cache",
-            "__pycache__",
-            "comitup.egg-info",
-        )
-
-        for root, dirs, files in os.walk("."):
-            for dir in dirs:
-                if dir in clean_dirs:
-                    shutil.rmtree(os.path.join(root, dir))
-
-            for file in files:
-                for match in (".pyc", ".cache", ".coverage"):
-                    if match in file:
-                        os.unlink(os.path.join(root, file))
 
 
 setup(
@@ -79,7 +52,7 @@ setup(
                 "web/templates/connect.html",
                 "web/templates/confirm.html",
             ],
-        ),  # noqa
+        ),
         (
             "/usr/share/comitup/web/templates/css",
             [
@@ -88,7 +61,7 @@ setup(
                 "web/templates/css/uikit.min.css",
                 "web/templates/css/uikit-rtl.min.css",
             ],
-        ),  # noqa
+        ),
         (
             "/usr/share/comitup/web/templates/js",
             [
@@ -96,21 +69,21 @@ setup(
                 "web/templates/js/uikit-icons.js",
                 "web/templates/js/blink.js",
             ],
-        ),  # noqa
+        ),
         (
             "/usr/share/comitup/web/templates/images",
             [
                 "web/templates/images/ledon.gif",
                 "web/templates/images/ledoff.gif",
             ],
-        ),  # noqa
+        ),
         (
             "/usr/share/comitup/dns",
             [
                 "conf/dns-hotspot.conf",
                 "conf/dns-connected.conf",
             ],
-        ),  # noqa
+        ),
     ],
     install_requires=[
         "cachetools",
@@ -123,9 +96,6 @@ setup(
     ],
     setup_requires=["pytest-runner"],
     tests_require=["pytest", "mock"],
-    cmdclass={
-        "clean": MyClean,
-    },
     author="David Steele",
     author_email="steele@debian.org",
     url="https://davesteele.github.io/comitup/",
