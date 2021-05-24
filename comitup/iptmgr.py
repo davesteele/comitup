@@ -15,13 +15,14 @@ from typing import List, Optional
 
 from comitup import modemgr, nm, routemgr
 
+# fmt: off
 start_cmds: List[str] = [
     # HOTSPOT rules
     "iptables -w -N COMITUP-OUT",
-    "iptables -w -A COMITUP-OUT "  # \
-    "-p icmp --icmp-type destination-unreachable -j DROP",
-    "iptables -w -A COMITUP-OUT "  # \
-    "-p icmp --icmp-type port-unreachable -j DROP",
+    "iptables -w -A COMITUP-OUT "
+      "-p icmp --icmp-type destination-unreachable -j DROP",  # noqa
+    "iptables -w -A COMITUP-OUT "
+      "-p icmp --icmp-type port-unreachable -j DROP",
     "iptables -w -A COMITUP-OUT -j RETURN",
     "iptables -w -I OUTPUT -o {ap} -j COMITUP-OUT",
 ]
@@ -46,7 +47,7 @@ appliance_clear: List[str] = [
     "iptables -w -t nat -F COMITUP-FWD >/dev/null 2>&1",
     "iptables -w -t nat -X COMITUP-FWD >/dev/null 2>&1",
 ]
-
+# fmt: on
 
 log: logging.Logger = logging.getLogger("comitup")
 
