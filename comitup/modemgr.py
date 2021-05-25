@@ -30,11 +30,7 @@ link_device: Optional["NetworkManager.Device"] = None
 
 
 def get_conf() -> config.Config:
-    global conf
-
-    if not conf:
-        (conf, _) = config.load_data()
-
+    (conf, _) = config.load_data()
     return conf
 
 
