@@ -18,17 +18,17 @@ from typing import Optional, Tuple
 
 from comitup import persist
 
-PERSIST_PATH = "/var/lib/comitup/comitup.json"
-CONF_PATH = "/etc/comitup.conf"
-BOOT_CONF_PATH = "/boot/comitup.conf"
-SECTION = "DEFAULT"
+PERSIST_PATH: str = "/var/lib/comitup/comitup.json"
+CONF_PATH: str = "/etc/comitup.conf"
+BOOT_CONF_PATH: str = "/boot/comitup.conf"
+SECTION: str = "DEFAULT"
 
 data_cache: Optional[Tuple["Config", persist.persist]] = None
 
 
 class Config(object):
-    def __init__(self, filename, section=SECTION, defaults={}):
-        self._section = section
+    def __init__(self, filename: str, section: str = SECTION, defaults={}):
+        self._section: str = section
 
         self._config = configparser.ConfigParser(defaults=defaults)
         try:

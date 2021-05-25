@@ -155,7 +155,7 @@ def add_hosts(hosts: List[str]) -> None:
         log.error("No devices found in add_hosts()")
         return
 
-    entries = False
+    entries: bool = False
     for device in devices:
         name = nm.device_name(device)
         addr = nm.get_active_ip(device)

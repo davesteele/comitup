@@ -10,14 +10,14 @@ import re
 import time
 from pathlib import Path
 
-brightPath = Path("/sys/class/leds/led0/brightness")
-triggerPath = Path("/sys/class/leds/led0/trigger")
-modelPath = Path("/sys/firmware/devicetree/base/model")
+brightPath: Path = Path("/sys/class/leds/led0/brightness")
+triggerPath: Path = Path("/sys/class/leds/led0/trigger")
+modelPath: Path = Path("/sys/firmware/devicetree/base/model")
 
 
 def onval() -> str:
     """A "1" turns on the led, except on a Zero."""
-    val = "1"
+    val: str = "1"
     if can_blink():
         if "Zero" in modelPath.read_text():
             val = "0"
@@ -40,10 +40,11 @@ def can_blink() -> bool:
 
 def get_trigger() -> str:
     """Save the current led trigger, for later restoration."""
-    text = triggerPath.read_text()
+    text: str = triggerPath.read_text()
 
     match = re.search(r"\[(.+)\]", text)
 
+    mode: str
     if match:
         mode = match.group(1)
     else:

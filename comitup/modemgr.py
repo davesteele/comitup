@@ -23,8 +23,6 @@ MULTI_MODE: str = "router"
 
 CONF_PATH: str = "/etc/comitup.conf"
 
-conf: Optional[config.Config] = None
-
 ap_device: Optional["NetworkManager.Device"] = None
 link_device: Optional["NetworkManager.Device"] = None
 

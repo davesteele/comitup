@@ -35,7 +35,7 @@ class DevInfo(object):
         return [x[1] for x in self.dev_list if x[0] == dev][0]
 
 
-dev_info = DevInfo()
+dev_info: DevInfo = DevInfo()
 
 
 def device_present() -> Optional[str]:
@@ -47,12 +47,12 @@ def device_present() -> Optional[str]:
 
 
 def device_supports_ap() -> Optional[str]:
-    dev = dev_info.get_devs()[0]
-    phy = dev_info.get_phy(dev)
+    dev: str = dev_info.get_devs()[0]
+    phy: str = dev_info.get_phy(dev)
 
     try:
-        cmd = "iw phy {} info".format(phy)
-        deviceinfo = subprocess.check_output(cmd.split()).decode()
+        cmd: str = "iw phy {} info".format(phy)
+        deviceinfo: str = subprocess.check_output(cmd.split()).decode()
     except subprocess.CalledProcessError:
         return ""
 
@@ -64,9 +64,9 @@ def device_supports_ap() -> Optional[str]:
 
 def device_nm_managed() -> Optional[str]:
     try:
-        cmd = "nmcli device show"
+        cmd: str = "nmcli device show"
         try:
-            devsinfo = subprocess.check_output(
+            devsinfo: str = subprocess.check_output(
                 cmd.split(), re.MULTILINE
             ).decode()
         except UnicodeDecodeError:

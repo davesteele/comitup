@@ -31,7 +31,7 @@ callmatrix = {
 }
 
 
-def kill_dns(ppath: Path, sig):
+def kill_dns(ppath: Path, sig: int) -> None:
     try:
         pid: int = int(pidpath.read_text().strip())
         os.kill(pid, sig)

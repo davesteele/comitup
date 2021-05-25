@@ -10,7 +10,9 @@ import logging
 import os
 import signal
 import sys
+import types
 from logging.handlers import TimedRotatingFileHandler
+from typing import Optional
 
 from dbus.mainloop.glib import DBusGMainLoop
 
@@ -26,8 +28,8 @@ from comitup import sysd  # noqa
 from comitup import webmgr  # noqa
 from comitup import wificheck  # noqa
 
-LOG_PATH = "/var/log/comitup.log"
-log = None
+LOG_PATH: str = "/var/log/comitup.log"
+log: Optional[logging.Logger] = None
 
 
 def deflog(verbose: bool) -> logging.Logger:
@@ -97,14 +99,14 @@ def parse_args() -> argparse.Namespace:
     return args
 
 
-def cleanup():
+def cleanup() -> None:
     # leave the network setup as it, but kill comitup-web
     webmgr.stop_service(webmgr.COMITUP_SERVICE)
     if log:
         log.info("Stopping comitup")
 
 
-def handle_term(signum, frame):
+def handle_term(signum: int, handler: types.FrameType) -> None:
     cleanup()
     sys.exit(0)
 
