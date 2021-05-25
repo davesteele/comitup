@@ -3,7 +3,7 @@ import textwrap
 import pytest
 from mock import Mock
 
-from comitup import iptmgr, routemgr
+from comitup import routemgr
 
 routetxt = textwrap.dedent(
     """
@@ -26,8 +26,11 @@ def defroute(monkeypatch):
 
 
 def test_defroute_fixture(defroute):
-    cp = iptmgr.subprocess.run(
-        "ip route", stdout=iptmgr.subprocess.PIPE, shell=True, encoding="utf-8"
+    cp = routemgr.subprocess.run(
+        "ip route",
+        stdout=routemgr.subprocess.PIPE,
+        shell=True,
+        encoding="utf-8"
     )
     assert "ethn" in cp.stdout
 
