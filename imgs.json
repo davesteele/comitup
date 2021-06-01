@@ -1,22 +1,22 @@
 {
     "full": {
-        "compressed": 1256742215,
+        "compressed": 1261270898,
         "compressedstr": "1.2 G",
-        "filename": "image_2021-05-17-Comitup.zip",
-        "infoname": "2021-05-17-Comitup.info",
-        "magnet": "magnet:?xt=urn:btih:b9269132d3629ed38e398d1343d979e0f1f22f85&dn=image%5F2021-05-17-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
+        "filename": "image_2021-05-31-Comitup.zip",
+        "infoname": "2021-05-31-Comitup.info",
+        "magnet": "magnet:?xt=urn:btih:62d1ab85b9dfd2010779a577a10974e7ca96c5fd&dn=image%5F2021-05-31-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
         "name": "",
-        "uncompressed": 4039114752,
-        "uncompressedstr": "3.9 G"
+        "uncompressed": 3758932480,
+        "uncompressedstr": "3.7 G"
     },
     "lite": {
-        "compressed": 490801138,
-        "compressedstr": "479 M",
-        "filename": "image_2021-05-17-Comitup-lite.zip",
-        "infoname": "2021-05-17-Comitup-lite.info",
-        "magnet": "magnet:?xt=urn:btih:d3bdde403d925656457fd21db67f08b9ce8e2176&dn=image%5F2021-05-17-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
+        "compressed": 497046215,
+        "compressedstr": "485 M",
+        "filename": "image_2021-05-31-Comitup-lite.zip",
+        "infoname": "2021-05-31-Comitup-lite.info",
+        "magnet": "magnet:?xt=urn:btih:6fce1fa5f7a670c187c930c3e876bb723bbcfb3f&dn=image%5F2021-05-31-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopentor.org%3A2710%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
         "name": "Lite",
-        "uncompressed": 1954545664,
-        "uncompressedstr": "1.9 G"
+        "uncompressed": 2203353600,
+        "uncompressedstr": "2.2 G"
     }
 }
