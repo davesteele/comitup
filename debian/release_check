@@ -25,35 +25,41 @@ echo "The tag base version is $TAGVER"
 
 echo
 
+fail="0"
+
 if [ "$DIST" == "UNRELEASED" ] ; then
   echo "Changelog is not released"
-  exit 1
+  fail="1"
 fi
 
 if [ "$DEBVER" != "$VER" ] ; then
   echo "Debian and upstream versions don't match"
-  exit 1
+  fail="1"
 fi
 
 if [ "$TAGBRANCH" != debian ] ; then
   echo "Debian release tag not found"
-  exit 1
+  fail="1"
 fi
 
 if [ "$TAGVER" != "$DEBVER" ] ; then
   echo "Tag version doesn't match debian base version"
-  exit 1
+  fail="1"
 fi
 
 found="0"
 for tag in `git tag --merged debian` ; do
-  if [ "$tag" = "main/$TAGVER" ] ; then
+  if [ "$tag" = "main/$DEBVER" ] ; then
     found="1"
   fi
 done
 
 if [ $found = "0" ] ; then
   echo "Main tag not found in merge"
+  fail="1"
+fi
+
+if [ "$fail" == "1" ] ; then
   exit 1
 fi
 
