@@ -17,6 +17,7 @@ export PYBUILD_INSTALL_ARGS=--install-lib=/usr/share/comitup\
 
 override_dh_auto_build:
 	if [ "${VER}" != "${PRODUCT_VER}" ] ; then exit 1 ; fi
+	./debian/release_check || echo "\nRELEASE CHECK FAILURE\n"
 	dh_auto_build
 	for mn in ${manpages}; do \
 	  pandoc $$mn.md -s -t man -o $$mn; \
