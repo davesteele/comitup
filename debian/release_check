@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# check to see if the software is ready for release
+# run this from the project root
+
+set -e
+
+DIST=`cat debian/changelog | head -1 | awk '{print $3}' | sed -e 's/;//'`
+echo "The distribution for this release is $DIST"
+
+DEBVER=`cat debian/changelog | head -1 | sed -e 's/^[^\(]\+.//' | sed -e 's/\-.\+//'`
+echo "The changelog base version is $DEBVER"
+
+VER=`cat setup.py | grep version= | sed -e 's/.\+version=.//' | sed -e 's/..$//'`
+echo "The setup.py version is $VER"
+
+TAG=`git describe HEAD`
+echo "The tag reported by 'git describe' is $TAG"
+
+TAGBRANCH=`echo "$TAG" | sed -e 's/\/.\+//'`
+echo "The branch for that is $TAGBRANCH"
+
+TAGVER=`echo "$TAG" | sed -e 's/^.\+\///' | sed -e 's/..$//'`
+echo "The tag base version is $TAGVER"
+
+echo
+
+if [ "$DIST" == "UNRELEASED" ] ; then
+  echo "Changelog is not released"
+  exit 1
+fi
+
+if [ "$DEBVER" != "$VER" ] ; then
+  echo "Debian and upstream versions don't match"
+  exit 1
+fi
+
+if [ "$TAGBRANCH" != debian ] ; then
+  echo "Debian release tag not found"
+  exit 1
+fi
+
+if [ "$TAGVER" != "$DEBVER" ] ; then
+  echo "Tag version doesn't match debian base version"
+  exit 1
+fi
+
+found="0"
+for tag in `git tag --merged debian` ; do
+  if [ "$tag" = "main/$TAGVER" ] ; then
+    found="1"
+  fi
+done
+
+if [ $found = "0" ] ; then
+  echo "Main tag not found in merge"
+  exit 1
+fi
+
+echo "All checks successful"
