@@ -5,13 +5,16 @@
 
 set -e
 
-DIST=`cat debian/changelog | head -1 | awk '{print $3}' | sed -e 's/;//'`
+ROOT=`git rev-parse --show-toplevel`
+
+
+DIST=`cat "$ROOT/debian/changelog" | head -1 | awk '{print $3}' | sed -e 's/;//'`
 echo "The distribution for this release is $DIST"
 
-DEBVER=`cat debian/changelog | head -1 | sed -e 's/^[^\(]\+.//' | sed -e 's/\-.\+//'`
+DEBVER=`cat "$ROOT/debian/changelog" | head -1 | sed -e 's/^[^\(]\+.//' | sed -e 's/\-.\+//'`
 echo "The changelog base version is $DEBVER"
 
-VER=`cat setup.py | grep version= | sed -e 's/.\+version=.//' | sed -e 's/..$//'`
+VER=`cat "$ROOT/setup.py" | grep version= | sed -e 's/.\+version=.//' | sed -e 's/..$//'`
 echo "The setup.py version is $VER"
 
 TAG=`git describe HEAD`
