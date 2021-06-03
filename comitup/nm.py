@@ -35,20 +35,22 @@ def initialize() -> None:
     nm.Settings.ReloadConnections()
 
 
-T = TypeVar("T")
+A = TypeVar("A")
+R = TypeVar("R")
 
 
-def none_on_exception(*exceptions) -> Callable[[T], T]:
-    def _none_on_exception(fp: T) -> T:
-        @wraps(cast(Callable[..., Any], fp))
-        def wrapper(*args, **kwargs):
+# TODO - use ParamSpec once 3.10 become ubiquitous
+def none_on_exception(*exceptions) -> Callable[[Callable[[A], R]], Callable[[A], Optional[R]]]:
+    def _none_on_exception(fp: Callable[..., R]) -> Callable[..., Optional[R]]:
+        @wraps(fp)
+        def wrapper(*args, **kwargs) -> Optional[R]:
             try:
                 return fp(*args, **kwargs)
             except exceptions:
                 log.debug("Got an exception, returning None, %s", fp.__name__)
                 return None
 
-        return cast(T, wrapper)
+        return wrapper
 
     return _none_on_exception
 
