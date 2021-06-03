@@ -39,8 +39,10 @@ A = TypeVar("A")
 R = TypeVar("R")
 
 
-# TODO - use ParamSpec once 3.10 become ubiquitous
-def none_on_exception(*exceptions) -> Callable[[Callable[[A], R]], Callable[[A], Optional[R]]]:
+# TODO - use ParamSpec["A"] once 3.10 become ubiquitous
+def none_on_exception(
+    *exceptions,
+) -> Callable[[Callable[[A], R]], Callable[[A], Optional[R]]]:
     def _none_on_exception(fp: Callable[..., R]) -> Callable[..., Optional[R]]:
         @wraps(fp)
         def wrapper(*args, **kwargs) -> Optional[R]:
