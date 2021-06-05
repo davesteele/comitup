@@ -1,0 +1,15 @@
+on:
+  push:
+    branches:
+      - debtest
+
+jobs:
+  build-deb:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: singingwolfboy/build-dpkg-buster@v1
+        id: build
+        with:
+          args: --unsigned-source --unsigned-changes
