@@ -122,8 +122,6 @@ def clear_entries() -> None:
 
     if group and not group.IsEmpty():
         group.Reset()
-        group.Free()
-        group = None
 
     establish_group()
 
