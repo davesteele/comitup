@@ -139,9 +139,12 @@ def any_changed_state(state: int, *args) -> None:
 
     interesting_states = PASS_STATES + FAIL_STATES
 
-    if state in interesting_states:
+    def reset_mdns():
         mdns.clear_entries()
         mdns.add_hosts(dns_names)
+
+    if state in interesting_states:
+        timeout_add(0, reset_mdns)
 
 
 def set_device_listeners(
