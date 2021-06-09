@@ -150,6 +150,13 @@ def get_active_ip(device: nm.Device) -> Optional[str]:
     return addr
 
 
+@none_on_exception(AttributeError)
+def get_active_ip6(device: nm.Device) -> Optional[str]:
+    addr6 = device.Ip6Config.Addresses[0][0]
+
+    return addr6
+
+
 def get_all_connections() -> List[nm.Connection]:
     return [x for x in nm.Settings.ListConnections()]
 

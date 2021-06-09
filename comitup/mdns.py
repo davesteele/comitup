@@ -29,13 +29,16 @@ log = logging.getLogger("comitup")
 
 CLASS_IN = 0x01
 TYPE_A = 0x01
+TYPE_AAAA = 0x1C
 TTL = 5
 
 DBUS_NAME = "org.freedesktop.Avahi"
 DBUS_PATH_SERVER = "/"
 DBUS_INTERFACE_SERVER = "org.freedesktop.Avahi.Server"
 DBUS_INTERFACE_ENTRY_GROUP = "org.freedesktop.Avahi.EntryGroup"
+PROTO_UNSPECIFIED = -1
 PROTO_INET = 0
+PROTO_INET6 = 1
 group: Optional[dbus.Interface] = None
 
 # functions
@@ -77,6 +80,20 @@ def make_a_record(host: str, devindex: int, addr: str) -> None:
         )
 
 
+def make_aaaa_record(host: str, devindex: int, addr: str) -> None:
+    if group:
+        group.AddRecord(
+            devindex,
+            PROTO_INET6,
+            dbus.UInt32(0),
+            encode_dns(host),
+            CLASS_IN,
+            TYPE_AAAA,
+            TTL,
+            socket.inet_pton(socket.AF_INET6, addr),
+        )
+
+
 def string_to_txt_array(strng: str) -> List[bytes]:
     if strng:
         return [dbus.Byte(x) for x in strng.encode()]
@@ -88,7 +105,7 @@ def string_array_to_txt_array(txt_array: List[str]) -> List[List[bytes]]:
     return [string_to_txt_array(x) for x in txt_array]
 
 
-def add_service(host: str, devindex: int, addr: str) -> None:
+def add_service(host: str, devindex: int, addr: str, addr6: str) -> None:
     name = host
     (conf, data) = config.load_data()
     if ".local" in name:
@@ -97,7 +114,7 @@ def add_service(host: str, devindex: int, addr: str) -> None:
     if group:
         group.AddService(
             devindex,
-            PROTO_INET,
+            PROTO_UNSPECIFIED,
             dbus.UInt32(0),
             name,
             "_%s._tcp" % conf.service_name,
@@ -107,7 +124,8 @@ def add_service(host: str, devindex: int, addr: str) -> None:
             string_array_to_txt_array(
                 [
                     "hostname=%s" % host,
-                    "ipaddr=%s" % addr,
+                    "ipaddr=%s" % addr if (addr and addr != "0.0.0.0") else "",
+                    "ip6addr=%s" % addr6 if addr6 else "",
                     "comitup-home=https://davesteele.github.io/comitup/",
                 ]
             ),
@@ -161,30 +179,36 @@ def add_hosts(hosts: List[str]) -> None:
     for device in devices:
         name = nm.device_name(device)
         addr = nm.get_active_ip(device)
+        addr6 = nm.get_active_ip6(device)
         log.debug("add_hosts: {}, {}".format(name, addr))
         if (
             name in nm.get_phys_dev_names()
             and name in int_mapping
-            and addr
-            and addr != "0.0.0.0"
         ):
-
             index = int_mapping[name]
 
             try:
-                for host in hosts:
-                    log.debug(
-                        "Add A record {}-{}-{}".format(host, index, addr)
-                    )
-                    make_a_record(host, index, addr)
+                if addr and addr != "0.0.0.0":
+                    for host in hosts:
+                        log.debug("Add A record {}-{}-{}".format(host, index, addr))
+                        make_a_record(host, index, addr)
 
-                log.debug("Add service {}, {}, {}".format(host, index, addr))
-                add_service(hosts[0], index, addr)
+                    entries = True
+
+                if addr6:
+                    for host in hosts:
+                        log.debug("Add AAAA record {}-{}-{}".format(host, index, addr6))
+                        make_aaaa_record(host, index, addr6)
+
+                    entries = True
+
+                if addr6 or (addr and addr != "0.0.0.0"):
+                    log.debug("Add service {}, {}, {}-{}".format(host, index, addr, addr6))
+                    add_service(hosts[0], index, addr, addr6)
+
             except Exception:
                 log.error("Exception encountered adding avahi record")
                 clear_entries(emphatic=True)
-
-            entries = True
 
     if group and entries:
         group.Commit()
