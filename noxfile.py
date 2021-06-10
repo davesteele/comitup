@@ -47,5 +47,13 @@ def flake8(session):
 
 @nox.session()
 def mypy(session):
-    session.install("mypy")
+    session.install(
+        "mypy",
+        "types-mock",
+        "types-tabulate",
+        "types-pkg_resources",
+        "types-Flask",
+        "types-cachetools",
+    )
+
     session.run("mypy", "cli", "comitup", "web", "test")

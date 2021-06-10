@@ -97,12 +97,10 @@ def init_iptmgr() -> None:
 
 
 def main():
-    import six
-
     print("applying rules")
     run_cmds(start_cmds)
 
-    six.input("Press Enter to continue...")
+    input("Press Enter to continue...")
 
     run_cmds(end_cmds)
 
