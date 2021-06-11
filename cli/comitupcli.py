@@ -11,7 +11,9 @@
 # or later
 #
 
+import argparse
 import sys
+from typing import List
 
 sys.path.append(".")
 sys.path.append("..")
@@ -40,11 +42,13 @@ def do_connect(ciu_client, ssid, password):
 
 def do_info(ciu_client, connection):
     info = ciu_client.ciu_info(connection)
-    print("")
     print(
         "Host %s on comitup version %s" % (info["hostnames"], info["version"])
     )
     print("'%s' mode" % info["imode"])
+
+    state, _ = get_state(ciu_client)
+    print("{} state".format(state))
 
 
 def do_locate(ciu_client, connection):
@@ -55,17 +59,35 @@ def do_locate(ciu_client, connection):
         print("ERROR: Run as root")
 
 
-CmdState = namedtuple("CmdState", "fn, desc, HOTSPOT, CONNECTING, CONNECTED")
+CmdState = namedtuple(
+    "CmdState", "fn, desc, HOTSPOT, CONNECTING, CONNECTED, scriptable"
+)
 
 commands = OrderedDict(
     [
-        ("i", CmdState(do_info, "(i)nfo", True, True, True)),
-        ("r", CmdState(do_reload, "(r)eload", True, True, True)),
-        ("d", CmdState(do_delete, "(d)elete connection", False, True, True)),
-        ("q", CmdState(do_quit, "(q)uit", True, True, True)),
-        ("<n>", CmdState(do_connect, "connect to <n>", True, False, False)),
-        ("m", CmdState(do_connect, "(m)anual connection", True, False, False)),
-        ("l", CmdState(do_locate, "(l)ocate the device", True, True, True)),
+        ("i", CmdState(do_info, "(i)nfo", True, True, True, True)),
+        ("r", CmdState(do_reload, "(r)eload", True, True, True, False)),
+        (
+            "d",
+            CmdState(
+                do_delete, "(d)elete connection", False, True, True, True
+            ),
+        ),
+        ("q", CmdState(do_quit, "(q)uit", True, True, True, False)),
+        (
+            "<n>",
+            CmdState(do_connect, "connect to <n>", True, False, False, False),
+        ),
+        (
+            "m",
+            CmdState(
+                do_connect, "(m)anual connection", True, False, False, True
+            ),
+        ),
+        (
+            "l",
+            CmdState(do_locate, "(l)ocate the device", True, True, True, True),
+        ),
     ]
 )
 
@@ -129,10 +151,48 @@ def interpreter():
             do_connect(ciu_client, ssid, password)
         else:
             try:
+                print()
                 commands[cmd].fn(ciu_client, connection)
             except KeyError:
                 print("\nInvalid command\n")
 
 
+def one_shot(cmdlist: List[str]):
+    cmd = cmdlist[0]
+
+    if cmd not in commands:
+        print("Invalid command {}".format(cmd))
+        return
+
+    if not commands[cmd].scriptable:
+        print("Command is not scriptable")
+        return
+
+    ciu_client = ciu.CiuClient()
+
+    state, connection = get_state(ciu_client)
+
+    if cmd == "m":
+        print("Attempting to connecto {}".format(cmdlist[1]))
+        do_connect(ciu_client, *cmdlist[1:])
+    else:
+        commands[cmd].fn(ciu_client, connection)
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="A CLI front end for the Comitup service"
+    )
+
+    parser.add_argument("command", nargs="*", help="a one-shot command")
+
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    interpreter()
+    args = parse_args()
+
+    if args.command:
+        one_shot(args.command)
+    else:
+        interpreter()

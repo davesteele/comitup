@@ -1,6 +1,6 @@
 % comitup-cli(1)
 %
-% April 2021
+% June 2021
 
 # NAME
 
@@ -8,7 +8,7 @@ comitup-cli -- command-line interface for comitup network management
 
 ## SYNOPSIS
 
-    $ `comitup-cli`
+    $ `comitup-cli [cmd ...]`
     
     State: HOTSPOT
     Connection: hotspot-123
@@ -28,9 +28,12 @@ The **comitup-cli** utility provides access to the comitup(8) D-Bus interface.
 It is intended to serve as a debug tool, and a source code example for
 connecting to the interface.
 
+If an argument is provided, a one-shot command is attempted. Oherwise, the
+program goes into an interpretive mode.
+
 If the comitup(8) service is not running, **comitup-cli** will immediately exit.
 
-Display:
+## Command-Mode Display:
 
   * **State**
 
@@ -60,7 +63,7 @@ Display:
     strongest signal are sorted to the top of the list. The entries are
     numbered, for use with the __connect__ command.
 
-Commands:
+## Commands
 
   * __r__ - **Reload**
 

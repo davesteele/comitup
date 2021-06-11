@@ -53,7 +53,7 @@ def set_trigger(trigger: str) -> None:
     triggerPath.write_text(trigger)
 
 
-def blink(times:int = 1) -> None:
+def blink(times: int = 1) -> None:
     """Blink the green led once."""
     if can_blink():
         oldtrig = get_trigger()
