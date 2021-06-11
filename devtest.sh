@@ -14,6 +14,8 @@
 #   virtualenv -p python3 ~/venvs/venvtest
 #   . ~/venvs/venvtest/bin/activate
 #   python -m pip install pytest mypy flake8
+#   python -m pip install types-mock types-tabulate types-pkg_resources
+#   python -m pip install types-Flask types-cachetools
 #
 
 set -e
@@ -22,7 +24,7 @@ echo "Running pytest"
 py.test-3
 
 echo "Running mypy"
-mypy comitup cli web test *.py
+mypy comitup cli web test
 
 echo "Running flake8"
 flake8 comitup cli web test *.py
