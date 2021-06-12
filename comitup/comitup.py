@@ -22,6 +22,7 @@ from gi.repository.GLib import MainLoop  # noqa
 from comitup import cdns  # noqa
 from comitup import config  # noqa
 from comitup import iptmgr  # noqa
+from comitup import nuke  # noqa
 from comitup import persist  # noqa
 from comitup import statemgr  # noqa
 from comitup import sysd  # noqa
@@ -102,6 +103,7 @@ def parse_args() -> argparse.Namespace:
 def cleanup() -> None:
     # leave the network setup as it, but kill comitup-web
     webmgr.stop_service(webmgr.COMITUP_SERVICE)
+    nuke.cleanup_nuke()
     if log:
         log.info("Stopping comitup")
 
@@ -151,6 +153,8 @@ def main():
             cdns.state_callback,
         ],
     )
+
+    nuke.init_nuke()
 
     signal.signal(signal.SIGTERM, handle_term)
 

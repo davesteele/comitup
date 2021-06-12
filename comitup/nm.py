@@ -154,6 +154,13 @@ def get_all_connections() -> List[nm.Connection]:
     return [x for x in nm.Settings.ListConnections()]
 
 
+def get_all_wifi_connection_ssids():
+    for conn in get_all_connections():
+        ssid = get_ssid_from_connection(conn)
+        if ssid:
+            yield ssid
+
+
 @none_on_exception(AttributeError, KeyError)
 def get_ssid_from_connection(connection: nm.Connection) -> Optional[str]:
     settings = get_connection_settings(connection)
