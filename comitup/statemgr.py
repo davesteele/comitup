@@ -22,7 +22,7 @@ from typing import TYPE_CHECKING, Callable, Dict, List, Optional
 import dbus
 import dbus.service
 
-from comitup import iwscan
+from comitup import iwscan, nuke
 
 if TYPE_CHECKING:
     from comitup.config import Config
@@ -112,6 +112,13 @@ class Comitup(dbus.service.Object):
         if not conf or not data:
             sys.exit(1)
         return get_info(conf, data)
+
+    @dbus.service.method(comitup_int, in_signature="", out_signature="")
+    def nuke(self) -> None:
+        def do_nuke():
+            nuke.nuke()
+
+        timeout_add(10, do_nuke)
 
 
 def get_info(conf: "Config", data: "persist") -> Dict[str, str]:

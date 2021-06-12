@@ -1,6 +1,6 @@
 % comitup(8)
 %
-% May 2021
+% June 2021
 
 # NAME
 
@@ -113,6 +113,16 @@ following methods.
 
     Delete the connection for _ssid_. The system will not be able to reconnect
     using this connection.
+
+  * _nuke()_
+
+    Input: None
+
+    Output: None
+
+    Perform a factory reset of Comitup information on the device, which
+    consists of removing all WiFi connections, and restarting the service. Note
+    that _enable\_nuke_ must be enabled in comitup.conf for this to succeed.
 
 ## COPYRIGHT
 

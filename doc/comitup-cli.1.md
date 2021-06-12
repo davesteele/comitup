@@ -20,6 +20,7 @@ comitup-cli -- command-line interface for comitup network management
         (q)uit
         connect to (<n>)
         [l]ocate the device
+        [x] Factory reset (no warning)
     command?:
 
 ## DESCRIPTION
@@ -99,6 +100,12 @@ If the comitup(8) service is not running, **comitup-cli** will immediately exit.
 
     Locate the headless Raspberry Pi running Comitup by blinking the front
     green LED once.
+
+  * __x__ - **Factory Reset**
+
+    Remove all defined WiFi connections, and restart the service. There is no
+    confirmation requested. This will terminate the interpreter session. Note
+    that _enable_nuke_ must be enabled in _comitup.conf_ for this to succeed.
 
 ## COPYRIGHT
 

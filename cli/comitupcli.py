@@ -59,6 +59,10 @@ def do_locate(ciu_client, connection):
         print("ERROR: Run as root")
 
 
+def do_nuke(ciu_client, connection):
+    ciu_client.ciu_nuke()
+
+
 CmdState = namedtuple(
     "CmdState", "fn, desc, HOTSPOT, CONNECTING, CONNECTED, scriptable"
 )
@@ -87,6 +91,17 @@ commands = OrderedDict(
         (
             "l",
             CmdState(do_locate, "(l)ocate the device", True, True, True, True),
+        ),
+        (
+            "x",
+            CmdState(
+                do_nuke,
+                "(x) Factory reset (no warning)",
+                True,
+                True,
+                True,
+                True,
+            ),
         ),
     ]
 )
@@ -189,10 +204,14 @@ def parse_args():
     return parser.parse_args()
 
 
-if __name__ == "__main__":
+def main():
     args = parse_args()
 
     if args.command:
         one_shot(args.command)
     else:
         interpreter()
+
+
+if __name__ == "__main__":
+    main()
