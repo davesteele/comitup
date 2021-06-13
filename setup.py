@@ -32,7 +32,7 @@ setup(
     entry_points={
         "console_scripts": [
             "comitup=comitup.comitup:main",
-            "comitup-cli=cli.comitupcli:interpreter",
+            "comitup-cli=cli.comitupcli:main",
             "comitup-web=web.comitupweb:main",
         ],
     },
