@@ -1,6 +1,6 @@
 % comitup-conf(5)
 %
-% May 2021
+% June 2021
 
 # NAME
 
@@ -55,6 +55,15 @@ It is located in the _/etc/_ directory.
   * _verbose_:
 
     Set to '1' (or 'yes' or 'true') to enable more verbose logging.
+
+  * _enable\_nuke:
+
+    Set to '1' (or 'yes' or 'true') to enable a hardware-based factory reset
+    function. This will cause all WiFi connection settings to be deleted. On a
+    Raspberry Pi, short out pins 39 and 40 on the GPIO header for three seconds
+    to invoke. The green LED will flash three times to indicate success.
+
+    This capability is also availble via _comitup-cli_ and the D-BUS interface.
 
 ## COPYRIGHT
 
