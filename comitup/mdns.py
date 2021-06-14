@@ -120,7 +120,7 @@ def add_service(host: str, devindex: int, addr: str) -> None:
 def clear_entries(emphatic=False) -> None:
     global group
 
-    if group and not group.IsEmpty():
+    if group and (not group.IsEmpty() or emphatic):
         group.Reset()
 
         if emphatic:
