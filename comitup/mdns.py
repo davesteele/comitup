@@ -117,11 +117,15 @@ def add_service(host: str, devindex: int, addr: str) -> None:
 # public functions
 
 
-def clear_entries() -> None:
+def clear_entries(emphatic=False) -> None:
     global group
 
     if group and not group.IsEmpty():
         group.Reset()
+
+        if emphatic:
+            group.Free()
+            group = None
 
     establish_group()
 
@@ -166,12 +170,19 @@ def add_hosts(hosts: List[str]) -> None:
         ):
 
             index = int_mapping[name]
-            for host in hosts:
-                log.debug("Add A record {}-{}-{}".format(host, index, addr))
-                make_a_record(host, index, addr)
 
-            log.debug("Add service {}, {}, {}".format(host, index, addr))
-            add_service(hosts[0], index, addr)
+            try:
+                for host in hosts:
+                    log.debug(
+                        "Add A record {}-{}-{}".format(host, index, addr)
+                    )
+                    make_a_record(host, index, addr)
+
+                log.debug("Add service {}, {}, {}".format(host, index, addr))
+                add_service(hosts[0], index, addr)
+            except Exception:
+                log.error("Exception encountered adding avahi record")
+                clear_entries(emphatic=True)
 
             entries = True
 
