@@ -36,6 +36,7 @@ def checkenabled(fn):
     return wrapper
 
 
+@checkenabled
 def nuke():
     for ssid in nm.get_all_wifi_connection_ssids():
         nm.del_connection_by_ssid(ssid)
