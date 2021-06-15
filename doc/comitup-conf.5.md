@@ -56,7 +56,7 @@ It is located in the _/etc/_ directory.
 
     Set to '1' (or 'yes' or 'true') to enable more verbose logging.
 
-  * _enable\_nuke:
+  * _enable\_nuke_:
 
     Set to '1' (or 'yes' or 'true') to enable a hardware-based factory reset
     function. This will cause all WiFi connection settings to be deleted. On a
