@@ -1,4 +1,3 @@
-
 # Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -16,13 +15,14 @@ from typing import List, Optional
 
 from comitup import modemgr, nm, routemgr
 
+# fmt: off
 start_cmds: List[str] = [
     # HOTSPOT rules
     "iptables -w -N COMITUP-OUT",
     "iptables -w -A COMITUP-OUT "
       "-p icmp --icmp-type destination-unreachable -j DROP",  # noqa
     "iptables -w -A COMITUP-OUT "
-      "-p icmp --icmp-type port-unreachable -j DROP",  # noqa
+      "-p icmp --icmp-type port-unreachable -j DROP",
     "iptables -w -A COMITUP-OUT -j RETURN",
     "iptables -w -I OUTPUT -o {ap} -j COMITUP-OUT",
 ]
@@ -47,9 +47,9 @@ appliance_clear: List[str] = [
     "iptables -w -t nat -F COMITUP-FWD >/dev/null 2>&1",
     "iptables -w -t nat -X COMITUP-FWD >/dev/null 2>&1",
 ]
+# fmt: on
 
-
-log: logging.Logger = logging.getLogger('comitup')
+log: logging.Logger = logging.getLogger("comitup")
 
 
 def run_cmds(cmds: List[str]) -> None:
@@ -61,7 +61,7 @@ def run_cmds(cmds: List[str]) -> None:
 
 def state_callback(state: str, action: str) -> None:
     log.debug("Iptmgr callback")
-    if (state, action) == ('HOTSPOT', 'start'):
+    if (state, action) == ("HOTSPOT", "start"):
         log.debug("Running iptables commands for HOTSPOT")
 
         run_cmds(end_cmds)
@@ -72,7 +72,7 @@ def state_callback(state: str, action: str) -> None:
 
         log.debug("Done with iptables commands for HOTSPOT")
 
-    elif (state, action) == ('CONNECTED', 'start'):
+    elif (state, action) == ("CONNECTED", "start"):
         log.debug("Running iptables commands for CONNECTED")
         run_cmds(end_cmds)
 
@@ -97,15 +97,13 @@ def init_iptmgr() -> None:
 
 
 def main():
-    import six
-
     print("applying rules")
     run_cmds(start_cmds)
 
-    six.input("Press Enter to continue...")
+    input("Press Enter to continue...")
 
     run_cmds(end_cmds)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

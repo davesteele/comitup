@@ -18,7 +18,7 @@ log = logging.getLogger("comitup")
 # wpa_cli.
 
 last_kick_time: float = 0
-kick_period_secs: int = 5*60
+kick_period_secs: int = 5 * 60
 
 
 def needs_kick(devstring: str) -> bool:

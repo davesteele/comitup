@@ -13,7 +13,7 @@ import textwrap
 from collections import namedtuple
 from typing import List, Optional, Tuple
 
-log = logging.getLogger('comitup')
+log = logging.getLogger("comitup")
 
 
 class DevInfo(object):
@@ -22,7 +22,7 @@ class DevInfo(object):
         for dev in os.listdir("/sys/class/net"):
             try:
                 path = "/sys/class/net/{}/phy80211/name".format(dev)
-                with open(path, 'r') as fp:
+                with open(path, "r") as fp:
                     phy = fp.read().strip()
                 self.dev_list.append((dev, phy))
             except (NotADirectoryError, FileNotFoundError):
@@ -35,7 +35,7 @@ class DevInfo(object):
         return [x[1] for x in self.dev_list if x[0] == dev][0]
 
 
-dev_info = DevInfo()
+dev_info: DevInfo = DevInfo()
 
 
 def device_present() -> Optional[str]:
@@ -47,12 +47,12 @@ def device_present() -> Optional[str]:
 
 
 def device_supports_ap() -> Optional[str]:
-    dev = dev_info.get_devs()[0]
-    phy = dev_info.get_phy(dev)
+    dev: str = dev_info.get_devs()[0]
+    phy: str = dev_info.get_phy(dev)
 
     try:
-        cmd = "iw phy {} info".format(phy)
-        deviceinfo = subprocess.check_output(cmd.split()).decode()
+        cmd: str = "iw phy {} info".format(phy)
+        deviceinfo: str = subprocess.check_output(cmd.split()).decode()
     except subprocess.CalledProcessError:
         return ""
 
@@ -64,9 +64,9 @@ def device_supports_ap() -> Optional[str]:
 
 def device_nm_managed() -> Optional[str]:
     try:
-        cmd = "nmcli device show"
+        cmd: str = "nmcli device show"
         try:
-            devsinfo = subprocess.check_output(
+            devsinfo: str = subprocess.check_output(
                 cmd.split(), re.MULTILINE
             ).decode()
         except UnicodeDecodeError:
@@ -83,37 +83,43 @@ def device_nm_managed() -> Optional[str]:
     return None
 
 
-testspec = namedtuple('testspec', ['testfn', 'title', 'description'])
+testspec = namedtuple("testspec", ["testfn", "title", "description"])
 
 
 testspecs = [
     testspec(
         device_present,
         "comitup-no-wifi - No wifi devices found",
-        textwrap.dedent("""
+        textwrap.dedent(
+            """
             Comitup is a wifi device manager. 'sudo iw list' indicates that
             there are no devices to manage.
-        """),
+        """
+        ),
     ),
     testspec(
         device_supports_ap,
         "comitup-no-ap - The Main wifi device doesn't support AP mode",
-        textwrap.dedent("""
+        textwrap.dedent(
+            """
             Comitup uses the first wifi device to implement the comitup-<nnn>
             Access Point. For this to work, the device must include "AP" in
             list of "Supported interface modes" returned by "iw list".
-        """),
+        """
+        ),
     ),
     testspec(
         device_nm_managed,
         "comitup-no-nm - Wifi device is not managed by NetworkManager",
-        textwrap.dedent("""
+        textwrap.dedent(
+            """
             Comitup uses NetworkManager to manage the wifi devices, but the
             required devices are not listed. This usually means that the
             devices are listed in /etc/network/interfaces, and are therefore
             being managed elsewhere. Remove the references to wifi devices
             from that file.
-        """),
+        """
+        ),
     ),
 ]
 
@@ -138,5 +144,5 @@ def run_checks(logit=True, printit=True, verbose=True) -> bool:
     return False
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run_checks(logit=False)

@@ -30,6 +30,7 @@ class CiuClient(object):
         "ciu_points": "access_points",
         "ciu_connect": "connect",
         "ciu_delete": "delete_connection",
+        "ciu_nuke": "nuke",
     }
 
     def __init__(self):

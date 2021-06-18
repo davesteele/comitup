@@ -20,20 +20,21 @@ import NetworkManager
 from dbus.mainloop.glib import DBusGMainLoop
 from gi.repository.GLib import MainLoop, timeout_add
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     DBusGMainLoop(set_as_default=True)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import os
     import sys
+
     fullpath = os.path.abspath(__file__)
-    parentdir = '/'.join(fullpath.split('/')[:-2])
+    parentdir = "/".join(fullpath.split("/")[:-2])
     sys.path.insert(0, parentdir)
 
 from comitup import modemgr  # noqa
 from comitup import nm  # noqa
 
-log: logging.Logger = logging.getLogger('comitup')
+log: logging.Logger = logging.getLogger("comitup")
 
 bus: dbus.SystemBus = dbus.SystemBus()
 
@@ -75,10 +76,10 @@ def disable() -> None:
 
 
 def enable(
-        dev: NetworkManager.Device,
-        connect_fn: Callable[[], None],
-        fail_fn: Callable[[], None],
-        state_id: int,
+    dev: NetworkManager.Device,
+    connect_fn: Callable[[], None],
+    fail_fn: Callable[[], None],
+    state_id: int,
 ) -> None:
     global monitored_dev, nm_dev_connect, nm_dev_fail
 
@@ -138,14 +139,17 @@ def any_changed_state(state: int, *args) -> None:
 
     interesting_states = PASS_STATES + FAIL_STATES
 
-    if state in interesting_states:
+    def reset_mdns():
         mdns.clear_entries()
         mdns.add_hosts(dns_names)
 
+    if state in interesting_states:
+        timeout_add(0, reset_mdns)
+
 
 def set_device_listeners(
-        ap_dev: NetworkManager.Device,
-        second_dev: NetworkManager.Device,
+    ap_dev: NetworkManager.Device,
+    second_dev: NetworkManager.Device,
 ) -> None:
     global ap_device, second_device_name
 
@@ -156,7 +160,7 @@ def set_device_listeners(
             ap_changed_state,
             signal_name="StateChanged",
             dbus_interface="org.freedesktop.NetworkManager.Device",
-            path=nm.get_device_path(ap_dev)
+            path=nm.get_device_path(ap_dev),
         )
         log.debug("Listener is {}".format(device_listener))
 
@@ -170,7 +174,7 @@ def set_device_listeners(
             second_changed_state,
             signal_name="StateChanged",
             dbus_interface="org.freedesktop.NetworkManager.Device",
-            path=nm.get_device_path(second_dev)
+            path=nm.get_device_path(second_dev),
         )
         log.debug("Listener is {}".format(device_listener))
 
@@ -183,10 +187,7 @@ def set_device_listeners(
 
 
 def init_nmmon() -> None:
-    set_device_listeners(
-        modemgr.get_ap_device(),
-        modemgr.get_link_device()
-    )
+    set_device_listeners(modemgr.get_ap_device(), modemgr.get_link_device())
 
 
 def main():
@@ -194,7 +195,7 @@ def main():
     log.addHandler(handler)
     log.setLevel(logging.DEBUG)
 
-    log.info('starting')
+    log.info("starting")
 
     init_nmmon()
 
@@ -210,5 +211,5 @@ def main():
     loop.run()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

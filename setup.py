@@ -1,4 +1,3 @@
-
 # Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -10,95 +9,81 @@
 # or later
 #
 
-import os
-import shutil
-from distutils.command.clean import clean
-
 from setuptools import setup
 
 
-class MyClean(clean):
-    def run(self):
-        clean.run(self)
-
-        for root, dirs, files in os.walk('.'):
-            [shutil.rmtree(os.path.join(root, x)) for x in dirs if x in
-                (".pyc", ".coverage", ".cache", "__pycache__",
-                 "comitup.egg-info")]
-
-            for file in files:
-                for match in (".pyc", ".cache", ".coverage"):
-                    if match in file:
-                        os.unlink(os.path.join(root, file))
-
-
 setup(
-    name='comitup',
-    packages=['comitup', 'web', 'cli'],
-    version='1.29',
+    name="comitup",
+    packages=["comitup", "web", "cli"],
+    version="1.30",
     description="Remotely manage wifi connections on a headless computer",
     classifiers=[
-        'Development Status :: 5 - Production/Stable',
-        'Environment :: Web Environment',
-        'Framework :: Flask',
-        'Intended Audience :: End Users/Desktop',
-        'License :: OSI Approved ' +
-        ':: GNU General Public License v2 or later (GPLv2+)',
-        'Natural Language :: English',
-        'Operating System :: POSIX :: Linux',
-        'Programming Language :: Python',
-        'Topic :: System :: Networking',
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
+        "Framework :: Flask",
+        "Intended Audience :: End Users/Desktop",
+        "License :: OSI Approved "
+        + ":: GNU General Public License v2 or later (GPLv2+)",
+        "Natural Language :: English",
+        "Operating System :: POSIX :: Linux",
+        "Programming Language :: Python",
+        "Topic :: System :: Networking",
     ],
     entry_points={
-        'console_scripts': [
-            'comitup=comitup.comitup:main',
-            'comitup-cli=cli.comitupcli:interpreter',
-            'comitup-web=web.comitupweb:main',
+        "console_scripts": [
+            "comitup=comitup.comitup:main",
+            "comitup-cli=cli.comitupcli:main",
+            "comitup-web=web.comitupweb:main",
         ],
     },
     options={
-        'build_scripts': {
-            'executable': '/usr/bin/python3',
+        "build_scripts": {
+            "executable": "/usr/bin/python3",
         },
     },
     data_files=[
-        ('/etc', ['conf/comitup.conf']),
-        ('/var/lib/comitup', ['conf/comitup.json']),
-        ('/etc/dbus-1/system.d', ['conf/comitup-dbus.conf']),
-        ('/usr/share/comitup/web/templates',
+        ("/etc", ["conf/comitup.conf"]),
+        ("/var/lib/comitup", ["conf/comitup.json"]),
+        ("/etc/dbus-1/system.d", ["conf/comitup-dbus.conf"]),
+        (
+            "/usr/share/comitup/web/templates",
             [
-                'web/templates/index.html',
-                'web/templates/connect.html',
-                'web/templates/confirm.html',
-            ]
-        ),  # noqa
-        ('/usr/share/comitup/web/templates/css',
+                "web/templates/index.html",
+                "web/templates/connect.html",
+                "web/templates/confirm.html",
+            ],
+        ),
+        (
+            "/usr/share/comitup/web/templates/css",
             [
-                'web/templates/css/uikit.css',
-                'web/templates/css/uikit-rtl.css',
-                'web/templates/css/uikit.min.css',
-                'web/templates/css/uikit-rtl.min.css',
-            ]
-        ),  # noqa
-        ('/usr/share/comitup/web/templates/js',
+                "web/templates/css/uikit.css",
+                "web/templates/css/uikit-rtl.css",
+                "web/templates/css/uikit.min.css",
+                "web/templates/css/uikit-rtl.min.css",
+            ],
+        ),
+        (
+            "/usr/share/comitup/web/templates/js",
             [
-                'web/templates/js/uikit.js',
-                'web/templates/js/uikit-icons.js',
-                'web/templates/js/blink.js',
-            ]
-        ),  # noqa
-        ('/usr/share/comitup/web/templates/images',
+                "web/templates/js/uikit.js",
+                "web/templates/js/uikit-icons.js",
+                "web/templates/js/blink.js",
+            ],
+        ),
+        (
+            "/usr/share/comitup/web/templates/images",
             [
-                'web/templates/images/ledon.gif',
-                'web/templates/images/ledoff.gif',
-            ]
-        ),  # noqa
-        ('/usr/share/comitup/dns',
+                "web/templates/images/ledon.gif",
+                "web/templates/images/ledoff.gif",
+            ],
+        ),
+        (
+            "/usr/share/comitup/dns",
             [
-                'conf/dns-hotspot.conf',
-                'conf/dns-connected.conf',
-            ]
-        ),  # noqa
+                "conf/dns-hotspot.conf",
+                "conf/dns-connected.conf",
+            ],
+        ),
     ],
     install_requires=[
         "cachetools",
@@ -110,11 +95,8 @@ setup(
         "pycairo",
     ],
     setup_requires=["pytest-runner"],
-    tests_require=['pytest', 'mock'],
-    cmdclass={
-        'clean': MyClean,
-    },
+    tests_require=["pytest", "mock"],
     author="David Steele",
     author_email="steele@debian.org",
-    url='https://davesteele.github.io/comitup/',
-    )
+    url="https://davesteele.github.io/comitup/",
+)

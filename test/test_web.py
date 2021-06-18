@@ -80,7 +80,7 @@ def test_webapp_blink_confirm(app, canblink, monkeypatch, path):
     monkeypatch.setattr("web.comitupweb.ciu_client", Mock())
     monkeypatch.setattr(
         "web.comitupweb.ciu_client.ciu_info",
-        Mock(return_value={"imode": "single"})
+        Mock(return_value={"imode": "single"}),
     )
     monkeypatch.setattr(
         "web.comitupweb.ciu_client.ciu_points", Mock(return_value=[])

@@ -10,19 +10,14 @@ import re
 import time
 from pathlib import Path
 
-brightPath = Path("/sys/class/leds/led0/brightness")
-triggerPath = Path("/sys/class/leds/led0/trigger")
-modelPath = Path("/sys/firmware/devicetree/base/model")
+brightPath: Path = Path("/sys/class/leds/led0/brightness")
+triggerPath: Path = Path("/sys/class/leds/led0/trigger")
+modelPath: Path = Path("/sys/firmware/devicetree/base/model")
 
 
 def onval() -> str:
-    """A "1" turns on the led, except on a Zero."""
-    val = "1"
-    if can_blink():
-        if "Zero" in modelPath.read_text():
-            val = "0"
-
-    return val
+    """A "1" turns on the led."""
+    return "1"
 
 
 def offval() -> str:
@@ -40,10 +35,11 @@ def can_blink() -> bool:
 
 def get_trigger() -> str:
     """Save the current led trigger, for later restoration."""
-    text = triggerPath.read_text()
+    text: str = triggerPath.read_text()
 
     match = re.search(r"\[(.+)\]", text)
 
+    mode: str
     if match:
         mode = match.group(1)
     else:
@@ -57,18 +53,20 @@ def set_trigger(trigger: str) -> None:
     triggerPath.write_text(trigger)
 
 
-def blink() -> None:
+def blink(times: int = 1) -> None:
     """Blink the green led once."""
     if can_blink():
         oldtrig = get_trigger()
 
         set_trigger("gpio")
         brightPath.write_text(offval())
-        time.sleep(0.25)
-        brightPath.write_text(onval())
-        time.sleep(0.5)
-        brightPath.write_text(offval())
-        time.sleep(0.25)
+
+        for _ in range(times):
+            time.sleep(0.25)
+            brightPath.write_text(onval())
+            time.sleep(0.5)
+            brightPath.write_text(offval())
+            time.sleep(0.25)
 
         set_trigger(oldtrig)
 
@@ -76,4 +74,4 @@ def blink() -> None:
 if __name__ == "__main__":
     print(can_blink())
     print(get_trigger())
-    blink()
+    blink(3)

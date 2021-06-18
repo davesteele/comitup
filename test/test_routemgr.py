@@ -1,10 +1,9 @@
-
 import textwrap
 
 import pytest
 from mock import Mock
 
-from comitup import iptmgr, routemgr
+from comitup import routemgr
 
 routetxt = textwrap.dedent(
     """
@@ -27,9 +26,9 @@ def defroute(monkeypatch):
 
 
 def test_defroute_fixture(defroute):
-    cp = iptmgr.subprocess.run(
+    cp = routemgr.subprocess.run(
         "ip route",
-        stdout=iptmgr.subprocess.PIPE,
+        stdout=routemgr.subprocess.PIPE,
         shell=True,
         encoding="utf-8"
     )

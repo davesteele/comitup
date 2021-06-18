@@ -1,6 +1,6 @@
+import subprocess
 
 import nox
-import subprocess
 
 pkgs = [
     "libcairo2-dev",
@@ -44,7 +44,16 @@ def flake8(session):
     session.install("flake8")
     session.run("flake8", "setup.py", "cli", "comitup", "web", "test")
 
+
 @nox.session()
 def mypy(session):
-    session.install("mypy")
+    session.install(
+        "mypy",
+        "types-mock",
+        "types-tabulate",
+        "types-pkg_resources",
+        "types-Flask",
+        "types-cachetools",
+    )
+
     session.run("mypy", "cli", "comitup", "web", "test")

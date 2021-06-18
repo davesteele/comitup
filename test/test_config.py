@@ -1,4 +1,3 @@
-
 # Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
@@ -16,7 +15,7 @@ from comitup import config
 def conf_fxt(tmpdir):
     path = os.path.join(tmpdir.__str__(), "conf.conf")
 
-    with open(path, 'w') as fp:
+    with open(path, "w") as fp:
         fp.write(
             textwrap.dedent(
                 """
@@ -34,7 +33,7 @@ def conf_fxt(tmpdir):
     return config.Config(path)
 
 
-@pytest.mark.parametrize("idx", ('1', '2', '3'))
+@pytest.mark.parametrize("idx", ("1", "2", "3"))
 def test_conf_vals(idx, conf_fxt):
     assert eval('conf_fxt.tag{0} == "val{0}"'.format(idx))
 
@@ -67,7 +66,7 @@ BoolFixt = namedtuple("BoolFixt", ["config", "result"])
 def bool_fixt(tmpdir, request):
     path = os.path.join(tmpdir.__str__(), "conf.conf")
 
-    with open(path, 'w') as fp:
+    with open(path, "w") as fp:
         fp.write("tag = {}".format(request.param.data))
 
     return BoolFixt(config.Config(path), request.param.result)

@@ -14,9 +14,7 @@ def defroute_dev() -> Optional[str]:
     """Return the name of the interface holding the default route."""
 
     cp = subprocess.run(
-        "ip route".split(),
-        stdout=subprocess.PIPE,
-        encoding="utf-8"
+        "ip route".split(), stdout=subprocess.PIPE, encoding="utf-8"
     )
     fstline = cp.stdout.split("\n")[0]
     match = re.search("^default.+dev ([^ ]+)", fstline)

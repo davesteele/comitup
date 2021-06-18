@@ -11,7 +11,7 @@
 # or later
 #
 
-from typing import Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 
 from comitup import config, nm
 
@@ -23,18 +23,12 @@ MULTI_MODE: str = "router"
 
 CONF_PATH: str = "/etc/comitup.conf"
 
-conf: Optional[config.Config] = None
-
 ap_device: Optional["NetworkManager.Device"] = None
 link_device: Optional["NetworkManager.Device"] = None
 
 
 def get_conf() -> config.Config:
-    global conf
-
-    if not conf:
-        (conf, _) = config.load_data()
-
+    (conf, _) = config.load_data()
     return conf
 
 
@@ -87,7 +81,7 @@ def get_link_device() -> "NetworkManager.Device":
 
 
 def get_state_device(state: str) -> "NetworkManager.Device":
-    if state == 'HOTSPOT':
+    if state == "HOTSPOT":
         return get_ap_device()
     else:
         return get_link_device()

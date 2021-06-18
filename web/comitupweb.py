@@ -18,9 +18,16 @@ import urllib
 from logging.handlers import TimedRotatingFileHandler
 from multiprocessing import Process
 
-from flask import (Flask, abort, jsonify, redirect, render_template, request,
-                   send_from_directory)
-from cachetools import cached, TTLCache
+from cachetools import TTLCache, cached
+from flask import (
+    Flask,
+    abort,
+    jsonify,
+    redirect,
+    render_template,
+    request,
+    send_from_directory,
+)
 
 sys.path.append(".")
 sys.path.append("..")
