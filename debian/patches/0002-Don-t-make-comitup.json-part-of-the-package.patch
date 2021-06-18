@@ -3,17 +3,14 @@ Date: Sun, 17 Sep 2017 20:24:28 -0400
 Subject: Don't make comitup.json part of the package
 
 We don't want it to be overwritten on upgrade.
----
- setup.py | 1 -
- 1 file changed, 1 deletion(-)
 
 --- a/setup.py
 +++ b/setup.py
-@@ -81,7 +81,6 @@
+@@ -43,7 +43,6 @@
      },
      data_files=[
-         ('/etc', ['conf/comitup.conf']),
--        ('/var/lib/comitup', ['conf/comitup.json']),
-         ('/etc/dbus-1/system.d', ['conf/comitup-dbus.conf']),
-         ('/usr/share/comitup/web/templates',
-             [
+         ("/etc", ["conf/comitup.conf"]),
+-        ("/var/lib/comitup", ["conf/comitup.json"]),
+         ("/etc/dbus-1/system.d", ["conf/comitup-dbus.conf"]),
+         (
+             "/usr/share/comitup/web/templates",

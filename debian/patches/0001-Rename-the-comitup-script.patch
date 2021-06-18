@@ -8,16 +8,14 @@ and script in the same directory.
  setup.py | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/setup.py b/setup.py
-index 8104abc..c9e127c 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -64,7 +64,7 @@ setup(
+@@ -31,7 +31,7 @@
      ],
      entry_points={
-         'console_scripts': [
--            'comitup=comitup.comitup:main',
-+            'comitup-cmd=comitup.comitup:main',
-             'comitup-cli=cli.comitupcli:interpreter',
-             'comitup-web=web.comitupweb:main',
+         "console_scripts": [
+-            "comitup=comitup.comitup:main",
++            "comitup-cmd=comitup.comitup:main",
+             "comitup-cli=cli.comitupcli:main",
+             "comitup-web=web.comitupweb:main",
          ],
