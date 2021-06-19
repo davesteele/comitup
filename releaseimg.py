@@ -9,6 +9,8 @@ import json
 import shutil
 import zipfile
 
+from jinja2 import Template
+
 
 zip_path = sys.argv[1]
 zip_name = os.path.split(zip_path)[-1]
@@ -100,9 +102,11 @@ imginfo = {}
 if 'lite' in zip_name:
     imginfo['name'] = 'Lite'
     imgname = 'lite'
+    latestpath = "latest/comitup-lite-img-latest.html"
 else:
     imginfo['name'] = ''
     imgname = 'full'
+    latestpath = "latest/comitup-img-latest.html"
 
 
 imginfo['filename'] = zip_name
@@ -124,6 +128,10 @@ imgsinfo[imgname] = imginfo
 with open('imgs.json', 'w') as fp:
 	json.dump(imgsinfo, fp, indent=4, sort_keys=True)
 
+template = Template(open("templates/latest-img.tmpl").read())
+output = template.render(img=zip_name)
+with open(latestpath, "w") as fp:
+    fp.write(output)
 
 os.system("otto add {} {} ./torrent/{}.torrent".format(zip_path, info_path, zip_name))
 
