@@ -102,12 +102,13 @@ imginfo = {}
 if 'lite' in zip_name:
     imginfo['name'] = 'Lite'
     imgname = 'lite'
-    latestpath = "latest/comitup-lite-img-latest.html"
+    imginfo["latestname"] = "comitup-lite"
 else:
     imginfo['name'] = ''
     imgname = 'full'
-    latestpath = "latest/comitup-img-latest.html"
+    imginfo["latestname"] = "comitup"
 
+latestpath = "latest/{}-img-latest.html".format(imginfo["latestname"])
 
 imginfo['filename'] = zip_name
 zf = zipfile.ZipFile(zip_path)
