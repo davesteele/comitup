@@ -30,6 +30,15 @@
 {% for pkg in pkgs.all_pkgs %}
 <li><a href="deb/{{ pkg }}">{{ pkg }}</a></li>
 {% endfor %}
+</ul>
+
+<ul>
+{% for pkg in pkgs.pkg_names %}
+<li><a href="latest/{{ pkg }}_latest.html">latest {{ pkg }}</a></li>
+{% endfor %}
+</ul>
+
+<ul>
 <li><a href="deb/checksums.txt">checksums.txt</a></li>
 </ul>
 

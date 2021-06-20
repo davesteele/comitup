@@ -62,5 +62,11 @@
         "python3-networkmanager_2.1-1_all.deb",
         "python3-dnslib_0.9.7+hg20170303-1_all.deb",
         "davesteele-comitup-apt-source_1.1_all.deb"
+    ],
+    "pkg_names": [
+        "comitup",
+        "python3-networkmanager",
+        "python3-dnslib",
+        "davesteele-comitup-apt-source"
     ]
 }

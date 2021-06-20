@@ -32,8 +32,11 @@ for pkg in pkgs:
 
 debs = reduce(lambda x,y: x + y, [pkgs[x] for x in pkgs])
 
-outputjson = { 'all_pkgs': debs,
-               'latest_pkgs': latestdebs, }
+outputjson = {
+    'all_pkgs': debs,
+    'latest_pkgs': latestdebs,
+    'pkg_names': [pkg for pkg in pkgs],
+}
 
 with open('pkgs.json', 'w') as outfile:
     json.dump(outputjson, outfile, sort_keys=True, indent=4)
