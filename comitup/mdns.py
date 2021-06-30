@@ -17,6 +17,7 @@ import subprocess
 from typing import TYPE_CHECKING, Dict, List, Optional
 
 import dbus
+import socket
 
 from comitup import config, nm
 
@@ -188,6 +189,22 @@ def add_hosts(hosts: List[str]) -> None:
 
     if group and entries:
         group.Commit()
+
+
+def check_mdns(hosts: List[str]) -> None:
+    reset = False
+
+    log.debug("Checking mdns")
+
+    try:
+        socket.gethostbyname(hosts[0])
+    except socket.gaierror:
+        reset = True
+
+    if reset:
+        log.error("Mdns check failed - resetting records and services.")
+        clear_entries(emphatic=True)
+        add_hosts(*hosts)
 
 
 if __name__ == "__main__":

@@ -296,6 +296,8 @@ def connected_timeout(dummy: int) -> None:
             log.error("AP is holding default route while CONNECTED, kicking")
             nm.disconnect(link_dev)
 
+    mdns.check_mdns(dns_names)
+
 
 #
 # State Management
