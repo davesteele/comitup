@@ -68,6 +68,4 @@ def state_callback(state: str, action: str) -> None:
     except KeyError:
         return
 
-    log.debug("Calling cdns {}-{} behavior".format(state, action))
-
     fn_fact()(svc_fact())

@@ -44,8 +44,6 @@ def state_callback(state: str, action: str) -> None:
     except KeyError:
         return
 
-    log.debug("Calling webmgr {}-{} behavior".format(state, action))
-
     if svc_fact():
         fn_fact()(svc_fact())
 
