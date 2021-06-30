@@ -204,7 +204,7 @@ def check_mdns(hosts: List[str]) -> None:
     if reset:
         log.error("Mdns check failed - resetting records and services.")
         clear_entries(emphatic=True)
-        add_hosts(*hosts)
+        add_hosts(hosts)
 
 
 if __name__ == "__main__":
