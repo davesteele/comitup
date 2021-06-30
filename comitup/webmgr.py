@@ -39,11 +39,12 @@ callmatrix = {
 
 
 def state_callback(state: str, action: str) -> None:
-    log.debug("Webmgr callback")
     try:
         (fn_fact, svc_fact) = callmatrix[(state, action)]
     except KeyError:
         return
+
+    log.debug("Calling webmgr {}-{} behavior".format(state, action))
 
     if svc_fact():
         fn_fact()(svc_fact())

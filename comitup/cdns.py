@@ -63,10 +63,11 @@ def run_dns(confpath: str) -> None:
 
 
 def state_callback(state: str, action: str) -> None:
-    log.debug("Cdns callback")
     try:
         (fn_fact, svc_fact) = callmatrix[(state, action, modemgr.get_mode())]
     except KeyError:
         return
+
+    log.debug("Calling cdns {}-{} behavior".format(state, action))
 
     fn_fact()(svc_fact())
