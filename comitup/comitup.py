@@ -57,13 +57,13 @@ def deflog(verbose: bool) -> logging.Logger:
 
 
 def check_environment(log: logging.Logger) -> None:
-    for service in ["systemd-resolved", "dnsmasq", "dhcpd"]:
+    for service in ["systemd-resolved", "dnsmasq", "dhcpd", "dhcpcd"]:
         try:
             if sysd.sd_unit_jobs("{}.service".format(service)):
                 for msg in [
                     "Warning: {} service is active.".format(service),
                     "This may interfere with comitup providing "
-                    "DNS and DHCP services",
+                    "networking services",
                 ]:
                     print(msg)
                     log.warn(msg)
