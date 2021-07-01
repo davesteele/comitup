@@ -17,7 +17,6 @@ import subprocess
 from typing import TYPE_CHECKING, Dict, List, Optional
 
 import dbus
-import socket
 
 from comitup import config, nm
 
