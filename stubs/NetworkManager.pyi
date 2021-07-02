@@ -51,7 +51,7 @@ class Settings(NMDbusInterface):
 
 class Connection(NMDbusInterface):
     uuid: str
-    Connection: Connection
+    Connection: Any
     @staticmethod
     def Delete() -> None: ...
     @staticmethod

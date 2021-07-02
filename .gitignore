@@ -11,3 +11,5 @@ venv/*
 .mypy_cache/*
 .eggs/*
 .tox/*
+
+.devenv/*
