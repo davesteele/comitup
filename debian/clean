@@ -12,3 +12,4 @@ doc/comitup-web.8
 .mypy_cache/
 */.mypy_cache/
 .eggs/
+.devenv/
