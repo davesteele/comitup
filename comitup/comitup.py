@@ -43,8 +43,7 @@ def deflog(verbose: bool) -> logging.Logger:
     handler = TimedRotatingFileHandler(
         LOG_PATH,
         encoding="utf=8",
-        when="D",
-        interval=7,
+        when="W0",
         backupCount=8,
     )
     fmtr = logging.Formatter(
