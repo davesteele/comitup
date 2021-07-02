@@ -25,6 +25,7 @@ pkgs: List[str] = [
     "pytest",
     "mypy",
     "flake8",
+    "black",
     "types-mock",
     "types-tabulate",
     "types-pkg_resources",
@@ -71,6 +72,7 @@ tests: List[str] = [
     "pytest",
     "mypy {}".format(targets),
     "flake8 {}".format(targets),
+    "black --check {}".format(targets),
 ]
 
 if any([runtest(test) for test in tests]):
