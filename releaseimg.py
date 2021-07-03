@@ -8,6 +8,7 @@ import gnupg
 import json
 import shutil
 import zipfile
+from pathlib import Path
 
 from jinja2 import Template
 
@@ -83,6 +84,10 @@ sha = hashlib.sha1()
 with open(zip_path, 'rb') as fp:
     for chunk in iter(lambda: fp.read(1048576), b''):
         sha.update(chunk)
+
+torrent_path = Path("./torrent")
+if not torrent_path.exists():
+    torrent_path.mkdir()
 
 with open("./torrent/{}.sha1.txt".format(zip_name), 'w') as fp:
     fp.write("{0} {1}".format(sha.hexdigest(), zip_name))
