@@ -24,9 +24,10 @@ class Device(NMDbusInterface):
     def Disconnect() -> None: ...
     @staticmethod
     def GetAllAccessPoints() -> List[AccessPoint]: ...
-
-    class Ip4Config():
-        Addresses:  List[List[str]]
+    class Ip4Config:
+        Addresses: List[List[str]]
+    class Ip6Config:
+        Addresses: List[List[str]]
 
 class Wireless(Device): ...
 

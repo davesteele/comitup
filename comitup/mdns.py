@@ -105,7 +105,9 @@ def string_array_to_txt_array(txt_array: List[str]) -> List[List[bytes]]:
     return [string_to_txt_array(x) for x in txt_array]
 
 
-def add_service(host: str, devindex: int, addr: str, addr6: str) -> None:
+def add_service(
+    host: str, devindex: int, addr: Optional[str], addr6: Optional[str]
+) -> None:
     name = host
     (conf, data) = config.load_data()
     if ".local" in name:
@@ -181,29 +183,36 @@ def add_hosts(hosts: List[str]) -> None:
         addr = nm.get_active_ip(device)
         addr6 = nm.get_active_ip6(device)
         log.debug("add_hosts: {}, {}".format(name, addr))
-        if (
-            name in nm.get_phys_dev_names()
-            and name in int_mapping
-        ):
+        if name in nm.get_phys_dev_names() and name in int_mapping:
             index = int_mapping[name]
 
             try:
                 if addr and addr != "0.0.0.0":
                     for host in hosts:
-                        log.debug("Add A record {}-{}-{}".format(host, index, addr))
+                        log.debug(
+                            "Add A record {}-{}-{}".format(host, index, addr)
+                        )
                         make_a_record(host, index, addr)
 
                     entries = True
 
                 if addr6:
                     for host in hosts:
-                        log.debug("Add AAAA record {}-{}-{}".format(host, index, addr6))
+                        log.debug(
+                            "Add AAAA record {}-{}-{}".format(
+                                host, index, addr6
+                            )
+                        )
                         make_aaaa_record(host, index, addr6)
 
                     entries = True
 
                 if addr6 or (addr and addr != "0.0.0.0"):
-                    log.debug("Add service {}, {}, {}-{}".format(host, index, addr, addr6))
+                    log.debug(
+                        "Add service {}, {}, {}-{}".format(
+                            host, index, addr, addr6
+                        )
+                    )
                     add_service(hosts[0], index, addr, addr6)
 
             except Exception:
