@@ -274,7 +274,10 @@ def make_hotspot(name="comitup", device=None, password="", hash="0000"):
 
 
 def make_connection_for(
-    ssid: str, password: str = None, interface: Optional[str] = None
+    ssid: str,
+    password: str = None,
+    interface: Optional[str] = None,
+    link_local: bool = True,
 ) -> None:
     settings = dbus.Dictionary(
         {
@@ -299,11 +302,14 @@ def make_connection_for(
             ),
             "ipv6": dbus.Dictionary(
                 {
-                    "method": "auto",
+                    "method": "link-local",
                 }
             ),
         }
     )
+
+    if not link_local:
+        settings["ipv6"]["method"] = "auto"
 
     if interface:
         settings["connection"]["interface-name"] = interface
