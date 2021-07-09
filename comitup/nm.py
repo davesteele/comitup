@@ -150,7 +150,7 @@ def get_active_ip(device: nm.Device) -> Optional[str]:
     return addr
 
 
-@none_on_exception(AttributeError)
+@none_on_exception(AttributeError, IndexError)
 def get_active_ip6(device: nm.Device) -> Optional[str]:
     addr6 = device.Ip6Config.Addresses[0][0]
 
@@ -336,7 +336,7 @@ def make_connection_for(
 def do_listaccess(arg):
     """List all accessible access points"""
     rows = []
-    for point in get_access_points(get_wifi_device()):
+    for point in get_access_points(get_wifi_devices()[-1]):
         row = (
             point.Ssid,
             point.HwAddress,
