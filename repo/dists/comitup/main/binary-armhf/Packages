@@ -18,6 +18,25 @@ Description: bootstrap Wi-Fi using Wi-Fi
  that fails, it creates a hotspot and web service to aid in configuring a
  connection.
 
+Package: comitup-watch
+Version: 0.1-1
+Architecture: all
+Maintainer: David Steele <steele@debian.org>
+Installed-Size: 50
+Depends: python3-colorama, python3-dbussy, python3-tabulate, python3-zeroconf, python3:any (>= 3.6~), network-manager, avahi-daemon
+Homepage: https://davesteele.github.io/comitup/
+Priority: optional
+Section: net
+Filename: pool/main/c/comitup-watch/comitup-watch_0.1-1_all.deb
+Size: 9656
+SHA256: 9f5a44cca39106a03583c259265a74e0189f9678d15764dc713cb93802e8c97d
+SHA1: 5478a24e7e27c10ba05a361336b1ab7c0c87a11a
+MD5sum: 1ac699523b5d0be2cd22e1c9fe6e5c4c
+Description: monitor local Comitup-enabled devices
+ Comitup-watch creates a terminal display showing the status of Comitup devices
+ on the local network. This includes the hotspot name for unconnected devices,
+ IP address information for connected ones, and a current ping status.
+
 Package: davesteele-comitup-apt-source
 Source: davesteele-apt-source
 Version: 1.1
@@ -35,6 +54,28 @@ MD5sum: e9109afb6faa3f8d486b8f24a0724ef5
 Description: Apt configuration for comitup repository
  This adds a managed key and apt sources entry for the comitup
  repository managed by David Steele.
+
+Package: python3-dbussy
+Source: python-dbussy
+Version: 1.3-2
+Architecture: all
+Maintainer: Debian Python Team <team+python@tracker.debian.org>
+Installed-Size: 427
+Depends: python3:any, libdbus-1-3
+Homepage: https://github.com/ldo/dbussy
+Priority: optional
+Section: python
+Filename: pool/main/p/python-dbussy/python3-dbussy_1.3-2_all.deb
+Size: 69956
+SHA256: 1797948183b6ce9b4b95bc7259b9e7c84bb18b3bbd463b15f985653c1861665b
+SHA1: d70ebcd5085f02dea0681e9de13186c04dd91d52
+MD5sum: 470fdcbdd3c23cf1141dc3a48b3763bb
+Description: Python 3 language bindings for libdbus
+ DBussy is a wrapper around libdbus, written in pure Python. It is
+ intended to give access to essentially all the low-level
+ functionality of libdbus, which includes the option to run without an
+ event loop, or to implement your own custom event loop, or hook into
+ asyncio.
 
 Package: python3-dnslib
 Source: python-dnslib
@@ -89,4 +130,32 @@ Description: Python 3 interface to the NetworkManager D-Bus interface
  http://packages.python.org/python-networkmanager/
  .
  This package provides the Python 3.x module.
+
+Package: python3-zeroconf
+Source: python-zeroconf
+Version: 0.26.1-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 198
+Depends: python3-ifaddr, python3:any
+Breaks: python3-pychromecast (<< 4.2.0~)
+Homepage: https://github.com/jstasiak/python-zeroconf
+Priority: optional
+Section: python
+Filename: pool/main/p/python-zeroconf/python3-zeroconf_0.26.1-1_all.deb
+Size: 43264
+SHA256: 45278a92aa749a4bb0b00aad24b871b7c7d3bbff3a3c83e4bce5c85293f27bba
+SHA1: 1ac7ae475badd337088d9564baef8217da492090
+MD5sum: 69587c0eaaab281aa8964327a2ebe4d2
+Description: Pure Python implementation of multicast DNS service discovery (Python3)
+ This is an implementation of the multicast DNS Service Discover Library
+ zeroconf in pure Python.
+ .
+ Compared to some other Zeroconf/Bonjour/Avahi Python packages:
+ .
+  - isn't tied to Bonjour or Avahi
+  - doesn't use D-Bus
+  - doesn't force you to use particular event loop or Twisted
+ .
+ This is the Python3 version of the library.
 
