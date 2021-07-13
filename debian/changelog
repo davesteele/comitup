@@ -1,3 +1,14 @@
+comitup (1.31-1) UNRELEASED; urgency=medium
+
+  * Added IPv5 support:
+    - Address IPv6 conflict with dhcpcd.
+    - Create mdns AAAA record for IPv6.
+    - Publish Zeroconf service to IPv6.
+    - Add an "ipv6_link_local" option for better security.
+  * Added development "devtest.py".
+
+ -- David Steele <steele@debian.org>  Mon, 12 Jul 2021 20:06:28 -0400
+
 comitup (1.30-1) comitup; urgency=medium
 
   * Add a SW/HW factory reset capability.
