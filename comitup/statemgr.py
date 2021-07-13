@@ -90,7 +90,9 @@ class Comitup(dbus.service.Object):
             if nm.get_connection_by_ssid(ssid):
                 nm.del_connection_by_ssid(ssid)
 
-            nm.make_connection_for(ssid, password)
+            nm.make_connection_for(
+                ssid, password, link_local=conf.getboolean("ipv6_link_local")
+            )
 
             states.set_state("CONNECTING", [ssid, ssid])
             return False
@@ -153,7 +155,6 @@ def get_hosts(conf: "Config", data: "persist") -> List[str]:
 
 
 def external_callback(state: str, action: str) -> None:
-    log.debug("External callback")
     if action != "start":
         return
 
@@ -165,6 +166,8 @@ def external_callback(state: str, action: str) -> None:
     if not os.access(script, os.X_OK):
         log.error("Callback script %s is not executable" % script)
         return
+
+    log.debug("Calling External callback")
 
     def demote(uid, gid):
         def dodemote():

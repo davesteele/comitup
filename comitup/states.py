@@ -296,6 +296,10 @@ def connected_timeout(dummy: int) -> None:
             log.error("AP is holding default route while CONNECTED, kicking")
             nm.disconnect(link_dev)
 
+    # Leave this out for now. Disabling dhcpcd may have fixed the instability
+    # problem.
+    # mdns.check_mdns(dns_names)
+
 
 #
 # State Management

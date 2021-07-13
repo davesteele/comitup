@@ -150,6 +150,13 @@ def get_active_ip(device: nm.Device) -> Optional[str]:
     return addr
 
 
+@none_on_exception(AttributeError, IndexError)
+def get_active_ip6(device: nm.Device) -> Optional[str]:
+    addr6 = device.Ip6Config.Addresses[0][0]
+
+    return addr6
+
+
 def get_all_connections() -> List[nm.Connection]:
     return [x for x in nm.Settings.ListConnections()]
 
@@ -267,7 +274,10 @@ def make_hotspot(name="comitup", device=None, password="", hash="0000"):
 
 
 def make_connection_for(
-    ssid: str, password: str = None, interface: Optional[str] = None
+    ssid: str,
+    password: str = None,
+    interface: Optional[str] = None,
+    link_local: bool = True,
 ) -> None:
     settings = dbus.Dictionary(
         {
@@ -292,11 +302,14 @@ def make_connection_for(
             ),
             "ipv6": dbus.Dictionary(
                 {
-                    "method": "auto",
+                    "method": "link-local",
                 }
             ),
         }
     )
+
+    if not link_local:
+        settings["ipv6"]["method"] = "auto"
 
     if interface:
         settings["connection"]["interface-name"] = interface
@@ -323,7 +336,7 @@ def make_connection_for(
 def do_listaccess(arg):
     """List all accessible access points"""
     rows = []
-    for point in get_access_points(get_wifi_device()):
+    for point in get_access_points(get_wifi_devices()[-1]):
         row = (
             point.Ssid,
             point.HwAddress,

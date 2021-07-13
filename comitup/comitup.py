@@ -43,8 +43,7 @@ def deflog(verbose: bool) -> logging.Logger:
     handler = TimedRotatingFileHandler(
         LOG_PATH,
         encoding="utf=8",
-        when="D",
-        interval=7,
+        when="W0",
         backupCount=8,
     )
     fmtr = logging.Formatter(
@@ -57,13 +56,13 @@ def deflog(verbose: bool) -> logging.Logger:
 
 
 def check_environment(log: logging.Logger) -> None:
-    for service in ["systemd-resolved", "dnsmasq", "dhcpd"]:
+    for service in ["systemd-resolved", "dnsmasq", "dhcpd", "dhcpcd"]:
         try:
             if sysd.sd_unit_jobs("{}.service".format(service)):
                 for msg in [
                     "Warning: {} service is active.".format(service),
                     "This may interfere with comitup providing "
-                    "DNS and DHCP services",
+                    "networking services",
                 ]:
                     print(msg)
                     log.warn(msg)

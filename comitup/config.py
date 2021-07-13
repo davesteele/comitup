@@ -73,6 +73,7 @@ def load_data() -> Tuple[Config, persist.persist]:
                 "enable_appliance_mode": "1",
                 "primary_wifi_device": "",
                 "enable_nuke": "0",
+                "ipv6_link_local": 1,
             },
         )
 

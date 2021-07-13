@@ -30,7 +30,7 @@ def test_defroute_fixture(defroute):
         "ip route",
         stdout=routemgr.subprocess.PIPE,
         shell=True,
-        encoding="utf-8"
+        encoding="utf-8",
     )
     assert "ethn" in cp.stdout
 

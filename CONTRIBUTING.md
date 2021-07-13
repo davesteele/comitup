@@ -3,7 +3,7 @@
 
 Fork the [repository](https://github.com/davesteele/comitup), make the changes on a new branch off of _main_, and submit a [Pull Request](https://github.com/davesteele/comitup/pulls).
 
-Contributions should pass _devtest.sh_, otherwise GitHub CI tests will very likely fail.
+Contributions should pass _devtest.py_, otherwise GitHub CI tests will very likely fail.
 
 ## Submitting a Bug Report/Troubleshooting request
 
