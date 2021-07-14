@@ -13,3 +13,4 @@ doc/comitup-web.8
 */.mypy_cache/
 .eggs/
 .devenv/
+comitup.egg-info/
