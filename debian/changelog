@@ -1,4 +1,4 @@
-comitup (1.31-1) UNRELEASED; urgency=medium
+comitup (1.31-1) comitup; urgency=medium
 
   * Added IPv5 support:
     - Address IPv6 conflict with dhcpcd.
@@ -7,7 +7,7 @@ comitup (1.31-1) UNRELEASED; urgency=medium
     - Add an "ipv6_link_local" option for better security.
   * Added development "devtest.py".
 
- -- David Steele <steele@debian.org>  Mon, 12 Jul 2021 20:06:28 -0400
+ -- David Steele <steele@debian.org>  Tue, 13 Jul 2021 21:27:48 -0400
 
 comitup (1.30-1) comitup; urgency=medium
 
