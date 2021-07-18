@@ -25,17 +25,17 @@ for deb in os.listdir('deb'):
 
 latestver={}
 latestdebs = []
-for pkg in pkgs:
+for pkg in sorted(pkgs):
     pkgs[pkg] = sorted(pkgs[pkg], key=pkgkeyfunc)
     latestver = pkglatestver(pkgs[pkg])
     latestdebs.append([x for x in pkgs[pkg] if latestver in x][0])
 
-debs = reduce(lambda x,y: x + y, [pkgs[x] for x in pkgs])
+debs = reduce(lambda x,y: x + y, [pkgs[x] for x in sorted(pkgs)])
 
 outputjson = {
     'all_pkgs': debs,
     'latest_pkgs': latestdebs,
-    'pkg_names': [pkg for pkg in pkgs],
+    'pkg_names': [pkg for pkg in sorted(pkgs)],
 }
 
 with open('pkgs.json', 'w') as outfile:
