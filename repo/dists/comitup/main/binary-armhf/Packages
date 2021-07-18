@@ -19,19 +19,19 @@ Description: bootstrap Wi-Fi using Wi-Fi
  connection.
 
 Package: comitup-watch
-Version: 0.1-1
+Version: 0.2-1
 Architecture: all
 Maintainer: David Steele <steele@debian.org>
-Installed-Size: 50
+Installed-Size: 56
 Depends: python3-colorama, python3-dbussy, python3-tabulate, python3-zeroconf, python3:any (>= 3.6~), network-manager, avahi-daemon
 Homepage: https://davesteele.github.io/comitup/
 Priority: optional
 Section: net
-Filename: pool/main/c/comitup-watch/comitup-watch_0.1-1_all.deb
-Size: 9656
-SHA256: 9f5a44cca39106a03583c259265a74e0189f9678d15764dc713cb93802e8c97d
-SHA1: 5478a24e7e27c10ba05a361336b1ab7c0c87a11a
-MD5sum: 1ac699523b5d0be2cd22e1c9fe6e5c4c
+Filename: pool/main/c/comitup-watch/comitup-watch_0.2-1_all.deb
+Size: 11344
+SHA256: c4b423f3a62690e02e4db78f462eee6d7c51c67a4da13893f27cf7dacc9725a2
+SHA1: 0febaec16e847ea9a7f64e3c3633370638bc097a
+MD5sum: ce311aaaf870c0656b5637c64ea97deb
 Description: monitor local Comitup-enabled devices
  Comitup-watch creates a terminal display showing the status of Comitup devices
  on the local network. This includes the hotspot name for unconnected devices,
