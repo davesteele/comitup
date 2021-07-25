@@ -1,6 +1,6 @@
 % comitup-cli(1)
 %
-% June 2021
+% July 2021
 
 # NAME
 
@@ -43,11 +43,14 @@ If the comitup(8) service is not running, **comitup-cli** will immediately exit.
     In the **HOTSPOT** mode, **comitup** creates a wifi hotspot with the
     name **comitup-&lt;nnn&gt;**, where &lt;nnn&gt; is a persistent number.
 
-    Once in **HOTSPOT** mode, the system will occasionally (~1/min) cycle
+    Once in **HOTSPOT** mode, the system will occasionally (~3 min) cycle
     through available defined connections, by transitioning to the
     **CONNECTING** mode. The Access Point list is updated by this process.
     Any command issued by **comitup-cli** will cause the next
     timeout instance to be skipped.
+
+    If any other devices are connected to the Comitup hotspot, the periodic
+    attempt is skipped, to avoid interrupting service to those devices.
 
     Once a connection is established, the system will be in the **CONNECTED**
     mode. If the connection is lost, failed, or deleted, the system will
@@ -113,5 +116,5 @@ Comitup is Copyright (C) 2016-2019 David Steele &lt;steele@debian.org&gt;
 
 ## SEE ALSO
 
-comitup(8), comitup-conf(5), comitup-web(8)
+comitup(8), comitup-conf(5), comitup-web(8), comitup-watch(1)
 
