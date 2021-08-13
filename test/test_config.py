@@ -54,13 +54,14 @@ BoolFixt = namedtuple("BoolFixt", ["config", "result"])
         Case("yes", True),
         Case("Yes", True),
         Case("no", False),
-        # these two don't work
-        # Case("y", True),
-        # Case("n", False),
+        Case("y", True),
+        Case("n", False),
         Case("true", True),
         Case("True", True),
         Case("TRUE", True),
         Case("false", False),
+        Case("on", True),
+        Case("off", False),
     ]
 )
 def bool_fixt(tmpdir, request):

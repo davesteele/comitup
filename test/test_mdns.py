@@ -19,12 +19,9 @@ def avahi_fxt(monkeypatch, request):
     save_group = mdns.group
     mdns.group = Mock()
 
-    def fin():
-        mdns.group = save_group
+    yield None
 
-    request.addfinalizer(fin)
-
-    return None
+    mdns.group = save_group
 
 
 def test_avahi_null(avahi_fxt):

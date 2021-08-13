@@ -26,11 +26,23 @@ SECTION: str = "DEFAULT"
 data_cache: Optional[Tuple["Config", persist.persist]] = None
 
 
+class MyConfigParser(configparser.ConfigParser):
+    def getboolean(self, *args, **kwargs):
+        mappings = {"y": True, "n": False}
+
+        try:
+            val = mappings[self.get(*args, **kwargs).lower()]
+        except KeyError:
+            val = super().getboolean(*args, **kwargs)
+
+        return val
+
+
 class Config(object):
     def __init__(self, filename: str, section: str = SECTION, defaults={}):
         self._section: str = section
 
-        self._config = configparser.ConfigParser(defaults=defaults)
+        self._config = MyConfigParser(defaults=defaults)
         try:
             with open(filename, "r") as fp:
                 conf_str = "[%s]\n" % self._section + fp.read()
