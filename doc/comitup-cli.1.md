@@ -1,6 +1,6 @@
 % comitup-cli(1)
 %
-% July 2021
+% Aug 2021
 
 # NAME
 
@@ -103,6 +103,12 @@ If the comitup(8) service is not running, **comitup-cli** will immediately exit.
 
     Locate the headless Raspberry Pi running Comitup by blinking the front
     green LED once.
+
+  * __n__ - **reName**
+
+    Change the name of the host, Comitup ap_name, and comitup mdns domain name.
+    This also adds an entry in 'hosts'. This causes Comitup to restart, and the
+    cli session to end.
 
   * __x__ - **Factory Reset**
 
