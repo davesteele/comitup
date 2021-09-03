@@ -11,9 +11,9 @@ personal repository, coordinating with the davesteele-apt-source pacakage.
 This is invoked via the reprepro config distributions "signwith" tag.
 """
 
-# This is my current key, Keep using it a while till the new one propagates.
-key = "E77F6E6B8150A5A8"
-killdate = date(2021, 9, 1)
+# This is my current key
+key = "0959C4A3DCF89FBF"
+killdate = date(2025, 2, 22)
 
 if date.today() > killdate:
     print("time to update {} to a new key".format(sys.argv[0]))
