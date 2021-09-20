@@ -11,6 +11,7 @@ Build-Depends:
     python3-pytest,
     python3-pytest-runner,
     python3-mock,
+    python3-dbus,
     pandoc,
     python3-flask,
 Standards-Version: 4.5.1
