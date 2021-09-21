@@ -12,6 +12,7 @@ Build-Depends:
     python3-pytest-runner,
     python3-mock,
     python3-dbus,
+    python3-cachetools,
     pandoc,
     python3-flask,
 Standards-Version: 4.5.1
@@ -32,6 +33,7 @@ Depends:
     python3-gi,
     python3-flask,
     python3-dbus,
+    python3-cachetools,
     iw,
     dnsmasq-base,
     avahi-daemon,
