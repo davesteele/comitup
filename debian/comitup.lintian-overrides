@@ -5,11 +5,6 @@
 
 package-supports-alternative-init-but-no-init.d-script
 
-# Comitup stores copies of the man pages in html format, as an aide to
-# deployment scripts. There is no need to register these with doc-base.
-
-possible-documentation-but-no-doc-base-registration
-
 # Comitup-web is totally managed by comitup. There is no need for systemd to have a reason to auto-start it.
 
 systemd-service-file-missing-install-key
