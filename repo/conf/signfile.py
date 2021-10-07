@@ -23,7 +23,9 @@ if date.today() > killdate:
 (infile, outinline, outdetached) = sys.argv[1:4]
 
 if outinline:
-    cmd = "gpg --clear-sign --local-user {}! -o {} {}".format(key, outinline, infile)
+    cmd = "gpg --clear-sign --local-user {}! -o {} {}".format(
+        key, outinline, infile
+    )
     print('running "{}"'.format(cmd))
     cp = subprocess.run(cmd, shell=True, check=True)
 
