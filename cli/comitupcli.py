@@ -109,25 +109,8 @@ CmdState = namedtuple(
 
 commands = OrderedDict(
     [
-        ("i", CmdState(do_info, "(i)nfo", True, True, True, True)),
         ("r", CmdState(do_reload, "(r)eload", True, True, True, False)),
-        (
-            "d",
-            CmdState(
-                do_delete, "(d)elete connection", False, True, True, True
-            ),
-        ),
-        ("q", CmdState(do_quit, "(q)uit", True, True, True, False)),
-        (
-            "<n>",
-            CmdState(do_connect, "connect to <n>", True, False, False, False),
-        ),
-        (
-            "m",
-            CmdState(
-                do_connect, "(m)anual connection", True, False, False, True
-            ),
-        ),
+        ("i", CmdState(do_info, "(i)nfo", True, True, True, True)),
         (
             "l",
             CmdState(do_locate, "(l)ocate the device", True, True, True, True),
@@ -144,6 +127,22 @@ commands = OrderedDict(
             ),
         ),
         (
+            "d",
+            CmdState(
+                do_delete, "(d)elete connection", False, True, True, True
+            ),
+        ),
+        (
+            "<n>",
+            CmdState(do_connect, "connect to <n>", True, False, False, False),
+        ),
+        (
+            "m",
+            CmdState(
+                do_connect, "(m)anual connection", True, False, False, True
+            ),
+        ),
+        (
             "x",
             CmdState(
                 do_nuke,
@@ -154,6 +153,7 @@ commands = OrderedDict(
                 True,
             ),
         ),
+        ("q", CmdState(do_quit, "(q)uit", True, True, True, False)),
     ]
 )
 
