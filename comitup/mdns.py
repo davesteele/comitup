@@ -222,10 +222,6 @@ def add_hosts(hosts: List[str]) -> None:
                     log.error("Exception encountered adding avahi record")
                     clear_entries(emphatic=True)
                     entries = False
-
-                    # TODO - does this cause problems?
-                    os.kill(os.getpid(), signal.SIGTERM)
-
         except NetworkManager.ObjectVanished as e:
             log.error(
                 "Unrecoverable NetworkManager Error - exiting - {}".format(
