@@ -6,6 +6,7 @@
 
 import logging
 import re
+import struct
 import subprocess
 from multiprocessing import Process, Queue
 from typing import Dict, List
@@ -20,7 +21,7 @@ def docmd(cmd: str) -> str:
     cmd = "timeout 5 " + cmd
 
     try:
-        out = subprocess.check_output(cmd.split()).decode()
+        out = subprocess.check_output(cmd.split(), encoding="ascii")
     except subprocess.CalledProcessError:
         out = ""
 
@@ -51,6 +52,24 @@ def dbm2pct(dbm: float) -> str:
     return str(pct)
 
 
+def decode_x(s: str) -> str:
+    """Take a unicode string of the form "b\xc3\xbct" and fix it"""
+    s = eval("'{}'".format(s))
+    outlist = []
+    for cp in s:
+        num = ord(cp)
+        if num < 255:
+            outlist.append(struct.pack("B", num))
+        elif num < 65535:
+            outlist.append(struct.pack(">H", num))
+        else:
+            b = (num & 0xFF0000) >> 16
+            H = num & 0xFFFF
+            outlist.append(struct.pack(">bH", b, H))
+    blist = b"".join(outlist)
+    return blist.decode("utf-8")
+
+
 def devaps(dev: str, dump: str = "") -> List[Dict[str, str]]:
     """Get a list of Access Points (as dicts) for a device"""
     if not dump:
@@ -63,6 +82,7 @@ def devaps(dev: str, dump: str = "") -> List[Dict[str, str]]:
             ap = blk2dict(blk)
             ap["power"] = dbm2pct(float(ap["signal"].split()[0]))
             if ap["SSID"]:
+                ap["SSID"] = decode_x(ap["SSID"])
                 aps.append(ap)
         except KeyError:
             pass
