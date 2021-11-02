@@ -2,6 +2,7 @@ doc/comitup.8
 doc/comitup-conf.5
 doc/comitup-cli.1
 doc/comitup-web.8
+web/templates/js/uikit.min.js
 .pytest_cache/
 .nox/
 .tox/

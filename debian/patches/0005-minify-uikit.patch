@@ -1,0 +1,80 @@
+Description: Use the build-time minified uikit code
+Author: David Steele <steele#debian.org>
+
+
+--- a/web/templates/confirm.html
++++ b/web/templates/confirm.html
+@@ -6,7 +6,7 @@
+     <title>Comitup</title>
+     <link rel="icon" href="img/favicon.ico">
+     <!-- CSS FILES -->
+-    <link rel="stylesheet" type="text/css" href="css/uikit.css">
++    <link rel="stylesheet" type="text/css" href="css/uikit.min.css">
+     <script src="js/blink.js"></script>
+ </head>
+ <body class="uk-height-1-1">
+@@ -64,5 +64,5 @@
+ </div>
+ 
+ <!-- JS FILES -->
+-<script src="js/uikit.js"></script>
++<script src="js/uikit.min.js"></script>
+ <script src="js/uikit-icons.js"></script>
+--- a/web/templates/connect.html
++++ b/web/templates/connect.html
+@@ -7,7 +7,7 @@
+     <title>Comitup</title>
+     <link rel="icon" href="img/favicon.ico">
+     <!-- CSS FILES -->
+-    <link rel="stylesheet" type="text/css" href="css/uikit.css">
++    <link rel="stylesheet" type="text/css" href="css/uikit.min.css">
+ </head>
+ <body class="uk-height-1-1">
+ <div class="uk-flex uk-flex-center uk-flex-middle">
+@@ -31,5 +31,5 @@
+ </div>
+ 
+ <!-- JS FILES -->
+-<script src="js/uikit.js"></script>
++<script src="js/uikit.min.js"></script>
+ <script src="js/uikit-icons.js"></script>
+--- a/web/templates/index.html
++++ b/web/templates/index.html
+@@ -6,7 +6,7 @@
+     <title>Comitup</title>
+     <link rel="icon" href="img/favicon.ico">
+     <!-- CSS FILES -->
+-    <link rel="stylesheet" type="text/css" href="css/uikit.css">
++    <link rel="stylesheet" type="text/css" href="css/uikit.min.css">
+     <script src="js/blink.js"></script>
+ </head>
+ <body class="uk-height-1-1">
+@@ -62,7 +62,7 @@
+ </div>
+ 
+ <!-- JS FILES -->
+-<script src="js/uikit.js"></script>
++<script src="js/uikit.min.js"></script>
+ <script src="js/uikit-icons.js"></script>
+ 
+ </body>
+--- a/setup.py
++++ b/setup.py
+@@ -55,16 +55,13 @@
+         (
+             "/usr/share/comitup/web/templates/css",
+             [
+-                "web/templates/css/uikit.css",
+-                "web/templates/css/uikit-rtl.css",
+                 "web/templates/css/uikit.min.css",
+-                "web/templates/css/uikit-rtl.min.css",
+             ],
+         ),
+         (
+             "/usr/share/comitup/web/templates/js",
+             [
+-                "web/templates/js/uikit.js",
++                "web/templates/js/uikit.min.js",
+                 "web/templates/js/uikit-icons.js",
+                 "web/templates/js/blink.js",
+             ],
