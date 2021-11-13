@@ -21,3 +21,7 @@ for deb in pkgs["latest_pkgs"]:
 
     with open(page, 'w') as fp:
         fp.write(output)
+
+    with open(f"deb/{deb}", "rb") as rp:
+        with open(f"latest/{pkg}_latest.deb", "wb") as wp:
+            wp.write(rp.read())
