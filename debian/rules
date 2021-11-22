@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-export DEB_BUILD_OPTIONS=nocheck
+export DEB_BUILD_MAINT_OPTIONS=nocheck
 
 include /usr/share/dpkg/pkg-info.mk
 
