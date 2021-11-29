@@ -19,19 +19,23 @@ def set_country_code(code):
     cmd = "iw reg set " + code
     out = subprocess.check_output(cmd.split())
 
+    if out:
+        print("iw reg set failed")
+
     crda = "/etc/default/crda"
 
-    with open(crda, 'r') as fp:
+    with open(crda, "r") as fp:
         crdatext = fp.read()
 
-    crdatext = re.sub("REGDOMAIN=.*", "REGDOMAIN=%s" % code,
-                      crdatext, re.MULTILINE)
+    crdatext = re.sub(
+        "REGDOMAIN=.*", "REGDOMAIN=%s" % code, crdatext, re.MULTILINE
+    )
 
-    with open(crda, 'w') as fp:
+    with open(crda, "w") as fp:
         fp.write(crdatext)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     country = get_country_code()
 
     print(country)
