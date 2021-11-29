@@ -41,7 +41,6 @@ DBusGMainLoop(set_as_default=True)
 from comitup import states                                 # noqa
 from comitup import nm                                     # noqa
 from comitup import modemgr                                # noqa
-from comitup import kicknm                                 # noqa
 from comitup import countrycode                            # noqa
 
 comitup_path: str = "/com/github/davesteele/comitup"
