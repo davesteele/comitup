@@ -124,7 +124,7 @@ class Comitup(dbus.service.Object):
         timeout_add(10, do_nuke)
 
     @dbus.service.method(comitup_int, in_signature="s", out_signature="")
-    def set_country(code):
+    def set_country(self, code):
         countrycode.set_country_code(code)
 
 
