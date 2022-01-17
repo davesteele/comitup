@@ -24,6 +24,10 @@ from comitup import iwscan, mdns, modemgr, nm, nmmon, routemgr, wpa
 
 log = logging.getLogger("comitup")
 
+# constants
+DEFAULT_TIMEOUT = 180  # default time for state timeout functions
+FAIL_TIMEOUT = 360  # hotspot timeout after a connecting fail
+
 # Global state information
 dns_names: List[str] = []
 com_state: Optional[str] = None
@@ -208,7 +212,7 @@ def connecting_fail(reason: int) -> None:
     log.debug("Connection failed - reason {}".format(reason))
 
     badreasons = [
-        NetworkManager.NM_DEVICE_STATE_REASON_NO_SECRETS,
+        # NetworkManager.NM_DEVICE_STATE_REASON_NO_SECRETS,  # Disable delete
     ]
     if reason in badreasons:
         log.error("Connection {} config failure - DELETING".format(connection))
@@ -217,7 +221,7 @@ def connecting_fail(reason: int) -> None:
     if conn_list:
         set_state("CONNECTING", force=True)
     else:
-        set_state("HOTSPOT")
+        set_state("HOTSPOT", timeout=FAIL_TIMEOUT)
 
 
 @timeout
@@ -324,7 +328,7 @@ class state_matrix(object):
 def set_state(
     state: str,
     connections: List[str] = [],
-    timeout: int = 180,
+    timeout: int = DEFAULT_TIMEOUT,
     force: bool = False,
 ) -> None:
     timeout_add(0, set_state_to, state, connections, timeout, force, state_id)
