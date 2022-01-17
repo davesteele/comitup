@@ -211,7 +211,7 @@ def connecting_fail(reason: int) -> None:
 
     log.debug("Connection failed - reason {}".format(reason))
 
-    badreasons = [
+    badreasons: List[int] = [
         # NetworkManager.NM_DEVICE_STATE_REASON_NO_SECRETS,  # Disable delete
     ]
     if reason in badreasons:
