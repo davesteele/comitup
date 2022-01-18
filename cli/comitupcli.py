@@ -13,6 +13,9 @@
 
 import argparse
 import sys
+from pathlib import Path
+from re import MULTILINE, search, sub
+from subprocess import run
 from typing import List
 
 sys.path.append(".")
@@ -59,6 +62,43 @@ def do_locate(ciu_client, connection):
         print("ERROR: Run as root")
 
 
+def set_conf(key, val):
+    confpath = Path("/etc/comitup.conf")
+
+    confdata = confpath.read_text()
+
+    if search("^{}: .+$".format(key), confdata, flags=MULTILINE):
+        confdata = sub(
+            "^{}: .+$".format(key),
+            "{}: {}".format(key, val),
+            confdata,
+            flags=MULTILINE,
+        )
+    elif search("^# {}:.+$".format(key), confdata, flags=MULTILINE):
+        confdata = sub(
+            "^(# {}:.+)$".format(key),
+            r"\1\n{}: {}".format(key, val),
+            confdata,
+            flags=MULTILINE,
+        )
+    else:
+        confdata += "{}: {}\n".format(key, val)
+
+    confpath.write_text(confdata)
+
+
+def do_name(ciu_client, name):
+    with open("/etc/hostname", "w", encoding="utf-8") as fp:
+        fp.write(name)
+    with open("/etc/hosts", "a", encoding="utf-8") as fp:
+        fp.write("127.0.0.1\t{}\n".format(name))
+    run(["/usr/bin/hostname", name])
+    set_conf("ap_name", name)
+    run(["/usr/bin/systemctl", "restart", "comitup"])
+
+    sys.exit(0)
+
+
 def do_nuke(ciu_client, connection):
     ciu_client.ciu_nuke()
 
@@ -69,15 +109,29 @@ CmdState = namedtuple(
 
 commands = OrderedDict(
     [
-        ("i", CmdState(do_info, "(i)nfo", True, True, True, True)),
         ("r", CmdState(do_reload, "(r)eload", True, True, True, False)),
+        ("i", CmdState(do_info, "(i)nfo", True, True, True, True)),
+        (
+            "l",
+            CmdState(do_locate, "(l)ocate the device", True, True, True, True),
+        ),
+        (
+            "n",
+            CmdState(
+                do_name,
+                "re(n)ame the device (restarts the service)",
+                True,
+                True,
+                True,
+                True,
+            ),
+        ),
         (
             "d",
             CmdState(
                 do_delete, "(d)elete connection", False, True, True, True
             ),
         ),
-        ("q", CmdState(do_quit, "(q)uit", True, True, True, False)),
         (
             "<n>",
             CmdState(do_connect, "connect to <n>", True, False, False, False),
@@ -87,10 +141,6 @@ commands = OrderedDict(
             CmdState(
                 do_connect, "(m)anual connection", True, False, False, True
             ),
-        ),
-        (
-            "l",
-            CmdState(do_locate, "(l)ocate the device", True, True, True, True),
         ),
         (
             "x",
@@ -103,6 +153,7 @@ commands = OrderedDict(
                 True,
             ),
         ),
+        ("q", CmdState(do_quit, "(q)uit", True, True, True, False)),
     ]
 )
 
@@ -164,6 +215,9 @@ def interpreter():
             ssid = input("ssid?: ")
             password = getpass("password (if required)?: ")
             do_connect(ciu_client, ssid, password)
+        elif cmd == "n":
+            name = input("new host name?: ")
+            do_name(ciu_client, name)
         else:
             try:
                 print()
@@ -188,8 +242,10 @@ def one_shot(cmdlist: List[str]):
     state, connection = get_state(ciu_client)
 
     if cmd == "m":
-        print("Attempting to connecto {}".format(cmdlist[1]))
+        print("Attempting to connect to {}".format(cmdlist[1]))
         do_connect(ciu_client, *cmdlist[1:])
+    elif cmd == "n":
+        do_name(ciu_client, *cmdlist[1:])
     else:
         commands[cmd].fn(ciu_client, connection)
 

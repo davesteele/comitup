@@ -71,12 +71,3 @@ def test_ciu_loadconf(conf_fxt, persist_fxt):
     (conf, data) = config.load_data()
     assert conf.ap_name == "test"
     assert os.path.isfile(persist_fxt)
-
-
-@pytest.fixture()
-def loop_fxt(monkeypatch):
-    loop = Mock()
-
-    monkeypatch.setattr("comitup.comitup.MainLoop", Mock(return_value=loop))
-
-    return loop

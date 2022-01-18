@@ -11,17 +11,17 @@
 # or later
 #
 
+import NetworkManager
 import logging
+import os
+import signal
 import socket
 import subprocess
-from typing import TYPE_CHECKING, Dict, List, Optional
+from typing import Dict, List, Optional
 
 import dbus
 
 from comitup import config, nm
-
-if TYPE_CHECKING:
-    import NetworkManager  # noqa
 
 log = logging.getLogger("comitup")
 
@@ -183,41 +183,52 @@ def add_hosts(hosts: List[str]) -> None:
         addr = nm.get_active_ip(device)
         addr6 = nm.get_active_ip6(device)
         log.debug("add_hosts: {}, {}".format(name, addr))
-        if name in nm.get_phys_dev_names() and name in int_mapping:
-            index = int_mapping[name]
+        try:
+            if name in nm.get_phys_dev_names() and name in int_mapping:
+                index = int_mapping[name]
 
-            try:
-                if addr and addr != "0.0.0.0":
-                    for host in hosts:
+                try:
+                    if addr and addr != "0.0.0.0":
+                        for host in hosts:
+                            log.debug(
+                                "Add A record {}-{}-{}".format(
+                                    host, index, addr
+                                )
+                            )
+                            make_a_record(host, index, addr)
+
+                        entries = True
+
+                    if addr6:
+                        for host in hosts:
+                            log.debug(
+                                "Add AAAA record {}-{}-{}".format(
+                                    host, index, addr6
+                                )
+                            )
+                            make_aaaa_record(host, index, addr6)
+
+                        entries = True
+
+                    if addr6 or (addr and addr != "0.0.0.0"):
                         log.debug(
-                            "Add A record {}-{}-{}".format(host, index, addr)
-                        )
-                        make_a_record(host, index, addr)
-
-                    entries = True
-
-                if addr6:
-                    for host in hosts:
-                        log.debug(
-                            "Add AAAA record {}-{}-{}".format(
-                                host, index, addr6
+                            "Add service {}, {}, {}-{}".format(
+                                host, index, addr, addr6
                             )
                         )
-                        make_aaaa_record(host, index, addr6)
+                        add_service(hosts[0], index, addr, addr6)
 
-                    entries = True
-
-                if addr6 or (addr and addr != "0.0.0.0"):
-                    log.debug(
-                        "Add service {}, {}, {}-{}".format(
-                            host, index, addr, addr6
-                        )
-                    )
-                    add_service(hosts[0], index, addr, addr6)
-
-            except Exception:
-                log.error("Exception encountered adding avahi record")
-                clear_entries(emphatic=True)
+                except Exception:
+                    log.error("Exception encountered adding avahi record")
+                    clear_entries(emphatic=True)
+                    entries = False
+        except NetworkManager.ObjectVanished as e:
+            log.error(
+                "Unrecoverable NetworkManager Error - exiting - {}".format(
+                    str(e)
+                )
+            )
+            os.kill(os.getpid(), signal.SIGTERM)
 
     if group and entries:
         group.Commit()
