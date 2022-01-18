@@ -1,5 +1,5 @@
 -----BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA512
+Hash: SHA256
 
 MD5Sum
 1ac699523b5d0be2cd22e1c9fe6e5c4c  comitup-watch_0.1-1_all.deb
@@ -48,6 +48,7 @@ fd2bf9692be762637d6628021ed603b9  comitup_1.29-1_all.deb
 0fcbc29a0e33346eb74223b4cdb6d0b6  comitup_1.3.1-1_all.deb
 8e93154b0e768ae91134f39ef6060773  comitup_1.30-1_all.deb
 f780798ba62fcdb052c8711f9516fa1d  comitup_1.31-1_all.deb
+4cd1543e9bad71115bc3e4e5d004138a  comitup_1.32-1_all.deb
 d716991b588863cf91af77d34becd701  comitup_1.4-1_all.deb
 c505577932eb26a667fd517f8832b463  comitup_1.5-1_all.deb
 42d42beca4221d9c0dc82a1604b01d29  comitup_1.6-1_all.deb
@@ -63,6 +64,7 @@ d48172762a117f40c2ea1ece6da9c56a  python3-networkmanager_2.0.1-3_all.deb
 8f579803d8ef74b8fff03db65d58a440  python3-networkmanager_2.0.1-4_all.deb
 872adfee6a13608623ce0efb123c7565  python3-networkmanager_2.1-1_all.deb
 69587c0eaaab281aa8964327a2ebe4d2  python3-zeroconf_0.26.1-1_all.deb
+5d5ae159ed8a13eb06a083d23e1dfee4  python3-zeroconf_0.36.1-1_all.deb
 
 SHA1
 5478a24e7e27c10ba05a361336b1ab7c0c87a11a  comitup-watch_0.1-1_all.deb
@@ -111,6 +113,7 @@ d1469be86630d3fbfdfdb3a31f8812c78329e9d3  comitup_1.29-1_all.deb
 26ec070de870832963e4f0e0d41f18300ea8c719  comitup_1.3.1-1_all.deb
 03a181eaa0e071fde3f0296750851c8850e59437  comitup_1.30-1_all.deb
 280665410034629e3bb9b69ea8836163cfbcba65  comitup_1.31-1_all.deb
+3e0496265ac4498d97497319b796ed23d76b6454  comitup_1.32-1_all.deb
 8e5fafdf9a2c92ed76a9a6cfeb9a0050360e7666  comitup_1.4-1_all.deb
 f5a7f0a09e72cf6d0699a6d26ca6c2f44c19059e  comitup_1.5-1_all.deb
 2501f130e7f1f54cc23c319581f8fd1d89e810c4  comitup_1.6-1_all.deb
@@ -126,6 +129,7 @@ b4397e78fa09b6cb0488f7761000c58df296b49c  python3-networkmanager_2.0.1-3_all.deb
 edb14e1bbb853ed3af98ea28bdd277dc1a8491c7  python3-networkmanager_2.0.1-4_all.deb
 6cccef68a152ddf825377eb047f2d9e5cae4353b  python3-networkmanager_2.1-1_all.deb
 1ac7ae475badd337088d9564baef8217da492090  python3-zeroconf_0.26.1-1_all.deb
+2489eb774152a106ee87f5779687b5767b713f17  python3-zeroconf_0.36.1-1_all.deb
 
 SHA256
 9f5a44cca39106a03583c259265a74e0189f9678d15764dc713cb93802e8c97d  comitup-watch_0.1-1_all.deb
@@ -174,6 +178,7 @@ bacfe97aa1eaa9f8e555850f2c3309048ed65663ac36d35d73aa581d04aa3b84  comitup_1.29-1
 183e0172642d866d2878401b843983d1a73f57adb3ecc81252f558e3a059812e  comitup_1.3.1-1_all.deb
 4809c408f5a856253fdc602ce92da70bed2653780c39928f9056aa16f5eeef93  comitup_1.30-1_all.deb
 ac8929eac3c3e82e2044eaee4e7337ad4c1e476ae23c7394339f626d02afde47  comitup_1.31-1_all.deb
+00700ef0404927543fc457cb0539bc9613c48a94a0ea0364601f46d8bb42db4e  comitup_1.32-1_all.deb
 a97bd387e310e1a9070350f35eb9cf2622ba6a1a6f5d646cfd999767acd53303  comitup_1.4-1_all.deb
 c8d93df4289795f1386804a457252b277d442c3d30a1da40b755ec1a55da69b8  comitup_1.5-1_all.deb
 b854e64c734cfd805ac5d7ff24f19e021f9f47723052a87141bd1433760a9b01  comitup_1.6-1_all.deb
@@ -189,20 +194,21 @@ d203fcde35a350d5925123cbc99388ba523a3ac7f7c271f74a6f7b52ce4c2aa0  python3-dnslib
 89c65fd8a986f9f69bbd3eb294b93319b3b7b14b928c3cecf037db48851d85c4  python3-networkmanager_2.0.1-4_all.deb
 ec324d2a46dd6accbe6787ba5b570a0acdf09d09e8d24107d815fa40081994ad  python3-networkmanager_2.1-1_all.deb
 45278a92aa749a4bb0b00aad24b871b7c7d3bbff3a3c83e4bce5c85293f27bba  python3-zeroconf_0.26.1-1_all.deb
+ad91105dd80f482f36e301c38c85b00df5572aaf7a9f93caa65ba50b0115954c  python3-zeroconf_0.36.1-1_all.deb
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEi4SQsUoAbTYxHS3FCVnEo9z4n78FAmD0VG4ACgkQCVnEo9z4
-n7+05w//d5H422RAZBmrj+Thg4qIzrvkU8G28jACgRiU6o1QlwwyOy0loAsbeTBj
-wSOmsRUwejw4Ktt1/t+r48lNmZgjkYt6hlVdRRfmEgNT+/383F0cutSgLWjfOh8/
-voxAe8JXFpdJdqZQ7hHX+pXYNmILrkGJg7me/j3vdLE96AktcpSaTq1hjo65NMPu
-Y5+tUk9SJRPxzbMUGt2svkepmQcn2EePVLfVLwjdrZxizAQuMhuDAQRcnRQzDUGC
-4qR4G2/On87fqtDS8rDqvu4pWFaYkO6D+h1MlutNZJ5r9taZDatY34882XBcwxSM
-m6ktAPkgpTbZ40ZaVCkrAycgOGAfAxMODZ86qiWOZ3gWzEvNXMd2MqRrR+cy22gK
-3EsH0cYyb5GghWMA4gMxosI4k2Op9xA2zyxwFdxGp/TedOD2bMGqnSvgtAdcbhqL
-Ve++smjjR1NRUNHejQkt/yLRju8+MQQollHB04P/kHm8IBnskJTZPsL9I7Jw84+W
-KsIRUfOa8YN0oSih+pCQWmIhvjLL37HRYJcuV0euygPfwjBSuPxwWOr0GRuq3MdD
-jkUYo+5XTHh88eyFgEgV+WCrgRW6XxPEm1lfNA7vzS+PDbNvXXgnebpSjClHwZbJ
-Oa8aIuBxCVxYMnhNmg25LGojTtNRcQYIEd3alCx9QHL+LPFWbtc=
-=lhNR
+iQIzBAEBCAAdFiEEi4SQsUoAbTYxHS3FCVnEo9z4n78FAmHnM8oACgkQCVnEo9z4
+n7/wmhAAn9xRMe9LhE2zt8RAAaHmKTsP1mCv6Cu6fdhHNVt6kumjfJrhXTpQYDzQ
+vZS4HPtd0keuzmJ7C/uPmkLPNYjc+EPOHnA1uebPt6Sz+zziPhr/H1G8+/kr+pEH
+cvUWQHkPJImpFKbB8REFPqADGR9CuOtNY9qsucIvbPz0xWP7umAgagZWfJsDsmGf
+yQSJ/92+ymrxP10rLQ4ZvcgtHEzov1zDkz6ik32ZeDBNECOYRWzvIBIC9SNFj1Bz
+QgyUIrDEAvICsXsuXnF7+VveBjFvybpN6k4kEuMS+f/v2AH3gOOQya0fZwua3+xO
+QKdX5JyM/9qTrVbN70Y/8uyxtt1adt0zCj/tfsKygoto0yYIkiewEjhQmkAkTlZz
++vvpSjlcGUI/aLQ0/jYkzBFk3OcFi5AXGpkirIhLj8XOw6v70m0vqXF1BT82TKoS
+0+xZwiHJVZrd6cg5omBU/gu/KBF51CbbI+/gSneGz2htarSUxcfniRrwNrpEm33k
+cmPXWh959k7nKpFmVNLI1iWJNZTPfD9u+63IqHwucYXzHgsK0eS5QcyA2YoxbQJn
+HjSR2RUZZSckH6gAfi8kvXCv+tpo3VEjW6XDdKYNPRa5uSkVztMyaO4ANmTkz5Q+
+IfBi2wrPM031mmjr2WhyQREFeebg5UyYpwwQ0eRwSZ/7/TRim2A=
+=S14H
 -----END PGP SIGNATURE-----

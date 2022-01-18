@@ -1,18 +1,18 @@
 Package: comitup
-Version: 1.31-1
+Version: 1.32-1
 Architecture: all
 Maintainer: David Steele <steele@debian.org>
-Installed-Size: 1700
+Installed-Size: 657
 Depends: python3-cachetools, python3-cairo, python3-flask, python3-gi, python3-jinja2, python3-networkmanager (>= 2.1-1), python3:any (>= 3.6~), systemd, python3-pkg-resources, python3-dbus, iw, dnsmasq-base, avahi-daemon
 Suggests: python3-tabulate
 Homepage: https://davesteele.github.io/comitup/
 Priority: optional
 Section: net
-Filename: pool/main/c/comitup/comitup_1.31-1_all.deb
-Size: 152816
-SHA256: ac8929eac3c3e82e2044eaee4e7337ad4c1e476ae23c7394339f626d02afde47
-SHA1: 280665410034629e3bb9b69ea8836163cfbcba65
-MD5sum: f780798ba62fcdb052c8711f9516fa1d
+Filename: pool/main/c/comitup/comitup_1.32-1_all.deb
+Size: 119000
+SHA256: 00700ef0404927543fc457cb0539bc9613c48a94a0ea0364601f46d8bb42db4e
+SHA1: 3e0496265ac4498d97497319b796ed23d76b6454
+MD5sum: 4cd1543e9bad71115bc3e4e5d004138a
 Description: bootstrap Wi-Fi using Wi-Fi
  Comitup will attempt to connect to Wi-Fi using an established connection. If
  that fails, it creates a hotspot and web service to aid in configuring a
@@ -133,20 +133,20 @@ Description: Python 3 interface to the NetworkManager D-Bus interface
 
 Package: python3-zeroconf
 Source: python-zeroconf
-Version: 0.26.1-1
+Version: 0.36.1-1
 Architecture: all
-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
-Installed-Size: 198
+Maintainer: Debian Python Team <team+python@tracker.debian.org>
+Installed-Size: 310
 Depends: python3-ifaddr, python3:any
 Breaks: python3-pychromecast (<< 4.2.0~)
 Homepage: https://github.com/jstasiak/python-zeroconf
 Priority: optional
 Section: python
-Filename: pool/main/p/python-zeroconf/python3-zeroconf_0.26.1-1_all.deb
-Size: 43264
-SHA256: 45278a92aa749a4bb0b00aad24b871b7c7d3bbff3a3c83e4bce5c85293f27bba
-SHA1: 1ac7ae475badd337088d9564baef8217da492090
-MD5sum: 69587c0eaaab281aa8964327a2ebe4d2
+Filename: pool/main/p/python-zeroconf/python3-zeroconf_0.36.1-1_all.deb
+Size: 69852
+SHA256: ad91105dd80f482f36e301c38c85b00df5572aaf7a9f93caa65ba50b0115954c
+SHA1: 2489eb774152a106ee87f5779687b5767b713f17
+MD5sum: 5d5ae159ed8a13eb06a083d23e1dfee4
 Description: Pure Python implementation of multicast DNS service discovery (Python3)
  This is an implementation of the multicast DNS Service Discover Library
  zeroconf in pure Python.
