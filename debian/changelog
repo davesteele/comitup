@@ -1,4 +1,4 @@
-comitup (1.32-1) UNRELEASED; urgency=medium
+comitup (1.32-1) comitup; urgency=medium
 
   * No longer delete credentials on upstream auth failure. Extend retry
     instead.
@@ -15,7 +15,7 @@ comitup (1.32-1) UNRELEASED; urgency=medium
   * WEB
     - Expand logging
 
- -- David Steele <steele@debian.org>  Tue, 18 Jan 2022 14:56:06 -0500
+ -- David Steele <steele@debian.org>  Tue, 18 Jan 2022 16:18:44 -0500
 
 comitup (1.31-1) comitup; urgency=medium
 
