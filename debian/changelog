@@ -1,3 +1,22 @@
+comitup (1.32-1) UNRELEASED; urgency=medium
+
+  * No longer delete credentials on upstream auth failure. Extend retry
+    instead.
+  * Add cachetools dependency.
+  * Update and minimize uikit.
+  * Improve boolean detection in config variables.
+  * Tolerate NetworkManager crash, by restarting service.
+  * Fixed bug causing mdns publish failure.
+  * Fixed bug involving SSIDs with extended Unicode chars
+  * Fixed crash on active IP interface with no IPv4 address.
+  * CLI
+    - Host rename command added
+    - Commands reordered
+  * WEB
+    - Expand logging
+
+ -- David Steele <steele@debian.org>  Tue, 18 Jan 2022 14:56:06 -0500
+
 comitup (1.31-1) comitup; urgency=medium
 
   * Added IPv5 support:
