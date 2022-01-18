@@ -4,3 +4,5 @@ for manpg in comitup comitup-conf comitup-web comitup-cli ; do
     (man -t $manpg | ps2pdf - $manpg.pdf);
     man -Thtml $manpg >@manpg.html
 done
+
+rm @manpg.html
