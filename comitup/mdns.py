@@ -218,7 +218,6 @@ def add_hosts(hosts: List[str]) -> None:
             except Exception:
                 log.error("Exception encountered adding avahi record")
                 clear_entries(emphatic=True)
-                entries = False
 
     if group and entries:
         group.Commit()
