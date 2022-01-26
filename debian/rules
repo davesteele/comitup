@@ -17,9 +17,12 @@ export PYBUILD_INSTALL_ARGS=--install-lib=/usr/share/comitup\
 %:
 	dh $@ --with python3 --buildsystem=pybuild
 
+override_dh_auto_clean:
+	dh_auto_clean
+	./debian/release_check || echo "\nRELEASE CHECK FAILURE\n"
+
 override_dh_auto_build:
 	if [ "${VER}" != "${PRODUCT_VER}" ] ; then exit 1 ; fi
-	./debian/release_check || echo "\nRELEASE CHECK FAILURE\n"
 	dh_auto_build
 	uglifyjs web/templates/js/uikit.js -m -c >web/templates/js/uikit.min.js
 	for mn in ${manpages}; do \
