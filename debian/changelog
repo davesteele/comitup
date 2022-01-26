@@ -1,3 +1,9 @@
+comitup (1.33-1) comitup; urgency=medium
+
+  * Fix a web crash involving seen SSIDs with null characters.
+
+ -- David Steele <steele@debian.org>  Tue, 25 Jan 2022 21:15:02 -0500
+
 comitup (1.32-1) comitup; urgency=medium
 
   * No longer delete credentials on upstream auth failure. Extend retry
