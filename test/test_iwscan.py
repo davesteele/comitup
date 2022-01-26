@@ -14,6 +14,7 @@ class Case(NamedTuple):
     [
         Case("but", "but"),
         Case("b\xc3\xbct", "büt"),
+        Case("b\x00\x00t", "b\x00\x00t"),
     ],
 )
 def test_decode_x(case):
