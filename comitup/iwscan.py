@@ -54,6 +54,8 @@ def dbm2pct(dbm: float) -> str:
 
 def decode_x(s: str) -> str:
     """Take a unicode string of the form "b\xc3\xbct" and fix it"""
+    s = re.sub("\x00", "", s, count=0, flags=re.I)
+    s = eval("'{}'".format(s))
     outlist = []
     for cp in s:
         num = ord(cp)
