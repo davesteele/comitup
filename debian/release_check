@@ -62,11 +62,12 @@ if [ $found = "0" ] ; then
   fail="1"
 fi
 
-git diff-files --quiet || exit_code=$?
-if (( exit_code == 1 )) ; then
-  echo "There are working tree changes"
-  fail="1"
-fi
+# This fails during build - patches run first
+# git diff-files --quiet || exit_code=$?
+# if (( exit_code == 1 )) ; then
+#   echo "There are working tree changes"
+#   fail="1"
+# fi
 
 if [ "$fail" == "1" ] ; then
   exit 1
