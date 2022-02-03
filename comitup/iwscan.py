@@ -82,7 +82,8 @@ def devaps(dev: str, dump: str = "") -> List[Dict[str, str]]:
         try:
             ap = blk2dict(blk)
             ap["power"] = dbm2pct(float(ap["signal"].split()[0]))
-            if ap["SSID"]:
+
+            if ap["SSID"] and ap["SSID"].count(r"\x00") == 0:
                 ap["SSID"] = decode_x(ap["SSID"])
                 aps.append(ap)
         except KeyError:
