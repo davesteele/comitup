@@ -1,0 +1,27 @@
+name: Comitup Nox Tests
+
+on: [push, pull_request]
+
+jobs:
+  noxtest:
+    name: Debian Build Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+    steps:
+    - name: Check out
+      uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install build environment
+      run: >
+        sudo apt-get install devscripts build-essential
+    - name: Install build dependencies
+      run: >
+        sudo mk-build-deps -i
+    - name: Build
+      run: |
+        debuild
