@@ -1,4 +1,4 @@
-name: Comitup Nox Tests
+name: Comitup Debian Build Test
 
 on: [push, pull_request]
 
@@ -18,7 +18,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install build environment
       run: >
-        sudo apt-get install devscripts build-essential
+        sudo apt-get install devscripts build-essential equivs
     - name: Install build dependencies
       run: >
         sudo mk-build-deps -i
