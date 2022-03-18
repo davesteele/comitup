@@ -24,8 +24,9 @@ if ".zip" not in zip_name:
 # Update tracker list from https://newtrackon.com
 trackers = [
     "udp://exodus.desync.com:6969/announce",
-    "udp://opentor.org:2710/announce",
+    "udp://tracker.btsync.gq:233/announce",
     "http://tracker.files.fm:6969/announce",
+    #     "udp://opentor.org:2710/announce",
     #     'https://tracker.nanoha.org:443/announce',
     # these two came back up
     #    'udp://tracker.coppersurfer.tk:6969/announce',
