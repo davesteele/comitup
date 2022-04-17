@@ -1,3 +1,9 @@
+comitup (1.35-1) comitup; urgency=medium
+
+  * Improve service publication.
+
+ -- David Steele <steele@debian.org>  Sun, 17 Apr 2022 10:24:15 -0400
+
 comitup (1.34-1) comitup; urgency=medium
 
   * Don't list hidden/invalid SSIDs.
