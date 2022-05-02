@@ -31,7 +31,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "comitup-cmd=comitup.comitup:main",
+            "comitup=comitup.comitup:main",
             "comitup-cli=cli.comitupcli:main",
             "comitup-web=web.comitupweb:main",
         ],
@@ -43,6 +43,7 @@ setup(
     },
     data_files=[
         ("/etc", ["conf/comitup.conf"]),
+        ("/var/lib/comitup", ["conf/comitup.json"]),
         ("/etc/dbus-1/system.d", ["conf/comitup-dbus.conf"]),
         (
             "/usr/share/comitup/web/templates",
@@ -55,13 +56,16 @@ setup(
         (
             "/usr/share/comitup/web/templates/css",
             [
+                "web/templates/css/uikit.css",
+                "web/templates/css/uikit-rtl.css",
                 "web/templates/css/uikit.min.css",
+                "web/templates/css/uikit-rtl.min.css",
             ],
         ),
         (
             "/usr/share/comitup/web/templates/js",
             [
-                "web/templates/js/uikit.min.js",
+                "web/templates/js/uikit.js",
                 "web/templates/js/uikit-icons.js",
                 "web/templates/js/blink.js",
             ],
@@ -84,6 +88,7 @@ setup(
     install_requires=[
         "cachetools",
         "jinja2",
+        "dbus-python",
         "pygobject",
         "flask",
         "python-networkmanager",

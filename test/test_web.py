@@ -27,7 +27,7 @@ def ssid(request):
 
 @pytest.fixture
 def app(monkeypatch):
-    templatedir = pathlib.Path(__file__).parent.parent.parent.parent.parent / "web/templates"
+    templatedir = pathlib.Path(__file__).parent.parent / "web/templates"
     monkeypatch.setattr("web.comitupweb.TEMPLATE_PATH", str(templatedir))
 
     app = comitupweb.create_app(Mock())
