@@ -15,7 +15,6 @@ Build-Depends:
     python3-cachetools,
     pandoc,
     python3-flask,
-    uglifyjs,
 Standards-Version: 4.5.1
 X-Python3-Version: >= 3.6
 Rules-Requires-Root: binary-targets

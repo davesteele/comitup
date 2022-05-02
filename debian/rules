@@ -26,7 +26,6 @@ override_dh_auto_clean:
 override_dh_auto_build:
 	if [ "${VER}" != "${PRODUCT_VER}" ] ; then exit 1 ; fi
 	dh_auto_build
-	uglifyjs web/templates/js/uikit.js -m -c >web/templates/js/uikit.min.js
 	for mn in ${manpages}; do \
 	  pandoc $$mn.md -s -t man -o $$mn; \
 	  sed -i 's/\\\[en\]/\\\-/' $$mn; \
