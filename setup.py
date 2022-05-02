@@ -65,8 +65,8 @@ setup(
         (
             "/usr/share/comitup/web/templates/js",
             [
-                "web/templates/js/uikit.js",
-                "web/templates/js/uikit-icons.js",
+                "web/templates/js/uikit",
+                "web/templates/js/uikit-icons",
                 "web/templates/js/blink.js",
             ],
         ),
