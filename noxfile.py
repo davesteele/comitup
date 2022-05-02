@@ -19,6 +19,7 @@ deps = [
     "flask",
     "pygobject",
     "cachetools",
+    "tomllib",
 ]
 
 
