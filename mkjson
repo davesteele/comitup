@@ -5,10 +5,29 @@ import os
 import re
 from functools import reduce
 
-from distutils.version import LooseVersion
-from pkg_resources import parse_version
+# from pkg_resources import parse_version
 from collections import defaultdict
 
+
+def parse_major(ver):
+    def vergen(ver):
+        for component in re.split("[_\.]+", ver):
+            try:
+                yield int(component)
+            except ValueError:
+                yield component
+
+    return [x for x in vergen(ver)]
+
+def parse_minor(ver):
+    return (ver,)
+
+def parse_version(ver):
+    try:
+        major, minor = ver.split("-")
+    except ValueError:
+        return (ver, None)
+    return (parse_major(major), parse_minor(minor))
 
 def pkgkeyfunc(a):
     (name, ver) = a.split('_')[0:2]

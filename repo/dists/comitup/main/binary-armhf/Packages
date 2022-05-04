@@ -107,19 +107,19 @@ Description: Module to encode/decode DNS wire-format packets (Python 3)
 
 Package: python3-networkmanager
 Source: python-networkmanager
-Version: 2.1-1
+Version: 2.2-1dss02
 Architecture: all
-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
-Installed-Size: 112
+Maintainer: Debian Python Team <team+python@tracker.debian.org>
+Installed-Size: 119
 Depends: network-manager (>= 0.9.0~), python3-dbus, python3-six, python3:any
 Homepage: https://pypi.python.org/pypi/python-networkmanager/
 Priority: optional
 Section: python
-Filename: pool/main/p/python-networkmanager/python3-networkmanager_2.1-1_all.deb
-Size: 26856
-SHA256: ec324d2a46dd6accbe6787ba5b570a0acdf09d09e8d24107d815fa40081994ad
-SHA1: 6cccef68a152ddf825377eb047f2d9e5cae4353b
-MD5sum: 872adfee6a13608623ce0efb123c7565
+Filename: pool/main/p/python-networkmanager/python3-networkmanager_2.2-1dss02_all.deb
+Size: 27796
+SHA256: a62e8cbc7116adb26149a214e55689fd1c30f07d28f3f8c369ab8619d617f6ae
+SHA1: 7bd660c999a5cbfda0ef69a06b3fcbc2502682f3
+MD5sum: 76e55f25232896ee35e806d594f34ef4
 Description: Python 3 interface to the NetworkManager D-Bus interface
  python-networkmanager wraps NetworkManager's D-Bus interface so you can be
  less verbose when talking to NetworkManager from Python. All interfaces have

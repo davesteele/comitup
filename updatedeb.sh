@@ -11,6 +11,7 @@ git rm debian/changelog
 
 cp ../comitup*deb deb/
 cp ../davesteele-comitup-apt-source*deb deb/
+cp ../python3-networkmanager*deb deb/
 
 cd deb
 echo MD5Sum >checksums.txt
