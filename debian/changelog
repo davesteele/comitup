@@ -1,8 +1,8 @@
-comitup (1.36-1) UNRELEASED; urgency=medium
+comitup (1.36-1) unstable; urgency=medium
 
-  * Start v1.36-1
+  * Test and formatting fixes.
 
- -- David Steele <steele@debian.org>  Mon, 02 May 2022 13:13:56 -0600
+ -- David Steele <steele@debian.org>  Wed, 04 May 2022 13:51:16 -0400
 
 comitup (1.35-1) comitup; urgency=medium
 
