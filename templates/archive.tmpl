@@ -27,14 +27,12 @@
       <a href="index.html">back</a>
         <h3>Archived packages.</h3>
 <ul>
-{% for pkg in pkgs.all_pkgs %}
-<li><a href="deb/{{ pkg }}">{{ pkg }}</a></li>
+{% for pkg in pkgs.all_pkgs %}<li><a href="deb/{{ pkg }}">{{ pkg }}</a></li>
 {% endfor %}
 </ul>
 
 <ul>
-{% for pkg in pkgs.pkg_names %}
-<li><a href="latest/{{ pkg }}_latest.html">latest {{ pkg }}</a></li>
+{% for pkg in pkgs.pkg_names %}<li><a href="latest/{{ pkg }}_latest.html">latest {{ pkg }}</a></li>
 {% endfor %}
 </ul>
 
