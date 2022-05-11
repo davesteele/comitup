@@ -1,9 +1,9 @@
-comitup (1.37-1) UNRELEASED; urgency=medium
+comitup (1.37-1) unstable; urgency=medium
 
   * Eliminate web crash when Unicode APs seen.
   * "ap_name" restrictions documented.
 
- -- David Steele <steele@debian.org>  Wed, 11 May 2022 14:05:56 -0400
+ -- David Steele <steele@debian.org>  Wed, 11 May 2022 14:17:58 -0400
 
 comitup (1.36-1) unstable; urgency=medium
 
