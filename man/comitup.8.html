@@ -1,79 +1,374 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<!-- Creator     : groff version 1.22.4 -->
+<!-- CreationDate: Wed May 11 18:35:17 2022 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="author" content="" />
-  <title>comitup(8)</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>comitup</title>
+
 </head>
 <body>
-<header>
-<h1 class="title">comitup(8)</h1>
-<p class="author"></p>
-<p class="date">June 2021</p>
-</header>
-<h1 id="name">NAME</h1>
-<p>comitup – Manage wifi connections on headless, unconnected systems</p>
-<h2 id="synopsis">SYNOPSIS</h2>
-<p><code>comitup [options]</code></p>
-<h2 id="description">DESCRIPTION</h2>
-<p>The <strong>comitup</strong> service provides a means to establish a connection between a computer and a wifi access point, in the case where wifi is the only means available to access the computer.</p>
-<p>On startup, the service will attempt to connect to wifi using established networkmanager(8) connections. If this is not successful, <strong>comitup</strong> will establish a wifi hotspot with the name <em>comitup-&lt;nnn&gt;</em>, where &lt;nnn&gt; is a persistent number.</p>
-<p>While the hotspot is active, a comitup-web(8) service is available to manage connecting to an access point. A captive portal environment is established to aid in discovery of the web service.</p>
-<p>If two wifi interfaces are available, the hotspot will remain active on the first interface, and the internet connection will be made on the second. Otherwise, the hotspot will be replaced with the internet connection.</p>
-<p>In all states, avahi-daemon(8) is used to publish the mdns host name <em>comitup-&lt;nnn&gt;.local</em>, making the web service accessible as e.g. <em>http://comitup-123.local</em>, for systems supporting Zeroconf. For other systems, a <em>comitup</em> Workstation entry is published which is visible to Zeroconf browsing applications, allowing the IP address to be manually determined. The web service address is <em>http://10.41.0.1</em>.</p>
-<p><strong>comitup</strong> logs to <em>/var/log/comitup.log</em>.</p>
-<h2 id="options">Options</h2>
-<ul>
-<li><em>-h</em>, <em>–help</em> - Print help and exit</li>
-<li><em>-c</em>, <em>–check</em> - Check the wifi device configuration and exit</li>
-<li><em>-i</em>, <em>–info</em> - Print info about the current configuration, and exit</li>
-<li><em>-v</em>, <em>–verbose</em> - Increase logging to <em>/var/log/comitup.log</em></li>
-</ul>
-<h2 id="d-bus-interface">D-Bus Interface</h2>
-<p><strong>Comitup</strong> provides a D-Bus object which claims the name <em>com.github.davesteele.comitup</em> on the path <em>/com/github/davesteele/comitup</em>, supporting the interface <em>com.github.davesteele.comitup</em>. The interface includes the following methods.</p>
-<ul>
-<li><p><em>get_info()</em></p>
-<p>Input: None</p>
-<p>Output: <em>DICT_ENTRY</em></p>
-<p>Return information about the current <strong>Comitup</strong> service. The keys are as follows:</p>
-<ul>
-<li><p><em>version</em> - The package version.</p></li>
-<li><p><em>apname</em> - The currently configured AP hotspot name.</p></li>
-<li><p><em>hostnames</em> - A list of host names that are published for the service IP address.</p></li>
-<li><p><em>imode</em> - The current interface mode for comitup. This returns the string ‘single’ or ‘router’. In ‘single’ mode, the hotspot is terminated when <strong>CONNECTED</strong>. In ‘router’ mode, the hotspot is retained, the upstream connection is made with the other wifi device, and traffic is routed between them. The web service is terminated when <strong>CONNECTED</strong>.</p></li>
-</ul></li>
-<li><p><em>access_points()</em></p>
-<p>Input: None</p>
-<p>Output: Array of <em>DICT_ENTRY</em></p>
-<p>Return a list of visible access points. This is represented as an array of D-Bus <em>DICT_ENTRY</em>. Each <em>DICT_ENTRY</em> contains strings associated with the following keys, <em>ssid</em>, <em>strength</em> (0 to 100) and <em>security</em> (<em>encrypted</em> or <em>unencrypted</em>).</p></li>
-<li><p><em>state()</em></p>
-<p>Input: None</p>
-<p>Output: <em>state</em>, <em>connection</em></p>
-<p>This returns strings for the current <strong>comitup</strong> state (either <strong>HOTSPOT</strong>, <strong>CONNECTING</strong>, or <strong>CONNECTED</strong>) and the <em>ssid</em> name for the current connection on the wifi device.</p></li>
-<li><p><em>connect()</em></p>
-<p>Input: <em>ssid</em>, <em>password</em></p>
-<p>Output: None</p>
-<p>Delete any existing connection for <em>ssid</em>, create a new connection, and attempt to connect to it. The password may be a zero length string if not needed.</p></li>
-<li><p><em>delete_connection()</em></p>
-<p>Input: <em>ssid</em></p>
-<p>Output: None</p>
-<p>Delete the connection for <em>ssid</em>. The system will not be able to reconnect using this connection.</p></li>
-<li><p><em>nuke()</em></p>
-<p>Input: None</p>
-<p>Output: None</p>
-<p>Perform a factory reset of Comitup information on the device, which consists of removing all WiFi connections, and restarting the service. Note that <em>enable_nuke</em> must be enabled in comitup.conf for this to succeed.</p></li>
-</ul>
-<h2 id="copyright">COPYRIGHT</h2>
-<p>Comitup is Copyright (C) 2016-2019 David Steele &lt;steele@debian.org&gt;.</p>
-<h2 id="see-also">SEE ALSO</h2>
-<p>comitup-conf(5), comitup-cli(1), comitup-web(8)</p>
+
+<h1 align="center">comitup</h1>
+
+<a href="#NAME">NAME</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">comitup -
+Manage wifi connections on headless, unconnected systems</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>SYNOPSIS</b>
+<tt><br>
+comitup [options]</tt></p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>DESCRIPTION</b>
+<br>
+The <b>comitup</b> service provides a means to establish a
+connection between a computer and a wifi access point, in
+the case where wifi is the only means available to access
+the computer.</p>
+
+<p style="margin-left:11%; margin-top: 1em">On startup, the
+service will attempt to connect to wifi using established
+networkmanager(8) connections. If this is not successful,
+<b>comitup</b> will establish a wifi hotspot with the name
+<i>comitup-&lt;nnn&gt;</i>, where &lt;nnn&gt; is a
+persistent number.</p>
+
+<p style="margin-left:11%; margin-top: 1em">While the
+hotspot is active, a comitup-web(8) service is available to
+manage connecting to an access point. A captive portal
+environment is established to aid in discovery of the web
+service.</p>
+
+<p style="margin-left:11%; margin-top: 1em">If two wifi
+interfaces are available, the hotspot will remain active on
+the first interface, and the internet connection will be
+made on the second. Otherwise, the hotspot will be replaced
+with the internet connection.</p>
+
+<p style="margin-left:11%; margin-top: 1em">In all states,
+avahi-daemon(8) is used to publish the mdns host name
+<i>comitup-&lt;nnn&gt;.local</i>, making the web service
+accessible as e.g.&nbsp;<i>http://comitup-123.local</i>, for
+systems supporting Zeroconf. For other systems, a
+<i>comitup</i> Workstation entry is published which is
+visible to Zeroconf browsing applications, allowing the IP
+address to be manually determined. The web service address
+is <i>http://10.41.0.1</i>.</p>
+
+<p style="margin-left:11%; margin-top: 1em"><b>comitup</b>
+logs to <i>/var/log/comitup.log</i>.</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>Options</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p><i>-h</i>, <i>-help</i> - Print help and exit</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p><i>-c</i>, <i>-check</i> - Check the wifi device
+configuration and exit</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p><i>-i</i>, <i>-info</i> - Print info about the current
+configuration, and exit</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p><i>-v</i>, <i>-verbose</i> - Increase logging to
+<i>/var/log/comitup.log</i></p> </td></tr>
+</table>
+
+<p style="margin-left:11%; margin-top: 1em"><b>D-Bus
+Interface <br>
+Comitup</b> provides a D-Bus object which claims the name
+<i>com.github.davesteele.comitup</i> on the path
+<i>/com/github/davesteele/comitup</i>, supporting the
+interface <i>com.github.davesteele.comitup</i>. The
+interface includes the following methods.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><i>get_info()</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Input: None</p>
+
+<p style="margin-left:14%; margin-top: 1em">Output:
+<i>DICT_ENTRY</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Return
+information about the current <b>Comitup</b> service. The
+keys are as follows:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="83%">
+
+
+<p style="margin-top: 1em"><i>version</i> - The package
+version.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="4%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="83%">
+
+
+<p><i>apname</i> - The currently configured AP hotspot
+name.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="4%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="83%">
+
+
+<p><i>hostnames</i> - A list of host names that are
+published for the service IP address.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="4%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="83%">
+
+
+<p><i>imode</i> - The current interface mode for comitup.
+This returns the string &rsquo;single&rsquo; or
+&rsquo;router&rsquo;. In &rsquo;single&rsquo; mode, the
+hotspot is terminated when <b>CONNECTED</b>. In
+&rsquo;router&rsquo; mode, the hotspot is retained, the
+upstream connection is made with the other wifi device, and
+traffic is routed between them. The web service is
+terminated when <b>CONNECTED</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="4%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="83%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>access_points()</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Input: None</p>
+
+<p style="margin-left:14%; margin-top: 1em">Output: Array
+of <i>DICT_ENTRY</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Return a list
+of visible access points. This is represented as an array of
+D-Bus <i>DICT_ENTRY</i>. Each <i>DICT_ENTRY</i> contains
+strings associated with the following keys, <i>ssid</i>,
+<i>strength</i> (0 to 100) and <i>security</i>
+(<i>encrypted</i> or <i>unencrypted</i>).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="11%">
+
+
+<p style="margin-top: 1em"><i>state()</i></p></td>
+<td width="75%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Input: None</p>
+
+<p style="margin-left:14%; margin-top: 1em">Output:
+<i>state</i>, <i>connection</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">This returns
+strings for the current <b>comitup</b> state (either
+<b>HOTSPOT</b>, <b>CONNECTING</b>, or <b>CONNECTED</b>) and
+the <i>ssid</i> name for the current connection on the wifi
+device.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="14%">
+
+
+<p style="margin-top: 1em"><i>connect()</i></p></td>
+<td width="72%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Input:
+<i>ssid</i>, <i>password</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Output:
+None</p>
+
+<p style="margin-left:14%; margin-top: 1em">Delete any
+existing connection for <i>ssid</i>, create a new
+connection, and attempt to connect to it. The password may
+be a zero length string if not needed.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="29%">
+
+
+<p style="margin-top: 1em"><i>delete_connection()</i></p></td>
+<td width="57%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Input:
+<i>ssid</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Output:
+None</p>
+
+<p style="margin-left:14%; margin-top: 1em">Delete the
+connection for <i>ssid</i>. The system will not be able to
+reconnect using this connection.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><i>nuke()</i></p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Input: None</p>
+
+<p style="margin-left:14%; margin-top: 1em">Output:
+None</p>
+
+<p style="margin-left:14%; margin-top: 1em">Perform a
+factory reset of Comitup information on the device, which
+consists of removing all WiFi connections, and restarting
+the service. Note that <i>enable_nuke</i> must be enabled in
+comitup.conf for this to succeed.</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>COPYRIGHT</b>
+<br>
+Comitup is Copyright (C) 2016-2019 David Steele
+&lt;steele@debian.org&gt;.</p>
+
+<p style="margin-left:11%; margin-top: 1em"><b>SEE ALSO</b>
+<br>
+comitup-conf(5), comitup-cli(1), comitup-web(8),
+comitup-watch(1)</p>
+<hr>
 </body>
 </html>

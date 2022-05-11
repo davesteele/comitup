@@ -1,28 +1,43 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<!-- Creator     : groff version 1.22.4 -->
+<!-- CreationDate: Wed May 11 18:35:18 2022 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="author" content="" />
-  <title>comitup-cli(1)</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>comitup-cli</title>
+
 </head>
 <body>
-<header>
-<h1 class="title">comitup-cli(1)</h1>
-<p class="author"></p>
-<p class="date">June 2021</p>
-</header>
-<h1 id="name">NAME</h1>
-<p>comitup-cli – command-line interface for comitup network management</p>
-<h2 id="synopsis">SYNOPSIS</h2>
-<pre><code>$ `comitup-cli [cmd ...]`
+
+<h1 align="center">comitup-cli</h1>
+
+<a href="#NAME">NAME</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:11%; margin-top: 1em">comitup-cli -
+command-line interface for comitup network management</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<pre style="margin-left:22%;">$ `comitup-cli [cmd ...]`
+
 
 State: HOTSPOT
 Connection: hotspot-123
@@ -35,47 +50,331 @@ Available Commands:
     connect to (&lt;n&gt;)
     [l]ocate the device
     [x] Factory reset (no warning)
-command?:</code></pre>
-<h2 id="description">DESCRIPTION</h2>
-<p>The <strong>comitup-cli</strong> utility provides access to the comitup(8) D-Bus interface. It is intended to serve as a debug tool, and a source code example for connecting to the interface.</p>
-<p>If an argument is provided, a one-shot command is attempted. Oherwise, the program goes into an interpretive mode.</p>
-<p>If the comitup(8) service is not running, <strong>comitup-cli</strong> will immediately exit.</p>
-<h2 id="command-mode-display">Command-Mode Display:</h2>
-<ul>
-<li><p><strong>State</strong></p>
-<p>The <strong>comitup</strong> states are <strong>HOTSPOT</strong>, <strong>CONNECTING</strong>, and <strong>CONNECTED</strong>.</p>
-<p>In the <strong>HOTSPOT</strong> mode, <strong>comitup</strong> creates a wifi hotspot with the name <strong>comitup-&lt;nnn&gt;</strong>, where &lt;nnn&gt; is a persistent number.</p>
-<p>Once in <strong>HOTSPOT</strong> mode, the system will occasionally (~1/min) cycle through available defined connections, by transitioning to the <strong>CONNECTING</strong> mode. The Access Point list is updated by this process. Any command issued by <strong>comitup-cli</strong> will cause the next timeout instance to be skipped.</p>
-<p>Once a connection is established, the system will be in the <strong>CONNECTED</strong> mode. If the connection is lost, failed, or deleted, the system will transition back to the <strong>HOTSPOT</strong> state.</p></li>
-<li><p><strong>Connection</strong></p>
-<p>The <code>ssid</code> of the current active connection.</p></li>
-<li><p><strong>Points</strong></p>
-<p>While in the <strong>HOTSPOT</strong> mode, <strong>comitup-cli</strong> will list the currently-visible access points, by <code>ssid</code>. Access points with the strongest signal are sorted to the top of the list. The entries are numbered, for use with the <strong>connect</strong> command.</p></li>
-</ul>
-<h2 id="commands">Commands</h2>
-<ul>
-<li><p><strong>r</strong> - <strong>Reload</strong></p>
-<p>Refresh the displayed state, mode, and list of access points.</p></li>
-<li><p><strong>q</strong> - <strong>Quit</strong></p>
-<p>Exit <strong>comitup.cli</strong>.</p></li>
-<li><p><strong>d</strong> - <strong>Delete connection</strong></p>
-<p>Delete the configuration information for the current wifi connection. This will cause <strong>comitup</strong> to transition to the <strong>HOTSPOT</strong> mode.</p>
-<p>This command is not available in the <strong>HOTSPOT</strong> mode.</p></li>
-<li><p><strong>&lt;n&gt;</strong> - <strong>Connect to access point &lt;n&gt;</strong></p>
-<p>Define a connection for the selected access point, and then attempt to connect.</p>
-<p>This command is only available in the <strong>HOTSPOT</strong> mode.</p></li>
-<li><p><strong>m</strong> - <strong>Manual connection</strong></p>
-<p>Enter an SSID manually.</p></li>
-<li><p><strong>i</strong> - <strong>Get information</strong></p>
-<p>Return the comitup version and host name for the current instance.</p></li>
-<li><p><strong>l</strong> - <strong>Locate</strong></p>
-<p>Locate the headless Raspberry Pi running Comitup by blinking the front green LED once.</p></li>
-<li><p><strong>x</strong> - <strong>Factory Reset</strong></p>
-<p>Remove all defined WiFi connections, and restart the service. There is no confirmation requested. This will terminate the interpreter session. Note that <em>enable_nuke</em> must be enabled in <em>comitup.conf</em> for this to succeed.</p></li>
-</ul>
-<h2 id="copyright">COPYRIGHT</h2>
-<p>Comitup is Copyright (C) 2016-2019 David Steele &lt;steele@debian.org&gt;</p>
-<h2 id="see-also">SEE ALSO</h2>
-<p>comitup(8), comitup-conf(5), comitup-web(8)</p>
+command?:</pre>
+
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>DESCRIPTION</b>
+<br>
+The <b>comitup-cli</b> utility provides access to the
+comitup(8) D-Bus interface. It is intended to serve as a
+debug tool, and a source code example for connecting to the
+interface.</p>
+
+<p style="margin-left:11%; margin-top: 1em">If an argument
+is provided, a one-shot command is attempted. Oherwise, the
+program goes into an interpretive mode.</p>
+
+<p style="margin-left:11%; margin-top: 1em">If the
+comitup(8) service is not running, <b>comitup-cli</b> will
+immediately exit.</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>Command-Mode
+Display:</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="8%">
+
+
+<p><b>State</b></p></td>
+<td width="78%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">The
+<b>comitup</b> states are <b>HOTSPOT</b>, <b>CONNECTING</b>,
+and <b>CONNECTED</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">In the
+<b>HOTSPOT</b> mode, <b>comitup</b> creates a wifi hotspot
+with the name <b>comitup-&lt;nnn&gt;</b>, where &lt;nnn&gt;
+is a persistent number.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Once in
+<b>HOTSPOT</b> mode, the system will occasionally (~3 min)
+cycle through available defined connections, by
+transitioning to the <b>CONNECTING</b> mode. The Access
+Point list is updated by this process. Any command issued by
+<b>comitup-cli</b> will cause the next timeout instance to
+be skipped.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If any other
+devices are connected to the Comitup hotspot, the periodic
+attempt is skipped, to avoid interrupting service to those
+devices.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Once a
+connection is established, the system will be in the
+<b>CONNECTED</b> mode. If the connection is lost, failed, or
+deleted, the system will transition back to the
+<b>HOTSPOT</b> state.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>Connection</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">The
+<tt>ssid</tt> of the current active connection.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><b>Points</b></p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">While in the
+<b>HOTSPOT</b> mode, <b>comitup-cli</b> will list the
+currently-visible access points, by <tt>ssid</tt>. Access
+points with the strongest signal are sorted to the top of
+the list. The entries are numbered, for use with the
+<b>connect</b> command.</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>Commands</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>r</b> - <b>Reload</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Refresh the
+displayed state, mode, and list of access points.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><b>q</b> - <b>Quit</b></p></td>
+<td width="74%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Exit
+<b>comitup.cli</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em"><b>d</b> - <b>Delete
+connection</b></p> </td>
+<td width="54%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Delete the
+configuration information for the current wifi connection.
+This will cause <b>comitup</b> to transition to the
+<b>HOTSPOT</b> mode.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This command is
+not available in the <b>HOTSPOT</b> mode.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em"><b>&lt;n&gt;</b> - <b>Connect to
+access point &lt;n&gt;</b></p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Define a
+connection for the selected access point, and then attempt
+to connect.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This command is
+only available in the <b>HOTSPOT</b> mode.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em"><b>m</b> - <b>Manual
+connection</b></p> </td>
+<td width="54%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Enter an SSID
+manually.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="29%">
+
+
+<p style="margin-top: 1em"><b>i</b> - <b>Get
+information</b></p> </td>
+<td width="57%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Return the
+comitup version and host name for the current instance.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>l</b> - <b>Locate</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Locate the
+headless Raspberry Pi running Comitup by blinking the front
+green LED once.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>n</b> - <b>reName</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Change the name
+of the host, Comitup ap_name, and comitup mdns domain name.
+This also adds an entry in &rsquo;hosts&rsquo;. This causes
+Comitup to restart, and the cli session to end.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="11%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em"><b>x</b> - <b>Factory
+Reset</b></p> </td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Remove all
+defined WiFi connections, and restart the service. There is
+no confirmation requested. This will terminate the
+interpreter session. Note that <i>enable_nuke</i> must be
+enabled in <i>comitup.conf</i> for this to succeed.</p>
+
+
+<p style="margin-left:11%; margin-top: 1em"><b>COPYRIGHT</b>
+<br>
+Comitup is Copyright (C) 2016-2019 David Steele
+&lt;steele@debian.org&gt;</p>
+
+<p style="margin-left:11%; margin-top: 1em"><b>SEE ALSO</b>
+<br>
+comitup(8), comitup-conf(5), comitup-web(8),
+comitup-watch(1)</p>
+<hr>
 </body>
 </html>
