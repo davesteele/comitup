@@ -22,6 +22,9 @@ It is located in the _/etc/_ directory.
     will be replaced with a persistent, random number. Similarly, the string
     &lt;hostname&gt; is replaced with the computer's hostname.
 
+    For the Avahi Service Discovery publication to work correctly, the name
+    should be ASCII, with no special characters or white space.
+
   * _ap\_password_:
     If this parameter is defined in the configuration file, then the comitup hotspot will
     require that any connection to the hotspot be authenticated, using this password.
