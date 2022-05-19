@@ -87,9 +87,7 @@ boot.</li>
 {% for img in ['lite', 'full'] %}
 <li>Comitup {{ imgs[img]['name'] }} <a href="latest/{{ imgs[img]["latestname"] }}-img-latest.html">Image</a> ({{ imgs[img]['uncompressedstr'] }}B, {{ imgs[img]['compressedstr'] }}B compressed)<br>
 <ul>
-<li><a href="https://steele.debian.net/comitup/{{ imgs[img]['filename'] }}">Download</a>
-| <a href="torrent/{{ imgs[img]['filename'] }}.torrent">Torrent</a>
-| <a href="{{ imgs[img]['magnet'] }}">Magnet</a></li>
+<li><a href="https://steele.debian.net/comitup/{{ imgs[img]['filename'] }}">Download</a></li>
 <li><a href="torrent/{{ imgs[img]['filename'] }}.sha1.txt">SHA1</a>
 | <a href="torrent/{{ imgs[img]['filename'] }}.asc.txt">PGP</a></li>
 <li><a href="https://steele.debian.net/comitup/{{ imgs[img]['infoname'] }}">Info</a></li>
