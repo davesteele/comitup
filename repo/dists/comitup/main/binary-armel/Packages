@@ -39,21 +39,23 @@ Description: monitor local Comitup-enabled devices
 
 Package: davesteele-comitup-apt-source
 Source: davesteele-apt-source
-Version: 1.1
+Version: 1.2
 Architecture: all
 Maintainer: David Steele <steele@debian.org>
-Installed-Size: 28
+Installed-Size: 58
 Homepage: https://github.com/davesteele/davesteele-apt-source
 Priority: optional
 Section: misc
-Filename: pool/main/d/davesteele-apt-source/davesteele-comitup-apt-source_1.1_all.deb
-Size: 11164
-SHA256: feaf18b0899fbd9438faaadf9eb1ef393be0f446d338c192ca0eb6bb8e895790
-SHA1: ce9ce5b95fd0ccb1e2588a03ea6983be7a96241c
-MD5sum: e9109afb6faa3f8d486b8f24a0724ef5
+Filename: pool/main/d/davesteele-apt-source/davesteele-comitup-apt-source_1.2_all.deb
+Size: 43052
+SHA256: 00101275697f75a9f7f268f697d251e78bb411e854c5cc366c24757d1c77894a
+SHA1: 8f93c2df45ea967e6974534e17febe17a6491d66
+MD5sum: ad33d9799bf471aa052e00aab43dee32
 Description: Apt configuration for comitup repository
  This adds a managed key and apt sources entry for the comitup
  repository managed by David Steele.
+ .
+ Note that this key installed by this package is is on the Debian Keyring.
 
 Package: python3-dbussy
 Source: python-dbussy
