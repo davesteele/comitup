@@ -21,6 +21,29 @@ if ".zip" not in zip_name:
     print("argument must be the zipped image")
     sys.exit(1)
 
+# Update tracker list from https://newtrackon.com
+trackers = [
+    "udp://exodus.desync.com:6969/announce",
+    "udp://tracker.btsync.gq:233/announce",
+    "http://tracker.files.fm:6969/announce",
+    #     "udp://opentor.org:2710/announce",
+    #     'https://tracker.nanoha.org:443/announce',
+    # these two came back up
+    #    'udp://tracker.coppersurfer.tk:6969/announce',
+    #    'udp://tracker.opentrackr.org:1337/announce',
+    # old trackers - have been seen offline
+    #    'https://tracker.publictorrent.net:443/announce',
+    #    'http://torrent.nwps.ws:80/announce',
+    #    'udp://thetracker.org:80/announce',
+    #    'udp://tracker.vanitycore.co:6969/announce',
+    #    'http://retracker.telecom.by:80/announce',
+    #    'http://share.camoe.cn:8080/announce',
+    #    'https://1.track.ga:443/announce',
+    #    'https://open.acgnxtracker.com:443/announce',
+    #    'http://tracker.electro-torrent.pl:80/announce',
+]
+
+
 mag = [
     (1000000000.0, "G"),
     (1000000.0, "M"),
@@ -70,6 +93,18 @@ with open("./torrent/{}.sha1.txt".format(zip_name), "w") as fp:
 os.system("gpg -a --detach-sign {}".format(zip_path))
 os.rename(zip_path + ".asc", "./torrent/" + zip_name + ".asc.txt")
 
+cmd = "transmission-create -o ./torrent/{0}.torrent".format(zip_name)
+for tracker in trackers:
+    cmd += " -t " + tracker
+cmd += " " + zip_path
+os.system(cmd)
+
+os.system(
+    "transmission-show -m ./torrent/{0}.torrent >./torrent/{0}.magnet".format(
+        zip_name
+    )
+)
+
 imginfo = {}
 if "lite" in zip_name:
     imginfo["name"] = "Lite"
@@ -89,6 +124,7 @@ zf.close()
 imginfo["compressed"] = os.stat(zip_path).st_size
 imginfo["uncompressedstr"] = numsum(imginfo["uncompressed"])
 imginfo["compressedstr"] = numsum(imginfo["compressed"])
+imginfo["magnet"] = open("./torrent/{}.magnet".format(zip_name), "r").read()
 imginfo["infoname"] = info_name
 
 
@@ -106,7 +142,10 @@ with open(latestpath, "w") as fp:
     fp.write(output)
 
 os.system(
-    "otto upload {} {}".format(zip_path, info_path)
+    "otto add {} {} ./torrent/{}.torrent".format(zip_path, info_path, zip_name)
 )
+
+os.system("cp {} ~/Downloads".format(zip_path))
+os.system("transmission-remote -a ./torrent/{}.torrent".format(zip_name))
 
 os.system("./makesite")
