@@ -17,6 +17,7 @@ import logging
 from functools import wraps
 from typing import Callable, List, Optional
 
+import dbus
 import NetworkManager
 from gi.repository.GLib import timeout_add
 
@@ -192,7 +193,10 @@ def connecting_start(dummy: int) -> None:
 
             conn = conn_list.pop(0)
             log.info("Attempting connection to %s" % conn)
-            activate_connection(conn, "CONNECTING")
+            try:
+                activate_connection(conn, "CONNECTING")
+            except dbus.exceptions.DBusException:
+                connecting_fail(state_id, 0)
         else:
             set_state("HOTSPOT")
 
