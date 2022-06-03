@@ -196,6 +196,8 @@ def connecting_start(dummy: int) -> None:
             try:
                 activate_connection(conn, "CONNECTING")
             except dbus.exceptions.DBusException:
+                msg = "DBUS failure connecting to {} - skipping".format(conn)
+                log.warning(msg)
                 connecting_fail(state_id, 0)
         else:
             set_state("HOTSPOT")
