@@ -11,7 +11,6 @@
 
 from setuptools import setup
 
-
 setup(
     name="comitup",
     packages=["comitup", "web", "cli"],

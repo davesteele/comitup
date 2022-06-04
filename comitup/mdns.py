@@ -11,7 +11,6 @@
 # or later
 #
 
-import NetworkManager
 import logging
 import os
 import signal
@@ -20,6 +19,7 @@ import subprocess
 from typing import Dict, List, Optional
 
 import dbus
+import NetworkManager
 
 from comitup import config, nm
 
