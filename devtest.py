@@ -16,7 +16,6 @@ import venv
 from pathlib import Path
 from typing import List
 
-
 envpath: Path = Path(__file__).resolve().parent / ".devenv"
 pythonpath: str = str(envpath / "bin" / "python")
 
@@ -26,6 +25,7 @@ pkgs: List[str] = [
     "mypy",
     "flake8",
     "black",
+    "isort",
     "types-mock",
     "types-tabulate",
     "types-pkg_resources",
@@ -73,6 +73,7 @@ tests: List[str] = [
     "mypy {}".format(targets),
     "flake8 {}".format(targets),
     "black --check {}".format(targets),
+    "isort --check {}".format(targets),
 ]
 
 if any([runtest(test) for test in tests]):
