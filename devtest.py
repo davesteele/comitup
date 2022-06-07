@@ -7,12 +7,14 @@ devtest.py
 This creates a  virtual environment, and runs a number of test environments
 against the comitup code.
 
-The venv is persistent, so the tests run quicker than in tox or nox.
+The venv is persistent, and the tests run in parallel, so this is much quicker
+than tox or nox.
 """
 
 import subprocess
 import sys
 import venv
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import List
 
@@ -40,17 +42,12 @@ def mkcmd(cmd: str) -> List[str]:
     return [str(pythonpath), "-m"] + cmd.split()
 
 
-def run(cmd: str) -> int:
-    cp = subprocess.run(mkcmd(cmd))
+def run(cmd: str) -> subprocess.CompletedProcess:
+    cp = subprocess.run(
+        mkcmd(cmd), stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+    )
 
-    return cp.returncode
-
-
-def runtest(test: str) -> int:
-
-    print("# Running {}".format(test.split()[0]))
-
-    return run(test)
+    return cp
 
 
 print("# Tests starting")
@@ -76,7 +73,17 @@ tests: List[str] = [
     "isort --check {}".format(targets),
 ]
 
-if any([runtest(test) for test in tests]):
+executor = ThreadPoolExecutor(max_workers=5)
+
+fail = False
+for result in executor.map(lambda x: run(x), tests):
+    print("# Running {}".format(" ".join(result.args)))
+    print(result.stdout.decode())
+    print("#####################################")
+    if result.returncode:
+        fail = True
+
+if fail:
     print("# ERROR(S) ENCOUNTERED")
     sys.exit(1)
 
