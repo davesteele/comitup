@@ -66,20 +66,22 @@ if not envpath.exists():
 
 
 tests: List[str] = [
-    "pytest",
-    "mypy {}".format(targets),
-    "flake8 {}".format(targets),
-    "black --check {}".format(targets),
     "isort --check {}".format(targets),
+    "black --check {}".format(targets),
+    "flake8 {}".format(targets),
+    "mypy {}".format(targets),
+    "pytest",
 ]
 
 executor = ThreadPoolExecutor(max_workers=5)
 
 fail = False
 for result in executor.map(lambda x: run(x), tests):
+    print("#####################################")
     print("# Running {}".format(" ".join(result.args)))
     print(result.stdout.decode())
     print("#####################################")
+    print()
     if result.returncode:
         fail = True
 
