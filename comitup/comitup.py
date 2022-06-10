@@ -126,7 +126,7 @@ def main():
     log.info("Starting comitup")
 
     if args.info:
-        for (key, val) in statemgr.get_info(conf, data).items():
+        for key, val in statemgr.get_info(conf, data).items():
             print("{}: {}".format(key, val))
         sys.exit(0)
 
