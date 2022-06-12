@@ -1,0 +1,9 @@
+title: Comitup
+  # logo: /assets/img/logo.png
+description: Bootstrap WiFi networking using the WiFi connection
+github.is_project_page: true
+github.owner_name: David Steele
+github.owner_url: https://github.com/davesteele
+show_downloads: false
+google_analytics:
+theme: jekyll-theme-minimal
