@@ -91,10 +91,10 @@ To [burn](https://github.com/davesteele/comitup/wiki/Tutorial#copy-the-image-to-
 * The <a href="https://github.com/davesteele/comitup/wiki">Comitup
 Wiki</a> (with <a href="https://github.com/davesteele/comitup/wiki/Tutorial">Tutorial</a>).
 * Man pages
-  * <a href="man/comitup.8.html">comitup (8)</a> (<a href="man/comitup.pdf">pdf</a>)
-  * <a href="man/comitup-conf.5.html">comitup-conf (5)</a> (<a href="man/comitup-conf.pdf">pdf</a>)
-  * <a href="man/comitup-web.8.html">comitup-web (8)</a> (<a href="man/comitup-web.pdf">pdf</a>)
-  * <a href="man/comitup-cli.1.html">comitup-cli (1)</a> (<a href="man/comitup-cli.pdf">pdf</a>)
+  * <a href="man/comitup.pdf">comitup (8)</a>
+  * <a href="man/comitup-conf.pdf">comitup-conf (5)</a>
+  * <a href="man/comitup-web.pdf">comitup-web (8)</a>
+  * <a href="man/comitup-cli.pdf">comitup-cli (1)</a>
 * <a href="https://github.com/davesteele/comitup/blob/debian/debian/changelog">Changelog</a>
 
 ### Support/Feedback
