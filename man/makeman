@@ -2,10 +2,10 @@
 
 for manpg in comitup comitup-conf comitup-web comitup-cli ; do
     (man -t $manpg | ps2pdf - $manpg.pdf);
-    man -Thtml $manpg >$manpg.html
+    # man -Thtml $manpg >$manpg.html
 done
 
-mv -f comitup.html comitup.8.html
-mv -f comitup-cli.html comitup-cli.1.html
-mv -f comitup-conf.html comitup-conf.5.html
-mv -f comitup-web.html comitup-web.8.html
+# mv -f comitup.html comitup.8.html
+# mv -f comitup-cli.html comitup-cli.1.html
+# mv -f comitup-conf.html comitup-conf.5.html
+# mv -f comitup-web.html comitup-web.8.html
