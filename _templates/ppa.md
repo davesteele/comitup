@@ -11,6 +11,8 @@ automatically upgrade with standard tools.
 Note that <a href="https://github.com/davesteele/comitup/wiki/Installing-Comitup">additional steps</a> may be needed.
 <br><br>
 
+Be sure to see the [Installing Comitup](https://github.com/davesteele/comitup/wiki/Installing-Comitup) wiki page for possible issues when installing the package directly.
+
 #### The Better Way
 
 Get the latest <a href="latest/davesteele-comitup-apt-source_latest.html">davesteele-comitup-apt-source deb</a> file from the <a href="archive.html">archive</a>.
