@@ -66,10 +66,10 @@ if not envpath.exists():
 
 
 tests: List[str] = [
-    "isort --check {}".format(targets),
     "black --check {}".format(targets),
-    "flake8 {}".format(targets),
+    "isort --check {}".format(targets),
     "mypy {}".format(targets),
+    "flake8 {}".format(targets),
     "pytest",
 ]
 
