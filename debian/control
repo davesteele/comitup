@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: David Steele <steele@debian.org>
 Build-Depends:
     debhelper-compat (=12),
-    dh-sequence-python3,
+    pybuild-plugin-pyproject,
     dh-python,
     python3-all,
     python3-setuptools,
