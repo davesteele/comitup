@@ -1,5 +1,6 @@
-import pytest
 from typing import NamedTuple
+
+import pytest
 
 from comitup.iwscan import decode_x
 

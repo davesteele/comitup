@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10", "3.11.0-alpha.7"]
+        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10", "3.11.0-alpha - 3.11.0"]
     steps:
     - name: Check out
       uses: actions/checkout@v2
@@ -21,6 +21,8 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Update apt registry
+      run: sudo apt-get update
     - name: Install deb packages
       run: >
         sudo apt-get install
