@@ -14,7 +14,7 @@ from setuptools import setup
 setup(
     name="comitup",
     packages=["comitup", "web", "cli"],
-    version="1.37",
+    version="1.38",
     description="Remotely manage wifi connections on a headless computer",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
