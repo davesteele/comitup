@@ -1,3 +1,11 @@
+comitup (1.38-1) UNRELEASED; urgency=medium
+
+  * Fix bug with attempting connections that don't exist.
+  * Fix crash when encountering SSIDs with "'"s.
+  * Internal test improvements.
+
+ -- David Steele <steele@debian.org>  Thu, 07 Jul 2022 17:37:42 -0400
+
 comitup (1.37-1) unstable; urgency=medium
 
   * Eliminate web crash when Unicode APs seen.
