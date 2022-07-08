@@ -12,6 +12,8 @@ case "$1" in
       rm -f /etc/NetworkManager/dnsmasq-shared.d/nm-dns-sabotage.conf
     fi
 
+    systemctl enable comitup
+
     python3 /usr/share/comitup/comitup/wificheck.py || true
     ;;
 esac

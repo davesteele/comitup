@@ -1,0 +1,46 @@
+--- a/setup.py
++++ b/setup.py
+@@ -44,7 +44,7 @@
+         ("/etc", ["conf/comitup.conf"]),
+         ("/etc/dbus-1/system.d", ["conf/comitup-dbus.conf"]),
+         (
+-            "/usr/share/comitup/web/templates",
++            "/web/templates",
+             [
+                 "web/templates/index.html",
+                 "web/templates/connect.html",
+@@ -52,7 +52,7 @@
+             ],
+         ),
+         (
+-            "/usr/share/comitup/web/templates/css",
++            "/web/templates/css",
+             [
+                 "web/templates/css/uikit.css",
+                 "web/templates/css/uikit-rtl.css",
+@@ -61,7 +61,7 @@
+             ],
+         ),
+         (
+-            "/usr/share/comitup/web/templates/js",
++            "/web/templates/js",
+             [
+                 "web/templates/js/uikit",
+                 "web/templates/js/uikit-icons",
+@@ -69,14 +69,14 @@
+             ],
+         ),
+         (
+-            "/usr/share/comitup/web/templates/images",
++            "/web/templates/images",
+             [
+                 "web/templates/images/ledon.gif",
+                 "web/templates/images/ledoff.gif",
+             ],
+         ),
+         (
+-            "/usr/share/comitup/dns",
++            "/dns",
+             [
+                 "conf/dns-hotspot.conf",
+                 "conf/dns-connected.conf",

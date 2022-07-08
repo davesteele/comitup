@@ -13,8 +13,8 @@ PRODUCT_VER = $(shell (grep -e "^\s*version" setup.py | tail -1 |  sed 's/[^0-9\
 manpages = $(shell (ls doc/*.md | sed 's/.md//'))
 
 export PYBUILD_NAME=comitup
-export PYBUILD_INSTALL_ARGS=--install-lib=/usr/share/comitup\
- --install-scripts=/usr/share/comitup
+# export PYBUILD_INSTALL_ARGS="--install-dir /usr/share/comitup\
+#  --install-scripts=/usr/share/comitup"
 
 %:
 	dh $@ --with python3 --buildsystem=pybuild
@@ -31,6 +31,25 @@ override_dh_auto_build:
 	  sed -i 's/\\\[en\]/\\\-/' $$mn; \
 	done
 
+# TODO - this is a (hopefully) temporary kluge.
+# The PEP517 build process seems to be refusing to install the application
+# module into /usr/share/comitup. Force the file locations after the default
+# install.
+# The rtupdate script did not need to be adjusted, suggesting that this is a
+# bug in pybuild.
+override_dh_auto_install:
+	dh_auto_install
+	mkdir -p debian/comitup/usr/share/comitup
+	mkdir -p debian/comitup/etc
+	mv debian/comitup/usr/lib/python3*/dist-packages/etc/* debian/comitup/etc/
+	mv debian/comitup/usr/lib/python3*/dist-packages/* debian/comitup/usr/share/comitup/
+	rmdir debian/comitup/usr/lib/python3*/dist-packages/
+	mv debian/comitup/usr/bin/* debian/comitup/usr/share/comitup/
+	rmdir debian/comitup/usr/bin/
+
 override_dh_installsystemd:
 	dh_installsystemd
 	dh_installsystemd --name=comitup-web
+
+binary-*:
+	dh-python3
