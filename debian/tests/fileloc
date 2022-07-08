@@ -1,0 +1,20 @@
+#!/bin/bash
+
+declare -a Paths=("/etc/comitup.conf" \
+       "/etc/dbus-1/system.d/comitup-dbus.conf" \
+       "/lib/systemd/system/comitup.service" \
+       "/usr/share/comitup/comitup-cmd" \
+       "/usr/share/comitup/web/comitupweb.py"\
+       "/usr/sbin/comitup" \
+       "/var/lib/comitup" \
+       "/usr/share/comitup/comitup/comitup.py")
+
+retval=0
+for path in ${Paths[@]}; do
+    if [ ! -e $path ]; then
+        echo "Not found - $path"
+        retval=1
+    fi
+done
+
+exit $retval
