@@ -1,18 +1,18 @@
 Package: comitup
-Version: 1.37-1
+Version: 1.38-1
 Architecture: all
 Maintainer: David Steele <steele@debian.org>
-Installed-Size: 1899
-Depends: python3-cachetools, python3-cairo, python3-flask, python3-gi, python3-jinja2, python3-networkmanager (>= 2.1-1), python3:any (>= 3.6~), systemd, python3-pkg-resources, python3-dbus, iw, dnsmasq-base, avahi-daemon
+Installed-Size: 1942
+Depends: python3-cachetools, python3-cairo, python3-flask, python3-gi, python3-jinja2, python3-networkmanager (>= 2.1-1), python3:any, systemd, python3-pkg-resources, python3-dbus, iw, dnsmasq-base, avahi-daemon
 Suggests: python3-tabulate
 Homepage: https://davesteele.github.io/comitup/
 Priority: optional
 Section: net
-Filename: pool/main/c/comitup/comitup_1.37-1_all.deb
-Size: 177144
-SHA256: 2b701c287ce79cd55a0162036466c36f4cfcd27ede8303dd62bcbc88d1de41a8
-SHA1: 6a7835d656e0628bd59975182f8940c8c3ae2107
-MD5sum: edbc99583bcf3eb8b07329f344e013ca
+Filename: pool/main/c/comitup/comitup_1.38-1_all.deb
+Size: 185376
+SHA256: 97bc0b7df84b44f74a4b5e6a465a03d897e29985cec4c95b158dbf00f4fa5364
+SHA1: c6a07239ed64fdaf3b96a7269e0f087e300d3e4f
+MD5sum: 49ba471c6abf6f6fc0552c3ad092343d
 Description: bootstrap Wi-Fi using Wi-Fi
  Comitup will attempt to connect to Wi-Fi using an established connection. If
  that fails, it creates a hotspot and web service to aid in configuring a
