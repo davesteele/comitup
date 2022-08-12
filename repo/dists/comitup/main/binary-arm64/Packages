@@ -1,0 +1,163 @@
+Package: comitup
+Version: 1.38-1
+Architecture: all
+Maintainer: David Steele <steele@debian.org>
+Installed-Size: 1942
+Depends: python3-cachetools, python3-cairo, python3-flask, python3-gi, python3-jinja2, python3-networkmanager (>= 2.1-1), python3:any, systemd, python3-pkg-resources, python3-dbus, iw, dnsmasq-base, avahi-daemon
+Suggests: python3-tabulate
+Homepage: https://davesteele.github.io/comitup/
+Priority: optional
+Section: net
+Filename: pool/main/c/comitup/comitup_1.38-1_all.deb
+Size: 185376
+SHA256: 97bc0b7df84b44f74a4b5e6a465a03d897e29985cec4c95b158dbf00f4fa5364
+SHA1: c6a07239ed64fdaf3b96a7269e0f087e300d3e4f
+MD5sum: 49ba471c6abf6f6fc0552c3ad092343d
+Description: bootstrap Wi-Fi using Wi-Fi
+ Comitup will attempt to connect to Wi-Fi using an established connection. If
+ that fails, it creates a hotspot and web service to aid in configuring a
+ connection.
+
+Package: comitup-watch
+Version: 0.2-1
+Architecture: all
+Maintainer: David Steele <steele@debian.org>
+Installed-Size: 56
+Depends: python3-colorama, python3-dbussy, python3-tabulate, python3-zeroconf, python3:any (>= 3.6~), network-manager, avahi-daemon
+Homepage: https://davesteele.github.io/comitup/
+Priority: optional
+Section: net
+Filename: pool/main/c/comitup-watch/comitup-watch_0.2-1_all.deb
+Size: 11344
+SHA256: c4b423f3a62690e02e4db78f462eee6d7c51c67a4da13893f27cf7dacc9725a2
+SHA1: 0febaec16e847ea9a7f64e3c3633370638bc097a
+MD5sum: ce311aaaf870c0656b5637c64ea97deb
+Description: monitor local Comitup-enabled devices
+ Comitup-watch creates a terminal display showing the status of Comitup devices
+ on the local network. This includes the hotspot name for unconnected devices,
+ IP address information for connected ones, and a current ping status.
+
+Package: davesteele-comitup-apt-source
+Source: davesteele-apt-source
+Version: 1.2
+Architecture: all
+Maintainer: David Steele <steele@debian.org>
+Installed-Size: 58
+Homepage: https://github.com/davesteele/davesteele-apt-source
+Priority: optional
+Section: misc
+Filename: pool/main/d/davesteele-apt-source/davesteele-comitup-apt-source_1.2_all.deb
+Size: 43052
+SHA256: 00101275697f75a9f7f268f697d251e78bb411e854c5cc366c24757d1c77894a
+SHA1: 8f93c2df45ea967e6974534e17febe17a6491d66
+MD5sum: ad33d9799bf471aa052e00aab43dee32
+Description: Apt configuration for comitup repository
+ This adds a managed key and apt sources entry for the comitup
+ repository managed by David Steele.
+ .
+ Note that this key installed by this package is is on the Debian Keyring.
+
+Package: python3-dbussy
+Source: python-dbussy
+Version: 1.3-2
+Architecture: all
+Maintainer: Debian Python Team <team+python@tracker.debian.org>
+Installed-Size: 427
+Depends: python3:any, libdbus-1-3
+Homepage: https://github.com/ldo/dbussy
+Priority: optional
+Section: python
+Filename: pool/main/p/python-dbussy/python3-dbussy_1.3-2_all.deb
+Size: 69956
+SHA256: 1797948183b6ce9b4b95bc7259b9e7c84bb18b3bbd463b15f985653c1861665b
+SHA1: d70ebcd5085f02dea0681e9de13186c04dd91d52
+MD5sum: 470fdcbdd3c23cf1141dc3a48b3763bb
+Description: Python 3 language bindings for libdbus
+ DBussy is a wrapper around libdbus, written in pure Python. It is
+ intended to give access to essentially all the low-level
+ functionality of libdbus, which includes the option to run without an
+ event loop, or to implement your own custom event loop, or hook into
+ asyncio.
+
+Package: python3-dnslib
+Source: python-dnslib
+Version: 0.9.7+hg20170303-1
+Architecture: all
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Installed-Size: 207
+Depends: python3:any (>= 3.3.2-2~)
+Homepage: https://bitbucket.org/paulc/dnslib
+Priority: optional
+Section: python
+Filename: pool/main/p/python-dnslib/python3-dnslib_0.9.7+hg20170303-1_all.deb
+Size: 39328
+SHA256: d203fcde35a350d5925123cbc99388ba523a3ac7f7c271f74a6f7b52ce4c2aa0
+SHA1: 6f20fa6a22cc37e14ab4804cb4216ffe99aca74a
+MD5sum: 110d9db131599f91a0c961d627609b1b
+Description: Module to encode/decode DNS wire-format packets (Python 3)
+ This DNS encode/decode Python 3 module provides:
+ .
+  - Support for encoding/decoding DNS packets between wire format, Python
+    objects, and Zone/DiG textual representation (dnslib.dns)
+  - A server framework allowing the simple creation of custom DNS resolvers
+    (dnslib.server) and a number of example servers created using this
+    framework
+  - A number of utilities for testing (dnslib.client, dnslib.proxy,
+    dnslib.intercept)
+ .
+ This is the Python 3 version of the package.
+
+Package: python3-networkmanager
+Source: python-networkmanager
+Version: 2.2-1dss02
+Architecture: all
+Maintainer: Debian Python Team <team+python@tracker.debian.org>
+Installed-Size: 119
+Depends: network-manager (>= 0.9.0~), python3-dbus, python3-six, python3:any
+Homepage: https://pypi.python.org/pypi/python-networkmanager/
+Priority: optional
+Section: python
+Filename: pool/main/p/python-networkmanager/python3-networkmanager_2.2-1dss02_all.deb
+Size: 27796
+SHA256: a62e8cbc7116adb26149a214e55689fd1c30f07d28f3f8c369ab8619d617f6ae
+SHA1: 7bd660c999a5cbfda0ef69a06b3fcbc2502682f3
+MD5sum: 76e55f25232896ee35e806d594f34ef4
+Description: Python 3 interface to the NetworkManager D-Bus interface
+ python-networkmanager wraps NetworkManager's D-Bus interface so you can be
+ less verbose when talking to NetworkManager from Python. All interfaces have
+ been wrapped in classes, properties are exposed as Python properties and
+ function calls are forwarded to the correct interface.
+ .
+ See docs/index.rst for the documentation. An HTML version can be found on
+ http://packages.python.org/python-networkmanager/
+ .
+ This package provides the Python 3.x module.
+
+Package: python3-zeroconf
+Source: python-zeroconf
+Version: 0.36.1-1
+Architecture: all
+Maintainer: Debian Python Team <team+python@tracker.debian.org>
+Installed-Size: 310
+Depends: python3-ifaddr, python3:any
+Breaks: python3-pychromecast (<< 4.2.0~)
+Homepage: https://github.com/jstasiak/python-zeroconf
+Priority: optional
+Section: python
+Filename: pool/main/p/python-zeroconf/python3-zeroconf_0.36.1-1_all.deb
+Size: 69852
+SHA256: ad91105dd80f482f36e301c38c85b00df5572aaf7a9f93caa65ba50b0115954c
+SHA1: 2489eb774152a106ee87f5779687b5767b713f17
+MD5sum: 5d5ae159ed8a13eb06a083d23e1dfee4
+Description: Pure Python implementation of multicast DNS service discovery (Python3)
+ This is an implementation of the multicast DNS Service Discover Library
+ zeroconf in pure Python.
+ .
+ Compared to some other Zeroconf/Bonjour/Avahi Python packages:
+ .
+  - isn't tied to Bonjour or Avahi
+  - doesn't use D-Bus
+  - doesn't force you to use particular event loop or Twisted
+ .
+ This is the Python3 version of the library.
+

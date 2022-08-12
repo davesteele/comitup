@@ -1,7 +1,7 @@
 Suite: stable
 Codename: comitup
-Date: Sat, 09 Jul 2022 00:09:06 UTC
-Architectures: amd64 i386 armhf armel
+Date: Fri, 12 Aug 2022 14:04:01 UTC
+Architectures: amd64 i386 armhf armel arm64
 Components: main
 Description: Apt repository for comitup on Jessie
 MD5Sum:
@@ -17,6 +17,9 @@ MD5Sum:
  8fcae858d1c583fd3c9fe5129a394106 6590 main/binary-armel/Packages
  70663a7573d82b259e1a857215e54c93 2695 main/binary-armel/Packages.gz
  e386ab57b2853b759f1bd053a0a6fff8 102 main/binary-armel/Release
+ 8fcae858d1c583fd3c9fe5129a394106 6590 main/binary-arm64/Packages
+ 70663a7573d82b259e1a857215e54c93 2695 main/binary-arm64/Packages.gz
+ 964765ce6f8b0beb181975bd58c0a31b 102 main/binary-arm64/Release
 SHA1:
  00d238adc537f838e5b03481f2100d4b748bf82b 6590 main/binary-amd64/Packages
  102467ab37bec1a7b1c232bfb4340fd55d5695c8 2695 main/binary-amd64/Packages.gz
@@ -30,6 +33,9 @@ SHA1:
  00d238adc537f838e5b03481f2100d4b748bf82b 6590 main/binary-armel/Packages
  102467ab37bec1a7b1c232bfb4340fd55d5695c8 2695 main/binary-armel/Packages.gz
  76238278554d09626bb4c5f877c35e380d776c57 102 main/binary-armel/Release
+ 00d238adc537f838e5b03481f2100d4b748bf82b 6590 main/binary-arm64/Packages
+ 102467ab37bec1a7b1c232bfb4340fd55d5695c8 2695 main/binary-arm64/Packages.gz
+ 3664bce575b257d4a2ecbc7436fc9395f834d899 102 main/binary-arm64/Release
 SHA256:
  3a1b7901620c30bf698f2838ddd114ab02b056e09c60fd2db695276e6a469f89 6590 main/binary-amd64/Packages
  e69084e7d587dfab259491d8fdfa132ce5e4fcecaf06d48e7c92935b39127ac7 2695 main/binary-amd64/Packages.gz
@@ -43,3 +49,6 @@ SHA256:
  3a1b7901620c30bf698f2838ddd114ab02b056e09c60fd2db695276e6a469f89 6590 main/binary-armel/Packages
  e69084e7d587dfab259491d8fdfa132ce5e4fcecaf06d48e7c92935b39127ac7 2695 main/binary-armel/Packages.gz
  cec0bf59fe71cdad4d970511bfd7351bedeaa895b1d9478019a0f448381dce2e 102 main/binary-armel/Release
+ 3a1b7901620c30bf698f2838ddd114ab02b056e09c60fd2db695276e6a469f89 6590 main/binary-arm64/Packages
+ e69084e7d587dfab259491d8fdfa132ce5e4fcecaf06d48e7c92935b39127ac7 2695 main/binary-arm64/Packages.gz
+ c3bda7dd658618c9d5a8751989e6bee086a921c88c64936959a8f68e97cb4190 102 main/binary-arm64/Release
