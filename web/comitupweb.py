@@ -11,12 +11,14 @@
 # or later
 #
 
+import json
 import logging
 import sys
 import time
 import urllib
 from logging.handlers import TimedRotatingFileHandler
 from multiprocessing import Process
+from pathlib import Path
 
 from cachetools import TTLCache, cached
 from flask import (
@@ -37,6 +39,13 @@ from comitup import client as ciu  # noqa
 ciu_client = None
 LOG_PATH = "/var/log/comitup-web.log"
 TEMPLATE_PATH = "/usr/share/comitup/web/templates"
+SERVER_PORT = 80
+DEBUG = False
+
+# LOG_PATH = "/tmp/comitup-web.log"
+# TEMPLATE_PATH = "./templates"
+# SERVER_PORT = 8000
+# DEBUG=True
 
 ttl_cache: TTLCache = TTLCache(maxsize=10, ttl=5)
 
@@ -85,8 +94,16 @@ def create_app(log):
         for point in points:
             point["ssid_encoded"] = urllib.parse.quote(point["ssid"])
         log.info("index.html - {} points".format(len(points)))
+
+        with open(str(Path(TEMPLATE_PATH) / "countries.json"), "r") as fp:
+            countries = json.load(fp)
+
         return render_template(
-            "index.html", points=points, can_blink=ciu.can_blink()
+            "index.html",
+            points=points,
+            can_blink=ciu.can_blink(),
+            default_country="",
+            countries=countries,
         )
 
     @app.route("/confirm")
@@ -174,7 +191,7 @@ def main():
     ciu_client.ciu_points()
 
     app = create_app(log)
-    app.run(host="0.0.0.0", port=80, debug=False, threaded=True)
+    app.run(host="0.0.0.0", port=SERVER_PORT, debug=DEBUG, threaded=True)
 
 
 if __name__ == "__main__":
