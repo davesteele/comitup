@@ -58,6 +58,14 @@
                {% endif %}
             </div>
        </div>
+	<form action="/action_page.php" method="get">
+		<label for="browser">Set the WiFi country code:<br></label>
+            <input list="countries" name="country" id="country" value="United States">
+	    <datalist id="countries">{% for country in countries %}
+	          <option value="{{ country.name }}" data-code="{{ country.alpha2 }}">{% endfor %}
+            </datalist>
+            <input type="submit">
+          </form>
     </div>
 </div>
 
