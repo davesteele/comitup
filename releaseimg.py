@@ -136,7 +136,7 @@ imgsinfo[imgname] = imginfo
 with open("imgs.json", "w") as fp:
     json.dump(imgsinfo, fp, indent=4, sort_keys=True)
 
-template = Template(open("templates/latest-img.tmpl").read())
+template = Template(open("_templates/latest-img.tmpl").read())
 output = template.render(img=zip_name)
 with open(latestpath, "w") as fp:
     fp.write(output)
