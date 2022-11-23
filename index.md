@@ -36,7 +36,7 @@ extension of standard Raspberry Pi OS which includes Comitup, and supports
 the following additional
 capabilities:
 
-* The ssh service is enabled by default. Be sure to change the "pi" user
+* The ssh service is enabled by default. Be sure to change the default user
 password.
 * The Raspberry Pi Ethernet port will automatically configure for the host
 network if possible. If a DHCP server is not found, the port will set to
