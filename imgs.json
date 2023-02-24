@@ -1,24 +1,24 @@
 {
     "full": {
-        "compressed": 1233188103,
-        "compressedstr": "1.2 G",
-        "filename": "image_2022-09-08-Comitup.zip",
-        "infoname": "2022-09-08-Comitup.info",
+        "compressed": 1433832880,
+        "compressedstr": "1.4 G",
+        "filename": "image_2023-02-24-Comitup.zip",
+        "infoname": "2023-02-24-Comitup.info",
         "latestname": "comitup",
-        "magnet": "magnet:?xt=urn:btih:2bc2d1c6d64a2807ef03040baf6d730e606e860b&dn=image%5F2022-09-08-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.btsync.gq%3A233%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:cf2ca018f4a50b5f824d9a4c1b9bc720ac1a8cac&dn=image%5F2023-02-24-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.btsync.gq%3A233%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
         "name": "",
-        "uncompressed": 3858759680,
-        "uncompressedstr": "3.8 G"
+        "uncompressed": 4437573632,
+        "uncompressedstr": "4.3 G"
     },
     "lite": {
-        "compressed": 523309871,
-        "compressedstr": "511 M",
-        "filename": "image_2022-09-08-Comitup-lite.zip",
-        "infoname": "2022-09-08-Comitup-lite.info",
+        "compressed": 575213375,
+        "compressedstr": "562 M",
+        "filename": "image_2023-02-24-Comitup-lite.zip",
+        "infoname": "2023-02-24-Comitup-lite.info",
         "latestname": "comitup-lite",
-        "magnet": "magnet:?xt=urn:btih:1ba5d475039eba55b9e0c4fc238f6ae8ff6a1eeb&dn=image%5F2022-09-08-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.btsync.gq%3A233%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:a4617a3d882a1bb84f4fed0bca2d078037b1d30b&dn=image%5F2023-02-24-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.btsync.gq%3A233%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
         "name": "Lite",
-        "uncompressed": 1891631104,
-        "uncompressedstr": "1.8 G"
+        "uncompressed": 2025848832,
+        "uncompressedstr": "2.0 G"
     }
 }

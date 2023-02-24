@@ -57,19 +57,19 @@ with the first logon
 To [burn](https://github.com/davesteele/comitup/wiki/Tutorial#copy-the-image-to-a-microsd-card) onto an SD card for the Raspberry Pi.
 
 
-* Comitup Lite [Image](latest/comitup-lite-img-latest.html) (1.8 GB, 511 MB compressed)
-  * [Download](https://steele.debian.net/comitup/image_2022-09-08-Comitup-lite.zip) | [Torrent](torrent/image_2022-09-08-Comitup-lite.zip.torrent) | [Magnet](magnet:?xt=urn:btih:1ba5d475039eba55b9e0c4fc238f6ae8ff6a1eeb&dn=image%5F2022-09-08-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.btsync.gq%3A233%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce
+* Comitup Lite [Image](latest/comitup-lite-img-latest.html) (2.0 GB, 562 MB compressed)
+  * [Download](https://steele.debian.net/comitup/image_2023-02-24-Comitup-lite.zip) | [Torrent](torrent/image_2023-02-24-Comitup-lite.zip.torrent) | [Magnet](magnet:?xt=urn:btih:a4617a3d882a1bb84f4fed0bca2d078037b1d30b&dn=image%5F2023-02-24-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.btsync.gq%3A233%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce
 ) 
-  * [SHA1](torrent/image_2022-09-08-Comitup-lite.zip.sha1.txt)
-  * [PGP](torrent/image_2022-09-08-Comitup-lite.zip.asc.txt)
-  * [Info](https://steele.debian.net/comitup/2022-09-08-Comitup-lite.info)
+  * [SHA1](torrent/image_2023-02-24-Comitup-lite.zip.sha1.txt)
+  * [PGP](torrent/image_2023-02-24-Comitup-lite.zip.asc.txt)
+  * [Info](https://steele.debian.net/comitup/2023-02-24-Comitup-lite.info)
 
-* Comitup  [Image](latest/comitup-img-latest.html) (3.8 GB, 1.2 GB compressed)
-  * [Download](https://steele.debian.net/comitup/image_2022-09-08-Comitup.zip) | [Torrent](torrent/image_2022-09-08-Comitup.zip.torrent) | [Magnet](magnet:?xt=urn:btih:2bc2d1c6d64a2807ef03040baf6d730e606e860b&dn=image%5F2022-09-08-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.btsync.gq%3A233%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce
+* Comitup  [Image](latest/comitup-img-latest.html) (4.3 GB, 1.4 GB compressed)
+  * [Download](https://steele.debian.net/comitup/image_2023-02-24-Comitup.zip) | [Torrent](torrent/image_2023-02-24-Comitup.zip.torrent) | [Magnet](magnet:?xt=urn:btih:cf2ca018f4a50b5f824d9a4c1b9bc720ac1a8cac&dn=image%5F2023-02-24-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.btsync.gq%3A233%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce
 ) 
-  * [SHA1](torrent/image_2022-09-08-Comitup.zip.sha1.txt)
-  * [PGP](torrent/image_2022-09-08-Comitup.zip.asc.txt)
-  * [Info](https://steele.debian.net/comitup/2022-09-08-Comitup.info)
+  * [SHA1](torrent/image_2023-02-24-Comitup.zip.sha1.txt)
+  * [PGP](torrent/image_2023-02-24-Comitup.zip.asc.txt)
+  * [Info](https://steele.debian.net/comitup/2023-02-24-Comitup.info)
 
 
 #### Package Installation
