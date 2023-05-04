@@ -1,24 +1,24 @@
 {
     "full": {
-        "compressed": 1433832880,
-        "compressedstr": "1.4 G",
-        "filename": "image_2023-02-24-Comitup.zip",
-        "infoname": "2023-02-24-Comitup.info",
+        "compressed": 1345343613,
+        "compressedstr": "1.3 G",
+        "filename": "image_2023-05-03-Comitup.zip",
+        "infoname": "2023-05-03-Comitup.info",
         "latestname": "comitup",
-        "magnet": "magnet:?xt=urn:btih:cf2ca018f4a50b5f824d9a4c1b9bc720ac1a8cac&dn=image%5F2023-02-24-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.btsync.gq%3A233%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:2d5e850b7ab4d1b31e0b943587b854336d96d2a0&dn=image%5F2023-05-03-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce&tr=udp%3A%2F%2Fpsyco.fr%3A6969%2Fannounce\n",
         "name": "",
-        "uncompressed": 4437573632,
-        "uncompressedstr": "4.3 G"
+        "uncompressed": 4190109696,
+        "uncompressedstr": "4.1 G"
     },
     "lite": {
-        "compressed": 575213375,
-        "compressedstr": "562 M",
-        "filename": "image_2023-02-24-Comitup-lite.zip",
-        "infoname": "2023-02-24-Comitup-lite.info",
+        "compressed": 578533623,
+        "compressedstr": "565 M",
+        "filename": "image_2023-05-03-Comitup-lite.zip",
+        "infoname": "2023-05-03-Comitup-lite.info",
         "latestname": "comitup-lite",
-        "magnet": "magnet:?xt=urn:btih:a4617a3d882a1bb84f4fed0bca2d078037b1d30b&dn=image%5F2023-02-24-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.btsync.gq%3A233%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:cff6ff96362400c075496494e85ef60caa0d0111&dn=image%5F2023-05-03-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce&tr=udp%3A%2F%2Fpsyco.fr%3A6969%2Fannounce\n",
         "name": "Lite",
-        "uncompressed": 2025848832,
+        "uncompressed": 2030043136,
         "uncompressedstr": "2.0 G"
     }
 }
