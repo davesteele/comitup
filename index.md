@@ -78,7 +78,7 @@ To [burn](https://github.com/davesteele/comitup/wiki/Tutorial#copy-the-image-to-
   install comitup" (though Buster users shouldn't - more up-to-date-versions of
   the comitup package are HIGHLY RECOMMENDED).
 * New package versions are available in the [Package Archive](archive.html) or
-  the [comitup repository](ppa.html). The latest version can be downloaded
+  the [comitup repository](ppa.html) (there is also a third-party [RPM repo](https://github.com/davesteele/comitup/issues/222)). The latest version can be downloaded
   [here](latest/comitup_latest.html).
 * Remove any references to wifi interfaces in "/etc/network/interfaces" so that
   Network Manager/Comitup can manage them.
