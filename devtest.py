@@ -1,11 +1,10 @@
+#!/usr/bin/python3
+#
 # Copyright (c) 2022 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 #
-
-#!/usr/bin/python3
-
 
 """
 devtest.py
@@ -34,6 +33,8 @@ pkgs: List[str] = [
     "flake8",
     "black",
     "isort",
+    "cachetools",
+    "flask",
     "types-mock",
     "types-tabulate",
     "types-pkg_resources",
