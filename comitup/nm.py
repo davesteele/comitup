@@ -89,7 +89,6 @@ def get_wifi_devices() -> List[nm.Wireless]:
 
 
 def get_phys_dev_names() -> List[str]:
-
     devices = get_devices()
 
     if devices is not None:
@@ -224,7 +223,6 @@ def get_candidate_connections(device: nm.Device) -> List[str]:
                 and settings["connection"]["type"] == "802-11-wireless"
                 and settings["802-11-wireless"]["mode"] == "infrastructure"
             ):
-
                 candidates.append(ssid)
         except KeyError:
             log.debug("Unexpected connection format for %s" % ssid)

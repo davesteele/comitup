@@ -120,7 +120,6 @@ def test_make_hotspot(monkeypatch):
 
 
 def test_make_connection_for(monkeypatch):
-
     addconnection = Mock()
     monkeypatch.setattr("comitup.nm.nm.Settings.AddConnection", addconnection)
 
