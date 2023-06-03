@@ -9,7 +9,7 @@ import re
 import struct
 import subprocess
 from multiprocessing import Process, Queue
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 log = logging.getLogger("comitup")
 
@@ -114,7 +114,7 @@ def dedup_aplist(aplist: List[Dict[str, str]]) -> List[Dict[str, str]]:
     return [apdict[x] for x in apdict]
 
 
-def candidates(device: str = None) -> List[Dict[str, str]]:
+def candidates(device: Optional[str] = None) -> List[Dict[str, str]]:
     """Return a list of reachable Access Point SSIDs, sorted by power"""
 
     if device:

@@ -273,7 +273,7 @@ def make_hotspot(name="comitup", device=None, password="", hash="0000"):
 
 def make_connection_for(
     ssid: str,
-    password: str = None,
+    password: Optional[str] = None,
     interface: Optional[str] = None,
     link_local: bool = True,
 ) -> None:
