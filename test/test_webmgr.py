@@ -4,7 +4,7 @@
 # License-Filename: LICENSE
 
 import pytest
-from mock import call, patch
+from mock import patch
 
 from comitup import webmgr
 
