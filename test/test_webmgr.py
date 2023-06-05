@@ -59,7 +59,6 @@ def test_webmgr_callback(
 
     if arg_fact():
         assert fn_fact().called
-        assert fn_fact().called_with(call(arg_fact()))
     else:
         assert not fn_fact().called
 
