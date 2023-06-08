@@ -32,7 +32,6 @@ sys.path.append("/usr/share/comitup")
 
 import time  # noqa
 
-import pkg_resources  # noqa
 from dbus.mainloop.glib import DBusGMainLoop  # noqa
 from gi.repository.GLib import MainLoop, timeout_add  # noqa
 
@@ -41,6 +40,7 @@ DBusGMainLoop(set_as_default=True)
 from comitup import modemgr  # noqa
 from comitup import nm  # noqa
 from comitup import states  # noqa
+from comitup.__version__ import __version__  # noqa
 
 comitup_path: str = "/com/github/davesteele/comitup"
 
@@ -128,7 +128,7 @@ def get_info(conf: "Config", data: "persist") -> Dict[str, str]:
         sys.exit(1)
 
     info = {
-        "version": pkg_resources.get_distribution("comitup").version,
+        "version": __version__,
         "apname": expand_ap(conf.ap_name, data.id),
         "hostnames": ";".join(get_hosts(conf, data)),
         "imode": modemgr.get_mode(),
