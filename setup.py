@@ -11,10 +11,12 @@
 
 from setuptools import setup
 
+from comitup import __version__
+
 setup(
     name="comitup",
     packages=["comitup", "web", "cli"],
-    version="1.38",
+    version=__version__.__version__,
     description="Remotely manage wifi connections on a headless computer",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
