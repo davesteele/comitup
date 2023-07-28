@@ -1,3 +1,9 @@
+comitup (1.38-2) unstable; urgency=medium
+
+  * Ensure service is unmasked in post install (Closes: #1041447).
+
+ -- David Steele <steele@debian.org>  Fri, 28 Jul 2023 17:12:44 -0400
+
 comitup (1.38-1) unstable; urgency=medium
 
   * Fix bug with attempting connections that don't exist.
