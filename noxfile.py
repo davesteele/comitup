@@ -37,7 +37,7 @@ def missing_pkg(pkg):
 def test(session):
     missings = [x for x in pkgs if missing_pkg(x)]
     if missings:
-        session.error("Missing packages: %s" % format(", ".join(missings)))
+        session.error("Missing packages: %s" % format(" ".join(missings)))
 
     for pkg in deps:
         session.install(pkg)
