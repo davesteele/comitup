@@ -42,13 +42,13 @@ def test(session):
     for pkg in deps:
         session.install(pkg)
 
-    session.run("pytest")
+    session.run("python", "-m", "pytest")
 
 
 @nox.session()
 def flake8(session):
     session.install("flake8")
-    session.run("flake8", "setup.py", "cli", "comitup", "web", "test")
+    session.run("python", "-m", "flake8", "setup.py", "cli", "comitup", "web", "test")
 
 
 @nox.session()
@@ -62,4 +62,4 @@ def mypy(session):
         "types-cachetools",
     )
 
-    session.run("mypy", "cli", "comitup", "web", "test")
+    session.run("python", "-m", "mypy", "cli", "comitup", "web", "test")
