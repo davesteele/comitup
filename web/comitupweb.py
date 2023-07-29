@@ -36,7 +36,7 @@ sys.path.append("..")
 
 from comitup import client as ciu  # noqa
 
-ciu_client = None
+ciu_client = None  # type: ignore
 LOG_PATH = "/var/log/comitup-web.log"
 TEMPLATE_PATH = "/usr/share/comitup/web/templates"
 SERVER_PORT = 80
@@ -71,13 +71,13 @@ def deflog():
 def do_connect(ssid, password, log):
     time.sleep(1)
     log.debug("Calling client connect")
-    ciu_client.service = None
-    ciu_client.ciu_connect(ssid, password)
+    ciu_client.service = None  # type: ignore
+    ciu_client.ciu_connect(ssid, password)  # type: ignore
 
 
 @cached(cache=ttl_cache)
 def cached_points():
-    return ciu_client.ciu_points()
+    return ciu_client.ciu_points()  # type: ignore
 
 
 def create_app(log):
@@ -92,7 +92,9 @@ def create_app(log):
     def index():
         points = cached_points()
         for point in points:
-            point["ssid_encoded"] = urllib.parse.quote(point["ssid"])
+            point["ssid_encoded"] = urllib.parse.quote(  # type: ignore
+                point["ssid"]
+            )
         log.info("index.html - {} points".format(len(points)))
 
         with open(str(Path(TEMPLATE_PATH) / "countries.json"), "r") as fp:
@@ -109,10 +111,10 @@ def create_app(log):
     @app.route("/confirm")
     def confirm():
         ssid = request.args.get("ssid", "")
-        ssid_encoded = urllib.parse.quote(ssid.encode())
+        ssid_encoded = urllib.parse.quote(ssid.encode())  # type: ignore
         encrypted = request.args.get("encrypted", "unencrypted")
 
-        mode = ciu_client.ciu_info()["imode"]
+        mode = ciu_client.ciu_info()["imode"]  # type: ignore
 
         log.info("confirm.html - ssid {0}, mode {1}".format(ssid, mode))
 
@@ -127,7 +129,7 @@ def create_app(log):
 
     @app.route("/connect", methods=["POST"])
     def connect():
-        ssid = urllib.parse.unquote(request.form["ssid"])
+        ssid = urllib.parse.unquote(request.form["ssid"])  # type: ignore
         password = request.form["password"].encode()
 
         cached_points()

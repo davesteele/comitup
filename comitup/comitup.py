@@ -33,7 +33,7 @@ LOG_PATH: str = "/var/log/comitup.log"
 log: Optional[logging.Logger] = None
 
 
-def deflog(verbose: bool) -> logging.Logger:
+def deflog(verbose: int) -> logging.Logger:
     level = logging.INFO
     if verbose:
         level = logging.DEBUG

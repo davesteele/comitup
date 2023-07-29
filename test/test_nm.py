@@ -78,11 +78,11 @@ def connections_fxt(monkeypatch):
 
 
 def test_get_active_ssid(device_fxt):
-    assert nm.get_active_ssid(nm.get_wifi_device()) == "myssid"
+    assert nm.get_active_ssid(nm.get_wifi_device()) == "myssid"  # type: ignore
 
 
 def test_get_active_ip(device_fxt):
-    assert nm.get_active_ip(nm.get_wifi_device()) == "1.2.3.4"
+    assert nm.get_active_ip(nm.get_wifi_device()) == "1.2.3.4"  # type: ignore
 
 
 def test_no_conn(no_connections_fxt):
@@ -106,7 +106,9 @@ def test_activate_connection_by_id(get_dev, monkeypatch, connections_fxt):
         "comitup.nm.nm.NetworkManager.ActivateConnection", activate
     )
 
-    nm.activate_connection_by_ssid("myssid", nm.get_wifi_device())
+    nm.activate_connection_by_ssid(
+        "myssid", nm.get_wifi_device()
+    )  # type: ignore
     assert activate.called
 
 
