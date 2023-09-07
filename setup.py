@@ -52,7 +52,6 @@ setup(
                 "web/templates/index.html",
                 "web/templates/connect.html",
                 "web/templates/confirm.html",
-                "web/templates/countries.js",
             ],
         ),
         (
