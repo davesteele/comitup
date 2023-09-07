@@ -14,8 +14,6 @@ case "$1" in
 
     systemctl unmask comitup
     systemctl enable comitup
-
-    python3 /usr/share/comitup/comitup/wificheck.py || true
     ;;
 esac
 
