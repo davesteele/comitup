@@ -1,24 +1,24 @@
 {
     "full": {
-        "compressed": 1345343613,
-        "compressedstr": "1.3 G",
-        "filename": "image_2023-05-03-Comitup.zip",
-        "infoname": "2023-05-03-Comitup.info",
+        "compressed": 2053134069,
+        "compressedstr": "2.0 G",
+        "filename": "image_2024-01-08-Comitup.zip",
+        "infoname": "2024-01-08-Comitup.info",
         "latestname": "comitup",
-        "magnet": "magnet:?xt=urn:btih:2d5e850b7ab4d1b31e0b943587b854336d96d2a0&dn=image%5F2023-05-03-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce&tr=udp%3A%2F%2Fpsyco.fr%3A6969%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:8064931f3257277a43ccb09d2207661dd5ef6fc3&dn=image_2024-01-08-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce&tr=udp%3A%2F%2Fpsyco.fr%3A6969%2Fannounce\n",
         "name": "",
-        "uncompressed": 4190109696,
-        "uncompressedstr": "4.1 G"
+        "uncompressed": 5389680640,
+        "uncompressedstr": "5.3 G"
     },
     "lite": {
-        "compressed": 578533623,
-        "compressedstr": "565 M",
-        "filename": "image_2023-05-03-Comitup-lite.zip",
-        "infoname": "2023-05-03-Comitup-lite.info",
+        "compressed": 1029092777,
+        "compressedstr": "1.0 G",
+        "filename": "image_2024-01-08-Comitup-lite.zip",
+        "infoname": "2024-01-08-Comitup-lite.info",
         "latestname": "comitup-lite",
-        "magnet": "magnet:?xt=urn:btih:cff6ff96362400c075496494e85ef60caa0d0111&dn=image%5F2023-05-03-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce&tr=udp%3A%2F%2Fpsyco.fr%3A6969%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:518c4d30a8755b8013a9a7aab03256e098236c93&dn=image_2024-01-08-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.files.fm%3A6969%2Fannounce&tr=udp%3A%2F%2Fpsyco.fr%3A6969%2Fannounce\n",
         "name": "Lite",
-        "uncompressed": 2030043136,
-        "uncompressedstr": "2.0 G"
+        "uncompressed": 2667577344,
+        "uncompressedstr": "2.6 G"
     }
 }
