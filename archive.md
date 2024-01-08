@@ -76,6 +76,7 @@ layout: default
 *  [python3-networkmanager_2.1-1_all.deb](deb/python3-networkmanager_2.1-1_all.deb)
 *  [python3-networkmanager_2.2-1dss01_all.deb](deb/python3-networkmanager_2.2-1dss01_all.deb)
 *  [python3-networkmanager_2.2-1dss02_all.deb](deb/python3-networkmanager_2.2-1dss02_all.deb)
+*  [python3-networkmanager_2.2-3_all.deb](deb/python3-networkmanager_2.2-3_all.deb)
 *  [python3-zeroconf_0.26.1-1_all.deb](deb/python3-zeroconf_0.26.1-1_all.deb)
 *  [python3-zeroconf_0.36.1-1_all.deb](deb/python3-zeroconf_0.36.1-1_all.deb)
 

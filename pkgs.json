@@ -70,6 +70,7 @@
         "python3-networkmanager_2.1-1_all.deb",
         "python3-networkmanager_2.2-1dss01_all.deb",
         "python3-networkmanager_2.2-1dss02_all.deb",
+        "python3-networkmanager_2.2-3_all.deb",
         "python3-zeroconf_0.26.1-1_all.deb",
         "python3-zeroconf_0.36.1-1_all.deb"
     ],
@@ -79,7 +80,7 @@
         "davesteele-comitup-apt-source_1.2_all.deb",
         "python3-dbussy_1.3-2_all.deb",
         "python3-dnslib_0.9.7+hg20170303-1_all.deb",
-        "python3-networkmanager_2.2-1dss02_all.deb",
+        "python3-networkmanager_2.2-3_all.deb",
         "python3-zeroconf_0.36.1-1_all.deb"
     ],
     "pkg_names": [
