@@ -14,6 +14,7 @@
 
 import hashlib
 import logging
+import time
 from functools import wraps
 from typing import Callable, List, Optional
 
@@ -92,6 +93,12 @@ def dns_to_conn(host: str) -> str:
         return host
 
 
+def request_ap_scan():
+    ap_dev: NetworkManager.Device = modemgr.get_ap_device()
+    ap_dev.RequestScan([])
+
+    time.sleep(5)
+
 #
 # Hotspot state
 #
@@ -123,7 +130,9 @@ def hotspot_start(dummy: int) -> None:
         activate_connection(hs_ssid, "HOTSPOT")
     else:
         log.debug("Didn't need to reactivate - already running")
-        # the connect callback won't happen - let's 'pass' manually
+
+        request_ap_scan()
+
         timeout_add(100, fake_hs_pass, state_id)
 
 
@@ -200,6 +209,7 @@ def connecting_start(dummy: int) -> None:
                 log.warning(msg)
                 connecting_fail(state_id, 0)
         else:
+            request_ap_scan()
             set_state("HOTSPOT")
 
 
@@ -227,6 +237,7 @@ def connecting_fail(reason: int) -> None:
     if conn_list:
         set_state("CONNECTING", force=True)
     else:
+        request_ap_scan()
         set_state("HOTSPOT", timeout=FAIL_TIMEOUT)
 
 
