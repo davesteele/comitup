@@ -75,8 +75,8 @@ To [burn](https://github.com/davesteele/comitup/wiki/Tutorial#copy-the-image-to-
 #### Package Installation
 
 * Raspberry Pi OS/Debian users can install the package with "sudo apt-get
-  install comitup" (Bookworm users note that an updated python3-networkmanager package is required, available in the Comitup
-  [repository](ppa.html)).
+  install comitup" (Bookworm users note that an updated python3-networkmanager package is required, available in the
+  Comitup [repository](ppa.html)).
 * New package versions are available in the [Package Archive](archive.html) or
   the [comitup repository](ppa.html) (there is also a third-party [RPM repo](https://github.com/davesteele/comitup/issues/222)). The latest version can be downloaded
   [here](latest/comitup_latest.html).
