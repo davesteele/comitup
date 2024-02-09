@@ -11,6 +11,8 @@
 
 from setuptools import setup
 
+import sys
+sys.path.append(".")
 from comitup import __version__
 
 setup(
