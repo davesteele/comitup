@@ -6,10 +6,6 @@ export PYBUILD_DISABLE=test
 
 include /usr/share/dpkg/pkg-info.mk
 
-VER = $(shell (echo ${DEB_VERSION}) | sed 's/[-\+].\+//')
-PRODUCT_VER = $(shell (grep -e "^\s*version" setup.py | tail -1 |  sed 's/[^0-9\.]//g'))
-
-
 manpages = $(shell (ls doc/*.md | sed 's/.md//'))
 
 export PYBUILD_NAME=comitup
@@ -24,7 +20,6 @@ override_dh_auto_clean:
 	./debian/release_check || echo "\nRELEASE CHECK FAILURE\n"
 
 override_dh_auto_build:
-	if [ "${VER}" != "${PRODUCT_VER}" ] ; then exit 1 ; fi
 	dh_auto_build
 	for mn in ${manpages}; do \
 	  pandoc $$mn.md -s -t man -o $$mn; \
