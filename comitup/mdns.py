@@ -126,9 +126,11 @@ def add_service(
             string_array_to_txt_array(
                 [
                     "hostname=%s" % host,
-                    "ipaddr=%s" % addr
-                    if (addr and addr != "0.0.0.0")
-                    else "ipaddr=",
+                    (
+                        "ipaddr=%s" % addr
+                        if (addr and addr != "0.0.0.0")
+                        else "ipaddr="
+                    ),
                     "ip6addr=%s" % addr6 if addr6 else "ip6addr=",
                     "comitup-home=https://davesteele.github.io/comitup/",
                 ]

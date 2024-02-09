@@ -9,11 +9,12 @@
 # or later
 #
 
+import sys
+
 from setuptools import setup
 
-import sys
 sys.path.append(".")
-from comitup import __version__
+from comitup import __version__  # noqa
 
 setup(
     name="comitup",
