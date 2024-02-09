@@ -1,3 +1,9 @@
+comitup (1.39-1) UNRELEASED; urgency=medium
+
+  * Python 3.12 compatibilty fixes (Closes: #1061791).
+
+ -- David Steele <steele@debian.org>  Fri, 09 Feb 2024 12:43:00 -0500
+
 comitup (1.38-2) unstable; urgency=medium
 
   * Ensure service is unmasked in post install (Closes: #1041447).
