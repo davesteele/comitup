@@ -37,13 +37,13 @@ def test_avahi_establish_group(avahi_fxt):
 
 
 def test_avahi_make_a_record(avahi_fxt):
-    mdns.make_a_record("host", "1", "1.2.3.4")
-    assert mdns.group.AddRecord.called
+    mdns.make_a_record("host", 1, "1.2.3.4")
+    assert mdns.group.AddRecord.called  # type: ignore
 
 
 def test_avahi_add_service(avahi_fxt):
-    mdns.add_service("host", "1", "1.2.3.4", "::1")
-    assert mdns.group.AddService.called
+    mdns.add_service("host", 1, "1.2.3.4", "::1")
+    assert mdns.group.AddService.called  # type: ignore
 
 
 @patch("comitup.mdns.establish_group", Mock())
@@ -58,7 +58,7 @@ def test_avahi_clear_entries(avahi_fxt):
 
     assert isempty.called
     assert oldgroup.Reset.called
-    assert not mdns.log.called
+    assert not mdns.log.called  # type: ignore
 
 
 @pytest.mark.parametrize(

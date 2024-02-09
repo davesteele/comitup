@@ -1,3 +1,9 @@
+# Copyright (c) 2022 David Steele <dsteele@gmail.com>
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+# License-Filename: LICENSE
+#
+
 import subprocess
 
 import nox
@@ -31,18 +37,18 @@ def missing_pkg(pkg):
 def test(session):
     missings = [x for x in pkgs if missing_pkg(x)]
     if missings:
-        session.error("Missing packages: %s" % format(", ".join(missings)))
+        session.error("Missing packages: %s" % format(" ".join(missings)))
 
     for pkg in deps:
         session.install(pkg)
 
-    session.run("pytest")
+    session.run("python", "-m", "pytest")
 
 
 @nox.session()
 def flake8(session):
     session.install("flake8")
-    session.run("flake8", "setup.py", "cli", "comitup", "web", "test")
+    session.run("python", "-m", "flake8", "setup.py", "cli", "comitup", "web", "test")
 
 
 @nox.session()
@@ -56,4 +62,4 @@ def mypy(session):
         "types-cachetools",
     )
 
-    session.run("mypy", "cli", "comitup", "web", "test")
+    session.run("python", "-m", "mypy", "cli", "comitup", "web", "test")

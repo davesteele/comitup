@@ -192,7 +192,6 @@ def print_cmd_prompts(state, connection, points):
 
 
 def interpreter():
-
     ciu_client = ciu.CiuClient()
 
     while True:

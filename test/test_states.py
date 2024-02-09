@@ -66,7 +66,6 @@ def points_fxt(monkeypatch):
 
 @pytest.mark.parametrize("offset, match", ((-1, False), (0, True), (1, False)))
 def test_state_timeout_wrapper(offset, match):
-
     themock = Mock()
 
     @states.timeout

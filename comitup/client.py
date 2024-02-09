@@ -19,7 +19,6 @@ from comitup.blink import blink, can_blink  # noqa
 
 
 class CiuClient(object):
-
     # Make the dbus functions late binding, to facilitate testing.
 
     # These are the methods supported, with the corresponding dbus

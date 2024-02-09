@@ -39,8 +39,8 @@ Comitup can remember multiple upstream connections, and will search among them
 in the connection attempt, making it easier to move your device to different
 locations.
 
-If two wifi interfaces are available, the first will persistently remain
-the hotspot, and the second will get the external connection. When both
+If two wifi interfaces are available, the first can persistently remain
+the hotspot, and the second can manage the external connection. When both
 are connected, forwarding and masquerading are enabled so that
 hotspot-connected devices can access external networks.
 
