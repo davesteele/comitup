@@ -1,7 +1,7 @@
 #!/bin/bash
 
 declare -a Paths=("/etc/comitup.conf" \
-       "/etc/dbus-1/system.d/comitup-dbus.conf" \
+       "/usr/share/dbus-1/system.d/comitup-dbus.conf" \
        "/lib/systemd/system/comitup.service" \
        "/usr/share/comitup/comitup-cmd" \
        "/usr/share/comitup/web/comitupweb.py"\
