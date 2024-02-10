@@ -10,7 +10,7 @@ and script in the same directory.
 
 --- a/setup.py
 +++ b/setup.py
-@@ -31,7 +31,7 @@
+@@ -35,7 +35,7 @@
      ],
      entry_points={
          "console_scripts": [
