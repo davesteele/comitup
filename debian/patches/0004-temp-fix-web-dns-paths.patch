@@ -1,15 +1,15 @@
 --- a/setup.py
 +++ b/setup.py
-@@ -44,7 +44,7 @@
+@@ -49,7 +49,7 @@
          ("/etc", ["conf/comitup.conf"]),
-         ("/etc/dbus-1/system.d", ["conf/comitup-dbus.conf"]),
+         ("/usr/share/dbus-1/system.d", ["conf/comitup-dbus.conf"]),
          (
 -            "/usr/share/comitup/web/templates",
 +            "/web/templates",
              [
                  "web/templates/index.html",
                  "web/templates/connect.html",
-@@ -52,7 +52,7 @@
+@@ -57,7 +57,7 @@
              ],
          ),
          (
@@ -18,7 +18,7 @@
              [
                  "web/templates/css/uikit.css",
                  "web/templates/css/uikit-rtl.css",
-@@ -61,7 +61,7 @@
+@@ -66,7 +66,7 @@
              ],
          ),
          (
@@ -27,7 +27,7 @@
              [
                  "web/templates/js/uikit",
                  "web/templates/js/uikit-icons",
-@@ -69,14 +69,14 @@
+@@ -74,14 +74,14 @@
              ],
          ),
          (

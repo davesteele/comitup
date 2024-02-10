@@ -6,11 +6,11 @@ We don't want it to be overwritten on upgrade.
 
 --- a/setup.py
 +++ b/setup.py
-@@ -43,7 +43,6 @@
+@@ -47,7 +47,6 @@
      },
      data_files=[
          ("/etc", ["conf/comitup.conf"]),
 -        ("/var/lib/comitup", ["conf/comitup.json"]),
-         ("/etc/dbus-1/system.d", ["conf/comitup-dbus.conf"]),
+         ("/usr/share/dbus-1/system.d", ["conf/comitup-dbus.conf"]),
          (
              "/usr/share/comitup/web/templates",
