@@ -48,7 +48,7 @@ setup(
     data_files=[
         ("/etc", ["conf/comitup.conf"]),
         ("/var/lib/comitup", ["conf/comitup.json"]),
-        ("/etc/dbus-1/system.d", ["conf/comitup-dbus.conf"]),
+        ("/usr/share/dbus-1/system.d", ["conf/comitup-dbus.conf"]),
         (
             "/usr/share/comitup/web/templates",
             [
