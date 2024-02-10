@@ -35,7 +35,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "comitup=comitup.comitup:main",
+            "comitup-cmd=comitup.comitup:main",
             "comitup-cli=cli.comitupcli:main",
             "comitup-web=web.comitupweb:main",
         ],
@@ -47,10 +47,9 @@ setup(
     },
     data_files=[
         ("/etc", ["conf/comitup.conf"]),
-        ("/var/lib/comitup", ["conf/comitup.json"]),
         ("/usr/share/dbus-1/system.d", ["conf/comitup-dbus.conf"]),
         (
-            "/usr/share/comitup/web/templates",
+            "/web/templates",
             [
                 "web/templates/index.html",
                 "web/templates/connect.html",
@@ -58,7 +57,7 @@ setup(
             ],
         ),
         (
-            "/usr/share/comitup/web/templates/css",
+            "/web/templates/css",
             [
                 "web/templates/css/uikit.css",
                 "web/templates/css/uikit-rtl.css",
@@ -67,7 +66,7 @@ setup(
             ],
         ),
         (
-            "/usr/share/comitup/web/templates/js",
+            "/web/templates/js",
             [
                 "web/templates/js/uikit",
                 "web/templates/js/uikit-icons",
@@ -75,14 +74,14 @@ setup(
             ],
         ),
         (
-            "/usr/share/comitup/web/templates/images",
+            "/web/templates/images",
             [
                 "web/templates/images/ledon.gif",
                 "web/templates/images/ledoff.gif",
             ],
         ),
         (
-            "/usr/share/comitup/dns",
+            "/dns",
             [
                 "conf/dns-hotspot.conf",
                 "conf/dns-connected.conf",
@@ -92,7 +91,6 @@ setup(
     install_requires=[
         "cachetools",
         "jinja2",
-        "dbus-python",
         "pygobject",
         "flask",
         "python-networkmanager",
