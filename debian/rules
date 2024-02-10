@@ -36,11 +36,15 @@ override_dh_auto_install:
 	dh_auto_install
 	mkdir -p debian/comitup/usr/share/comitup
 	mkdir -p debian/comitup/etc
+	mkdir -p debian/comitup/usr/share/dbus-1/system.d
 	mv debian/comitup/usr/lib/python3*/dist-packages/etc/* debian/comitup/etc/
 	mv debian/comitup/usr/lib/python3*/dist-packages/* debian/comitup/usr/share/comitup/
 	rmdir debian/comitup/usr/lib/python3*/dist-packages/
 	mv debian/comitup/usr/bin/* debian/comitup/usr/share/comitup/
 	rmdir debian/comitup/usr/bin/
+	mv debian/comitup/usr/share/comitup/usr/share/dbus-1/system.d/* debian/comitup/usr/share/dbus-1/system.d/
+	rm -rf debian/comitup/usr/share/comitup/usr
+	rm -rf debian/comitup/usr/share/comitup/etc
 
 override_dh_installsystemd:
 	dh_installsystemd
