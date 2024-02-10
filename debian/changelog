@@ -1,6 +1,6 @@
 comitup (1.39-1) UNRELEASED; urgency=medium
 
-  * Python 3.12 compatibilty fixes (Closes: #1061791).
+  * Python 3.12 compatibility fixes (Closes: #1061791).
 
  -- David Steele <steele@debian.org>  Fri, 09 Feb 2024 12:43:00 -0500
 
