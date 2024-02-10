@@ -21,7 +21,7 @@ using a ZeroConf Browser.
 * A comitup-web service, which provides a web interface for selecting and 
 authenticating against an existing Access Point.
 * A captive portal, facilitating discovery of the web service on systems
-that support it.</li>
+that support it.
 * The portal also features a "Locate" function that will blink the front
 green LED on a a Raspberry Pi, allowing the user to discriminate between
 multiple Comitup Pi's.
