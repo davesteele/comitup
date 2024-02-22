@@ -54,10 +54,7 @@ def offval() -> str:
 
 def can_blink() -> bool:
     """Is this a Pi with a blinkable green led?"""
-    if bright_path() and bright_path().exists() and trigger_path().exists():
-        return True
-
-    return False
+    return bright_path() and trigger_path()
 
 
 def get_trigger() -> str:
