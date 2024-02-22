@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - test
+      - python3.13
   pull_request:
 
 jobs:
@@ -13,8 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        #         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13.0-alpha - 3.13.0"]
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13.0-alpha - 3.13.0"]
     steps:
     - name: Check out
       uses: actions/checkout@v4
