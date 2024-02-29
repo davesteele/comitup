@@ -1,3 +1,11 @@
+comitup (1.40-1) UNRELEASED; urgency=medium
+
+  * Cleanup wpa kick output.
+  * Improve the AP device detection on startup.
+  * Replace iptables with nftables.
+
+ -- David Steele <steele@debian.org>  Thu, 29 Feb 2024 18:57:12 -0500
+
 comitup (1.39-1) unstable; urgency=medium
 
   * Python 3.12 compatibility fixes (Closes: #1061791).
