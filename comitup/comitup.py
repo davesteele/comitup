@@ -21,7 +21,7 @@ from gi.repository.GLib import MainLoop  # noqa
 
 from comitup import cdns  # noqa
 from comitup import config  # noqa
-from comitup import iptmgr  # noqa
+from comitup import nftmgr  # noqa
 from comitup import nuke  # noqa
 from comitup import persist  # noqa
 from comitup import statemgr  # noqa
@@ -144,14 +144,14 @@ def main():
     check_environment(log)
 
     webmgr.init_webmgr(conf.web_service)
-    iptmgr.init_iptmgr()
+    nftmgr.init_nftmgr()
 
     statemgr.init_state_mgr(
         conf,
         data,
         [
             webmgr.state_callback,
-            iptmgr.state_callback,
+            nftmgr.state_callback,
             cdns.state_callback,
         ],
     )

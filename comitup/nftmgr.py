@@ -77,13 +77,13 @@ def run_cmds(cmds: List[str], **vars) -> None:
     vars["ap"] = apdev
     for cmd in cmds:
         runcmd = cmd.format(**vars)
-        log.debug(f'iptmgr - running "{runcmd}"')
+        log.debug(f'nftmgr - running "{runcmd}"')
         subprocess.call(runcmd, shell=True)
 
 
 def state_callback(state: str, action: str) -> None:
     if (state, action) == ("HOTSPOT", "start"):
-        log.debug("iptmgr - Running nft commands for HOTSPOT")
+        log.debug("nftmgr - Running nft commands for HOTSPOT")
 
         stop_hs_rules()
         start_hs_rules()
@@ -91,10 +91,10 @@ def state_callback(state: str, action: str) -> None:
         if modemgr.get_mode() == modemgr.MULTI_MODE:
             stop_router_rules()
 
-        log.debug("iptmgr - Done with nft commands for HOTSPOT")
+        log.debug("nftmgr - Done with nft commands for HOTSPOT")
 
     elif (state, action) == ("CONNECTED", "start"):
-        log.debug("iptmgr - Running nft commands for CONNECTED")
+        log.debug("nftmgr - Running nft commands for CONNECTED")
         stop_hs_rules()
 
         if modemgr.get_mode() == modemgr.MULTI_MODE:
@@ -110,8 +110,8 @@ def state_callback(state: str, action: str) -> None:
                     ],
                 )
 
-        log.debug("iptmgr - Done with nft commands for CONNECTED")
+        log.debug("nftmgr - Done with nft commands for CONNECTED")
 
 
-def init_iptmgr() -> None:
+def init_nftmgr() -> None:
     pass
