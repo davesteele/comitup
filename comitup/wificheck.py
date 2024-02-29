@@ -51,19 +51,21 @@ def device_present() -> Optional[str]:
 
 
 def device_supports_ap() -> Optional[str]:
-    dev: str = dev_info.get_devs()[0]
-    phy: str = dev_info.get_phy(dev)
+    dev: str
 
-    try:
-        cmd: str = "iw phy {} info".format(phy)
-        deviceinfo: str = subprocess.check_output(cmd.split()).decode()
-    except subprocess.CalledProcessError:
-        return ""
+    for dev in dev_info.get_devs():
+        phy: str = dev_info.get_phy(dev)
 
-    if "* AP\n" not in deviceinfo:
-        return phy
+        try:
+            cmd: str = "iw phy {} info".format(phy)
+            deviceinfo: str = subprocess.check_output(cmd.split()).decode()
+        except subprocess.CalledProcessError:
+            return ""
 
-    return None
+        if "* AP\n" in deviceinfo:
+            return None
+
+    return ""
 
 
 def device_nm_managed() -> Optional[str]:
