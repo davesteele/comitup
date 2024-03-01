@@ -34,7 +34,7 @@ def kick_wpa(devstring: str) -> None:
         shell_cmd = "/sbin/wpa_cli -i {0} {1} > /dev/null 2>&1".format(
             devstring, wpa_cmd
         )
-        subprocess.run(shell_cmd.split())
+        subprocess.run(shell_cmd.split(), capture_output=True)
 
     last_kick_time = time.time()
 
