@@ -21,7 +21,9 @@ def docmd(cmd: str) -> str:
     cmd = "timeout 5 " + cmd
 
     try:
-        out = subprocess.check_output(cmd.split(), encoding="utf-8")
+        out = subprocess.check_output(
+            cmd.split(), encoding="utf-8", stderr=subprocess.PIPE
+        )
     except subprocess.CalledProcessError:
         out = ""
 
