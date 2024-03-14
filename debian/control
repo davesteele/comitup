@@ -37,7 +37,7 @@ Depends:
     iw,
     dnsmasq-base,
     avahi-daemon,
-    iptables,
+    nftables,
 Suggests: python3-tabulate
 Description: bootstrap Wi-Fi using Wi-Fi
  Comitup will attempt to connect to Wi-Fi using an established connection. If
