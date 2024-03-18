@@ -1,11 +1,11 @@
-comitup (1.40-1) UNRELEASED; urgency=medium
+comitup (1.40-1) unstable; urgency=medium
 
   * Cleanup wpa kick output.
   * Improve the AP device detection on startup.
   * Replace iptables with nftables.
   * Fix bug in the blink 'locate' code.
 
- -- David Steele <steele@debian.org>  Thu, 29 Feb 2024 18:57:12 -0500
+ -- David Steele <steele@debian.org>  Mon, 18 Mar 2024 15:34:40 -0400
 
 comitup (1.39-1) unstable; urgency=medium
 
