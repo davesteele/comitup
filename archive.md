@@ -67,6 +67,7 @@ layout: default
 *  [comitup_1.38-2_all.deb](deb/comitup_1.38-2_all.deb)
 *  [comitup_1.39-1_all.deb](deb/comitup_1.39-1_all.deb)
 *  [comitup_1.40-1_all.deb](deb/comitup_1.40-1_all.deb)
+*  [comitup_1.41-1_all.deb](deb/comitup_1.41-1_all.deb)
 *  [comitup-watch_0.1-1_all.deb](deb/comitup-watch_0.1-1_all.deb)
 *  [comitup-watch_0.2-1_all.deb](deb/comitup-watch_0.2-1_all.deb)
 *  [davesteele-comitup-apt-source_1.0_all.deb](deb/davesteele-comitup-apt-source_1.0_all.deb)
