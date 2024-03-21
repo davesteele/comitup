@@ -82,7 +82,11 @@ def blink(times: int = 1) -> None:
     if can_blink():
         oldtrig = get_trigger()
 
-        set_trigger("gpio")
+        try:
+            set_trigger("gpio")
+        except OSError:
+            set_trigger("input")
+
         bright_path().write_text(offval())
 
         for _ in range(times):
