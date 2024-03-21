@@ -1,3 +1,9 @@
+comitup (1.41-1) comitup; urgency=medium
+
+  * Fix another blink 'locate' bug.
+
+ -- David Steele <steele@debian.org>  Thu, 21 Mar 2024 12:22:23 -0400
+
 comitup (1.40-1) unstable; urgency=medium
 
   * Cleanup wpa kick output.
