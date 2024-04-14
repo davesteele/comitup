@@ -5,9 +5,9 @@
 
 import pathlib
 import urllib
+from unittest.mock import Mock
 
 import pytest
-from mock import Mock
 
 from web import comitupweb
 

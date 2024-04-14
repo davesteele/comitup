@@ -7,9 +7,9 @@ import logging
 import os
 import sys
 import textwrap
+from unittest.mock import Mock
 
 import pytest
-from mock import Mock
 
 sys.modules["NetworkManager"] = Mock()
 

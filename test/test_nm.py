@@ -1,10 +1,11 @@
-import pytest
-
 # Copyright (c) 2017-2019 David Steele <dsteele@gmail.com>
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
-from mock import Mock, patch
+
+from unittest.mock import Mock, patch
+
+import pytest
 
 from comitup import nm
 

@@ -5,10 +5,10 @@
 
 import importlib
 from collections import namedtuple
+from unittest.mock import Mock
 
 import dbus.service
 import pytest
-from mock import Mock
 
 
 def nullwrapper(*args, **kwargs):
