@@ -4,7 +4,7 @@
 # License-Filename: LICENSE
 
 import pytest
-from mock import Mock, call
+from mock import Mock
 
 from comitup import states
 
@@ -111,7 +111,7 @@ def test_state_callback_decorator(state_globals):
 
     foo_bar(0)
 
-    assert callback.call_args == call("FOO", "bar")
+    callback.assert_called_with("FOO", "bar")
 
 
 def test_state_matrix():
