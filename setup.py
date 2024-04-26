@@ -97,7 +97,7 @@ setup(
         "pycairo",
     ],
     setup_requires=["pytest-runner"],
-    tests_require=["pytest", "mock"],
+    tests_require=["pytest"],
     author="David Steele",
     author_email="steele@debian.org",
     url="https://davesteele.github.io/comitup/",
