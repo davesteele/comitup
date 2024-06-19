@@ -1,6 +1,7 @@
 comitup (1.41-2) UNRELEASED; urgency=medium
 
   * Remove lintian override of obsolete tag.
+  * Make systemd service installation compliant.
 
  -- David Steele <steele@debian.org>  Wed, 19 Jun 2024 10:35:43 -0400
 
