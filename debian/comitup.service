@@ -17,6 +17,7 @@ ExecStart=/usr/sbin/comitup
 # NoNewPrivileges=yes
 Restart=always
 RestartSec=5
+KillSignal=SIGKILL
 
 [Install]
 WantedBy=multi-user.target
