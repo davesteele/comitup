@@ -135,12 +135,12 @@ def get_device_settings(device: nm.Device) -> Dict[str, Any]:
     return get_connection_settings(connection.Connection)
 
 
-@none_on_exception(AttributeError)
+@none_on_exception(AttributeError, nm.ObjectVanished)
 def get_active_ssid(device: nm.Device) -> Optional[str]:
     return get_device_settings(device)["802-11-wireless"]["ssid"]
 
 
-@none_on_exception(AttributeError, IndexError)
+@none_on_exception(AttributeError, IndexError, nm.ObjectVanished)
 def get_active_ip(device: nm.Device) -> Optional[str]:
     addr: str = device.Ip4Address
     if addr == "0.0.0.0":
@@ -149,7 +149,7 @@ def get_active_ip(device: nm.Device) -> Optional[str]:
     return addr
 
 
-@none_on_exception(AttributeError, IndexError)
+@none_on_exception(AttributeError, IndexError, nm.ObjectVanished)
 def get_active_ip6(device: nm.Device) -> Optional[str]:
     addr6 = device.Ip6Config.Addresses[0][0]
 
@@ -167,7 +167,7 @@ def get_all_wifi_connection_ssids():
             yield ssid
 
 
-@none_on_exception(AttributeError, KeyError)
+@none_on_exception(AttributeError, KeyError, nm.ObjectVanished)
 def get_ssid_from_connection(connection: nm.Connection) -> Optional[str]:
     settings = get_connection_settings(connection)
 
