@@ -81,8 +81,15 @@ def get_wifi_devices() -> List[nm.Wireless]:
     devices: Optional[List[nm.Device]] = get_devices()
 
     if devices is not None:
-        devices = [x for x in devices if x.DeviceType == 2]
-        return [cast(nm.Wireless, x) for x in devices]
+        devices_filt = []
+        for device in devices:
+            try:
+                if device.DeviceType == 2:
+                    devices_filt.append(device)
+            except nm.ObjectVanished:
+                pass
+
+        return [cast(nm.Wireless, x) for x in devices_filt]
     else:
         log.error("No WiFi devices found in nm.get_wifi_devices()")
         return []
@@ -91,11 +98,15 @@ def get_wifi_devices() -> List[nm.Wireless]:
 def get_phys_dev_names() -> List[str]:
     devices = get_devices()
 
-    if devices is not None:
-        return [device_name(x) for x in devices if x.DeviceType in (1, 2)]
-    else:
-        log.error("No devices found in nm.get_phys_dev_names")
-        return []
+    returnval = []
+    for device in devices:
+        try:
+            if device.DeviceType in (1, 2):
+                returnval.append(device_name(device))
+        except nm.ObjectVanished:
+            pass
+
+    return returnval
 
 
 @none_on_exception(IndexError)
