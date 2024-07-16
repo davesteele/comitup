@@ -225,11 +225,7 @@ def add_hosts(hosts: List[str]) -> None:
                     clear_entries(emphatic=True)
                     entries = False
         except NetworkManager.ObjectVanished as e:
-            log.error(
-                "Device disappeared in NetworkManager Error - {}".format(
-                    str(e)
-                )
-            )
+            pass
 
     if group and entries:
         group.Commit()
