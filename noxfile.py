@@ -19,7 +19,6 @@ pkgs = [
 
 deps = [
     "pytest",
-    "mock",
     "dbus-python",
     "python-networkmanager",
     "flask",
@@ -55,7 +54,6 @@ def flake8(session):
 def mypy(session):
     session.install(
         "mypy",
-        "types-mock",
         "types-tabulate",
         "types-pkg_resources",
         "types-Flask",

@@ -3,8 +3,9 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 
+from unittest.mock import Mock
+
 import pytest
-from mock import Mock, call
 
 from comitup import states
 
@@ -111,7 +112,7 @@ def test_state_callback_decorator(state_globals):
 
     foo_bar(0)
 
-    assert callback.call_args == call("FOO", "bar")
+    callback.assert_called_with("FOO", "bar")
 
 
 def test_state_matrix():

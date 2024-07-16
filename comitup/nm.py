@@ -81,8 +81,15 @@ def get_wifi_devices() -> List[nm.Wireless]:
     devices: Optional[List[nm.Device]] = get_devices()
 
     if devices is not None:
-        devices = [x for x in devices if x.DeviceType == 2]
-        return [cast(nm.Wireless, x) for x in devices]
+        devices_filt = []
+        for device in devices:
+            try:
+                if device.DeviceType == 2:
+                    devices_filt.append(device)
+            except nm.ObjectVanished:
+                pass
+
+        return [cast(nm.Wireless, x) for x in devices_filt]
     else:
         log.error("No WiFi devices found in nm.get_wifi_devices()")
         return []
@@ -91,11 +98,16 @@ def get_wifi_devices() -> List[nm.Wireless]:
 def get_phys_dev_names() -> List[str]:
     devices = get_devices()
 
+    returnval = []
     if devices is not None:
-        return [device_name(x) for x in devices if x.DeviceType in (1, 2)]
-    else:
-        log.error("No devices found in nm.get_phys_dev_names")
-        return []
+        for device in devices:
+            try:
+                if device.DeviceType in (1, 2):
+                    returnval.append(device_name(device))
+            except nm.ObjectVanished:
+                pass
+
+    return returnval
 
 
 @none_on_exception(IndexError)
@@ -135,12 +147,12 @@ def get_device_settings(device: nm.Device) -> Dict[str, Any]:
     return get_connection_settings(connection.Connection)
 
 
-@none_on_exception(AttributeError)
+@none_on_exception(AttributeError, nm.ObjectVanished)
 def get_active_ssid(device: nm.Device) -> Optional[str]:
     return get_device_settings(device)["802-11-wireless"]["ssid"]
 
 
-@none_on_exception(AttributeError, IndexError)
+@none_on_exception(AttributeError, IndexError, nm.ObjectVanished)
 def get_active_ip(device: nm.Device) -> Optional[str]:
     addr: str = device.Ip4Address
     if addr == "0.0.0.0":
@@ -149,7 +161,7 @@ def get_active_ip(device: nm.Device) -> Optional[str]:
     return addr
 
 
-@none_on_exception(AttributeError, IndexError)
+@none_on_exception(AttributeError, IndexError, nm.ObjectVanished)
 def get_active_ip6(device: nm.Device) -> Optional[str]:
     addr6 = device.Ip6Config.Addresses[0][0]
 
@@ -167,7 +179,7 @@ def get_all_wifi_connection_ssids():
             yield ssid
 
 
-@none_on_exception(AttributeError, KeyError)
+@none_on_exception(AttributeError, KeyError, nm.ObjectVanished)
 def get_ssid_from_connection(connection: nm.Connection) -> Optional[str]:
     settings = get_connection_settings(connection)
 

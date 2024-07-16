@@ -12,8 +12,6 @@
 #
 
 import logging
-import os
-import signal
 import socket
 import subprocess
 from typing import Dict, List, Optional
@@ -183,11 +181,11 @@ def add_hosts(hosts: List[str]) -> None:
 
     entries: bool = False
     for device in devices:
-        name = nm.device_name(device)
-        addr = nm.get_active_ip(device)
-        addr6 = nm.get_active_ip6(device)
-        log.debug("add_hosts: {}, {}".format(name, addr))
         try:
+            name = nm.device_name(device)
+            addr = nm.get_active_ip(device)
+            addr6 = nm.get_active_ip6(device)
+            log.debug("add_hosts: {}, {}".format(name, addr))
             if name in nm.get_phys_dev_names() and name in int_mapping:
                 index = int_mapping[name]
 
@@ -228,11 +226,10 @@ def add_hosts(hosts: List[str]) -> None:
                     entries = False
         except NetworkManager.ObjectVanished as e:
             log.error(
-                "Unrecoverable NetworkManager Error - exiting - {}".format(
+                "Device disappeared in NetworkManager Error - {}".format(
                     str(e)
                 )
             )
-            os.kill(os.getpid(), signal.SIGTERM)
 
     if group and entries:
         group.Commit()

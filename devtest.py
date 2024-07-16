@@ -35,7 +35,6 @@ pkgs: List[str] = [
     "isort",
     "cachetools",
     "flask",
-    "types-mock",
     "types-tabulate",
     "types-pkg_resources",
     "types-Flask",
