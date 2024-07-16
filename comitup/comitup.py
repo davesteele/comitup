@@ -164,6 +164,8 @@ def main():
 
     try:
         loop.run()
+    except KeyboardInterrupt:
+        pass
     except Exception:
         log.error("Terminal exception encountered")
         raise
