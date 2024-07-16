@@ -99,12 +99,13 @@ def get_phys_dev_names() -> List[str]:
     devices = get_devices()
 
     returnval = []
-    for device in devices:
-        try:
-            if device.DeviceType in (1, 2):
-                returnval.append(device_name(device))
-        except nm.ObjectVanished:
-            pass
+    if devices is not None:
+        for device in devices:
+            try:
+                if device.DeviceType in (1, 2):
+                    returnval.append(device_name(device))
+            except nm.ObjectVanished:
+                pass
 
     return returnval
 
