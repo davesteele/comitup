@@ -1,4 +1,4 @@
-comitup (1.42-1) UNRELEASED; urgency=medium
+comitup (1.42-1) unstable; urgency=medium
 
   * Remove lintian override of obsolete tag.
   * Make systemd service installation compliant.
@@ -6,7 +6,7 @@ comitup (1.42-1) UNRELEASED; urgency=medium
   * Tolerate disappearing devices in NetworkManager.
   * Update mock in test.
 
- -- David Steele <steele@debian.org>  Wed, 19 Jun 2024 10:35:43 -0400
+ -- David Steele <steele@debian.org>  Thu, 18 Jul 2024 22:30:23 -0400
 
 comitup (1.41-1) comitup; urgency=medium
 
