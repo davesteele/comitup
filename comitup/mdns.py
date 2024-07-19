@@ -224,7 +224,7 @@ def add_hosts(hosts: List[str]) -> None:
                     log.error("Exception encountered adding avahi record")
                     clear_entries(emphatic=True)
                     entries = False
-        except NetworkManager.ObjectVanished as e:
+        except NetworkManager.ObjectVanished:
             pass
 
     if group and entries:
