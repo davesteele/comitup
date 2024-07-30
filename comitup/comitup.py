@@ -65,7 +65,7 @@ def check_environment(log: logging.Logger) -> None:
                     "networking services",
                 ]:
                     print(msg)
-                    log.warn(msg)
+                    log.warning(msg)
         except Exception:
             pass
 
