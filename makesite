@@ -6,20 +6,24 @@ import json
 pkgs = json.load(open('pkgs.json', 'r'))
 imgs = json.load(open('imgs.json', 'r'))
 
-for page in ['index', 'archive', 'ppa']:
-    template = Template(open("_templates/{}.md".format(page)).read())
-    output = template.render(imgs=imgs, pkgs=pkgs)
-
-    with open(page + ".md", 'w') as fp:
-        fp.write(output)
+latest = {}
 
 for deb in pkgs["latest_pkgs"]:
     pkg = deb.split("_")[0]
+    latest[pkg] = deb
+
     page = "latest/{}_latest.html".format(pkg)
     template = Template(open("_templates/latest.tmpl").read())
     output = template.render(deb=deb, pkg=pkg)
 
     with open(page, 'w') as fp:
+        fp.write(output)
+
+for page in ['index', 'archive', 'ppa']:
+    template = Template(open("_templates/{}.md".format(page)).read())
+    output = template.render(imgs=imgs, pkgs=pkgs, latest=latest)
+
+    with open(page + ".md", 'w') as fp:
         fp.write(output)
 
 #     with open(f"deb/{deb}", "rb") as rp:
