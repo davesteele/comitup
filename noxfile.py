@@ -55,7 +55,6 @@ def mypy(session):
     session.install(
         "mypy",
         "types-tabulate",
-        "types-pkg_resources",
         "types-Flask",
         "types-cachetools",
     )

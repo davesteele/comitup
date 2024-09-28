@@ -36,7 +36,6 @@ pkgs: List[str] = [
     "cachetools",
     "flask",
     "types-tabulate",
-    "types-pkg_resources",
     "types-Flask",
     "types-cachetools",
 ]
