@@ -1,3 +1,10 @@
+comitup (1.43-1) UNRELEASED; urgency=medium
+
+  * Cleanup
+  * Remove python-pkg-resources dependency.
+
+ -- David Steele <steele@debian.org>  Sun, 27 Oct 2024 11:02:37 -0400
+
 comitup (1.42-1) unstable; urgency=medium
 
   * Remove lintian override of obsolete tag.
