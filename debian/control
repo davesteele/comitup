@@ -29,7 +29,6 @@ Depends:
     ${misc:Depends},
     systemd,
     python3-networkmanager (>= 2.1-1),
-    python3-pkg-resources,
     python3-gi,
     python3-flask,
     python3-dbus,
