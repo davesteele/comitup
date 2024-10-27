@@ -1,9 +1,9 @@
-comitup (1.43-1) UNRELEASED; urgency=medium
+comitup (1.43-1) unstable; urgency=medium
 
-  * Cleanup
-  * Remove python-pkg-resources dependency.
+  * Cleanup.
+  * Remove python-pkg-resources dependency (Closes: #1083342).
 
- -- David Steele <steele@debian.org>  Sun, 27 Oct 2024 11:02:37 -0400
+ -- David Steele <steele@debian.org>  Sun, 27 Oct 2024 11:12:14 -0400
 
 comitup (1.42-1) unstable; urgency=medium
 
