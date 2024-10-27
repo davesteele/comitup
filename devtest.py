@@ -36,7 +36,6 @@ pkgs: List[str] = [
     "cachetools",
     "flask",
     "types-tabulate",
-    "types-pkg_resources",
     "types-Flask",
     "types-cachetools",
 ]
@@ -68,7 +67,10 @@ if not envpath.exists():
 
     print("# Installing packages")
 
-    run("pip install " + " ".join(pkgs))
+    for pkg in pkgs:
+        cp = run("pip install " + pkg)
+        print("Running", " ".join(cp.args))
+        print(cp.stdout.decode())
 
 
 tests: List[str] = [
