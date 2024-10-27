@@ -61,6 +61,7 @@ d716991b588863cf91af77d34becd701  comitup_1.4-1_all.deb
 9f842173f850725d7eec4556d45ffb29  comitup_1.40-1_all.deb
 0ab3f7f0293aa367033bb1c3de6e12fc  comitup_1.41-1_all.deb
 882a2385a4f0de3b9378aeb723e768fa  comitup_1.42-1_all.deb
+d7c61eea9dd5944c7d08a82abbc16869  comitup_1.43-1_all.deb
 c505577932eb26a667fd517f8832b463  comitup_1.5-1_all.deb
 42d42beca4221d9c0dc82a1604b01d29  comitup_1.6-1_all.deb
 b2b001071cb2e52c7b4c49324e2b5f49  comitup_1.7-1_all.deb
@@ -141,6 +142,7 @@ f37dc7e1306c03626adcfb51335fdf2558b0f70d  comitup_1.38-2_all.deb
 c24c845686d89d77c3182f9127d1110236663f48  comitup_1.40-1_all.deb
 f1ba3fcfff3c874c101468e3e2d89345529864f3  comitup_1.41-1_all.deb
 e5551151316d5e46290eb3d8e51fdcd5feff648e  comitup_1.42-1_all.deb
+be83a74b4a7361a2eba3e556b16bd57494707004  comitup_1.43-1_all.deb
 f5a7f0a09e72cf6d0699a6d26ca6c2f44c19059e  comitup_1.5-1_all.deb
 2501f130e7f1f54cc23c319581f8fd1d89e810c4  comitup_1.6-1_all.deb
 3e95c133b3331821eefd1096cd2acbe0191897e7  comitup_1.7-1_all.deb
@@ -221,6 +223,7 @@ a97bd387e310e1a9070350f35eb9cf2622ba6a1a6f5d646cfd999767acd53303  comitup_1.4-1_
 f4cfed005e32fe078bcbf5a538ca19f257fec957386c98359b05450bd475a2d4  comitup_1.40-1_all.deb
 8651cef28f3e75674684605475abe5620ae00d0ea4a6acc9e28f63a5cd8580db  comitup_1.41-1_all.deb
 cbe528a22d77b90dff68b941d4c100e5c83e95d73d51e82a504e17ba05fb1635  comitup_1.42-1_all.deb
+cfe41519cb0245f1a616263f6b06ec6a04d9afa44cb871c21130047b1c8c40f6  comitup_1.43-1_all.deb
 c8d93df4289795f1386804a457252b277d442c3d30a1da40b755ec1a55da69b8  comitup_1.5-1_all.deb
 b854e64c734cfd805ac5d7ff24f19e021f9f47723052a87141bd1433760a9b01  comitup_1.6-1_all.deb
 c488d67a42ee602f122b30293518e59cfb8644f45e83c51c461905e7588083b3  comitup_1.7-1_all.deb
@@ -243,17 +246,17 @@ ad91105dd80f482f36e301c38c85b00df5572aaf7a9f93caa65ba50b0115954c  python3-zeroco
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEi4SQsUoAbTYxHS3FCVnEo9z4n78FAmaaueMACgkQCVnEo9z4
-n7+OkA//bQlDSNFY47MWK9IW/ONW3ra2c65MyxqVOxMy1btuiEOrVtfS/bl7HovE
-NkqHPjWxzcT2rtX6bUWkkjwDRdJ7S2LZtz9v1cONIiFu9Nla/Qy+slKL3ePdmpVq
-dlD92mH5kfLHdUgjK+69emEHa/HrfBjnkEwoRrb2sn6oi/fzuFNIfxkDl50f2fLT
-PDo2bVGH6DBNTovJn1ZlZK4ugXuyls+X3BcRsaJDyph5JpFSWCYH6kP9ADKoMlG4
-hoffcEVrr03/H4GXcAIZ23pw9dhveQrf1pgN/bRNk9yXWw9Nnj1gsGcBGrzv6L0J
-LIT8+/N+W4C7Ka7xK+lgYrGJBrT+Q93c1bq/ZFi9r3s7ECt9Im6N2Z1Wn/nlJqdP
-E7ga7oeVcaqOCwSaVchYsbwHuIWPBQi05Zv5+hvr1/by6NV2tiYoWB6Y7jRhrP0z
-f/fqP+J5MszErqdNuYa4cCb3gaVsqi+dsWcYYoGMSRlvV+V5PEDJOorj5FqsVbFq
-y6UD3q90SgCo9raAK92k/xbXKaVcrC+OXCKdOKZC3zrGIe4rE7GDvYQpslGz5jmb
-SjUqHTKx0ZTP35s60wrOfHsRdvegGoUwtkBstHZiM0/84Aurv911CZcv9QWvlYsz
-52GzR0T6RPnabFCCVKm4ollPk7l/5QjMVBGOSjE2oX+1wS27/sU=
-=UsDk
+iQIzBAEBCgAdFiEEi4SQsUoAbTYxHS3FCVnEo9z4n78FAmceiwEACgkQCVnEo9z4
+n7+6og/+I+qRkrmVqGmKThfek4bNwoR5S6536KFvtp8rTdGcmlJ9qM0w2moNDEDh
+kbaiVZxRBHcxJfTFm+Gec/cbnMjxHO8QccUBR12IebWUYIHnv1QF6EhJCpU1fjRj
+yV4TQM8Tagnw0hI+4KyO7OX8hYV1Lhi31/havfK4J5ZMase3P5gVrp2acHjyGlXo
+AYSmAh9m3MZWKTNtOAD81wS5LmBHSdZtzI8cUuytX9ovPZ5+qHEjbamDfYBAi4iU
+3/gdr8p9ljmfKk+kYLXRBR1InLj0gN6oVYj3LabC3vQ8AZjy1NLd5oMRYD4Ceizd
+7Oep3xSsxAcvF3jQWs54unvDXaxwokxRgF/BNMDIQM/d9GclAs5KuVJZ5PsfYH11
+P0aQ5b6RX7WwHAQkwRbVf6utc6s5XqxQSiMiYzdaYl/rkFO/xl5kd7ygf4iVXA4r
+SWziCoF6OdMmmDBvNUx1L+6FrRogAyRE6o3cm9aj4ZjhkaQs562rTjVprUmfcmCs
+7bvbm6MY09dQCC0WPRKxq9m4fyOdys7cwqZbdRTt06rSSwm1NtEudeLISnC/+Cnq
+KRF8WG5PYp5jGL4shE08k0XBzWSYBtWT9mDk/keLkC/aMIS9D53ze9ZuQLaJ+38n
+888ud3AhEfc7IdHtOnVoTsK0V8LdV+5to++70D5ZblFBpLmOCpo=
+=2YWB
 -----END PGP SIGNATURE-----
