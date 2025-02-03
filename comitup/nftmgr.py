@@ -55,9 +55,10 @@ def start_router_rules() -> None:
     ]
     # fmt: on
 
-    link_dev = nm.device_name(modemgr.get_link_device())
-    run_cmds(appliance_cmds, link=link_dev)
-
+    defaultdev: Optional[str] = routemgr.defroute_dev()
+    ap_dev: str = modemgr.get_ap_device().Interface
+    if defaultdev and defaultdev != ap_dev:
+        run_cmds(appliance_cmds, link=defaultdev)
 
 def stop_router_rules() -> None:
     # fmt: off
@@ -86,29 +87,20 @@ def state_callback(state: str, action: str) -> None:
         log.debug("nftmgr - Running nft commands for HOTSPOT")
 
         stop_hs_rules()
-        start_hs_rules()
+        stop_router_rules()
 
-        if modemgr.get_mode() == modemgr.MULTI_MODE:
-            stop_router_rules()
+        start_hs_rules()
+        start_router_rules()
 
         log.debug("nftmgr - Done with nft commands for HOTSPOT")
 
     elif (state, action) == ("CONNECTED", "start"):
         log.debug("nftmgr - Running nft commands for CONNECTED")
+
         stop_hs_rules()
+        stop_router_rules()
 
-        if modemgr.get_mode() == modemgr.MULTI_MODE:
-            stop_router_rules()
-            start_router_rules()
-
-            defaultdev: Optional[str] = routemgr.defroute_dev()
-            apdev: str = modemgr.get_ap_device().Interface
-            if defaultdev and defaultdev != apdev:
-                run_cmds(
-                    [
-                        f"nft 'insert rule ip nat COMITUP-FWD oifname \"{defaultdev}\" counter masquerade'"
-                    ],
-                )
+        start_router_rules()
 
         log.debug("nftmgr - Done with nft commands for CONNECTED")
 
