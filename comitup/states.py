@@ -176,7 +176,7 @@ def fake_cg_pass(sid: int) -> bool:
 
 @state_callback
 def connecting_start(dummy: int) -> None:
-    global conn_list, connection
+    global connection
 
     dev = modemgr.get_state_device("CONNECTED")
     full_conn_list = candidate_connections(dev)
@@ -213,8 +213,6 @@ def connecting_pass(reason: int) -> None:
 @timeout
 @state_callback
 def connecting_fail(reason: int) -> None:
-    global conn_list
-
     log.debug("Connection failed - reason {}".format(reason))
 
     badreasons: List[int] = [
@@ -425,7 +423,7 @@ def init_states(
     callbacks: List[Callable[[str, str], None]],
     hotspot_pw: str,
 ) -> None:
-    global hotspot_name, conn_list, connection, startup
+    global hotspot_name, startup
 
     nmmon.init_nmmon()
     set_hosts(*hosts)
@@ -441,6 +439,4 @@ def init_states(
 
 
 def add_state_callback(callback: Callable[[str, str], None]) -> None:
-    global state_callbacks
-
     state_callbacks.append(callback)

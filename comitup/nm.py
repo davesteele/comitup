@@ -129,8 +129,6 @@ def disconnect(device: nm.Device) -> None:
 
 
 def get_connection_settings(connection: nm.Connection) -> Dict[str, Any]:
-    global settings_cache
-
     if connection.uuid not in settings_cache:
         log.debug("Not in cache")
         settings_cache[connection.uuid] = connection.GetSettings()
