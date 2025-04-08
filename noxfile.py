@@ -11,7 +11,7 @@ import nox
 pkgs = [
     "libcairo2-dev",
     "gobject-introspection",
-    "libgirepository1.0-dev",
+    "libgirepository-2.0-dev",
     "python3-dev",
     "libdbus-glib-1-dev",
     "libdbus-1-dev",
