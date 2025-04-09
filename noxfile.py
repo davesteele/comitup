@@ -57,6 +57,7 @@ def mypy(session):
         "types-tabulate",
         "types-Flask",
         "types-cachetools",
+        "types-RPi.GPIO",
     )
 
     session.run("python", "-m", "mypy", "cli", "comitup", "web", "test")
