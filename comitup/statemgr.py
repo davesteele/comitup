@@ -17,6 +17,7 @@ import re
 import socket
 import subprocess
 import sys
+from importlib.metadata import version
 from typing import TYPE_CHECKING, Callable, Dict, List, Optional
 
 import dbus
@@ -40,7 +41,6 @@ DBusGMainLoop(set_as_default=True)
 from comitup import modemgr  # noqa
 from comitup import nm  # noqa
 from comitup import states  # noqa
-from comitup.__version__ import __version__  # noqa
 
 comitup_path: str = "/com/github/davesteele/comitup"
 
@@ -128,7 +128,7 @@ def get_info(conf: "Config", data: "persist") -> Dict[str, str]:
         sys.exit(1)
 
     info = {
-        "version": __version__,
+        "version": version("comitup"),
         "apname": expand_ap(conf.ap_name, data.id),
         "hostnames": ";".join(get_hosts(conf, data)),
         "imode": modemgr.get_mode(),

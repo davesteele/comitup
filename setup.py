@@ -13,13 +13,10 @@ import sys
 
 from setuptools import setup
 
-sys.path.append(".")
-from comitup import __version__  # noqa
-
 setup(
     name="comitup",
     packages=["comitup", "web", "cli"],
-    version=__version__.__version__,
+    version="1.43",
     description="Remotely manage wifi connections on a headless computer",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
