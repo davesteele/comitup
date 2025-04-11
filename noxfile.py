@@ -48,7 +48,16 @@ def test(session):
 @nox.session()
 def flake8(session):
     session.install("flake8")
-    session.run("python", "-m", "flake8", "setup.py", "cli", "comitup", "web", "test")
+    session.run(
+        "python",
+        "-m",
+        "flake8",
+        "setup.py",
+        "cli",
+        "comitup",
+        "web",
+        "test"
+    )
 
 
 @nox.session()
