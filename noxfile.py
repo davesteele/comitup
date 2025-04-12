@@ -12,7 +12,6 @@ pkgs = [
     "libcairo2-dev",
     "gobject-introspection",
     "libgirepository-2.0-dev",
-    "libgirepository1.0-dev",
     "python3-dev",
     "libdbus-glib-1-dev",
     "libdbus-1-dev",
