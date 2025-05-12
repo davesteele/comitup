@@ -75,6 +75,7 @@ layout: default
 *  [davesteele-comitup-apt-source_1.0_all.deb](deb/davesteele-comitup-apt-source_1.0_all.deb)
 *  [davesteele-comitup-apt-source_1.1_all.deb](deb/davesteele-comitup-apt-source_1.1_all.deb)
 *  [davesteele-comitup-apt-source_1.2_all.deb](deb/davesteele-comitup-apt-source_1.2_all.deb)
+*  [davesteele-comitup-apt-source_1.3_all.deb](deb/davesteele-comitup-apt-source_1.3_all.deb)
 *  [python3-dbussy_1.3-2_all.deb](deb/python3-dbussy_1.3-2_all.deb)
 *  [python3-dnslib_0.9.7+hg20170303-1_all.deb](deb/python3-dnslib_0.9.7+hg20170303-1_all.deb)
 *  [python3-networkmanager_2.0.1-3_all.deb](deb/python3-networkmanager_2.0.1-3_all.deb)

@@ -71,6 +71,7 @@ b2b001071cb2e52c7b4c49324e2b5f49  comitup_1.7-1_all.deb
 aa08515a6655eabc1ee37d328b163320  davesteele-comitup-apt-source_1.0_all.deb
 e9109afb6faa3f8d486b8f24a0724ef5  davesteele-comitup-apt-source_1.1_all.deb
 ad33d9799bf471aa052e00aab43dee32  davesteele-comitup-apt-source_1.2_all.deb
+e6c39bd6c24ce2a01d2424a7619e0afe  davesteele-comitup-apt-source_1.3_all.deb
 470fdcbdd3c23cf1141dc3a48b3763bb  python3-dbussy_1.3-2_all.deb
 110d9db131599f91a0c961d627609b1b  python3-dnslib_0.9.7+hg20170303-1_all.deb
 d48172762a117f40c2ea1ece6da9c56a  python3-networkmanager_2.0.1-3_all.deb
@@ -152,6 +153,7 @@ a6a6c88e0054dd6728a99402c61711938e29e2f1  comitup_1.9-1_all.deb
 1b8ff10c136a18c15e97b450e0532626ffbd05d3  davesteele-comitup-apt-source_1.0_all.deb
 ce9ce5b95fd0ccb1e2588a03ea6983be7a96241c  davesteele-comitup-apt-source_1.1_all.deb
 8f93c2df45ea967e6974534e17febe17a6491d66  davesteele-comitup-apt-source_1.2_all.deb
+632fbabb3280d8ffda12911b61b54c5df3244cb0  davesteele-comitup-apt-source_1.3_all.deb
 d70ebcd5085f02dea0681e9de13186c04dd91d52  python3-dbussy_1.3-2_all.deb
 6f20fa6a22cc37e14ab4804cb4216ffe99aca74a  python3-dnslib_0.9.7+hg20170303-1_all.deb
 b4397e78fa09b6cb0488f7761000c58df296b49c  python3-networkmanager_2.0.1-3_all.deb
@@ -233,6 +235,7 @@ ab38aa78649a216578eeddd63e4fe398317b4eb6be3bb7e7ffa8ff89a6153039  comitup_1.9-2_
 723934f10170dcf4fea34e14b2bf8ca5a1612c5ddfa09d95091b603960a93224  davesteele-comitup-apt-source_1.0_all.deb
 feaf18b0899fbd9438faaadf9eb1ef393be0f446d338c192ca0eb6bb8e895790  davesteele-comitup-apt-source_1.1_all.deb
 00101275697f75a9f7f268f697d251e78bb411e854c5cc366c24757d1c77894a  davesteele-comitup-apt-source_1.2_all.deb
+6620d256af8d21b05782d77039150351785d596b0f3faee7154245d76dd19114  davesteele-comitup-apt-source_1.3_all.deb
 1797948183b6ce9b4b95bc7259b9e7c84bb18b3bbd463b15f985653c1861665b  python3-dbussy_1.3-2_all.deb
 d203fcde35a350d5925123cbc99388ba523a3ac7f7c271f74a6f7b52ce4c2aa0  python3-dnslib_0.9.7+hg20170303-1_all.deb
 93ae15df3b310d5e4cbe0531178e88a6b53242588ad46e16e1b4029d9adb7ea0  python3-networkmanager_2.0.1-3_all.deb
@@ -246,17 +249,17 @@ ad91105dd80f482f36e301c38c85b00df5572aaf7a9f93caa65ba50b0115954c  python3-zeroco
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEi4SQsUoAbTYxHS3FCVnEo9z4n78FAmceiwEACgkQCVnEo9z4
-n7+6og/+I+qRkrmVqGmKThfek4bNwoR5S6536KFvtp8rTdGcmlJ9qM0w2moNDEDh
-kbaiVZxRBHcxJfTFm+Gec/cbnMjxHO8QccUBR12IebWUYIHnv1QF6EhJCpU1fjRj
-yV4TQM8Tagnw0hI+4KyO7OX8hYV1Lhi31/havfK4J5ZMase3P5gVrp2acHjyGlXo
-AYSmAh9m3MZWKTNtOAD81wS5LmBHSdZtzI8cUuytX9ovPZ5+qHEjbamDfYBAi4iU
-3/gdr8p9ljmfKk+kYLXRBR1InLj0gN6oVYj3LabC3vQ8AZjy1NLd5oMRYD4Ceizd
-7Oep3xSsxAcvF3jQWs54unvDXaxwokxRgF/BNMDIQM/d9GclAs5KuVJZ5PsfYH11
-P0aQ5b6RX7WwHAQkwRbVf6utc6s5XqxQSiMiYzdaYl/rkFO/xl5kd7ygf4iVXA4r
-SWziCoF6OdMmmDBvNUx1L+6FrRogAyRE6o3cm9aj4ZjhkaQs562rTjVprUmfcmCs
-7bvbm6MY09dQCC0WPRKxq9m4fyOdys7cwqZbdRTt06rSSwm1NtEudeLISnC/+Cnq
-KRF8WG5PYp5jGL4shE08k0XBzWSYBtWT9mDk/keLkC/aMIS9D53ze9ZuQLaJ+38n
-888ud3AhEfc7IdHtOnVoTsK0V8LdV+5to++70D5ZblFBpLmOCpo=
-=2YWB
+iQIzBAEBCgAdFiEEi4SQsUoAbTYxHS3FCVnEo9z4n78FAmgiRTYACgkQCVnEo9z4
+n79e5A//UWzy4jth+Tri+ihiM3XCCIDaA7ZfDd9jAGbetgyh1sH2o89vSJonkvVX
+yyQdK2vCBMBbGI25raiL9NKXXW7Hybkhcrbyk0jerbmGylrZVQMiCPb+lQfewV+E
+ZP07nApJdyIExMqeWLvCgcz/g8BLHg5nOxdAuQf0k/lOrqBWxHrZlbgj6y8NSkuQ
+8Br+EcPvOmcftlDrb54VOH/6/O9wBA/EVZvPIs3SmrXeaX1Sv23Avlj5CxF7AR0e
+8Nfo9KRWSDGDc2IV+yrgJ8s4rnfunNxLV+DdFzi+kiVY5WoJTQm49nFsE/rAahgl
+1gSr120UkfxWZp7KHjXEoJ551Z1X5V89WXW14eGG2IzmXiz388iRgY0acO+1cezi
+YpuykHT/mpdPALszelCmrwRAvOmGyPm42O61eewZDuxjhoJ8OwaK3w9oNCl4EvCF
+flJVl9xPt9zMqIWXzBIFC0IOpzEo3BFQFb/qfuzrIVMRstqrwz1IgI/Q+oF0LXc+
+4PYxN9Vuk4YaJhXHsyrzETBadrqdPF3iOyY86LhMQAgN6poH23XoWShLE+oc5jT0
+Fo880EcvUkV1+WGGu8pnVhc3u8v2G5UkrGgrvVgJ7B15ljOIe5RC+s32vUtZX10i
+h4UUXfUE+K4F6agcYigdSrALzjTV/ekl2Tq13v5roWEa4rXlotU=
+=rlym
 -----END PGP SIGNATURE-----

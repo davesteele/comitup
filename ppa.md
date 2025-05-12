@@ -15,7 +15,7 @@ Be sure to see the [Installing Comitup](https://github.com/davesteele/comitup/wi
 
 #### The Better Way
 
-Get the latest <a href="deb/davesteele-comitup-apt-source_1.2_all.deb">davesteele-comitup-apt-source deb</a> file from the <a href="archive.html">archive</a>.
+Get the latest <a href="deb/davesteele-comitup-apt-source_1.3_all.deb">davesteele-comitup-apt-source deb</a> file from the <a href="archive.html">archive</a>.
 <br><br>
 Install the deb:<br><br>
 <pre>
