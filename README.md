@@ -26,7 +26,8 @@ and authenticate a visible wifi connection.
 The hotspot is named _comitup-&lt;nnn&gt;_, where _&lt;nnn&gt;_ is a
 persistent number. The website is accessible on that hotspot as
 _ht&#8203;tp://comitup-&lt;nnn&gt;.local_
-from any device which supports [Bonjour/ZeroConf/Avahi][zeroconf]. For
+from any device which supports [Bonjour/ZeroConf/Avahi][zeroconf] (05/25 - This
+may be just ht&#8203;tp://comitup-&lt;nnn&gt;) . For
 other devices, use a Zeroconf browser ([Android][], [Windows][]) to
 determine the IP address of the "Comitup Service", and browse to
 _http&#58;//&lt;ipaddress&gt;_. This address will be _http&#58;//10.41.0.1/_
