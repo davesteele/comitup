@@ -14,8 +14,9 @@ Wifi Access Points, if possible. Otherwise, it will create a stand-alone
 Access Point with the name (SSID) 'comitup-&lt;nnn&gt;', 
 where '&lt;nnn&gt;' is a unique, persistent number.
 * Defined ZeroConf mdns address name for
-'comitup-&lt;nnn&gt;.local', advertising the IP address of the Raspbery
-Pi on all interfaces.
+'comitup-&lt;nnn&gt;.local' (or just 'comitup-&lt;nnn&gt; on some post 05/25
+installations), advertising the IP address of the Raspbery Pi on all
+interfaces.
 * Connection information is published as a _comitup._tcp service, visible
 using a ZeroConf Browser.
 * A comitup-web service, which provides a web interface for selecting and 
