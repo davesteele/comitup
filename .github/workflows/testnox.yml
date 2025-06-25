@@ -23,6 +23,8 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Update apt registry
       run: sudo apt-get update
+    - name: Install build tools
+      run: sudo apt-get install build-essential
     - name: Install deb packages
       run: >
         sudo apt-get install
