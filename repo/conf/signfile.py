@@ -12,8 +12,8 @@ This is invoked via the reprepro config distributions "signwith" tag.
 """
 
 # This is my current key
-key = "0959C4A3DCF89FBF"
-killdate = date(2025, 10, 22)
+key = "B5E293D64E192FDE"
+killdate = date(2029, 12, 12)
 
 if date.today() > killdate:
     print("time to update {} to a new key".format(sys.argv[0]))
