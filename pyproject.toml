@@ -1,9 +1,140 @@
 [build-system]
-requires = ["setuptools", "wheel", "pytest-runner"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "comitup"
+version = "1.43"
+authors = [
+    {name = "David Steele", email = "dsteele@gmail.com"},
+]
+description = "Remotely manage wifi connections on a headless computer"
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = [
+    "raspberrypi",
+    "raspberry-pi",
+    "pi",
+    "wifi",
+    "zeroconf",
+    "bootstrap-wifi",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Framework :: Flask",
+    "Intended Audience :: End Users/Desktop",
+    "Natural Language :: English",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python",
+    "Topic :: System :: Networking",
+]
+dependencies = [
+    "cachetools",
+    "jinja2",
+    "pygobject",
+    "flask",
+    "python-networkmanager",
+    "pycairo",
+]
+
+[project.scripts]
+comitup = "comitup.comitup:main"
+comitup-web = "web.comitupweb:main"
+comitup-cli = "cli.comitupcli:main"
+
+[project.urls]
+Homepage = "https://davesteele.github.io/comitup/"
+Source = "https://github.com/davesteele/comitup.git"
+Issues = "https://github.com/davesteele/comitup/issues"
+Changelog = "https://raw.githubusercontent.com/davesteele/comitup/refs/heads/debian/debian/changelog"
+
+[tool.setuptools]
+packages = [
+    "comitup",
+    "cli",
+    "web",
+    "web.templates",
+    "web.templates.js",
+    "web.templates.images",
+    "web.templates.css",
+]
+include-package-data = true
 
 [tool.black]
 line-length = 79
 
 [tool.isort]
 profile = "black"
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore",
+    "default:::comitup",
+    "default:::web",
+    "default:::cli"
+]
+
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.tox]
+legacy_tox_ini = """
+    [tox]
+    env_list =
+        TEST
+        PEP8
+        MYPY
+
+    [testenv:TEST]
+    deps =
+        pytest
+        dbus-python
+        python-networkmanager
+        flask
+        pygobject
+        apt-wrapper
+        cachetools
+
+    commands_pre =
+        apt status libcairo2-dev
+        apt status gobject-introspection
+        apt status libgirepository-2.0-dev
+        apt status python3-dev
+        apt status libdbus-glib-1-dev
+        apt status libdbus-1-dev
+
+    commands = pytest
+
+    [testenv:PEP8]
+    deps = flake8
+
+    commands = flake8 setup.py comitup cli web test
+
+    [testenv:MYPY]
+    deps =
+        mypy
+        types-tabulate
+        types-Flask
+        types-cachetools
+        types-RPi-GPIO
+
+    commands = mypy comitup cli web test
+"""
+
+[tool.mypy]
+mypy_path = "stubs"
+
+[[tool.mypy.overrides]]
+module = [
+    "mypy-dbus",
+    "dbus",
+    "dbus.mainloop.glib",
+    "dbus.service",
+    "gi",
+    "gi.repository.GLib",
+    "pytest",
+    "RPi",
+    "venv",
+]
+
+ignore_missing_imports = true

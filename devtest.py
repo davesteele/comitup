@@ -18,6 +18,7 @@ than tox or nox.
 
 import subprocess
 import sys
+import textwrap
 import venv
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -85,11 +86,16 @@ executor = ThreadPoolExecutor(max_workers=5)
 
 fail = False
 for result in executor.map(lambda x: run(x), tests):
-    print("#####################################")
-    print("# Running {}".format(" ".join(result.args)))
-    print(result.stdout.decode())
-    print("#####################################")
-    print()
+    print(
+        textwrap.dedent(
+            f"""\
+            #####################################
+            # Running {" ".join(result.args)}
+            {textwrap.indent(result.stdout.decode(), "            ")}
+            #####################################
+            """
+        )
+    )
     if result.returncode:
         fail = True
 

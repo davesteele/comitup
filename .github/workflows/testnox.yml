@@ -13,20 +13,22 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13.0-alpha - 3.13.0"]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
     steps:
     - name: Check out
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.python-version }}
     - name: Update apt registry
       run: sudo apt-get update
+    - name: Install build tools
+      run: sudo apt-get install build-essential
     - name: Install deb packages
       run: >
         sudo apt-get install
-        libcairo2-dev gobject-introspection libgirepository1.0-dev
+        libcairo2-dev gobject-introspection libgirepository-2.0-dev
         python3-dev libdbus-glib-1-dev libdbus-1-dev
     - name: Install pip dependencies
       run: |

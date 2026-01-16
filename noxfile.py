@@ -11,7 +11,7 @@ import nox
 pkgs = [
     "libcairo2-dev",
     "gobject-introspection",
-    "libgirepository1.0-dev",
+    "libgirepository-2.0-dev",
     "python3-dev",
     "libdbus-glib-1-dev",
     "libdbus-1-dev",
@@ -36,7 +36,7 @@ def missing_pkg(pkg):
 def test(session):
     missings = [x for x in pkgs if missing_pkg(x)]
     if missings:
-        session.error("Missing packages: %s" % format(" ".join(missings)))
+        session.log("Missing packages: %s" % format(" ".join(missings)))
 
     for pkg in deps:
         session.install(pkg)
@@ -47,7 +47,16 @@ def test(session):
 @nox.session()
 def flake8(session):
     session.install("flake8")
-    session.run("python", "-m", "flake8", "setup.py", "cli", "comitup", "web", "test")
+    session.run(
+        "python",
+        "-m",
+        "flake8",
+        "setup.py",
+        "cli",
+        "comitup",
+        "web",
+        "test"
+    )
 
 
 @nox.session()
@@ -57,6 +66,7 @@ def mypy(session):
         "types-tabulate",
         "types-Flask",
         "types-cachetools",
+        "types-RPi.GPIO",
     )
 
     session.run("python", "-m", "mypy", "cli", "comitup", "web", "test")

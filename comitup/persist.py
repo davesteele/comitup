@@ -29,7 +29,7 @@ class persist(dict):
     def __init__(self, path, *args, **kwargs):
         """Initialize with backing file path, and optional dict defaults"""
 
-        super(persist, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self._path = path
 
@@ -46,7 +46,7 @@ class persist(dict):
         with open(self._path, "r") as fp:
             dct = json.load(fp)
 
-        super().update(dct)
+        self.update(dct)
 
     def _addsave(fn):
         """Decorator to add save behavior to methods"""
