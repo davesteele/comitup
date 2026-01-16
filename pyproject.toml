@@ -1,6 +1,65 @@
 [build-system]
-requires = ["setuptools", "wheel", "pytest-runner"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "comitup"
+version = "1.43"
+authors = [
+    {name = "David Steele", email = "dsteele@gmail.com"},
+]
+description = "Remotely manage wifi connections on a headless computer"
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = [
+    "raspberrypi",
+    "raspberry-pi",
+    "pi",
+    "wifi",
+    "zeroconf",
+    "bootstrap-wifi",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Framework :: Flask",
+    "Intended Audience :: End Users/Desktop",
+    "Natural Language :: English",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python",
+    "Topic :: System :: Networking",
+]
+dependencies = [
+    "cachetools",
+    "jinja2",
+    "pygobject",
+    "flask",
+    "python-networkmanager",
+    "pycairo",
+]
+
+[project.scripts]
+comitup = "comitup.comitup:main"
+comitup-web = "web.comitupweb:main"
+comitup-cli = "cli.comitupcli:main"
+
+[project.urls]
+Homepage = "https://davesteele.github.io/comitup/"
+Source = "https://github.com/davesteele/comitup.git"
+Issues = "https://github.com/davesteele/comitup/issues"
+Changelog = "https://raw.githubusercontent.com/davesteele/comitup/refs/heads/debian/debian/changelog"
+
+[tool.setuptools]
+packages = [
+    "comitup",
+    "cli",
+    "web",
+    "web.templates",
+    "web.templates.js",
+    "web.templates.images",
+    "web.templates.css",
+]
+include-package-data = true
 
 [tool.black]
 line-length = 79
