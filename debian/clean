@@ -12,3 +12,4 @@ web/templates/js/uikit.min.js
 .eggs/
 .devenv/
 comitup.egg-info/
+dist/
