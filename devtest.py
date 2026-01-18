@@ -31,9 +31,7 @@ pythonpath: str = str(envpath / "bin" / "python")
 pkgs: List[str] = [
     "pytest",
     "mypy",
-    "flake8",
-    "black",
-    "isort",
+    "ruff",
     "cachetools",
     "flask",
     "types-tabulate",
@@ -75,10 +73,10 @@ if not envpath.exists():
 
 
 tests: List[str] = [
-    "black --check {}".format(targets),
-    "isort --check {}".format(targets),
+    "ruff format --check {}".format(targets),
+    "ruff check --select I {}".format(targets),
     "mypy {}".format(targets),
-    "flake8 {}".format(targets),
+    "ruff check {}".format(targets),
     "pytest",
 ]
 

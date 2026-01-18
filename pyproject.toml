@@ -61,11 +61,9 @@ packages = [
 ]
 include-package-data = true
 
-[tool.black]
+[tool.ruff]
 line-length = 79
-
-[tool.isort]
-profile = "black"
+indent-width = 4
 
 [tool.pytest.ini_options]
 filterwarnings = [
@@ -106,9 +104,9 @@ legacy_tox_ini = """
     commands = pytest
 
     [testenv:PEP8]
-    deps = flake8
+    deps = ruff
 
-    commands = flake8 setup.py comitup cli web test
+    commands = ruff check setup.py comitup cli web test
 
     [testenv:MYPY]
     deps =
