@@ -86,13 +86,14 @@ executor = ThreadPoolExecutor(max_workers=5)
 
 fail = False
 for result in executor.map(lambda x: run(x), tests):
+    judgement = "PASS" if not result.returncode else "FAIL"
     print(
         textwrap.dedent(
             f"""\
             #####################################
             # Running {" ".join(result.args)}
             {textwrap.indent(result.stdout.decode(), "            ")}
-            #####################################
+            ################{judgement}#################
             """
         )
     )
