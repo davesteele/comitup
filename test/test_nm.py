@@ -126,7 +126,7 @@ def test_make_connection_for(monkeypatch):
     addconnection = Mock()
     monkeypatch.setattr("comitup.nm.nm.Settings.AddConnection", addconnection)
 
-    nm.make_connection_for("anssid", "password")
+    nm.make_connection_for("anssid", "password", None, False)
 
     assert addconnection.called
 

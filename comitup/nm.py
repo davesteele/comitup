@@ -283,9 +283,9 @@ def make_hotspot(name="comitup", device=None, password="", hash="0000"):
 
 def make_connection_for(
     ssid: str,
-    password: Optional[str] = None,
-    interface: Optional[str] = None,
-    link_local: bool = True,
+    password: Optional[str],
+    interface: Optional[str],
+    link_local: bool,
 ) -> None:
     settings = dbus.Dictionary(
         {
