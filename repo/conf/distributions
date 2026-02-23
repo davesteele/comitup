@@ -6,5 +6,4 @@ Suite: stable
 Architectures: amd64 i386 armhf armel arm64
 Components: main
 Description: Apt repository for comitup on Jessie
-SignWith: ! signfile.py
-
+SignWith: B5E293D64E192FDE!
