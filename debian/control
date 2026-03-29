@@ -10,7 +10,6 @@ Build-Depends:
     python3-setuptools,
     python3-pytest,
     python3-pytest-runner,
-    python3-mock,
     python3-dbus,
     python3-cachetools,
     pandoc,
