@@ -1,24 +1,24 @@
 {
     "full": {
-        "compressed": 1930200496,
+        "compressed": 1963679367,
         "compressedstr": "1.9 G",
-        "filename": "image_2026-01-13-Comitup.zip",
-        "infoname": "2026-01-13-Comitup.info",
+        "filename": "image_2026-03-28-Comitup.zip",
+        "infoname": "2026-03-28-Comitup.info",
         "latestname": "comitup",
-        "magnet": "magnet:?xt=urn:btih:ded35cfdbc2f5ce3e5c697fc02c093d1548081af&dn=image_2026-01-13-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:dbdd6fd7a7acebb1df20b960ce67d5fdeea4cdaf&dn=image_2026-03-28-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce\n",
         "name": "",
-        "uncompressed": 5930745856,
+        "uncompressed": 5989466112,
         "uncompressedstr": "5.8 G"
     },
     "lite": {
-        "compressed": 869675159,
-        "compressedstr": "849 M",
-        "filename": "image_2026-01-13-Comitup-lite.zip",
-        "infoname": "2026-01-13-Comitup-lite.info",
+        "compressed": 950467771,
+        "compressedstr": "928 M",
+        "filename": "image_2026-03-28-Comitup-lite.zip",
+        "infoname": "2026-03-28-Comitup-lite.info",
         "latestname": "comitup-lite",
-        "magnet": "magnet:?xt=urn:btih:a773eee3eb1c93ca6eca3f79f6cc28700c26a249&dn=image_2026-01-13-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:4231d910170e484ccf6e9fa5eec70652839b4cc0&dn=image_2026-03-28-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce\n",
         "name": "Lite",
-        "uncompressed": 2927624192,
-        "uncompressedstr": "2.9 G"
+        "uncompressed": 3170893824,
+        "uncompressedstr": "3.1 G"
     }
 }
