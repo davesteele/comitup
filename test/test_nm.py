@@ -107,9 +107,7 @@ def test_activate_connection_by_id(get_dev, monkeypatch, connections_fxt):
         "comitup.nm.nm.NetworkManager.ActivateConnection", activate
     )
 
-    nm.activate_connection_by_ssid(
-        "myssid", nm.get_wifi_device()
-    )  # type: ignore
+    nm.activate_connection_by_ssid("myssid", nm.get_wifi_device())  # type: ignore
     assert activate.called
 
 
@@ -126,7 +124,7 @@ def test_make_connection_for(monkeypatch):
     addconnection = Mock()
     monkeypatch.setattr("comitup.nm.nm.Settings.AddConnection", addconnection)
 
-    nm.make_connection_for("anssid", "password")
+    nm.make_connection_for("anssid", "password", None, False)
 
     assert addconnection.called
 

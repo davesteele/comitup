@@ -31,9 +31,7 @@ pythonpath: str = str(envpath / "bin" / "python")
 pkgs: List[str] = [
     "pytest",
     "mypy",
-    "flake8",
-    "black",
-    "isort",
+    "ruff",
     "cachetools",
     "flask",
     "types-tabulate",
@@ -75,10 +73,10 @@ if not envpath.exists():
 
 
 tests: List[str] = [
-    "black --check {}".format(targets),
-    "isort --check {}".format(targets),
+    "ruff format --check {}".format(targets),
+    "ruff check --select I {}".format(targets),
     "mypy {}".format(targets),
-    "flake8 {}".format(targets),
+    "ruff check {}".format(targets),
     "pytest",
 ]
 
@@ -86,13 +84,14 @@ executor = ThreadPoolExecutor(max_workers=5)
 
 fail = False
 for result in executor.map(lambda x: run(x), tests):
+    judgement = "PASS" if not result.returncode else "FAIL"
     print(
         textwrap.dedent(
             f"""\
             #####################################
             # Running {" ".join(result.args)}
             {textwrap.indent(result.stdout.decode(), "            ")}
-            #####################################
+            ################{judgement}#################
             """
         )
     )
