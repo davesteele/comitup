@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "comitup"
-version = "1.43"
+version = "1.44"
 authors = [
     {name = "David Steele", email = "dsteele@gmail.com"},
 ]

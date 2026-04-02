@@ -45,6 +45,8 @@ It is located in the _/etc/_ directory.
     local hotspot and to the internet simultaneously. Setting this to something other than
     "true" will limit comitup to the first wifi interface.
 
+    This is experimental.
+
   * _external\_callback_:
 
     The path to an external script that is called on comitup state changes. It will include
