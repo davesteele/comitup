@@ -1,3 +1,11 @@
+comitup (1.44-1) UNRELEASED; urgency=medium
+
+  * Mark appliance/router mode as experimental.
+  * Move all configuration to pyproject.toml.
+  * Use ruff for testing.
+
+ -- David Steele <steele@debian.org>  Wed, 01 Apr 2026 20:35:12 -0400
+
 comitup (1.43-1) unstable; urgency=medium
 
   * Cleanup.
