@@ -14,7 +14,7 @@ echo "The distribution for this release is $DIST"
 DEBVER=`cat "$ROOT/debian/changelog" | head -1 | sed -e 's/^[^\(]\+.//' | sed -e 's/\-.\+//'`
 echo "The changelog base version is $DEBVER"
 
-VER=`cat $ROOT/comitup/__version__.py | grep __version__ | sed -e 's/\"//g' | awk '{print $NF}'`
+VER=`cat $ROOT/pyproject.toml | grep version | sed -e 's/\"//g' | awk '{print $NF}'`
 echo "The main  version is $VER"
 
 TAG=`git describe HEAD`
