@@ -39,7 +39,7 @@ pkgs: List[str] = [
     "types-cachetools",
 ]
 
-targets: str = "comitup web cli test devtest.py setup.py"
+targets: str = "comitup web comitup_cli test devtest.py setup.py"
 
 
 def mkcmd(cmd: str) -> List[str]:
