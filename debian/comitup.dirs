@@ -1,1 +1,3 @@
 var/lib/comitup
+usr/share/comitup
+usr/share/comitup/dns

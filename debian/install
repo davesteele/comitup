@@ -1,1 +1,3 @@
 conf/comitup-dbus.conf /usr/share/dbus-1/system.d/
+conf/dns-connected.conf /usr/share/comitup/dns/
+conf/dns-hotspot.conf /usr/share/comitup/dns/
