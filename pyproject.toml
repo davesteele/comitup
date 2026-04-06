@@ -40,8 +40,8 @@ dependencies = [
 
 [project.scripts]
 comitup = "comitup.comitup:main"
-comitup-web = "web.comitupweb:main"
-comitup-cli = "cli.comitupcli:main"
+comitup-web = "comitup_web.comitupweb:main"
+comitup-cli = "comitup_cli.comitupcli:main"
 
 [project.urls]
 Homepage = "https://davesteele.github.io/comitup/"
@@ -52,8 +52,8 @@ Changelog = "https://raw.githubusercontent.com/davesteele/comitup/refs/heads/deb
 [tool.setuptools]
 packages = [
     "comitup",
-    "cli",
-    "web",
+    "comitup_cli",
+    "comitup_web",
     "web.templates",
     "web.templates.js",
     "web.templates.images",
@@ -69,8 +69,8 @@ indent-width = 4
 filterwarnings = [
     "ignore",
     "default:::comitup",
-    "default:::web",
-    "default:::cli"
+    "default:::comitup_web",
+    "default:::comitup_cli"
 ]
 
 asyncio_default_fixture_loop_scope = "function"
@@ -106,7 +106,7 @@ legacy_tox_ini = """
     [testenv:PEP8]
     deps = ruff
 
-    commands = ruff check setup.py comitup cli web test
+    commands = ruff check setup.py comitup comitup_cli comitup_web test
 
     [testenv:MYPY]
     deps =
@@ -116,7 +116,7 @@ legacy_tox_ini = """
         types-cachetools
         types-RPi-GPIO
 
-    commands = mypy comitup cli web test
+    commands = mypy comitup comitup_cli comitup_web test
 """
 
 [tool.mypy]

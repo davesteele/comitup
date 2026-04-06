@@ -37,9 +37,13 @@ pkgs: List[str] = [
     "types-tabulate",
     "types-Flask",
     "types-cachetools",
+    "types-Pygments",
+    "types-RPi.GPIO",
+    "types-pexpect",
+    "types-setuptools",
 ]
 
-targets: str = "comitup web cli test devtest.py setup.py"
+targets: str = "comitup comitup_web comitup_cli test devtest.py setup.py"
 
 
 def mkcmd(cmd: str) -> List[str]:
