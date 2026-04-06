@@ -3,11 +3,10 @@
 declare -a Paths=("/etc/comitup.conf" \
        "/usr/share/dbus-1/system.d/comitup-dbus.conf" \
        "/lib/systemd/system/comitup.service" \
-       "/usr/share/comitup/comitup-cmd" \
-       "/usr/share/comitup/web/comitupweb.py"\
        "/usr/sbin/comitup" \
        "/var/lib/comitup" \
-       "/usr/share/comitup/comitup/comitup.py")
+       "/usr/lib/python3/dist-packages/comitup/comitup.py")
+       "/usr/lib/python3/dist-packages/comitup_web/comitupweb.py"\
 
 retval=0
 for path in ${Paths[@]}; do
