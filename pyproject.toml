@@ -54,10 +54,10 @@ packages = [
     "comitup",
     "comitup_cli",
     "comitup_web",
-    "web.templates",
-    "web.templates.js",
-    "web.templates.images",
-    "web.templates.css",
+    "comitup_web.templates",
+    "comitup_web.templates.js",
+    "comitup_web.templates.images",
+    "comitup_web.templates.css",
 ]
 include-package-data = true
 
