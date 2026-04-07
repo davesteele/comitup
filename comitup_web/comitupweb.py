@@ -17,6 +17,7 @@ import time
 import urllib
 from logging.handlers import TimedRotatingFileHandler
 from multiprocessing import Process
+from pathlib import Path
 
 from cachetools import TTLCache, cached
 from flask import (
@@ -36,9 +37,23 @@ from comitup import client as ciu  # noqa
 
 ciu_client = None  # type: ignore
 LOG_PATH = "/var/log/comitup-web.log"
-TEMPLATE_PATH = "/usr/share/comitup/web/templates"
+TEMPLATE_PATH = None
 
 ttl_cache: TTLCache = TTLCache(maxsize=10, ttl=5)
+
+
+def template_path() -> str:
+    global TEMPLATE_PATH
+
+    if not TEMPLATE_PATH:
+        templ_path = Path(__file__).resolve().parent / "templates"
+
+        if templ_path.exists():
+            TEMPLATE_PATH = str(templ_path)
+        else:
+            TEMPLATE_PATH = "/usr/share/comitup/web/templates"
+
+    return TEMPLATE_PATH
 
 
 def deflog():
@@ -72,7 +87,7 @@ def cached_points():
 
 
 def create_app(log):
-    app = Flask(__name__, template_folder=TEMPLATE_PATH)
+    app = Flask(__name__, template_folder=template_path())
 
     @app.after_request
     def add_header(response):
@@ -142,15 +157,15 @@ def create_app(log):
 
     @app.route("/img/<path:path>")
     def send_image(path):
-        return send_from_directory(TEMPLATE_PATH + "/images", path)
+        return send_from_directory(template_path() + "/images", path)
 
     @app.route("/js/<path:path>")
     def send_js(path):
-        return send_from_directory(TEMPLATE_PATH + "/js", path)
+        return send_from_directory(template_path() + "/js", path)
 
     @app.route("/css/<path:path>")
     def send_css(path):
-        return send_from_directory(TEMPLATE_PATH + "/css", path)
+        return send_from_directory(template_path() + "/css", path)
 
     @app.route("/<path:path>")
     def catch_all(path):
