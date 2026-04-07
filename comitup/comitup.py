@@ -136,10 +136,12 @@ def main():
         else:
             sys.exit(0)
     else:
-        wificheck.run_checks(
+        if wificheck.run_checks(
+            logit=True,
             verbose=False,
             primary_dev=conf.primary_wifi_device,
-        )
+        ):
+            sys.exit(1)
 
     check_environment(log)
 
