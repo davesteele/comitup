@@ -91,7 +91,10 @@ class Comitup(dbus.service.Object):
                 nm.del_connection_by_ssid(ssid)
 
             nm.make_connection_for(
-                ssid, password, link_local=conf.getboolean("ipv6_link_local")
+                ssid,
+                password,
+                None,
+                link_local=conf.getboolean("ipv6_link_local"),
             )
 
             states.set_state("CONNECTING", [ssid, ssid])
