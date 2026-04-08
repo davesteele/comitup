@@ -1,4 +1,13 @@
-comitup (1.44-1) unstable; urgency=medium
+comitup (1.45-1) unstable; urgency=medium
+
+  * Fix watch file.
+  * Fix PEP621 build issues.
+  * Update tests.
+  * Exit on startup if wifi checks fail.
+
+ -- David Steele <steele@debian.org>  Wed, 08 Apr 2026 00:35:41 -0400
+
+comitup (1.44-1) UNRELEASED; urgency=medium
 
   * Mark appliance/router mode as experimental.
   * Move all configuration to pyproject.toml.
