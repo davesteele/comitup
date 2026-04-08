@@ -1,4 +1,8 @@
 version=4
 
-https://github.com/davesteele/comitup/tags \
-/davesteele/comitup/archive/refs/tags/main/(.*)\.tar\.gz
+opts=filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/@PACKAGE@-$1\.tar\.gz/,\
+pgpsigurlmangle=s/github.com/raw.githubusercontent.com/;\
+s/archive\/refs\/tags\/main/signatures/;\
+s/([^\/]+)\.tar\.gz/@PACKAGE@-$1\.tar\.gz/;\
+s/$/.asc/ \
+https://github.com/davesteele/@PACKAGE@/tags /davesteele/@PACKAGE@/archive/refs/tags/main/(.+)\.tar\.gz
