@@ -5,8 +5,9 @@ declare -a Paths=("/etc/comitup.conf" \
        "/lib/systemd/system/comitup.service" \
        "/usr/sbin/comitup" \
        "/var/lib/comitup" \
-       "/usr/lib/python3/dist-packages/comitup/comitup.py")
-       "/usr/lib/python3/dist-packages/comitup_web/comitupweb.py"\
+       "/usr/lib/python3/dist-packages/comitup/comitup.py"\
+       "/usr/lib/python3/dist-packages/comitup_cli/comitupcli.py"\
+       "/usr/lib/python3/dist-packages/comitup_web/comitupweb.py")
 
 retval=0
 for path in ${Paths[@]}; do
