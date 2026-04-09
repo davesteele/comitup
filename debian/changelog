@@ -1,4 +1,12 @@
-comitup (1.45-1) unstable; urgency=medium
+comitup (1.46-1) unstable; urgency=medium
+
+  * Update upstream key, and restore signature checking.
+  * Increase restart delay (for Pi Zero).
+  * Fix typo in fileloc CI test.
+
+ -- David Steele <steele@debian.org>  Thu, 09 Apr 2026 14:35:31 -0400
+
+comitup (1.45-1) UNRELEASED; urgency=medium
 
   * Fix watch file.
   * Fix PEP621 build issues.
