@@ -33,6 +33,9 @@ override_dh_auto_install:
 	    mv debian/comitup/usr/bin/$$binar debian/comitup/usr/sbin/; \
 	done
 	rmdir debian/comitup/usr/bin
+	#
+	mkdir -p debian/comitup/usr/share/comitup
+	mv debian/comitup/usr/lib/python3*/dist-packages/comitup_web/templates debian/comitup/usr/share/comitup/
 
 override_dh_installsystemd:
 	dh_installsystemd comitup.service
