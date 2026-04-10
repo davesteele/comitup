@@ -59,14 +59,14 @@ To [burn](https://github.com/davesteele/comitup/wiki/Tutorial#copy-the-image-to-
 
 
 * Comitup Lite [Image](latest/comitup-lite-img-latest.html) (3.1 GB, 928 MB compressed)
-  * [Download](https://steele.debian.net/comitup/image_2026-04-08-Comitup-lite.zip) | [Torrent](torrent/image_2026-04-08-Comitup-lite.zip.torrent) | [Magnet](magnet:?xt=urn:btih:2fe3e14f229e5d0fd63132c22a1442696dcb0701&dn=image_2026-04-08-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce
+  * [Download](https://steele.debian.net/comitup/image_2026-04-08-Comitup-lite.zip) | [Torrent](torrent/image_2026-04-08-Comitup-lite.zip.torrent) | [Magnet](magnet:?xt=urn:btih:2fe3e14f229e5d0fd63132c22a1442696dcb0701&dn=image_2026-04-08-Comitup-lite.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fns575949.ip-51-222-82.net%3A6969%2Fannounce
 ) 
   * [SHA1](torrent/image_2026-04-08-Comitup-lite.zip.sha1.txt)
   * [PGP](torrent/image_2026-04-08-Comitup-lite.zip.asc.txt)
   * [Info](https://steele.debian.net/comitup/2026-04-08-Comitup-lite.info)
 
 * Comitup  [Image](latest/comitup-img-latest.html) (5.8 GB, 1.9 GB compressed)
-  * [Download](https://steele.debian.net/comitup/image_2026-04-08-Comitup.zip) | [Torrent](torrent/image_2026-04-08-Comitup.zip.torrent) | [Magnet](magnet:?xt=urn:btih:51c4a00ee8f9eb88b6ccaf912f1e2cd15207be72&dn=image_2026-04-08-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce
+  * [Download](https://steele.debian.net/comitup/image_2026-04-08-Comitup.zip) | [Torrent](torrent/image_2026-04-08-Comitup.zip.torrent) | [Magnet](magnet:?xt=urn:btih:51c4a00ee8f9eb88b6ccaf912f1e2cd15207be72&dn=image_2026-04-08-Comitup.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fns575949.ip-51-222-82.net%3A6969%2Fannounce
 ) 
   * [SHA1](torrent/image_2026-04-08-Comitup.zip.sha1.txt)
   * [PGP](torrent/image_2026-04-08-Comitup.zip.asc.txt)
