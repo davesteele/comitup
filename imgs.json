@@ -1,22 +1,22 @@
 {
     "full": {
-        "compressed": 1963679367,
+        "compressed": 1963532011,
         "compressedstr": "1.9 G",
-        "filename": "image_2026-03-28-Comitup.zip",
-        "infoname": "2026-03-28-Comitup.info",
+        "filename": "image_2026-04-08-Comitup.zip",
+        "infoname": "2026-04-08-Comitup.info",
         "latestname": "comitup",
-        "magnet": "magnet:?xt=urn:btih:dbdd6fd7a7acebb1df20b960ce67d5fdeea4cdaf&dn=image_2026-03-28-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:51c4a00ee8f9eb88b6ccaf912f1e2cd15207be72&dn=image_2026-04-08-Comitup.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce\n",
         "name": "",
         "uncompressed": 5989466112,
         "uncompressedstr": "5.8 G"
     },
     "lite": {
-        "compressed": 950467771,
+        "compressed": 950281213,
         "compressedstr": "928 M",
-        "filename": "image_2026-03-28-Comitup-lite.zip",
-        "infoname": "2026-03-28-Comitup-lite.info",
+        "filename": "image_2026-04-08-Comitup-lite.zip",
+        "infoname": "2026-04-08-Comitup-lite.info",
         "latestname": "comitup-lite",
-        "magnet": "magnet:?xt=urn:btih:4231d910170e484ccf6e9fa5eec70652839b4cc0&dn=image_2026-03-28-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:2fe3e14f229e5d0fd63132c22a1442696dcb0701&dn=image_2026-04-08-Comitup-lite.zip&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce\n",
         "name": "Lite",
         "uncompressed": 3170893824,
         "uncompressedstr": "3.1 G"
