@@ -82,7 +82,7 @@ def load_data() -> Tuple[Config, persist.persist]:
                 "service_name": "comitup",
                 "external_callback": "/usr/local/bin/comitup-callback",
                 "verbose": "0",
-                "enable_appliance_mode": "0",
+                "enable_appliance_mode": "1",
                 "primary_wifi_device": "",
                 "enable_nuke": "0",
                 "ipv6_link_local": 1,
