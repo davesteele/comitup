@@ -135,13 +135,24 @@ def main():
             sys.exit(1)
         else:
             sys.exit(0)
-    else:
-        if wificheck.run_checks(
+
+    got_intfs: int = False
+    check_count = 0
+    while got_intfs is False:
+        check_count += 1
+        if not wificheck.run_checks(
             logit=True,
             verbose=False,
             primary_dev=conf.primary_wifi_device,
         ):
+            got_intfs = True
+
+        if check_count >= 5:
+            log.error("No valid interfaces")
             sys.exit(1)
+
+        if not got_intfs:
+            time.sleep(2)
 
     check_environment(log)
 
