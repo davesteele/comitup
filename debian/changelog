@@ -1,10 +1,11 @@
 comitup (1.47-1) unstable; urgency=medium
 
+  * Tolerate NetworkManager slow startup.
   * Move web templates back to /usr/share.
   * Fix a bug in Avahi service publish for router/appliance mode.
   * Move comitup man page to section 8.
 
- -- David Steele <steele@debian.org>  Wed, 15 Apr 2026 01:26:56 -0400
+ -- David Steele <steele@debian.org>  Sun, 19 Apr 2026 00:40:59 -0400
 
 comitup (1.46-1) unstable; urgency=medium
 
