@@ -51,7 +51,7 @@ def template_path() -> str:
         if templ_path.exists():
             TEMPLATE_PATH = str(templ_path)
         else:
-            TEMPLATE_PATH = "/usr/share/comitup/web/templates"
+            TEMPLATE_PATH = "/usr/share/comitup/templates"
 
     return TEMPLATE_PATH
 

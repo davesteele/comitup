@@ -16,19 +16,39 @@ import getpass
 import logging
 import pprint
 import sys
+import time
 import uuid
 from functools import wraps
 from typing import Any, Callable, Dict, List, Optional, TypeVar, cast
 
 import dbus
-import NetworkManager as nm
+from dbus.exceptions import DBusException
+
+log = logging.getLogger("comitup")
+
+got_nm: bool = False
+try_count: int = 0
+while got_nm is False:
+    try_count += 1
+    try:
+        import NetworkManager as nm
+
+        got_nm = True
+
+    except DBusException:
+        log.warning("NetworkManager D-Bus not ready - delaying")
+
+    if try_count >= 5:
+        log.error("NetworkManager D-Bus not found")
+        sys.exit(1)
+
+    if not got_nm:
+        time.sleep(3)
 
 device_list: Optional[List[nm.Device]] = None
 settings_cache: Dict[str, Any] = {}
 
 pp = pprint.PrettyPrinter(indent=4)
-
-log = logging.getLogger("comitup")
 
 
 def initialize() -> None:

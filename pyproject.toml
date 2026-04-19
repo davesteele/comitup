@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "comitup"
-version = "1.46"
+version = "1.47"
 authors = [
     {name = "David Steele", email = "dsteele@gmail.com"},
 ]
@@ -128,6 +128,7 @@ module = [
     "dbus",
     "dbus.mainloop.glib",
     "dbus.service",
+    "dbus.exceptions",
     "gi",
     "gi.repository.GLib",
     "pytest",

@@ -12,6 +12,7 @@
 #
 
 import logging
+import time
 from functools import partial
 from typing import Callable, List, Optional
 
@@ -136,6 +137,8 @@ def second_changed_state(state, oldstate, reason, *args) -> None:
 def any_changed_state(state: int, *args) -> None:
     from comitup import mdns
     from comitup.states import dns_names
+
+    time.sleep(1)
 
     interesting_states = PASS_STATES + FAIL_STATES
 

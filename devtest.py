@@ -70,6 +70,8 @@ if not envpath.exists():
 
     print("# Installing packages")
 
+    run("pip install --upgrade pip")
+
     for pkg in pkgs:
         cp = run("pip install " + pkg)
         print("Running", " ".join(cp.args))
