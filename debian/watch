@@ -2,7 +2,7 @@ version=4
 
 opts=filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/@PACKAGE@-$1\.tar\.gz/,\
 pgpsigurlmangle=s/github.com/raw.githubusercontent.com/;\
-s/archive\/refs\/tags\/main/signatures/;\
-s/([^\/]+)\.tar\.gz/@PACKAGE@-$1\.tar\.gz/;\
+s/archive\/refs\/tags/refs\/heads\/signatures/;\
+s/v([^\/]+)\.tar\.gz/@PACKAGE@-$1\.tar\.gz/;\
 s/$/.asc/ \
 https://github.com/davesteele/@PACKAGE@/tags /davesteele/@PACKAGE@/archive/refs/tags/v(.+)\.tar\.gz
