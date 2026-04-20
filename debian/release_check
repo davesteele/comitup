@@ -70,7 +70,14 @@ fi
 # fi
 
 if [ "$fail" == "1" ] ; then
-  exit 1
+  echo "ERROR ENCOUNTERED"
+  if [[ "$TAGVER" =~ -.-  ]] ; then  # if this is not a release build
+    /bin/true
+  else
+    exit 1
+  fi
+else
+  echo "All checks successful"
 fi
 
-echo "All checks successful"
+echo done

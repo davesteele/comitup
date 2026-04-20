@@ -17,7 +17,7 @@ export PYBUILD_NAME=comitup
 
 override_dh_auto_clean:
 	dh_auto_clean
-	./debian/release_check || echo "\nRELEASE CHECK FAILURE\n"
+	./debian/release_check
 
 override_dh_auto_build:
 	dh_auto_build
