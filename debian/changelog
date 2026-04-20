@@ -1,3 +1,9 @@
+comitup (1.47.1-1) unstable; urgency=medium
+
+  * Add missing time import in comitup.py.
+
+ -- David Steele <steele@debian.org>  Sun, 19 Apr 2026 23:47:01 -0400
+
 comitup (1.47-1) unstable; urgency=medium
 
   * Tolerate NetworkManager slow startup.
