@@ -1,0 +1,13 @@
+--- a/MANIFEST.in
++++ b/MANIFEST.in
+@@ -1,10 +1,2 @@
+ include LICENSE
+-include doc/*.ronn
+-include cli/comitupcli.py
+-include conf/comitup*
+ include README.md
+-include web/*.py
+-include web/templates/*
+-include web/templates/css/*
+-include web/templates/images/*
+-include web/templates/js/*

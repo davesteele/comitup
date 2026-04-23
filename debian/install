@@ -3,3 +3,4 @@ conf/dns-connected.conf /usr/share/comitup/dns/
 conf/dns-hotspot.conf /usr/share/comitup/dns/
 conf/comitup.conf /etc/
 conf/comitup.json /var/lib/comitup/
+comitup_web/templates/ /usr/share/comitup/
