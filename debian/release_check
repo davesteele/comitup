@@ -5,6 +5,11 @@
 
 set -e
 
+if ! git status ; then
+  exit 0
+fi
+
+
 ROOT=`git rev-parse --show-toplevel`
 
 
