@@ -25,7 +25,8 @@ if ".zip" not in zip_name:
 trackers = [
     "http://tracker.bt4g.com:2095/announce",
     "udp://open.stealth.si:80/announce",
-    "udp://ns575949.ip-51-222-82.net:6969/announce",
+    "https://shahidrazi.online:443/announce",
+    # "udp://ns575949.ip-51-222-82.net:6969/announce",
     # "udp://tracker.torrent.eu.org:451/announce",
     # "udp://exodus.desync.com:6969/announce",
     # "http://tracker.files.fm:6969/announce",
