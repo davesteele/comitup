@@ -58,19 +58,19 @@ with the first logon
 To [burn](https://github.com/davesteele/comitup/wiki/Tutorial#copy-the-image-to-a-microsd-card) onto an SD card for the Raspberry Pi.
 
 
-* Comitup Lite [Image](latest/comitup-lite-img-latest.html) (3.1 GB, 926 MB compressed)
-  * [Download](https://steele.debian.net/comitup/image_2026-04-25-Comitup-lite.zip) | [Torrent](torrent/image_2026-04-25-Comitup-lite.zip.torrent) | [Magnet](magnet:?xt=urn:btih:74e9b1a80ff482e1a2296966c4381f9cac4e02f5&dn=image_2026-04-25-Comitup-lite.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fns575949.ip-51-222-82.net%3A6969%2Fannounce
+* Comitup Lite [Image](latest/comitup-lite-img-latest.html) (2.9 GB, 872 MB compressed)
+  * [Download](https://steele.debian.net/comitup/image_2026-05-15-Comitup-lite.zip) | [Torrent](torrent/image_2026-05-15-Comitup-lite.zip.torrent) | [Magnet](magnet:?xt=urn:btih:5baef9502ff8055f21414db842e9e4cfde663b50&dn=image_2026-05-15-Comitup-lite.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce
 ) 
-  * [SHA1](torrent/image_2026-04-25-Comitup-lite.zip.sha1.txt)
-  * [PGP](torrent/image_2026-04-25-Comitup-lite.zip.asc.txt)
-  * [Info](https://steele.debian.net/comitup/2026-04-25-Comitup-lite.info)
+  * [SHA1](torrent/image_2026-05-15-Comitup-lite.zip.sha1.txt)
+  * [PGP](torrent/image_2026-05-15-Comitup-lite.zip.asc.txt)
+  * [Info](https://steele.debian.net/comitup/2026-05-15-Comitup-lite.info)
 
 * Comitup  [Image](latest/comitup-img-latest.html) (5.8 GB, 1.9 GB compressed)
-  * [Download](https://steele.debian.net/comitup/image_2026-04-25-Comitup.zip) | [Torrent](torrent/image_2026-04-25-Comitup.zip.torrent) | [Magnet](magnet:?xt=urn:btih:f28f5b1ef9d749fb98b6b8791665817501e2c687&dn=image_2026-04-25-Comitup.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fns575949.ip-51-222-82.net%3A6969%2Fannounce
+  * [Download](https://steele.debian.net/comitup/image_2026-05-15-Comitup.zip) | [Torrent](torrent/image_2026-05-15-Comitup.zip.torrent) | [Magnet](magnet:?xt=urn:btih:ff77377f5da39a4f276f39615d144a1416f830ea&dn=image_2026-05-15-Comitup.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce
 ) 
-  * [SHA1](torrent/image_2026-04-25-Comitup.zip.sha1.txt)
-  * [PGP](torrent/image_2026-04-25-Comitup.zip.asc.txt)
-  * [Info](https://steele.debian.net/comitup/2026-04-25-Comitup.info)
+  * [SHA1](torrent/image_2026-05-15-Comitup.zip.sha1.txt)
+  * [PGP](torrent/image_2026-05-15-Comitup.zip.asc.txt)
+  * [Info](https://steele.debian.net/comitup/2026-05-15-Comitup.info)
 
 
 #### Package Installation
