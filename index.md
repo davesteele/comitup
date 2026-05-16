@@ -54,6 +54,11 @@ NOTE: Starting with the 2022-04-16 image, the local "pi" user has been replaced
 with the default "comitup" user. The password matches the user name - change it
 with the first logon
 
+NOTE: Starting with the 2026-05-15 image, the Comitup Image is 64-bit (for Pi 5
+compatibility). For those needing 32-bit for, say, the Pi Zero, an [older
+image](https://steele.debian.net/comitup/image_2026-04-25-Comitup-lite.zip) is
+available.
+
 #### Comitup Image
 To [burn](https://github.com/davesteele/comitup/wiki/Tutorial#copy-the-image-to-a-microsd-card) onto an SD card for the Raspberry Pi.
 
