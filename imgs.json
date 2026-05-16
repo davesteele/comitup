@@ -1,24 +1,24 @@
 {
     "full": {
-        "compressed": 1965560440,
-        "compressedstr": "1.9 G",
-        "filename": "image_2026-05-15-Comitup.zip",
-        "infoname": "2026-05-15-Comitup.info",
+        "compressed": 2057363011,
+        "compressedstr": "2.0 G",
+        "filename": "image_2026-05-16-Comitup.zip",
+        "infoname": "2026-05-16-Comitup.info",
         "latestname": "comitup",
-        "magnet": "magnet:?xt=urn:btih:ff77377f5da39a4f276f39615d144a1416f830ea&dn=image_2026-05-15-Comitup.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:1281322fd5fd96704be6641f025915abf0979932&dn=image_2026-05-16-Comitup.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce\n",
         "name": "",
-        "uncompressed": 5930745856,
-        "uncompressedstr": "5.8 G"
+        "uncompressed": 6702497792,
+        "uncompressedstr": "6.5 G"
     },
     "lite": {
-        "compressed": 892699704,
-        "compressedstr": "872 M",
-        "filename": "image_2026-05-15-Comitup-lite.zip",
-        "infoname": "2026-05-15-Comitup-lite.info",
+        "compressed": 899481520,
+        "compressedstr": "878 M",
+        "filename": "image_2026-05-16-Comitup-lite.zip",
+        "infoname": "2026-05-16-Comitup-lite.info",
         "latestname": "comitup-lite",
-        "magnet": "magnet:?xt=urn:btih:5baef9502ff8055f21414db842e9e4cfde663b50&dn=image_2026-05-15-Comitup-lite.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:2f2432742fed8fe7b1d3357acd07e9a267285422&dn=image_2026-05-16-Comitup-lite.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce\n",
         "name": "Lite",
-        "uncompressed": 2927624192,
-        "uncompressedstr": "2.9 G"
+        "uncompressed": 3229614080,
+        "uncompressedstr": "3.2 G"
     }
 }
