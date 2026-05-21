@@ -54,28 +54,32 @@ NOTE: Starting with the 2022-04-16 image, the local "pi" user has been replaced
 with the default "comitup" user. The password matches the user name - change it
 with the first logon
 
-NOTE: Starting with the 2026-05-15 image, the Comitup Image is 64-bit (for Pi 5
-compatibility). For those needing 32-bit for, say, the Pi Zero, an [older
-image](https://steele.debian.net/comitup/image_2026-04-25-Comitup-lite.zip) is
-available.
+NOTE: The Pi Zero, 1, and 2 require the 32-bit image. The Pi 5 requires the 64-bit image.
 
 #### Comitup Image
 To [burn](https://github.com/davesteele/comitup/wiki/Tutorial#copy-the-image-to-a-microsd-card) onto an SD card for the Raspberry Pi.
 
 
-* Comitup Lite [Image](latest/comitup-lite-img-latest.html) (3.2 GB, 878 MB compressed)
-  * [Download](https://steele.debian.net/comitup/image_2026-05-16-Comitup-lite.zip) | [Torrent](torrent/image_2026-05-16-Comitup-lite.zip.torrent) | [Magnet](magnet:?xt=urn:btih:2f2432742fed8fe7b1d3357acd07e9a267285422&dn=image_2026-05-16-Comitup-lite.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce
+* Comitup Lite 64 bit [Image](latest/comitup64-lite-img-latest.html) (3.2 GB, 882 MB compressed)
+  * [Download](https://steele.debian.net/comitup/image_2026-05-20-Comitup64-lite.zip) | [Torrent](torrent/image_2026-05-20-Comitup64-lite.zip.torrent) | [Magnet](magnet:?xt=urn:btih:f58badd5a031dcb53806e5088dae734acc5e2474&dn=image_2026-05-20-Comitup64-lite.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce
 ) 
-  * [SHA1](torrent/image_2026-05-16-Comitup-lite.zip.sha1.txt)
-  * [PGP](torrent/image_2026-05-16-Comitup-lite.zip.asc.txt)
-  * [Info](https://steele.debian.net/comitup/2026-05-16-Comitup-lite.info)
+  * [SHA1](torrent/image_2026-05-20-Comitup64-lite.zip.sha1.txt)
+  * [PGP](torrent/image_2026-05-20-Comitup64-lite.zip.asc.txt)
+  * [Info](https://steele.debian.net/comitup/2026-05-20-Comitup64-lite.info)
 
-* Comitup  [Image](latest/comitup-img-latest.html) (6.5 GB, 2.0 GB compressed)
-  * [Download](https://steele.debian.net/comitup/image_2026-05-16-Comitup.zip) | [Torrent](torrent/image_2026-05-16-Comitup.zip.torrent) | [Magnet](magnet:?xt=urn:btih:1281322fd5fd96704be6641f025915abf0979932&dn=image_2026-05-16-Comitup.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce
+* Comitup 64 bit [Image](latest/comitup64-img-latest.html) (6.6 GB, 2.0 GB compressed)
+  * [Download](https://steele.debian.net/comitup/image_2026-05-20-Comitup64.zip) | [Torrent](torrent/image_2026-05-20-Comitup64.zip.torrent) | [Magnet](magnet:?xt=urn:btih:afa6a36ca38adfdd0f41903805b75a4b420699d0&dn=image_2026-05-20-Comitup64.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce
 ) 
-  * [SHA1](torrent/image_2026-05-16-Comitup.zip.sha1.txt)
-  * [PGP](torrent/image_2026-05-16-Comitup.zip.asc.txt)
-  * [Info](https://steele.debian.net/comitup/2026-05-16-Comitup.info)
+  * [SHA1](torrent/image_2026-05-20-Comitup64.zip.sha1.txt)
+  * [PGP](torrent/image_2026-05-20-Comitup64.zip.asc.txt)
+  * [Info](https://steele.debian.net/comitup/2026-05-20-Comitup64.info)
+
+* Comitup Lite 32 bit [Image](latest/comitup32-lite-img-latest.html) (2.9 GB, 872 MB compressed)
+  * [Download](https://steele.debian.net/comitup/image_2026-05-20-Comitup32-lite.zip) | [Torrent](torrent/image_2026-05-20-Comitup32-lite.zip.torrent) | [Magnet](magnet:?xt=urn:btih:8a8c698157bca98766a1037e9417f88b0494d695&dn=image_2026-05-20-Comitup32-lite.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce
+) 
+  * [SHA1](torrent/image_2026-05-20-Comitup32-lite.zip.sha1.txt)
+  * [PGP](torrent/image_2026-05-20-Comitup32-lite.zip.asc.txt)
+  * [Info](https://steele.debian.net/comitup/2026-05-20-Comitup32-lite.info)
 
 
 #### Package Installation
