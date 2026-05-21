@@ -50,6 +50,8 @@ boot.
 You can get Comitup by installing the package, or by downloading a Raspberry Pi
 OS image including the package (the preferred method).
 
+The Lite image has a terminal interface. The larger image boots to a desktop.
+
 NOTE: Starting with the 2022-04-16 image, the local "pi" user has been replaced
 with the default "comitup" user. The password matches the user name - change it
 with the first logon
