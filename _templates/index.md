@@ -54,16 +54,13 @@ NOTE: Starting with the 2022-04-16 image, the local "pi" user has been replaced
 with the default "comitup" user. The password matches the user name - change it
 with the first logon
 
-NOTE: Starting with the 2026-05-15 image, the Comitup Image is 64-bit (for Pi 5
-compatibility). For those needing 32-bit for, say, the Pi Zero, an [older
-image](https://steele.debian.net/comitup/image_2026-04-25-Comitup-lite.zip) is
-available.
+NOTE: The Pi Zero, 1, and 2 require the 32-bit image. The Pi 5 requires the 64-bit image.
 
 #### Comitup Image
 To [burn](https://github.com/davesteele/comitup/wiki/Tutorial#copy-the-image-to-a-microsd-card) onto an SD card for the Raspberry Pi.
 
-{% for img in ['lite', 'full'] %}
-* Comitup {{ imgs[img]['name'] }} [Image](latest/{{ imgs[img]["latestname"] }}-img-latest.html) ({{ imgs[img]['uncompressedstr'] }}B, {{ imgs[img]['compressedstr'] }}B compressed)
+{% for img in ['lite64', 'full64', 'lite32'] %}
+* Comitup {{ imgs[img]['name'] }}{{ imgs[img]["bits"] }} bit [Image](latest/{{ imgs[img]["latestname"] }}-img-latest.html) ({{ imgs[img]['uncompressedstr'] }}B, {{ imgs[img]['compressedstr'] }}B compressed)
   * [Download](https://steele.debian.net/comitup/{{ imgs[img]['filename'] }}) | [Torrent](torrent/{{ imgs[img]['filename'] }}.torrent) | [Magnet]({{ imgs[img]['magnet'] }}) 
   * [SHA1](torrent/{{ imgs[img]['filename'] }}.sha1.txt)
   * [PGP](torrent/{{ imgs[img]['filename'] }}.asc.txt)

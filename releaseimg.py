@@ -112,14 +112,21 @@ os.system(
 )
 
 imginfo = {}
-if "lite" in zip_name:
-    imginfo["name"] = "Lite"
-    imgname = "lite"
-    imginfo["latestname"] = "comitup-lite"
-else:
+if "Comitup64-lite.zip" in zip_name:
+    imginfo["name"] = "Lite "
+    imgname = "lite64"
+    imginfo["latestname"] = "comitup64-lite"
+    imginfo["bits"] = 64
+elif "Comitup64.zip" in zip_name:
     imginfo["name"] = ""
-    imgname = "full"
-    imginfo["latestname"] = "comitup"
+    imgname = "full64"
+    imginfo["latestname"] = "comitup64"
+    imginfo["bits"] = 64
+elif "Comitup32-lite.zip" in zip_name:
+    imginfo["name"] = "Lite "
+    imgname = "lite32"
+    imginfo["latestname"] = "comitup32-lite"
+    imginfo["bits"] = 32
 
 latestpath = "latest/{}-img-latest.html".format(imginfo["latestname"])
 
