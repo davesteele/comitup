@@ -22,9 +22,9 @@ def start_hs_rules() -> None:
     # fmt: off
     start_cmds: List[str] = [
         "nft add table ip filter",
-        "nft 'add chain ip filter COMITUP-OUT {{ type filter hook output priority 100 ; }}'",
-        "nft 'add rule ip filter COMITUP-OUT icmp type destination-unreachable counter drop' ",
-        "nft 'add rule ip filter COMITUP-OUT icmp code port-unreachable counter drop' ",
+        "nft 'add chain ip filter COMITUP-OUT {{ type filter hook output priority 100 ; }}'",  # noqa
+        "nft 'add rule ip filter COMITUP-OUT icmp type destination-unreachable counter drop' ",  # noqa
+        "nft 'add rule ip filter COMITUP-OUT icmp code port-unreachable counter drop' ",  # noqa
         "nft 'add rule ip filter COMITUP-OUT counter return'",
     ]
     # fmt: on
@@ -48,7 +48,7 @@ def start_router_rules() -> None:
     # fmt: off
     appliance_cmds: List[str] = [
         "nft add table ip nat",
-        "nft 'add chain nat COMITUP-FWD {{ type nat hook postrouting priority 100 ; }}'",
+        "nft 'add chain nat COMITUP-FWD {{ type nat hook postrouting priority 100 ; }}'",  # noqa
         "nft 'add rule ip nat COMITUP-FWD oifname {link} counter masquerade'",
         "nft 'add rule ip nat COMITUP-FWD counter return'",
         "echo 1 > /proc/sys/net/ipv4/ip_forward",
@@ -106,7 +106,7 @@ def state_callback(state: str, action: str) -> None:
             if defaultdev and defaultdev != apdev:
                 run_cmds(
                     [
-                        f"nft 'insert rule ip nat COMITUP-FWD oifname \"{defaultdev}\" counter masquerade'"
+                        f"nft 'insert rule ip nat COMITUP-FWD oifname \"{defaultdev}\" counter masquerade'"  # noqa
                     ],
                 )
 
