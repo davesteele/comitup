@@ -1,38 +1,38 @@
 {
     "full64": {
         "bits": 64,
-        "compressed": 2061447905,
+        "compressed": 2058104662,
         "compressedstr": "2.0 G",
-        "filename": "image_2026-05-20-Comitup64.zip",
-        "infoname": "2026-05-20-Comitup64.info",
+        "filename": "image_2026-06-20-Comitup64.zip",
+        "infoname": "2026-06-20-Comitup64.info",
         "latestname": "comitup64",
-        "magnet": "magnet:?xt=urn:btih:afa6a36ca38adfdd0f41903805b75a4b420699d0&dn=image_2026-05-20-Comitup64.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:dccbf957e28ed838fa2e03df6f02636b9e3619d5&dn=image_2026-06-20-Comitup64.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce\n",
         "name": "",
-        "uncompressed": 6710886400,
-        "uncompressedstr": "6.6 G"
+        "uncompressed": 6694109184,
+        "uncompressedstr": "6.5 G"
     },
     "lite32": {
         "bits": 32,
-        "compressed": 892670451,
-        "compressedstr": "872 M",
-        "filename": "image_2026-05-20-Comitup32-lite.zip",
-        "infoname": "2026-05-20-Comitup32-lite.info",
+        "compressed": 881962112,
+        "compressedstr": "861 M",
+        "filename": "image_2026-06-20-Comitup32-lite.zip",
+        "infoname": "2026-06-20-Comitup32-lite.info",
         "latestname": "comitup32-lite",
-        "magnet": "magnet:?xt=urn:btih:8a8c698157bca98766a1037e9417f88b0494d695&dn=image_2026-05-20-Comitup32-lite.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:d6258d256be16739808fbfc72c0d1e8ed4b53010&dn=image_2026-06-20-Comitup32-lite.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce\n",
         "name": "Lite ",
-        "uncompressed": 2961178624,
+        "uncompressed": 2919235584,
         "uncompressedstr": "2.9 G"
     },
     "lite64": {
         "bits": 64,
-        "compressed": 902719797,
-        "compressedstr": "882 M",
-        "filename": "image_2026-05-20-Comitup64-lite.zip",
-        "infoname": "2026-05-20-Comitup64-lite.info",
+        "compressed": 892527655,
+        "compressedstr": "872 M",
+        "filename": "image_2026-06-20-Comitup64-lite.zip",
+        "infoname": "2026-06-20-Comitup64-lite.info",
         "latestname": "comitup64-lite",
-        "magnet": "magnet:?xt=urn:btih:f58badd5a031dcb53806e5088dae734acc5e2474&dn=image_2026-05-20-Comitup64-lite.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce\n",
+        "magnet": "magnet:?xt=urn:btih:24ef4c711a618200fb2394c6cbee7eb2a90fc1c2&dn=image_2026-06-20-Comitup64-lite.zip&tr=http%3A%2F%2Ftracker.bt4g.com%3A2095%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=https%3A%2F%2Fshahidrazi.online%3A443%2Fannounce\n",
         "name": "Lite ",
-        "uncompressed": 3229614080,
-        "uncompressedstr": "3.2 G"
+        "uncompressed": 3196059648,
+        "uncompressedstr": "3.1 G"
     }
 }
