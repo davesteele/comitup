@@ -1,8 +1,5 @@
-version=4
+Version: 5
 
-opts=filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/@PACKAGE@-$1\.tar\.gz/,\
-pgpsigurlmangle=s/github.com/raw.githubusercontent.com/;\
-s/archive\/refs\/tags/refs\/heads\/signatures/;\
-s/v([^\/]+)\.tar\.gz/@PACKAGE@-$1\.tar\.gz/;\
-s/$/.asc/ \
-https://github.com/davesteele/@PACKAGE@/tags /davesteele/@PACKAGE@/archive/refs/tags/v(.+)\.tar\.gz
+Template: Github
+Dist: https://github.com/davesteele/@PACKAGE@
+Pgpsigurlmangle: s/github.com/raw.githubusercontent.com/;s/archive\/refs\/tags/refs\/heads\/signatures/;s/v([^\/]+)\.tar\.gz/@PACKAGE@-$1\.tar\.gz/;s/$/.asc/
