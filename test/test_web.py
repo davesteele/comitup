@@ -63,7 +63,9 @@ def test_webapp_index(app, ssid, monkeypatch):
 
 
 def test_webapp_connect(app, ssid, monkeypatch):
-    monkeypatch.setattr("comitup_web.comitupweb.Process", Mock())
+    monkeypatch.setattr(
+        "comitup_web.comitupweb.multiprocessing.Process", Mock()
+    )
 
     data = {
         "ssid": urllib.parse.quote(ssid),

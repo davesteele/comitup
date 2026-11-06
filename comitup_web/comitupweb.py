@@ -12,11 +12,11 @@
 #
 
 import logging
+import multiprocessing
 import sys
 import time
 import urllib
 from logging.handlers import TimedRotatingFileHandler
-from multiprocessing import Process
 from pathlib import Path
 
 from cachetools import TTLCache, cached
@@ -132,7 +132,11 @@ def create_app(log):
 
         cached_points()
 
-        p = Process(target=do_connect, args=(ssid, password, log))
+        multiprocessing.set_start_method("fork", force=True)
+
+        p = multiprocessing.Process(
+            target=do_connect, args=(ssid, password, log)
+        )
         p.start()
 
         log.info("connect.html - ssid {0}".format(ssid))
