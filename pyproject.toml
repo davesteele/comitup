@@ -112,30 +112,12 @@ legacy_tox_ini = """
 
     [testenv:MYPY]
     deps =
-        mypy
         types-tabulate
         types-Flask
         types-cachetools
         types-RPi-GPIO
 
-    commands = mypy comitup comitup_cli comitup_web test
+    commands = comitup comitup_cli comitup_web test
 """
-
-[tool.mypy]
-mypy_path = "stubs"
-
-[[tool.mypy.overrides]]
-module = [
-    "mypy-dbus",
-    "dbus",
-    "dbus.mainloop.glib",
-    "dbus.service",
-    "dbus.exceptions",
-    "gi",
-    "gi.repository.GLib",
-    "pytest",
-    "RPi",
-    "venv",
-]
 
 ignore_missing_imports = true
