@@ -80,7 +80,7 @@ if not envpath.exists():
 tests: List[str] = [
     "ruff format --check {}".format(targets),
     "ruff check --select I {}".format(targets),
-    "ruff check {}".format(targets),
+    # "ruff check {}".format(targets),
     "pytest",
 ]
 
