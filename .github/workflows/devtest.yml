@@ -37,6 +37,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install nox mypy ruff cachetools types-tabulate types-Flask
         pip install types-cachetools dbus-python pytest python-networkmanager
+        pip install mock
         pip install pygobject
     - name: Run tests
       run: |
