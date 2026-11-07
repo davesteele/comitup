@@ -3,9 +3,8 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # License-Filename: LICENSE
 
-from unittest.mock import Mock
-
 import pytest
+from mock import Mock
 
 from comitup import states
 
